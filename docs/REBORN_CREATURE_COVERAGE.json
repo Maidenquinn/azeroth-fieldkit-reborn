@@ -1,0 +1,1488 @@
+{
+  "clientSha256": "ab7b6332a6c47e4c29188e44932939e560b274cf06e0f212cb3ada119a3a3d35",
+  "source": "installed include_str TOML packs",
+  "zones": [
+    {
+      "key": "ab",
+      "bosses": [
+        {
+          "name": "Kovork",
+          "entry": 1590,
+          "icon": "INV_Misc_Head_Troll_01",
+          "status": "native"
+        },
+        {
+          "name": "Nimar the Slayer",
+          "entry": 1591,
+          "icon": "INV_Misc_Head_Troll_01",
+          "status": "native"
+        },
+        {
+          "name": "Marez Cowl",
+          "entry": 1592,
+          "icon": "INV_Misc_Head_Human_01",
+          "status": "native"
+        },
+        {
+          "name": "Lord Falconcrest",
+          "entry": 1593,
+          "icon": "INV_Misc_Head_Human_01",
+          "status": "native"
+        },
+        {
+          "name": "Lord Aliden Perenolde",
+          "entry": 1594,
+          "icon": "INV_Misc_Head_Human_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "aq",
+      "bosses": [
+        {
+          "name": "Kurinnaxx",
+          "entry": 1190,
+          "icon": "Ability_Hunter_Pet_Worm",
+          "status": "native"
+        },
+        {
+          "name": "General Rajaxx",
+          "entry": 1191,
+          "icon": "Ability_Hunter_Pet_Silithid",
+          "status": "native"
+        },
+        {
+          "name": "Princess Huhuran",
+          "entry": 1192,
+          "icon": "Ability_Hunter_Pet_Wasp",
+          "status": "native"
+        },
+        {
+          "name": "Ossirian the Unscarred",
+          "entry": 1193,
+          "icon": "Achievement_Boss_OssirianTheUnscarred",
+          "status": "native"
+        },
+        {
+          "name": "C'Thun",
+          "entry": 1194,
+          "icon": "Achievement_Boss_CThun",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "arena",
+      "bosses": [
+        {
+          "name": "High Priestess Jeklik",
+          "entry": 990,
+          "icon": "INV_Misc_Head_Troll_02",
+          "status": "native"
+        },
+        {
+          "name": "High Priest Venoxis",
+          "entry": 991,
+          "icon": "INV_Misc_Head_Troll_02",
+          "status": "native"
+        },
+        {
+          "name": "Bloodlord Mandokir",
+          "entry": 992,
+          "icon": "INV_Misc_Head_Troll_01",
+          "status": "native"
+        },
+        {
+          "name": "Jin'do the Hexxer",
+          "entry": 993,
+          "icon": "INV_Misc_Head_Troll_01",
+          "status": "native"
+        },
+        {
+          "name": "Hakkar the Soulflayer",
+          "entry": 994,
+          "icon": "Achievement_Boss_Hakkar",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "av",
+      "bosses": [
+        {
+          "name": "Korrak the Bloodrager",
+          "entry": 390,
+          "icon": "INV_Misc_Head_Orc_01",
+          "status": "native"
+        },
+        {
+          "name": "Ivus the Forest Lord",
+          "entry": 391,
+          "icon": "Ability_Druid_ForceofNature",
+          "status": "native"
+        },
+        {
+          "name": "Lokholar the Ice Lord",
+          "entry": 392,
+          "icon": "Spell_Frost_SummonWaterElemental_2",
+          "status": "native"
+        },
+        {
+          "name": "Glacius the Frozen Titan",
+          "entry": 394,
+          "icon": "Spell_Frost_SummonWaterElemental_2",
+          "status": "native"
+        },
+        {
+          "name": "Azuregos",
+          "entry": 393,
+          "icon": "INV_Misc_Head_Dragon_Blue",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "azjolnerub",
+      "bosses": [
+        {
+          "name": "Krik'thir the Gatewatcher",
+          "entry": 4890,
+          "icon": "Achievement_Boss_Krikthir",
+          "status": "native"
+        },
+        {
+          "name": "Hadronox",
+          "entry": 4891,
+          "icon": "Achievement_Boss_Hadronox",
+          "status": "native"
+        },
+        {
+          "name": "Elder Nadox",
+          "entry": 4892,
+          "icon": "Achievement_Boss_ElderNadox",
+          "status": "native"
+        },
+        {
+          "name": "Herald Volazj",
+          "entry": 4893,
+          "icon": "Achievement_Boss_HeraldVolazj",
+          "status": "native"
+        },
+        {
+          "name": "Anub'arak",
+          "entry": 2107,
+          "icon": "Achievement_Boss_Anubarak",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "blackwing_descent",
+      "bosses": [
+        {
+          "name": "Nefarian",
+          "entry": 700218,
+          "icon": "Achievement_Boss_Nefarion",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "bladesedge",
+      "bosses": [
+        {
+          "name": "Gurn Grubnosh",
+          "entry": 3590,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        },
+        {
+          "name": "Maggoc",
+          "entry": 3591,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        },
+        {
+          "name": "High King Maulgar",
+          "entry": 3592,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        },
+        {
+          "name": "Krosh Firehand",
+          "entry": 3593,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        },
+        {
+          "name": "Gruul",
+          "entry": 2006,
+          "icon": "Achievement_Boss_GruulTheDragonkiller",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "borean",
+      "bosses": [
+        {
+          "name": "Serfex the Reaver",
+          "entry": 4793,
+          "icon": "Ability_Hunter_Pet_Ravager",
+          "status": "native"
+        },
+        {
+          "name": "Ormorok the Tree-Shaper",
+          "entry": 4291,
+          "icon": "Ability_Druid_ForceofNature",
+          "status": "native"
+        },
+        {
+          "name": "Icehorn",
+          "entry": 4292,
+          "icon": "Ability_Hunter_Pet_Rhino",
+          "status": "native"
+        },
+        {
+          "name": "Kvaldir High-Shaman",
+          "entry": 4293,
+          "icon": "INV_Misc_Head_Vrykul",
+          "status": "native"
+        },
+        {
+          "name": "Keristrasza",
+          "entry": 2101,
+          "icon": "Achievement_Boss_Keristrasza",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "brm",
+      "bosses": [
+        {
+          "name": "General Angerforge",
+          "entry": 1090,
+          "icon": "INV_Misc_Head_Dwarf_01",
+          "status": "native"
+        },
+        {
+          "name": "Warchief Rend Blackhand",
+          "entry": 1091,
+          "icon": "INV_Misc_Head_Orc_02",
+          "status": "native"
+        },
+        {
+          "name": "Emperor Dagran Thaurissan",
+          "entry": 1092,
+          "icon": "Achievement_Boss_EmperorDagranThaurissan",
+          "status": "native"
+        },
+        {
+          "name": "Majordomo Executus",
+          "entry": 1093,
+          "icon": "Spell_Fire_Elemental_Totem",
+          "status": "native"
+        },
+        {
+          "name": "Nefarian",
+          "entry": 1094,
+          "icon": "Achievement_Boss_Nefarion",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "coldarra",
+      "bosses": [
+        {
+          "name": "Drakos the Interrogator",
+          "entry": 4990,
+          "icon": "INV_Misc_Head_Dragon_Blue",
+          "status": "native"
+        },
+        {
+          "name": "Varos Cloudstrider",
+          "entry": 4991,
+          "icon": "INV_Misc_Head_Dragon_Blue",
+          "status": "native"
+        },
+        {
+          "name": "Anomalus",
+          "entry": 4992,
+          "icon": "Achievement_Boss_Anomalus",
+          "status": "native"
+        },
+        {
+          "name": "Ley-Guardian Eregos",
+          "entry": 4993,
+          "icon": "Achievement_Boss_Eregos",
+          "status": "native"
+        },
+        {
+          "name": "Malygos",
+          "entry": 2108,
+          "icon": "Achievement_Boss_Malygos_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "deepholm",
+      "bosses": [
+        {
+          "name": "Ozruk",
+          "entry": 43391,
+          "icon": "Spell_Nature_EarthElemental_Totem",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "dragon_soul",
+      "bosses": [
+        {
+          "name": "Deathwing",
+          "entry": 700228,
+          "icon": "INV_Misc_Head_Dragon_Black",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "dragonblight",
+      "bosses": [
+        {
+          "name": "Tenebron",
+          "entry": 4490,
+          "icon": "Ability_Mount_Drake_Twilight",
+          "status": "native"
+        },
+        {
+          "name": "Shadron",
+          "entry": 4491,
+          "icon": "Ability_Mount_Drake_Twilight",
+          "status": "native"
+        },
+        {
+          "name": "Gammothra the Tormentor",
+          "entry": 4492,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        },
+        {
+          "name": "Vesperon",
+          "entry": 4493,
+          "icon": "Ability_Mount_Drake_Twilight",
+          "status": "native"
+        },
+        {
+          "name": "Sartharion",
+          "entry": 2103,
+          "icon": "Achievement_Boss_Sartharion_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "duskwood",
+      "bosses": [
+        {
+          "name": "Naraxis",
+          "entry": 790,
+          "icon": "Ability_Hunter_Pet_Spider",
+          "status": "native"
+        },
+        {
+          "name": "Mor'Ladim",
+          "entry": 791,
+          "icon": "INV_Misc_Head_Undead_02",
+          "status": "native"
+        },
+        {
+          "name": "Stitches",
+          "entry": 792,
+          "icon": "Spell_Shadow_AbominationExplosion",
+          "status": "native"
+        },
+        {
+          "name": "Lupos",
+          "entry": 793,
+          "icon": "Ability_Hunter_Pet_Wolf",
+          "status": "native"
+        },
+        {
+          "name": "Morbent Fel",
+          "entry": 794,
+          "icon": "INV_Misc_Head_Undead_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "elwynn",
+      "bosses": [
+        {
+          "name": "Hogger",
+          "entry": 690,
+          "icon": "INV_Misc_Head_Gnoll_01",
+          "status": "native"
+        },
+        {
+          "name": "Mother Fang",
+          "entry": 691,
+          "icon": "Ability_Hunter_Pet_Spider",
+          "status": "native"
+        },
+        {
+          "name": "Rhahk'Zor",
+          "entry": 692,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        },
+        {
+          "name": "Mr. Smite",
+          "entry": 693,
+          "icon": "INV_Misc_Head_Human_01",
+          "status": "native"
+        },
+        {
+          "name": "Edwin VanCleef",
+          "entry": 694,
+          "icon": "Achievement_Boss_EdwinVancleef",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "eots",
+      "bosses": [
+        {
+          "name": "Nexus-Prince Shaffar",
+          "entry": 3490,
+          "icon": "Achievement_Boss_Nexus_Prince_Shaffar",
+          "status": "native"
+        },
+        {
+          "name": "Yor",
+          "entry": 3491,
+          "icon": "Spell_Shadow_SummonVoidWalker",
+          "status": "native"
+        },
+        {
+          "name": "Nuramoc",
+          "entry": 3492,
+          "icon": "Ability_Hunter_Pet_Ravager",
+          "status": "native"
+        },
+        {
+          "name": "Nexus-King Salhadaar",
+          "entry": 3493,
+          "icon": "Spell_Arcane_Arcane04",
+          "status": "native"
+        },
+        {
+          "name": "the Fel Reaver",
+          "entry": 2005,
+          "icon": "Achievement_Dungeon_UlduarRaid_IronGolem_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "feralas",
+      "bosses": [
+        {
+          "name": "Zevrim Thornhoof",
+          "entry": 890,
+          "icon": "Spell_Shadow_SummonFelHunter",
+          "status": "native"
+        },
+        {
+          "name": "Alzzin the Wildshaper",
+          "entry": 891,
+          "icon": "Spell_Shadow_SummonFelHunter",
+          "status": "native"
+        },
+        {
+          "name": "Tendris Warpwood",
+          "entry": 892,
+          "icon": "Ability_Druid_ForceofNature",
+          "status": "native"
+        },
+        {
+          "name": "Immol'thar",
+          "entry": 893,
+          "icon": "Spell_Shadow_SummonFelHunter",
+          "status": "native"
+        },
+        {
+          "name": "King Gordok",
+          "entry": 894,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "firelands",
+      "bosses": [
+        {
+          "name": "Ragnaros",
+          "entry": 700198,
+          "icon": "Achievement_Boss_Ragnaros",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "fjord",
+      "bosses": [
+        {
+          "name": "Prince Keleseth",
+          "entry": 4390,
+          "icon": "Achievement_Boss_PrinceKeleseth",
+          "status": "native"
+        },
+        {
+          "name": "Skarvald the Constructor",
+          "entry": 4391,
+          "icon": "INV_Misc_Head_Vrykul",
+          "status": "native"
+        },
+        {
+          "name": "Gortok Palehoof",
+          "entry": 4392,
+          "icon": "Ability_Hunter_Pet_Gorilla",
+          "status": "native"
+        },
+        {
+          "name": "Skadi the Ruthless",
+          "entry": 4393,
+          "icon": "Achievement_Boss_Skadi",
+          "status": "native"
+        },
+        {
+          "name": "Ingvar the Plunderer",
+          "entry": 2102,
+          "icon": "INV_Misc_Head_Vrykul",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "gilneas",
+      "bosses": [
+        {
+          "name": "Dark Ranger Thyala",
+          "entry": 700118,
+          "icon": "Ability_TheBlackArrow",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "grim_batol",
+      "bosses": [
+        {
+          "name": "Erudax",
+          "entry": 700208,
+          "icon": "Spell_Shadow_Shadowfiend",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "grizzly",
+      "bosses": [
+        {
+          "name": "Ursoc",
+          "entry": 4590,
+          "icon": "Ability_Hunter_Pet_Bear",
+          "status": "native"
+        },
+        {
+          "name": "Trollgore",
+          "entry": 4591,
+          "icon": "Achievement_Boss_trollgore",
+          "status": "native"
+        },
+        {
+          "name": "Novos the Summoner",
+          "entry": 4592,
+          "icon": "Achievement_Boss_novos",
+          "status": "native"
+        },
+        {
+          "name": "King Dred",
+          "entry": 4593,
+          "icon": "Achievement_Boss_kingdred",
+          "status": "native"
+        },
+        {
+          "name": "the Prophet Tharon'ja",
+          "entry": 2104,
+          "icon": "Spell_Shadow_AnimateDead",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "hellfire",
+      "bosses": [
+        {
+          "name": "Watchkeeper Gargolmar",
+          "entry": 3090,
+          "icon": "INV_Misc_Head_Orc_01",
+          "status": "native"
+        },
+        {
+          "name": "Omor the Unscarred",
+          "entry": 3091,
+          "icon": "Achievement_Boss_OmarTheUnscarred_01",
+          "status": "native"
+        },
+        {
+          "name": "Nazan",
+          "entry": 3092,
+          "icon": "Ability_Mount_NetherDrakeElite",
+          "status": "native"
+        },
+        {
+          "name": "Keli'dan the Breaker",
+          "entry": 3093,
+          "icon": "Achievement_Boss_KelidanTheBreaker",
+          "status": "native"
+        },
+        {
+          "name": "Kargath Bladefist",
+          "entry": 2001,
+          "icon": "Achievement_Boss_KargathBladefist_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "hyjal",
+      "bosses": [
+        {
+          "name": "Rage Winterchill",
+          "entry": 3990,
+          "icon": "Spell_Shadow_RaiseDead",
+          "status": "native"
+        },
+        {
+          "name": "Anetheron",
+          "entry": 3991,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "Kaz'rogal",
+          "entry": 3992,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "Azgalor",
+          "entry": 3993,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "Archimonde",
+          "entry": 2010,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "icc",
+      "bosses": [
+        {
+          "name": "Lord Marrowgar",
+          "entry": 5390,
+          "icon": "Achievement_Boss_LordMarrowgar",
+          "status": "native"
+        },
+        {
+          "name": "Lady Deathwhisper",
+          "entry": 5391,
+          "icon": "Achievement_Boss_LadyDeathwhisper",
+          "status": "native"
+        },
+        {
+          "name": "Festergut",
+          "entry": 5392,
+          "icon": "Achievement_Boss_FestergutRotface",
+          "status": "native"
+        },
+        {
+          "name": "Blood-Queen Lana'thel",
+          "entry": 5393,
+          "icon": "Achievement_Boss_Lanathel",
+          "status": "native"
+        },
+        {
+          "name": "the Lich King",
+          "entry": 2112,
+          "icon": "Achievement_Boss_LichKing",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "icecrown",
+      "bosses": [
+        {
+          "name": "Gormok the Impaler",
+          "entry": 5190,
+          "icon": "Achievement_Dungeon_UlduarRaid_IceGiant_01",
+          "status": "native"
+        },
+        {
+          "name": "Acidmaw",
+          "entry": 5191,
+          "icon": "Ability_Hunter_Pet_Worm",
+          "status": "native"
+        },
+        {
+          "name": "Icehowl",
+          "entry": 5192,
+          "icon": "Ability_Hunter_Pet_Rhino",
+          "status": "native"
+        },
+        {
+          "name": "Lord Jaraxxus",
+          "entry": 5193,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "the Black Knight",
+          "entry": 2110,
+          "icon": "Spell_DeathKnight_ArmyOfTheDead",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "karazhan",
+      "bosses": [
+        {
+          "name": "Attumen the Huntsman",
+          "entry": 3690,
+          "icon": "INV_Misc_Head_Undead_01",
+          "status": "native"
+        },
+        {
+          "name": "Maiden of Virtue",
+          "entry": 3691,
+          "icon": "INV_Misc_Head_Human_02",
+          "status": "native"
+        },
+        {
+          "name": "the Curator",
+          "entry": 3692,
+          "icon": "Ability_GolemStormBolt",
+          "status": "native"
+        },
+        {
+          "name": "Nightbane",
+          "entry": 3693,
+          "icon": "INV_Misc_Head_Dragon_Black",
+          "status": "native"
+        },
+        {
+          "name": "Prince Malchezaar",
+          "entry": 2007,
+          "icon": "Achievement_Boss_Prince_Malchezaar",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "lost_isles",
+      "bosses": [
+        {
+          "name": "Volcanoth",
+          "entry": 700188,
+          "icon": "Spell_Fire_LavaSpawn",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "mount_hyjal",
+      "bosses": [
+        {
+          "name": "Baron Geddon",
+          "entry": 700148,
+          "icon": "Spell_Fire_Elemental_Totem",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "nagrand",
+      "bosses": [
+        {
+          "name": "Gutripper",
+          "entry": 3390,
+          "icon": "Ability_Hunter_Pet_Ravager",
+          "status": "native"
+        },
+        {
+          "name": "Warmaul Champion",
+          "entry": 3391,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        },
+        {
+          "name": "Gurok the Usurper",
+          "entry": 3392,
+          "icon": "Achievement_Boss_GruulTheDragonkiller",
+          "status": "native"
+        },
+        {
+          "name": "Voidhunter Yar",
+          "entry": 3393,
+          "icon": "Spell_Shadow_SummonVoidWalker",
+          "status": "native"
+        },
+        {
+          "name": "Mogor",
+          "entry": 2004,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "naxx",
+      "bosses": [
+        {
+          "name": "Anub'Rekhan",
+          "entry": 1490,
+          "icon": "INV_Misc_Head_Nerubian_01",
+          "status": "native"
+        },
+        {
+          "name": "Noth the Plaguebringer",
+          "entry": 1491,
+          "icon": "INV_Misc_Head_Undead_02",
+          "status": "native"
+        },
+        {
+          "name": "Patchwerk",
+          "entry": 1492,
+          "icon": "Achievement_Boss_patchwerk",
+          "status": "native"
+        },
+        {
+          "name": "Sapphiron",
+          "entry": 1493,
+          "icon": "Achievement_Boss_Sapphiron_01",
+          "status": "native"
+        },
+        {
+          "name": "Kel'Thuzad",
+          "entry": 1494,
+          "icon": "Achievement_Boss_KelThuzad_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "netherstorm",
+      "bosses": [
+        {
+          "name": "Mechano-Lord Capacitus",
+          "entry": 3790,
+          "icon": "Ability_GolemStormBolt",
+          "status": "native"
+        },
+        {
+          "name": "Warp Splinter",
+          "entry": 3791,
+          "icon": "Achievement_Boss_WarpSplinter",
+          "status": "native"
+        },
+        {
+          "name": "Laj",
+          "entry": 3792,
+          "icon": "Ability_Druid_ForceofNature",
+          "status": "native"
+        },
+        {
+          "name": "Harbinger Skyriss",
+          "entry": 3793,
+          "icon": "Achievement_Boss_Harbinger_Skyriss",
+          "status": "native"
+        },
+        {
+          "name": "Kael'thas Sunstrider",
+          "entry": 2008,
+          "icon": "Achievement_Boss_Kael'thasSunstrider_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "pitofsaron",
+      "bosses": [
+        {
+          "name": "Forgemaster Garfrost",
+          "entry": 5290,
+          "icon": "Achievement_Boss_Forgemaster",
+          "status": "native"
+        },
+        {
+          "name": "Ick",
+          "entry": 5291,
+          "icon": "INV_Misc_Head_Undead_02",
+          "status": "native"
+        },
+        {
+          "name": "Devourer of Souls",
+          "entry": 5292,
+          "icon": "Achievement_Boss_DevourerofSouls",
+          "status": "native"
+        },
+        {
+          "name": "Rimefang",
+          "entry": 5293,
+          "icon": "INV_PET_FROSTWYRM",
+          "status": "native"
+        },
+        {
+          "name": "Scourgelord Tyrannus",
+          "entry": 2111,
+          "icon": "Achievement_Boss_ScourgelordTyrannus",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "queldanas",
+      "bosses": [
+        {
+          "name": "Kalecgos",
+          "entry": 4190,
+          "icon": "INV_Misc_Head_Dragon_Blue",
+          "status": "native"
+        },
+        {
+          "name": "Brutallus",
+          "entry": 4191,
+          "icon": "Spell_Fire_Elemental_Totem",
+          "status": "native"
+        },
+        {
+          "name": "Felmyst",
+          "entry": 4192,
+          "icon": "INV_Misc_Head_Dragon_Green",
+          "status": "native"
+        },
+        {
+          "name": "M'uru",
+          "entry": 4193,
+          "icon": "Spell_Arcane_Arcane01",
+          "status": "native"
+        },
+        {
+          "name": "Kil'jaeden",
+          "entry": 2012,
+          "icon": "ACHIEVEMENT_BOSS_KILJAEDAN",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "shadowmoon",
+      "bosses": [
+        {
+          "name": "High Warlord Naj'entus",
+          "entry": 4090,
+          "icon": "INV_Misc_Head_Orc_01",
+          "status": "native"
+        },
+        {
+          "name": "Supremus",
+          "entry": 4091,
+          "icon": "Spell_Fire_Elemental_Totem",
+          "status": "native"
+        },
+        {
+          "name": "Teron Gorefiend",
+          "entry": 4092,
+          "icon": "INV_Misc_Head_Undead_01",
+          "status": "native"
+        },
+        {
+          "name": "Gurtogg Bloodboil",
+          "entry": 4093,
+          "icon": "INV_Misc_Head_Orc_02",
+          "status": "native"
+        },
+        {
+          "name": "Illidan Stormrage",
+          "entry": 2011,
+          "icon": "Achievement_Boss_Illidan",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "sholazar",
+      "bosses": [
+        {
+          "name": "King Krush",
+          "entry": 4790,
+          "icon": "Ability_Hunter_Pet_Devilsaur",
+          "status": "native"
+        },
+        {
+          "name": "Loque'nahak",
+          "entry": 4791,
+          "icon": "Ability_Hunter_Pet_Cat",
+          "status": "native"
+        },
+        {
+          "name": "Avatar of Freya",
+          "entry": 4792,
+          "icon": "Achievement_Boss_Freya_01",
+          "status": "native"
+        },
+        {
+          "name": "Old Crystalbark",
+          "entry": 4290,
+          "icon": "Ability_Druid_ForceofNature",
+          "status": "native"
+        },
+        {
+          "name": "Artruis the Heartless",
+          "entry": 2106,
+          "icon": "Spell_Shadow_RaiseDead",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "sm",
+      "bosses": [
+        {
+          "name": "Houndmaster Loksey",
+          "entry": 1390,
+          "icon": "INV_Misc_Head_Human_01",
+          "status": "native"
+        },
+        {
+          "name": "Arcanist Doan",
+          "entry": 1391,
+          "icon": "INV_Misc_Head_Human_02",
+          "status": "native"
+        },
+        {
+          "name": "Herod",
+          "entry": 1392,
+          "icon": "INV_Misc_Head_Human_01",
+          "status": "native"
+        },
+        {
+          "name": "Scarlet Commander Mograine",
+          "entry": 1393,
+          "icon": "INV_Misc_Head_Human_01",
+          "status": "native"
+        },
+        {
+          "name": "High Inquisitor Whitemane",
+          "entry": 1394,
+          "icon": "INV_Misc_Head_Human_02",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "stormpeaks",
+      "bosses": [
+        {
+          "name": "Krystallus",
+          "entry": 5090,
+          "icon": "Spell_Nature_EarthElemental_Totem",
+          "status": "native"
+        },
+        {
+          "name": "General Bjarngrim",
+          "entry": 5091,
+          "icon": "Achievement_Boss_GeneralBjarngrim",
+          "status": "native"
+        },
+        {
+          "name": "Razorscale",
+          "entry": 5092,
+          "icon": "Achievement_Boss_Razorscale",
+          "status": "native"
+        },
+        {
+          "name": "Hodir",
+          "entry": 5093,
+          "icon": "Achievement_Boss_Hodir_01",
+          "status": "native"
+        },
+        {
+          "name": "Yogg-Saron",
+          "entry": 2109,
+          "icon": "Achievement_Boss_YoggSaron_01",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "terokkar",
+      "bosses": [
+        {
+          "name": "Pandemonius",
+          "entry": 3290,
+          "icon": "Spell_Shadow_SummonVoidWalker",
+          "status": "native"
+        },
+        {
+          "name": "Shirrak the Dead Watcher",
+          "entry": 3291,
+          "icon": "Ability_Hunter_Pet_Bat",
+          "status": "native"
+        },
+        {
+          "name": "Exarch Maladaar",
+          "entry": 3292,
+          "icon": "Achievement_Boss_Exarch_Maladaar",
+          "status": "native"
+        },
+        {
+          "name": "Darkweaver Syth",
+          "entry": 3293,
+          "icon": "Ability_Hunter_Pet_Vulture",
+          "status": "native"
+        },
+        {
+          "name": "Talon King Ikiss",
+          "entry": 2003,
+          "icon": "Achievement_Boss_TalonKingIkiss",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "tol_barad",
+      "bosses": [
+        {
+          "name": "Argaloth",
+          "entry": 700128,
+          "icon": "Achievement_Boss_Magtheridon",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "twilight_highlands",
+      "bosses": [
+        {
+          "name": "Cho'gall",
+          "entry": 700168,
+          "icon": "Achievement_Reputation_Ogre",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "uldum",
+      "bosses": [
+        {
+          "name": "Siamat",
+          "entry": 700138,
+          "icon": "Spell_Nature_Lightning",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "ungoro",
+      "bosses": [
+        {
+          "name": "Ravasaur Matriarch",
+          "entry": 1290,
+          "icon": "Ability_Hunter_Pet_Raptor",
+          "status": "native"
+        },
+        {
+          "name": "Uhk'loc",
+          "entry": 1291,
+          "icon": "Ability_Hunter_Pet_Devilsaur",
+          "status": "native"
+        },
+        {
+          "name": "Lar'korwi",
+          "entry": 1292,
+          "icon": "Ability_Hunter_Pet_Devilsaur",
+          "status": "native"
+        },
+        {
+          "name": "Tyrant Devilsaur",
+          "entry": 1293,
+          "icon": "Ability_Hunter_Pet_Devilsaur",
+          "status": "native"
+        },
+        {
+          "name": "King Mosh",
+          "entry": 1294,
+          "icon": "Ability_Hunter_Pet_Devilsaur",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "vashjir",
+      "bosses": [
+        {
+          "name": "Lady Naz'jar",
+          "entry": 700158,
+          "icon": "Achievement_Boss_LadyVashj",
+          "status": "presentation fallback; no native icon"
+        }
+      ],
+      "creatures": 6
+    },
+    {
+      "key": "wsg",
+      "bosses": [
+        {
+          "name": "Doomguard Commander",
+          "entry": 190,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "Mannoroth's Herald",
+          "entry": 191,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "Varimathras",
+          "entry": 192,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "Lord Hel'nurath",
+          "entry": 194,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        },
+        {
+          "name": "Lord Kazzak",
+          "entry": 193,
+          "icon": "Spell_Shadow_SummonInfernal",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "zangarmarsh",
+      "bosses": [
+        {
+          "name": "Hungarfen",
+          "entry": 3190,
+          "icon": "Creature_SporeMushroom",
+          "status": "native"
+        },
+        {
+          "name": "Ghaz'an",
+          "entry": 3191,
+          "icon": "Ability_Hunter_Pet_WindSerpent",
+          "status": "native"
+        },
+        {
+          "name": "Quagmirran",
+          "entry": 3192,
+          "icon": "Achievement_Boss_Quagmirran",
+          "status": "native"
+        },
+        {
+          "name": "the Black Stalker",
+          "entry": 3193,
+          "icon": "Achievement_Boss_theBlackStalker",
+          "status": "native"
+        },
+        {
+          "name": "Lady Vashj",
+          "entry": 2002,
+          "icon": "ACHIEVEMENT_BOSS_LADYVASHJ",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "zulaman",
+      "bosses": [
+        {
+          "name": "Nalorakk",
+          "entry": 3890,
+          "icon": "Ability_Hunter_Pet_Bear",
+          "status": "native"
+        },
+        {
+          "name": "Akil'zon",
+          "entry": 3891,
+          "icon": "Ability_Hunter_Pet_Owl",
+          "status": "native"
+        },
+        {
+          "name": "Jan'alai",
+          "entry": 3892,
+          "icon": "Ability_Hunter_Pet_DragonHawk",
+          "status": "native"
+        },
+        {
+          "name": "Halazzi",
+          "entry": 3893,
+          "icon": "Ability_Hunter_Pet_Cat",
+          "status": "native"
+        },
+        {
+          "name": "Zul'jin",
+          "entry": 2009,
+          "icon": "Achievement_Boss_Zuljin",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    },
+    {
+      "key": "zuldrak",
+      "bosses": [
+        {
+          "name": "Slad'ran",
+          "entry": 4690,
+          "icon": "Achievement_Boss_Sladran",
+          "status": "native"
+        },
+        {
+          "name": "Drakkari Colossus",
+          "entry": 4691,
+          "icon": "Ability_GolemStormBolt",
+          "status": "native"
+        },
+        {
+          "name": "Moorabi",
+          "entry": 4692,
+          "icon": "Achievement_Boss_Moorabi",
+          "status": "native"
+        },
+        {
+          "name": "Eck the Ferocious",
+          "entry": 4693,
+          "icon": "Ability_Hunter_Pet_Worm",
+          "status": "native"
+        },
+        {
+          "name": "Gal'darah",
+          "entry": 2105,
+          "icon": "Achievement_Boss_Galdarah",
+          "status": "native"
+        }
+      ],
+      "creatures": 17
+    }
+  ],
+  "seasonal": [
+    {
+      "name": "Pumpkin Soldier",
+      "display": 21822,
+      "icon": "INV_Helmet_96",
+      "source": "base/meta/holidays.toml",
+      "status": "presentation fallback; no native icon"
+    },
+    {
+      "name": "Restless Skeleton",
+      "display": 158,
+      "icon": "Spell_Shadow_AnimateDead",
+      "source": "base/meta/holidays.toml",
+      "status": "presentation fallback; no native icon"
+    },
+    {
+      "name": "Wailing Banshee",
+      "display": 915,
+      "icon": "Spell_Shadow_Possession",
+      "source": "base/meta/holidays.toml",
+      "status": "presentation fallback; no native icon"
+    },
+    {
+      "name": "Hallowed Spirit",
+      "display": 146,
+      "icon": "Spell_Holy_GuardianSpirit",
+      "source": "base/meta/holidays.toml",
+      "status": "presentation fallback; no native icon"
+    }
+  ],
+  "bossIconAssets": {
+    "verifiedPaths": 120,
+    "archives": [
+      "common-2.MPQ",
+      "common.MPQ",
+      "locale-enUS.MPQ",
+      "speech-enUS.MPQ",
+      "expansion.MPQ"
+    ],
+    "missing": [],
+    "method": "read-only MPQ hash tables; encrypted AZSR containers not opened"
+  }
+}

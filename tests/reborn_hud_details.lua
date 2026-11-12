@@ -41,8 +41,9 @@ FieldKitLoadout.scanAt=0;FieldKitLoadout.Scan()
 local e=FieldKitLoadout.spells[1];assert(e.nativeText==AZS_SPELLTIPS.auto_shot)
 local lines={};GameTooltip.AddLine=function(self,text) table.insert(lines,text) end
 FieldKitLoadout.Tip(UIParent,e)
-assert(lines[2]==e.nativeText)
-for _,line in ipairs(lines) do assert(line~="Bonus details not provided") end
+for _,line in ipairs(lines) do assert(line~=e.nativeText,"Full native description leaked into bonus tooltip") end
+e.bonuses={"+56% dmg"};lines={};FieldKitLoadout.Tip(UIParent,e)
+assert(lines[2]=="+56% dmg")
 AZS_SPELLTIPS.auto_shot="Deals 180 damage. Your damage bonus: +80%."
 NOW=NOW+2;assert(FieldKitLoadout.Scan())
 assert(FieldKitLoadout.spells[1].nativeText==AZS_SPELLTIPS.auto_shot)

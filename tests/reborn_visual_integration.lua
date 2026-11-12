@@ -48,7 +48,7 @@ assert(R.EnemyIcon("Bog Giant",{})=="Interface\\Icons\\NativeBogGiant","Dead mob
 assert(R.EnemyIcon("Unknown",{})=="Interface\\Icons\\INV_Misc_QuestionMark")
 R.NoteEnemy(nil,"Bog Giant",99) -- unknown entries cannot erase evidence
 assert(R.EnemyIcon("Bog Giant",{})=="Interface\\Icons\\NativeBogGiant")
-run="run2";assert(R.EnemyIcon("Bog Giant",{})=="Interface\\Icons\\INV_Misc_QuestionMark")
+run="run2";assert(R.EnemyIcon("Bog Giant",{})=="Interface\\Icons\\Achievement_Reputation_Ogre","Known catalog appearance lost after run boundary")
 C.Set("zoneThemes",false)
 assert(b.icon:GetAlpha()==1 and b.IconBorder:GetAlpha()==1 and not R.squareActions[b]:IsShown())
 assert(dash:GetParent()==UIParent and swarm:GetParent()==Minimap and mapName:GetParent()==UIParent)

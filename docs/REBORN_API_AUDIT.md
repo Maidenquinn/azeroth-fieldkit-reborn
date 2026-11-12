@@ -1,191 +1,113 @@
-# Audit FieldKit Reborn — 12 novembre 2026, candidat reborn.5
+# Audit FieldKit Reborn — 12 novembre 2026, reborn.6
 
-## Périmètre et preuves
+## Sources contrôlées
 
-Client installé **0.6.1**, 51 modules Lua chargés par le TOC FieldKit,
-407 fichiers Lua publics des addons AzerothSurvivors, AzerothSurvivorsAPI et
-AzerothSurvivorsUI. Les huit guides officiels ont été relus, dont
-[l'API](https://azreborn.com/guides/addon-api),
-[les parties et zones](https://azreborn.com/guides/runs-and-zones),
-[les classes](https://azreborn.com/guides/classes-and-talents),
-[la coopération](https://azreborn.com/guides/co-op) et
-[la progression](https://azreborn.com/guides/progression-and-cosmetics).
+Client installé **0.6.3**, 52 modules FieldKit et 407 fichiers Lua publics du
+client. Les huit guides officiels ont été relus, dont
+[l’API](https://azreborn.com/guides/addon-api) et
+[les parties et zones](https://azreborn.com/guides/runs-and-zones).
+[REBORN_API_COVERAGE.json](REBORN_API_COVERAGE.json) conserve les définitions,
+références, fichiers, lignes et empreintes des sources : 129 déclarations Lua
+AZS et 94 symboles documentés, dont 79 référencés. Une référence statique ne
+prouve ni une fonctionnalité active ni une validation en jeu.
 
-L'inventaire reproductible [REBORN_API_COVERAGE.json](REBORN_API_COVERAGE.json)
-énumère chaque symbole, ses définitions, ses références et ses appels directs,
-avec fichier/ligne et empreintes SHA256 des sources. Il recense 129 déclarations
-globales de fonctions AZS dans le Lua du client, et 94 symboles AZS mentionnés
-dans le guide API (fonctions **et** tables). Ce ne sont pas 129 contrats publics
-stables : certains sont des helpers internes de l'interface native. Une référence
-statique, notamment dans Diagnostics, ne prouve pas une fonctionnalité active.
-Les fonctions exportées par le moteur figurent par leur mention documentaire ;
-leur implémentation binaire/serveur n'est pas disponible dans cette installation.
+Le générateur `tools/build_reborn_creatures.py` lit également les définitions
+TOML embarquées dans le PE installé, sans exécuter le binaire ni modifier le
+client. Il ne redistribue que les métadonnées de présentation nécessaires.
+[REBORN_CREATURE_COVERAGE.json](REBORN_CREATURE_COVERAGE.json) détaille chaque
+boss, sa zone, son entrée, son icône et la provenance de celle-ci.
 
-Les modules sont inventoriés et soumis aux contrôles statiques, à la compilation
-et à la suite de comportement. La revue ciblée porte sur la compatibilité des
-API, la propriété des cadres natifs, les frontières de partie, les données
-manquantes et les défauts reproduits dans les captures. Cela ne remplace pas
-une recette visuelle en jeu, ni une certification indépendante de chaque chemin.
+## Corrections reborn.6
 
-## Défauts confirmés et corrigés
+- **Icônes de boss** : la carte Chronicle ne consultait que `AZS_UNITS.entry`,
+  souvent absent. Elle utilise maintenant le même résolveur que le compteur,
+  avec priorité aux observations natives, puis aux noms du catalogue de la
+  zone et aux noms globaux non ambigus. Les identifiants d’instance ne sont
+  jamais assimilés à des entrées de créature.
+- **Couverture** : 48 cartes, 192 boss planifiés et 684 lignes de créatures.
+  Douze boss finaux de Cataclysm n’ont aucune icône déclarée : ils reçoivent
+  un remplacement de présentation explicite, identifié comme tel dans le
+  rapport. Les 120 chemins distincts utilisés pour les boss et les quatre
+  apparences de Sanssaint ont été retrouvés dans les tables de hachage des
+  cinq archives MPQ lisibles. Aucun conteneur AZSR chiffré n’a été ouvert.
+  Ce contrôle d’existence ne remplace pas une observation visuelle des 192 combats.
+- **Créatures saisonnières** : Pumpkin Soldier, Restless Skeleton, Wailing
+  Banshee et Hallowed Spirit reçoivent un remplacement visuel, car leurs
+  apparences définissent des modèles, mais aucune icône native. Aucun faux
+  identifiant d’entrée n’est créé.
+- **Antres** : les chaînes vides ne créent plus de lignes anonymes. L’index
+  natif commence à 1. Un nom connu est retenu uniquement pour le même gardien
+  identifié dans la même partie ; il n’est jamais annoncé comme une future
+  apparition après sa disparition. Si l’API n’envoie pas son identité avant
+  apparition, la ligne affiche « Gardien · antre N ». Le catalogue des élites
+  n’établit pas la prochaine sélection ; aucun nom supposé n’est affiché.
+- **Jauges boss/Horde** : cadres du thème, matière sombre et bordure dorée,
+  texte serif, hauteur extérieure 30 et remplissage intérieur 16. Chaque
+  surface est dimensionnée avant construction et le remplissage est sur un
+  enfant au-dessus du matériau. Le pourcentage reste dans sa barre dédiée,
+  sans compte à rebours ajouté pour le prochain boss.
+- **Liste de sorts** : l’infobulle FieldKit garde nom, rang et bonus explicites,
+  mais ne recopie plus la description `AZS_SPELLTIPS`. Les descriptions natives
+  de la barre d’actions restent disponibles. Les bonus non transmis restent
+  indisponibles ; le texte de base n’est pas transformé en bonus supposés.
+  Dans ce client, AZSSPELLS ne transporte que key/spell/rank/cd/cdmax ;
+  AZSSPELLTIP donne une description complète aux valeurs actuelles, sans
+  ventilation distincte des bonus. La liste peut donc signaler des bonus
+  indisponibles même si la puissance effective du sort a augmenté.
+- **Modale des dégâts** : niveaux de cadres explicites au-dessus du matériau,
+  hauteurs de texte définies, un seul FontString par en-tête, boutons fermer,
+  épingler et pagination au-dessus de la fenêtre. L’icône est placée avant
+  le calcul du retrait du nom. Les barres utilisent le maximum réel de la
+  liste, même après un tri ascendant.
+- **Compteur de soins** : une chaîne source vide reçoit « Source non identifiée ».
+  Les icônes des sources structurées sont conservées ; Lifesteal a son propre
+  pictogramme. La provenance manquante n’est pas remplacée par le nom d’un sort
+  déduit uniquement de son icône.
 
-1. **Carré doré central** : la précédente jauge appliquait une surface texturée
-   avant son dimensionnement. Les coins pouvaient recevoir une dimension nulle,
-   laissant le client dessiner la taille intrinsèque de l'atlas. La nouvelle
-   jauge utilise une texture de barre, un fond uni et quatre traits explicitement
-   dimensionnés ; hauteur 22, largeur bornée. La primitive générale Theme.Update
-   borne également ses dimensions pendant la résolution initiale des ancrages.
-2. **Horde perdue** : l'anneau natif masqué avait une vraie fonction. Une seconde
-   jauge fine reprend maintenant `AZS_RUN.en / AZS_RUN.enm`, avec compte et teinte
-   ambre/rouge. Une donnée absente reste inconnue ; zéro est une donnée valide.
-3. **Septième case fantôme** : la case était incrustée dans les images du dock.
-   La rangée entière est recouverte et six sockets sont redessinés à partir de
-   l'atlas existant, centrés dans les trois dispositions. Six boutons natifs
-   restent interactifs. Le vrai `AZSDashButton` est placé séparément à côté du
-   dock ; il conserve sa touche Maj, ses charges et son infobulle.
-4. **Compteurs illisibles** : remplacement des anciennes petites étiquettes par
-   trois/quatre cellules égales, icônes de même taille et nombres en AzerothSans
-   18, alignés verticalement. Les noms et valeurs complètes restent accessibles
-   en infobulle. La monnaie d'événement occupe la quatrième cellule de cette
-   même bande ; aucune ligne volante au-dessus du dock.
-5. **Sorts absents au départ** : Loadout.Update effaçait les données en phase
-   `ready`. La disponibilité du loadout inclut désormais cette phase sans
-   changer la définition de partie active pour les autres modules. L'adaptateur
-   préfère `AZS_GetMeterContext` + `AZS_GetMeterLoadout`, puis le paquet frais
-   `AZS_SPELLS` si l'API structurée n'est pas prête. Il lit les noms/icônes via
-   GetSpellInfo et garde les descriptions `AZS_SPELLTIPS`. Aucun sort supposé
-   appris ni rang 1 inventé. La barrière de fraîcheur reste obligatoire.
-6. **Gardiens oubliés par les barres Chronicle** : Reborn ne met volontairement
-   aucun gardien dans `AZS_UNITS`, contrairement à l'ancien jeu. Le sélecteur
-   utilise maintenant `AZS_GetBosses` et `AZS_GetGuardians`, en réunissant des
-   copies pour FieldKit. Le flag éveillé et les PV natifs sont conservés ; aucun
-   ajout n'est effectué dans les tables du jeu. Les gardiens endormis restent
-   exclus du rendu de combat.
-7. **Restauration** : les nouvelles cellules, les deux jauges et la rangée de
-   six sockets sont masquées lorsque le thème est désactivé. Les boutons natifs
-   retrouvent les parents et propriétés enregistrés.
-8. **Thème perdu après /reload** : reproduit dans le vrai client. Le réglage
-   était encore activé, mais `AZSZONE` n'était pas renvoyé alors que les paquets
-   de partie/sorts étaient présents. Le mode auto utilise maintenant la phase
-   de partie pour rétablir l'habillage sans exiger un identifiant de zone. Le
-   nom affiché peut provenir de GetRealZoneText/GetZoneText, sans fabriquer un
-   identifiant de carte ni une difficulté. Vérifié après rechargements réels.
-9. **Flèches du chat en double** : les noms Reborn sont
-   ChatFrame1ButtonFrameUpButton/DownButton/BottomButton. Ils sont maintenant
-   masqués/restaurés avec les contrôles natifs ; les quatre contrôles FieldKit
-   restent disponibles. Les onglets de conversation natifs restent gérés par
-   le jeu.
-10. **Distances de lairs aberrantes au départ** : les coordonnées 0,0 du paquet
-    d'attente donnaient des milliers de yards. Les distances restent absentes
-    en phase ready, puis utilisent la pose officielle AZS_GetPlayerPosition.
-    Le cas de coordonnées natives non nulles différentes du paquet est testé.
+## Compatibilité conservée
 
-## Couverture par famille de modules
+TOC 11200 et callbacks Lua legacy du client, dépendance à AzerothSurvivorsAPI,
+variables FieldKitRebornDB isolées. Six actions natives restent interactives,
+Destrier séparé, compteurs alignés et monnaie événementielle dans la même bande.
+Les getters boss/gardiens, loadout structuré, filtres de fraîcheur, couleurs
+PV, restitution des cadres natifs et restauration automatique après /reload
+restent couverts. Les sources historiques FieldKit et Stats ne sont pas modifiées.
 
-- Runtime, Reborn, RebornPresentation, RebornHUD, GameCompatibility, Diagnostics :
-  identité indépendante, adaptateurs, capacités optionnelles et géométrie.
-  Interface **11200** et dépendance AzerothSurvivorsAPI conservées pour les shims
-  `this/event/argN`, UnitBuff et événements de combat historiques.
-- NativeData, NativeTools, Loadout, RunMode, FieldKit : phase, heure, boss,
-  gardiens, effets, résurrection, niveaux stockés, bijoux, lairs et statistiques.
-  Les données natives remplacées par paquet sont relues ; aucune mutation.
-- MeterLedger, MeterSuite, TakenDetails, Coop, GroupHistory, PartySync,
-  PartyDetails : snapshots, identité des propriétaires, détails de groupe et
-  limites de capacité. Le canal optionnel AFKRDETAIL1 reste désactivé par défaut.
-  Le soin effectué n'est jamais présenté comme du soin reçu.
-- WorldPins, WorldAnchors, WorldMarkers, CombatText, CombatOptions, LegacyCrits,
-  BossTimeline : positions, projections, unités abattues, texte et calendrier.
-  Les fonctions optionnelles sont sondées ; les identifiants d'instance ne
-  deviennent pas des identifiants de créature. Cache d'icônes observées borné.
-- Theme, ThemeHUD, ThemeTarget, ThemeMinimap, ReferenceHUD, ReferenceArt,
-  ZoneThemes, ZoneThemeRegistry, HudStack, CardLayout, ScreenLayers : propriété
-  du HUD, boutons réels, changement/restauration du thème, limites de rendu.
-  Le calendrier fournit la progression boss ; le thème n'invente pas de formule.
-- Config, Profiles, Positions, Settings, OptionsSchema, Interface,
-  Localization, InterfaceStrings, Preview, PreviewVisibility, CopyLog :
-  migrations, profils, préférences, texte et prévisualisations. Les anciennes
-  sauvegardes FieldKitDB ne sont pas importées dans FieldKitRebornDB.
-- Seed, SpellAssets, PortraitCatalog, Portraits : conservation du patrimoine
-  graphique, mais le catalogue natif Reborn et les observations priment sur les
-  données de l'ancien jeu. Un portrait inconnu reste explicitement inconnu.
+## API utiles encore non intégrées
 
-Le catalogue du client contient 48 zones, 12 classes, 241 sorts de classe,
-38 bijoux, 20 amulettes, 612 références d'icônes de créatures et 83 hauts faits.
-Le test parcourt toutes les zones et tous les sorts de classe générés. Ce sont
-des métadonnées lues, pas 48 parties jouées ou un bestiaire serveur exhaustif.
+- `AZS_GetRunSummary` : bilan de fin de partie et historique, utile au futur port Stats.
+- `AZS_IsStoringLevels` / `AZS_SetStoringLevels` : état exact et commande manuelle
+  de stockage des niveaux. Ne pas déclencher le changement automatiquement.
+- `AZS_GetSummons` / `AZS_GetSummonCount` / `AZS_GetTotemCount` : détails et
+  compteurs facultatifs ; les groupes d’invocations sont déjà exploités.
+- `AZS_GetRunLength` : repère global de campagne, distinct de la progression boss.
 
-## Fonctionnalités du jeu et choix d'intégration
+Les helpers OnBanner/ParseBanner/OnWorldProjected distribuent des événements
+internes ; leur absence d’appel direct ne signifie pas une feature perdue.
+Les checkpoints atomiques, fenêtres natives récentes et portraits retenus sont
+annoncés non supportés par Meter.lua. Les appeler ne créerait pas ces données.
 
-Les guides distinguent campagne, difficultés héroïques/affixes, chaîne de zones,
-continuation sans fin après victoire, défi quotidien, entraînement/simulation
-et hub social. La continuation sans fin ne doit pas être confondue avec les
-modes encore annoncés « Coming soon ». Les quatre continents/ères n'impliquent
-pas quatre contrats API : noms, calendrier et contenu restent fournis par la
-partie native. L'habillage automatique Elwynn s'applique aux cartes d'extension,
-sans prétendre fournir une nouvelle illustration spécifique à chaque zone.
+## Vérification et limites
 
-Le HUD natif reste propriétaire des choix de niveau, portails, avertissements
-de mécanique, sélection de bijoux, boutique/événement, talents persistants,
-cosmétiques, défis et classements. FieldKit garde les commandes de jeu manuelles
-et n'essaie pas de reproduire ou automatiser ces écrans. Les avertissements
-natifs ne sont pas supprimés globalement avec les éléments remplacés du HUD.
-La Horde et la monnaie d'événement, précédemment perdues, sont intégrées.
+Contrôles statiques, compilation et suite de comportement complète ; fixtures
+Reborn de production avec les sources Api.lua, Meter.lua et Content.lua installées.
+Les tests vérifient chaque boss du catalogue, les limites d’icônes, la fraîcheur
+des identités, les noms vides, les couches de rendu et les colonnes de la modale.
+Le mock associe désormais le FontString d’un bouton comme le client.
 
-## API encore utiles à exploiter davantage
+Recette réelle partielle via le skill computer-use : jauges Elwynn, quatre
+antres numérotés, six cases, retours du thème après /reload et réapparition des
+deux sorts après réception des paquets. Une fixture temporaire clairement
+étiquetée « TEST RENDU - DONNEES FICTIVES » a exercé le vrai rendu de la modale :
+icônes, noms, valeurs, en-têtes uniques, tri Total et fermeture. Cette fixture
+n’a modifié aucune table native et a été retirée du TOC et du dossier installé.
 
-- **AZS_GetRunSummary** : résumé fiable à la fin d'une partie, avec le résultat
-  réellement fourni. Utile à l'historique de FieldKit et prioritaire pour le
-  futur port Azeroth Stats. Actuellement inutilisé ; aucun résumé persistant
-  nouveau n'a été ajouté à ce correctif HUD.
-- **AZS_IsStoringLevels / AZS_SetStoringLevels** : afficher l'état exact du
-  stockage et proposer un bouton manuel. FieldKit lit déjà le nombre et ouvre
-  les niveaux conservés, mais ne fournit pas encore ce sélecteur d'état.
-- **AZS_GetRunLength** : repère global vers le dernier boss ou résumé de
-  campagne, indépendant de la progression vers le prochain boss. À afficher
-  seulement si pertinent pour le mode courant ; pas de compte à rebours ajouté.
-- **AZS_GetSummons / AZS_GetSummonCount / AZS_GetTotemCount** : détail individuel
-  et compteurs compacts facultatifs. Les groupes d'invocations et totems sont
-  déjà exploités ; ce serait un approfondissement, pas une feature absente.
-- Le **loadout structuré** et les **getters boss/gardiens** étaient utiles et
-  insuffisamment exploités : ils sont maintenant intégrés dans reborn.5.
+Les commandes de déplacement disponibles n’ont pas démarré le combat. Aucun
+combat réel, cycle de charges du Destrier, Horde pleine ou transport coop n’est
+annoncé validé dans cette recette. Les sources de dégâts réelles restent à
+recetter en partie. Les défauts corrigés dans les couches de la modale ont,
+eux, été reproduits et vérifiés dans le client avec les données de test.
 
-Les fonctions OnBanner/ParseBanner/OnWorldProjected sont des points de
-distribution internes : leur absence d'appel direct n'est pas un défaut.
-FieldKit s'abonne déjà aux handlers publics de bannières/projection.
-Les checkpoints atomiques, fenêtres récentes natives et portraits retenus sont
-annoncés non supportés par le Meter API du client. Les appeler davantage ne
-créerait aucune donnée fiable. Les commandes de jeu ne sont pas des données à
-collecter automatiquement. La couverture doit se juger par la fonctionnalité,
-pas par le pourcentage brut de noms AZS appelés.
-
-## Vérification et limites restantes
-
-Les fixtures de production vérifient le démarrage sans GetPlayerBuff, les trois
-dispositions, la restauration native, les vrais callbacks, l'identité des objets,
-les couleurs de vie, la fraîcheur entre parties, les six sockets et la Horde.
-Une fixture 0×0 remplace les dimensions artificielles du mock pour détecter la
-régression de texture. Les fichiers Api.lua, Meter.lua et Generated/Content.lua
-du client installé sont aussi exécutés dans le harnais Lua.
-
-Une recette native partielle a ensuite été effectuée avec l'autorisation de
-contrôle donnée par le mainteneur : disparition du carré, six cases dans les
-trois dispositions, compteurs alignés avec monnaie d'événement, deux sorts de
-départ et leur description, puis retours automatiques du thème après /reload.
-La Horde a été vue à 0/120 et la progression boss à 0 %. Le thème complet/auto
-et l'échelle initiale de 80 % ont été conservés à la fin.
-
-Le compteur de charges `AZS_DASH.seen` peut aussi rester absent après /reload
-dans ce client : le bouton natif se cache alors de lui-même. FieldKit montre un
-repère grisé « ? » hors des six sorts, avec une infobulle d'attente ; il ne
-prétend pas connaître les charges et ne déclenche aucune commande automatique.
-Le vrai bouton reprend la place dès que la mise à jour native arrive. La
-difficulté reste « ? » si elle n'est plus transmise ; le nom du monde seul ne
-permet pas de la déduire.
-
-Cette recette ne valide pas un combat prolongé, une Horde pleine, les cycles
-réels de charges du Destrier, un combat de gardien ou le transport coop. Ces
-points restent couverts seulement par les fixtures lorsqu'elles existent.
-Le journal Lua n'a montré aucune nouvelle erreur pendant cette recette ; les
-anciennes erreurs Ace3/issecretvalue du jeu n'ont pas été effacées ni corrigées
-en modifiant ses addons. Aucun fichier des addons natifs ni aucune sauvegarde
-de compte n'est modifié par le déploiement.
+Pour regenerer le catalogue et verifier les chemins d’icones : installer les
+dependances de requirements-dev.txt, puis executer
+`python tools/build_reborn_creatures.py --game CHEMIN_DU_JEU --verify-icons`.

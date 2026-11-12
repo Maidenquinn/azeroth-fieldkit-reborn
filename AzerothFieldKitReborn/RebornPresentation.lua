@@ -74,7 +74,45 @@ function R.EnemyIcon(name,row)
  R.CacheEnemyIcons()
  if type(row)=="table" and type(row.icon)=="string" and row.icon~="" then return R.Icon(row.icon) end
  if type(row)=="table" and row.entry then R.NoteEnemy(nil,name,row.entry) end
- return (R.enemyIcons and R.enemyIcons[name]) or "Interface\\Icons\\INV_Misc_QuestionMark"
+ return (R.enemyIcons and R.enemyIcons[name]) or R.CreatureIcon(name,type(row)=="table" and row.entry) or "Interface\\Icons\\INV_Misc_QuestionMark"
+end
+-- Versioned presentation catalog from the installed packs. A zone-local name
+-- wins over global names; conflicting global names never select an arbitrary icon.
+function R.CreatureIcon(name,entry)
+ local native=type(AZS_GEN)=="table" and AZS_GEN.creatureIcons
+ if entry and type(native)=="table" and native[tonumber(entry)] then return R.Icon(native[tonumber(entry)]) end
+ local data=FieldKitRebornCreatures;if not data then return nil end
+ if not R.creatureNames then
+  R.creatureNames={};R.creatureZones={}
+  local function Add(index,c)
+   for _,key in ipairs({c.name,R.Localize(c.name)}) do
+    local icon=R.Icon(c.icon);local old=index[key]
+    if old==nil then index[key]=icon elseif old~=icon then index[key]=false end
+   end
+  end
+  for zone,list in pairs(data.zones) do
+   local index={};R.creatureZones[zone]=index
+   for _,c in ipairs(list) do Add(index,c);Add(R.creatureNames,c) end
+  end
+  for _,c in ipairs(data.seasonal) do Add(R.creatureNames,c) end
+ end
+ local zone=type(AZS_ZONE)=="table" and AZS_ZONE.zone
+ local index=zone and R.creatureZones[zone]
+ return (index and index[name]) or R.creatureNames[name] or nil
+end
+-- The native packet may not reveal the next guardian's identity. Keep a real
+-- name once observed in this run, but never predict a random spawn from elites.
+function R.LairName(lair)
+ local run=type(AZS_API_RunId)=="function" and AZS_API_RunId() or nil
+ local zone=type(AZS_ZONE)=="table" and AZS_ZONE.zone
+ local stamp=tostring(run)..":"..tostring(zone)
+ if R.lairStamp~=stamp then R.lairStamp=stamp;R.lairNames={} end
+ local index=tonumber(lair.index) or 1
+ local identity=lair.id and lair.state~="empty" and (tostring(index)..":"..tostring(lair.id))
+ if type(lair.name)=="string" and string.find(lair.name,"%S") then
+  if identity then R.lairNames[identity]=lair.name end;return lair.name
+ end
+ return (identity and R.lairNames[identity]) or string.format(FieldKit_L("Guardian · lair %d"),math.max(1,index))
 end
 local observer=CreateFrame("Frame");observer:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 observer:SetScript("OnEvent",function()

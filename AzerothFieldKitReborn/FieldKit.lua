@@ -2152,7 +2152,8 @@ function UpdateLairFrame()
 		end
 		row:SetValue(0)
 		local flaggedRow=type(flagged)=="table" and ((flagged.index and flagged.index==l.index) or (flagged.id and flagged.id==l.id))
-		row.label:SetText((flaggedRow and "> " or "")..(l.name or "?"))
+		local lairName=not FieldKit.rebornLegacyFixture and FieldKitReborn.LairName(l) or l.name or "?"
+		row.label:SetText((flaggedRow and "> " or "")..lairName)
 		row.label:SetTextColor(r, g, b)
 		row.value:SetText(FieldKit_L(state))
 		row.value:SetTextColor(r, g, b)

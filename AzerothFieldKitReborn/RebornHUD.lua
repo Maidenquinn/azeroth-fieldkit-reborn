@@ -1,41 +1,38 @@
--- Explicit geometry only: no material skin on small live meters. A skin built
--- at zero size leaves native 512px texture quads in this client.
+-- Size the outer material before building its slices. The fill is a separate
+-- child above that material, inset within the same Elwynn/Naxx gold chrome.
 local R=FieldKitReborn
 function R.ThinMeter(name)
- local f=CreateFrame("StatusBar",name,FieldKitThemeHUD.header)
- f:SetWidth(360);f:SetHeight(22);f:SetMinMaxValues(0,100)
- f:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
- f.back=f:CreateTexture(nil,"BACKGROUND");FieldKitTheme.Solid(f.back,{.025,.04,.035})
- f.edges={}
- for i=1,4 do local t=f:CreateTexture(nil,"OVERLAY");FieldKitTheme.Solid(t,FieldKitTheme.gold);f.edges[i]=t end
- f.label=FieldKitTheme.Label(f,nil,6,0,348,22,14,FieldKitTheme.text,false)
+ local f=CreateFrame("Frame",name,FieldKitThemeHUD.header)
+ f:SetWidth(360);f:SetHeight(30);FieldKitTheme.Surface(f,"card",true)
+ f.fill=CreateFrame("StatusBar",nil,f);f.fill:SetFrameLevel(f:GetFrameLevel()+1)
+ f.fill:SetMinMaxValues(0,100);f.fill:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
+ f.label=FieldKitTheme.Label(f.fill,nil,6,0,348,22,14,FieldKitTheme.text,true)
  f.label:ClearAllPoints();f.label:SetPoint("CENTER",f,"CENTER",0,0);f.label:SetJustifyH("CENTER");f.label:SetJustifyV("MIDDLE")
  return f
 end
 function R.SizeMeter(f,width)
- local w=math.max(200,math.min(480,width));local h=22
- f:SetWidth(w);f:SetHeight(h);f.back:ClearAllPoints();f.back:SetPoint("TOPLEFT",f,"TOPLEFT",0,0);f.back:SetWidth(w);f.back:SetHeight(h)
- local edges={{0,0,w,1},{0,h-1,w,1},{0,0,1,h},{w-1,0,1,h}}
- for i,a in ipairs(edges) do local t=f.edges[i];t:ClearAllPoints();t:SetPoint("TOPLEFT",f,"TOPLEFT",a[1],-a[2]);t:SetWidth(a[3]);t:SetHeight(a[4]) end
- f.label:SetWidth(w-12);f.label:SetHeight(h)
+ local w=math.max(200,math.min(480,width));local h=30
+ f:SetWidth(w);f:SetHeight(h);FieldKitTheme.Update(f)
+ f.fill:ClearAllPoints();f.fill:SetPoint("TOPLEFT",f,"TOPLEFT",8,-7);f.fill:SetWidth(w-16);f.fill:SetHeight(h-14)
+ f.label:SetWidth(w-24);f.label:SetHeight(h-10);FieldKitTheme.Font(f.label,14,FieldKitTheme.text,true)
 end
 function R.ProgressBar()
  local H=FieldKitThemeHUD
- if not R.progressFrame then R.progressFrame=R.ThinMeter("FieldKitRebornBossProgress");R.progressFrame:SetStatusBarColor(.62,.24,.83) end
+ if not R.progressFrame then R.progressFrame=R.ThinMeter("FieldKitRebornBossProgress") end
  if not R.hordeFrame then R.hordeFrame=R.ThinMeter("FieldKitRebornHorde") end
  local width=math.min(420,H.header:GetWidth()-28);R.SizeMeter(R.progressFrame,width);R.SizeMeter(R.hordeFrame,width)
  local share=R.BossProgress();local f=R.progressFrame
  f:ClearAllPoints();f:SetPoint("TOP",H.header,"BOTTOM",0,-6)
  if share then
   local boss=FieldKitNativeTools.NextBoss();local name=boss and boss.name or FieldKit_L("Next boss")
-  f:SetValue(0);f:SetValue(share*100);f.label:SetText(name..string.format(" · %.0f%%",math.floor(share*100)));f:Show();H.next:SetText(name)
+  f.fill:SetStatusBarColor(.45,.32,.12,.95);f.fill:SetValue(0);f.fill:SetValue(share*100);f.label:SetText(name..string.format(" · %.0f%%",math.floor(share*100)));f:Show();H.next:SetText(name)
  else f:Hide();H.next:SetText(FieldKit_L("No upcoming boss")) end
  local run=type(AZS_RUN)=="table" and AZS_RUN or {}
  local alive=FieldKit.Number(run.en,nil,0);local cap=FieldKit.Number(run.enm,nil,1)
  local h=R.hordeFrame;h:ClearAllPoints();h:SetPoint("TOP",share and f or H.header,"BOTTOM",0,-5)
  if alive then
   local value=cap and math.min(1,alive/cap) or 0
-  h:SetValue(0);h:SetValue(value*100);h:SetStatusBarColor(value>=.75 and .9 or .85,value>=.75 and .18 or .58,.12)
+  h.fill:SetValue(0);h.fill:SetValue(value*100);h.fill:SetStatusBarColor(value>=.75 and .7 or .48,value>=.75 and .15 or .38,.12,.95)
   h.label:SetText(FieldKit_L("Horde").."  "..string.format("%.0f",alive)..(cap and (" / "..string.format("%.0f",cap)) or ""));h:Show()
  else h:Hide() end
 end

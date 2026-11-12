@@ -26,13 +26,13 @@ for _,variant in ipairs({"minimal","complete","alternative"}) do
  FieldKitRebornDB.zoneThemeVariant=variant;C.Set("zoneThemes",true)
  assert(#R.sixSlots==6 and R.sixPlate:IsShown())
  for _,slot in ipairs(R.sixSlots) do assert(slot:IsShown() and #slot.tiles>0,"Six-slot atlas crop empty: "..variant) end
- assert(R.progressFrame:GetHeight()==22 and not R.progressFrame.fieldkitSkin)
+ assert(R.progressFrame:GetHeight()==30 and R.progressFrame.fieldkitSkin)
  for _,f in ipairs({R.progressFrame,R.hordeFrame}) do
-  assert(f.back.width>0 and f.back.height>0)
-  for _,e in ipairs(f.edges) do assert(e.width>0 and e.height>0 and e.height<=22) end
+  assert(f.fill:GetWidth()>0 and f.fill:GetHeight()==16 and f.fill:GetFrameLevel()>f:GetFrameLevel())
+  for _,e in ipairs(f.fieldkitSkin.parts) do assert(e.texture.width>0 and e.texture.height>0 and e.texture.height<=30) end
  end
  assert(R.hordeFrame:IsShown() and R.hordeFrame.label:GetText()=="Horde  0 / 300")
- AZS_RUN.en=299;R.UpdateRunDetails();assert(R.hordeFrame:GetValue()>99)
+ AZS_RUN.en=299;R.UpdateRunDetails();assert(R.hordeFrame.fill:GetValue()>99)
  AZS_RUN.en=0
  for i,f in ipairs(R.counterCells) do
   assert(f:IsShown() and f:GetHeight()==R.counterCells[1]:GetHeight() and f:GetWidth()==R.counterCells[1]:GetWidth())

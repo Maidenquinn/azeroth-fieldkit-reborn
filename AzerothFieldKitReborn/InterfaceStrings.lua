@@ -1,6 +1,8 @@
 -- Presentation-only additions. Native creature/spell names are never translated.
 local fr=FieldKitLocale.fr
 local labels={
+ ["Unidentified source"]="Source non identifiée",
+ ["Guardian · lair %d"]="Gardien · antre %d",
  ["Mount state unavailable"]="État de la monture indisponible",
  ["Waiting for the game's charge update."]="En attente de la mise à jour des charges par le jeu.",
  ["Lock window positions"]="Verrouiller la position des fenêtres",

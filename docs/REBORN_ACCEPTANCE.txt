@@ -1,6 +1,6 @@
-Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.5
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.6
 
-Client de reference: Reborn 0.6.1, inventorie le 12 novembre 2026.
+Client de reference: Reborn 0.6.3, inventorie le 12 novembre 2026.
 Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
 
 1. Activer AzerothSurvivorsAPI et AzerothFieldKitReborn. Ouvrir /fieldkit.
@@ -26,7 +26,8 @@ Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
     de progression sans decompte. Jauge Horde dediee (0, puis proche du maximum),
     sans anneau sur la minimap ni nom de zone en double.
 16. Verifier les icones d'ennemis observes, leur conservation apres la mort et
-    leur remise a zero a la partie suivante. Une source non identifiee reste ?.
+    leur conservation sans observation grace au catalogue de zone. Les noms
+    ambigus hors zone restent inconnus. Les remplacements saisonniers sont explicites.
 
 17. Des la phase Bouge pour commencer, verifier les deux sorts de depart dans
     la carte et le detail Spells, puis les mises a jour de rang/bonus.
@@ -45,3 +46,17 @@ pleine, charges et coop restent a valider.
 Les sauvegardes sont dans FieldKitRebornDB; FieldKitDB n'est jamais importe.
 Le catalogue de portraits de l'ancien jeu n'est pas une preuve pour Reborn.
 Une icone inconnue est normale si aucune apparence native n'est identifiee.
+
+21. Verifier les 192 boss du rapport REBORN_CREATURE_COVERAGE.json sur 48 cartes.
+    Douze boss sans icone native utilisent un remplacement de presentation.
+22. Avant apparition, une identite de gardien non transmise reste Gardien/antre N.
+    Ne pas reutiliser le nom du precedent gardien pour une nouvelle apparition.
+23. Ouvrir le detail des sorts: lignes, icones et valeurs visibles, entetes
+    uniques, fermeture et epinglage accessibles. Trier Total dans les deux sens.
+24. Dans Spells, uniquement les bonus explicites; la description complete reste
+    sur la barre native. Verifier Lifesteal et une source de soins sans nom.
+
+Recette reborn.6: jauges Elwynn, antres 1 a 4, theme et sorts apres reload.
+Rendu/tri/fermeture de la modale testes dans le vrai client avec une fixture
+clairement fictive, retiree du client et absente du paquet distribue.
+Aucun combat reel valide par cette recette.

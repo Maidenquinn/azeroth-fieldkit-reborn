@@ -172,6 +172,7 @@ function L.EnsureAssetIcons()
 end
 function L.Icon(name)
  if name=="Melee" or name=="Mêlée" then return "Interface\\Icons\\INV_Sword_04" end
+ if name=="Lifesteal" or name=="Vol de vie" then return "Interface\\Icons\\Spell_Shadow_LifeDrain02" end
  L.EnsureAssetIcons()
  local key=L.Key(name)
  return L.icons[key] or L.assetIcons[key]
@@ -186,7 +187,8 @@ function L.Decorate(row,name)
   row.fieldkitSpellIcon=row:CreateTexture(nil,"ARTWORK");row.fieldkitSpellIcon:SetWidth(13);row.fieldkitSpellIcon:SetHeight(13)
   row.fieldkitSpellIcon:SetPoint("LEFT",row,"LEFT",2,0);row.fieldkitSpellIcon:SetTexCoord(.08,.92,.08,.92)
  end
- local icon=L.Icon(name);row.fieldkitIconInset=icon and 18 or 0
+ local line=row.fieldkitLine
+ local icon=(type(line)=="table" and FieldKitReborn.Icon(line.icon)) or L.Icon(name);row.fieldkitIconInset=icon and 18 or 0
  if icon then row.fieldkitSpellIcon:SetTexture(icon);row.fieldkitSpellIcon:Show() else row.fieldkitSpellIcon:Hide() end
 end
 -- Did the learned-spell packet change (keys, ranks)? Compared in place with the last one seen: no allocation.
@@ -346,10 +348,9 @@ function L.Tip(owner,entry)
  if not entry then return end
  GameTooltip:SetOwner(owner,"ANCHOR_LEFT");GameTooltip:SetText(entry.name or "?")
  if entry.rank then GameTooltip:AddLine(entry.rank,.8,.8,.8) end
- if entry.nativeText then GameTooltip:AddLine(entry.nativeText,1,.82,0,true) end
  for _,line in ipairs(entry.upgrades or {}) do GameTooltip:AddLine(line,1,1,1,true) end
- for _,line in ipairs(entry.bonuses) do GameTooltip:AddLine(line,.3,1,.4,true) end
- if not entry.nativeText and table.getn(entry.bonuses)==0 and table.getn(entry.upgrades or {})==0 then GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
+ for _,line in ipairs(entry.bonuses or {}) do GameTooltip:AddLine(line,.3,1,.4,true) end
+ if table.getn(entry.bonuses or {})==0 and table.getn(entry.upgrades or {})==0 then GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
  GameTooltip:Show()
 end
 function L.Attach(frame,readSlot,refresh)

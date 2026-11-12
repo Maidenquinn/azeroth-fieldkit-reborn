@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.5",
+  "version": "0.1.0-reborn.6",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Partial native-client visual QA: three layouts, six visible sockets, aligned four-cell counters, ready starting spells and tooltip, bounded boss/Horde bars at zero, auto theme restored after repeated /reload, world map label and unknown mount-state indicator. Not validated: sustained combat, live full Horde, Steed charge cycles or co-op transport."
+  "inGameTestScope": "Partial client 0.6.3 QA: themed boss/Horde bars at zero, correctly numbered lairs, theme and starting spells restored after reload. Modal rendering/sort/close validated in the real renderer using an explicitly labelled temporary synthetic fixture, removed afterwards. No real combat, full Horde, Steed charge cycles or co-op transport validation."
 }

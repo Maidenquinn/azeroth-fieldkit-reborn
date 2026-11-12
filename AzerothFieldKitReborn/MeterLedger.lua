@@ -14,7 +14,7 @@ L.views={"damage","healing","boss","taken","party","kills"}
 L.labels={"Damage","Healing","Boss damage","Damage taken","Party DPS","Kills"}
 
 local function Text(s,limit)
- if type(s)~="string" then return nil end
+ if type(s)~="string" or not string.find(s,"%S") then return nil end
  return FieldKitNative and FieldKitNative.Text and FieldKitNative.Text(s,limit or 160) or string.sub(s,1,limit or 160)
 end
 
@@ -441,6 +441,7 @@ local function RowsFromSnap(snap)
    local src=row.sourceKey and sources[row.sourceKey] or nil
    local name
    if type(src)=="table" then name=Text(src.name,120) end
+   if not name and row.sourceKey then name=FieldKit_L("Unidentified source") end
    if not name and row.ownerId and actors[row.ownerId] then name=Text(actors[row.ownerId].name,120) end
    if not name then name=Text(row.sourceKey or row.ownerId,120) or "?" end
    name=SpellBase(name) or name
@@ -591,7 +592,7 @@ function L.Read(view)
  for i=1,math.min(512,nLines) do
   local row=lines[i]
   if type(row)=="table" and type(row.name)=="string" then
-   table.insert(out,{name=Text(row.name,120),dmg=Num(row.dmg,0),dps=Num(row.dps,0),share=Num(row.share,0,1),proc=row.proc==1 and 1 or 0})
+   table.insert(out,{name=Text(row.name,120) or FieldKit_L("Unidentified source"),dmg=Num(row.dmg,0),dps=Num(row.dps,0),share=Num(row.share,0,1),proc=row.proc==1 and 1 or 0,icon=row.icon})
   end
  end
  return FinishLines(view,AttachKillStats(out),Num(total,0),Num(rate,0),true,nLines>512)

@@ -28,8 +28,9 @@ function methods:Show() self.shown=true end
 function methods:Hide() self.shown=false end
 function methods:IsShown() return self.shown~=false end
 methods.IsVisible=methods.IsShown
-function methods:SetText(v) self.text=v end
-function methods:GetText() return self.text end
+function methods:SetFontString(fontString) self.fontString=fontString end
+function methods:SetText(v) self.text=v;if self.fontString then self.fontString:SetText(v) end end
+function methods:GetText() return self.fontString and self.fontString:GetText() or self.text end
 function methods:SetTexture(v) self.texture=v end
 function methods:GetTexture() return self.texture end
 function methods:SetAlpha(v) self.alpha=v end

@@ -198,9 +198,11 @@ function R.Portrait(frame,name,kind,id)
    icon=R.Icon(AZS_GEN.creatureIcons[tonumber(u.entry)])
   end
  end
+ if not icon and R.EnemyIcon then icon=R.EnemyIcon(name) end
+ if icon=="Interface\\Icons\\INV_Misc_QuestionMark" then icon=nil end
  local path=icon or "Interface\\Icons\\INV_Misc_QuestionMark"
  if frame.mashPortraitPath~=path then frame.portrait:SetTexture(path);frame.mashPortraitPath=path end
- frame.mashPortraitReason=icon and "Reborn native creature icon" or "Reborn appearance unavailable"
+ frame.mashPortraitReason=icon and "Reborn observed/catalog creature icon" or "Reborn appearance unavailable"
  frame.mashPortraitIdentity=tostring(kind)..":"..tostring(id)
  FieldKit_Portraits.last={name=name,id=id,path=path,reason=frame.mashPortraitReason}
 end

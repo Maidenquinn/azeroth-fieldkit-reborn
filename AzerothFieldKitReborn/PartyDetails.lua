@@ -86,6 +86,7 @@ local function MakeSortCap(parent,key,justify)
  if parent.GetFrameLevel then b:SetFrameLevel(parent:GetFrameLevel()+4) end
  local t=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
  t:SetAllPoints(b);t:SetJustifyH(justify or "RIGHT");T.Font(t,11,T.muted);b.cap=t
+ if b.SetFontString then b:SetFontString(t) end
  b:SetScript("OnClick",function() D.SetSort(this.sortKey) end)
  b:SetScript("OnEnter",function()
   D.overPopup=true;D.deadline=nil
@@ -101,8 +102,8 @@ end
 
 local function CapText(btn,key)
  local shown=FieldKit_L(btn.fieldkitCaption or "")..SortMark(key)
- if btn.cap then btn.cap:SetText(shown) end
- if btn.SetText then btn:SetText(shown) end
+ if btn.cap then btn.cap:SetText(shown)
+ elseif btn.SetText then btn:SetText(shown) end
 end
 
 function D.Data(name,mode)
@@ -166,6 +167,7 @@ function D.Build()
  D.summary=T.Label(frame,nil,16,40,680,22,12,T.text)
  D.hint=T.Label(frame,nil,16,64,680,36,11,T.muted)
  D.header=CreateFrame("Frame",nil,frame);D.header:SetPoint("TOPLEFT",frame,"TOPLEFT",12,-106);D.header:SetHeight(18)
+ D.header:SetFrameStrata("TOOLTIP");D.header:SetFrameLevel(frame:GetFrameLevel()+2)
  D.header:EnableMouse(true);D.BindHover(D.header)
  D.spell=MakeSortCap(D.header,"name","LEFT")
  if D.header.GetFrameLevel then D.spell:SetFrameLevel(D.header:GetFrameLevel()+2) end
@@ -190,10 +192,11 @@ function D.Build()
  frame.rows={}
  for i=1,D.pool do
   local row=CreateFrame("StatusBar",nil,frame);frame.rows[i]=row
+  row:SetFrameStrata("TOOLTIP");row:SetFrameLevel(frame:GetFrameLevel()+2)
   row:SetMinMaxValues(0,1);row:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar")
   row:SetHeight(20);row:EnableMouse(true);D.BindHover(row)
   row.label=row:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall")
-  row.label:SetJustifyH("LEFT");T.Font(row.label,12,T.text)
+  row.label:SetJustifyH("LEFT");row.label:SetHeight(16);T.Font(row.label,12,T.text)
   row.value=row:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall");row.value:Hide()
   row.hitColumns={}
   for j=1,HIT_COLS do
@@ -207,6 +210,7 @@ function D.Build()
  D.pin=T.Button(frame,nil,"Pin",0,0,80,24,function()
   D.pinned=not D.pinned;D.deadline=nil;D.Render()
  end)
+ D.pin:SetFrameStrata("TOOLTIP");D.pin:SetFrameLevel(frame:GetFrameLevel()+6)
  D.pin:ClearAllPoints();D.pin:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-40,-8);D.BindHover(D.pin)
  D.pin:SetScript("OnEnter",function()
   D.overPopup=true;D.deadline=nil
@@ -224,8 +228,10 @@ function D.Build()
  D.footer=T.Label(frame,nil,16,0,520,24,11,T.muted)
  D.previous=T.Button(frame,nil,"<",0,0,30,24,function() D.Page(-D.visible) end)
  D.next=T.Button(frame,nil,">",0,0,30,24,function() D.Page(D.visible) end)
+ for _,button in ipairs({D.previous,D.next}) do button:SetFrameStrata("TOOLTIP");button:SetFrameLevel(frame:GetFrameLevel()+6) end
  D.BindHover(D.previous);D.BindHover(D.next)
  local close=CreateFrame("Button",nil,frame,"UIPanelCloseButton")
+ D.close=close;close:SetFrameStrata("TOOLTIP");close:SetFrameLevel(frame:GetFrameLevel()+6)
  close:SetWidth(26);close:SetHeight(26);close:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-4,-4)
  close:SetScript("OnClick",D.Close);D.BindHover(close)
  D.BindHover(frame)
@@ -305,12 +311,13 @@ function D.Render()
  if data.unavailable then hint="Your spell breakdown is not provided by the client." end
  if data.truncated then hint=data.shared and "Partial shared snapshot: safety limit reached." or "Partial view: the 512-source safety limit was reached." end
  FieldKit_Text(D.hint,hint)
- local top=data.rows[1] and data.rows[1].dmg or 1
+ local top=1
+ for _,line in ipairs(data.rows) do top=math.max(top,line.dmg or 0) end
  for i=1,D.pool do
   local row=frame.rows[i];local line=i<=shown and data.rows[D.offset+i]
   if line then
    row:ClearAllPoints();row:SetPoint("TOPLEFT",frame,"TOPLEFT",12,-128-(i-1)*22);row:SetWidth(width-24)
-   row.label:SetText(line.name);row.fieldkitSpell=line.name;row.fieldkitLine=line
+   row.label:SetText(line.name);row.label:Show();row.fieldkitSpell=line.name;row.fieldkitLine=line
    if hitMode then
     if row.meterColumns then for j=1,3 do row.meterColumns[j]:Hide() end end
     local cells=HitCells(line)
@@ -320,9 +327,9 @@ function D.Render()
      text:SetWidth(HIT_WIDTHS[j]);text:SetText(cells[j]);text:Show()
      if j==2 and line.maxCrit and line.maxCrit>0 then text:SetTextColor(1,.55,.2) else text:SetTextColor(1,1,1) end
     end
-    row.label:ClearAllPoints();row.label:SetPoint("LEFT",row,"LEFT",3+(row.fieldkitIconInset or 0),0)
-    row.label:SetWidth(math.max(80,width-HIT_RIGHT[1]-16-(row.fieldkitIconInset or 0)))
     if FieldKitLoadout and FieldKitLoadout.Decorate then FieldKitLoadout.Decorate(row,line.name) end
+    row.label:ClearAllPoints();row.label:SetPoint("LEFT",row,"LEFT",3+(row.fieldkitIconInset or 0),0)
+    row.label:SetWidth(math.max(80,width-24-HIT_RIGHT[1]-HIT_WIDTHS[1]-12-(row.fieldkitIconInset or 0)))
    else
     for j=1,HIT_COLS do row.hitColumns[j]:Hide() end
     FieldKit.UpdateMeterColumns(row,line,3,width-12,data.mode==2 and "hps" or "dps")
