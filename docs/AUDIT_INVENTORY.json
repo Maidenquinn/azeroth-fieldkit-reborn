@@ -1,14 +1,14 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.3",
-  "runtimeModules": 49,
+  "candidate": "0.1.0-reborn.4",
+  "runtimeModules": 50,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
   "dynamicCombatEventNames": "See CombatText.lua events list; not all registrations are string literals.",
   "files": {
     "Runtime.lua": {
       "bytes": 5206,
-      "sha256": "369c330449fd6196a35cd28c8c28ba524cc1ed8a356b4dfda8aa3059ace9d144",
+      "sha256": "c34cce0ddc02f4cdd79993040e5d5cc4795d6818b9adb9f2f4d5f3bf261815c7",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -54,8 +54,8 @@
       "literalEvents": []
     },
     "Reborn.lua": {
-      "bytes": 8951,
-      "sha256": "755bdf9fbe03b957806b47d7a447e17eaafb23dc7998a7ff785e61ba933e8f0d",
+      "bytes": 7516,
+      "sha256": "b41f838d866d4ac14644653b1c7fceb6b84e63ed4a5c5ddde4e4a1794c1ac7b7",
       "namedFunctions": [
         {
           "name": "R.ActionButton",
@@ -63,62 +63,107 @@
         },
         {
           "name": "R.ReplacePresentation",
-          "line": 15
+          "line": 16
         },
         {
           "name": "R.RestorePresentation",
-          "line": 28
+          "line": 29
         },
         {
           "name": "R.HealthColor",
-          "line": 36
+          "line": 38
         },
         {
           "name": "R.BossProgress",
-          "line": 45
+          "line": 47
         },
         {
           "name": "R.EventCurrency",
-          "line": 64
+          "line": 66
         },
         {
           "name": "R.UpdateRunDetails",
-          "line": 72
+          "line": 74
         },
         {
           "name": "R.Capabilities",
-          "line": 105
+          "line": 78
         },
         {
           "name": "R.SupportsHealing",
-          "line": 110
+          "line": 83
         },
         {
           "name": "R.Icon",
-          "line": 116
+          "line": 89
         },
         {
           "name": "R.Localize",
-          "line": 121
+          "line": 94
         },
         {
           "name": "R.Spell",
-          "line": 127
+          "line": 100
         },
         {
           "name": "R.Gear",
-          "line": 144
+          "line": 117
         },
         {
           "name": "R.PlayerBuffs",
-          "line": 158
+          "line": 131
         },
         {
           "name": "R.Portrait",
-          "line": 186
+          "line": 159
         }
       ],
       "literalEvents": []
+    },
+    "RebornPresentation.lua": {
+      "bytes": 7917,
+      "sha256": "935b768606b3619ef89190c0e9e386480d0a3718e43ce7bf8f0db63246e2eb4e",
+      "namedFunctions": [
+        {
+          "name": "R.SkinAction",
+          "line": 3
+        },
+        {
+          "name": "R.RestoreSquareActions",
+          "line": 30
+        },
+        {
+          "name": "R.ProgressBar",
+          "line": 35
+        },
+        {
+          "name": "R.CounterBand",
+          "line": 54
+        },
+        {
+          "name": "R.RefreshPresentationDetails",
+          "line": 97
+        },
+        {
+          "name": "R.EnsureEnemyRun",
+          "line": 106
+        },
+        {
+          "name": "R.NoteEnemy",
+          "line": 110
+        },
+        {
+          "name": "R.CacheEnemyIcons",
+          "line": 126
+        },
+        {
+          "name": "R.EnemyIcon",
+          "line": 136
+        }
+      ],
+      "literalEvents": [
+        "COMBAT_LOG_EVENT_UNFILTERED"
+      ]
     },
     "Diagnostics.lua": {
       "bytes": 19322,
@@ -686,8 +731,8 @@
       "literalEvents": []
     },
     "MeterLedger.lua": {
-      "bytes": 27395,
-      "sha256": "051b7bfe7cd23da74d6f93646cae5db4283cd03b1bf4fd1a1cdb4e9797680636",
+      "bytes": 27478,
+      "sha256": "7fc41cb5b402cfe47fe01ab66025f5501b74383e591f09fbc397409c6d3287e4",
       "namedFunctions": [
         {
           "name": "Text",
@@ -1636,8 +1681,8 @@
       "literalEvents": []
     },
     "Loadout.lua": {
-      "bytes": 21275,
-      "sha256": "b508b0f82cdd7a3556e08252b2ac49a382f3556a546cb7b6c813c99b8119573c",
+      "bytes": 21306,
+      "sha256": "71467cca564e76b7aec4d3c8f26ea40e5c5159f0bb4952a5275170848ebf9fea",
       "namedFunctions": [
         {
           "name": "L.Plain",
@@ -3381,8 +3426,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 142388,
-      "sha256": "6914d7889d932d09dccf2210c1a0cc87ce04323413db939814f9a6cbe108de6c",
+      "bytes": 142591,
+      "sha256": "74b75ff594ea40f8b5112fbe3be763092468d9335e944119c5daad1f6bb80b5f",
       "namedFunctions": [
         {
           "name": "Short",
@@ -3494,359 +3539,359 @@
         },
         {
           "name": "R.MapRim",
-          "line": 580
+          "line": 581
         },
         {
           "name": "R.LauncherLabel",
-          "line": 605
+          "line": 606
         },
         {
           "name": "R.MapRound",
-          "line": 613
+          "line": 614
         },
         {
           "name": "R.Map",
-          "line": 629
+          "line": 630
         },
         {
           "name": "R.EffectBox",
-          "line": 696
+          "line": 697
         },
         {
           "name": "R.EffectIcon",
-          "line": 702
+          "line": 703
         },
         {
           "name": "R.AmountParts",
-          "line": 708
+          "line": 709
         },
         {
           "name": "Row",
-          "line": 713
+          "line": 714
         },
         {
           "name": "R.DamageTabs",
-          "line": 725
+          "line": 726
         },
         {
           "name": "R.SocketY",
-          "line": 769
+          "line": 770
         },
         {
           "name": "R.SocketH",
-          "line": 779
-        },
-        {
-          "name": "R.SocketIcon",
           "line": 780
         },
         {
+          "name": "R.SocketIcon",
+          "line": 781
+        },
+        {
           "name": "R.DiagHook",
-          "line": 786
+          "line": 787
         },
         {
           "name": "R.DamageTip",
-          "line": 794
+          "line": 795
         },
         {
           "name": "Add",
-          "line": 800
+          "line": 801
         },
         {
           "name": "R.ToggleStats",
-          "line": 821
-        },
-        {
-          "name": "R.StatsCapFor",
           "line": 822
         },
         {
+          "name": "R.StatsCapFor",
+          "line": 823
+        },
+        {
           "name": "R.StatsPlan",
-          "line": 826
+          "line": 827
         },
         {
           "name": "R.DmgZone",
-          "line": 840
-        },
-        {
-          "name": "R.DmgDelta",
           "line": 841
         },
         {
-          "name": "R.AccZone",
-          "line": 848
+          "name": "R.DmgDelta",
+          "line": 842
         },
         {
-          "name": "R.AccMin",
+          "name": "R.AccZone",
           "line": 849
         },
         {
-          "name": "R.AccCut",
+          "name": "R.AccMin",
           "line": 850
         },
         {
+          "name": "R.AccCut",
+          "line": 851
+        },
+        {
           "name": "R.AccDelta",
-          "line": 855
+          "line": 856
         },
         {
           "name": "R.AccShape",
-          "line": 861
+          "line": 862
         },
         {
           "name": "R.AccPlan",
-          "line": 869
+          "line": 870
         },
         {
           "name": "R.DmgPlan",
-          "line": 882
+          "line": 883
         },
         {
           "name": "Inset",
-          "line": 907
-        },
-        {
-          "name": "R.CardVisible",
           "line": 908
         },
         {
+          "name": "R.CardVisible",
+          "line": 909
+        },
+        {
           "name": "R.ZoomXY",
-          "line": 916
+          "line": 917
         },
         {
           "name": "R.RingGeometry",
-          "line": 922
+          "line": 923
         },
         {
           "name": "Add",
-          "line": 930
+          "line": 931
         },
         {
           "name": "R.Preferred",
-          "line": 942
+          "line": 943
         },
         {
           "name": "R.LiveRect",
-          "line": 950
+          "line": 951
         },
         {
           "name": "R.NoteMoved",
-          "line": 959
+          "line": 960
         },
         {
           "name": "R.ScreenSize",
-          "line": 979
+          "line": 980
         },
         {
           "name": "Add",
-          "line": 981
+          "line": 982
         },
         {
           "name": "R.ScreenBounds",
-          "line": 992
+          "line": 993
         },
         {
           "name": "R.ApplyClamp",
-          "line": 1001
+          "line": 1002
         },
         {
           "name": "R.ClampToScreen",
-          "line": 1009
+          "line": 1010
         },
         {
           "name": "FixedObstacles",
-          "line": 1026
+          "line": 1027
         },
         {
           "name": "R.PreferredAny",
-          "line": 1043
+          "line": 1044
         },
         {
           "name": "R.StatsRoom",
-          "line": 1055
+          "line": 1056
         },
         {
           "name": "R.GrowSpan",
-          "line": 1070
+          "line": 1071
         },
         {
           "name": "R.AccMaxRows",
-          "line": 1082
+          "line": 1083
         },
         {
           "name": "R.DmgMaxRows",
-          "line": 1090
+          "line": 1091
         },
         {
           "name": "R.BarTestApply",
-          "line": 1102
+          "line": 1103
         },
         {
           "name": "R.BarTest",
-          "line": 1108
+          "line": 1109
         },
         {
           "name": "R.PlayerBarRect",
-          "line": 1121
+          "line": 1122
         },
         {
           "name": "R.BarOverlay",
-          "line": 1127
+          "line": 1128
         },
         {
           "name": "Num",
-          "line": 1141
-        },
-        {
-          "name": "FName",
           "line": 1142
         },
         {
+          "name": "FName",
+          "line": 1143
+        },
+        {
           "name": "Points",
-          "line": 1148
+          "line": 1149
         },
         {
           "name": "Size",
-          "line": 1159
-        },
-        {
-          "name": "Call",
           "line": 1160
         },
         {
-          "name": "Edges",
+          "name": "Call",
           "line": 1161
         },
         {
-          "name": "Scale",
+          "name": "Edges",
           "line": 1162
         },
         {
-          "name": "R.PlayerBarProbe",
+          "name": "Scale",
           "line": 1163
         },
         {
+          "name": "R.PlayerBarProbe",
+          "line": 1164
+        },
+        {
           "name": "R.Probe",
-          "line": 1248
+          "line": 1249
         },
         {
           "name": "PartySame",
-          "line": 1273
-        },
-        {
-          "name": "R.PartyFrames",
           "line": 1274
         },
         {
+          "name": "R.PartyFrames",
+          "line": 1275
+        },
+        {
           "name": "R.PartyPrepare",
-          "line": 1277
+          "line": 1278
         },
         {
           "name": "R.PartyApply",
-          "line": 1289
+          "line": 1290
         },
         {
           "name": "R.PartyRestore",
-          "line": 1300
+          "line": 1301
         },
         {
           "name": "R.PartyRestoreAll",
-          "line": 1304
+          "line": 1305
         },
         {
           "name": "R.PartyPass",
-          "line": 1306
+          "line": 1307
         },
         {
           "name": "R.Resolve",
-          "line": 1314
+          "line": 1315
         },
         {
           "name": "Opaque",
-          "line": 1322
+          "line": 1323
         },
         {
           "name": "Rank",
-          "line": 1352
+          "line": 1353
         },
         {
           "name": "Free",
-          "line": 1360
+          "line": 1361
         },
         {
           "name": "Hit",
-          "line": 1362
+          "line": 1363
         },
         {
           "name": "SearchY",
-          "line": 1367
+          "line": 1368
         },
         {
           "name": "Search",
-          "line": 1378
+          "line": 1379
         },
         {
           "name": "R.ApplyShift",
-          "line": 1406
+          "line": 1407
         },
         {
           "name": "R.PlanLayout",
-          "line": 1417
+          "line": 1418
         },
         {
           "name": "R.RowIcon",
-          "line": 1436
+          "line": 1437
         },
         {
           "name": "R.Stable",
-          "line": 1442
-        },
-        {
-          "name": "R.HideUnwanted",
           "line": 1443
         },
         {
+          "name": "R.HideUnwanted",
+          "line": 1444
+        },
+        {
           "name": "R.CardRect",
-          "line": 1446
+          "line": 1447
         },
         {
           "name": "R.Window",
-          "line": 1466
+          "line": 1467
         },
         {
           "name": "R.CardTabs",
-          "line": 1475
+          "line": 1476
         },
         {
           "name": "R.MaskBuffs",
-          "line": 1499
+          "line": 1500
         },
         {
           "name": "R.LairList",
-          "line": 1510
+          "line": 1511
         },
         {
           "name": "Tint",
-          "line": 1513
+          "line": 1514
         },
         {
           "name": "R.Panels",
-          "line": 1540
+          "line": 1541
         },
         {
           "name": "Wide",
-          "line": 1615
+          "line": 1616
         },
         {
           "name": "Wide",
-          "line": 1665
+          "line": 1666
         },
         {
           "name": "R.Settings",
-          "line": 1759
+          "line": 1762
         },
         {
           "name": "R.Buffs",
-          "line": 1774
+          "line": 1777
         }
       ],
       "literalEvents": []
@@ -6229,7 +6274,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.3",
+    "version": "0.1.0-reborn.4",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6240,7 +6285,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Maintainer screenshots confirm Reborn expansion themes render. Missing progress/currency/spell descriptions, native gauge/target overlap and HP color corrected in reborn.3; live verification of these corrections pending."
+    "inGameTestScope": "Maintainer screenshots confirm themes and reborn.3 HUD render. Item/spell/enemy icons, six-spell plus Steed layout, integrated event currency, separate progress bar and minimap cleanup corrected in reborn.4; live visual acceptance pending."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

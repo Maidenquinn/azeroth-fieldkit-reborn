@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.3",
+  "version": "0.1.0-reborn.4",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.3",
+    "version": "0.1.0-reborn.4",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,18 +29,23 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Maintainer screenshots confirm Reborn expansion themes render. Missing progress/currency/spell descriptions, native gauge/target overlap and HP color corrected in reborn.3; live verification of these corrections pending."
+    "inGameTestScope": "Maintainer screenshots confirm themes and reborn.3 HUD render. Item/spell/enemy icons, six-spell plus Steed layout, integrated event currency, separate progress bar and minimap cleanup corrected in reborn.4; live visual acceptance pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "369c330449fd6196a35cd28c8c28ba524cc1ed8a356b4dfda8aa3059ace9d144"
+      "sha256": "c34cce0ddc02f4cdd79993040e5d5cc4795d6818b9adb9f2f4d5f3bf261815c7"
     },
     "Reborn.lua": {
       "maxUpvalues": 2,
-      "functions": 18,
-      "sha256": "755bdf9fbe03b957806b47d7a447e17eaafb23dc7998a7ff785e61ba933e8f0d"
+      "functions": 16,
+      "sha256": "b41f838d866d4ac14644653b1c7fceb6b84e63ed4a5c5ddde4e4a1794c1ac7b7"
+    },
+    "RebornPresentation.lua": {
+      "maxUpvalues": 1,
+      "functions": 13,
+      "sha256": "935b768606b3619ef89190c0e9e386480d0a3718e43ce7bf8f0db63246e2eb4e"
     },
     "Diagnostics.lua": {
       "maxUpvalues": 5,
@@ -120,7 +125,7 @@
     "MeterLedger.lua": {
       "maxUpvalues": 11,
       "functions": 50,
-      "sha256": "051b7bfe7cd23da74d6f93646cae5db4283cd03b1bf4fd1a1cdb4e9797680636"
+      "sha256": "7fc41cb5b402cfe47fe01ab66025f5501b74383e591f09fbc397409c6d3287e4"
     },
     "MeterSuite.lua": {
       "maxUpvalues": 6,
@@ -180,7 +185,7 @@
     "Loadout.lua": {
       "maxUpvalues": 2,
       "functions": 28,
-      "sha256": "b508b0f82cdd7a3556e08252b2ac49a382f3556a546cb7b6c813c99b8119573c"
+      "sha256": "71467cca564e76b7aec4d3c8f26ea40e5c5159f0bb4952a5275170848ebf9fea"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -270,7 +275,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 181,
-      "sha256": "6914d7889d932d09dccf2210c1a0cc87ce04323413db939814f9a6cbe108de6c"
+      "sha256": "74b75ff594ea40f8b5112fbe3be763092468d9335e944119c5daad1f6bb80b5f"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

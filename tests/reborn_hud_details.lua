@@ -20,9 +20,10 @@ local hp=130
 UnitHealth=function(unit) return unit=="player" and hp or 600 end
 UnitHealthMax=function(unit) return unit=="player" and 508 or 1000 end
 FieldKitRebornDB.zoneThemeMode="auto";C.Set("zoneThemes",true)
-assert(string.find(H.next:GetText(),"5%%"))
-R.UpdateRunDetails();assert(not string.find(H.next:GetText(),"5%%.*5%%"),"Duplicate progress suffix")
-assert(R.eventFrame:IsShown() and string.find(R.eventFrame.label:GetText(),"105 Bonbons",1,true))
+assert(H.next:GetText()=="Second" and not string.find(H.next:GetText(),"180"))
+assert(R.progressFrame:IsShown() and string.find(R.progressFrame.label:GetText(),"5%%"))
+R.UpdateRunDetails();assert(not string.find(R.progressFrame.label:GetText(),"5%%.*5%%"),"Duplicate progress suffix")
+assert(R.eventFrame:IsShown() and R.eventFrame.label:GetText()=="105" and R.eventFrame:GetParent()==H.counterRoot)
 assert(gauge:GetParent()==H.Hidden() and target:GetParent()==H.Hidden())
 assert(FieldKitThemeTarget.frame:IsShown());FieldKitThemeTarget.frame:Click();assert(clicked)
 local color

@@ -6,12 +6,13 @@ local R=FieldKitReborn
 -- move to FieldKit's dock, retaining native clicks, ranks and cooldowns.
 function R.ActionButton(slot)
  if not FieldKit.rebornLegacyFixture then
+  if slot==12 then return getglobal("AZSDashButton") end
   local native=getglobal("AzerothSurvivorsActionBar1Button"..slot)
   if native then return native end
  end
  return getglobal("ActionButton"..slot)
 end
-local presentationNames={"AzerothSurvivorsUnitFramePlayer","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsActionBar1","AzerothSurvivorsSurvivorsBossBar","AZSRiftBar"}
+local presentationNames={"AzerothSurvivorsUnitFramePlayer","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsActionBar1","AzerothSurvivorsSurvivorsBossBar","AZSRiftBar","AzerothSurvivorsMinimapStatusButton","MinimapZoneText","AZSMapInfo"}
 function R.ReplacePresentation()
  if not FieldKitZoneThemes or not FieldKitZoneThemes.active then return end
  R.presentation=R.presentation or {}
@@ -26,6 +27,7 @@ function R.ReplacePresentation()
  end
 end
 function R.RestorePresentation()
+ if R.RestoreSquareActions then R.RestoreSquareActions() end
  for frame,saved in pairs(R.presentation or {}) do
   frame:SetParent(saved.parent)
   frame:SetAlpha(saved.alpha)
@@ -70,38 +72,9 @@ function R.EventCurrency()
  return {name=FieldKitNative.Text(name),icon=icon,count=count,color=color}
 end
 function R.UpdateRunDetails()
- if FieldKit.rebornLegacyFixture then return end
- local H=FieldKitThemeHUD
- if H.next then
-  local share=R.BossProgress()
-  local text=H.next:GetText() or ""
-  if text==R.lastProgressText then text=R.lastProgressBase end
-  R.lastProgressBase=text
-  R.lastProgressText=share and (text..string.format(" · %.0f%%",math.floor(share*100))) or text
-  H.next:SetText(R.lastProgressText)
- end
- local color={R.HealthColor(UnitHealth("player"),UnitHealthMax("player"))}
- if H.health and color[1] then H.health:SetStatusBarColor(color[1],color[2],color[3]) end
- local event=R.EventCurrency()
- if not event then if R.eventFrame then R.eventFrame:Hide() end;return end
- if not R.eventFrame then
-  local f=CreateFrame("Frame","FieldKitRebornEventCurrency",H.dock);R.eventFrame=f
-  f:SetWidth(240);f:SetHeight(26);f:EnableMouse(true);FieldKitTheme.Surface(f,"card")
-  f.icon=f:CreateTexture(nil,"ARTWORK");f.icon:SetWidth(20);f.icon:SetHeight(20);f.icon:SetPoint("LEFT",f,"LEFT",5,0)
-  f.label=FieldKitTheme.Label(f,nil,30,2,205,22,13,FieldKitTheme.gold)
-  f:SetScript("OnEnter",function()
-   local e=R.EventCurrency();if not e then return end
-   GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(e.name)
-   GameTooltip:AddLine(string.format("%.0f",e.count),1,.82,0);GameTooltip:Show()
-  end)
-  f:SetScript("OnLeave",function() GameTooltip:Hide() end)
- end
- local f=R.eventFrame;f:ClearAllPoints();f:SetPoint("BOTTOM",H.dock,"TOP",0,8)
- f.icon:SetTexture(event.icon);f.label:SetText(string.format("%.0f",event.count).." "..event.name)
- local c=event.color
- if type(c)=="table" then f.label:SetTextColor(FieldKit.Number(c[1],1,0,1),FieldKit.Number(c[2],.82,0,1),FieldKit.Number(c[3],0,0,1)) end
- f:Show()
+ if not FieldKit.rebornLegacyFixture then R.RefreshPresentationDetails() end
 end
+
 function R.Capabilities()
  if type(AZS_GetMeterCapabilities)~="function" then return nil end
  local ok,c=pcall(AZS_GetMeterCapabilities)

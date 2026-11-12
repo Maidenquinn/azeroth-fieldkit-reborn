@@ -1,5 +1,28 @@
 # Native effects and data boundary
 
+## Reborn reborn.4 native icon and layout integration
+
+RebornPresentation.lua renders square addon-owned textures from the live icons
+of the native action buttons. It temporarily hides their circular backdrop,
+border and original masked icon, while preserving native clicks, cooldowns,
+ranks and charge indicators. Geometry and alpha are restored on theme-off.
+The six ability slots remain native action slots 1–6; the last artwork socket
+uses the real AZSDashButton (Steed/Dash), with its own visibility and commands.
+
+The existing counter band is reflowed into four columns during an event,
+including the native currency icon/count. Boss progression has a distinct
+StatusBar below the header; the header retains only the boss's name.
+The native AzerothSurvivorsMinimapStatusButton (Horde ring), MinimapZoneText
+and AZSMapInfo yield while themes are active and are restored afterwards.
+
+Gear icons in the reference card now read the selected AZS_GEAR item rather
+than persistent inventory slots. Enemy icons read AZS_GEN.creatureIcons using
+explicit entries from AZS_WorldUnits/AZS_UnitWorldPosition, observed in bounded
+runtime caches (512 name/locale entries, world refresh at most once a second).
+Incoming combat-log sources may populate the same cache. Conflicting names
+or unknown entries display a question mark; no entry is guessed from a name
+or instance id. Cache data is never saved or sent and resets for each run id.
+
 ## Reborn reborn.3 HUD details
 
 Boss progress reads the bundled AZS_NextBossProgress helper when available,

@@ -215,7 +215,7 @@ function L.ContentKey()
  end
  for _,slot in ipairs({2,13,14,11,12}) do
   local it=L.items[slot];n=n+1
-  parts[n]=slot..":"..tostring(it and it.name)..":"..table.concat(it and it.bonuses or {},"|")
+  parts[n]=slot..":"..tostring(it and it.name)..":"..tostring(it and it.icon)..":"..table.concat(it and it.bonuses or {},"|")
  end
  return table.concat(parts,";;")
 end

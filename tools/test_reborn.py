@@ -20,6 +20,7 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_buffs.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_themes.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_hud_details.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_visual_integration.lua').read_text(encoding='utf8'))
     if a.game:
         l=runtime()
         l.execute('''

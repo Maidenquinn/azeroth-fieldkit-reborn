@@ -493,6 +493,7 @@ function R.Update(variant,zone)
    if normal and type(normal)~="string" and normal.SetAlpha then H.Save(normal);normal:SetAlpha(0) end
    local cooldown=b.cooldown or getglobal(b:GetName().."Cooldown")
    if cooldown then H.Save(cooldown);cooldown:ClearAllPoints();cooldown:SetAllPoints(b) end
+   if not FieldKit.rebornLegacyFixture then FieldKitReborn.SkinAction(b,slots[i]) end
   end
  end
  if d.rects.xpArt then R.Geometry(R.xpArt,d.rects.xpArt);R.Art(R.xpArt,"xpArt");R.xpArt:Show() else R.xpArt:Hide() end
@@ -1547,7 +1548,7 @@ function R.Panels(variant,zone)
  local d=R.layout;R.PlanLayout(zone,d);R.PartyPass()
  if not FieldKitNative.Active() and (not R.readyAt or GetTime()>R.readyAt or R.readySerial~=FieldKitNative.serial) then
   R.readyItems={};R.readyAt=GetTime()+5;R.readySerial=FieldKitNative.serial
-  if FieldKitLoadout.readSlot then for _,id in ipairs({2,13,14,11,12}) do local ok,name=pcall(FieldKitLoadout.readSlot,id);if ok then R.readyItems[id]={name=name,bonuses={}} end end end
+  if FieldKit.rebornLegacyFixture and FieldKitLoadout.readSlot then for _,id in ipairs({2,13,14,11,12}) do local ok,name=pcall(FieldKitLoadout.readSlot,id);if ok then R.readyItems[id]={name=name,bonuses={}} end end end
  end
  local prefs={Damage="meterFrame",Lairs="lairFrame",Accessories="gearFrame",Stats="statsFrame",Effects="effectsFrame"}
  for _,kind in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do
@@ -1696,7 +1697,9 @@ function R.Panels(variant,zone)
     if tab==1 then
      local ids={2,13,14,11,12};local names={"Amulet","Trinket 1","Trinket 2","Ring 1","Ring 2"}
      for i=1,5 do local r=Row(f,i,72,R.SocketY(zone,i),a[3]-94,R.SocketH(zone));local e=FieldKitLoadout.items[ids[i]] or (R.readyItems and R.readyItems[ids[i]]);r.entry=e;local occupied=e and e.name and e.name~="" and e.name~=FieldKit_L("Empty");if occupied then r.label:SetText(e.name);r.value:SetText("");r.label:SetWidth(a[3]-98);r.value:SetWidth(0) else FieldKit_Text(r.label,names[i]);r.value:SetText(e and FieldKit_L("Empty") or "?");r.label:SetWidth(126);r.value:SetWidth(a[3]-228) end
-      local texture=type(GetInventoryItemTexture)=="function" and GetInventoryItemTexture("player",ids[i]);if texture then R.SocketIcon(r,zone,texture) end
+      local texture=e and e.icon
+      if FieldKit.rebornLegacyFixture then texture=type(GetInventoryItemTexture)=="function" and GetInventoryItemTexture("player",ids[i]) end
+      if texture then R.SocketIcon(r,zone,texture) end
       r.fontSize=16;r.fontMin=16
      end
     else
@@ -1704,7 +1707,7 @@ function R.Panels(variant,zone)
      for i=1,math.min(R.accN or 5,total-offset) do
       local e=spells[offset+i];local r=Row(f,i,72,R.SocketY(zone,i,R.accN),a[3]-94,R.SocketH(zone));r.entry=e
       r.label:SetText(e.name or "?");r.value:SetText(e.rank or "");r.value:SetWidth(78);r.label:SetWidth(a[3]-98-82)
-      local icon=FieldKitLoadout.Icon(e.name);if icon then R.SocketIcon(r,zone,icon) end
+      local icon=e.icon or FieldKitLoadout.Icon(e.name);if icon then R.SocketIcon(r,zone,icon) end
       r.fontSize=16;r.fontMin=12;local cr,cg,cb=FieldKitLoadout.RankColor(e.rankValue);r.valueTint={cr,cg,cb}
      end
     end
