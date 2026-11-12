@@ -1,4 +1,4 @@
-Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.2
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.3
 
 Client de reference: Reborn 0.6.1, inventorie le 12 novembre 2026.
 Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
@@ -16,6 +16,10 @@ Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
    son detail. Tester separement la reception du partage optionnel.
 9. Tester les choix de niveau, mort, victoire, hub, sauvegarde et redemarrage.
 10. Relever les erreurs Lua et les ralentissements pendant une partie longue.
+11. Verifier la progression du prochain boss (rift prioritaire), les bonbons
+    d'evenement et leur tooltip. Aucune deuxieme jauge native ne doit apparaitre.
+12. Comparer les details natifs d'un sort avant/apres un bonus sans gain de rang.
+13. Verifier les couleurs de vie a 100/60/30/10 pour cent et le cadre de cible.
 
 Les sauvegardes sont dans FieldKitRebornDB; FieldKitDB n'est jamais importe.
 Le catalogue de portraits de l'ancien jeu n'est pas une preuve pour Reborn.

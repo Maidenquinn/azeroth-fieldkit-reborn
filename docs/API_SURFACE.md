@@ -1,5 +1,26 @@
 # Native effects and data boundary
 
+## Reborn reborn.3 HUD details
+
+Boss progress reads the bundled AZS_NextBossProgress helper when available,
+otherwise the same native AZS_RUN.rift / AZS_SCHEDULE data used by the run's
+tracker. A rift percentage takes priority over time-based progression.
+AZS_EVENT and AZS_EventCurrency supply the active holiday's currency name,
+icon, count and color. An addon-owned strip displays this current-run value;
+it is neither an account balance nor a fabricated second currency.
+
+The presentation mask additionally retains/restores the known native containers
+AzerothSurvivorsSurvivorsBossBar and AZSRiftBar. ThemeTarget uses the real
+AzerothSurvivorsUnitFrameTarget when present and restores it on theme-off;
+its native click callback is retained. No supplied addon source is modified.
+Player HP colors use observed current/max HP: green >=75%, yellow >=50%,
+orange >=25%, red below 25%. These are display thresholds, not game mechanics.
+
+Loadout reads bounded, sanitized AZS_SPELLTIPS keyed by actual learned spell key.
+The native current-spell description is shown in its tooltip, refreshed when the
+text changes even if rank does not. The AZSSPELLTIP generation joins the existing
+freshness barrier so descriptions from a previous run are not silently reused.
+
 ## Reborn reborn.2 presentation integration
 
 Reborn themes read AZS_BUFFS/GetSpellInfo and the legacy-shaped UnitBuff shim;

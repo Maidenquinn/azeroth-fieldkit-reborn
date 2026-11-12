@@ -3,6 +3,13 @@ FieldKitThemeTarget={}
 local C=FieldKitThemeTarget
 local H=FieldKitThemeHUD
 local T=FieldKitTheme
+function C.NativeFrame()
+ if not FieldKit.rebornLegacyFixture then
+  local frame=getglobal("AzerothSurvivorsUnitFrameTarget")
+  if frame then return frame end
+ end
+ return getglobal("TargetFrame")
+end
 function C.Create()
  if C.frame then return end
  local f=CreateFrame("Button","FieldKitThemeTargetFrame",UIParent);C.frame=f
@@ -15,8 +22,8 @@ function C.Create()
  C.hp=T.Label(C.bar,"",0,0,284,19,12,T.text);C.hp:SetJustifyH("CENTER")
  f:RegisterForClicks("LeftButtonUp","RightButtonUp")
  f:SetScript("OnClick",function()
-  local source=getglobal("TargetFrame");local callback=source and (source:GetScript("OnClick") or source:GetScript("OnMouseUp"))
-  if callback then local previous=this;this=source;pcall(callback);this=previous end
+  local source=C.NativeFrame();local callback=source and (source:GetScript("OnClick") or source:GetScript("OnMouseUp"))
+  if callback then local previous=this;this=source;pcall(callback,source,arg1 or "LeftButton");this=previous end
  end)
  f:SetScript("OnEnter",function()
   if GameTooltip and type(GameTooltip.SetUnit)=="function" then GameTooltip:SetOwner(this,"ANCHOR_BOTTOMRIGHT");GameTooltip:SetUnit("target");GameTooltip:Show() end
@@ -69,7 +76,7 @@ function C.Stop()
  if C.frame then C.frame:Hide() end
  if C.frame and C.frame.auras then for _,list in pairs(C.frame.auras) do for i=1,table.getn(list) do list[i]:Hide() end end end
  C.details=false
- local native=getglobal("TargetFrame");local saved=native and H.saved[native]
+ local native=C.NativeFrame();local saved=native and H.saved[native]
  if saved then
   if native:GetParent()==saved.parent or native:GetParent()==H.storage then H.RestoreOne(native)
   else if native:GetAlpha()==0 then native:SetAlpha(saved.alpha) end;H.saved[native]=nil end
@@ -78,10 +85,10 @@ function C.Stop()
  if cast and H.saved[cast] and cast:GetParent()==C.castOwner then H.RestoreOne(cast) end;C.castOwner=nil
 end
 function C.Update(variant)
- local native=getglobal("TargetFrame")
+ local native=C.NativeFrame()
  if not native or type(UnitExists)~="function" or not UnitExists("target") then C.Stop();return end
  local parent=native:GetParent()
- if parent and parent~=UIParent and parent~=H.storage then C.reason="Another addon owns the target frame";C.Stop();return end
+ if parent and parent~=UIParent and parent~=H.storage and native~=getglobal("AzerothSurvivorsUnitFrameTarget") then C.reason="Another addon owns the target frame";C.Stop();return end
  local hp,max=FieldKit.Number(UnitHealth("target")),FieldKit.Number(UnitHealthMax("target"))
  if not hp or not max or max<=0 then C.reason="Native data unavailable";C.Stop();return end
  C.Create();C.reason=nil

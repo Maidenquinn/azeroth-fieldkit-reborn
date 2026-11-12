@@ -190,7 +190,7 @@ function L.Decorate(row,name)
  if icon then row.fieldkitSpellIcon:SetTexture(icon);row.fieldkitSpellIcon:Show() else row.fieldkitSpellIcon:Hide() end
 end
 -- Did the learned-spell packet change (keys, ranks)? Compared in place with the last one seen: no allocation.
-L.sigKeys,L.sigRanks,L.sigCount={},{},0
+L.sigKeys,L.sigRanks,L.sigCount,L.sigTips={},{},0,{}
 function L.SpellsChanged()
  local list=type(AZS_SPELLS)=="table" and AZS_SPELLS or nil
  local count=list and math.min(32,table.getn(list)) or 0
@@ -198,6 +198,10 @@ function L.SpellsChanged()
  for i=1,count do
   local s=list[i];local key,rank=type(s)=="table" and s.key,type(s)=="table" and s.rank
   if L.sigKeys[i]~=key or L.sigRanks[i]~=rank then L.sigKeys[i]=key;L.sigRanks[i]=rank;changed=true end
+  if not FieldKit.rebornLegacyFixture then
+   local tip=type(AZS_SPELLTIPS)=="table" and AZS_SPELLTIPS[key]
+   if L.sigTips[i]~=tip then L.sigTips[i]=tip;changed=true end
+  end
  end
  L.sigCount=count
  return changed
@@ -207,7 +211,7 @@ function L.ContentKey()
  local parts={};local n=0
  for i=1,table.getn(L.spells) do
   local e=L.spells[i];n=n+1
-  parts[n]=tostring(e.key)..":"..tostring(e.rank)..":"..tostring(e.name)..":"..tostring(e.icon)..":"..table.concat(e.bonuses or {},"|")..":"..table.concat(e.upgrades or {},"|")
+  parts[n]=tostring(e.key)..":"..tostring(e.rank)..":"..tostring(e.name)..":"..tostring(e.icon)..":"..table.concat(e.bonuses or {},"|")..":"..table.concat(e.upgrades or {},"|")..":"..tostring(e.nativeText)
  end
  for _,slot in ipairs({2,13,14,11,12}) do
   local it=L.items[slot];n=n+1
@@ -219,7 +223,7 @@ end
 L.eventFrame=CreateFrame("Frame")
 for _,name in ipairs({"UNIT_INVENTORY_CHANGED","ACTIONBAR_SLOT_CHANGED","SPELLS_CHANGED","LEARNED_SPELL_IN_TAB","PLAYER_ENTERING_WORLD","CHAT_MSG_ADDON"}) do L.eventFrame:RegisterEvent(name) end
 L.eventFrame:SetScript("OnEvent",function()
- if event=="CHAT_MSG_ADDON" and arg1~="AZSGEAR" and arg1~="AZSSPELLS" then return end
+ if event=="CHAT_MSG_ADDON" and arg1~="AZSGEAR" and arg1~="AZSSPELLS" and arg1~="AZSSPELLTIP" then return end
  if event=="UNIT_INVENTORY_CHANGED" and arg1~="player" then return end
  L.dirty=true
 end)
@@ -262,6 +266,10 @@ function L.Scan()
     local asset=FieldKitReborn.Spell(s.key) or book[L.Key(s.key)]
     if FieldKit.rebornLegacyFixture then asset=FieldKitSpellAssets[tonumber(s.spell)] or asset end
     local e={key=s.key,name=asset and asset.name or N.Text(s.key),icon=asset and asset.icon,rank=string.format(FieldKit_L("Rank %d"),rank),rankValue=rank,bonuses={},upgrades={}}
+    if not FieldKit.rebornLegacyFixture and N.Fresh("AZSSPELLTIP") and type(AZS_SPELLTIPS)=="table" then
+     local text=L.Plain(AZS_SPELLTIPS[s.key],2048)
+     if text and text~="" then e.nativeText=text end
+    end
     table.insert(L.spells,e)
     if e.icon then
      L.icons[L.Key(e.name)]=e.icon
@@ -309,9 +317,10 @@ function L.Tip(owner,entry)
  if not entry then return end
  GameTooltip:SetOwner(owner,"ANCHOR_LEFT");GameTooltip:SetText(entry.name or "?")
  if entry.rank then GameTooltip:AddLine(entry.rank,.8,.8,.8) end
+ if entry.nativeText then GameTooltip:AddLine(entry.nativeText,1,.82,0,true) end
  for _,line in ipairs(entry.upgrades or {}) do GameTooltip:AddLine(line,1,1,1,true) end
  for _,line in ipairs(entry.bonuses) do GameTooltip:AddLine(line,.3,1,.4,true) end
- if table.getn(entry.bonuses)==0 and table.getn(entry.upgrades or {})==0 then GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
+ if not entry.nativeText and table.getn(entry.bonuses)==0 and table.getn(entry.upgrades or {})==0 then GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
  GameTooltip:Show()
 end
 function L.Attach(frame,readSlot,refresh)

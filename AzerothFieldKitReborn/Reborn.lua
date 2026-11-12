@@ -11,7 +11,7 @@ function R.ActionButton(slot)
  end
  return getglobal("ActionButton"..slot)
 end
-local presentationNames={"AzerothSurvivorsUnitFramePlayer","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsActionBar1"}
+local presentationNames={"AzerothSurvivorsUnitFramePlayer","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsActionBar1","AzerothSurvivorsSurvivorsBossBar","AZSRiftBar"}
 function R.ReplacePresentation()
  if not FieldKitZoneThemes or not FieldKitZoneThemes.active then return end
  R.presentation=R.presentation or {}
@@ -32,6 +32,75 @@ function R.RestorePresentation()
   if saved.mouse~=nil and frame.EnableMouse then frame:EnableMouse(saved.mouse) end
  end
  R.presentation={}
+end
+function R.HealthColor(current,maximum)
+ current=FieldKit.Number(current,nil,0);maximum=FieldKit.Number(maximum,nil,0)
+ if not current or not maximum or maximum<=0 then return nil end
+ local share=current/maximum
+ if share>=.75 then return .12,.76,.18 end
+ if share>=.5 then return 1,.85,.12 end
+ if share>=.25 then return 1,.48,.08 end
+ return .9,.12,.12
+end
+function R.BossProgress()
+ if type(AZS_NextBossProgress)=="function" then
+  local ok,share=pcall(AZS_NextBossProgress)
+  share=ok and FieldKit.Number(share,nil,0,1)
+  if share then return share end
+ end
+ local run=type(AZS_RUN)=="table" and AZS_RUN or {}
+ local last=0
+ for _,boss in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do
+  if boss.state=="due" then
+   local rift=FieldKit.Number(run.rift,nil,0,100)
+   if rift then return rift/100 end
+   local now=FieldKitNative.Time();local at=FieldKit.Number(boss.at)
+   if now and at and at>last then return math.max(0,math.min(1,(now-last)/(at-last))) end
+   return nil
+  end
+  last=FieldKit.Number(boss.at,last)
+ end
+end
+function R.EventCurrency()
+ local event=AZS_EVENT
+ if type(event)~="table" or type(AZS_EventCurrency)~="function" then return nil end
+ local ok,name,icon,color=pcall(AZS_EventCurrency,event.key)
+ local count=FieldKit.Number(event.n,nil,0)
+ if not ok or type(name)~="string" or type(icon)~="string" or not count then return nil end
+ return {name=FieldKitNative.Text(name),icon=icon,count=count,color=color}
+end
+function R.UpdateRunDetails()
+ if FieldKit.rebornLegacyFixture then return end
+ local H=FieldKitThemeHUD
+ if H.next then
+  local share=R.BossProgress()
+  local text=H.next:GetText() or ""
+  if text==R.lastProgressText then text=R.lastProgressBase end
+  R.lastProgressBase=text
+  R.lastProgressText=share and (text..string.format(" · %.0f%%",math.floor(share*100))) or text
+  H.next:SetText(R.lastProgressText)
+ end
+ local color={R.HealthColor(UnitHealth("player"),UnitHealthMax("player"))}
+ if H.health and color[1] then H.health:SetStatusBarColor(color[1],color[2],color[3]) end
+ local event=R.EventCurrency()
+ if not event then if R.eventFrame then R.eventFrame:Hide() end;return end
+ if not R.eventFrame then
+  local f=CreateFrame("Frame","FieldKitRebornEventCurrency",H.dock);R.eventFrame=f
+  f:SetWidth(240);f:SetHeight(26);f:EnableMouse(true);FieldKitTheme.Surface(f,"card")
+  f.icon=f:CreateTexture(nil,"ARTWORK");f.icon:SetWidth(20);f.icon:SetHeight(20);f.icon:SetPoint("LEFT",f,"LEFT",5,0)
+  f.label=FieldKitTheme.Label(f,nil,30,2,205,22,13,FieldKitTheme.gold)
+  f:SetScript("OnEnter",function()
+   local e=R.EventCurrency();if not e then return end
+   GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(e.name)
+   GameTooltip:AddLine(string.format("%.0f",e.count),1,.82,0);GameTooltip:Show()
+  end)
+  f:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ end
+ local f=R.eventFrame;f:ClearAllPoints();f:SetPoint("BOTTOM",H.dock,"TOP",0,8)
+ f.icon:SetTexture(event.icon);f.label:SetText(string.format("%.0f",event.count).." "..event.name)
+ local c=event.color
+ if type(c)=="table" then f.label:SetTextColor(FieldKit.Number(c[1],1,0,1),FieldKit.Number(c[2],.82,0,1),FieldKit.Number(c[3],0,0,1)) end
+ f:Show()
 end
 function R.Capabilities()
  if type(AZS_GetMeterCapabilities)~="function" then return nil end

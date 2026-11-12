@@ -571,6 +571,7 @@ function R.Update(variant,zone)
  for _,name in ipairs({"ChatFrame1UpButton","ChatFrame1DownButton","ChatFrame1BottomButton","ChatFrame1MenuButton","ChatFrameMenuButton","FieldKitChatCopyButton"}) do local f=getglobal(name);if f then FieldKitZoneThemes.Mask(f,true) end end
  if R.ShortcutsHidden(zone,variant) then R.footer:Hide()
  else Label(R.footer,R.canvas,{d.size[1]-305,d.size[2]-27,290,20},11,false,"RIGHT");R.footer:SetText("FIELDKIT "..FieldKit.version.." · "..string.upper(zone)) end
+ FieldKitReborn.UpdateRunDetails()
  for _,label in ipairs({H.zone,H.mode.fieldkitLabel,R.heroic,H.clock,H.next,H.name,R.level,H.hp,H.resourceText,H.xpText}) do if label:IsShown() then R.Fit(label) end end
  for _,label in ipairs(R.counts) do R.Fit(label,nil,10) end
  for _,b in ipairs(H.buttons) do if b:IsShown() then R.Fit(b.fieldkitLabel,nil,10) end end

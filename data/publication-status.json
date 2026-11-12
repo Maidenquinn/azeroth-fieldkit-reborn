@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.2",
+  "version": "0.1.0-reborn.3",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Maintainer screenshots show the initial startup failure then generic HUD after buff fix. Expansion themes and native visual replacement corrected in reborn.2; live confirmation pending."
+  "inGameTestScope": "Maintainer screenshots confirm Reborn expansion themes render. Missing progress/currency/spell descriptions, native gauge/target overlap and HP color corrected in reborn.3; live verification of these corrections pending."
 }
