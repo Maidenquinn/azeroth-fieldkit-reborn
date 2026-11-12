@@ -287,7 +287,7 @@ function H.ReferenceValues()
  local nativeZone=type(AZS_ZONE)=="table" and AZS_ZONE.zname;local key=type(AZS_ZONE)=="table" and AZS_ZONE.zone
  if type(nativeZone)~="string" or nativeZone=="" then nativeZone=FieldKitZoneRegistry[key or ""] and FieldKit_L(FieldKitZoneRegistry[key].name) or FieldKit_L("Zone not provided") end
  H.zone:SetText(FieldKitNative.Text(nativeZone));H.clock:SetText(FieldKitNative.Clock(FieldKitNative.Time()));local boss=FieldKitNativeTools.NextBoss();H.next:SetText(boss and boss.name.." · "..FieldKitNative.Clock(boss.left) or FieldKit_L("No upcoming boss"))
- for _,slot in ipairs(slots) do local b=getglobal("ActionButton"..slot);H.Save(b)
+ for _,slot in ipairs(slots) do local b=FieldKitReborn.ActionButton(slot);H.Save(b)
   -- Native Rejouer/reload can recreate the build while our persisted native
   -- visibility override is active. Its transient alpha must not become the
   -- restored alpha when the user's original build was visible.
@@ -308,7 +308,7 @@ function H.Update(variant,zone)
  else Place(H.dock,"BOTTOM",UIParent,"BOTTOM",0,68) end
  for i=1,7 do
   local x=16+(i-1)*67;local rim=H.actionRims[i];rim:ClearAllPoints();rim:SetPoint("TOPLEFT",H.dock,"TOPLEFT",x,-10)
-  local button=getglobal("ActionButton"..slots[i])
+  local button=FieldKitReborn.ActionButton(slots[i])
   if button then H.Save(button);button:SetParent(H.dock);button:ClearAllPoints();button:SetPoint("TOPLEFT",H.dock,"TOPLEFT",x+5,-15);button:SetWidth(52);button:SetHeight(52);button:SetFrameLevel(H.dock:GetFrameLevel()+4) end
  end
  if complete and zone=="elwynn" then Place(H.healthRoot,"TOPRIGHT",UIParent,"TOPRIGHT",-22,-20)

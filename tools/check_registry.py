@@ -7,9 +7,10 @@ spec=importlib.util.spec_from_file_location('registry_pin',a.registry/'tools/pin
 registry=importlib.util.module_from_spec(spec);spec.loader.exec_module(registry)
 entry=tomllib.loads((base/'distribution/azeroth-fieldkit-reborn.toml').read_text(encoding='utf8'))
 registry.check_fields(entry)
-archives=list((base/'dist').glob('AzerothFieldKitReborn-*.zip'))
-assert len(archives)==1, 'Expected one candidate archive in dist'
-data=archives[0].read_bytes();interfaces=registry.check_zip(entry['folders'],data)
+toc=(base/'AzerothFieldKitReborn/AzerothFieldKitReborn.toc').read_text(encoding='utf8')
+version=next(s.split(':',1)[1].strip() for s in toc.splitlines() if s.startswith('## Version:'))
+archive=base/'dist'/f'AzerothFieldKitReborn-{version}.zip'
+data=archive.read_bytes();interfaces=registry.check_zip(entry['folders'],data)
 result={'officialRegistryZipCheck':True,'interfaces':interfaces,'bytes':len(data),
         'sha256':hashlib.sha256(data).hexdigest(),'registryCommit':None,'liveGameTest':False}
 import subprocess

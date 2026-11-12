@@ -1,6 +1,38 @@
 -- Read Reborn's fresh public globals; never predict content from the old game.
 FieldKitReborn={}
 local R=FieldKitReborn
+-- Preserve the shipped addons and their event handling. Only their visual
+-- containers yield while FieldKit owns the themed HUD. Real action buttons
+-- move to FieldKit's dock, retaining native clicks, ranks and cooldowns.
+function R.ActionButton(slot)
+ if not FieldKit.rebornLegacyFixture then
+  local native=getglobal("AzerothSurvivorsActionBar1Button"..slot)
+  if native then return native end
+ end
+ return getglobal("ActionButton"..slot)
+end
+local presentationNames={"AzerothSurvivorsUnitFramePlayer","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsActionBar1"}
+function R.ReplacePresentation()
+ if not FieldKitZoneThemes or not FieldKitZoneThemes.active then return end
+ R.presentation=R.presentation or {}
+ for _,name in ipairs(presentationNames) do
+  local frame=getglobal(name)
+  if frame then
+   if not R.presentation[frame] then
+    R.presentation[frame]={parent=frame:GetParent(),alpha=frame:GetAlpha(),mouse=frame.IsMouseEnabled and frame:IsMouseEnabled()}
+   end
+   frame:SetParent(FieldKitThemeHUD.Hidden());frame:SetAlpha(0);if frame.EnableMouse then frame:EnableMouse(false) end
+  end
+ end
+end
+function R.RestorePresentation()
+ for frame,saved in pairs(R.presentation or {}) do
+  frame:SetParent(saved.parent)
+  frame:SetAlpha(saved.alpha)
+  if saved.mouse~=nil and frame.EnableMouse then frame:EnableMouse(saved.mouse) end
+ end
+ R.presentation={}
+end
 function R.Capabilities()
  if type(AZS_GetMeterCapabilities)~="function" then return nil end
  local ok,c=pcall(AZS_GetMeterCapabilities)
@@ -50,6 +82,36 @@ function R.Gear()
   if slot then items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses={g.text or ""},rankValue=tonumber(g.amount)} end
  end
  return items
+end
+-- Reborn does not implement the 1.12 GetPlayerBuff family. Its server buff
+-- list supplies spell ids and remaining seconds; UnitBuff's shim supplies
+-- icon/count only when the server list has not arrived.
+function R.PlayerBuffs()
+ local out={}
+ local list=type(AZS_BUFFS)=="table" and AZS_BUFFS or {}
+ if FieldKitNative and not FieldKitNative.Fresh("AZSBUFFS") then return out end
+ local age=type(AZS_BUFFS_UPDATED)=="number" and math.max(0,GetTime()-AZS_BUFFS_UPDATED) or 0
+ for i=1,math.min(32,table.getn(list)) do
+  local b=list[i]
+  if type(b)=="table" then
+   local name,rank,icon
+   if type(GetSpellInfo)=="function" and tonumber(b.spell) then
+    local ok,a,c,d=pcall(GetSpellInfo,tonumber(b.spell));if ok then name,rank,icon=a,c,d end
+   end
+   local left=FieldKit.Number(b.left)
+   local remaining=left and left>=0 and math.max(0,left-age) or nil
+   if not remaining or remaining>0 then
+    table.insert(out,{name=name or tostring(b.spell or "?"),icon=icon or "Interface\\Icons\\INV_Misc_QuestionMark",remaining=remaining})
+   end
+  end
+ end
+ if table.getn(list)>0 or type(UnitBuff)~="function" then return out end
+ for i=1,32 do
+  local ok,icon,count=pcall(UnitBuff,"player",i)
+  if not ok or type(icon)~="string" or icon=="" then break end
+  table.insert(out,{name="Effect",icon=icon,count=FieldKit.Number(count,nil,0)})
+ end
+ return out
 end
 -- Creature instance ids must never be used as entry/display ids.
 function R.Portrait(frame,name,kind,id)

@@ -9,6 +9,7 @@ root=base/'AzerothFieldKitReborn'
 def runtime():
     l=LuaRuntime(unpack_returned_tuples=True)
     l.execute((base/'tests/mock.lua').read_text(encoding='utf8'))
+    l.execute('GetPlayerBuff=nil;GetPlayerBuffTexture=nil;GetPlayerBuffTimeLeft=nil;GetPlayerBuffApplications=nil')
     for name in (root/'AzerothFieldKitReborn.toc').read_text().splitlines():
         if name.endswith('.lua'): l.execute((root/name).read_text(encoding='utf8'),name=name)
     return l
@@ -16,6 +17,8 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--game',type=Path);a=p.parse_args()
     l=runtime();l.execute((base/'tests/reborn.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_party.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_buffs.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_themes.lua').read_text(encoding='utf8'))
     if a.game:
         l=runtime()
         l.execute('''
@@ -60,6 +63,8 @@ def main():
         assert(FieldKitMeterLedger.Reset()==false)
         for _,zone in ipairs(AZS_GEN.zones) do
           AZS_ZONE.zone=zone.key
+          FieldKitRebornDB.zoneThemes=true;FieldKitRebornDB.zoneThemeMode="auto"
+          assert(FieldKitZoneThemes.Resolve()=="elwynn","Auto theme unavailable on "..zone.key)
           assert(zone.bosses and #zone.bosses>0)
           assert(FieldKitRunMode.ChartLines(1)[1]==nil)
         end

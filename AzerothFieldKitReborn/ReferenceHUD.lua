@@ -482,16 +482,16 @@ function R.Update(variant,zone)
   R.portrait:Show()
  else R.portrait:Hide();R.portraitBack:Hide();R.portraitFrame:Hide() end
  for i=1,7 do
-  local a=d.actions;local b=getglobal("ActionButton"..slots[i]);if b then
+  local a=d.actions;local b=FieldKitReborn.ActionButton(slots[i]);if b then
    local redraw=b:GetParent()~=H.dock or b.referenceKey~=key or b.referenceSerial~=FieldKitNative.serial;local shown=b:IsShown()
    b:SetParent(H.dock);b:SetAlpha(1);b:SetFrameStrata("HIGH");b:SetScale(1);b:ClearAllPoints();b:SetWidth(a[3]-8);b:SetHeight(a[3]-8);b:SetPoint("TOPLEFT",H.dock,"TOPLEFT",a[1]-d.rects.dock[1]+(i-1)*a[4]+4,d.rects.dock[2]-a[2]-4);
-   local icon=getglobal("ActionButton"..slots[i].."IconTexture") or getglobal("ActionButton"..slots[i].."Icon");if icon then H.Save(icon);icon:ClearAllPoints();icon:SetAllPoints(b) end;b:SetFrameLevel(H.dock:GetFrameLevel()+8)
+   local icon=b.icon or getglobal(b:GetName().."IconTexture") or getglobal(b:GetName().."Icon");if icon then H.Save(icon);icon:ClearAllPoints();icon:SetAllPoints(b) end;b:SetFrameLevel(H.dock:GetFrameLevel()+8)
    if redraw and shown then b:Hide();b:Show() end;b.referenceKey=key;b.referenceSerial=FieldKitNative.serial
    -- The approved socket supplies the border; the native 32px normal texture
    -- otherwise leaves a second small square over the enlarged spell icon.
    local normal=b.GetNormalTexture and b:GetNormalTexture()
    if normal and type(normal)~="string" and normal.SetAlpha then H.Save(normal);normal:SetAlpha(0) end
-   local cooldown=getglobal("ActionButton"..slots[i].."Cooldown")
+   local cooldown=b.cooldown or getglobal(b:GetName().."Cooldown")
    if cooldown then H.Save(cooldown);cooldown:ClearAllPoints();cooldown:SetAllPoints(b) end
   end
  end

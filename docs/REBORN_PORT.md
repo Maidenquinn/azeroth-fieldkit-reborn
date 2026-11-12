@@ -58,8 +58,12 @@ Les calendriers, créatures vivantes, rangs et bijoux affichés proviennent des
 tables natives ; une nouvelle carte ne nécessite pas une liste codée en dur.
 
 Les thèmes graphiques spécifiques hérités restent limités à leurs compositions
-existantes. Une carte d'extension utilise le HUD générique ; elle n'a pas reçu
-magiquement un nouveau thème illustré. Les portraits 3D/statistiques de soins
+existantes. Depuis reborn.2, une carte d'extension utilise aussi l'habillage
+Elwynn en mode auto ; les noms, sorts et calendriers restent ceux de sa carte.
+Les conteneurs visuels natifs cèdent la place, les vrais boutons Reborn sont
+intégrés au dock FieldKit et le HUD natif est restauré si le thème est désactivé.
+Le HUD générique reste accessible lorsque les thèmes sont désactivés.
+Les portraits 3D/statistiques de soins
 reçus/fenêtres récentes/checkpoints ne sont pas fabriqués lorsque l'API les refuse.
 Les fonctions optionnelles sont vérifiées avant appel. Le partage coop reste
 désactivé par défaut et nécessite deux clients consentants.

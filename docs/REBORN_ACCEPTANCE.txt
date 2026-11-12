@@ -1,4 +1,4 @@
-Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.1
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.2
 
 Client de reference: Reborn 0.6.1, inventorie le 12 novembre 2026.
 Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.

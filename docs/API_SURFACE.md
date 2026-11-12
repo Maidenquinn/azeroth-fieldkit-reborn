@@ -1,5 +1,23 @@
 # Native effects and data boundary
 
+## Reborn reborn.2 presentation integration
+
+Reborn themes read AZS_BUFFS/GetSpellInfo and the legacy-shaped UnitBuff shim;
+the absent GetPlayerBuff family is used only by historical test fixtures.
+GetTime minus AZS_BUFFS_UPDATED ages native remaining seconds; unknown durations
+stay unavailable. NativeTools and the player buff strip share this reader.
+
+When themes are active, Reborn.lua temporarily reparents only the named visual
+containers AzerothSurvivorsUnitFramePlayer, AzerothSurvivorsSurvivorsResources
+and AzerothSurvivorsActionBar1 into FieldKit's hidden storage. Their original
+parent, alpha and mouse state are retained in memory and restored on theme-off,
+profile/preview suspension and logout. The addon does not disable built-in
+modules or change their source. Main-bar buttons are the real
+AzerothSurvivorsActionBar1ButtonN objects; their own native scripts, icon/rank
+updates and cooldowns remain attached. ThemeHUD saves/restores their geometry.
+The existing bounded AZS_SetHudShown calls control native run tracker/meter parts.
+Auto may reuse the Elwynn artwork on other maps without changing native identity.
+
 The review boundary is **TOC-loaded source**, not every file in the developer
 repository. Runtime.lua centralizes CVar/HUD writes; ordinary frame methods remain
 in their owning UI modules. `tools/audit.py` emits a complementary machine inventory.

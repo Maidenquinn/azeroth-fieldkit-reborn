@@ -156,6 +156,10 @@ function C.Resolve()
  if key=="auto" then key=type(AZS_ZONE)=="table" and AZS_ZONE.zone end
  -- Naxxramas is unfinished and deliberately unavailable in this release.
  if key=="elwynn" or (key=="naxx" and C.allowUnfinishedThemes) then return key end
+ -- Auto selects a visual skin, not a whitelist of playable maps. Reuse the
+ -- completed skin on expansion maps while all labels/data stay native.
+ if not FieldKit.rebornLegacyFixture and FieldKitRebornDB.zoneThemeMode=="auto" and
+  type(key)=="string" and key~="" and type(AZS_GetPhase)=="function" and AZS_GetPhase() then return "elwynn" end
 end
 function C.Suspend()
  for _,handle in pairs(C.detailHandles or {}) do handle:Hide() end
@@ -172,6 +176,7 @@ function C.Suspend()
 end
 -- Persist only seven restoration booleans so a reload cannot forget prior CVars.
 function C.NativeRestore()
+ if FieldKitReborn then FieldKitReborn.RestorePresentation() end
  local saved=FieldKitRebornDB and FieldKitRebornDB.zoneThemeNativeBefore
  if type(saved)~="table" then return end
  for _,key in ipairs({"clock","tally","build","banners","bosses","meter","levels"}) do
@@ -180,6 +185,7 @@ function C.NativeRestore()
  FieldKitRebornDB.zoneThemeNativeBefore=nil
 end
 function C.NativeReplace()
+ if not FieldKit.rebornLegacyFixture then FieldKitReborn.ReplacePresentation() end
  if type(AZS_IsHudShown)~="function" then return end
  if type(FieldKitRebornDB.zoneThemeNativeBefore)~="table" then FieldKitRebornDB.zoneThemeNativeBefore={} end
  local saved=FieldKitRebornDB.zoneThemeNativeBefore

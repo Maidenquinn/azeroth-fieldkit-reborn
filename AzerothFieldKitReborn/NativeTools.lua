@@ -64,6 +64,14 @@ function T.ShowRows(frame,rows,total)
 end
 -- Active player buffs from the client: icon, name (hidden tooltip), stacks and time left when exposed.
 function T.Buffs(rows)
+ if not FieldKit.rebornLegacyFixture then
+  for _,b in ipairs(FieldKitReborn.PlayerBuffs()) do
+   local value=b.remaining and N.Clock(b.remaining) or ""
+   if b.count and b.count>1 then value=tostring(b.count).."x"..(value~="" and (" · "..value) or "") end
+   table.insert(rows,{label=N.Text(b.name),value=value,icon=b.icon})
+  end
+  return true
+ end
  if type(GetPlayerBuff)~="function" or type(GetPlayerBuffTexture)~="function" then return false end
  if not T.scan and type(CreateFrame)=="function" then
   local ok,tip=pcall(CreateFrame,"GameTooltip","FieldKitBuffScan",nil,"GameTooltipTemplate")

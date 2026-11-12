@@ -5,6 +5,8 @@ assert(FieldKit.Number(1e15)==1e15 and FieldKit.Number(1/0)==nil)
 assert(FieldKit_FormatHealth(1e15,1e15,1)=="1000000000000000 / 1000000000000000")
 FieldKitDB={sentinel="original-game"}
 fire(FieldKitFrame,"VARIABLES_LOADED")
+assert(FieldKit.zoneThemeReady and FieldKitMeterFrame and FieldKitStatsFrame and FieldKitGearFrame,
+ "Reborn startup stopped before the complete HUD was created")
 assert(FieldKitDB.sentinel=="original-game" and FieldKitRebornDB~=FieldKitDB)
 AZS_GEN={classes={{key="monk",token="MONK"}},spells={MONK={{key="jab",name="Jab",icon="ability_monk_jab"}}}}
 AZS_ZONE={zone="new-expansion-map",class="monk"}

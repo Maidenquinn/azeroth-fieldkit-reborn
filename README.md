@@ -1,7 +1,7 @@
 # Azeroth FieldKit Reborn
 
 Independent FieldKit adaptation for **Azeroth Survivors Reborn**, initially
-targeting client **0.6.1**. Version **0.1.0-reborn.1** is a development candidate.
+targeting client **0.6.1**. Version **0.1.0-reborn.2** is a development candidate.
 
 [Français](README.fr.md) · [Port audit](docs/REBORN_PORT.md) ·
 [Native acceptance recipe](docs/REBORN_ACCEPTANCE.txt) ·
@@ -10,8 +10,8 @@ targeting client **0.6.1**. Version **0.1.0-reborn.1** is a development candidat
 Combat HUD, meters, learned spells, run jewelry, boss schedules, minimap/world
 markers, configurable themes and English/French settings. Reborn's native data
 supplies its maps and class spells, including expansion content. Dedicated
-illustrated themes are limited to the inherited layouts; other maps use the
-generic HUD. Unsupported received-healing counters, recent windows, checkpoints
+illustrated themes reuse the existing Elwynn skin on other maps in Auto mode,
+with native zone names and data. Unsupported received-healing counters, recent windows, checkpoints
 and unidentified appearances stay unavailable.
 
 ## Install

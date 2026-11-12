@@ -1189,6 +1189,17 @@ local function UpdatePlayerBuffs()
 		return
 	end
 	local n = 0
+	if not FieldKit.rebornLegacyFixture then
+		local buffs=DB.playerBuffs and FieldKitReborn.PlayerBuffs() or {}
+		for i=1,math.min(BUFF_MAX,table.getn(buffs)) do
+			local b=buffs[i];local icon=BuffIcon(i);n=i
+			icon.texture:SetTexture(b.icon);FieldKit_Text(icon.time,FormatBuffTime(b.remaining))
+			icon:ClearAllPoints();icon:SetPoint("TOPLEFT",buffRow,"TOPLEFT",(i-1)*(BUFF_SIZE+BUFF_GAP),0);icon:Show()
+		end
+		for i=n+1,table.getn(buffIcons) do buffIcons[i]:Hide() end
+		buffRow:SetWidth(math.max(1,n*(BUFF_SIZE+BUFF_GAP)-BUFF_GAP))
+		return
+	end
 	if ( DB.playerBuffs ) then
 		for i = 0, 31 do
 			if ( n >= BUFF_MAX ) then

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.1",
+  "version": "0.1.0-reborn.2",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.1",
+    "version": "0.1.0-reborn.2",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,18 +29,18 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Offline validation only; Reborn live acceptance pending"
+    "inGameTestScope": "Maintainer screenshots show the initial startup failure then generic HUD after buff fix. Expansion themes and native visual replacement corrected in reborn.2; live confirmation pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "8d1d5f2c07d2154f89f0aabdb6107fec62f4b1ee5d310dc81b166eac1f811fc2"
+      "sha256": "3940658ab79aca998e28f7c66f68922fca5d804a40db37eff08706feb6fc5de9"
     },
     "Reborn.lua": {
       "maxUpvalues": 2,
-      "functions": 8,
-      "sha256": "441d9742a00a2406bf125b060e449639369f49c8757f13c19e363309fc7aceb1"
+      "functions": 12,
+      "sha256": "93a7da80043850bf68a2fdee50ae23e5d46d79c2dfa9bf15c79f2fdf5252c37e"
     },
     "Diagnostics.lua": {
       "maxUpvalues": 5,
@@ -115,7 +115,7 @@
     "NativeData.lua": {
       "maxUpvalues": 2,
       "functions": 13,
-      "sha256": "074a5cc2a94f11434c0fefaf29d8e33aaa1e53dd86db46f60a2ff160d6fd519c"
+      "sha256": "e44c9e58cd307d21911315bdded75a08cc69fc524a8a65cf7a0233e35ac013ea"
     },
     "MeterLedger.lua": {
       "maxUpvalues": 11,
@@ -170,7 +170,7 @@
     "NativeTools.lua": {
       "maxUpvalues": 3,
       "functions": 19,
-      "sha256": "d99e3438e51abbab70d1187dcc6a8e62f16a0fc7c8aa86cc53e713bd1a2c2591"
+      "sha256": "fb04ac5fce7a84b7970626f73869bc6ee69dbab125c1ae257e53c8d825c7f18e"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -215,7 +215,7 @@
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 189,
-      "sha256": "373a3fe93587a46295e47d1dd9e0eb03ad8ace09f5a65a05653b7dddd11d2069"
+      "sha256": "6381896ec818cb3010f824b268c3be87b1452b5a316ddd8b27779193f62d454c"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -255,7 +255,7 @@
     "ThemeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 42,
-      "sha256": "43d8d28f78056d730c8ecfed3691d1686564c855d61c8553054bde2f38cce8c0"
+      "sha256": "8f062e7948afc757a68c5c23cfe4850be82decdcf225e6743e880a7185781b8f"
     },
     "ThemeTarget.lua": {
       "maxUpvalues": 6,
@@ -270,12 +270,12 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 181,
-      "sha256": "5f17ba092dd6ed3cc061c02f7dd92a3d710b5462efc769116c5710b72285eeb9"
+      "sha256": "e885bc482e5138aeae70c91890d7a4267f6be77d4afc146b804258e1fc425a09"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "6d15d50194d6093b9226d8763fd609da24c1ca9745bb6fc613d94a6803d5f735"
+      "sha256": "4def8489319ccc45ff9606f6fdf079d3106a29426c6b56445640343aa9ab31b6"
     }
   }
 }
