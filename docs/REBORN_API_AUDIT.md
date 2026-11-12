@@ -64,6 +64,21 @@ une recette visuelle en jeu, ni une certification indépendante de chaque chemin
 7. **Restauration** : les nouvelles cellules, les deux jauges et la rangée de
    six sockets sont masquées lorsque le thème est désactivé. Les boutons natifs
    retrouvent les parents et propriétés enregistrés.
+8. **Thème perdu après /reload** : reproduit dans le vrai client. Le réglage
+   était encore activé, mais `AZSZONE` n'était pas renvoyé alors que les paquets
+   de partie/sorts étaient présents. Le mode auto utilise maintenant la phase
+   de partie pour rétablir l'habillage sans exiger un identifiant de zone. Le
+   nom affiché peut provenir de GetRealZoneText/GetZoneText, sans fabriquer un
+   identifiant de carte ni une difficulté. Vérifié après rechargements réels.
+9. **Flèches du chat en double** : les noms Reborn sont
+   ChatFrame1ButtonFrameUpButton/DownButton/BottomButton. Ils sont maintenant
+   masqués/restaurés avec les contrôles natifs ; les quatre contrôles FieldKit
+   restent disponibles. Les onglets de conversation natifs restent gérés par
+   le jeu.
+10. **Distances de lairs aberrantes au départ** : les coordonnées 0,0 du paquet
+    d'attente donnaient des milliers de yards. Les distances restent absentes
+    en phase ready, puis utilisent la pose officielle AZS_GetPlayerPosition.
+    Le cas de coordonnées natives non nulles différentes du paquet est testé.
 
 ## Couverture par famille de modules
 
@@ -152,10 +167,25 @@ Une fixture 0×0 remplace les dimensions artificielles du mock pour détecter la
 régression de texture. Les fichiers Api.lua, Meter.lua et Generated/Content.lua
 du client installé sont aussi exécutés dans le harnais Lua.
 
-Ces contrôles ne prouvent pas le rendu du moteur. Le client a été observé sur
-un choix de niveau d'une partie existante ; aucun choix n'a été effectué et
-aucun redémarrage n'a interrompu cette partie. La recette visuelle de reborn.5
-reste à faire après rechargement/redémarrage, en particulier l'échelle réelle
-des trois dispositions, les charges du Destrier, une Horde pleine, la monnaie
-d'événement et un combat de gardien. Aucun fichier des addons natifs ni aucune
-sauvegarde de compte n'est modifié par le déploiement.
+Une recette native partielle a ensuite été effectuée avec l'autorisation de
+contrôle donnée par le mainteneur : disparition du carré, six cases dans les
+trois dispositions, compteurs alignés avec monnaie d'événement, deux sorts de
+départ et leur description, puis retours automatiques du thème après /reload.
+La Horde a été vue à 0/120 et la progression boss à 0 %. Le thème complet/auto
+et l'échelle initiale de 80 % ont été conservés à la fin.
+
+Le compteur de charges `AZS_DASH.seen` peut aussi rester absent après /reload
+dans ce client : le bouton natif se cache alors de lui-même. FieldKit montre un
+repère grisé « ? » hors des six sorts, avec une infobulle d'attente ; il ne
+prétend pas connaître les charges et ne déclenche aucune commande automatique.
+Le vrai bouton reprend la place dès que la mise à jour native arrive. La
+difficulté reste « ? » si elle n'est plus transmise ; le nom du monde seul ne
+permet pas de la déduire.
+
+Cette recette ne valide pas un combat prolongé, une Horde pleine, les cycles
+réels de charges du Destrier, un combat de gardien ou le transport coop. Ces
+points restent couverts seulement par les fixtures lorsqu'elles existent.
+Le journal Lua n'a montré aucune nouvelle erreur pendant cette recette ; les
+anciennes erreurs Ace3/issecretvalue du jeu n'ont pas été effacées ni corrigées
+en modifiant ses addons. Aucun fichier des addons natifs ni aucune sauvegarde
+de compte n'est modifié par le déploiement.

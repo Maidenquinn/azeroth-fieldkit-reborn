@@ -2095,6 +2095,14 @@ function UpdateLairFrame()
 	end
 	local px = type(AZS_RUN)=="table" and FieldKit.Number(AZS_RUN.px)
 	local py = type(AZS_RUN)=="table" and FieldKit.Number(AZS_RUN.py)
+ if not FieldKit.rebornLegacyFixture then
+  -- The ready packet's 0,0 placeholder is not the hero's live world pose.
+  px,py=nil,nil
+  if AZS_GetPhase()~="ready" and type(AZS_GetPlayerPosition)=="function" then
+   local ok,p=pcall(AZS_GetPlayerPosition)
+   if ok and type(p)=="table" then px,py=FieldKit.Number(p.x),FieldKit.Number(p.y) end
+  end
+ end
 	local held = 0
  local flagged=DB.highlightFlaggedLair and FieldKitNative.Read("AZS_GetFlaggedLair")
 	local n = math.min(table.getn(lairs), LAIR_ROWS)

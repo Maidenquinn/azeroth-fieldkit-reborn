@@ -17,6 +17,8 @@ dash.icon:SetTexture("Interface\\Icons\\Ability_Mount_RidingHorse");dash.key=das
 local clicks=0;dash:SetScript("OnClick",function() clicks=clicks+1 end)
 local swarm=CreateFrame("Frame","AzerothSurvivorsMinimapStatusButton",Minimap)
 local mapName=CreateFrame("Frame","AZSMapInfo",UIParent)
+local chatParent=CreateFrame("Frame",nil,UIParent)
+local chatUp=CreateFrame("Button","ChatFrame1ButtonFrameUpButton",chatParent)
 HasAction=function(slot) return slot<=2 end
 FieldKitLoadout.items={[13]={name="Reborn pendant",icon="Interface\\Icons\\CorrectPendant",bonuses={}}}
 GetInventoryItemTexture=function() return "Interface\\Icons\\WrongPersistentItem" end
@@ -29,9 +31,13 @@ assert(b.icon:GetAlpha()==0 and b.backdrop:GetAlpha()==0 and b.IconBorder:GetAlp
 assert(R.squareActions[b].icon:GetTexture()=="Interface\\Icons\\Spell1" and R.squareActions[b]:IsShown())
 assert(not R.squareActions[AzerothSurvivorsActionBar1Button3]:IsShown())
 assert(swarm:GetParent()==H.Hidden() and mapName:GetParent()==H.Hidden())
+assert(chatUp:GetParent()==H.Hidden(),"Reborn's stock chat arrow leaked beside the themed controls")
 assert(V.frames.Accessories.rows[2].icon:GetTexture()=="Interface\\Icons\\CorrectPendant")
 assert(R.eventFrame:GetParent()==H.counterRoot and R.eventFrame.label:GetText()=="12")
 assert(H.next:GetText()=="Hungarfen" and R.progressFrame:IsShown())
+AZS_DASH={seen=false,off=0};R.PlaceSteed();assert(R.steedPending:IsShown() and R.steedPending.label:GetText()=="?")
+assert(R.steedPending:GetScript("OnClick")==nil,"Unknown charges must not fabricate a usable ability")
+AZS_DASH.seen=true;R.PlaceSteed();assert(not R.steedPending:IsShown())
 assert(R.progressFrame.label:GetText()=="Hungarfen · 5%")
 local run="run1";AZS_API_RunId=function() return run end
 AZS_GEN={creatureIcons={[42]="NativeBogGiant"}}
@@ -46,4 +52,5 @@ run="run2";assert(R.EnemyIcon("Bog Giant",{})=="Interface\\Icons\\INV_Misc_Quest
 C.Set("zoneThemes",false)
 assert(b.icon:GetAlpha()==1 and b.IconBorder:GetAlpha()==1 and not R.squareActions[b]:IsShown())
 assert(dash:GetParent()==UIParent and swarm:GetParent()==Minimap and mapName:GetParent()==UIParent)
+assert(chatUp:GetParent()==chatParent)
 print("PASS Reborn square spell icons, six spells plus real Steed, correct run item icons, integrated candy/progress bar, native minimap cleanup and observed enemy icons")

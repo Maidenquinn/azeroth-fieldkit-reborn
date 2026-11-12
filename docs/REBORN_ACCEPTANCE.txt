@@ -34,6 +34,14 @@ Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
 19. Combattre un gardien eveille : barre Chronicle et PV natifs, puis disparition
     de sa barre au sommeil/despawn, sans le dupliquer dans AZS_UNITS.
 
+20. /reload en ready puis en combat : le theme auto revient sans changer son
+    reglage. Si AZSZONE manque, garder le nom de carte depuis le monde ;
+    difficulte et charges de monture inconnues restent indiquees comme telles.
+
+Recette native partielle effectuee le 12 novembre : trois dispositions, six
+slots, compteurs, sorts de depart et details, reload en ready. Combats, Horde
+pleine, charges et coop restent a valider.
+
 Les sauvegardes sont dans FieldKitRebornDB; FieldKitDB n'est jamais importe.
 Le catalogue de portraits de l'ancien jeu n'est pas une preuve pour Reborn.
 Une icone inconnue est normale si aucune apparence native n'est identifiee.

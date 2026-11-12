@@ -35,6 +35,7 @@ function R.RestoreSquareActions()
  if R.counterCover then R.counterCover:Hide() end
  if R.hordeFrame then R.hordeFrame:Hide() end
  if R.sixPlate then R.sixPlate:Hide() end
+ if R.steedPending then R.steedPending:Hide() end
  for _,f in ipairs(R.sixSlots or {}) do f:Hide() end
 end
 -- Entry->icon comes from the public world position API and the native catalog.

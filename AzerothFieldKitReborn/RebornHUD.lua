@@ -109,6 +109,20 @@ function R.PlaceSteed()
  local b=getglobal("AZSDashButton");if not b then return end
  local H=FieldKitThemeHUD;H.Save(b);b:SetParent(H.dock);b:ClearAllPoints();b:SetPoint("BOTTOMLEFT",H.dock,"BOTTOMRIGHT",8,24);b:SetFrameLevel(H.dock:GetFrameLevel()+12)
  -- Retain the real utility's original round skin, charges, tooltip and key.
+ local pending=type(AZS_DASH)=="table" and not AZS_DASH.seen and AZS_DASH.off~=1
+ if pending then
+  if not R.steedPending then
+   local f=CreateFrame("Frame",nil,H.dock);R.steedPending=f;f:SetWidth(46);f:SetHeight(46);f:EnableMouse(true)
+   f.icon=f:CreateTexture(nil,"ARTWORK");f.icon:SetAllPoints(f);f.icon:SetVertexColor(.45,.45,.45)
+   f.label=FieldKitTheme.Label(f,nil,0,0,46,20,16,FieldKitTheme.gold,false);f.label:ClearAllPoints();f.label:SetPoint("BOTTOM",f,"BOTTOM",0,0);f.label:SetText("?")
+   f:SetScript("OnEnter",function()
+    GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(FieldKit_L("Mount state unavailable"));GameTooltip:AddLine(FieldKit_L("Waiting for the game's charge update."),.8,.8,.8,true);GameTooltip:Show()
+   end)
+   f:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  end
+  local f=R.steedPending;f:ClearAllPoints();f:SetPoint("BOTTOMLEFT",H.dock,"BOTTOMRIGHT",8,24);f:SetFrameLevel(H.dock:GetFrameLevel()+12)
+  f.icon:SetTexture(b.icon and b.icon:GetTexture() or "Interface\\Icons\\INV_Misc_QuestionMark");f:Show()
+ elseif R.steedPending then R.steedPending:Hide() end
 end
 function R.RefreshPresentationDetails()
  local H=FieldKitThemeHUD;R.ProgressBar();R.CounterBand()

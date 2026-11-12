@@ -12,7 +12,8 @@ function R.ActionButton(slot)
  end
  return getglobal("ActionButton"..slot)
 end
-local presentationNames={"AzerothSurvivorsUnitFramePlayer","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsActionBar1","AzerothSurvivorsSurvivorsBossBar","AZSRiftBar","AzerothSurvivorsMinimapStatusButton","MinimapZoneText","AZSMapInfo"}
+local presentationNames={"AzerothSurvivorsUnitFramePlayer","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsActionBar1","AzerothSurvivorsSurvivorsBossBar","AZSRiftBar","AzerothSurvivorsMinimapStatusButton","MinimapZoneText","AZSMapInfo",
+ "ChatFrame1ButtonFrameUpButton","ChatFrame1ButtonFrameDownButton","ChatFrame1ButtonFrameBottomButton"}
 function R.ReplacePresentation()
  if not FieldKitZoneThemes or not FieldKitZoneThemes.active then return end
  R.presentation=R.presentation or {}
@@ -117,6 +118,18 @@ function R.Localize(value)
  if type(value)~="string" then return nil end
  if type(AZS_L)=="table" and type(AZS_L[value])=="string" then return AZS_L[value] end
  return value
+end
+function R.ZoneName()
+ local z=type(AZS_ZONE)=="table" and AZS_ZONE or {}
+ if type(z.zname)=="string" and z.zname~="" then return z.zname end
+ -- Map display text is still available from the world after /reload even
+ -- when AZSZONE is missing. This supplies a label, never an invented zone id.
+ if type(AZS_GetPhase)=="function" and AZS_GetPhase() then
+  for _,name in ipairs({"GetRealZoneText","GetZoneText"}) do local fn=getglobal(name)
+   if type(fn)=="function" then local ok,text=pcall(fn);if ok and type(text)=="string" and text~="" then return text end end
+  end
+ end
+ return z.zone
 end
 -- The native class pool supplies metadata only; learned rows come from AZS_SPELLS.
 function R.Spell(key)

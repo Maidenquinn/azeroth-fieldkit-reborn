@@ -45,4 +45,9 @@ end
 -- Reproduce an unresolved native frame at 0x0, rather than mock defaults 232x100.
 local f=CreateFrame("Frame");f:SetWidth(0);f:SetHeight(0);FieldKitTheme.Surface(f,"card")
 for _,p in ipairs(f.fieldkitSkin.parts) do assert(p.texture.width>0 and p.texture.height>0,"Intrinsic-size texture regression") end
+AZS_GetLairs=function() return {{name="Lair",index=1,state="empty",left=40,x=100,y=200}} end
+AZS_GetPlayerPosition=function() return {x=103,y=204} end
+AZS_RUN.px=0;AZS_RUN.py=0;AZS_RUN.ph="ready";update(FieldKitFrame,.3)
+assert(FieldKitLairFrame.rows[1].dist:GetText()=="","Ready placeholder produced a false distance")
+AZS_RUN.ph="playing";update(FieldKitFrame,.3);assert(FieldKitLairFrame.rows[1].dist:GetText()=="5 yd","Lair distance ignored live pose API")
 print("PASS ready starting spells, structured loadout/freshness, six visible sockets in all layouts, bounded thin meters, restored Horde and equal footer cells")

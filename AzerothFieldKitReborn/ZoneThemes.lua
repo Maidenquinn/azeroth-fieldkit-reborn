@@ -158,8 +158,11 @@ function C.Resolve()
  if key=="elwynn" or (key=="naxx" and C.allowUnfinishedThemes) then return key end
  -- Auto selects a visual skin, not a whitelist of playable maps. Reuse the
  -- completed skin on expansion maps while all labels/data stay native.
+ -- /reload can replay the run/learned packets before AZSZONE. A known run
+ -- phase is sufficient to restore the chosen visual skin; zone metadata may
+ -- remain unknown without disabling the entire HUD. The API excludes the hub.
  if not FieldKit.rebornLegacyFixture and FieldKitRebornDB.zoneThemeMode=="auto" and
-  type(key)=="string" and key~="" and type(AZS_GetPhase)=="function" and AZS_GetPhase() then return "elwynn" end
+  type(AZS_GetPhase)=="function" and AZS_GetPhase() then return "elwynn" end
 end
 function C.Suspend()
  for _,handle in pairs(C.detailHandles or {}) do handle:Hide() end

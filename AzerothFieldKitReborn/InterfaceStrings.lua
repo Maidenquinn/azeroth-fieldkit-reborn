@@ -1,6 +1,8 @@
 -- Presentation-only additions. Native creature/spell names are never translated.
 local fr=FieldKitLocale.fr
 local labels={
+ ["Mount state unavailable"]="État de la monture indisponible",
+ ["Waiting for the game's charge update."]="En attente de la mise à jour des charges par le jeu.",
  ["Lock window positions"]="Verrouiller la position des fenêtres",
  ["Drag active windows during play by default. Locking keeps their current positions; grouping and dimensions stay unchanged."]="Les fenêtres actives se déplacent directement en jeu par défaut. Le verrouillage conserve leurs positions ; groupes et dimensions restent inchangés.",
  ["Left-click: settings. Right-click: lock/unlock windows. Drag: move this shortcut."]="Clic gauche : paramètres. Clic droit : verrouiller/déverrouiller les fenêtres. Glisser : déplacer ce raccourci.",

@@ -132,6 +132,7 @@ function R.Update()
  local level=FieldKit.GetHeroicLevel()
  FieldKit_Text(f.total,FieldKit.GetHeroicLabel() or (active and "Mode not provided" or "Preview"))
  local zone=type(AZS_ZONE)=="table" and (AZS_ZONE.zname or AZS_ZONE.zone)
+ if not FieldKit.rebornLegacyFixture then zone=FieldKitReborn.ZoneName() end
  if level==nil and FieldKitRebornDB.hideUnknownMode and not FieldKit.layoutEditing then f:Hide();return end
  local lines={zone or FieldKit_L("Zone not provided")}
  if level==nil then table.insert(lines,FieldKit_L("No difficulty data received."))

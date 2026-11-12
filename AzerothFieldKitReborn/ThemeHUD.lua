@@ -285,6 +285,7 @@ function H.ReferenceValues()
  local xp,xpn=FieldKit.Number(UnitXP("player")),FieldKit.Number(UnitXPMax("player"))
  if xp and xpn and xpn>0 then H.xp:SetMinMaxValues(0,xpn);H.xp:SetValue(xp);H.xpText:SetText("XP · "..math.floor(xp/xpn*100).."%");H.xpDetail="XP "..xp.." / "..xpn.." · "..math.max(0,xpn-xp).." "..FieldKit_L("remaining") else H.xp:SetValue(0);H.xpText:SetText("XP · ?");H.xpDetail=FieldKit_L("Native data unavailable") end
  local nativeZone=type(AZS_ZONE)=="table" and AZS_ZONE.zname;local key=type(AZS_ZONE)=="table" and AZS_ZONE.zone
+ if not FieldKit.rebornLegacyFixture then nativeZone=FieldKitReborn.ZoneName() end
  if type(nativeZone)~="string" or nativeZone=="" then nativeZone=FieldKitZoneRegistry[key or ""] and FieldKit_L(FieldKitZoneRegistry[key].name) or FieldKit_L("Zone not provided") end
  H.zone:SetText(FieldKitNative.Text(nativeZone));H.clock:SetText(FieldKitNative.Clock(FieldKitNative.Time()));local boss=FieldKitNativeTools.NextBoss();H.next:SetText(boss and boss.name.." · "..FieldKitNative.Clock(boss.left) or FieldKit_L("No upcoming boss"))
  for _,slot in ipairs(slots) do local b=FieldKitReborn.ActionButton(slot);H.Save(b)
@@ -338,6 +339,7 @@ function H.Update(variant,zone)
  local mapCaption=(complete and zone=="elwynn") or (alternative and zone=="naxx")
  Place(H.identity,"TOPLEFT",UIParent,"TOPLEFT",22,mapCaption and -272 or (alternative and -42 or -18))
  local nativeZone=type(AZS_ZONE)=="table" and AZS_ZONE.zname;local key=type(AZS_ZONE)=="table" and AZS_ZONE.zone
+ if not FieldKit.rebornLegacyFixture then nativeZone=FieldKitReborn.ZoneName() end
  if type(nativeZone)~="string" or nativeZone=="" then nativeZone=FieldKitZoneRegistry[key or ""] and FieldKit_L(FieldKitZoneRegistry[key].name) or FieldKit_L("Zone not provided") end
  H.zone:SetText(FieldKitNative.Text(nativeZone));FieldKit_Text(H.mode,(FieldKit.GetHeroicLabel() or FieldKit_L("Mode not provided")).."   ·   "..FieldKit_L("Game mode"))
  local time=FieldKitNative.Time();H.clock:SetText(FieldKitNative.Clock(time));local nextBoss=FieldKitNativeTools.NextBoss();H.next:SetText(nextBoss and nextBoss.name.." · "..FieldKitNative.Clock(nextBoss.left) or FieldKit_L("No upcoming boss"))

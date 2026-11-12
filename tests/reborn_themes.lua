@@ -31,5 +31,9 @@ for _,variant in ipairs({"minimal","complete","alternative"}) do
  assert(nativeState.clock==true and nativeState.meter==true and nativeState.build==true)
 end
 AZS_ZONE.zone="future-map";FieldKitRebornDB.zoneThemes=true;assert(C.Resolve()=="elwynn")
+AZS_ZONE={};AZS_RUN.ph="playing";assert(C.Resolve()=="elwynn","Reload before AZSZONE disabled the auto theme")
+GetRealZoneText=function() return "Zangarmarsh" end
+assert(FieldKitReborn.ZoneName()=="Zangarmarsh","World zone label unavailable after reload")
+AZS_RUN.ph="ready";assert(C.Resolve()=="elwynn","Reload during ready disabled the auto theme")
 AZS_RUN.ph=nil;assert(C.Resolve()==nil,"Auto theme must not activate outside a run")
 print("PASS Reborn themes on expansion maps: all three layouts, native action callbacks, native HUD suppression and full restoration")
