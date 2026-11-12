@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.4",
+  "version": "0.1.0-reborn.5",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Maintainer screenshots confirm themes and reborn.3 HUD render. Item/spell/enemy icons, six-spell plus Steed layout, integrated event currency, separate progress bar and minimap cleanup corrected in reborn.4; live visual acceptance pending."
+  "inGameTestScope": "User screenshots reproduce reborn.4 regressions. Reborn.5 fixes have production Lua fixtures and installed API execution; live visual acceptance pending. Agent observed an existing level-up screen without changing the ongoing run."
 }

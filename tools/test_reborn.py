@@ -21,6 +21,7 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_themes.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_hud_details.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_visual_integration.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_ready_hud.lua').read_text(encoding='utf8'))
     if a.game:
         l=runtime()
         l.execute('''
@@ -63,6 +64,20 @@ def main():
         rows,total,rate,known=FieldKitMeterLedger.Read("healing")
         assert(known and total==50)
         assert(FieldKitMeterLedger.Reset()==false)
+        AZS_RUN.ph="ready";AZS_ZONE.class="hunter"
+        AZS_SPELLS={{key="auto_shot",spell=75,rank=1},{key="aimed_shot",spell=19434,rank=1}}
+        FieldKitNative.Packet("AZSSPELLS");FieldKitLoadout.scanAt=0;FieldKitLoadout.Update()
+        assert(#FieldKitLoadout.spells==2,"Installed retained-run API lost ready spells")
+        local context=AZS_GetMeterContext()
+        local snapshot=AZS_GetMeterLoadout({apiVersion=1,runId=context.runId})
+        assert(snapshot and #snapshot.abilities==2,"Installed structured API was not exercised")
+        AZS_RUN.ph="playing"
+        AZS_UNITS={{kind="boss",id=1,name="Boss",hp=100,hpm=200,state=1}}
+        AZS_LAIRS={{state="awake",id=2,name="Guardian",hp=50,hpm=80}}
+        local units=FieldKitReborn.BossUnits()
+        assert(#AZS_UNITS==1 and #units==2 and units[2].kind=="guardian" and units[2].state==1)
+        assert(units[1].state==1 and units[2].hp==50)
+        AZS_LAIRS[1].state="asleep";units=FieldKitReborn.BossUnits();assert(units[2].state==0)
         for _,zone in ipairs(AZS_GEN.zones) do
           AZS_ZONE.zone=zone.key
           FieldKitRebornDB.zoneThemes=true;FieldKitRebornDB.zoneThemeMode="auto"

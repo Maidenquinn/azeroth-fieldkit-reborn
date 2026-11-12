@@ -1,4 +1,4 @@
-Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.4
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.5
 
 Client de reference: Reborn 0.6.1, inventorie le 12 novembre 2026.
 Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
@@ -21,11 +21,18 @@ Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
 12. Comparer les details natifs d'un sort avant/apres un bonus sans gain de rang.
 13. Verifier les couleurs de vie a 100/60/30/10 pour cent et le cadre de cible.
 14. Verifier les icones des bijoux de partie (sans confondre l'inventaire),
-    les six icones carrees et le Destrier/Maj dans le septieme emplacement.
+    exactement six sockets carres et le Destrier/Maj separe de la rangee.
 15. Verifier les bonbons dans la bande victims/or/cache et la jauge distincte
-    de progression sans decompte. Pas d'anneau Horde ou nom de zone en double.
+    de progression sans decompte. Jauge Horde dediee (0, puis proche du maximum),
+    sans anneau sur la minimap ni nom de zone en double.
 16. Verifier les icones d'ennemis observes, leur conservation apres la mort et
     leur remise a zero a la partie suivante. Une source non identifiee reste ?.
+
+17. Des la phase Bouge pour commencer, verifier les deux sorts de depart dans
+    la carte et le detail Spells, puis les mises a jour de rang/bonus.
+18. Verifier la hauteur des deux jauges sous le bandeau, sans carre dore geant.
+19. Combattre un gardien eveille : barre Chronicle et PV natifs, puis disparition
+    de sa barre au sommeil/despawn, sans le dupliquer dans AZS_UNITS.
 
 Les sauvegardes sont dans FieldKitRebornDB; FieldKitDB n'est jamais importe.
 Le catalogue de portraits de l'ancien jeu n'est pas une preuve pour Reborn.

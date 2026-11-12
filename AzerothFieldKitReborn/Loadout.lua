@@ -229,6 +229,26 @@ L.eventFrame:SetScript("OnEvent",function()
 end)
 L.RESCAN_GAP=1.5   -- shortest delay between two scans caused by changes
 L.IDLE_RESCAN=30   -- safety net: a full rescan at least this often, whatever happened (a missed event is repaired within it)
+-- The retained-run API includes the starting abilities during "ready". Keep
+-- the packet freshness fence: an API snapshot must never revive a prior run.
+function L.Learned()
+ if not N.Fresh("AZSSPELLS") then return {} end
+ local fallback=type(AZS_SPELLS)=="table" and AZS_SPELLS or {}
+ if FieldKit.rebornLegacyFixture or type(AZS_GetMeterContext)~="function" or type(AZS_GetMeterLoadout)~="function" then return fallback end
+ local ok,context=pcall(AZS_GetMeterContext)
+ if not ok or type(context)~="table" or type(context.runId)~="string" then return fallback end
+ local success,snapshot=pcall(AZS_GetMeterLoadout,{apiVersion=1,runId=context.runId,ownerId=context.localOwnerId})
+ if not success or type(snapshot)~="table" or type(snapshot.abilities)~="table" or type(snapshot.sources)~="table" then return fallback end
+ local out={}
+ for i=1,math.min(32,table.getn(snapshot.abilities)) do
+  local a=snapshot.abilities[i];local s=type(a)=="table" and snapshot.sources[a.sourceKey]
+  if type(a)=="table" and a.learned and type(s)=="table" and type(s.abilityKey)=="string" then
+   table.insert(out,{key=s.abilityKey,spell=s.spellIds and s.spellIds[1],rank=a.rank,
+    name=s.name,icon=type(s.icon)=="table" and s.icon.path})
+  end
+ end
+ return out
+end
 function L.Scan()
  -- Tooltip walks across the action bar are very expensive (spell book + up to 72 action slots + tooltips). Rescan only when
  -- something changed: first scan, run boundary, a different learned-spell packet, a native event (equipment, action bar, spells),
@@ -259,13 +279,22 @@ function L.Scan()
  -- abilities, racial ordering assumptions, or fabricated rank-one entries.
  local byTexture={}
  -- After a run boundary, Fresh("AZSSPELLS") is false until a new packet arrives.
- if N.Fresh("AZSSPELLS") and type(AZS_SPELLS)=="table" then
-  for i=1,math.min(32,table.getn(AZS_SPELLS)) do
-   local s=AZS_SPELLS[i];local rank=type(s)=="table" and FieldKit.Number(s.rank,nil,1,100000)
+ local learned=L.Learned()
+ if type(learned)=="table" then
+  for i=1,math.min(32,table.getn(learned)) do
+   local s=learned[i];local rank=type(s)=="table" and FieldKit.Number(s.rank,nil,1,100000)
    if rank and type(s.key)=="string" then
     local asset=FieldKitReborn.Spell(s.key) or book[L.Key(s.key)]
     if FieldKit.rebornLegacyFixture then asset=FieldKitSpellAssets[tonumber(s.spell)] or asset end
     local e={key=s.key,name=asset and asset.name or N.Text(s.key),icon=asset and asset.icon,rank=string.format(FieldKit_L("Rank %d"),rank),rankValue=rank,bonuses={},upgrades={}}
+    if not FieldKit.rebornLegacyFixture then
+     if type(s.name)=="string" then e.name=N.Text(s.name) end
+     e.icon=FieldKitReborn.Icon(s.icon) or e.icon
+     if type(GetSpellInfo)=="function" and tonumber(s.spell) then
+      local ok,name,_,icon=pcall(GetSpellInfo,tonumber(s.spell))
+      if ok then if type(name)=="string" then e.name=N.Text(name) end;e.icon=FieldKitReborn.Icon(icon) or e.icon end
+     end
+    end
     if not FieldKit.rebornLegacyFixture and N.Fresh("AZSSPELLTIP") and type(AZS_SPELLTIPS)=="table" then
      local text=L.Plain(AZS_SPELLTIPS[s.key],2048)
      if text and text~="" then e.nativeText=text end
@@ -400,7 +429,7 @@ function L.Render(frame)
 end
 function L.Update()
  if not FieldKitRebornDB then return end
- if not N.Active() then L.scanAt=0;L.scanned=nil;L.items={};L.spells={};L.icons={};L.contentKey=nil;return end
+ if not N.Active() and (FieldKit.rebornLegacyFixture or N.Read("AZS_GetPhase")~="ready") then L.scanAt=0;L.scanned=nil;L.items={};L.spells={};L.icons={};L.contentKey=nil;return end
  if L.serial~=N.serial then L.scanAt=0;L.scanned=nil;L.contentKey=nil;L.serial=N.serial end
  if L.Scan() and L.refresh then L.refresh() end
 end

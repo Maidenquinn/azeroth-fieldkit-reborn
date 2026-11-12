@@ -481,10 +481,11 @@ function R.Update(variant,zone)
   end
   R.portrait:Show()
  else R.portrait:Hide();R.portraitBack:Hide();R.portraitFrame:Hide() end
- for i=1,7 do
+ if not FieldKit.rebornLegacyFixture then FieldKitReborn.PrepareSixSlots(d) end
+ for i=1,(FieldKit.rebornLegacyFixture and 7 or 6) do
   local a=d.actions;local b=FieldKitReborn.ActionButton(slots[i]);if b then
    local redraw=b:GetParent()~=H.dock or b.referenceKey~=key or b.referenceSerial~=FieldKitNative.serial;local shown=b:IsShown()
-   b:SetParent(H.dock);b:SetAlpha(1);b:SetFrameStrata("HIGH");b:SetScale(1);b:ClearAllPoints();b:SetWidth(a[3]-8);b:SetHeight(a[3]-8);b:SetPoint("TOPLEFT",H.dock,"TOPLEFT",a[1]-d.rects.dock[1]+(i-1)*a[4]+4,d.rects.dock[2]-a[2]-4);
+   b:SetParent(H.dock);b:SetAlpha(1);b:SetFrameStrata("HIGH");b:SetScale(1);b:ClearAllPoints();b:SetWidth(a[3]-8);b:SetHeight(a[3]-8);b:SetPoint("TOPLEFT",H.dock,"TOPLEFT",a[1]-d.rects.dock[1]+(i-1)*a[4]+4+(FieldKit.rebornLegacyFixture and 0 or a[4]/2),d.rects.dock[2]-a[2]-4);
    local icon=b.icon or getglobal(b:GetName().."IconTexture") or getglobal(b:GetName().."Icon");if icon then H.Save(icon);icon:ClearAllPoints();icon:SetAllPoints(b) end;b:SetFrameLevel(H.dock:GetFrameLevel()+8)
    if redraw and shown then b:Hide();b:Show() end;b.referenceKey=key;b.referenceSerial=FieldKitNative.serial
    -- The approved socket supplies the border; the native 32px normal texture
@@ -496,6 +497,7 @@ function R.Update(variant,zone)
    if not FieldKit.rebornLegacyFixture then FieldKitReborn.SkinAction(b,slots[i]) end
   end
  end
+ if not FieldKit.rebornLegacyFixture then FieldKitReborn.PlaceSteed() end
  if d.rects.xpArt then R.Geometry(R.xpArt,d.rects.xpArt);R.Art(R.xpArt,"xpArt");R.xpArt:Show() else R.xpArt:Hide() end
  if d.integratedXP then R.Child(H.xpRoot,H.dock,d.xp) else R.Child(H.xpRoot,R.xpArt,d.xp) end;Blank(H.xpRoot)
  H.xpText:SetParent(H.xp);H.xpText:ClearAllPoints();H.xpText:SetPoint("CENTER",H.xp,"CENTER",0,0)

@@ -72,7 +72,9 @@ end
 -- Explicit dimensions avoid this client's custom-backdrop tiling/stretch quirks.
 function T.Update(frame)
  if not frame.fieldkitSkin then return end
- local w,h=frame:GetWidth(),frame:GetHeight()
+ -- Unresolved anchors may report zero during construction. Native texture
+ -- quads with a zero dimension can fall back to their intrinsic atlas size.
+ local w,h=math.max(3,frame:GetWidth()),math.max(3,frame:GetHeight())
  local skin=frame.fieldkitSkin
  local style=T.Style(frame)
  if skin.width==w and skin.height==h and skin.style==style then return end

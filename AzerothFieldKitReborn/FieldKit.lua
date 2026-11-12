@@ -722,10 +722,11 @@ local function UpdateBossFrame()
 		local phase = AZS_GetPhase()
 		if ( phase and phase ~= "ready" ) then
 			local awakeIds = AwakeGuardianIds()
+			local units = FieldKitReborn.BossUnits()
 
 			for pass = 1, 2 do
-				for i = 1, math.min(512,table.getn(AZS_UNITS)) do
-					local e = AZS_UNITS[i]
+				for i = 1, math.min(512,table.getn(units)) do
+					local e = units[i]
 					local kind = Field(e, "kind", 1)
 					local state = Field(e, "state", 6)
 					local wanted

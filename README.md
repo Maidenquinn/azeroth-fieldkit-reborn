@@ -1,7 +1,7 @@
 # Azeroth FieldKit Reborn
 
 Independent FieldKit adaptation for **Azeroth Survivors Reborn**, initially
-targeting client **0.6.1**. Version **0.1.0-reborn.4** is a development candidate.
+targeting client **0.6.1**. Version **0.1.0-reborn.5** is a development candidate.
 
 [Français](README.fr.md) · [Port audit](docs/REBORN_PORT.md) ·
 [Native acceptance recipe](docs/REBORN_ACCEPTANCE.txt) ·
@@ -56,3 +56,5 @@ from MASH by Malk. The original repository remains separately maintained and
 unchanged. History and credits are retained. Read [NOTICE](NOTICE.md) and
 [LICENSE](LICENSE.md); no new project-wide license or Reborn approval is asserted.
 Historical documents describe the original game unless explicitly headed Reborn.
+
+[Reborn API audit and HUD fixes](docs/REBORN_API_AUDIT.md) · [reborn.5 notes](docs/RELEASE_REBORN_0.1.0_5.md)

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.4",
+  "version": "0.1.0-reborn.5",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.4",
+    "version": "0.1.0-reborn.5",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,23 +29,28 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Maintainer screenshots confirm themes and reborn.3 HUD render. Item/spell/enemy icons, six-spell plus Steed layout, integrated event currency, separate progress bar and minimap cleanup corrected in reborn.4; live visual acceptance pending."
+    "inGameTestScope": "User screenshots reproduce reborn.4 regressions. Reborn.5 fixes have production Lua fixtures and installed API execution; live visual acceptance pending. Agent observed an existing level-up screen without changing the ongoing run."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "c34cce0ddc02f4cdd79993040e5d5cc4795d6818b9adb9f2f4d5f3bf261815c7"
+      "sha256": "5e42e4a35e346427e371d1d20f58f8542142a5587cbf1b57ca689fe3ac68426b"
     },
     "Reborn.lua": {
       "maxUpvalues": 2,
-      "functions": 16,
-      "sha256": "b41f838d866d4ac14644653b1c7fceb6b84e63ed4a5c5ddde4e4a1794c1ac7b7"
+      "functions": 17,
+      "sha256": "01ad1913bb62f054cad8b08ea3f7735edf014ca99bb052d9c01288e254db9b02"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
-      "functions": 13,
-      "sha256": "355a617eabac8c767552bf5686078838f82ab1d92cca75059ebd0160e62cd5cf"
+      "functions": 8,
+      "sha256": "2c3736d446231ecb16e437c7dd465654e04b4184cf546ea5a2d386a9ac1b0575"
+    },
+    "RebornHUD.lua": {
+      "maxUpvalues": 1,
+      "functions": 10,
+      "sha256": "b2b1bde8211087e92f67f24fd3c519ff1d2aee8b7374ad8495419da9f78c2f3a"
     },
     "Diagnostics.lua": {
       "maxUpvalues": 5,
@@ -80,7 +85,7 @@
     "Theme.lua": {
       "maxUpvalues": 1,
       "functions": 20,
-      "sha256": "efa31b10c0320094192de5e2bc2f12386585da9390689c3fea9b07fa7ab902a1"
+      "sha256": "9c2fbbe720a03ce63e3d4491b8c6cbbec484bd65720ac2733db21996bbd95b90"
     },
     "ZoneThemeRegistry.lua": {
       "maxUpvalues": 0,
@@ -184,8 +189,8 @@
     },
     "Loadout.lua": {
       "maxUpvalues": 2,
-      "functions": 28,
-      "sha256": "71467cca564e76b7aec4d3c8f26ea40e5c5159f0bb4952a5275170848ebf9fea"
+      "functions": 29,
+      "sha256": "931e7cffa6b1d4b7c7737b2951cf961ebbd1bf00c820b9ebab2acdf01855175e"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -220,7 +225,7 @@
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 189,
-      "sha256": "6381896ec818cb3010f824b268c3be87b1452b5a316ddd8b27779193f62d454c"
+      "sha256": "bfc7afb875f1ec9cb87b93e3265cb9ce824e048211ca036e1d893aca70664b9f"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -275,7 +280,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 181,
-      "sha256": "74b75ff594ea40f8b5112fbe3be763092468d9335e944119c5daad1f6bb80b5f"
+      "sha256": "e122aff1a07eca59c6e45b1fe9c69788dc0b20191437a7d31417e4ef71b1c92f"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
