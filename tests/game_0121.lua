@@ -1,6 +1,6 @@
 -- Contract tests based on the installed 0.121.0 client's exposed native strings.
 -- Synthetic inputs exercise actual UI and filter callbacks, not a live game run.
-FieldKitDB={}
+FieldKitRebornDB={}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")
 AZS_RUN.ph="playing";AZS_ZONE.heroic=5
 assert(FieldKit.GetHeroicLabel()=="Heroic V")
@@ -31,7 +31,7 @@ end
 assert(damage)
 
 -- Council: a final and a returning earlier boss coexist, independently of target.
-FieldKitDB.bossFrame=true;TARGET="Unrelated enemy"
+FieldKitRebornDB.bossFrame=true;TARGET="Unrelated enemy"
 AZS_UNITS={{kind="final",id=101,name="Zevrim Sabot-de-ronce",hp=100,hpm=100,state=0},
  {kind="boss",id=102,name="Brute gordunni",hp=80,hpm=100,state=0}}
 AZS_UNITS_UPDATED=NOW+2;update(FieldKitFrame,.3)
@@ -51,12 +51,12 @@ end
 local orb,en=plate("Explosive Orb");local orbfr,fr=plate("Orbe explosif");local mob,normal=plate("Ordinary mob")
 function WorldFrame:GetChildren() return orb,orbfr,mob end
 function WorldFrame:GetNumChildren() return 3 end
-FieldKitDB.hidePlates=true;FieldKitDB.hideUnknown=true;NAMEPLATES_ON=true
-FieldKitDB.known["Explosive Orb"]="normal";FieldKitDB.known["Orbe explosif"]="normal";FieldKitDB.known["Ordinary mob"]="normal"
+FieldKitRebornDB.hidePlates=true;FieldKitRebornDB.hideUnknown=true;NAMEPLATES_ON=true
+FieldKitRebornDB.known["Explosive Orb"]="normal";FieldKitRebornDB.known["Orbe explosif"]="normal";FieldKitRebornDB.known["Ordinary mob"]="normal"
 for i=1,5 do NOW=NOW+.3;update(FieldKitFrame,.3) end
 assert(en:GetAlpha()==1 and fr:GetAlpha()==1 and normal:GetAlpha()==0)
 assert(orb:GetParent()==UIParent and orbfr:GetParent()==UIParent)
 NAMEPLATES_ON=false;update(FieldKitFrame,.3)
 assert(en:GetAlpha()==0 and fr:GetAlpha()==0,"Respect the player's V-key state")
-FieldKitDB.hidePlates=false;update(FieldKitFrame,.3)
+FieldKitRebornDB.hidePlates=false;update(FieldKitFrame,.3)
 assert(orb:GetParent()==WorldFrame and orbfr:GetParent()==WorldFrame)

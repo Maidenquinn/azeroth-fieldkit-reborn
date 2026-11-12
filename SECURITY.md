@@ -9,7 +9,7 @@ independent security certification, a guarantee of no bugs or game approval.
 The hover card now follows HUD style/opacity. Native peer details remain limited,
 so 0.2.2-review.4 adds an explicitly opted-in PARTY-only snapshot protocol in
 PartySync.lua. Both players must enable it. Runtime.lua is the sole send boundary:
-fixed AFKDETAIL1 prefix, PARTY channel, printable packets up to 230 bytes and at
+fixed AFKRDETAIL1 prefix, PARTY channel, printable packets up to 230 bytes and at
 most four calls per second. Only own per-spell damage/DPS/share is shared on
 request. No chat text, positions, account information or saves are transmitted.
 Payloads are never evaluated as Lua. Peer caches are memory-only and reset on

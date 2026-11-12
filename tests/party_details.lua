@@ -7,7 +7,7 @@ for i=1,23 do table.insert(spells,{name="Actual spell "..i,dmg=2400-i*10,dps=240
 function AZS_GetMeter() return spells,123456,321 end
 AZS_PARTY={{name="Maiden",dmg=5000,dps=500,share=.8},{name="Denza",dmg=1000,dps=100,share=.2,top="Shadow Bolt",topdps=40}}
 function AZS_GetPartyMeter() return AZS_PARTY,6000,600 end
-FieldKitDB={partyMeter=true,cardOpacity=0}
+FieldKitRebornDB={partyMeter=true,cardOpacity=0}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")
 fire(FieldKitFrame,"CHAT_MSG_ADDON","AZSPARTY");update(FieldKitFrame,.3)
 local P,D=FieldKitCoop,FieldKitPartyDetails
@@ -24,7 +24,7 @@ assert(D.frame.rows[1].hitColumns[1]:GetText()=="2.4k")
 assert(D.hitCaptions[1]:IsShown() and not D.captions[1]:IsShown())
 assert(D.frame:GetWidth()>=640,"Own Max Hit breakdown needs a wide card")
 assert(D.frame.fieldkitSkin.base:GetAlpha()==0,"Hover ignored the selected HUD background opacity")
-FieldKitDB.cardStyle=2;FieldKitDB.cardOpacity=37;FieldKitTheme.Refresh()
+FieldKitRebornDB.cardStyle=2;FieldKitRebornDB.cardOpacity=37;FieldKitTheme.Refresh()
 assert(FieldKitTheme.Style(D.frame)==2 and D.frame.fieldkitSkin.base:GetAlpha()==.37)
 assert(D.frame.fieldkitSkin.parts[1].texture:GetHeight()==1)
 assert(not D.frame.fieldkitSkin.parts[5].texture:IsShown())
@@ -63,13 +63,13 @@ assert(D.hint:GetText()=="Allies: only their top spell is exposed. Full breakdow
 assert(not D.captions[1]:IsShown() and not D.captions[3]:IsShown())
 assert(not D.frame.rows[1].meterColumns[1]:IsShown() and not D.frame.rows[1].meterColumns[3]:IsShown())
 assert(not D.next:IsShown())
-FieldKitDB.partyDetailSync=true;FieldKitPartySync.Watch()
+FieldKitRebornDB.partyDetailSync=true;FieldKitPartySync.Watch()
 FieldKitPartySync.cache.Denza={rows={{name="His actual first spell",dmg=4321,dps=43.21,share=.75},{name="His other spell",dmg=1440,dps=14.4,share=.25}},damage=5761,dps=57.61,shared=true,received=GetTime()}
 D.Close();enter(peer)
 assert(D.data.shared and table.getn(D.data.rows)==2 and D.frame.rows[1].label:GetText()=="His actual first spell")
 assert(D.frame.rows[1].meterColumns[1]:GetText()=="4321" and D.frame.rows[1].meterColumns[2]:GetText()=="43 dps")
 assert(D.captions[1]:IsShown() and D.captions[3]:IsShown())
-FieldKitDB.partyDetailSync=false;FieldKitPartySync.Watch();D.Close();enter(peer)
+FieldKitRebornDB.partyDetailSync=false;FieldKitPartySync.Watch();D.Close();enter(peer)
 local created=table.getn(objects)
 D.Close();enter(own);D.Close();enter(peer)
 assert(table.getn(objects)==created,"Re-hover allocated another detail panel")

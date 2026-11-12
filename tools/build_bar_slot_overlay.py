@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 
 base=Path(__file__).resolve().parent.parent
-out=base/'AzerothFieldKit/media/ReferenceHUD'
+out=base/'AzerothFieldKitReborn/media/ReferenceHUD'
 src=Image.open(out/'elwynn_complete_vitality_1.tga').convert('RGBA')
 # crop box in art pixels (texture is the 360 x 135 art at 1:1): the slot with its ring and a margin
 X0,Y0,W,H=130,53,200,30

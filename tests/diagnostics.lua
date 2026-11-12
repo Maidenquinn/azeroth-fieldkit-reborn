@@ -6,7 +6,7 @@ local baseline=D.Snapshot()
 assert(baseline.frames==0 and baseline.counts.scan==0)
 update(FieldKitFrame,.05)
 assert(D.Snapshot().frames==0,"disabled diagnostics should record nothing")
-assert(FieldKitDB.diagnostics==nil,"diagnostics must not persist")
+assert(FieldKitRebornDB.diagnostics==nil,"diagnostics must not persist")
 local messages={}
 local original=DEFAULT_CHAT_FRAME.AddMessage
 DEFAULT_CHAT_FRAME.AddMessage=function(self,text) table.insert(messages,text) end
@@ -24,7 +24,7 @@ assert(D.frames==12,"invalid frame delta was recorded")
 local a,b,missing=D.Capabilities()
 assert(type(a)=="number" and b==12 and type(missing)=="table")
 assert(a+b-a==b)
-assert(FieldKitDB.diagnostics==nil)
+assert(FieldKitRebornDB.diagnostics==nil)
 local oldPhase=AZS_GetPhase
 AZS_GetPhase=nil
 local p,total=D.Capabilities()
@@ -39,14 +39,14 @@ assert(string.find(messages[table.getn(messages)],"snapshots=",1,true))
 local originalChat=ChatFrame1
 local state=D.Compatibility()
 assert(type(state.issues)=="table" and state.linked==true)
-local before=FieldKitDB.chatStyle
+local before=FieldKitRebornDB.chatStyle
 ChatFrame1=nil
 local absent=D.Compatibility()
 assert(not absent.chat and table.getn(absent.issues)>=1)
 ChatFrame1=originalChat
 SlashCmdList.FieldKit("diag compat")
 assert(string.find(messages[table.getn(messages)],"does not detect all addon conflicts",1,true))
-assert(FieldKitDB.chatStyle==before and FieldKitDB.diagnostics==nil)
+assert(FieldKitRebornDB.chatStyle==before and FieldKitRebornDB.diagnostics==nil)
 SlashCmdList.FieldKit("diag reset")
 assert(D.enabled and D.frames==0 and D.counts.scan==0)
 SlashCmdList.FieldKit("diag off")
@@ -70,7 +70,7 @@ do
  for i=1,30 do update(FieldKitFrame,.05) end
  for i,n in ipairs(names) do assert(getglobal(n[1])[n[2]]==original[i],n[1].."."..n[2].." untouched while OFF") end
  assert(D.frames==0 and KeyCount(D.ops)==0 and D.counts.scan==0,"nothing counted while OFF ("..D.frames..","..KeyCount(D.ops)..","..tostring(D.counts.scan)..")")
- local savedKeys=KeyCount(FieldKitDB)
+ local savedKeys=KeyCount(FieldKitRebornDB)
  local frames0=table.getn(objects)
  -- 2) ON: wrappers installed, nothing created per measurement, nothing persisted
  SlashCmdList.FieldKit("diag on")
@@ -140,7 +140,7 @@ do
  assert(table.getn(D.opOrder)==0,"no leftover counters after OFF")
  SlashCmdList.FieldKit("diag on");assert(table.getn(D.opOrder)<=D.targetCount+4,"counter list is bounded after 60 cycles ("..table.getn(D.opOrder)..")");SlashCmdList.FieldKit("diag off")
  assert(table.getn(objects)==frames0,"no frame or texture created by 60 on/off cycles")
- assert(KeyCount(FieldKitDB)==savedKeys and FieldKitDB.diagnostics==nil,"nothing written to the SavedVariables")
+ assert(KeyCount(FieldKitRebornDB)==savedKeys and FieldKitRebornDB.diagnostics==nil,"nothing written to the SavedVariables")
  -- 9) a replaced function is never clobbered by the restore
  SlashCmdList.FieldKit("diag on")
  local theirs=function() return "theirs" end

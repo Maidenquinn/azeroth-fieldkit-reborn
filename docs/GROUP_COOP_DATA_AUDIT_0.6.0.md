@@ -32,7 +32,7 @@ They prove a spell was used, never that it was selected or at which rank. They a
 ## 4. Communication between compatible addons
 
 `SendAddonMessage` (4 occurrences) and `CHAT_MSG_ADDON` (8) are in the executable, and PartySync.lua already implements an
-opt-in PARTY-only protocol (prefix `AFKDETAIL1`, versioned, rate-limited, validated, in-memory) for the meter breakdown.
+opt-in PARTY-only protocol (prefix `AFKRDETAIL1`, versioned, rate-limited, validated, in-memory) for the meter breakdown.
 `docs/PARTY_SYNC.md` states that **delivery between two real clients has never been confirmed** (`seen=0` is the expected
 failure signature, `/fieldkit sync` reports it). Therefore:
 

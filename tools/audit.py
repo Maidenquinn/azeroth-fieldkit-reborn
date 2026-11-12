@@ -3,8 +3,8 @@ This does not prove game-rule compliance or inspect the host client for malware.
 """
 from pathlib import Path
 import hashlib,json,re,struct
-base=Path(__file__).resolve().parent.parent;root=base/'AzerothFieldKit'
-toc=(root/'AzerothFieldKit.toc').read_text(encoding='utf8')
+base=Path(__file__).resolve().parent.parent;root=base/'AzerothFieldKitReborn'
+toc=(root/'AzerothFieldKitReborn.toc').read_text(encoding='utf8')
 version=next(s.split(':',1)[1].strip() for s in toc.splitlines() if s.startswith('## Version:'))
 publication=json.loads((base/'data/publication-status.json').read_text(encoding='utf8'))
 assert publication['version']==version,'Refresh publication metadata explicitly for this version'
@@ -33,7 +33,7 @@ for name in loaded:
  allowed={'SendAddonMessage','AZS_SetOnTopOfScreens'} if name=='Runtime.lua' else set()
  assert not identifiers&(forbidden-allowed),(name,identifiers&(forbidden-allowed))
  if name=='Runtime.lua':
-  assert 'pcall(SendAddonMessage,"AFKDETAIL1",payload,"PARTY")' in text,'Unexpected outbound transport boundary'
+  assert 'pcall(SendAddonMessage,"AFKRDETAIL1",payload,"PARTY")' in text,'Unexpected outbound transport boundary'
   assert len(re.findall(r'pcall\(SendAddonMessage\b',code))==1,'Unexpected additional send call'
  assert not re.search(r'\bAZS_\w+\s*=(?!=)',code),(name,'native AZS write')
  assert 'MASHDB' not in identifiers,(name,'old DB access')
@@ -47,7 +47,7 @@ for name in loaded:
   m=re.match(r'\s*(?:local )?function ([\w_.]+)\(',source)
   if m:
    functions.append({'name':m[1],'line':line})
-   index.append(f'- [{name}: {m[1]}](../AzerothFieldKit/{name}#L{line})')
+   index.append(f'- [{name}: {m[1]}](../AzerothFieldKitReborn/{name}#L{line})')
  files[name]={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'namedFunctions':functions,'literalEvents':events}
 media=json.loads((base/"data/theme-assets.json").read_text(encoding="utf8"))["files"]
 textures=[];portraits=0
@@ -83,7 +83,7 @@ report={'kind':'maintainer static inventory; not certification','candidate':vers
  'runtimeModules':len(loaded),'textureCount':len(textures),'forbiddenTokenGatePassed':True,
  'dynamicCombatEventNames':'See CombatText.lua events list; not all registrations are string literals.',
  'files':files,'textures':textures,'themeMedia':media,'inGameTest':False,'approval':('maintainer accepted for publication; not independently certified' if publication['maintainerAcceptedForPublication'] else 'development candidate; not accepted for publication'),'publication':publication,
- 'optionalPartyDetailTransport':{'defaultEnabled':False,'nativeCallBoundary':'Runtime.lua','prefix':'AFKDETAIL1','distribution':'PARTY','maxBytes':230,'maxCallsPerSecond':4,'liveCoopTransportConfirmed':False}}
+ 'optionalPartyDetailTransport':{'defaultEnabled':False,'nativeCallBoundary':'Runtime.lua','prefix':'AFKRDETAIL1','distribution':'PARTY','maxBytes':230,'maxCallsPerSecond':4,'liveCoopTransportConfirmed':False}}
 docs=base/'docs';docs.mkdir(exist_ok=True)
 (docs/'AUDIT_INVENTORY.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n',encoding='utf8',newline='\n')
 (docs/'CODE_INDEX.md').write_text('\n'.join(index)+'\n',encoding='utf8',newline='\n')

@@ -15,7 +15,7 @@ Observe *how often* existing work is scheduled and whether a fixed, read-only li
 - `/fieldkit diag off` — disable and clear counters.
 - `/fieldkit diag compat` — passive report of native chat method availability and linked left HUD root presence. It cannot prove addons are conflict-free.
 
-Diagnostics are disabled by default and are not persisted in FieldKitDB. The counters are in-memory only, have a fixed size and do not inspect players' data, messages or other addon frames. Reports are local chat messages only. There is no outbound traffic.
+Diagnostics are disabled by default and are not persisted in FieldKitRebornDB. The counters are in-memory only, have a fixed size and do not inspect players' data, messages or other addon frames. Reports are local chat messages only. There is no outbound traffic.
 
 ## Architecture and limitations
 

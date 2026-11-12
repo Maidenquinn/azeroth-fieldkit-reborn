@@ -1,18 +1,18 @@
 -- Offline protocol/security tests. An accepted native call is NOT a transport
 -- echo and must never be advertised as a received peer snapshot.
-FieldKitDB={partyDetailSync=false}
+FieldKitRebornDB={partyDetailSync=false}
 fire(FieldKitFrame,"VARIABLES_LOADED")
 local S=FieldKitPartySync
 local sends=0
 function UnitName(unit) return unit=="player" and "Maiden" or (unit=="party1" and "Denza") end
 function UnitExists(unit) return unit=="player" or unit=="party1" end
 function SendAddonMessage(prefix,body,channel)
- assert(prefix=="AFKDETAIL1" and channel=="PARTY" and string.len(body)<=230)
+ assert(prefix=="AFKRDETAIL1" and channel=="PARTY" and string.len(body)<=230)
  sends=sends+1
 end
 assert(not FieldKit.SendPartyDetail("Q:1-1:Denza:100") and sends==0)
 S.Request("Denza");S.Tick();assert(sends==0 and table.getn(S.queue)==0)
-FieldKitDB.partyDetailSync=true
+FieldKitRebornDB.partyDetailSync=true
 assert(not FieldKit.SendPartyDetail("X|arbitrary") and sends==0)
 assert(not FieldKit.SendPartyDetail("Q:\n") and sends==0)
 assert(not FieldKit.SendPartyDetail(string.rep("Q",231)) and sends==0)
@@ -42,16 +42,16 @@ assert(not S.Parse("100,10,1,129,0;"))
 assert(not S.Parse("100,10,1,1,0;Spell,10,1,.5,0;extra"))
 
 -- Wrong channel/sender/nonce and oversized messages cannot create cache entries.
-S.Receive("AFKDETAIL1","R:1-1:1:1:"..body,"WHISPER","Denza")
-S.Receive("AFKDETAIL1","R:1-1:1:1:bad","PARTY","Stranger")
-S.Receive("AFKDETAIL1","R:999-999:1:65:bad","PARTY","Denza")
+S.Receive("AFKRDETAIL1","R:1-1:1:1:"..body,"WHISPER","Denza")
+S.Receive("AFKRDETAIL1","R:1-1:1:1:bad","PARTY","Stranger")
+S.Receive("AFKRDETAIL1","R:999-999:1:65:bad","PARTY","Denza")
 assert(S.cache.Denza==nil)
 local pendingId=S.pending.Denza.id
 S.pending.Denza.at=GetTime()-11;S.requested.Denza=GetTime()-11
 S.Request("Denza");assert(S.pending.Denza.id==pendingId,"A refresh replaced an in-flight fragmented response")
 S.pending.Denza.at=GetTime()
 local queued=table.getn(S.queue)
-S.Receive("AFKDETAIL1","Q:1-100:Maiden:100","PARTY","Maiden")
+S.Receive("AFKRDETAIL1","Q:1-100:Maiden:100","PARTY","Maiden")
 assert(table.getn(S.queue)==queued,"Self echo caused an answer loop")
 -- Fragmentation, reverse order and exact large integer damage round-trip.
 local id=S.pending.Denza.id
@@ -59,15 +59,15 @@ local parts=math.ceil(string.len(body)/160)
 assert(parts<=64)
 for i=parts,1,-1 do
  NOW=NOW+.1
- S.Receive("AFKDETAIL1","R:"..id..":"..i..":"..parts..":"..string.sub(body,(i-1)*160+1,i*160),"PARTY","Denza")
+ S.Receive("AFKRDETAIL1","R:"..id..":"..i..":"..parts..":"..string.sub(body,(i-1)*160+1,i*160),"PARTY","Denza")
 end
 assert(S.completed==1 and S.cache.Denza.damage==123456789013 and S.cache.Denza.truncated)
 local completed=S.completed
-S.Receive("AFKDETAIL1","R:"..id..":1:1:old","PARTY","Denza")
+S.Receive("AFKRDETAIL1","R:"..id..":1:1:old","PARTY","Denza")
 assert(S.completed==completed,"A replay replaced the snapshot without a pending request")
 S.cache.Denza={received=GetTime(),rows={}};S.pending.Denza={at=GetTime(),id="1-2"}
 AZS_RUN.t=0;S.Watch();assert(S.cache.Denza==nil and S.pending.Denza==nil and table.getn(S.queue)==0)
-FieldKitDB.partyDetailSync=false;S.Watch()
+FieldKitRebornDB.partyDetailSync=false;S.Watch()
 assert(not FieldKit.SendPartyDetail("Q:1-4:Denza:0"))
 local exists,name=UnitExists,UnitName
 function UnitExists(unit) return unit=="player" or unit=="party1" or unit=="party2" end

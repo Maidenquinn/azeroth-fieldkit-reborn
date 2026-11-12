@@ -23,7 +23,7 @@ Saved preferences and run data formats are unchanged (V1/V2 roundtrip preserved)
 
 ## Update and evidence
 
-Download **AzerothFieldKit-0.3.4.zip** from Assets, not the Source code ZIP. Back up
+Download **AzerothFieldKitReborn-0.3.4.zip** from Assets, not the Source code ZIP. Back up
 and replace the existing FieldKit folder in the launched client's AddOns directory,
 keep your saved preferences and restart. Disable legacy MASH if still enabled.
 No external program or extra addon is required.

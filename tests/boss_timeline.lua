@@ -1,5 +1,5 @@
 -- Chronicle schedule timeline: markers from native upcoming list, clock HUD hide.
-FieldKitDB.bossTimeline=true
+FieldKitRebornDB.bossTimeline=true
 AZS_RUN={ph="playing",t=100}
 function AZS_GetPhase() return "playing" end
 function AZS_GetRunTime() return 100 end
@@ -25,7 +25,7 @@ AZS_RUN={ph="playing",t=500,nbn="Marez Cowl",nb=77}
 FieldKitBossTimeline.Update()
 assert(string.find(FieldKitBossTimelineFrame.nextLabel:GetText() or "","Marez",1,true),"endless next boss name")
 assert(FieldKitBossTimelineFrame.callout:GetText()=="1:17","endless next boss countdown")
-FieldKitDB.bossTimeline=false
+FieldKitRebornDB.bossTimeline=false
 FieldKitBossTimeline.Update()
 assert(not FieldKitBossTimelineFrame:IsShown())
 assert(hidden.clock==true,"clock restored when disabled")

@@ -1,6 +1,6 @@
 -- Runtime behavior and actual option callbacks, not copied implementation tests.
 local C=FieldKitCombat
-local savedX=FieldKitDB.combatTextX
+local savedX=FieldKitRebornDB.combatTextX
 local function visible()
  local result={}
  for i=1,table.getn(FieldKitCombatText.children) do
@@ -9,23 +9,23 @@ local function visible()
  return result
 end
 local function start()
- C.Clear();C.Preset("all");FieldKitDB.combatTextGroup=false;FieldKitDB.combatTextIgnore="";FieldKitDB.combatTextMin=0;FieldKitDB.combatTextHealMin=0
+ C.Clear();C.Preset("all");FieldKitRebornDB.combatTextGroup=false;FieldKitRebornDB.combatTextIgnore="";FieldKitRebornDB.combatTextMin=0;FieldKitRebornDB.combatTextHealMin=0
 end
 local function hit(message,ev) fire(FieldKitCombatText,ev or "CHAT_MSG_SPELL_SELF_DAMAGE",message);update(FieldKitCombatText,.06) end
 start();C.Event("crit").enabled=false
 hit("Your Backstab crits Wolf for 200.");assert(table.getn(visible())==0)
 hit("Your Backstab hits Wolf for 30.");assert(visible()[1].text=="Backstab 30")
-start();FieldKitDB.combatTextIgnore="  Backstab  \nRenew\nDodge Strike"
+start();FieldKitRebornDB.combatTextIgnore="  Backstab  \nRenew\nDodge Strike"
 hit("Your Backstab hits Wolf for 10.");assert(table.getn(visible())==0)
 hit("Your Dodge Strike misses Wolf.","CHAT_MSG_COMBAT_SELF_MISSES");assert(table.getn(visible())==0)
-start();FieldKitDB.combatTextIncoming=false
+start();FieldKitRebornDB.combatTextIncoming=false
 hit("Wolf's Fireball hits you for 30.","CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE");assert(table.getn(visible())==0)
-FieldKitDB.combatTextIncoming=true;hit("Wolf's Fireball hits you for 30.","CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE")
+FieldKitRebornDB.combatTextIncoming=true;hit("Wolf's Fireball hits you for 30.","CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE")
 assert(visible()[1].text=="Fireball 30")
-start();FieldKitDB.combatTextMin=50
+start();FieldKitRebornDB.combatTextMin=50
 hit("Your Backstab hits Wolf for 49.");assert(table.getn(visible())==0)
 hit("Your Backstab hits Wolf for 50.");assert(table.getn(visible())==1)
-start();FieldKitDB.combatTextHealMin=10
+start();FieldKitRebornDB.combatTextHealMin=10
 AZS_HEALING={{name="New Heal",dmg=100}};AZS_HEALING_UPDATED=101;update(FieldKitCombatText,.1)
 AZS_HEALING[1].dmg=109;AZS_HEALING_UPDATED=102;update(FieldKitCombatText,.1);assert(table.getn(visible())==0)
 AZS_HEALING[1].dmg=124;AZS_HEALING_UPDATED=103;update(FieldKitCombatText,.1);assert(visible()[1].text=="Heal: New Heal 15")
@@ -45,20 +45,20 @@ for i=1,table.getn(cases) do
  C.Clear();C.Event(cases[i][2]).enabled=false;hit(cases[i][1],"CHAT_MSG_COMBAT_SELF_MISSES");assert(table.getn(visible())==0)
 end
 start();hit("Your Backstab hits Wolf for 30. (10 blocked)");assert(table.getn(visible())==1 and visible()[1].text=="Backstab 30")
-start();FieldKitDB.combatTextGroup=true
+start();FieldKitRebornDB.combatTextGroup=true
 fire(FieldKitCombatText,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Backstab hits Wolf for 100.")
 C.Event("out").enabled=false;update(FieldKitCombatText,.4);assert(table.getn(visible())==0)
-start();FieldKitDB.combatTextSplit=true;FieldKitDB.combatTextX=200;FieldKitDB.combatTextIncomingX=-220
+start();FieldKitRebornDB.combatTextSplit=true;FieldKitRebornDB.combatTextX=200;FieldKitRebornDB.combatTextIncomingX=-220
 hit("Your Backstab hits Wolf for 100.");hit("Wolf hits you for 50.","CHAT_MSG_COMBAT_CREATURE_VS_SELF_HITS")
 local positions={};for _,s in ipairs(visible()) do positions[s.point[4]]=true end
 assert(positions[200] and positions[-220])
-start();FieldKitDB.combatTextFont=2;FieldKitDB.combatTextCritFont=4;FieldKitDB.combatTextCritSize=25
+start();FieldKitRebornDB.combatTextFont=2;FieldKitRebornDB.combatTextCritFont=4;FieldKitRebornDB.combatTextCritSize=25
 C.Event("crit").color={.2,.4,.6};hit("Your Backstab crits Wolf for 200.")
 local s=visible()[1];assert(s.fontPath=="Fonts\\SKURRI.TTF" and s.fontSize==25 and s.color[2]==.4)
-FieldKitDB.combatTextNames=false;FieldKitDB.combatTextOpacity=50;update(FieldKitCombatText,.06)
+FieldKitRebornDB.combatTextNames=false;FieldKitRebornDB.combatTextOpacity=50;update(FieldKitCombatText,.06)
 assert(s.text=="200" and s.alpha<=.5)
 C.Event("crit").size="31";update(FieldKitCombatText,.06);assert(s.fontSize==31)
-C.Clear();FieldKitDB.combatText=false;C.Preview("crit");update(FieldKitCombatText,.06)
+C.Clear();FieldKitRebornDB.combatText=false;C.Preview("crit");update(FieldKitCombatText,.06)
 assert(string.find(visible()[1].text,FieldKit_L("[Preview]"),1,true))
 update(FieldKitCombatText,6);assert(table.getn(visible())==0)
 -- Existing /mash entry point and all five subpages.
@@ -80,23 +80,23 @@ end
 click(button(editor,"Events"));editor.eventKind="out";editor.Refresh()
 click(widget("Catégorie à personnaliser"));click(widget("Catégorie à personnaliser").choiceButtons[2]);assert(editor.eventKind=="crit")
 local red=widget("Rouge");red:SetValue(51);this=red;red.scripts.OnValueChanged();assert(math.abs(C.Event("crit").color[1]-.2)<.001)
-editor.ignoreEdit:SetText("Backstab\nRenew");click(button(editor.pages[4],"Apply list"));assert(FieldKitDB.combatTextIgnore=="Backstab\nRenew")
+editor.ignoreEdit:SetText("Backstab\nRenew");click(button(editor.pages[4],"Apply list"));assert(FieldKitRebornDB.combatTextIgnore=="Backstab\nRenew")
 C.ShowAnchors();assert(FieldKitCombatAnchor1:IsShown() and FieldKitCombatAnchor2:IsShown())
 function FieldKitCombatAnchor1:GetCenter() return 650,450 end
-this=FieldKitCombatAnchor1;FieldKitCombatAnchor1.scripts.OnDragStop();assert(FieldKitDB.combatTextX==150 and FieldKitDB.combatTextY==50)
+this=FieldKitCombatAnchor1;FieldKitCombatAnchor1.scripts.OnDragStop();assert(FieldKitRebornDB.combatTextX==150 and FieldKitRebornDB.combatTextY==50)
 this=FieldKitPanel;FieldKitPanel.scripts.OnHide();assert(not FieldKitCombatAnchor1:IsShown())
 -- Persist event styles and ignored list without changing other modules' settings.
-FieldKitDB.combatTextX=savedX;FieldKitDB.uiPage="health";FieldKitDB.panelTab=3;FieldKitDB.panelSection="Health & buffs";FieldKitDB.combatText=true
-assert(FieldKitDB.moneyDockRepair==1 and FieldKitDB.guardianPins==false)
+FieldKitRebornDB.combatTextX=savedX;FieldKitRebornDB.uiPage="health";FieldKitRebornDB.panelTab=3;FieldKitRebornDB.panelSection="Health & buffs";FieldKitRebornDB.combatText=true
+assert(FieldKitRebornDB.moneyDockRepair==1 and FieldKitRebornDB.guardianPins==false)
 
-click(button(editor,"Essentials"));FieldKitDB.hideDamage=false;editor.Refresh()
+click(button(editor,"Essentials"));FieldKitRebornDB.hideDamage=false;editor.Refresh()
 local targetDamage=widget("Show target damage (game)")
 assert(targetDamage:GetChecked())
 click(button(editor.pages[7],"Utiliser seulement ce texte"))
-assert(FieldKitDB.combatText and FieldKitDB.hideDamage and FieldKitDB.showCrits==false)
+assert(FieldKitRebornDB.combatText and FieldKitRebornDB.hideDamage and FieldKitRebornDB.showCrits==false)
 assert(not targetDamage:GetChecked())
 
-FieldKitDB.showCrits=true;FieldKitDB.groupCrits=false
+FieldKitRebornDB.showCrits=true;FieldKitRebornDB.groupCrits=false
 fire(FieldKitFrame,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Backstab crits Wolf for 100.")
 update(FieldKitFrame,.1);assert(FieldKitLegacyCritFrame)
 FieldKit_UseCombatTextOnly();update(FieldKitFrame,.1)

@@ -1,133 +1,36 @@
-# Azeroth FieldKit
+# Azeroth FieldKit Reborn
 
-> **Mise à jour 0.4.0 :** interface bilingue, profils de combat et previews améliorées. [Notes de version](docs/RELEASE_0.4.0.md).
+Version indépendante de FieldKit pour **Azeroth Survivors Reborn 0.6.1**.
+Le candidat **0.1.0-reborn.1** adapte le HUD et les compteurs au nouveau client.
 
-> **Mise à jour 0.3.4 :** chronologie et cadres boss, suite de meters et
-> réglages clarifiés. Voir [notes de version](docs/RELEASE_0.3.4.md).
+[Audit du port](docs/REBORN_PORT.md) · [Recette en jeu](docs/REBORN_ACCEPTANCE.txt) ·
+[Téléchargements](https://github.com/Maidenquinn/azeroth-fieldkit-reborn/releases)
 
-> **Mise à jour 0.3.2 :** Accessoires/Sorts intégrés, multiplicateurs Difficulté,
-> cadres gardiens et polish HUD. Voir [notes de version](docs/RELEASE_0.3.2.md).
+Le contenu de partie vient des tables Reborn : sorts des nouvelles classes,
+bijoux de partie, boss, calendriers et cartes des extensions. Les thèmes illustrés
+restent ceux déjà disponibles ; les autres cartes utilisent le HUD générique.
+Les données non exposées restent inconnues : aucun soin reçu, checkpoint,
+multiplicateur ou portrait n'est inventé à partir de l'ancien jeu.
 
-Outils de combat et d’interface entièrement en jeu pour Azeroth Survivors.
-Maintenu par **Kevin Radlowski / Maidenhead**, dérivé de **MASH par Malk**.
+Décompresser le ZIP nommé `AzerothFieldKitReborn-*.zip` dans `Interface/AddOns` du
+client Reborn. Vérifier le chemin
+`AzerothFieldKitReborn/AzerothFieldKitReborn.toc`, activer l'addon ainsi que
+`AzerothSurvivorsAPI` fourni par le jeu, puis redémarrer. Ouvrir `/fieldkit`.
+Ne pas activer les deux éditions de FieldKit dans le même client : leurs noms
+de fenêtres et commandes restent communs pour la compatibilité du port.
 
-[English](README.md) · [Historique](CHANGELOG.md) · [Dossier de revue](docs/REVIEW.md)
+Les réglages sont dans **FieldKitRebornDB**, séparés de **FieldKitDB**. Aucun
+import automatique ni changement des sauvegardes de l'ancien jeu. Le partage
+optionnel entre joueurs utilise un protocole distinct et reste désactivé.
 
-## Version à utiliser
+Les tests hors jeu comprennent les vrais modules API du client installé et les
+métadonnées des 12 classes/241 sorts et 48 cartes. Ils ne prouvent pas le rendu,
+les performances d'une longue partie ou le réseau coop. Le statut du registre
+reste `untested` avant recette native. Une préversion GitHub est installable
+manuellement ; le lanceur attend une release éligible et l'index signé par les
+mainteneurs du jeu.
 
-- **Dernier paquet :** [0.4.0](https://github.com/Maidenquinn/azeroth-fieldkit/releases/tag/v0.4.0), interface bilingue et aperçus améliorés. [Notes de version](docs/RELEASE_0.4.0.md).
-- Publication validée par le mainteneur le 2 novembre 2026. Changements depuis
-  0.3.2 : suite de meters, chronologie/cadres boss et réglages plus clairs.
-  [Notes de version](docs/RELEASE_0.3.4.md). Préférences conservées.
-- Le 28 octobre 2026, le mainteneur a rapporté l’autorisation de publier l’addon
-  comme vérifié. Cette autorisation ne constitue pas une certification indépendante de ce
-  paquet et ne règle pas les droits hérités. Voir [publication](docs/PUBLICATION.md),
-  [crédits](NOTICE.md) et [licence](LICENSE.md).
-
-## Installation
-
-1. Sauvegardez le dossier FieldKit existant. Téléchargez le ZIP nommé de la version
-   dans **Assets** de la release, pas l’archive automatique des sources GitHub.
-2. Placez son dossier `AzerothFieldKit` dans les AddOns du **client réellement lancé**.
-   Vérifiez `AddOns/AzerothFieldKit/AzerothFieldKit.toc`, sans double dossier imbriqué.
-   Désactivez l’ancien MASH pour éviter les comportements en double.
-3. Activez FieldKit dans le sélecteur du client puis redémarrez le jeu.
-
-Téléchargez `AzerothFieldKit-0.4.0.zip` dans la release ci-dessus pour obtenir
-l’interface actuelle. Aucun programme externe ni addon compagnon n’est nécessaire. FieldKit
-n’importe pas automatiquement MASHDB et ne modifie pas vos sauvegardes de partie.
-
-## Prise en main
-
-Ouvrez `/fieldkit` ou cliquez sur sa boussole de minicarte. La langue se choisit dans
-**Interface**. Les noms de sorts et créatures restent dans la langue du jeu.
-
-Les fenêtres actives **se déplacent directement par défaut**. **Fenêtres → Disposition**
-permet de verrouiller leurs positions, grouper/séparer les cartes de gauche ou de
-droite et régler les dimensions d’une carte. Le verrouillage est conservé au
-rechargement. `/fieldkit lock`, `/fieldkit unlock` et le clic droit sur la boussole
-modifient le même choix sans ouvrir de panneau.
-
-**Aperçus** sert à organiser les cartes masquées et les zones de texte. Ce mode
-outrepasse temporairement le verrouillage ; Terminer rétablit votre préférence.
-
-**Vue d’ensemble → Affichage essentiel** affiche dégâts, antres, or et totaux du groupe,
-et masque statistiques, accessoires, mode et dégâts subis. Seule la visibilité change :
-positions, dimensions, style et autres addons sont conservés. **Annuler le préréglage**
-rétablit vos choix précédents jusqu’au prochain rechargement.
-
-## Où trouver les réglages
-
-- **Texte de combat :** un éditeur pour événements, filtres, polices, couleurs,
-  regroupement, animations, durée, zones et texte natif. Facultatif, sans MSBT externe.
-- **Vie et effets / Boss suivis / Alertes :** formats des PV, bouclier, effets,
-  portraits indépendants et alerte de vie basse. Le catalogue statique des portraits
-  ne garantit pas automatiquement les futures cartes ou apparences.
-- **Fenêtres → Affichage :** cartes visibles. Le compteur natif reste disponible ;
-  choisissez votre affichage préféré dans ses propres options pour éviter les doublons.
-- **Fenêtres → Disposition :** verrouillage, groupes et dimensions individuelles.
-  Les minima suivent la carte et ses lignes visibles. Agrandir augmente l’espacement,
-  pas la police ; une grande hauteur peut laisser de l’espace vide.
-- **Fenêtres → Apparence :** style Travaillé/Classique, opacité du fond du HUD et
-  colonnes dégâts/DPS/contribution. Paramètres et menus restent lisibles.
-- **Fenêtres → Coop / tests :** cartes passives facultatives, format des PV et partage
-  expérimental des sorts. Les cadres natifs restent interactifs par défaut. Les masquer
-  explicitement retire leurs interactions de ciblage, menus et effets jusqu’à restauration.
-- **Minicarte / Barres ennemies / Interface :** marqueurs indépendants des coffres et
-  antres, filtre facultatif, langue, caméra, barre compacte et copie locale du chat.
-
-Survolez un sort de votre compteur ou un joueur du compteur de groupe pour le détail.
-**Épingler** maintient le détail du même joueur pendant le défilement et les changements
-de classement. Détacher, Échap ou la croix le libère. Le détail se ferme lorsque son
-compteur source disparaît ou que la partie se termine.
-
-## Données et limites
-
-Les dégâts viennent des compteurs natifs, jamais du DPS multiplié par le temps.
-Les dégâts subis peuvent inclure un reste **Non attribués (total natif)**. Une valeur
-manquante reste inconnue. Un total de soins ne prouve pas chaque tick individuel.
-
-Le client fournit les totaux du groupe et au plus le meilleur sort allié. Le partage
-expérimental est **désactivé par défaut**. Les deux joueurs doivent l’activer ; seuls
-leurs propres compteurs de sorts sont envoyés sur demande, par messages PARTY bornés
-`AFKDETAIL1`. Le transport en coop réelle reste **non confirmé**. L’état indique les
-relevés reçus récemment ; un appel d’envoi réussi ne prouve pas la réception.
-Voir [protocole et limites](docs/PARTY_SYNC.md).
-
-La carte du mode reste compacte et se masque par défaut si la difficulté native manque.
-La carte Mode affiche les **multiplicateurs de l’écran Difficulté**, pas des mesures de combat
-ni des multiplicateurs mesurés en direct. Aucun affixe actif, marque ou étoile n’est
-inventé. Les runes au sol ne sont pas suivies ; les antres ne donnent pas la position
-mobile des gardiens.
-
-## Commandes et confidentialité
-
-- `/fieldkit`, `/fieldkitcombat` : paramètres et éditeur de combat.
-- `/fieldkit lock`, `/fieldkit unlock` : verrouillage persistant sans panneau.
-- `/fieldkit money` : rattacher la barre d’or/prix du coffre aux sorts.
-- `/fieldkit coop`, `/fieldkit sync` : diagnostic local de coop.
-- `/fieldkitlog on`, `off`, `clear` : copie facultative du chat en mémoire. Elle peut
-  contenir des messages privés ; désactiver efface le tampon. Rien n’est sauvegardé
-  ni transmis par cette fonction.
-
-Aucun code téléchargé n’est exécuté. Les écritures natives sont limitées aux effets
-visuels documentés et aux actions facultatives de la barre. Certaines CVars peuvent
-persister après désactivation : rétablissez-les dans le jeu si nécessaire.
-Voir [effets natifs](docs/API_SURFACE.md), [sécurité](SECURITY.md) et les conflits possibles.
-
-## Vérification et contribution
-
-Les tests hors jeu couvrent Lua 5.0.3/5.1, les upvalues, les préférences invalides,
-la persistance, les sources natives, les déplacements et les replis coop. Ils ne
-certifient ni le rendu en jeu, ni les performances, ni la livraison des messages.
-
-```text
-python tools/audit.py
-python tools/verify.py --lua50 CHEMIN_LUA_5_0_3
-python tools/package.py
-```
-
-Le paquet exige des sources commitées et des preuves de validation à jour.
-Voir [contribuer](CONTRIBUTING.md), [guide du code](docs/CODE_GUIDE.md),
-[tests](docs/TESTING.md) et [validation de la candidate](docs/UX_SIMPLIFICATION.md).
-Utilisez cette liste pour les retours après mise à jour. Les tests hors jeu ne prouvent ni le rendu ni le transport coop réels.
+Le projet original [azeroth-fieldkit](https://github.com/Maidenquinn/azeroth-fieldkit)
+reste indépendant. Crédits : Kevin Radlowski / Maidenhead, MASH par Malk.
+Les [notices](NOTICE.md) et le [statut des droits](LICENSE.md) sont conservés.
+Les anciens documents du dépôt concernent l'ancien jeu sauf mention Reborn.

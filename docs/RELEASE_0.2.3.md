@@ -30,7 +30,7 @@ the GitHub prerelease flag is retained. Credit to **Malk**, creator of MASH.
 
 ## Update
 
-Download **AzerothFieldKit-0.2.3.zip** from Assets, not the automatic Source code ZIP.
+Download **AzerothFieldKitReborn-0.2.3.zip** from Assets, not the automatic Source code ZIP.
 Back up the existing addon folder, then replace it in the AddOns directory of the
 client you actually launch. Keep your saved preferences. Restart the game and open
 `/fieldkit`. Disable legacy MASH to avoid competing replacements.

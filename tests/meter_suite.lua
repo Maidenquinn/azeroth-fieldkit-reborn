@@ -1,5 +1,5 @@
 -- Meter ledger hit book + suite view switching (no native snapshot required).
-FieldKitDB.meterFrame=true;FieldKitDB.meterTabs=true;FieldKitDB.meterSpellTips=true
+FieldKitRebornDB.meterFrame=true;FieldKitRebornDB.meterTabs=true;FieldKitRebornDB.meterSpellTips=true
 FieldKitMeterLedger.ClearHits()
 FieldKitMeterLedger.NoteHit("Whirlwind",100,false,12,"Interface\\Icons\\Ability_Whirlwind")
 FieldKitMeterLedger.NoteHit("Whirlwind",400,true,12,"Interface\\Icons\\Ability_Whirlwind")
@@ -22,13 +22,13 @@ FieldKitMeterLedger.ParseChat("Your Execute crits Razzashi Raptor for 1171.")
 local tip=FieldKitMeterLedger.Stats("Execute")
 assert(tip.hits==2 and tip.crits==1 and tip.maxCrit==1171 and tip.critPct==50)
 FieldKitMeterSuite.SetView("kills")
-assert(FieldKitDB.meterViewKey=="kills")
+assert(FieldKitRebornDB.meterViewKey=="kills")
 FieldKitMeterSuite.SetView("damage")
-assert(FieldKitDB.meterViewKey=="damage")
+assert(FieldKitRebornDB.meterViewKey=="damage")
 FieldKitMeterSuite.SetDetached("healing",true)
-assert(FieldKitDB.meterDetach_healing==true)
+assert(FieldKitRebornDB.meterDetach_healing==true)
 FieldKitMeterSuite.SetDetached("healing",false)
-assert(not FieldKitDB.meterDetach_healing)
+assert(not FieldKitRebornDB.meterDetach_healing)
 FieldKitMeterLedger.Reset()
 st=FieldKitMeterLedger.Stats("Whirlwind")
 assert(not st,"reset clears hit books")
@@ -40,8 +40,8 @@ assert(sum==1500 and tdps==15,"taken total dps")
 assert(taken[1].dps==10 and taken[2].dps==5,"per-source taken dps")
 AZS_GetRunTime=nil;AZS_TAKEN=nil
 -- Column sort + hide row (total unchanged)
-FieldKitDB.meterHiddenRows={}
-FieldKitDB.meterSortKey="name";FieldKitDB.meterSortAsc=true
+FieldKitRebornDB.meterHiddenRows={}
+FieldKitRebornDB.meterSortKey="name";FieldKitRebornDB.meterSortAsc=true
 FieldKitMeterLedger.ClearHits()
 FieldKitMeterLedger.NoteKill("Zebra");FieldKitMeterLedger.NoteKill("Alpha")
 local sorted=FieldKitMeterLedger.Read("kills")
@@ -52,9 +52,9 @@ local shown,totalAfter=FieldKitMeterLedger.Read("kills")
 assert(table.getn(shown)==1 and shown[1].name=="Zebra","hidden row omitted")
 assert(totalAfter==totalBefore,"hide keeps total")
 FieldKitMeterLedger.ClearHidden("kills")
-FieldKitDB.meterSortKey="dmg";FieldKitDB.meterSortAsc=false
+FieldKitRebornDB.meterSortKey="dmg";FieldKitRebornDB.meterSortAsc=false
 -- Healing perspective flag reaches snapshot query
-FieldKitDB.meterHealDone=true
+FieldKitRebornDB.meterHealDone=true
 local seenPersp
 AZS_GetMeterContext=function() return {runId="r1"} end
 AZS_GetMeterSnapshot=function(q)
@@ -63,12 +63,12 @@ AZS_GetMeterSnapshot=function(q)
 end
 FieldKitMeterLedger.Read("healing")
 assert(seenPersp=="performed","heal done perspective")
-FieldKitDB.meterHealDone=false
+FieldKitRebornDB.meterHealDone=false
 FieldKitMeterLedger.Read("healing")
 assert(seenPersp=="received","heal received perspective")
 AZS_GetMeterContext=nil;AZS_GetMeterSnapshot=nil
 -- Party drill-down owner scope
-FieldKitDB.meterPartyOwner="ally-1"
+FieldKitRebornDB.meterPartyOwner="ally-1"
 local seenScope,seenOwner
 AZS_GetMeterContext=function() return {runId="r1"} end
 AZS_GetMeterSnapshot=function(q)
@@ -77,7 +77,7 @@ AZS_GetMeterSnapshot=function(q)
 end
 FieldKitMeterLedger.Read("party")
 assert(seenScope=="owner" and seenOwner=="ally-1","party owner drill")
-FieldKitDB.meterPartyOwner=nil
+FieldKitRebornDB.meterPartyOwner=nil
 AZS_GetMeterContext=nil;AZS_GetMeterSnapshot=nil
 -- Pet / DoT combat-log parsing
 FieldKitMeterLedger.ClearHits()

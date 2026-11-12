@@ -1,0 +1,22 @@
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.1
+
+Client de reference: Reborn 0.6.1, inventorie le 12 novembre 2026.
+Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
+
+1. Activer AzerothSurvivorsAPI et AzerothFieldKitReborn. Ouvrir /fieldkit.
+2. Verifier les langues FR/EN, les themes et le retour au HUD natif.
+3. Jouer une carte de chaque extension avec une classe classique puis une
+   classe ajoutee (moine, chevalier de la mort ou chasseur de demons).
+4. Verifier sorts appris, rangs, bijoux de partie, boss et calendrier natif.
+5. Comparer degats/soins effectues avec le compteur natif. Les soins recus,
+   checkpoints et fenetres recentes non exposes restent indisponibles.
+6. Verifier les reperes coffres/tanieres, projections monde et textes de combat.
+7. Recommencer la meme carte: aucun ancien compteur de coups ne doit rester.
+8. En coop, cliquer chaque joueur apres inversion du classement et verifier
+   son detail. Tester separement la reception du partage optionnel.
+9. Tester les choix de niveau, mort, victoire, hub, sauvegarde et redemarrage.
+10. Relever les erreurs Lua et les ralentissements pendant une partie longue.
+
+Les sauvegardes sont dans FieldKitRebornDB; FieldKitDB n'est jamais importe.
+Le catalogue de portraits de l'ancien jeu n'est pas une preuve pour Reborn.
+Une icone inconnue est normale si aucune apparence native n'est identifiee.

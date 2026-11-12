@@ -18,7 +18,7 @@ This update focuses on the game's native chat and smoother interface customizati
 
 **Note:** Existing chat lines can only be recolored when FieldKit can safely recover their full contents. Older untracked messages are deliberately left alone.
 
-**Install:** download AzerothFieldKit-0.4.1.zip from the release Assets, replace the addon folder and restart the game. Your settings are preserved; back up SavedVariables first.
+**Install:** download AzerothFieldKitReborn-0.4.1.zip from the release Assets, replace the addon folder and restart the game. Your settings are preserved; back up SavedVariables first.
 
 Maintained derivative of MASH by Malk.
 

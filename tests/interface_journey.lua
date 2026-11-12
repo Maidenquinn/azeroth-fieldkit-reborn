@@ -10,14 +10,14 @@ local function check(label)
  error(label)
 end
 local function choose(c,value) click(c);click(c.choiceButtons[value]) end
-local savedMode=FieldKitDB.playerHealthMode
-U.Select("home");click(U.homeCards[2].open);assert(FieldKitDB.uiPage=="health")
+local savedMode=FieldKitRebornDB.playerHealthMode
+U.Select("home");click(U.homeCards[2].open);assert(FieldKitRebornDB.uiPage=="health")
 local health=page("health")
 choose(health.flow[3].frame.children[2],3)
-assert(FieldKitDB.playerHealthMode==3)
+assert(FieldKitRebornDB.playerHealthMode==3)
 choose(health.flow[3].frame.children[2],2)
-assert(FieldKitDB.playerHealthMode==2)
-FieldKitDB.playerHealthMode=savedMode
+assert(FieldKitRebornDB.playerHealthMode==2)
+FieldKitRebornDB.playerHealthMode=savedMode
 
 -- Reading, translating and resizing must not write native settings or reload.
 local oldReload,oldCVar,oldHud=ReloadUI,SetCVar,AZS_SetHudShown
@@ -25,13 +25,13 @@ local reloads,writes=0,0
 ReloadUI=function() reloads=reloads+1 end
 SetCVar=function() writes=writes+1 end
 AZS_SetHudShown=function() writes=writes+1 end
-local compact=FieldKitDB.compactBar
+local compact=FieldKitRebornDB.compactBar
 U.Select("interface");local control=check("Compact action bar")
 control:SetChecked(not compact);click(control)
 assert(reloads==0 and U.reloadNeeded)
 click(U.reload);assert(reloads==1)
 control:SetChecked(compact);click(control);assert(not U.reloadNeeded)
-local language=FieldKitDB.language
+local language=FieldKitRebornDB.language
 FieldKit_SetLanguage("en");FieldKit_SetLanguage("fr");FieldKit_SetLanguage(language)
 local total=table.getn(objects);local sw,sh=UIParent.width,UIParent.height
 UIParent.width=800;UIParent.height=600
@@ -53,15 +53,15 @@ click(U.move);assert(FieldKit.layoutEditing and not U.frame:IsShown() and U.dock
 click(U.done);assert(not FieldKit.layoutEditing and U.frame:IsShown() and not U.dock:IsShown())
 
 -- Reset/Undo restores the exact coordinates and detached-money preference.
-local previous=FieldKitDB.pos.FieldKitStatsFrame;local detached=FieldKitDB.moneyDetached
-FieldKitDB.pos.FieldKitStatsFrame={123,77};FieldKitDB.moneyDetached=true
-click(U.reset);assert(U.undoPositions and FieldKitDB.pos.FieldKitStatsFrame[1]~=123)
-click(U.undo);assert(FieldKitDB.pos.FieldKitStatsFrame[1]==123 and FieldKitDB.pos.FieldKitStatsFrame[2]==77)
-assert(FieldKitDB.moneyDetached==true and not U.undoPositions)
-FieldKitDB.pos.FieldKitStatsFrame=previous;FieldKitDB.moneyDetached=detached;U.context.positions()
+local previous=FieldKitRebornDB.pos.FieldKitStatsFrame;local detached=FieldKitRebornDB.moneyDetached
+FieldKitRebornDB.pos.FieldKitStatsFrame={123,77};FieldKitRebornDB.moneyDetached=true
+click(U.reset);assert(U.undoPositions and FieldKitRebornDB.pos.FieldKitStatsFrame[1]~=123)
+click(U.undo);assert(FieldKitRebornDB.pos.FieldKitStatsFrame[1]==123 and FieldKitRebornDB.pos.FieldKitStatsFrame[2]==77)
+assert(FieldKitRebornDB.moneyDetached==true and not U.undoPositions)
+FieldKitRebornDB.pos.FieldKitStatsFrame=previous;FieldKitRebornDB.moneyDetached=detached;U.context.positions()
 
 -- Gold strip can be disabled independently of statistics and remain hidden on ticks.
-local money=FieldKitDB.moneyFrame
+local money=FieldKitRebornDB.moneyFrame
 local moneyControl=check("Gold and chest price");moneyControl:SetChecked(false);click(moneyControl)
 update(FieldKitFrame,.4);assert(not FieldKitMoneyFrame:IsShown())
 moneyControl:SetChecked(money);click(moneyControl)

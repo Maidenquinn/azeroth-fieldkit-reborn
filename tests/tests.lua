@@ -3,7 +3,7 @@ string.match=nil;string.gmatch=nil
 function SetPortraitTexture() error("Forbidden target-bound portrait") end
 -- Every tab callback must open exactly its own page, including after repeated use.
 for i=1,table.getn(FieldKitPanel.tabs) do
- click(FieldKitPanel.tabs[i]);assert(FieldKitDB.panelTab==i)
+ click(FieldKitPanel.tabs[i]);assert(FieldKitRebornDB.panelTab==i)
  for j=1,table.getn(FieldKitPanel.tabs) do assert(FieldKitPanel.tabs[j].page:IsShown()==(i==j)) end
 end
 local namepaths={
@@ -14,13 +14,13 @@ for i=1,table.getn(namepaths) do
  for _,target in ipairs({false,"Young Wolf","Another enemy",namepaths[i][1],false}) do
   TARGET=target or nil
   FieldKit_Portraits.Apply(FieldKitBossFrame1,AZS_UNITS[1].name,"guardian",5001)
-  assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKit\\Portraits\\"..namepaths[i][2]..".tga")
+  assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKitReborn\\Portraits\\"..namepaths[i][2]..".tga")
  end
 end
 AZS_UNITS[2]={name=AZS_UNITS[1].name,id=5002}
 FieldKit_Portraits.Apply(FieldKitBossFrame1,AZS_UNITS[1].name,"guardian",5001)
 FieldKit_Portraits.Apply(FieldKitBossFrame2,AZS_UNITS[1].name,"guardian",5002)
-assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKit\\Portraits\\zevrim.tga")
+assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKitReborn\\Portraits\\zevrim.tga")
 assert(FieldKitBossFrame2.portrait.texture==FieldKitBossFrame1.portrait.texture)
 assert(FieldKitBossFrame1.mashPortraitIdentity~=FieldKitBossFrame2.mashPortraitIdentity)
 AZS_UNITS[1].displayId=999
@@ -35,18 +35,18 @@ assert(FieldKit_FormatHealth(6705,12200,2)=="55%")
 assert(FieldKit_FormatHealth(6705,12200,3)=="6705 / 12200 (55%)")
 assert(FieldKit_FormatHealth(nil,0,3)=="0 / 0 (0%)")
 -- Saved options must survive reopening and reinitialization.
-FieldKitDB.playerHealthMode=3;FieldKitDB.targetHealthMode=2;FieldKitDB.combatTextX=-123
+FieldKitRebornDB.playerHealthMode=3;FieldKitRebornDB.targetHealthMode=2;FieldKitRebornDB.combatTextX=-123
 SlashCmdList.FieldKit("");SlashCmdList.FieldKit("")
-assert(FieldKitDB.playerHealthMode==3 and FieldKitDB.targetHealthMode==2 and FieldKitDB.combatTextX==-123)
+assert(FieldKitRebornDB.playerHealthMode==3 and FieldKitRebornDB.targetHealthMode==2 and FieldKitRebornDB.combatTextX==-123)
 -- Collapse and expand all meter-style windows, then reload their persisted states.
 for _,f in ipairs({FieldKitMeterFrame,FieldKitTakenFrame,FieldKitLairFrame}) do
  assert(f and f.mashCollapseButton)
  click(f.mashCollapseButton);assert(f.mashCollapsed and f.height==24)
- assert(FieldKitDB.collapsedWindows[f.name])
+ assert(FieldKitRebornDB.collapsedWindows[f.name])
  click(f.mashCollapseButton);assert(not f.mashCollapsed and f.height>24)
 end
 -- Combat grouping uses skill + category, sums different amounts, and keeps crits apart.
-FieldKitDB.combatText=true;FieldKitDB.combatTextGroup=true;FieldKitDB.combatTextMin=0;FieldKitDB.combatTextMax=5
+FieldKitRebornDB.combatText=true;FieldKitRebornDB.combatTextGroup=true;FieldKitRebornDB.combatTextMin=0;FieldKitRebornDB.combatTextMax=5
 fire(FieldKitCombatText,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Backstab hits Wolf for 100.")
 fire(FieldKitCombatText,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Backstab hits Wolf for 200.")
 fire(FieldKitCombatText,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Backstab crits Wolf for 400.")
@@ -55,29 +55,29 @@ local texts={}
 for i=1,table.getn(FieldKitCombatText.children) do local s=FieldKitCombatText.children[i];if s:IsShown() then texts[s.text]=true end end
 assert(texts["Backstab 300 x2"] and texts["Backstab 400"])
 -- Burst saturation: bounds and nonoverlap, then a smooth rise and eventual fade/expiry.
-FieldKitDB.combatTextGroup=false
+FieldKitRebornDB.combatTextGroup=false
 for i=1,300 do fire(FieldKitCombatText,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Skill"..i.." hits Wolf for "..i..".") end
 update(FieldKitCombatText,.1)
 local visible={}
 for i=1,table.getn(FieldKitCombatText.children) do local s=FieldKitCombatText.children[i];if s:IsShown() then table.insert(visible,s) end end
 assert(table.getn(visible)==5)
 table.sort(visible,function(a,b) return a.point[5]<b.point[5] end)
-for i=2,5 do assert(visible[i].point[5]-visible[i-1].point[5]>=FieldKitDB.combatTextSpacing) end
+for i=2,5 do assert(visible[i].point[5]-visible[i-1].point[5]>=FieldKitRebornDB.combatTextSpacing) end
 local first=visible[1];local y=first.point[5];update(FieldKitCombatText,.2);assert(first.point[5]>y)
 update(FieldKitCombatText,1);assert(first.alpha<1 and first.alpha>0)
 update(FieldKitCombatText,1);for i=1,table.getn(FieldKitCombatText.children) do assert(not FieldKitCombatText.children[i]:IsShown()) end
 -- Disabling clears pending work, so no stale message can reappear.
-FieldKitDB.combatTextGroup=true;fire(FieldKitCombatText,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Backstab hits Wolf for 100.")
-FieldKitDB.combatText=false;update(FieldKitCombatText,.1);FieldKitDB.combatText=true;update(FieldKitCombatText,.3)
+FieldKitRebornDB.combatTextGroup=true;fire(FieldKitCombatText,"CHAT_MSG_SPELL_SELF_DAMAGE","Your Backstab hits Wolf for 100.")
+FieldKitRebornDB.combatText=false;update(FieldKitCombatText,.1);FieldKitRebornDB.combatText=true;update(FieldKitCombatText,.3)
 for i=1,table.getn(FieldKitCombatText.children) do assert(not FieldKitCombatText.children[i]:IsShown()) end
 -- Native healing totals establish a baseline, emit positive deltas only, and reset safely.
-FieldKitDB.combatTextGroup=false;FieldKitDB.combatTextHealing=true
+FieldKitRebornDB.combatTextGroup=false;FieldKitRebornDB.combatTextHealing=true
 AZS_HEALING={{name="Renew",dmg=100}};AZS_HEALING_UPDATED=1;update(FieldKitCombatText,.1)
 AZS_HEALING[1].dmg=170;AZS_HEALING_UPDATED=2;update(FieldKitCombatText,.1)
 local found=false
 for i=1,table.getn(FieldKitCombatText.children) do if FieldKitCombatText.children[i].text=="Heal: Renew 70" then found=true end end
 assert(found)
-FieldKitDB.combatText=true;FieldKitDB.combatTextGroup=false
+FieldKitRebornDB.combatText=true;FieldKitRebornDB.combatTextGroup=false
 fire(FieldKitCombatText,"CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE","Wolf suffers 30 Shadow damage from your Garrote.")
 fire(FieldKitCombatText,"CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE","You suffer 13 Fire damage from Wolf's Burn.")
 update(FieldKitCombatText,.1)
@@ -93,11 +93,11 @@ for _,f in ipairs({FieldKitStatsFrame,FieldKitGearFrame}) do
  click(f.mashCollapseButton);assert(f.height>23)
 end
 click(FieldKitMeterFrame.mashCollapseButton)
-FieldKitDB.statsCollapsed=true;FieldKitDB.gearCollapsed=true
-FieldKitDB.pos.FieldKitMeterFrame={99999,-99999}
-FieldKitDB.panelTab=4;FieldKitDB.bossHealthMode=3
+FieldKitRebornDB.statsCollapsed=true;FieldKitRebornDB.gearCollapsed=true
+FieldKitRebornDB.pos.FieldKitMeterFrame={99999,-99999}
+FieldKitRebornDB.panelTab=4;FieldKitRebornDB.bossHealthMode=3
 -- A phase transition within a run must preserve the healing baseline.
-FieldKitDB.combatText=true;FieldKitDB.combatTextGroup=false;FieldKitDB.combatTextHealing=true
+FieldKitRebornDB.combatText=true;FieldKitRebornDB.combatTextGroup=false;FieldKitRebornDB.combatTextHealing=true
 AZS_HEALING={{name="Renew",dmg=200}};AZS_HEALING_UPDATED=3;update(FieldKitCombatText,.1)
 AZS_RUN.ph="choosing";AZS_HEALING[1].dmg=210;AZS_HEALING_UPDATED=4;update(FieldKitCombatText,.1)
 local transitionHeal=false
@@ -113,7 +113,7 @@ AZS_UNITS={
 for _,target in ipairs({false,"Young Wolf","Brute gordunni","Another enemy",false}) do
  TARGET=target or nil
  fire(FieldKitFrame,"PLAYER_TARGET_CHANGED")
- assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKit\\Portraits\\gordunni.tga")
+ assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKitReborn\\Portraits\\gordunni.tga")
  assert(string.find(FieldKitBossFrame1.mashPortraitReason,"instances=2",1,true))
 end
 -- Both awake guardians share the verified appearance but preserve their own instance ids/HP.
@@ -151,7 +151,7 @@ for zone,names in pairs(FieldKit_PortraitCatalog) do
   TARGET="Unrelated creature"
   FieldKit_Portraits.Apply(FieldKitBossFrame1,name,"boss",10001)
   FieldKit_Portraits.Apply(FieldKitBossFrame2,name,"boss",10002)
-  assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKit\\Portraits\\"..data.key..".tga")
+  assert(FieldKitBossFrame1.portrait.texture=="Interface\\AddOns\\AzerothFieldKitReborn\\Portraits\\"..data.key..".tga")
   assert(FieldKitBossFrame2.portrait.texture==FieldKitBossFrame1.portrait.texture)
   assert(FieldKitBossFrame1.mashPortraitIdentity~=FieldKitBossFrame2.mashPortraitIdentity)
   TARGET=nil;FieldKit_Portraits.Apply(FieldKitBossFrame1,name,"boss",10001)

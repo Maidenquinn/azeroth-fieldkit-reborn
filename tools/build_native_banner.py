@@ -16,7 +16,7 @@ import numpy as np
 from PIL import Image
 
 base = Path(__file__).resolve().parent.parent
-out = base / 'AzerothFieldKit/media/ReferenceHUD'
+out = base / 'AzerothFieldKitReborn/media/ReferenceHUD'
 src = Image.open(out / 'elwynn_complete_Effects_1.tga').convert('RGBA')
 W0, H0 = 361, 116                      # the card art inside its 512 x 128 texture
 C = 25                                 # corner size

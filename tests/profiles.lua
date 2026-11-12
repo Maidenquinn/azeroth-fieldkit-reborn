@@ -2,9 +2,9 @@
 -- in-game metrics are deliberately shared. Test real live selection + undo.
 fire(FieldKitFrame,"VARIABLES_LOADED")
 local P=FieldKitProfiles
-assert(P and type(FieldKitDB.interfaceProfiles)=="table")
+assert(P and type(FieldKitRebornDB.interfaceProfiles)=="table")
 assert(not P.Load(1) and not P.Save(0) and not P.Save(4))
-local d=FieldKitDB
+local d=FieldKitRebornDB
 d.frameAnchors.FieldKitLeftStack={"TOPLEFT","TOPLEFT",125,-80}
 d.pos.FieldKitStatsFrame={-60,95}
 d.pos.FieldKitCollapseDock={-28,140}

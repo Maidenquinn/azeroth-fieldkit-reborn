@@ -16,8 +16,8 @@
 
 ## Install
 1. Close Azeroth Survivors.
-2. Back up the current `AzerothFieldKit` addon folder and `FieldKitDB` SavedVariables.
-3. Replace only the `AzerothFieldKit` folder in your game's `AddOns` directory with the folder from the release ZIP.
+2. Back up the current `AzerothFieldKitReborn` addon folder and `FieldKitRebornDB` SavedVariables.
+3. Replace only the `AzerothFieldKitReborn` folder in your game's `AddOns` directory with the folder from the release ZIP.
 4. Restart the game and open `/fieldkit`.
 
 Source: https://github.com/Maidenquinn/azeroth-fieldkit

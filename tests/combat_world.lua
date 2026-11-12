@@ -1,9 +1,9 @@
 -- World-anchored combat text follows Addon API version 1 (cursor + project + handler).
-FieldKitDB.combatText=true
-FieldKitDB.combatTextWorld=true
-FieldKitDB.combatTextOutgoing=true
-FieldKitDB.combatTextIncoming=true
-FieldKitDB.combatTextHealing=true
+FieldKitRebornDB.combatText=true
+FieldKitRebornDB.combatTextWorld=true
+FieldKitRebornDB.combatTextOutgoing=true
+FieldKitRebornDB.combatTextIncoming=true
+FieldKitRebornDB.combatTextHealing=true
 FieldKitCombat.Ensure()
 
 local cursor,stream="c0","s1"
@@ -78,6 +78,6 @@ AZS_GetCombatTextCapabilities=nil
 AZS_GetCombatTextEvents=nil
 AZS_ProjectCombatTextAnchors=nil
 AZS_RegisterCombatTextFrameHandler=nil
-FieldKitDB.combatTextWorld=false
+FieldKitRebornDB.combatTextWorld=false
 FieldKitCombat.Clear()
 print("combat_world: API v1 cursor/project/handler fixtures passed")

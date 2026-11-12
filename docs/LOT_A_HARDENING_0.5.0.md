@@ -3,7 +3,7 @@
 Baseline: v0.4.2 public release; alpha.12 accepted in-game. All hardening changes are on a draft branch, not released.
 
 ## Confirmed source-level observations
-- `Profiles.lua` stores three slots in `FieldKitDB.interfaceProfiles`, with flat `FieldKitDB` as the live renderer contract.
+- `Profiles.lua` stores three slots in `FieldKitRebornDB.interfaceProfiles`, with flat `FieldKitRebornDB` as the live renderer contract.
 - `P.Load` captures the outgoing state, autosaves the outgoing slot, applies the incoming snapshot, then refreshes the native HUD.
 - `P.Init` migrates legacy snapshots in place. Migrated schema-2 slots should not require a new baseline capture on each call.
 - Snapshot copy is bounded to 3,200 entries, depth 7 and 512 bytes per string; these limits protect memory but currently can silently omit unsupported values.
@@ -26,6 +26,6 @@ Baseline: v0.4.2 public release; alpha.12 accepted in-game. All hardening change
 ## Verification and acceptance
 - GitHub Actions: run the review-candidate workflow on the latest commit; require green before acceptance.
 - Lua: run `python tools/verify.py` and native Lua 5.0 compatibility fixture where available.
-- Game: back up `FieldKitDB`; test 1→2→3→1, Undo, rename, chat colors/size/history, HUD positions, logout/reload persistence, FR/EN, compact native bar limitation.
+- Game: back up `FieldKitRebornDB`; test 1→2→3→1, Undo, rename, chat colors/size/history, HUD positions, logout/reload persistence, FR/EN, compact native bar limitation.
 - Simulated failures must not be induced in a production SavedVariables file.
 - No merge, release, or claim of completed performance audit until all gates are passed.

@@ -2,7 +2,7 @@
 
 ## Root cause confirmed
 
-The alpha.1–alpha.4 `Profiles.lua` captured only 25 simple HUD flags plus four layout tables. All other values remained in the flat `FieldKitDB` and therefore leaked across profile switches. The old scheme also did not save edits to the outgoing active slot before switching.
+The alpha.1–alpha.4 `Profiles.lua` captured only 25 simple HUD flags plus four layout tables. All other values remained in the flat `FieldKitRebornDB` and therefore leaked across profile switches. The old scheme also did not save edits to the outgoing active slot before switching.
 
 ## Audit methodology
 
@@ -12,7 +12,7 @@ The source-of-truth now combines:
 - The dynamic defaults in `FieldKitCombat.defaults`, so future combat options are automatically scoped.
 - A bounded deep copy of 11 known nested settings maps.
 
-The new `tools/profile_scope_audit.py` is enforced by `tools/verify.py`. It currently classifies **136 declared preference fields**, **11 persisted preference tables** (counted within declared scope), and **16 explicitly shared or operational fields**. It scans all addon Lua modules and rejects newly referenced `FieldKitDB.<key>` or core `DB.<key>` fields until classified. Dynamic access via `FieldKitDB[key]` is covered through the defaults and explicit option lists. Static coverage is not a formal proof against every future use of arbitrary dynamic keys.
+The new `tools/profile_scope_audit.py` is enforced by `tools/verify.py`. It currently classifies **136 declared preference fields**, **11 persisted preference tables** (counted within declared scope), and **16 explicitly shared or operational fields**. It scans all addon Lua modules and rejects newly referenced `FieldKitRebornDB.<key>` or core `DB.<key>` fields until classified. Dynamic access via `FieldKitRebornDB[key]` is covered through the defaults and explicit option lists. Static coverage is not a formal proof against every future use of arbitrary dynamic keys.
 
 ## Per-profile settings
 
@@ -44,7 +44,7 @@ Likewise, native chat **message history**, the in-memory recovery journal, opt-i
 ## Migration and durability
 
 1. Existing alpha.1–alpha.4 slots retain their saved positions, sizes, opacity and other old fields.
-2. Newly supported settings are copied from the current user's flat `FieldKitDB` into each legacy slot. This preserves the initial appearance for existing users; the new preferences then diverge naturally when customized.
+2. Newly supported settings are copied from the current user's flat `FieldKitRebornDB` into each legacy slot. This preserves the initial appearance for existing users; the new preferences then diverge naturally when customized.
 3. New slots receive a deep copy with explicit nil markers, so a missing optional setting cannot inherit the preceding slot's value.
 4. Save-as selects the new profile editing context without overwriting the previous slot. When switching to another slot, all unsaved preference changes in the outgoing active slot are captured automatically.
 5. `PLAYER_LOGOUT` captures the final active profile configuration so a reload or exit persists edits. All flat settings continue to use the existing SavedVariables mechanism.

@@ -16,7 +16,7 @@ from PIL import Image
 from scipy import ndimage
 
 base = Path(__file__).resolve().parent.parent
-out = base / 'AzerothFieldKit/media/ReferenceHUD'
+out = base / 'AzerothFieldKitReborn/media/ReferenceHUD'
 S = 4
 DARK = np.array([32, 27, 7.]); GREEN = np.array([18, 40, 26.]); GOLD = np.array([198, 144, 62.])
 HI = np.array([240, 208, 128.]); LO = np.array([112, 85, 36.]); SHINE = np.array([245, 226, 157.])

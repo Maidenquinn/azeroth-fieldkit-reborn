@@ -1,5 +1,5 @@
 -- Synthetic visual fixtures must never leak into live gameplay or sharing state.
-FieldKitDB={meterFrame=false,takenFrame=false,partyMeter=false,partyCards=false,
+FieldKitRebornDB={meterFrame=false,takenFrame=false,partyMeter=false,partyCards=false,
  effectsFrame=false,reviveFrame=false,bossFrame=false,windowsLocked=true}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")
 local P,U=FieldKitPreview,FieldKitUI
@@ -12,18 +12,18 @@ AZS_SetOnTopOfScreens=function() writes=writes+1 end
 for i=1,table.getn(P.names) do
  P.Open(i);assert(P.mode=="inspect" and P.frames[i]:IsShown())
  assert(P.frames[i]~=getglobal(P.names[i]),"Preview reused a live frame")
- assert(not FieldKitDB.meterFrame and not FieldKitDB.partyCards and not FieldKitDB.bossFrame)
+ assert(not FieldKitRebornDB.meterFrame and not FieldKitRebornDB.partyCards and not FieldKitRebornDB.bossFrame)
 end
 assert(AZS_METER==meter and AZS_TAKEN==taken and FieldKitCoop.party==party and writes==0)
-P.Open(9);FieldKitDB.partyHealthMode=2;P.Refresh()
+P.Open(9);FieldKitRebornDB.partyHealthMode=2;P.Refresh()
 assert(P.frames[9].rows[1].value:GetText()=="55%")
-FieldKitDB.partyHealthMode=3;P.Refresh();assert(P.frames[9].rows[1].value:GetText()=="6705 / 12200 (55%)")
-P.Open(P.playerIndex);FieldKitDB.playerHealthMode=2;P.Refresh();assert(P.frames[P.playerIndex].hp:GetText()=="55%")
-P.Open(P.targetIndex);FieldKitDB.targetHealthMode=3;P.Refresh();assert(P.frames[P.targetIndex].hp:GetText()=="6705 / 12200 (55%)")
-P.Open(P.bossIndex);FieldKitDB.bossHealthMode=2;P.Refresh();assert(P.frames[P.bossIndex].hp:GetText()=="55%")
-P.Open(2);FieldKitDB.meterValues=3;P.Refresh()
+FieldKitRebornDB.partyHealthMode=3;P.Refresh();assert(P.frames[9].rows[1].value:GetText()=="6705 / 12200 (55%)")
+P.Open(P.playerIndex);FieldKitRebornDB.playerHealthMode=2;P.Refresh();assert(P.frames[P.playerIndex].hp:GetText()=="55%")
+P.Open(P.targetIndex);FieldKitRebornDB.targetHealthMode=3;P.Refresh();assert(P.frames[P.targetIndex].hp:GetText()=="6705 / 12200 (55%)")
+P.Open(P.bossIndex);FieldKitRebornDB.bossHealthMode=2;P.Refresh();assert(P.frames[P.bossIndex].hp:GetText()=="55%")
+P.Open(2);FieldKitRebornDB.meterValues=3;P.Refresh()
 assert(P.frames[2].rows[1].meterColumns[1]:GetText()=="42000")
-FieldKitDB.cardStyle=2;FieldKitDB.cardOpacity=18;FieldKitTheme.Refresh()
+FieldKitRebornDB.cardStyle=2;FieldKitRebornDB.cardOpacity=18;FieldKitTheme.Refresh()
 assert(FieldKitTheme.Style(P.frames[2])==2 and FieldKitTheme.Opacity(P.frames[2])==.18)
 assert(FieldKitTheme.Opacity(P.inspector)==1)
 FieldKit_SetLanguage("fr");P.Refresh();assert(P.frames[2].title:GetText()=="Aperçu")
@@ -32,24 +32,24 @@ local allocated=table.getn(objects)
 for i=1,30 do P.Refresh() end
 assert(table.getn(objects)==allocated,"Preview refresh allocated frames")
 -- A single explicit drag saves geometry under the live frame's name only.
-FieldKitDB.linkLeftCards=false;FieldKitHudStack.Apply()
+FieldKitRebornDB.linkLeftCards=false;FieldKitHudStack.Apply()
 U.SetLayoutEditing(true,false);P.Start(false)
 local f=P.frames[2];P.Drag(f,true);f:SetPoint("TOPRIGHT",UIParent,"TOPRIGHT",-2,-40);P.Drag(f,false)
-assert(FieldKitDB.frameAnchors.FieldKitMeterFrame[3]==-2)
-assert(not FieldKitDB.frameAnchors.FieldKitPreviewCard2)
-assert(FieldKitDB.windowsLocked,"Arrangement changed the saved lock")
-local anchor=FieldKitDB.frameAnchors.FieldKitMeterFrame
+assert(FieldKitRebornDB.frameAnchors.FieldKitMeterFrame[3]==-2)
+assert(not FieldKitRebornDB.frameAnchors.FieldKitPreviewCard2)
+assert(FieldKitRebornDB.windowsLocked,"Arrangement changed the saved lock")
+local anchor=FieldKitRebornDB.frameAnchors.FieldKitMeterFrame
 P.selected=3;P.Reset()
-assert(FieldKitDB.frameAnchors.FieldKitMeterFrame==anchor,"Reset affected an unrelated window")
+assert(FieldKitRebornDB.frameAnchors.FieldKitMeterFrame==anchor,"Reset affected an unrelated window")
 -- Disabled windows are selectable in global composition; linked examples don't overlap.
-P.included[9]=true;FieldKitDB.linkLeftCards=true;U.SetLayoutEditing(true,false)
+P.included[9]=true;FieldKitRebornDB.linkLeftCards=true;U.SetLayoutEditing(true,false)
 assert(P.frames[9]:IsShown() and P.frames[3]:IsShown())
 local _,root,_,_,y=P.frames[3]:GetPoint(1)
 assert(root==P.roots.FieldKitLeftStack and y<0)
 U.SetLayoutEditing(false,true)
 assert(not P.mode and not FieldKit.layoutEditing)
 for _,v in pairs(P.frames) do assert(not v:IsShown()) end
-assert(not FieldKitDB.meterFrame and not FieldKitDB.partyCards and writes==0)
+assert(not FieldKitRebornDB.meterFrame and not FieldKitRebornDB.partyCards and writes==0)
 -- Inspector selectors track resize selection without activating a module.
 P.Open(2);click(P.inspector.choice);click(P.inspector.choice.choiceButtons[3])
 assert(P.selected==3 and FieldKitCardLayout.selected==3)
@@ -64,7 +64,7 @@ P.selected=2;U.SetLayoutEditing(true,false);P.Start(false)
 local group=P.roots.FieldKitLeftStack
 P.Drag(P.frames[2],true);group:SetPoint("TOPLEFT",UIParent,"TOPLEFT",5,-22)
 U.SetLayoutEditing(false,true)
-assert(not group.moving and FieldKitDB.frameAnchors.FieldKitLeftStack[3]==5)
+assert(not group.moving and FieldKitRebornDB.frameAnchors.FieldKitLeftStack[3]==5)
 P.Open(14);P.inspector:Hide();P.inspector:GetScript("OnHide")()
 assert(not P.mode and not P.inspector:IsShown())
 -- Escape/close while dragging must stop, persist the deliberate move, then

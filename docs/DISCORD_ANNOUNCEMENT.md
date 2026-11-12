@@ -15,7 +15,7 @@ Copy the block contents, not the fences. Under 2,000 characters.
 • Effects window no longer sticks under the cursor while timers refresh.
 • Combat text can surface the game’s Show Target Damage switch.
 
-**Update:** download `AzerothFieldKit-0.3.4.zip` from Assets, replace the addon folder and restart. Layout and preferences are kept. No external program needed.
+**Update:** download `AzerothFieldKitReborn-0.3.4.zip` from Assets, replace the addon folder and restart. Layout and preferences are kept. No external program needed.
 
 Maintained fork of **MASH by Malk** — credit to him for the original addon. Published as a GitHub prerelease; feedback welcome!
 
@@ -26,6 +26,6 @@ Optional French follow-up (separate message if the channel allows):
 
 ```md
 # Azeroth FieldKit 0.3.4
-Compteur à onglets (rangs fusionnés), timeline Chroniques + cadres boss, réglages HUD découpés, correctif fenêtres Effets. ZIP `AzerothFieldKit-0.3.4.zip` — remplacer le dossier AddOns et redémarrer. Préférences conservées.
+Compteur à onglets (rangs fusionnés), timeline Chroniques + cadres boss, réglages HUD découpés, correctif fenêtres Effets. ZIP `AzerothFieldKitReborn-0.3.4.zip` — remplacer le dossier AddOns et redémarrer. Préférences conservées.
 https://github.com/Maidenquinn/azeroth-fieldkit/releases/tag/v0.3.4
 ```

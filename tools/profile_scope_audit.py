@@ -1,4 +1,4 @@
-"""Static coverage gate for persisted FieldKitDB preferences.
+"""Static coverage gate for persisted FieldKitRebornDB preferences.
 
 A new persisted setting must be either a slot-scoped preference or listed
 explicitly as intentionally shared gameplay/operational state. This catches
@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-ADDON = ROOT / "AzerothFieldKit"
+ADDON = ROOT / "AzerothFieldKitReborn"
 config = (ADDON / "Config.lua").read_text(encoding="utf8")
 profile = (ADDON / "Profiles.lua").read_text(encoding="utf8")
 defaults_block = config.split("local defaults={", 1)[1].split(
@@ -43,11 +43,11 @@ for path in ADDON.glob("*.lua"):
     if path.name == "Profiles.lua":
         continue
     source = path.read_text(encoding="utf8")
-    discovered.update(re.findall(r"\bFieldKitDB\.([A-Za-z_]\w*)", source))
+    discovered.update(re.findall(r"\bFieldKitRebornDB\.([A-Za-z_]\w*)", source))
     if path.name == "FieldKit.lua":
         discovered.update(re.findall(r"\bDB\.([A-Za-z_]\w*)", source))
 unknown = discovered - scoped - shared
-assert not unknown, "Unclassified FieldKitDB fields: " + ", ".join(sorted(unknown))
+assert not unknown, "Unclassified FieldKitRebornDB fields: " + ", ".join(sorted(unknown))
 assert not (scoped & shared), "Profile/shared scope overlap: " + ", ".join(sorted(scoped & shared))
 print(
     f"Profile scope audit: {len(scoped)} declared preferences and "

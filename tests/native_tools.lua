@@ -1,6 +1,6 @@
 -- Real addon constructors/handlers with explicit synthetic native inputs.
 -- No claim about packets delivered by the running game or rendered modals.
-FieldKitDB={}
+FieldKitRebornDB={}
 local writes,registrations,unregistrations=0,0,0
 local top={}
 function AZS_SetOnTopOfScreens(name,on) writes=writes+1;top[name]=on and true or nil end
@@ -128,10 +128,10 @@ fire(FieldKitFrame,"CHAT_MSG_ADDON","AZSTOTEMS");update(FieldKitFrame,.3)
 assert(FieldKitEffectsFrame.rows[1].label:GetText()=="First fresh batch")
 -- Optional APIs absent/throwing must not break the old client.
 AZS_GetTotems=nil;AZS_GetSummonGroups=nil;AZS_GetTimers=nil;AZS_GetRevive=nil;AZS_GetUpcomingBosses=function() error("unavailable") end
-FieldKitDB.effectBuffs=false;update(FieldKitFrame,.3)
+FieldKitRebornDB.effectBuffs=false;update(FieldKitFrame,.3)
 assert(FieldKitEffectsFrame.rows[1].label:GetText()=="Effects API unavailable")
 -- Real player buffs: icon, name from the native tooltip, stacks and time left; none -> exact empty list.
-FieldKitDB.effectBuffs=true
+FieldKitRebornDB.effectBuffs=true
 local oldPB,oldPT,oldTex,oldApp=GetPlayerBuff,GetPlayerBuffTimeLeft,GetPlayerBuffTexture,GetPlayerBuffApplications
 GetPlayerBuff=function(i) if i<2 then return i end return -1 end;GetPlayerBuffTimeLeft=function() return 75 end
 GetPlayerBuffTexture=function() return "Interface\Icons\Spell_Holy_WordFortitude" end;GetPlayerBuffApplications=function(i) return i==1 and 2 or 1 end

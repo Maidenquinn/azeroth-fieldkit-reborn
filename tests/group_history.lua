@@ -17,15 +17,15 @@ SPELLCASTOTHERSTART="%s begins to cast %s."
 SPELLINTERRUPTOTHEROTHER="%s interrupts %s's %s."
 AURAADDEDOTHERHELPFUL="%s gains %s."
 AURAREMOVEDOTHER="%s fades from %s."
-FieldKitDB=nil
+FieldKitRebornDB=nil
 fire(FieldKitFrame,"VARIABLES_LOADED")
 local H=FieldKitGroupHistory
 H.formats=nil
 H.Clear()
 
 -- defaults and bounds
-assert(FieldKitDB.partyHistory==false and FieldKitDB.partyHistoryCount==5 and FieldKitDB.partyShow==true and FieldKitDB.partyPlayerCard==false and FieldKitDB.partyDetail==2 and FieldKitDB.partyCardScale==100,"option defaults")
-assert(FieldKitDB.partyHistoryBuffs and FieldKitDB.partyHistoryCombat and FieldKitDB.partyHistoryIcons,"independent option defaults")
+assert(FieldKitRebornDB.partyHistory==false and FieldKitRebornDB.partyHistoryCount==5 and FieldKitRebornDB.partyShow==true and FieldKitRebornDB.partyPlayerCard==false and FieldKitRebornDB.partyDetail==2 and FieldKitRebornDB.partyCardScale==100,"option defaults")
+assert(FieldKitRebornDB.partyHistoryBuffs and FieldKitRebornDB.partyHistoryCombat and FieldKitRebornDB.partyHistoryIcons,"independent option defaults")
 
 -- compile: plain and positional (localized) formats
 local pattern,order=H.Compile("%s's %s hits %s for %d.")
@@ -40,7 +40,7 @@ assert(H.Handle("CHAT_MSG_SPELL_PARTY_DAMAGE","Denza's Frostbolt hits Boar for 4
 assert(table.getn(H.Recent("Denza"))==0)
 
 -- option on: events registered
-FieldKitDB.partyHistory=true;H.Sync()
+FieldKitRebornDB.partyHistory=true;H.Sync()
 assert(H.registered,"events registered")
 for _,e in ipairs({"CHAT_MSG_SPELL_PARTY_DAMAGE","CHAT_MSG_SPELL_PARTY_BUFF","CHAT_MSG_SPELL_PERIODIC_PARTY_DAMAGE","CHAT_MSG_SPELL_PERIODIC_PARTY_BUFFS","CHAT_MSG_SPELL_AURA_GONE_PARTY"}) do assert(H.frame.events[e],e.." is registered") end
 
@@ -71,17 +71,17 @@ assert(H.Handle("x","Boarpet's Bite hits Denza for 4.")==false,"pets and monster
 assert(H.Handle("x",nil)==false,"nil message")
 
 -- independent options
-FieldKitDB.partyHistoryBuffs=false;local n=table.getn(H.log.Denza)
+FieldKitRebornDB.partyHistoryBuffs=false;local n=table.getn(H.log.Denza)
 assert(H.Handle("x","Denza gains Mark of the Wild.")==false and table.getn(H.log.Denza)==n,"buffs off: not recorded")
 assert(H.Handle("x","Denza's Frostbolt hits Boar for 41.")==true,"damage still recorded")
-FieldKitDB.partyHistoryBuffs=true;FieldKitDB.partyHistoryCombat=false
+FieldKitRebornDB.partyHistoryBuffs=true;FieldKitRebornDB.partyHistoryCombat=false
 assert(H.Handle("x","Denza's Frostbolt hits Boar for 42.")==false,"damage and healing off: not recorded")
 assert(H.Handle("x","Denza gains Mark of the Wild.")==true,"buffs still recorded")
-FieldKitDB.partyHistoryCombat=true
+FieldKitRebornDB.partyHistoryCombat=true
 
 -- count option shrinks the history
-FieldKitDB.partyHistoryCount=2;H.Handle("x","Denza's Frostbolt hits Boar for 43.");assert(table.getn(H.log.Denza)==2,"count of 2 respected")
-FieldKitDB.partyHistoryCount=5
+FieldKitRebornDB.partyHistoryCount=2;H.Handle("x","Denza's Frostbolt hits Boar for 43.");assert(table.getn(H.log.Denza)==2,"count of 2 respected")
+FieldKitRebornDB.partyHistoryCount=5
 
 -- left the group: no memory kept
 members.party2=nil;H.Prune();assert(H.log.Lockpin==nil,"a member who left leaves no history")
@@ -106,7 +106,7 @@ FieldKit_SetLanguage("en")
 
 -- localized (French-style, positional) formats parse through the client's own strings
 SPELLLOGOTHEROTHER="%2$s de %1$s touche %3$s pour %4$d."
-H.Build();H.Clear();FieldKitDB.partyHistoryCount=5
+H.Build();H.Clear();FieldKitRebornDB.partyHistoryCount=5
 assert(H.Handle("x","Frappe de Denza touche Sanglier pour 40.")==true and H.log.Denza[1].spell=="Frappe" and H.log.Denza[1].target=="Sanglier" and H.log.Denza[1].amount==40,"positional localized format maps back to caster / spell / target / amount")
 SPELLLOGOTHEROTHER="%s's %s hits %s for %d."
 
@@ -116,8 +116,8 @@ H.formats=nil;H.Clear();assert(table.getn(H.Build())==0 and H.Handle("x","Denza'
 for k,v in pairs(saved) do _G[k]=v end;H.formats=nil
 
 -- disabling clears memory and unregisters
-FieldKitDB.partyHistory=false;H.Sync();assert(not H.registered and next(H.log)==nil,"off: unregistered and cleared")
-FieldKitDB.partyHistory=true;H.Sync()
+FieldKitRebornDB.partyHistory=false;H.Sync();assert(not H.registered and next(H.log)==nil,"off: unregistered and cleared")
+FieldKitRebornDB.partyHistory=true;H.Sync()
 
 -- performance and memory budget
 local clock=type(os)=="table" and os.clock
@@ -146,13 +146,13 @@ do
  assert(Find(d,"Spells").state=="unknown" and Find(d,"Accessories").state=="unknown","own data not available: unknown, not made up")
  FieldKitLoadout=oldLoadout
  -- tooltip: confirmed / observed / unknown tags, FR and EN
- H.Clear();FieldKitDB.partyHistory=true;FieldKitDB.partyHistoryCount=5;H.Handle("x","Denza's Frostbolt hits Boar for 40.")
+ H.Clear();FieldKitRebornDB.partyHistory=true;FieldKitRebornDB.partyHistoryCount=5;H.Handle("x","Denza's Frostbolt hits Boar for 40.")
  local text={};local tip={AddLine=function(_,t) table.insert(text,t) end}
  FieldKit_SetLanguage("en");H.DetailTooltip(tip,"party1","Denza");local all=table.concat(text," | ")
  assert(string.find(all,"[Unknown] Spells",1,true) and string.find(all,"[Observed] Recent actions",1,true) and string.find(all,"Frostbolt",1,true),"EN tags: "..all)
  text={};FieldKit_SetLanguage("fr");H.DetailTooltip(tip,"party1","Denza");all=table.concat(text," | ")
  assert(string.find(all,"[Inconnu] Sorts",1,true) and string.find(all,"[Observé] Dernières actions",1,true),"FR tags: "..all)
- FieldKit_SetLanguage("en");FieldKitDB.partyHistory=false;text={};H.DetailTooltip(tip,"party1","Denza")
+ FieldKit_SetLanguage("en");FieldKitRebornDB.partyHistory=false;text={};H.DetailTooltip(tip,"party1","Denza")
  assert(string.find(table.concat(text," | "),"history is off",1,true),"history off is said, not hidden")
 end
 
@@ -166,5 +166,5 @@ event="CHAT_MSG_SPELL_PARTY_DAMAGE";arg1="Denza's Frostbolt hits Boar for 40.";t
 NOW=NOW+10;this=H.probeFrame;H.probeFrame.scripts.OnUpdate()
 text=table.concat(said,"\n");assert(string.find(text,"CHAT_MSG_SPELL_PARTY_DAMAGE",1,true) and string.find(text,"1 event",1,true) and H.probe==nil,"event probe reports the counts and samples, then stops")
 DEFAULT_CHAT_FRAME.AddMessage=oldAdd
-FieldKitDB.partyHistory=false;H.Sync()
+FieldKitRebornDB.partyHistory=false;H.Sync()
 print("Group history: formats, kinds, options, bounds, roster, icons, FR/EN, probe and performance passed (synthetic)")

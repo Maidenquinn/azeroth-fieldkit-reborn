@@ -9,10 +9,10 @@ local C,H,M,T=FieldKitZoneThemes,FieldKitThemeHUD,FieldKitThemeMinimap,FieldKitT
 -- Naxx is hidden from production, but legacy layout regression fixtures remain executable.
 assert(C.Resolve()==nil)
 C.allowUnfinishedThemes=true
-assert(not C.active and not FieldKitDB.zoneThemes)
-FieldKit.zoneThemeReady=false;FieldKitDB.zoneThemes=true;FieldKitDB.zoneThemeMode="naxx"
+assert(not C.active and not FieldKitRebornDB.zoneThemes)
+FieldKit.zoneThemeReady=false;FieldKitRebornDB.zoneThemes=true;FieldKitRebornDB.zoneThemeMode="naxx"
 C.Refresh();assert(not C.active,"Do not capture native frames during legacy HUD construction")
-FieldKit.zoneThemeReady=true;FieldKitDB.zoneThemes=false
+FieldKit.zoneThemeReady=true;FieldKitRebornDB.zoneThemes=false
 function Minimap:SetMaskTexture(path) self.mask=path end
 function Minimap:GetMaskTexture() return self.mask or "Textures\\MinimapMask" end
 Minimap:SetParent(UIParent);Minimap:SetPoint("TOPRIGHT",UIParent,"TOPRIGHT",-12,-20)
@@ -48,7 +48,7 @@ function UnitMana() return 35 end
 function UnitManaMax() return 100 end
 function UnitPowerType() return 1 end
 AZS_ZONE={zone="naxx",heroic=3};AZS_RUN={t=60,ph="playing",kills=43,gold=10,chest=25,sh=20}
-local anchors=FieldKitDB.frameAnchors
+local anchors=FieldKitRebornDB.frameAnchors
 SlashCmdList.FieldKit("themes naxx")
 assert(C.active and T.zone=="naxx" and M.active)
 FieldKitPreview.Start(false);C.Refresh();assert(not C.active and not M.active,"Preview must release live ownership")
@@ -63,7 +63,7 @@ phase="ready";C.Refresh()
 for i=1,8 do click(M.zoomIn) end;assert(Minimap:GetZoom()==5)
 for i=1,8 do click(M.zoomOut) end;assert(Minimap:GetZoom()==0)
 assert(Minimap:GetWidth()==Minimap:GetHeight() and Minimap:GetParent()==M.root)
-assert(FieldKitDB.frameAnchors==anchors)
+assert(FieldKitRebornDB.frameAnchors==anchors)
 assert(state.clock==false and state.tally==false and state.build==false and state.bosses==false)
 C.NativeRestore();assert(state.clock==true and state.build==true and state.tally==false)
 C.Refresh();assert(state.clock==false and state.build==false)
@@ -109,14 +109,14 @@ local count=table.getn(objects)
 for i=1,120 do C.Refresh() end
 assert(table.getn(objects)==count,"HUD refresh must reuse all allocated surfaces")
 H.dock:SetPoint("TOPLEFT",UIParent,"TOPLEFT",83,-65)
-assert(C.Remember(H.dock));assert(not FieldKitDB.frameAnchors.FieldKitThemeDock)
-local scoped=FieldKitDB.zoneThemePositions[C.currentLayout].FieldKitThemeDock
+assert(C.Remember(H.dock));assert(not FieldKitRebornDB.frameAnchors.FieldKitThemeDock)
+local scoped=FieldKitRebornDB.zoneThemePositions[C.currentLayout].FieldKitThemeDock
 assert(scoped[3]==83 and scoped[4]==-65)
 FieldKitProfiles.Save(1)
 C.Set("zoneThemeMode","elwynn");C.Set("zoneThemeVariant","alternative")
 assert(T.zone=="elwynn" and H.zone:GetText()=="Naxxramas","Manual skin must never falsify the actual native zone")
 assert(FieldKitProfiles.Load(1));local dp,dr,drp,dx,dy=H.dock:GetPoint();assert(dp=="TOPLEFT" and dx==83 and dy==-65)
-assert(FieldKitDB.zoneThemeMode=="naxx" and FieldKitDB.zoneThemeVariant=="minimal")
+assert(FieldKitRebornDB.zoneThemeMode=="naxx" and FieldKitRebornDB.zoneThemeVariant=="minimal")
 C.Set("zoneThemes",false)
 assert(not C.active and not M.active and T.zone=="classic")
 assert(not top.FieldKitPanel and state.banners==true)
@@ -182,7 +182,7 @@ local setHeaderWidth=H.header.SetWidth
 H.header.SetWidth=function(self,width) assert(width==R.layout.rects.header[3],"Reference refresh must not first install fallback geometry");setHeaderWidth(self,width) end
 C.Refresh();H.header.SetWidth=setHeaderWidth
 ActionButton1:SetAlpha(0);C.Refresh();assert(ActionButton1:GetAlpha()==1,"Rejouer must not leave owned native actions transparent")
-FieldKitDB.zoneThemePositions[C.currentLayout]=nil
+FieldKitRebornDB.zoneThemePositions[C.currentLayout]=nil
 C.SetElementScale("FieldKitThemeDock",65)
 assert(H.dock:GetScale()==.65 and H.header:GetScale()==1)
 assert(H.healthRoot:GetParent()==H.dock and H.healthRoot:GetScale()==1)
@@ -190,7 +190,7 @@ assert(H.xpRoot:GetParent()==H.dock and H.counterRoot:GetParent()==H.dock)
 C.SetElementScale("FieldKitThemeMap",75);assert(M.root:GetScale()==.75 and M.zoomIn:GetParent()==M.root)
 H.dock:SetPoint("BOTTOM",UIParent,"BOTTOM",100,80);assert(C.Remember(H.dock))
 C.SetElementScale("FieldKitThemeDock",50)
-local pos=FieldKitDB.zoneThemePositions[C.currentLayout].FieldKitThemeDock
+local pos=FieldKitRebornDB.zoneThemePositions[C.currentLayout].FieldKitThemeDock
 assert(math.abs(pos[3]-130)<.0001 and math.abs(pos[4]-104)<.0001)
 FieldKitProfiles.Save(1)
 C.Set("zoneThemeVariant","complete");assert(C.ElementScale("FieldKitThemeDock")==1)
@@ -255,14 +255,14 @@ print("Review feedback: persistent summaries, readable detail rows, clean select
 C.Set("zoneThemeMode","elwynn");C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true)
 assert(not R.frames.Damage.bodyWash or not R.frames.Damage.bodyWash:IsShown())
 assert(R.frames.Accessories.rows[1].label.referenceFullText==long and R.frames.Accessories.rows[1].value:GetText()=="")
-click(R.frames.Stats.collapse);assert(FieldKitDB.statsCollapsed and not R.frames.Stats:IsShown());assert(FieldKitCollapseDock:IsShown())
-FieldKitDB.statsCollapsed=false;FieldKit.ApplyHUDProfileLive();C.Refresh();assert(R.frames.Stats:IsShown())
+click(R.frames.Stats.collapse);assert(FieldKitRebornDB.statsCollapsed and not R.frames.Stats:IsShown());assert(FieldKitCollapseDock:IsShown())
+FieldKitRebornDB.statsCollapsed=false;FieldKit.ApplyHUDProfileLive();C.Refresh();assert(R.frames.Stats:IsShown())
 assert(R.tabs[1].underline:IsShown())
-local oldlocked=FieldKitDB.windowsLocked;FieldKitDB.windowsLocked=false
+local oldlocked=FieldKitRebornDB.windowsLocked;FieldKitRebornDB.windowsLocked=false
 assert(Minimap:GetScript("OnDragStart")==nil and Minimap:GetScript("OnMouseDown")==nil,"FieldKit installs no script on the native Minimap")
 local start=M.root:GetScript("OnDragStart");assert(type(start)=="function");this=M.root;start();assert(H.identity.azsMoving and not M.root.azsMoving,"a drag reaching the map container moves the whole group (its owner), never the container alone")
 M.root:GetScript("OnDragStop")();assert(not H.identity.azsMoving)
-FieldKitDB.windowsLocked=oldlocked
+FieldKitRebornDB.windowsLocked=oldlocked
 C.Set("zoneThemes",false)
 print("Complete cards: original textures, equipment names, collapse dock and grouped minimap dragging passed")
 
@@ -296,7 +296,7 @@ FieldKitMeterLedger.Read=savedRead;C.Set("zoneThemes",false)
 print("Empty combat state, consistent tab surfaces and measured Elwynn action sockets passed")
 
 C.Set("zoneThemeMode","elwynn");C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true)
-FieldKitDB.meterFrame=true;FieldKitDB.lairFrame=true;FieldKitDB.statsFrame=true;FieldKitDB.effectsFrame=true;FieldKitDB.statsCollapsed=false;FieldKitDB.collapsedWindows={};C.Refresh()
+FieldKitRebornDB.meterFrame=true;FieldKitRebornDB.lairFrame=true;FieldKitRebornDB.statsFrame=true;FieldKitRebornDB.effectsFrame=true;FieldKitRebornDB.statsCollapsed=false;FieldKitRebornDB.collapsedWindows={};C.Refresh()
 for _,kind in ipairs({"Damage","Lairs","Stats","Effects"}) do
  local f=R.frames[kind];assert(f.cleanBody:IsShown());assert(not f.footerPatch or not f.footerPatch:IsShown());assert(not f.emptySocket or not f.emptySocket:IsShown())
 end
@@ -306,7 +306,7 @@ C.Set("zoneThemes",false)
 print("Clean card materials, flat meter tabs and bounded square minimap passed")
 
 C.Set("zoneThemeMode","elwynn");C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true)
-FieldKitDB.windowsLocked=true
+FieldKitRebornDB.windowsLocked=true
 for _,kind in ipairs({"Damage","Stats","Lairs"}) do
  C.Open(kind)
  local f=getglobal(({Damage="FieldKitMeterFrame",Stats="FieldKitStatsFrame",Lairs="FieldKitLairFrame"})[kind])
@@ -318,9 +318,9 @@ for _,kind in ipairs({"Damage","Stats","Lairs"}) do
  C.Open(kind)
 end
 local savedTaken=AZS_TAKEN;AZS_TAKEN={{source="mob melee",dmg=42}}
-local oldLang=FieldKitDB.language;FieldKitDB.language="fr"
+local oldLang=FieldKitRebornDB.language;FieldKitRebornDB.language="fr"
 local taken=FieldKitMeterLedger.Read("taken");assert(taken[1].displayName==FieldKit_L("Monster melee"))
-AZS_TAKEN=savedTaken;FieldKitDB.language=oldLang
+AZS_TAKEN=savedTaken;FieldKitRebornDB.language=oldLang
 local oldFriend=UnitIsFriend;UnitIsFriend=function() return true end
 UnitExists=function(unit) return unit=="target" or (exists and exists(unit)) end
 C.Refresh();assert(FieldKitThemeTarget.frame:IsShown() and TargetFrame:GetParent()==H.storage)
@@ -344,10 +344,10 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  FieldKitLoadout.items={[2]={name="Amulet of Test",bonuses={}}}
  FieldKitLoadout.spells={}
  for i=1,8 do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="Rank "..i,rankValue=i,bonuses={"+1%"},upgrades={}}) end
- FieldKitDB.loadoutTab=1;C.Refresh(true)
+ FieldKitRebornDB.loadoutTab=1;C.Refresh(true)
  local acc=R.frames.Accessories;assert(acc.cardTabs and acc.cardTabs[1]:IsShown() and acc.cardTabs[2]:IsShown(),zone..": two tabs inside the card")
  assert(acc.rows[1].label:GetText()=="Amulet of Test" and not C.open.Accessories,zone..": equipment tab content")
- click(acc.cardTabs[2]);assert(FieldKitDB.loadoutTab==2 and not C.open.Accessories,zone..": Spells replaces the content of the same card")
+ click(acc.cardTabs[2]);assert(FieldKitRebornDB.loadoutTab==2 and not C.open.Accessories,zone..": Spells replaces the content of the same card")
  assert(acc:IsShown() and acc.rows[1].label:GetText()=="Spell 1" and acc.rows[1].value:GetText()=="Rank 1" and acc.rows[1].entry.name=="Spell 1",zone..": spells listed with ranks and tooltip entries")
  -- alpha.36: the card grows with the content: all eight spells are listed at once, no scrolling, no pager
  assert(acc.rows[8]:IsShown() and acc.rows[8].label:GetText()=="Spell 8" and not acc.pager:IsShown() and not string.find(acc.cardTabs[2].fieldkitLabel:GetText(),"/",1,true),zone..": every spell is visible without scrolling")
@@ -359,7 +359,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
 
  arg1=-100;acc.scripts.OnMouseWheel();assert(acc.rows[7].label:GetText()=="Spell 8" and string.find(acc.cardTabs[2].fieldkitLabel:GetText(),"2-8/8",1,true) and not acc.pager:IsShown(),zone..": scrolling is clamped")
  R.AccMaxRows=realMax;R.scroll.Accessories=0;C.Refresh(true)
- click(acc.cardTabs[1]);assert(FieldKitDB.loadoutTab==1 and acc.rows[1].label:GetText()=="Amulet of Test" and not acc.pager:IsShown(),zone..": back to Equipment")
+ click(acc.cardTabs[1]);assert(FieldKitRebornDB.loadoutTab==1 and acc.rows[1].label:GetText()=="Amulet of Test" and not acc.pager:IsShown(),zone..": back to Equipment")
  FieldKitLoadout.items,FieldKitLoadout.spells=oldItems,oldSpells
  -- Effects: 0,1,2,4,many
  local effects=FieldKitNativeTools.frames[1];local oldRows=effects.lastRows
@@ -423,7 +423,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  -- Portrait: owned by a frame beneath the art, over an opaque backing
  assert(R.portraitFrame and R.portraitBack and R.portraitFrame:GetFrameLevel()<=H.healthRoot:GetFrameLevel(),zone..": portrait is drawn under the art rim")
  -- Equipment / Spells tabs keep a visible active mark
- FieldKitDB.loadoutTab=1;C.Refresh(true);local acc=R.frames.Accessories
+ FieldKitRebornDB.loadoutTab=1;C.Refresh(true);local acc=R.frames.Accessories
  assert(acc.cardTabs[1].underline:IsShown() and not acc.cardTabs[2].underline:IsShown() and acc.cardTabs[1].rule:IsShown() and acc.cardTabs[2].rule:IsShown(),zone..": active tab marked, inactive tab has a rule")
 end
 -- Boss and guardian cards
@@ -482,15 +482,15 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  if r1.label:GetText()==FieldKit_L("No combat data") then
   assert(rx==24 and -ry==top and r1:GetHeight()==bottom-top and r1.label:GetWidth()==dr[3]-48,zone..": empty state spans the content area (centred)")
  end
- FieldKitDB.language="en";C.Refresh(true);assert(R.frames.Accessories.cardTabs[1].fieldkitLabel:GetText()=="Equipment" and R.frames.Accessories.cardTabs[2].fieldkitLabel:GetText()=="Spells",zone..": English header tabs")
- FieldKitDB.language="fr";C.Refresh(true);assert(R.frames.Accessories.cardTabs[1].fieldkitLabel:GetText()=="Équipement" and R.frames.Accessories.cardTabs[2].fieldkitLabel:GetText()=="Sorts",zone..": French header tabs")
+ FieldKitRebornDB.language="en";C.Refresh(true);assert(R.frames.Accessories.cardTabs[1].fieldkitLabel:GetText()=="Equipment" and R.frames.Accessories.cardTabs[2].fieldkitLabel:GetText()=="Spells",zone..": English header tabs")
+ FieldKitRebornDB.language="fr";C.Refresh(true);assert(R.frames.Accessories.cardTabs[1].fieldkitLabel:GetText()=="Équipement" and R.frames.Accessories.cardTabs[2].fieldkitLabel:GetText()=="Sorts",zone..": French header tabs")
 end
 C.Set("zoneThemes",false)
 assert(FieldKitThemeMinimap.rim==nil or not FieldKitThemeMinimap.rim:IsShown(),"rim hidden when the theme is off")
 print("Map fill and rim, portrait socket, header tabs, lair columns, empty damage state and tab stability passed (synthetic)")
 
 -- alpha.16: drag survives the 0.2 s refresh, icons centred in painted sockets, Damage foot never overlaps rows, third-party map buttons.
-FieldKitDB.windowsLocked=false
+FieldKitRebornDB.windowsLocked=false
 for _,zone in ipairs({"elwynn","naxx"}) do
  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);C.Refresh(true)
  for _,kind in ipairs({"Accessories","Damage","Lairs"}) do
@@ -504,11 +504,11 @@ for _,zone in ipairs({"elwynn","naxx"}) do
   local saved=C.Position(f);assert(saved and saved[3]==321 and saved[4]==654,zone.." "..kind..": released position saved even when the engine anchors to the canvas")
   C.Refresh(true);local _,rel,_,x,y=f:GetPoint();assert(rel==UIParent and x==321 and y==654,zone.." "..kind..": position kept after refresh")
   f.referenceRect=nil;f.referenceGeometryKey=nil;C.revision=C.revision+1;C.Refresh(true);_,rel,_,x,y=f:GetPoint();assert(x==321 and y==654,zone.." "..kind..": position restored after a re-layout / reload")
-  f.GetLeft=nil;f.GetTop=nil;FieldKitDB.zoneThemePositions[C.currentLayout][f:GetName()]=nil;f.referenceRect=nil;C.revision=C.revision+1;C.Refresh(true)
+  f.GetLeft=nil;f.GetTop=nil;FieldKitRebornDB.zoneThemePositions[C.currentLayout][f:GetName()]=nil;f.referenceRect=nil;C.revision=C.revision+1;C.Refresh(true)
  end
  -- icons centred in sockets
  local oldTex=GetInventoryItemTexture;GetInventoryItemTexture=function() return "Interface\Icons\X" end
- local oldItems=FieldKitLoadout.items;FieldKitLoadout.items={[2]={name="Amulet",bonuses={}}};FieldKitDB.loadoutTab=1;C.Refresh(true)
+ local oldItems=FieldKitLoadout.items;FieldKitLoadout.items={[2]={name="Amulet",bonuses={}}};FieldKitRebornDB.loadoutTab=1;C.Refresh(true)
  local acc=R.frames.Accessories
  for i=1,5 do
   local r=acc.rows[i];local _,_,_,rx,ry=r:GetPoint();local _,_,_,ix,iy=r.icon:GetPoint();local size=r.icon:GetWidth()
@@ -522,7 +522,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  local oldRead=FieldKitMeterLedger.Read
  for _,count in ipairs({0,1,4,6,8,12}) do
   for _,lang in ipairs({"fr","en"}) do
-   FieldKitDB.language=lang
+   FieldKitRebornDB.language=lang
    FieldKitMeterLedger.Read=function() local lines={};for i=1,count do table.insert(lines,{name="Spell "..i,share=1/i,icon="Interface\Icons\X"}) end return lines,100,10,true end
    R.scroll.Damage=0;C.Refresh(true);local dm=R.frames.Damage;local dr=R.CardRect("Damage",R.layout)
    local capacity=R.dmgN;local room=R.DmgMaxRows(R.layout)
@@ -539,7 +539,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
    if count>capacity then this=dm;arg1=-100;dm.scripts.OnMouseWheel();assert(dm.rows[1].label:GetText()=="Spell "..(count-capacity+1),zone..": scrolling reaches the last spell") end
   end
  end
- FieldKitMeterLedger.Read=oldRead;FieldKitDB.language="fr"
+ FieldKitMeterLedger.Read=oldRead;FieldKitRebornDB.language="fr"
 end
 -- Third-party minimap buttons: owner keeps control; gear rides the opening edge; everything restored.
 do
@@ -575,7 +575,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
   local want=(math.mod(n,2)==1) and 2 or 1
   local b=acc.cardTabs[want];local before=b.fieldkitDiag.down
   b.scripts.OnMouseDown();NOW=NOW+.25;counting=true;C.Refresh(true);counting=false;b.scripts.OnMouseUp();click(b)
-  assert(FieldKitDB.loadoutTab==want and acc.cardTabs[want].fieldkitSelected==true,zone..": Equipment/Spells click "..n.." was lost")
+  assert(FieldKitRebornDB.loadoutTab==want and acc.cardTabs[want].fieldkitSelected==true,zone..": Equipment/Spells click "..n.." was lost")
   local view=math.mod(n,6)+1;local t=R.tabs[view]
   t.scripts.OnMouseDown();NOW=NOW+.25;counting=true;C.Refresh(true);counting=false;t.scripts.OnMouseUp();click(t)
   local _,index=FieldKitMeterSuite.View();assert(index==view,zone..": Damage category click "..n.." was lost")
@@ -640,15 +640,15 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true)
  local oldSpells=FieldKitLoadout.spells
  for _,count in ipairs({0,1,5,6,7,12}) do for _,lang in ipairs({"fr","en"}) do
-  FieldKitDB.language=lang;FieldKitLoadout.spells={};for i=1,count do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="Rank "..i,rankValue=i,bonuses={},upgrades={}}) end
-  FieldKitDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);local acc=R.frames.Accessories
+  FieldKitRebornDB.language=lang;FieldKitLoadout.spells={};for i=1,count do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="Rank "..i,rankValue=i,bonuses={},upgrades={}}) end
+  FieldKitRebornDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);local acc=R.frames.Accessories
   assert(not acc.pager:IsShown(),zone..": no counter over the rows ("..count.." spells, "..lang..")")
   local label=acc.cardTabs[2].fieldkitLabel:GetText();assert((R.accScroll and true or false)==(string.find(label,"/",1,true)~=nil),zone..": range in the tab only when scrolling is needed ("..count..")")
   if not R.accScroll then local shown=0;for _,r in ipairs(acc.rows) do if r:IsShown() and r.entry then shown=shown+1 end end;assert(shown==count,zone..": every spell is visible ("..shown.."/"..count..")") end
   local lastBottom=0;for _,r in ipairs(acc.rows) do if r:IsShown() then local _,_,_,_,y=r:GetPoint();lastBottom=math.max(lastBottom,-y+r:GetHeight()) end end
   assert(lastBottom<=R.CardRect("Accessories",R.layout)[4]-10,zone..": rows stay inside the card")
  end end
- FieldKitLoadout.spells=oldSpells;FieldKitDB.language="fr";FieldKitDB.loadoutTab=1
+ FieldKitLoadout.spells=oldSpells;FieldKitRebornDB.language="fr";FieldKitRebornDB.loadoutTab=1
 end
 C.Set("zoneThemes",false)
 print("Spells indicator in the header tab passed (synthetic)")
@@ -690,14 +690,14 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  end
  -- custom position survives the height change; a moved Effects card is not pushed
  src.rows=FakeStats(12);local f=R.frames.Stats
- local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
- FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanelStats"]={"TOPLEFT","BOTTOMLEFT",1200,640}
- FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]={"TOPLEFT","BOTTOMLEFT",900,300}
+ local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
+ FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanelStats"]={"TOPLEFT","BOTTOMLEFT",1200,640}
+ FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]={"TOPLEFT","BOTTOMLEFT",900,300}
  f.referenceRect=nil;R.frames.Effects.referenceRect=nil;C.revision=C.revision+1;C.Refresh(true)
  local p,rel,rp,x,y=f:GetPoint();assert(p=="TOPLEFT" and x==1200 and y==640,zone..": saved position before growing")
  R.statsOpen=true;C.Refresh(true);p,rel,rp,x,y=f:GetPoint();assert(p=="TOPLEFT" and x==1200 and y==640 and (R.shift.Effects or 0)==0,zone..": custom positions are kept after the height change, Effects not pushed")
  R.statsOpen=false;C.Refresh(true);p,rel,rp,x,y=f:GetPoint();assert(x==1200 and y==640,zone..": and after reducing")
- FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanelStats"]=nil;FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]=nil
+ FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanelStats"]=nil;FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]=nil
  src.rows=realRows;R.statsOpen=false
 end
 -- Damage hover tooltips (themed tip frame, sections only when data exists)
@@ -759,14 +759,14 @@ end
 local function Snapshot(t) local out={} for k,v in pairs(t or {}) do out[k]=v end return out end
 local realStatsRows=FieldKitStatsFrame.rows
 for _,zone in ipairs({"elwynn","naxx"}) do
- C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
+ C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
  local oldSpells=FieldKitLoadout.spells
- R.statsOpen=false;FieldKitDB.loadoutTab=1;C.Refresh(true)
+ R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;C.Refresh(true)
  for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do assert((R.shift[k] or 0)==0,zone..": the approved default layout is not moved ("..k..")") end
  -- seven spells: the card grows, the cards below follow without overlapping, and come back when the room is free again
  for _,count in ipairs({0,1,5,7,8,12}) do
   FieldKitLoadout.spells={};for i=1,count do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="R"..i,rankValue=i,bonuses={},upgrades={}}) end
-  FieldKitDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);local acc=R.frames.Accessories;local base=R.layout.rects.Accessories
+  FieldKitRebornDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);local acc=R.frames.Accessories;local base=R.layout.rects.Accessories
   local N=R.accN;assert(N==math.max(zone=="naxx" and 3 or 1,math.min(24,count)) and not R.accScroll,zone..": the card holds exactly the spells ("..tostring(N).." rows for "..count..")") -- alpha.36: height follows the content
   assert(acc:GetHeight()==base[4]+R.AccDelta(zone,N),zone..": card height for "..count.." spells ("..acc:GetHeight().." vs "..(base[4]+R.AccDelta(zone,N))..")")
   local shown=0;for i,r in ipairs(acc.rows) do if r:IsShown() then shown=shown+1;local _,_,_,_,y=r:GetPoint();assert(-y==R.SocketY(zone,i,N),zone..": row "..i.." sits on socket "..i.." ("..count..")") end end
@@ -778,18 +778,18 @@ for _,zone in ipairs({"elwynn","naxx"}) do
   NoOverlap(zone.." "..count.." spells")
   if N>5 then assert((R.shift.Stats or 0)>0 or (R.shiftX.Stats or 0)~=0,zone..": Stats gives way to the taller Equipment card "..count.." sh="..table.concat({tostring(R.shift.Accessories),tostring(R.shiftX.Accessories),tostring(R.shift.Stats),tostring(R.shiftX.Stats),tostring(R.shift.Effects),tostring(R.shiftX.Effects),tostring(R.shift.Lairs),tostring(R.shift.Damage)},",").." last="..tostring(R.lastMoved).." noRoom="..tostring(R.noRoom)) else assert((R.shift.Stats or 0)==0 and (R.shiftX.Stats or 0)==0,zone..": a card that is not taller moves nobody") end
  end
- FieldKitLoadout.spells=oldSpells;FieldKitDB.loadoutTab=1;C.Refresh(true)
+ FieldKitLoadout.spells=oldSpells;FieldKitRebornDB.loadoutTab=1;C.Refresh(true)
  for _,k in ipairs({"Stats","Effects"}) do assert((R.shift[k] or 0)==0 and (R.shiftX[k] or 0)==0,zone..": "..k.." is back at its preferred place on the Equipment tab") end
  -- Bonuses expanded: everything stays apart; reduced: everything returns; preferred positions never rewritten
- C.Refresh(true);local saved=Snapshot(FieldKitDB.zoneThemePositions and FieldKitDB.zoneThemePositions[C.currentLayout])
+ C.Refresh(true);local saved=Snapshot(FieldKitRebornDB.zoneThemePositions and FieldKitRebornDB.zoneThemePositions[C.currentLayout])
  FieldKitStatsFrame.rows=FakeStats(14);R.statsOpen=true;C.Refresh(true);NoOverlap(zone.." Bonuses expanded")
  local first=Snapshot(R.shift);C.Refresh(true);local second=Snapshot(R.shift)
  for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do assert((first[k] or 0)==(second[k] or 0),zone..": placement is deterministic and does not oscillate ("..k..")") end
  R.statsOpen=false;C.Refresh(true);for _,k in ipairs({"Stats","Effects","Accessories"}) do assert((R.shift[k] or 0)==0,zone..": "..k.." returned to its preferred place after Show less") end
- for k,v in pairs(Snapshot(FieldKitDB.zoneThemePositions and FieldKitDB.zoneThemePositions[C.currentLayout])) do assert(saved[k]==v,"automatic placement never writes a position") end
+ for k,v in pairs(Snapshot(FieldKitRebornDB.zoneThemePositions and FieldKitRebornDB.zoneThemePositions[C.currentLayout])) do assert(saved[k]==v,"automatic placement never writes a position") end
  -- option: overlap allowed keeps the historical layout
- R.statsOpen=true;FieldKitDB.zoneThemeOverlap=true;C.Refresh(true);local moved=0;for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do moved=moved+math.abs(R.shift[k] or 0) end;assert(moved==0,zone..": with overlap allowed nothing is moved")
- FieldKitDB.zoneThemeOverlap=false;R.statsOpen=false
+ R.statsOpen=true;FieldKitRebornDB.zoneThemeOverlap=true;C.Refresh(true);local moved=0;for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do moved=moved+math.abs(R.shift[k] or 0) end;assert(moved==0,zone..": with overlap allowed nothing is moved")
+ FieldKitRebornDB.zoneThemeOverlap=false;R.statsOpen=false
  -- a card under the mouse freezes the layout
  R.statsOpen=true;C.Refresh(true);local frozen=R.shift;R.frames.Stats.azsMoving=true;R.Resolve(zone,R.layout);assert(R.shift==frozen,zone..": nothing is rearranged while a card is dragged");R.frames.Stats.azsMoving=nil
  R.statsOpen=false;FieldKitStatsFrame.rows=realStatsRows;C.Refresh(true)
@@ -841,31 +841,31 @@ local function Apart(label)
  end
 end
 local function SaveAll(layout,list)
- FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
- for k,pos in pairs(list) do FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanel"..k]={"TOPLEFT","TOPLEFT",pos[1],-pos[2]} end
+ FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
+ for k,pos in pairs(list) do FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanel"..k]={"TOPLEFT","TOPLEFT",pos[1],-pos[2]} end
 end
 local function Relayout()
  for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do R.frames[k].referenceRect=nil;R.frames[k].referenceGeometryKey=nil end
  C.revision=C.revision+1;C.Refresh(true)
 end
 for _,zone in ipairs({"elwynn","naxx"}) do
- C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
- R.statsOpen=false;FieldKitDB.loadoutTab=1;R.lastMoved=nil
+ C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+ R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;R.lastMoved=nil
  local realRows=FieldKitStatsFrame.rows;local layout=C.currentLayout
- FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+ FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
  local saved={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local r=R.layout.rects[k];saved[k]={r[1],r[2]} end
  -- (a) the captured case: all five cards saved, Bonuses expanded
  SaveAll(layout,saved);Stage();Relayout()
  local before={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do before[k]={Rendered(R.frames[k])} end
  Apart(zone.." saved layout, compact")
- local snapshot={};for k,v in pairs(FieldKitDB.zoneThemePositions[layout]) do snapshot[k]=v[3]..":"..v[4] end
+ local snapshot={};for k,v in pairs(FieldKitRebornDB.zoneThemePositions[layout]) do snapshot[k]=v[3]..":"..v[4] end
  FieldKitStatsFrame.rows=FakeStats(14);R.statsOpen=true;C.Refresh(true);C.Refresh(true)
  Apart(zone.." saved layout, Bonuses expanded")
  for _,k in ipairs({"Damage","Lairs","Accessories"}) do assert((R.shift[k] or 0)==0 and (R.shiftX[k] or 0)==0,zone..": "..k.." is above/beside Bonuses and must not move (shift "..tostring(R.shift[k])..","..tostring(R.shiftX[k])..")") end
  local el,et=Rendered(R.frames.Effects);local sl,st,sw,sh=Rendered(R.frames.Stats)
  assert(R.frames.Stats:GetHeight()>R.layout.rects.Stats[4],zone..": Bonuses really grew")
  assert(el~=before.Effects[1] or et~=before.Effects[2],zone..": Effects gave way to the expanded Bonuses card")
- for k,v in pairs(FieldKitDB.zoneThemePositions[layout]) do assert(snapshot[k]==v[3]..":"..v[4],zone..": the saved position of "..k.." was not rewritten") end
+ for k,v in pairs(FieldKitRebornDB.zoneThemePositions[layout]) do assert(snapshot[k]==v[3]..":"..v[4],zone..": the saved position of "..k.." was not rewritten") end
  -- (b) deterministic: further refreshes change nothing
  local a1={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do a1[k]={Rendered(R.frames[k])} end
  for n=1,5 do C.Refresh(true) end
@@ -879,19 +879,19 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  R.statsOpen=false;saved.Effects={R.layout.rects.Effects[1],R.layout.rects.Effects[2]};SaveAll(layout,saved);Relayout()
  -- (e) seven spells with a saved Equipment card
  local oldSpells=FieldKitLoadout.spells;FieldKitLoadout.spells={};for i=1,7 do table.insert(FieldKitLoadout.spells,{name="S"..i,rank="R",rankValue=1,bonuses={},upgrades={}}) end
- FieldKitDB.loadoutTab=2;C.Refresh(true);C.Refresh(true);Apart(zone.." seven spells, all cards saved")
- FieldKitLoadout.spells=oldSpells;FieldKitDB.loadoutTab=1
+ FieldKitRebornDB.loadoutTab=2;C.Refresh(true);C.Refresh(true);Apart(zone.." seven spells, all cards saved")
+ FieldKitLoadout.spells=oldSpells;FieldKitRebornDB.loadoutTab=1
  -- (f) the card dropped last has priority: drop Effects onto Stats, the others give way, Effects stays where it was dropped
  saved.Effects={saved.Stats[1],saved.Stats[2]+40};SaveAll(layout,saved);Relayout()
  R.NoteMoved("FieldKitReferencePanelEffects");C.Refresh(true);C.Refresh(true)
  Apart(zone.." Effects dropped onto Bonuses")
  local dl,dt=Rendered(R.frames.Effects);assert(math.abs(dl-saved.Effects[1])<.5 and math.abs(dt-saved.Effects[2])<.5,zone..": the card dropped last stays exactly where it was dropped")
  -- (g) option: overlap allowed -> nothing is displaced
- FieldKitDB.zoneThemeOverlap=true;C.Refresh(true);C.Refresh(true);dl,dt=Rendered(R.frames.Stats)
+ FieldKitRebornDB.zoneThemeOverlap=true;C.Refresh(true);C.Refresh(true);dl,dt=Rendered(R.frames.Stats)
  assert(math.abs(dl-saved.Stats[1])<.5 and math.abs(dt-saved.Stats[2])<.5,zone..": with overlap allowed no card is displaced")
- FieldKitDB.zoneThemeOverlap=false;R.lastMoved=nil
+ FieldKitRebornDB.zoneThemeOverlap=false;R.lastMoved=nil
  -- clean up
- FieldKitDB.zoneThemePositions[layout]=nil;Unstage();R.statsOpen=false;FieldKitStatsFrame.rows=realRows;Relayout()
+ FieldKitRebornDB.zoneThemePositions[layout]=nil;Unstage();R.statsOpen=false;FieldKitStatsFrame.rows=realRows;Relayout()
 end
 
 -- Six damage categories: one row geometry, icon column, alignment never leaks between categories
@@ -933,10 +933,10 @@ for _,case in ipairs({{"elwynn",true},{"naxx",false}}) do
  local M=FieldKitThemeMinimap
  assert((M.GroupOwner()==H.identity)==viaIdentity,zone..": the group owner is the identity card only when the map has no art of its own")
  assert(Minimap:GetScript("OnDragStart")==nil and Minimap:GetScript("OnDragStop")==nil and Minimap:GetScript("OnMouseDown")==nil and Minimap:GetScript("OnMouseUp")==nil,zone..": no FieldKit script on the native map")
- FieldKitDB.windowsLocked=false;this=M.root;M.root:GetScript("OnDragStart")()
+ FieldKitRebornDB.windowsLocked=false;this=M.root;M.root:GetScript("OnDragStart")()
  assert(M.GroupOwner().azsMoving and (viaIdentity==not M.root.azsMoving),zone..": a drag reaching the container moves the owner of the group")
  M.root:GetScript("OnDragStop")();assert(not H.identity.azsMoving and not M.root.azsMoving,zone..": and ends cleanly")
- FieldKitDB.windowsLocked=true;M.root:GetScript("OnDragStart")();assert(not H.identity.azsMoving and not M.root.azsMoving,zone..": locked HUD: nothing moves");FieldKitDB.windowsLocked=false
+ FieldKitRebornDB.windowsLocked=true;M.root:GetScript("OnDragStart")();assert(not H.identity.azsMoving and not M.root.azsMoving,zone..": locked HUD: nothing moves");FieldKitRebornDB.windowsLocked=false
  -- zoom buttons: first click, both ways, bounded
  local zoom=3;Minimap.GetZoom=function() return zoom end;Minimap.SetZoom=function(_,v) zoom=v end
  for n=1,3 do C.Refresh(true) end
@@ -950,9 +950,9 @@ print("Map group owner, zoom buttons and native map scripts passed (synthetic)")
 
 -- alpha.21: real screen edges (letterboxed canvas), manual placement without artificial margin, mouse coverage of the map.
 for _,zone in ipairs({"elwynn","naxx"}) do
- C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
- R.statsOpen=false;FieldKitDB.loadoutTab=1;R.lastMoved=nil
- local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+ C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+ R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;R.lastMoved=nil
+ local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
  local saved={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local r=R.layout.rects[k];saved[k]={r[1],r[2]} end
  SaveAll(layout,saved);Stage()
  local LETTERBOX=17 -- the canvas is fitted into the screen: the real screen reaches 17 px above it
@@ -962,7 +962,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  assert(math.abs(st+LETTERBOX)<.01 and math.abs(sb-(UIH-LETTERBOX))<.01 and sr>R.layout.size[1],zone..": bounds are those of the REAL screen, not of the canvas ("..st..","..sb..")")
  -- ref y of the real screen top is -17: a pinned card whose DRAWN art touches the very top edge must stay there
  local n=OP[R.key].Effects;local h=R.layout.rects.Effects[4]
- local function PlaceEffects(frameTopScreen) FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]={"TOPLEFT","TOPLEFT",R.layout.rects.Effects[1],-frameTopScreen};Relayout() end
+ local function PlaceEffects(frameTopScreen) FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]={"TOPLEFT","TOPLEFT",R.layout.rects.Effects[1],-frameTopScreen};Relayout() end
  local topScreen=-n[2] -- frame top such that the drawn top is exactly the screen top (screen y 0)
  PlaceEffects(topScreen);C.Refresh(true);C.Refresh(true)
  local l,t=Rendered(R.frames.Effects);assert(math.abs((t+n[2])-0)<.01,zone..": art flush with the top screen edge is accepted ("..(t+n[2])..")")
@@ -971,7 +971,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  local bottomTop=UIH+n[4]-h;PlaceEffects(bottomTop);C.Refresh(true);C.Refresh(true)
  l,t=Rendered(R.frames.Effects);assert(math.abs((t+h-n[4])-UIH)<.01 and (R.shift.Effects or 0)==0,zone..": art flush with the bottom screen edge is accepted")
  -- dropped beyond the edge: snapped back flush, saved position follows, no artificial margin
- local a=FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"];a[4]=-(bottomTop+40);R.frames.Effects:ClearAllPoints();R.frames.Effects:SetPoint(a[1],UIParent,a[2],a[3],a[4])
+ local a=FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"];a[4]=-(bottomTop+40);R.frames.Effects:ClearAllPoints();R.frames.Effects:SetPoint(a[1],UIParent,a[2],a[3],a[4])
  R.NoteMoved("FieldKitReferencePanelEffects");l,t=Rendered(R.frames.Effects)
  assert(math.abs((t+h-n[4])-UIH)<.01 and math.abs(a[4]+bottomTop)<.01,zone..": a drop beyond the real edge snaps flush (saved "..a[4].." expected "..-bottomTop..")")
  a[4]=-(topScreen-40);R.frames.Effects:ClearAllPoints();R.frames.Effects:SetPoint(a[1],UIParent,a[2],a[3],a[4]);R.NoteMoved("FieldKitReferencePanelEffects")
@@ -979,12 +979,12 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  for name,r in pairs(hidden) do R.layout.rects[name]=r end
  R.canvas.GetTop=function() return UIH end -- (the automatic-placement checks below use an exact canvas)
  -- automatic placement keeps its visual margin from the real edge
- FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]=nil;SaveAll(layout,saved);Relayout()
+ FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanelEffects"]=nil;SaveAll(layout,saved);Relayout()
  FieldKitStatsFrame.rows=FakeStats(29);R.statsOpen=true;C.Refresh(true);C.Refresh(true)
  for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local o=Opaque2(k);assert(o[4]<=UIH-8+.5 and o[2]>=0,zone..": "..k.." automatic placement stays inside the real screen") end
  for _,k in ipairs({"Damage","Lairs","Accessories"}) do assert((R.shift[k] or 0)==0 and (R.shiftX[k] or 0)==0,zone..": "..k.." is not shoved around by Bonuses "..tostring(R.shift[k])..","..tostring(R.shiftX[k]).." stats="..table.concat({Rendered(R.frames.Stats)},",").." extra="..tostring(R.statsExtra).." acc="..table.concat({Rendered(R.frames.Accessories)},",")) end
  R.statsOpen=false;FieldKitStatsFrame.rows=realStatsRows
- R.canvas.GetTop=nil;FieldKitDB.zoneThemePositions[layout]=nil;Unstage();Relayout()
+ R.canvas.GetTop=nil;FieldKitRebornDB.zoneThemePositions[layout]=nil;Unstage();Relayout()
  -- mouse coverage of the native map: nothing of FieldKit sits over it except the zoom buttons and the art frame itself
  local M=FieldKitThemeMinimap;C.Refresh(true)
  local covering={}
@@ -1016,13 +1016,13 @@ local function StagePart(f)
  table.insert(PARTS,f)
 end
 for _,zone in ipairs({"elwynn","naxx"}) do
- C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
- R.statsOpen=false;FieldKitDB.loadoutTab=1;R.lastMoved=nil;FieldKitThemeMinimap.probe.ring=false
- local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+ C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+ R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;R.lastMoved=nil;FieldKitThemeMinimap.probe.ring=false
+ local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
  local saved={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local r=R.layout.rects[k];saved[k]={r[1],r[2]} end
  -- the player block ("Aethus") and the identity card were moved by the user, exactly as in the captured SavedVariables
  local movedTo={FieldKitThemeIdentity={1205,164},FieldKitThemeVitality={8,3}}
- for name,pos in pairs(movedTo) do FieldKitDB.zoneThemePositions[layout][name]={"TOPLEFT","TOPLEFT",pos[1],-pos[2]} end
+ for name,pos in pairs(movedTo) do FieldKitRebornDB.zoneThemePositions[layout][name]={"TOPLEFT","TOPLEFT",pos[1],-pos[2]} end
  SaveAll(layout,saved);Stage();StagePart(H.identity);StagePart(H.healthRoot)
  Relayout()
  local report={};local lines=R.Probe()
@@ -1044,7 +1044,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
   assert(last==false,zone..": "..k.." is not clamped by its technical rectangle");f.SetClampedToScreen=nil
  end
  for _,p in ipairs(PARTS) do p.GetLeft=nil;p.GetTop=nil;p.GetEffectiveScale=nil end;PARTS={}
- FieldKitDB.zoneThemePositions[layout]=nil;Unstage();Relayout()
+ FieldKitRebornDB.zoneThemePositions[layout]=nil;Unstage();Relayout()
 end
 -- probes: runtime switches for the map, never saved
 do
@@ -1073,9 +1073,9 @@ print("Live protected obstacles, clamp off and map/card probes passed (synthetic
 
 -- alpha.23: the four real screen edges, with a UIParent measurement that is ~10% short (as the right/top limits were on the client).
 for _,zone in ipairs({"elwynn","naxx"}) do
- C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
- R.statsOpen=false;FieldKitDB.loadoutTab=1;R.lastMoved=nil
- local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+ C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+ R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;R.lastMoved=nil
+ local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
  local saved={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local r=R.layout.rects[k];saved[k]={r[1],r[2]} end
  SaveAll(layout,saved);Stage()
  -- UIParent reports a scale that makes its width*scale 10% short; WorldFrame reports the real screen
@@ -1087,7 +1087,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  Relayout()
  for _,kind in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do
   local n=OP[R.key][kind];local f=R.frames[kind];local rect=R.CardRect(kind,R.layout);local cw,ch=rect[3],rect[4]
-  local function Drop(x,top) FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanel"..kind]={"TOPLEFT","TOPLEFT",x,-top};Relayout();R.NoteMoved("FieldKitReferencePanel"..kind);C.Refresh(true);C.Refresh(true);return Rendered(f) end
+  local function Drop(x,top) FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanel"..kind]={"TOPLEFT","TOPLEFT",x,-top};Relayout();R.NoteMoved("FieldKitReferencePanel"..kind);C.Refresh(true);C.Refresh(true);return Rendered(f) end
   -- right edge: dropped beyond it -> art flush with the real right edge, and a drop flush with it is left alone
   local l,t=Drop(UIW-cw+n[3]+60,300);assert(math.abs((l+cw-n[3])-UIW)<.5,zone.." "..kind..": right edge reached ("..(l+cw-n[3])..")")
   l,t=Drop(UIW-cw+n[3],300);assert(math.abs((l+cw-n[3])-UIW)<.5 and (R.shiftX[kind] or 0)==0,zone.." "..kind..": flush with the right edge stays")
@@ -1098,11 +1098,11 @@ for _,zone in ipairs({"elwynn","naxx"}) do
   l,t=Drop(400,UIH-ch+n[4]+60);assert(math.abs((t+ch-n[4])-UIH)<.5,zone.." "..kind..": bottom edge reached")
   l,t=Drop(-n[1]-60,300);assert(math.abs((l+n[1])-0)<.5,zone.." "..kind..": left edge reached")
   -- persistence: the saved position is the snapped one
-  local a=FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanel"..kind];assert(math.abs(a[3]+n[1])<.5,zone.." "..kind..": the saved position follows the snap ("..a[3]..")")
+  local a=FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanel"..kind];assert(math.abs(a[3]+n[1])<.5,zone.." "..kind..": the saved position follows the snap ("..a[3]..")")
  end
  for name,r in pairs(hidden) do R.layout.rects[name]=r end
  UIParent.GetEffectiveScale=oldScale;WorldFrame.GetEffectiveScale=nil;WorldFrame.width=nil;WorldFrame.height=nil
- FieldKitDB.zoneThemePositions[layout]=nil;Unstage();Relayout()
+ FieldKitRebornDB.zoneThemePositions[layout]=nil;Unstage();Relayout()
 end
 -- the gear diagnostics only read state: nothing about the gear changes
 do
@@ -1139,7 +1139,7 @@ do
  local before=table.getn(messages);SlashCmdList.FKMAPSTATE("");assert(table.getn(messages)==before+1 and string.find(messages[table.getn(messages)],"diagnostic error",1,true) and string.find(messages[table.getn(messages)],"boom",1,true) and opened==0,"a failing diagnostic prints its error")
  C.Command=broken
  -- ordinary commands still behave
- FieldKitDB.windowsLocked=false;SlashCmdList.FieldKit("lock");assert(FieldKitDB.windowsLocked==true,"/fieldkit lock still locks");SlashCmdList.FieldKit("unlock");assert(FieldKitDB.windowsLocked==false,"/fieldkit unlock still unlocks")
+ FieldKitRebornDB.windowsLocked=false;SlashCmdList.FieldKit("lock");assert(FieldKitRebornDB.windowsLocked==true,"/fieldkit lock still locks");SlashCmdList.FieldKit("unlock");assert(FieldKitRebornDB.windowsLocked==false,"/fieldkit unlock still unlocks")
  SlashCmdList.FieldKit("");assert(opened==1,"plain /fieldkit still opens the settings window");SlashCmdList.FieldKit("themes status")
  SlashCmdList.FieldKit("diag api")
  FieldKitUI.Toggle=toggle;DEFAULT_CHAT_FRAME.AddMessage=oldAdd;C.Set("zoneThemes",false)
@@ -1173,7 +1173,7 @@ do
   -- a re-layout that resets the owner's level is corrected once
   o(owner,3);C.Refresh(true);assert(Top({owner,Minimap,gear})[1]==gear,zone..": corrected after the owner was re-levelled")
   -- the interactions that belong to the owner are intact
-  FieldKitDB.windowsLocked=false;this=owner;if owner==M.root then M.root:GetScript("OnDragStart")() else assert(owner:GetScript("OnDragStart"),zone..": the identity card keeps its drag") end
+  FieldKitRebornDB.windowsLocked=false;this=owner;if owner==M.root then M.root:GetScript("OnDragStart")() else assert(owner:GetScript("OnDragStart"),zone..": the identity card keeps its drag") end
   if owner==M.root then M.root:GetScript("OnDragStop")() end
   click(M.zoomIn);click(M.zoomOut)
   -- theme off: the native map gets its own level back
@@ -1287,15 +1287,15 @@ do
   end
  end
  for _,zone in ipairs({"elwynn","naxx"}) do
-  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
-  R.statsOpen=false;FieldKitDB.loadoutTab=1;R.lastMoved=nil;R.lastParty=nil
-  local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+  R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;R.lastMoved=nil;R.lastParty=nil
+  local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
   local saved={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local r=R.layout.rects[k];saved[k]={r[1],r[2]} end
   SaveAll(layout,saved);Stage()
   local cards={};for i=1,4 do local f=getglobal("FieldKitPartyCard"..i);assert(f,"party card "..i);f:SetWidth(280);f:SetHeight(90);StageCard(f);f:Hide();cards[i]=f end
   Relayout()
   C.Refresh(true);C.Refresh(true);C.Refresh(true) -- let the engine settle before measuring the reference
-  local legacyBefore={};for k,v in pairs(FieldKitDB.frameAnchors or {}) do legacyBefore[k]=v[3]..":"..v[4] end
+  local legacyBefore={};for k,v in pairs(FieldKitRebornDB.frameAnchors or {}) do legacyBefore[k]=v[3]..":"..v[4] end
   local baseline={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do baseline[k]={Rendered(R.frames[k])} end
   local dmg=Opaque2("Damage")
   -- 0 members: nothing shown, nothing reserved
@@ -1308,7 +1308,7 @@ do
    Checked(zone..": "..count.." member(s)",cards)
    -- alpha.30 priority: the first teammate card keeps its preferred place, the main cards give way; saved positions untouched
    local fl,ft=Rendered(cards[1]);assert(math.abs(fl-(dmg[1]+18))<.5 and math.abs(ft-(dmg[2]+18))<.5,zone..": the teammate card keeps its preferred place with "..count.." member(s)")
-   for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local v=FieldKitDB.zoneThemePositions[layout]["FieldKitReferencePanel"..k];assert(v and v[3]==saved[k][1] and v[4]==-saved[k][2],zone..": the saved position of "..k.." is never rewritten by the engine") end
+   for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local v=FieldKitRebornDB.zoneThemePositions[layout]["FieldKitReferencePanel"..k];assert(v and v[3]==saved[k][1] and v[4]==-saved[k][2],zone..": the saved position of "..k.." is never rewritten by the engine") end
    -- stable: no repositioning loop
    local snap={};for i=1,4 do snap[i]={Rendered(cards[i])} end
    for n=1,5 do C.Refresh(true) end
@@ -1331,24 +1331,24 @@ do
   cards[1].azsMoving=nil
   -- manual move is saved by the shared store, wins over the engine, and is read back after a reload
   Place(cards[1],dmg[1]+400,dmg[2]+250);local savedOk=C.Remember(cards[1]);assert(savedOk,zone..": the drop is stored")
-  local stored=FieldKitDB.zoneThemePositions[layout].FieldKitPartyCard1;assert(stored and stored[3]>0,zone..": stored in the shared position store")
+  local stored=FieldKitRebornDB.zoneThemePositions[layout].FieldKitPartyCard1;assert(stored and stored[3]>0,zone..": stored in the shared position store")
   C.Refresh(true);local ml,mt=Rendered(cards[1]);assert(R.lastParty=="Party1",zone..": the moved card is remembered as last moved")
   Place(cards[1],5,5) -- "reload": the legacy code puts the card back at its old place
   cards[1].fieldkitApplied=nil;cards[1].fieldkitBase=nil;C.Refresh(true);C.Refresh(true)
   local rl,rt=Rendered(cards[1]);assert(math.abs(rl-ml)<.5 and math.abs(rt-mt)<.5,zone..": the saved position is applied again after a reload ("..rl..","..rt.." vs "..ml..","..mt..")")
   -- old legacy values untouched
-  for k,v in pairs(FieldKitDB.frameAnchors or {}) do assert(legacyBefore[k]==v[3]..":"..v[4],zone..": legacy anchor "..k.." untouched") end
+  for k,v in pairs(FieldKitRebornDB.frameAnchors or {}) do assert(legacyBefore[k]==v[3]..":"..v[4],zone..": legacy anchor "..k.." untouched") end
   -- Bonuses expands while teammate cards are shown: nobody overlaps, Bonuses is not displaced by them
   FieldKitStatsFrame.rows=FakeStats(14)
   for i=1,2 do Place(cards[i],dmg[1]+20+i*10,dmg[2]+20+i*10);cards[i].fieldkitBase=nil;cards[i]:Show() end
-  FieldKitDB.zoneThemePositions[layout].FieldKitPartyCard1=nil
+  FieldKitRebornDB.zoneThemePositions[layout].FieldKitPartyCard1=nil
   R.statsOpen=true;C.Refresh(true);C.Refresh(true)
   Checked(zone..": Bonuses expanded with teammate cards",cards)
   R.statsOpen=false;FieldKitStatsFrame.rows=realStatsRows;C.Refresh(true)
   -- overlap option on: nothing is displaced
-  FieldKitDB.zoneThemeOverlap=true;C.Refresh(true);assert(cards[1].fieldkitApplied==nil and cards[2].fieldkitApplied==nil,zone..": overlap allowed, nothing displaced");FieldKitDB.zoneThemeOverlap=false
+  FieldKitRebornDB.zoneThemeOverlap=true;C.Refresh(true);assert(cards[1].fieldkitApplied==nil and cards[2].fieldkitApplied==nil,zone..": overlap allowed, nothing displaced");FieldKitRebornDB.zoneThemeOverlap=false
   -- theme off: cards are back on their own place
-  for i=1,4 do cards[i]:Hide() end;FieldKitDB.zoneThemePositions[layout].FieldKitPartyCard1=nil
+  for i=1,4 do cards[i]:Hide() end;FieldKitRebornDB.zoneThemePositions[layout].FieldKitPartyCard1=nil
   C.Set("zoneThemes",false)
   for i=1,4 do cards[i].fieldkitApplied=nil;UnstageCard(cards[i]) end
   Unstage()
@@ -1381,9 +1381,9 @@ do
  local function Stage1(f) f.GetLeft=function(self) local l=Rendered(self);return l end;f.GetTop=function(self) local _,t=Rendered(self);return UIH-t end;f.GetEffectiveScale=function() return 1 end end
  local function Put(f,x,y) f:ClearAllPoints();f:SetPoint("TOPLEFT",UIParent,"TOPLEFT",x,-y) end
  for _,zone in ipairs({"elwynn","naxx"}) do
-  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
-  FieldKitDB.partyCards=false;FieldKitDB.replacePartyFrames=false;FieldKit_SetLanguage("en")
-  local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+  FieldKitRebornDB.partyCards=false;FieldKitRebornDB.replacePartyFrames=false;FieldKit_SetLanguage("en")
+  local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
   Stage()
   for i=1,4 do Stage1(P.frames[i]);P.frames[i]:SetWidth(280);P.frames[i]:SetHeight(100) end
   -- empty group: no card, native frames untouched
@@ -1393,15 +1393,15 @@ do
   P.Update()
   assert(P.frames[1]:IsShown() and P.frames[2]:IsShown() and not P.frames[3]:IsShown() and not P.frames[4]:IsShown(),zone..": two members, two cards")
   assert(not natives[1]:IsShown() and not natives[2]:IsShown(),zone..": native frames are not shown together with the cards")
-  assert(FieldKitDB.partyCards==false and FieldKitDB.replacePartyFrames==false,zone..": saved preferences are not modified")
+  assert(FieldKitRebornDB.partyCards==false and FieldKitRebornDB.replacePartyFrames==false,zone..": saved preferences are not modified")
   assert(P.frames[1].nameText:GetText()=="Denza" and P.frames[1].infoText:GetText()=="Lvl 12 Mage",zone..": name, then level and class on the secondary line ("..tostring(P.frames[1].infoText:GetText())..")")
   local c1=P.frames[1]
   assert(c1.hpBar:IsShown() and c1.hpBar.text:GetText()=="400 / 800 (50%)",zone..": health bar with current / maximum and percentage from the unit")
   assert(math.abs(c1.hpBar:GetValue()-.5)<1e-9,zone..": the bar is filled with the REAL fraction")
   assert(c1.mpBar:IsShown() and math.abs(c1.mpBar:GetValue()-.3)<1e-9 and c1.mpBar:GetHeight()==4,zone..": thin resource bar from the unit")
-  FieldKitDB.partyDetail=3;P.Update();assert(c1.mpBar.text:GetText()=="30 / 100" and c1:GetHeight()==(P.UsesArt() and 63 or 76) and P.frames[2]:GetHeight()==(P.UsesArt() and 63 or 76),zone..": full detail: resource values, all cards the same size")
-  FieldKitDB.partyDetail=1;P.Update();assert(c1:GetHeight()==(P.UsesArt() and 40 or 52) and not c1.mpBar:IsShown() and not c1.infoText:IsShown() and c1.hpBar:IsShown() and P.frames[2]:GetHeight()==(P.UsesArt() and 40 or 52),zone..": compact detail: name and life only, all cards the same size")
-  FieldKitDB.partyDetail=2;P.Update()
+  FieldKitRebornDB.partyDetail=3;P.Update();assert(c1.mpBar.text:GetText()=="30 / 100" and c1:GetHeight()==(P.UsesArt() and 63 or 76) and P.frames[2]:GetHeight()==(P.UsesArt() and 63 or 76),zone..": full detail: resource values, all cards the same size")
+  FieldKitRebornDB.partyDetail=1;P.Update();assert(c1:GetHeight()==(P.UsesArt() and 40 or 52) and not c1.mpBar:IsShown() and not c1.infoText:IsShown() and c1.hpBar:IsShown() and P.frames[2]:GetHeight()==(P.UsesArt() and 40 or 52),zone..": compact detail: name and life only, all cards the same size")
+  FieldKitRebornDB.partyDetail=2;P.Update()
   assert(c1:GetWidth()==300 and c1:GetHeight()==(P.UsesArt() and 57 or 68),zone..": standard card "..c1:GetWidth().."x"..c1:GetHeight())
   for _,row in ipairs(c1.rows) do assert(not row:IsShown(),zone..": the tall generic rows are not used") end
   assert(c1.hpBar:GetFrameLevel()>c1:GetFrameLevel() and c1.mpBar:GetFrameLevel()>c1:GetFrameLevel(),zone..": bars are explicitly above the card (children do not follow a parent's level)")
@@ -1444,20 +1444,20 @@ do
   local spots={{300,200},{900,260},{300,560},{1000,620}}
   for i=1,4 do Put(P.frames[i],spots[i][1],spots[i][2]);assert(C.Remember(P.frames[i]),zone..": card "..i.." is stored on its own") end
   C.Refresh(true);C.Refresh(true)
-  for i=1,4 do local v=FieldKitDB.zoneThemePositions[layout]["FieldKitPartyCard"..i];assert(v and v[3]==spots[i][1] and v[4]==-spots[i][2],zone..": independent saved position "..i) end
+  for i=1,4 do local v=FieldKitRebornDB.zoneThemePositions[layout]["FieldKitPartyCard"..i];assert(v and v[3]==spots[i][1] and v[4]==-spots[i][2],zone..": independent saved position "..i) end
   -- a main card put on a teammate card gives way; the teammate card keeps its place
-  FieldKitDB.zoneThemePositions[layout].FieldKitReferencePanelDamage={"TOPLEFT","TOPLEFT",spots[1][1],-spots[1][2]};Relayout();C.Refresh(true)
+  FieldKitRebornDB.zoneThemePositions[layout].FieldKitReferencePanelDamage={"TOPLEFT","TOPLEFT",spots[1][1],-spots[1][2]};Relayout();C.Refresh(true)
   local od=Opaque2("Damage");local dl,dt,dw,dh=od[1],od[2],od[3]-od[1],od[4]-od[2];local pl,pt,pw,ph=Rendered(P.frames[1])
   assert(not (math.min(dl+dw,pl+pw)-math.max(dl,pl)>0 and math.min(dt+dh,pt+ph)-math.max(dt,pt)>6),zone..": a main card dropped on a teammate card gives way")
   assert(math.abs(pl-spots[1][1])<.5 and math.abs(pt-spots[1][2])<.5,zone..": the teammate card keeps its place")
-  local saved=FieldKitDB.zoneThemePositions[layout].FieldKitReferencePanelDamage;assert(saved[3]==spots[1][1] and saved[4]==-spots[1][2],zone..": the engine never rewrites the saved position of the main card")
+  local saved=FieldKitRebornDB.zoneThemePositions[layout].FieldKitReferencePanelDamage;assert(saved[3]==spots[1][1] and saved[4]==-spots[1][2],zone..": the engine never rewrites the saved position of the main card")
   local other=zone=="elwynn" and "naxx:complete:reference" or "elwynn:complete:reference"
-  assert(FieldKitDB.zoneThemePositions[other]==nil or FieldKitDB.zoneThemePositions[other].FieldKitPartyCard1==nil,zone..": positions are stored per layout")
+  assert(FieldKitRebornDB.zoneThemePositions[other]==nil or FieldKitRebornDB.zoneThemePositions[other].FieldKitPartyCard1==nil,zone..": positions are stored per layout")
   -- alpha.32: one component, fixed geometry, nothing truncated or overlapping, player card, size and visibility options
   -- alpha.33/34: the border art follows the card, every widget sits inside the content box, at 3 detail levels x 3 scales.
   -- Elwynn: the frame is the Aethus art (9 tiles that exactly cover the card, skin hidden). Naxx: the zone material skin.
   for detail=1,3 do for _,scale in ipairs({70,100,130}) do
-   FieldKitDB.partyDetail=detail;FieldKitDB.partyCardScale=scale;P.Update()
+   FieldKitRebornDB.partyDetail=detail;FieldKitRebornDB.partyCardScale=scale;P.Update()
    local art=P.UsesArt();assert(art==(zone=="elwynn"),zone..": Elwynn uses the Aethus art, Naxx the zone material")
    local spec=(art and P.artDetail or P.detail)[detail]
    for i=1,4 do
@@ -1494,33 +1494,33 @@ do
    for i=2,4 do local a,c=P.frames[1].fieldkitLayout,P.frames[i].fieldkitLayout
     assert(a.width==c.width and a.height==c.height and a.hp[2]==c.hp[2] and a.box[1]==c.box[1] and a.portrait[3]==c.portrait[3],zone..": card "..i.." has the same structure as card 1") end
   end end
-  FieldKitDB.partyCardScale=100
-  FieldKitDB.partyDetail=2;P.Update()
+  FieldKitRebornDB.partyCardScale=100
+  FieldKitRebornDB.partyDetail=2;P.Update()
   -- history icons: only spells of the local spellbook, only at detail 2 and 3
   local H=FieldKitGroupHistory
   GetSpellName=function(i) return i==1 and "Frostbolt" or nil end;GetSpellTexture=function(i) return i==1 and "Interface\\Icons\\Spell_Frost_FrostBolt02" or nil end
   SPELLLOGOTHEROTHER="%s's %s hits %s for %d.";H.formats=nil;H.Clear()
-  FieldKitDB.partyHistory=true;H.Sync();H.icons=nil
+  FieldKitRebornDB.partyHistory=true;H.Sync();H.icons=nil
   H.Handle("x","Denza's Frostbolt hits Boar for 40.");H.Handle("x","Denza's Unknown Spell hits Boar for 40.")
   P.Update();assert(P.frames[1].fieldkitIconCount==1 and P.frames[1].historyIcons[1]:IsShown() and not P.frames[1].historyIcons[2]:IsShown(),zone..": one icon (the other spell is not in the local spellbook)")
-  FieldKitDB.partyHistoryIcons=false;P.Update();assert(P.frames[1].fieldkitIconCount==0 and not P.frames[1].historyIcons[1]:IsShown(),zone..": icons option off")
-  FieldKitDB.partyHistoryIcons=true;FieldKitDB.partyDetail=1;P.Update();assert(P.frames[1].fieldkitIconCount==0,zone..": compact detail has no icon line");FieldKitDB.partyDetail=2
-  FieldKitDB.partyHistory=false;H.Sync();GetSpellName=nil;GetSpellTexture=nil;P.Update()
+  FieldKitRebornDB.partyHistoryIcons=false;P.Update();assert(P.frames[1].fieldkitIconCount==0 and not P.frames[1].historyIcons[1]:IsShown(),zone..": icons option off")
+  FieldKitRebornDB.partyHistoryIcons=true;FieldKitRebornDB.partyDetail=1;P.Update();assert(P.frames[1].fieldkitIconCount==0,zone..": compact detail has no icon line");FieldKitRebornDB.partyDetail=2
+  FieldKitRebornDB.partyHistory=false;H.Sync();GetSpellName=nil;GetSpellTexture=nil;P.Update()
   -- the player's own card: same component, same size, optional
   assert(P.frames[0] and not P.frames[0]:IsShown(),zone..": own card off by default")
-  FieldKitDB.partyPlayerCard=true;Stage1(P.frames[0]);P.Update()
+  FieldKitRebornDB.partyPlayerCard=true;Stage1(P.frames[0]);P.Update()
   assert(P.frames[0]:IsShown() and P.frames[0].unit=="player" and P.frames[0]:GetWidth()==300 and P.frames[0]:GetHeight()==P.frames[1]:GetHeight(),zone..": own card shown with the very same structure and size")
   assert(P.frames[0].hpBar:IsShown() and P.frames[0].nameText:GetText()~=nil,zone..": own card has its bars")
   local found=false;for _,e in ipairs(R.PartyFrames()) do if e[2]==P.frames[0] then found=true end end;assert(found,zone..": own card is an element of the placement engine")
   -- size option
-  FieldKitDB.partyCardScale=130;P.Update();assert(P.frames[1]:GetScale()==1.3 and P.frames[0]:GetScale()==1.3,zone..": card size option")
-  FieldKitDB.partyCardScale=70;P.Update();assert(P.frames[2]:GetScale()==.7)
-  FieldKitDB.partyCardScale=100;P.Update()
-  FieldKitDB.partyPlayerCard=false;P.Update();assert(not P.frames[0]:IsShown(),zone..": own card hidden again")
+  FieldKitRebornDB.partyCardScale=130;P.Update();assert(P.frames[1]:GetScale()==1.3 and P.frames[0]:GetScale()==1.3,zone..": card size option")
+  FieldKitRebornDB.partyCardScale=70;P.Update();assert(P.frames[2]:GetScale()==.7)
+  FieldKitRebornDB.partyCardScale=100;P.Update()
+  FieldKitRebornDB.partyPlayerCard=false;P.Update();assert(not P.frames[0]:IsShown(),zone..": own card hidden again")
   -- show / hide group cards: native frames stay when the cards are hidden
-  FieldKitDB.partyShow=false;P.Update()
+  FieldKitRebornDB.partyShow=false;P.Update()
   for i=1,4 do assert(not P.frames[i]:IsShown() and P.stock[i]==nil,zone..": group cards hidden: no card, native hooks released") end
-  FieldKitDB.partyShow=true;P.Update();assert(P.frames[1]:IsShown(),zone..": group cards shown again")
+  FieldKitRebornDB.partyShow=true;P.Update();assert(P.frames[1]:IsShown(),zone..": group cards shown again")
   -- alpha.35: the life bar is a flat fill, proportional and exact at 100 / 99 / 80 / 50 / 1 %, outline above the fill
   for _,pct in ipairs({100,99,80,50,1}) do
    members[1].max=800;members[1].hp=members[1].max*pct/100;P.Update()
@@ -1535,7 +1535,7 @@ do
   members[1].hp=400;members[1].max=800;P.Update()
   -- alpha.36: life bar with a whole-pixel size, one anchor, an opaque fill and a forced fill refresh; six values x four scales
   for _,scale in ipairs({70,90,100,130}) do
-   FieldKitDB.partyCardScale=scale
+   FieldKitRebornDB.partyCardScale=scale
    for _,pct in ipairs({100,99,80,50,1,0}) do
     members[1].max=800;members[1].hp=members[1].max*pct/100
     local alphaSeen;local bar=P.frames[1].hpBar;local oldColor=bar.SetStatusBarColor
@@ -1552,18 +1552,18 @@ do
     assert(c1:GetScale()==scale/100,tag..": scale")
    end
   end
-  FieldKitDB.partyCardScale=100;members[1].hp=400;members[1].max=800;P.Update()
+  FieldKitRebornDB.partyCardScale=100;members[1].hp=400;members[1].max=800;P.Update()
   -- a size change (detail level) refreshes the fill at the new width
-  FieldKitDB.partyDetail=3;members[1].hp=800;P.Update();local b1=P.frames[1].hpBar;local k3=b1.fieldkitSize;assert(b1:GetValue()==1,zone..": full bar at detail 3")
-  FieldKitDB.partyDetail=1;P.Update();assert(b1.fieldkitSize~=k3 and b1:GetValue()==1,zone..": the full bar is refreshed after a size change ("..tostring(k3).." -> "..tostring(b1.fieldkitSize)..")")
-  FieldKitDB.partyDetail=2;members[1].hp=400;P.Update()
+  FieldKitRebornDB.partyDetail=3;members[1].hp=800;P.Update();local b1=P.frames[1].hpBar;local k3=b1.fieldkitSize;assert(b1:GetValue()==1,zone..": full bar at detail 3")
+  FieldKitRebornDB.partyDetail=1;P.Update();assert(b1.fieldkitSize~=k3 and b1:GetValue()==1,zone..": the full bar is refreshed after a size change ("..tostring(k3).." -> "..tostring(b1.fieldkitSize)..")")
+  FieldKitRebornDB.partyDetail=2;members[1].hp=400;P.Update()
   local probe=P.BarProbe();assert(table.getn(probe)>=1 and string.find(probe[1],"bar",1,true),zone..": /fieldkit barprobe reports the real bar size and value")
   -- theme off: native frames come back, the cards go
   C.Set("zoneThemes",false);P.Update()
   for i=1,4 do assert(not P.frames[i]:IsShown() and P.stock[i]==nil,zone..": theme off: no FieldKit card, native hooks released") end
   for i=1,4 do if M("party"..i) then assert(natives[i]:IsShown(),zone..": theme off: the native frame of an existing member is back") end end
   assert(P.frames[1]:GetFrameStrata()=="LOW" or not P.frames[1]:IsShown(),zone..": legacy strata back")
-  FieldKitDB.zoneThemePositions[layout]=nil;members={};P.Update()
+  FieldKitRebornDB.zoneThemePositions[layout]=nil;members={};P.Update()
   for i=1,4 do P.frames[i].GetLeft=nil;P.frames[i].GetTop=nil;P.frames[i].GetEffectiveScale=nil end;Unstage()
  end
  for k,v in pairs(old) do _G[k]=v end
@@ -1573,7 +1573,7 @@ print("Themed teammate cards: states, native replacement, strata, individual mov
 
 -- alpha.34: compact amounts, real damage per spell next to the share, the premium Damage header, the chat fill inside the frame.
 do
- local savedLang=FieldKitDB.language
+ local savedLang=FieldKitRebornDB.language
  FieldKit_SetLanguage("en")
  assert(R.Amount(nil)=="?" and R.Amount("x")=="?","a missing value is never turned into a number")
  assert(R.Amount(0)=="0" and R.Amount(950)=="950" and R.Amount(1250)=="1,250" and R.Amount(9999)=="9,999" and R.Amount(12400)=="12.4 k" and R.Amount(999000)=="999.0 k" and R.Amount(1200000)=="1.2 M" and R.Amount(-1250)=="-1,250","EN amounts")
@@ -1661,7 +1661,7 @@ print("Compact amounts, real damage per spell, premium Damage header and contain
 
 -- alpha.35: chat controls, overlap option layout, Damage header, bar fill.
 do
- local savedLang=FieldKitDB.language
+ local savedLang=FieldKitRebornDB.language
  FieldKit_SetLanguage("en")
  local chat=getglobal("ChatFrame1") or CreateFrame("Frame","ChatFrame1",UIParent)
  local calls={}
@@ -1687,7 +1687,7 @@ do
    local skin=R.chat.fieldkitSkin;local c=math.min(12,R.chat:GetWidth()/3,R.chat:GetHeight()/3);local _,_,_,bx=skin.base:GetPoint();assert(bx==c,"the fill is still inset by the corner cut")
    -- clicks on the first try, locked and unlocked; Shift variants; the copy window
    for _,locked in ipairs({false,true}) do
-    FieldKitDB.windowsLocked=locked;calls={};copies=0
+    FieldKitRebornDB.windowsLocked=locked;calls={};copies=0
     for _,b in ipairs(R.chatTools) do assert(b:IsShown() and b:GetWidth()>=22 and b:GetHeight()>=19,"hit area") end
     local by={};for _,b in ipairs(R.chatTools) do by[b.fieldkitChatTool]=b end
     click(by.up);click(by.down);click(by.bottom);click(by.copy)
@@ -1695,7 +1695,7 @@ do
     shiftDown=true;calls={};click(by.up);click(by.down);shiftDown=false
     assert(table.concat(calls,",")=="ScrollToTop,ScrollToBottom","Shift jumps to the top / the bottom")
    end
-   FieldKitDB.windowsLocked=false
+   FieldKitRebornDB.windowsLocked=false
    -- tooltips
    local text;local oldSet=GameTooltip.SetText;local oldOwner=GameTooltip.SetOwner;local oldShow=GameTooltip.Show
    GameTooltip.SetText=function(_,t) text=t end;GameTooltip.SetOwner=function() end;GameTooltip.Show=function() end
@@ -1719,11 +1719,11 @@ do
    assert(ob:GetWidth()==w and x==0 and y==-430,"full-width dedicated row at "..w.." px")
    assert(ob.fieldkitLabel:GetWidth()==w-32,"the label has the whole row")
   end
-  FieldKitDB.zoneThemeOverlap=false;C.Refresh(true)
+  FieldKitRebornDB.zoneThemeOverlap=false;C.Refresh(true)
   assert(ob.fieldkitLabel:GetText()=="Allow card overlap : Disabled","state in the label: "..tostring(ob.fieldkitLabel:GetText()))
-  click(ob);assert(FieldKitDB.zoneThemeOverlap==true and ob.fieldkitLabel:GetText()=="Allow card overlap : Enabled" and ob.fieldkitSelected==true,"immediate effect, label and gold state")
+  click(ob);assert(FieldKitRebornDB.zoneThemeOverlap==true and ob.fieldkitLabel:GetText()=="Allow card overlap : Enabled" and ob.fieldkitSelected==true,"immediate effect, label and gold state")
   FieldKit_SetLanguage("fr");C.Refresh(true);assert(ob.fieldkitLabel:GetText()=="Autoriser le chevauchement : Activé","FR label: "..tostring(ob.fieldkitLabel:GetText()))
-  FieldKit_SetLanguage("en");click(ob);assert(FieldKitDB.zoneThemeOverlap==false,"toggles back")
+  FieldKit_SetLanguage("en");click(ob);assert(FieldKitRebornDB.zoneThemeOverlap==false,"toggles back")
   -- nothing else of the page moved on top of it: the toggles stay above, the sliders below
   local sTitle=C.uiSliders[1].title;local _,_,_,_,sy=sTitle:GetPoint();assert(-sy>=430+36,"sliders are below the overlap row")
  end
@@ -1796,14 +1796,14 @@ print("Mode foot label clear of the info icon passed (synthetic)")
 do
  local function Snapshot(t) local out={} for k,v in pairs(t or {}) do out[k]=v end return out end
  for _,zone in ipairs({"elwynn","naxx"}) do
-  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
-  R.statsOpen=false;FieldKitDB.loadoutTab=1;C.Refresh(true)
+  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+  R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;C.Refresh(true)
   local acc=R.frames.Accessories;local base=R.layout.rects.Accessories
   local minN=zone=="naxx" and 3 or 1
   local oldSpells=FieldKitLoadout.spells;local oldItems=FieldKitLoadout.items
   local lastHeight=0;local heights={}
   assert(acc:GetHeight()==base[4],zone..": Equipment keeps its normal dimensions")
-  local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+  local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
   for _,count in ipairs({0,1,2,5,6,7,8,9,12}) do
    FieldKitLoadout.spells={};for i=1,count do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="Rank "..i,rankValue=i,bonuses={},upgrades={}}) end
    click(acc.cardTabs[2]);local N=R.accN;local tag=zone..": "..count.." spells"
@@ -1830,10 +1830,10 @@ do
   end
   assert(heights[1]<=heights[5] and heights[5]<heights[6] and heights[6]<heights[8] and heights[8]<heights[9] and heights[9]<heights[12],zone..": 1-2 compact, 3-5 intermediate, 6-8 higher, 9+ higher again")
   -- tab switches do not touch the saved positions; Equipment is back to its dimensions at once
-  local before=Snapshot(FieldKitDB.zoneThemePositions[layout])
+  local before=Snapshot(FieldKitRebornDB.zoneThemePositions[layout])
   click(acc.cardTabs[1]);assert(acc:GetHeight()==base[4] and acc.rows[1].label:GetText()~=nil,zone..": back on Equipment: normal height immediately")
   click(acc.cardTabs[2]);click(acc.cardTabs[1])
-  for k,v in pairs(Snapshot(FieldKitDB.zoneThemePositions[layout])) do assert(before[k]==v,zone..": changing tab never rewrites a saved position") end
+  for k,v in pairs(Snapshot(FieldKitRebornDB.zoneThemePositions[layout])) do assert(before[k]==v,zone..": changing tab never rewrites a saved position") end
   for _,k in ipairs({"Stats","Effects"}) do assert((R.shift[k] or 0)==0 and (R.shiftX[k] or 0)==0,zone..": "..k.." back at its preferred place after the card shrank") end
   -- the screen cannot hold the card: scrolling is only a fallback and no data is hidden
   FieldKitLoadout.spells={};for i=1,12 do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="Rank "..i,rankValue=i,bonuses={},upgrades={}}) end
@@ -1843,7 +1843,7 @@ do
   assert(string.find(acc.cardTabs[2].fieldkitLabel:GetText(),"1-"..N.."/12",1,true),zone..": the position is shown, nothing is hidden silently")
   this=acc;arg1=-100;acc.scripts.OnMouseWheel();assert(acc.rows[N].label:GetText()=="Spell 12",zone..": the last spell is reachable by scrolling")
   R.ScreenBounds=realBounds;R.scroll.Accessories=0;click(acc.cardTabs[1])
-  FieldKitLoadout.spells=oldSpells;FieldKitDB.loadoutTab=1;C.Refresh(true)
+  FieldKitLoadout.spells=oldSpells;FieldKitRebornDB.loadoutTab=1;C.Refresh(true)
   assert(acc:GetHeight()==base[4],zone..": Equipment dimensions restored")
  end
 
@@ -1876,9 +1876,9 @@ print("Dynamic Equipment / Spells card and Effects margins passed (synthetic)")
 -- measured art, Lairs in three aligned columns.
 do
  for _,zone in ipairs({"elwynn","naxx"}) do
-  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitDB.zoneThemeOverlap=false
-  R.statsOpen=false;FieldKitDB.loadoutTab=1;R.lastMoved=nil
-  local layout=C.currentLayout;FieldKitDB.zoneThemePositions[layout]=FieldKitDB.zoneThemePositions[layout] or {}
+  C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);FieldKitRebornDB.zoneThemeOverlap=false
+  R.statsOpen=false;FieldKitRebornDB.loadoutTab=1;R.lastMoved=nil
+  local layout=C.currentLayout;FieldKitRebornDB.zoneThemePositions[layout]=FieldKitRebornDB.zoneThemePositions[layout] or {}
   local saved={};for _,k in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do local r=R.layout.rects[k];saved[k]={r[1],r[2]} end
   local oldSpells=FieldKitLoadout.spells
   local minN=zone=="naxx" and 3 or 1
@@ -1886,7 +1886,7 @@ do
   SaveAll(layout,saved);Stage();Relayout()
   for _,count in ipairs({0,1,2,5,6,7,8,9,12,24}) do
    FieldKitLoadout.spells={};for i=1,count do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="Rank "..i,rankValue=i,bonuses={},upgrades={}}) end
-   FieldKitDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);C.Refresh(true)
+   FieldKitRebornDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);C.Refresh(true)
    local acc=R.frames.Accessories;local tag=zone..": "..count.." spells (default position)"
    local room=R.AccMaxRows(zone,R.layout);local N=R.accN
    local wanted=math.max(minN,math.min(count,room))
@@ -1899,20 +1899,20 @@ do
    Apart(tag)
   end
   -- (b) a card the user moved LOW: it is displayed higher instead of losing rows; the saved position is never rewritten
-  local statsPref,effectsPref=FieldKitDB.statsFrame,FieldKitDB.effectsFrame;FieldKitDB.statsFrame=false;FieldKitDB.effectsFrame=false -- the cards under it are not shown: only the screen limits it
+  local statsPref,effectsPref=FieldKitRebornDB.statsFrame,FieldKitRebornDB.effectsFrame;FieldKitRebornDB.statsFrame=false;FieldKitRebornDB.effectsFrame=false -- the cards under it are not shown: only the screen limits it
   local _,_,_,screenBottom=R.ScreenBounds(R.layout)
   local low={saved.Accessories[1],math.floor(screenBottom-8-(R.layout.rects.Accessories[4]+R.AccDelta(zone,8))+50)} -- 8 rows would reach the screen bottom (the Elwynn Complete nav plates are gone since alpha.48); the normal card still fits
   saved.Accessories=low;SaveAll(layout,saved);Relayout()
   FieldKitLoadout.spells={};for i=1,8 do table.insert(FieldKitLoadout.spells,{name="Spell "..i,rank="Rank "..i,rankValue=i,bonuses={},upgrades={}}) end
-  FieldKitDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);C.Refresh(true)
+  FieldKitRebornDB.loadoutTab=2;R.scroll.Accessories=0;C.Refresh(true);C.Refresh(true)
   local acc=R.frames.Accessories
   assert(R.accN==8 and not R.accScroll,zone..": all 8 spells although the card was moved low (rows "..tostring(R.accN)..")")
   assert((R.shift.Accessories or 0)<0,zone..": the card is displayed higher ("..tostring(R.shift.Accessories)..")")
-  local v=FieldKitDB.zoneThemePositions[layout].FieldKitReferencePanelAccessories;assert(v and v[3]==low[1] and v[4]==-low[2],zone..": the saved position is untouched")
+  local v=FieldKitRebornDB.zoneThemePositions[layout].FieldKitReferencePanelAccessories;assert(v and v[3]==low[1] and v[4]==-low[2],zone..": the saved position is untouched")
   Apart(zone..": moved-low Equipment card, 8 spells")
-  FieldKitDB.loadoutTab=1;C.Refresh(true);C.Refresh(true)
+  FieldKitRebornDB.loadoutTab=1;C.Refresh(true);C.Refresh(true)
   assert((R.shift.Accessories or 0)==0 and R.frames.Accessories:GetHeight()==R.layout.rects.Accessories[4],zone..": back on Equipment: preferred position and normal height")
-  FieldKitDB.statsFrame,FieldKitDB.effectsFrame=statsPref,effectsPref
+  FieldKitRebornDB.statsFrame,FieldKitRebornDB.effectsFrame=statsPref,effectsPref
   saved.Accessories={R.layout.rects.Accessories[1],R.layout.rects.Accessories[2]};SaveAll(layout,saved)
   FieldKitLoadout.spells=oldSpells
 
@@ -1932,7 +1932,7 @@ do
    Apart(tag)
   end
   FieldKitMeterLedger.Read=oldRead
-  Unstage();FieldKitDB.zoneThemePositions[layout]=nil;Relayout()
+  Unstage();FieldKitRebornDB.zoneThemePositions[layout]=nil;Relayout()
  end
  C.Set("zoneThemes",false)
 end
@@ -1977,7 +1977,7 @@ do
  local function RowOf(name,state,dist) local r=CreateFrame("Button");r.label=FS(name);r.value=FS(state);r.dist=FS(dist);r:Show();return r end
  for _,zone in ipairs({"elwynn","naxx"}) do
   C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true)
-  FieldKitDB.language="fr"
+  FieldKitRebornDB.language="fr"
   local longName="Capitaine Rochenoire de la Légion des Braises Éternelles"
   src.rows={RowOf("Rochenoire",FieldKit_L("awake"),"125 m"),RowOf(longName,FieldKit_L("back in ").."12:34","1 250 m"),RowOf("Ombrelame",FieldKit_L("asleep"),"87 m"),RowOf("Grand Roi Sombrefeu",FieldKit_L("back in ").."0:09","")}
   C.Refresh(true);local f=R.frames.Lairs;local a=R.CardRect("Lairs",R.layout);local tag=zone
@@ -1999,7 +1999,7 @@ do
   assert(rows[2].fullLines[1]==longName and rows[2].fullLines[2]~=nil and rows[2].fullLines[3]=="1 250 m",tag..": tooltip lines: full name, state and delay, distance")
   assert(rows[1].label.referenceFullText=="Rochenoire" and rows[1].label:GetStringWidth()<=rows[1].label:GetWidth() and (zone=="naxx" or rows[1].label:GetText()=="Rochenoire"),tag..": a short name keeps its full text (shortened only if its column is too narrow)")
  end
- src.rows=oldRows;FieldKitDB.language="en";C.Set("zoneThemes",false)
+ src.rows=oldRows;FieldKitRebornDB.language="en";C.Set("zoneThemes",false)
 end
 print("Every row when there is room, Effects geometry from the art and Lairs columns passed (synthetic)")
 
@@ -2109,41 +2109,41 @@ do
  local function OnScreen() local p,rel,rp,x,y=CF:GetPoint();local l,b,r,t=FieldKit.ChatRect(p,rp,x,y,CF:GetWidth(),CF:GetHeight(),CF:GetScale());return FieldKit.ChatVisible(l,b,r,t),p,x,y end
  local UIW,UIH=UIParent:GetWidth(),UIParent:GetHeight()
  for _,zone in ipairs({"elwynn","naxx"}) do
-  FieldKitDB.chatStyle=false;FieldKitDB.chatWidth=440;FieldKitDB.chatHeight=180;FieldKitDB.chatFontFace=1;FieldKitDB.chatFontSize=12;FieldKitDB.chatBackgroundOpacity=0;FieldKitDB.chatBackgroundColor=1;FieldKitDB.chatNative=nil;FieldKitDB.chatAnchor=nil
+  FieldKitRebornDB.chatStyle=false;FieldKitRebornDB.chatWidth=440;FieldKitRebornDB.chatHeight=180;FieldKitRebornDB.chatFontFace=1;FieldKitRebornDB.chatFontSize=12;FieldKitRebornDB.chatBackgroundOpacity=0;FieldKitRebornDB.chatBackgroundColor=1;FieldKitRebornDB.chatNative=nil;FieldKitRebornDB.chatAnchor=nil
   C.Set("zoneThemes",false);Native()
   C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);C.Refresh(true)
   local d=R.layout;local base=d.rects.chat;local tag=zone
   -- 1. customization off: the approved rectangles, the theme's font; the native geometry has been remembered
   assert(R.chat:GetWidth()==base[3] and R.chat:GetHeight()==base[4],tag..": approved chat card when not customizing")
   assert(CF:GetParent()==R.chat and string.find(font[1],"AzerothSans",1,true) and font[2]==12,tag..": theme font by default")
-  assert(type(FieldKitDB.chatNative)=="table" and FieldKitDB.chatNative.x==32 and FieldKitDB.chatNative.y==95 and FieldKitDB.chatNative.width==440,tag..": native geometry remembered before the first themed change")
+  assert(type(FieldKitRebornDB.chatNative)=="table" and FieldKitRebornDB.chatNative.x==32 and FieldKitRebornDB.chatNative.y==95 and FieldKitRebornDB.chatNative.width==440,tag..": native geometry remembered before the first themed change")
   -- 2. every preference, one at a time, immediately (no refresh in between)
-  FieldKitDB.chatStyle=true
+  FieldKitRebornDB.chatStyle=true
   local function Apply() FieldKit.ApplyChatStyle() end
   Apply()
   local text0W,text0H=CF:GetWidth(),CF:GetHeight()
-  FieldKitDB.chatWidth=520;Apply();assert(CF:GetWidth()==520 and R.chat:GetWidth()==R.chatPlan.rect[3] and R.chat:GetWidth()>520,tag..": width applies at once to the text and the card")
-  FieldKitDB.chatHeight=260;Apply();assert(CF:GetHeight()==260 and R.chat:GetHeight()==R.chatPlan.rect[4] and R.chat:GetHeight()>260,tag..": height applies at once")
-  FieldKitDB.chatFontFace=3;Apply();assert(string.find(font[1],"ARIALN",1,true) and font[2]==12,tag..": font family applies to the themed chat ("..tostring(font[1])..")")
-  FieldKitDB.chatFontSize=17;Apply();assert(font[2]==17 and string.find(font[1],"ARIALN",1,true),tag..": font size applies")
-  FieldKitDB.chatFontFace=1;Apply();assert(string.find(font[1],"AzerothSans",1,true) and font[2]==17,tag..": 'original font' = the theme's own font")
+  FieldKitRebornDB.chatWidth=520;Apply();assert(CF:GetWidth()==520 and R.chat:GetWidth()==R.chatPlan.rect[3] and R.chat:GetWidth()>520,tag..": width applies at once to the text and the card")
+  FieldKitRebornDB.chatHeight=260;Apply();assert(CF:GetHeight()==260 and R.chat:GetHeight()==R.chatPlan.rect[4] and R.chat:GetHeight()>260,tag..": height applies at once")
+  FieldKitRebornDB.chatFontFace=3;Apply();assert(string.find(font[1],"ARIALN",1,true) and font[2]==12,tag..": font family applies to the themed chat ("..tostring(font[1])..")")
+  FieldKitRebornDB.chatFontSize=17;Apply();assert(font[2]==17 and string.find(font[1],"ARIALN",1,true),tag..": font size applies")
+  FieldKitRebornDB.chatFontFace=1;Apply();assert(string.find(font[1],"AzerothSans",1,true) and font[2]==17,tag..": 'original font' = the theme's own font")
   -- opacity and colour act on the visible themed interior only (centre slice and fill), never on the gold border
   local skin=R.chat.fieldkitSkin;local centre=skin.parts[5].texture
-  FieldKitDB.chatBackgroundOpacity=0;Apply();assert(R.chat.fieldkitFill.alpha==0 and centre:GetAlpha()==0 and skin.base:GetAlpha()==0,tag..": opacity 0 = transparent interior")
+  FieldKitRebornDB.chatBackgroundOpacity=0;Apply();assert(R.chat.fieldkitFill.alpha==0 and centre:GetAlpha()==0 and skin.base:GetAlpha()==0,tag..": opacity 0 = transparent interior")
   for i=1,9 do if i~=5 then assert(skin.parts[i].texture:GetAlpha()==1,tag..": the gold border slice "..i.." stays opaque at opacity 0") end end
-  FieldKitDB.chatBackgroundOpacity=100;Apply();assert(R.chat.fieldkitFill.alpha==1 and centre:GetAlpha()==1,tag..": opacity 100 = fully opaque interior")
-  FieldKitDB.chatBackgroundOpacity=50;Apply();assert(R.chat.fieldkitFill.alpha==.5 and centre:GetAlpha()==.5,tag..": proportional opacity")
-  local want=FieldKit.ChatBackground(4);FieldKitDB.chatBackgroundColor=4;Apply();local c=R.chat.fieldkitFill.color;assert(c[1]==want[1] and c[2]==want[2] and c[3]==want[3],tag..": background colour applies to the interior")
+  FieldKitRebornDB.chatBackgroundOpacity=100;Apply();assert(R.chat.fieldkitFill.alpha==1 and centre:GetAlpha()==1,tag..": opacity 100 = fully opaque interior")
+  FieldKitRebornDB.chatBackgroundOpacity=50;Apply();assert(R.chat.fieldkitFill.alpha==.5 and centre:GetAlpha()==.5,tag..": proportional opacity")
+  local want=FieldKit.ChatBackground(4);FieldKitRebornDB.chatBackgroundColor=4;Apply();local c=R.chat.fieldkitFill.color;assert(c[1]==want[1] and c[2]==want[2] and c[3]==want[3],tag..": background colour applies to the interior")
   -- the theme refresh never overwrites a preference
-  local keep={FieldKitDB.chatWidth,FieldKitDB.chatHeight,FieldKitDB.chatFontFace,FieldKitDB.chatFontSize,FieldKitDB.chatBackgroundOpacity,FieldKitDB.chatBackgroundColor,FieldKitDB.chatStyle}
+  local keep={FieldKitRebornDB.chatWidth,FieldKitRebornDB.chatHeight,FieldKitRebornDB.chatFontFace,FieldKitRebornDB.chatFontSize,FieldKitRebornDB.chatBackgroundOpacity,FieldKitRebornDB.chatBackgroundColor,FieldKitRebornDB.chatStyle}
   for i=1,8 do C.Refresh(true) end
-  local now={FieldKitDB.chatWidth,FieldKitDB.chatHeight,FieldKitDB.chatFontFace,FieldKitDB.chatFontSize,FieldKitDB.chatBackgroundOpacity,FieldKitDB.chatBackgroundColor,FieldKitDB.chatStyle}
+  local now={FieldKitRebornDB.chatWidth,FieldKitRebornDB.chatHeight,FieldKitRebornDB.chatFontFace,FieldKitRebornDB.chatFontSize,FieldKitRebornDB.chatBackgroundOpacity,FieldKitRebornDB.chatBackgroundColor,FieldKitRebornDB.chatStyle}
   for i=1,7 do assert(keep[i]==now[i],tag..": preference "..i.." is not rewritten by theme refreshes") end
   assert(CF:GetWidth()==520 and CF:GetHeight()==260,tag..": and the refreshes keep applying them")
   -- 3. resize several times in both directions: the card follows, the text area never leaves it, the controls never overlap the text
-  FieldKitDB.chatBackgroundOpacity=100
+  FieldKitRebornDB.chatBackgroundOpacity=100
   for _,size in ipairs({{300,110},{700,400},{280,100},{800,450},{440,180},{300,300},{650,120}}) do
-   FieldKitDB.chatWidth=size[1];FieldKitDB.chatHeight=size[2];Apply()
+   FieldKitRebornDB.chatWidth=size[1];FieldKitRebornDB.chatHeight=size[2];Apply()
    local plan=R.chatPlan;local rect=plan.rect;local st=tag..": "..size[1].."x"..size[2]
    assert(CF:GetWidth()==size[1] and CF:GetHeight()==size[2],st..": text area exactly the chosen size")
    assert(R.chat:GetWidth()==rect[3] and R.chat:GetHeight()==rect[4],st..": the card has the planned size")
@@ -2164,18 +2164,18 @@ do
    assert(bx==cc and by==-cc and R.chat.fieldkitSkin.base:GetWidth()==rect[3]-2*cc and R.chat.fieldkitSkin.base:GetHeight()==rect[4]-2*cc,st..": the fill follows the real size inside the frame")
   end
   -- out-of-range values are clamped to sensible minimums
-  FieldKitDB.chatWidth=10;FieldKitDB.chatHeight=10;Apply();assert(CF:GetWidth()==280 and CF:GetHeight()==100,tag..": minimum dimensions")
-  FieldKitDB.chatWidth=440;FieldKitDB.chatHeight=180;Apply()
+  FieldKitRebornDB.chatWidth=10;FieldKitRebornDB.chatHeight=10;Apply();assert(CF:GetWidth()==280 and CF:GetHeight()==100,tag..": minimum dimensions")
+  FieldKitRebornDB.chatWidth=440;FieldKitRebornDB.chatHeight=180;Apply()
   -- 4. the card can be put in the four corners (saved per layout, like every card); the preferences and chatAnchor are untouched
-  local anchorBefore=FieldKitDB.chatAnchor
+  local anchorBefore=FieldKitRebornDB.chatAnchor
   for k,corner in ipairs({{0,0},{1,0},{0,1},{1,1}}) do
    local w,h=R.chat:GetWidth(),R.chat:GetHeight()
    R.chat:ClearAllPoints();R.chat:SetPoint("TOPLEFT",UIParent,"TOPLEFT",corner[1]*(UIW-w),-corner[2]*(UIH-h));assert(C.Remember(R.chat),tag..": corner "..k.." is stored")
    C.Refresh(true);C.Refresh(true)
    local _,_,_,cx,cy=CF:GetPoint();assert(CF:GetParent()==R.chat and cx==R.chatPlan.textX and cy==R.chatPlan.textY and CF:GetWidth()==440,tag..": the chat follows its card in corner "..k)
   end
-  assert(FieldKitDB.chatAnchor==anchorBefore,tag..": the themed move does not write the native chat anchor")
-  FieldKitDB.zoneThemePositions[C.currentLayout].FieldKitReferenceChat=nil;C.Refresh(true)
+  assert(FieldKitRebornDB.chatAnchor==anchorBefore,tag..": the themed move does not write the native chat anchor")
+  FieldKitRebornDB.zoneThemePositions[C.currentLayout].FieldKitReferenceChat=nil;C.Refresh(true)
   -- 5/6. theme off: the chat is visible and where it was; ten cycles without drift
   local reference
   for cycle=1,10 do
@@ -2200,7 +2200,7 @@ do
   assert(not FieldKit.ChatGuard(CF),tag..": and leaves a visible chat alone")
   -- 8. profile change while themed: the new profile's chat preferences apply at once
   C.Set("zoneThemes",true);C.Refresh(true)
-  FieldKitDB.chatWidth=333;FieldKitDB.chatHeight=222;FieldKitDB.chatFontSize=15;FieldKit.ApplyHUDProfileLive()
+  FieldKitRebornDB.chatWidth=333;FieldKitRebornDB.chatHeight=222;FieldKitRebornDB.chatFontSize=15;FieldKit.ApplyHUDProfileLive()
   assert(CF:GetWidth()==333 and CF:GetHeight()==222 and font[2]==15,tag..": a profile switch re-applies the chat preferences ("..CF:GetWidth().."x"..CF:GetHeight()..")")
   -- 9. the controls work (Copy, scroll) at the new size
   local opened=0;local oldCopy=FieldKit.OpenChatCopy;FieldKit.OpenChatCopy=function() opened=opened+1 end
@@ -2209,10 +2209,10 @@ do
   -- 11. FR / EN do not change the geometry
   FieldKit_SetLanguage("fr");C.Refresh(true);assert(CF:GetWidth()==333 and CF:GetHeight()==222,tag..": FR keeps the chosen size");FieldKit_SetLanguage("en");C.Refresh(true);assert(CF:GetWidth()==333,tag..": EN too")
   -- customization on, theme off: the chosen size is applied to the native chat at once
-  FieldKitDB.chatWidth=380;FieldKitDB.chatHeight=210;C.Set("zoneThemes",false)
+  FieldKitRebornDB.chatWidth=380;FieldKitRebornDB.chatHeight=210;C.Set("zoneThemes",false)
   assert(CF:GetWidth()==380 and CF:GetHeight()==210 and OnScreen(),tag..": theme off with customization on: the preferences apply to the native chat ("..CF:GetWidth().."x"..CF:GetHeight()..")")
   C.Set("zoneThemes",true);C.Refresh(true);assert(CF:GetParent()==R.chat and CF:GetWidth()==380,tag..": and back under the theme")
-  C.Set("zoneThemes",false);FieldKitDB.chatStyle=false
+  C.Set("zoneThemes",false);FieldKitRebornDB.chatStyle=false
  end
 end
 print("Chat preferences drive the themed chat; the chat survives the theme (cycles, corners, reload, profile) passed (synthetic)")
@@ -2233,7 +2233,7 @@ do
    -- 1. square: square mask, native map inside the frame, no ring
    assert(M.active and M.shape=="square" and Minimap.mask==SQ and Minimap:GetParent()==M.root,tag..": square map in the square frame")
    assert(not M.roundRing or not M.roundRing:IsShown(),tag..": no ring on a square map")
-   assert(C.ShapeLabel()=="Square map" and FieldKitDB.zoneThemeMinimap==true,tag..": label and legacy switch follow the square mode")
+   assert(C.ShapeLabel()=="Square map" and FieldKitRebornDB.zoneThemeMinimap==true,tag..": label and legacy switch follow the square mode")
    local squareSide=Minimap:GetWidth()
    -- 2. round, immediately (no reload): native mask + ring where the frame art is a separate piece, honest native otherwise
    C.Set("zoneThemeMapShape","round")
@@ -2256,7 +2256,7 @@ do
    local point,_,_,x,y=Minimap:GetPoint();assert(point=="TOPRIGHT" and x==-12 and y==-20,tag..": native anchor restored")
    assert(not M.roundRing or not M.roundRing:IsShown(),tag..": no ring on the native map")
    assert(not M.root:IsShown(),tag..": no FieldKit map frame left")
-   assert(FieldKitDB.zoneThemeMinimap==false,tag..": the legacy switch follows")
+   assert(FieldKitRebornDB.zoneThemeMinimap==false,tag..": the legacy switch follows")
    -- 4. back to square
    C.Set("zoneThemeMapShape","square")
    assert(M.active and Minimap.mask==SQ and Minimap:GetWidth()==squareSide,tag..": square again, same size")
@@ -2276,7 +2276,7 @@ do
    assert(M.shape==(hasArt and "round" or "native"),tag..": theme on again re-applies the selected mode ("..tostring(M.shape)..")")
    -- 8. the legacy switch still works
    C.Set("zoneThemeMinimap",false);assert(not M.active and C.ShapeLabel()=="Native map")
-   C.Set("zoneThemeMinimap",true);assert(FieldKitDB.zoneThemeMapShape=="round" or FieldKitDB.zoneThemeMapShape=="square")
+   C.Set("zoneThemeMinimap",true);assert(FieldKitRebornDB.zoneThemeMapShape=="round" or FieldKitRebornDB.zoneThemeMapShape=="square")
    C.Set("zoneThemeMapShape","square")
    -- 9. the zoom buttons exist in every mode that dresses the map
    assert(M.zoomIn and M.zoomOut,tag..": zoom buttons exist")
@@ -2408,7 +2408,7 @@ do
   -- theme change: Naxx and back keeps the Elwynn choice
   C.Set("zoneThemeMapShape","round")
   C.Set("zoneThemeMode","naxx");C.Refresh(true);C.Set("zoneThemeMode","elwynn");C.Refresh(true)
-  assert(FieldKitDB.zoneThemeMapShape=="round" and (M.shape=="round"),tag..": the shape survives a theme change")
+  assert(FieldKitRebornDB.zoneThemeMapShape=="round" and (M.shape=="round"),tag..": the shape survives a theme change")
   C.Set("zoneThemeMapShape","square")
   C.Set("zoneThemes",false)
  end
@@ -2430,7 +2430,7 @@ do
    local old=Minimap.GetChildren;Minimap.GetChildren=function() return fk,st,gear end
    local alpha=fk:GetAlpha()
    C.Set("zoneThemes",true);C.Refresh(true)
-   local saved={fk=FieldKitDB.minimapAngle}
+   local saved={fk=FieldKitRebornDB.minimapAngle}
    for _,f in ipairs({fk,st}) do
     assert(f:GetParent()==Minimap and f:GetAlpha()==alpha,tag..": "..f:GetName().." keeps its parent and alpha")
     local _,_,_,x,y=f:GetPoint();assert(x~=-4000,tag..": "..f:GetName().." is never parked off screen")
@@ -2445,7 +2445,7 @@ do
      local _,_,_,sx,sy=st:GetPoint();assert(math.sqrt(sx*sx+sy*sy)>85,tag..": the other button is not moved by it")
     end
     Owner(st,300);local _,_,_,sx,sy=st:GetPoint();assert(math.sqrt(sx*sx+sy*sy)>85,tag..": AzerothStats button dragged to 300 deg rides the edge")
-    assert(FieldKitDB.minimapAngle==saved.fk,tag..": FieldKit never writes the owner's saved angle (only the owner's own drag does)")
+    assert(FieldKitRebornDB.minimapAngle==saved.fk,tag..": FieldKit never writes the owner's saved angle (only the owner's own drag does)")
     -- no overlap between the three buttons
     local function Pos(f) local _,_,_,x,y=f:GetPoint();return x,y end
     Owner(fk,100);Owner(st,200);Owner(gear,300)
@@ -2492,18 +2492,18 @@ do
  round.scripts.OnLeave();assert(not ChoiceOn(round) and square.fieldkitSelected and ChoiceOn(square),"leaving restores exactly the state")
  this=square;square.scripts.OnEnter();square.scripts.OnLeave();assert(ChoiceOn(square),"a selected choice stays selected after hover")
  -- clicking updates every group at once, without reopening the panel
- click(round);assert(FieldKitDB.zoneThemeMapShape=="round" and round.fieldkitSelected and ChoiceOn(round) and not square.fieldkitSelected and not ChoiceOn(square),"clicking Round selects it and unselects Square immediately")
+ click(round);assert(FieldKitRebornDB.zoneThemeMapShape=="round" and round.fieldkitSelected and ChoiceOn(round) and not square.fieldkitSelected and not ChoiceOn(square),"clicking Round selects it and unselects Square immediately")
  click(groups.zoneThemeVariant[1].frame);assert(groups.zoneThemeVariant[1].frame.fieldkitSelected and not groups.zoneThemeVariant[3].frame.fieldkitSelected and ChoiceOn(groups.zoneThemeVariant[1].frame),"layout choice updates at once")
  click(groups.zoneThemeMode[1].frame);assert(groups.zoneThemeMode[1].frame.fieldkitSelected and not groups.zoneThemeMode[2].frame.fieldkitSelected,"public theme choice updates at once")
  click(groups.zoneThemeMode[2].frame);click(groups.zoneThemeVariant[2].frame);click(groups.zoneThemeMapShape[1].frame)
  -- the toggles use the same states
- for _,item in ipairs(groups.zoneThemeArt) do assert(item.frame.fieldkitChoice and ChoiceOn(item.frame)==(FieldKitDB.zoneThemeArt==true),"the dressing toggle shows its state") end
+ for _,item in ipairs(groups.zoneThemeArt) do assert(item.frame.fieldkitChoice and ChoiceOn(item.frame)==(FieldKitRebornDB.zoneThemeArt==true),"the dressing toggle shows its state") end
  -- persistence: reload (re-read of the saved values) and profile change
- local saved=FieldKitDB.zoneThemeMapShape
+ local saved=FieldKitRebornDB.zoneThemeMapShape
  C.Set("zoneThemeMapShape","round");assert(FieldKitProfiles.Save(3))
  C.Set("zoneThemeMapShape","native");assert(groups.zoneThemeMapShape[3].frame.fieldkitSelected)
  assert(FieldKitProfiles.Load(3));C.Refresh(true)
- assert(FieldKitDB.zoneThemeMapShape=="round" and groups.zoneThemeMapShape[2].frame.fieldkitSelected and ChoiceOn(groups.zoneThemeMapShape[2].frame) and not groups.zoneThemeMapShape[3].frame.fieldkitSelected,"a profile change restores and shows the saved shape")
+ assert(FieldKitRebornDB.zoneThemeMapShape=="round" and groups.zoneThemeMapShape[2].frame.fieldkitSelected and ChoiceOn(groups.zoneThemeMapShape[2].frame) and not groups.zoneThemeMapShape[3].frame.fieldkitSelected,"a profile change restores and shows the saved shape")
  C.Refresh(true);assert(groups.zoneThemeMapShape[2].frame.fieldkitSelected,"selection persists across refreshes (the /reload path)")
  C.Set("zoneThemeMapShape","square");C.Set("zoneThemes",false)
 end
@@ -2522,7 +2522,7 @@ do
  for _,zone in ipairs({"elwynn","naxx"}) do
   for _,variant in ipairs({"complete","minimal","alternative"}) do
    local tag=zone.."_"..variant
-   C.Set("zoneThemes",false);C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant",variant);phase="playing";FieldKitDB.cardOpacity=100
+   C.Set("zoneThemes",false);C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant",variant);phase="playing";FieldKitRebornDB.cardOpacity=100
    C.Set("zoneThemes",true);C.Refresh(true)
    -- the page exists (the options journey built it earlier in this file)
    assert(C.uiSliders and C.uiSliders[2].key=="cardOpacity",tag..": the opacity slider exists")
@@ -2534,7 +2534,7 @@ do
    for _,value in ipairs({0,25,50,75,100,50,0,100}) do
     counts.update,counts.suspend,counts.refresh,counts.hud=0,0,0,0
     Slide(value)
-    assert(FieldKitDB.cardOpacity==value,tag..": the value is set ("..value..")")
+    assert(FieldKitRebornDB.cardOpacity==value,tag..": the value is set ("..value..")")
     assert(counts.update==0 and counts.suspend==0 and counts.refresh==0 and counts.hud==0,tag..": no HUD rebuild at "..value.." (update "..counts.update..", suspend "..counts.suspend..", refresh "..counts.refresh..")")
     for kind,f in pairs(cards) do
      local frames=f.referenceMattes or {}
@@ -2554,11 +2554,11 @@ do
    -- reload path (full refresh) draws the saved value; persistence
    C.Refresh(true)
    for kind,f in pairs(cards) do for _,t in ipairs(f.referenceTiles or {}) do if t:IsShown() then assert(math.abs(t:GetAlpha()-.65)<1e-6,tag..": after a full refresh/reload the saved value is drawn") end end end
-   assert(FieldKitDB.cardOpacity==65,tag..": persisted")
+   assert(FieldKitRebornDB.cardOpacity==65,tag..": persisted")
    -- the old 30 % floor is gone: 0 really is 0
    Slide(0);for kind,f in pairs(cards) do for _,t in ipairs(f.referenceTiles or {}) do if t:IsShown() then assert(t:GetAlpha()==0,tag..": 0 % is transparent body") end end end
    -- profile change brings the profile's opacity back, and the slider memo does not skip it
-   FieldKitDB.cardOpacity=100;C.Refresh(true);Slide(30)
+   FieldKitRebornDB.cardOpacity=100;C.Refresh(true);Slide(30)
    for kind,f in pairs(cards) do for _,t in ipairs(f.referenceTiles or {}) do if t:IsShown() then assert(math.abs(t:GetAlpha()-.3)<1e-6,tag..": a stale memo never skips a real change") end end end
    Slide(100);C.Set("zoneThemes",false)
   end
@@ -2566,15 +2566,15 @@ do
  -- legacy HUD cards (T.Surface): the fill follows, the gold border slices keep their opacity
  do
   local f=CreateFrame("Frame",nil,UIParent);f:SetWidth(200);f:SetHeight(100);T.Surface(f,"card",true)
-  FieldKitDB.cardOpacity=100;T.State(f,false);local border=f.fieldkitSkin.parts[1].texture:GetAlpha()
-  FieldKitDB.cardOpacity=20;C.lastOpacity=nil;C.ApplyOpacity()
+  FieldKitRebornDB.cardOpacity=100;T.State(f,false);local border=f.fieldkitSkin.parts[1].texture:GetAlpha()
+  FieldKitRebornDB.cardOpacity=20;C.lastOpacity=nil;C.ApplyOpacity()
   assert(math.abs(f.fieldkitSkin.base:GetAlpha()-.2)<1e-6 and f.fieldkitSkin.parts[1].texture:GetAlpha()==border,"legacy card: fill follows the setting, border slices stay opaque")
-  FieldKitDB.cardOpacity=100;C.lastOpacity=nil;C.ApplyOpacity()
+  FieldKitRebornDB.cardOpacity=100;C.lastOpacity=nil;C.ApplyOpacity()
  end
  R.Update,C.Suspend,C.Refresh,H.Update=oldUpdate,oldSuspend,oldRefresh,oldHud
  -- the matte assets exist for every card art tile of both zones
  for _,name in ipairs({"Accessories","Damage","Effects","Lairs","Stats"}) do for _,zone in ipairs({"elwynn","naxx"}) do assert(R.FRAME_MATTE[zone.."_complete_"..name.."_1.tga"]) end end
- FieldKitDB.cardOpacity=100
+ FieldKitRebornDB.cardOpacity=100
 end
 print("Panel opacity: fast path (no rebuild), body-only fade with the frame kept opaque, memo, reload, profile, 0 % really transparent passed (synthetic)")
 
@@ -2582,7 +2582,7 @@ print("Panel opacity: fast path (no rebuild), body-only fade with the frame kept
 do
  local function Slide(value) local slider=C.uiSliders[2].slider;slider:SetValue(value);this=slider;slider.scripts.OnValueChanged() end
  for _,zone in ipairs({"elwynn","naxx"}) do
-  C.Set("zoneThemes",false);C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");phase="playing";FieldKitDB.cardOpacity=100
+  C.Set("zoneThemes",false);C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");phase="playing";FieldKitRebornDB.cardOpacity=100
   C.open={};C.Set("zoneThemes",true)
   for _,kind in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do C.open[kind]=true end
   C.Refresh(true)
@@ -2642,10 +2642,10 @@ do
  H.saved={};C.Refresh(true);assert(Count()==6,"native banners survive the /reload path")
  -- shape changes and back
  for _,shape in ipairs({"square","round","native","square","native"}) do C.Set("zoneThemeMapShape",shape) end
- assert(Count()==6 and FieldKitDB.zoneThemeMapShape=="native","native banners after shape changes")
+ assert(Count()==6 and FieldKitRebornDB.zoneThemeMapShape=="native","native banners after shape changes")
  -- profile change
  assert(FieldKitProfiles.Save(2));C.Set("zoneThemeMapShape","square");assert(FieldKitProfiles.Load(2));C.Refresh(true)
- assert(FieldKitDB.zoneThemeMapShape=="native" and Count()==6,"native banners come back with the profile")
+ assert(FieldKitRebornDB.zoneThemeMapShape=="native" and Count()==6,"native banners come back with the profile")
  -- the native minimap is the same object in the same state (not modified by the banners)
  assert(not M.active and Minimap:GetParent()==UIParent,"native map untouched")
  C.Set("zoneThemeMapShape","square");C.Set("zoneThemes",false)
@@ -2694,7 +2694,7 @@ do
  -- dressing on/off, theme changes, shapes, profile, reload
  C.Set("zoneThemeArt",false);CheckHidden("art off");C.Set("zoneThemeArt",true);CheckHidden("art on")
  for _,shape in ipairs({"round","native","square"}) do C.Set("zoneThemeMapShape",shape);CheckHidden("shape "..shape) end
- FieldKitDB.zoneThemeVariant="complete"
+ FieldKitRebornDB.zoneThemeVariant="complete"
  assert(FieldKitProfiles.Save(3));C.Set("zoneThemeMapShape","native");assert(FieldKitProfiles.Load(3));C.Refresh(true);CheckHidden("after a profile change")
  H.saved={};C.Refresh(true);CheckHidden("after the /reload path")
  -- the other layouts keep what they had, and switching back and forth is clean
@@ -2738,7 +2738,7 @@ do
   local al=Button("AzerlootMinimapButton",31);Border(al,53,"TOPLEFT",0,0)
   local odd=Button("OddAddonMinimapButton",24)
   local all={fk,st,al,odd}
-  local angleDB=FieldKitDB.minimapAngle
+  local angleDB=FieldKitRebornDB.minimapAngle
   -- the owners' own placements: radius 80 for three of them, half the map width + 10 for AzerLoot (follows the map size)
   local function Owner(f,deg)
    local a=math.rad(deg);local r=80
@@ -2793,7 +2793,7 @@ do
    -- scripts, clicks, mouse: nothing of the owners replaced, no OnUpdate added
    for _,f in ipairs(all) do assert(Set(f)==scripts[f],tag..": "..f:GetName().." scripts untouched") end
    for _,f in ipairs(all) do f.clicks=0;click(f);assert(f.clicks==1,tag..": "..f:GetName().." first click reaches its own handler once") end
-   assert(FieldKitDB.minimapAngle==angleDB,tag..": no owner angle written")
+   assert(FieldKitRebornDB.minimapAngle==angleDB,tag..": no owner angle written")
    -- the same inputs give the same result after reloads, shape changes and profile-like re-applies: no cumulative drift
    for _,f in ipairs(all) do Owner(f,30) end
    C.Refresh(true)
@@ -2845,11 +2845,11 @@ do
  local D=FieldKitDiagnostics
  local function Setup() C.Set("zoneThemes",false);C.Set("zoneThemeMode","elwynn");C.Set("zoneThemeVariant","complete");C.Set("zoneThemeMapShape","square");C.Set("zoneThemeScale",100);C.Set("zoneThemes",true);C.Refresh(true) end
  local function Fingerprint()
-  local keys={};for k,v in pairs(FieldKitDB) do if type(v)~="table" then table.insert(keys,tostring(k).."="..tostring(v)) end end
+  local keys={};for k,v in pairs(FieldKitRebornDB) do if type(v)~="table" then table.insert(keys,tostring(k).."="..tostring(v)) end end
   table.sort(keys);return table.concat(keys,";").."|"..tostring(T.zone).."|"..tostring(M.shape).."|"..tostring(C.currentLayout).."|"..table.getn(objects)
  end
  local function Scenario()
-  Setup();for v=75,110,5 do FieldKitDB.cardOpacity=v;C.ApplyOpacity() end
+  Setup();for v=75,110,5 do FieldKitRebornDB.cardOpacity=v;C.ApplyOpacity() end
   C.Set("zoneThemeScale",90);C.Set("zoneThemeMapShape","round");C.Set("zoneThemeMapShape","square");C.Set("zoneThemeScale",100)
   for i=1,6 do NOW=NOW+.25;C.Tick() end
   return Fingerprint()
@@ -2861,7 +2861,7 @@ do
  assert(plain==measured,"the diagnostics change neither the settings, the layout nor the widget count\n"..plain.."\n"..measured)
  -- the paths are told apart: the opacity fast path never suspends nor repaints; a scale change does
  SlashCmdList.FieldKit("diag reset")
- for v=75,100,5 do FieldKitDB.cardOpacity=v;C.ApplyOpacity() end
+ for v=75,100,5 do FieldKitRebornDB.cardOpacity=v;C.ApplyOpacity() end
  assert(D.ops["C.ApplyOpacity(fast path)"].calls==6 and D.ops["C.Set(setting change)"].calls==0,"opacity sweep uses the fast path only")
  local suspend=D.ops["C.Suspend(FULL teardown)"];local repaint=D.ops["T.Refresh(repaint ALL surfaces)"]
  assert(suspend.calls==0 and repaint.calls==0,"no full teardown and no repaint of every surface during an opacity sweep")
@@ -2915,8 +2915,8 @@ do
  assert(idle<=B.refreshWrites,"an idle theme refresh writes "..idle.." properties (budget "..B.refreshWrites..")")
  B.measuredIdle=idle
  -- 2) the opacity fast path: bounded, and a repeated value costs nothing (memo)
- FieldKitDB.cardOpacity=60;C.ApplyOpacity()
- local first=Writes(function() FieldKitDB.cardOpacity=40;C.ApplyOpacity() end)
+ FieldKitRebornDB.cardOpacity=60;C.ApplyOpacity()
+ local first=Writes(function() FieldKitRebornDB.cardOpacity=40;C.ApplyOpacity() end)
  local again=Writes(function() C.ApplyOpacity() end)
  assert(first>0 and first<=B.opacityWrites,"one opacity step: "..first.." writes (budget "..B.opacityWrites..")")
  assert(again==0,"the same opacity again costs nothing ("..again..")")
@@ -2931,13 +2931,13 @@ do
  local ticks=D.ops["C.Refresh(tick/unforced)"].calls
  assert(ticks<=B.tickPerSecond*10,"at 20 fps the theme ticks "..ticks.." times in 10 s (budget "..(B.tickPerSecond*10)..")")
  -- 5) the chat watcher must not force full theme refreshes
- FieldKitDB.chatStyle=true;FieldKitDB.chatCopy=false;D.Reset()
+ FieldKitRebornDB.chatStyle=true;FieldKitRebornDB.chatCopy=false;D.Reset()
  local watcher=FieldKitChatWatcher
  for i=1,25 do NOW=NOW+.2;arg1=.2;this=watcher;watcher.scripts.OnUpdate() end
  local forced=D.ops["C.Refresh(forced)"] and D.ops["C.Refresh(forced)"].calls or 0
  assert(forced<=B.chatForcedPerSecond*5,"the chat watcher forced "..forced.." theme refreshes in 5 s (budget "..(B.chatForcedPerSecond*5)..")")
  B.measuredChatForced=forced
- FieldKitDB.chatStyle=false
+ FieldKitRebornDB.chatStyle=false
  D.Enable(false)
  for name,orig in pairs(originals) do mt[name]=orig end
  C.Set("zoneThemes",false)
@@ -2965,7 +2965,7 @@ do
  for _,case in ipairs({{"elwynn","complete"},{"elwynn","minimal"},{"naxx","complete"},{"naxx","alternative"}}) do
   local tag=case[1].." "..case[2]
   Setup(case[1],case[2]);C.Refresh()
-  local before=Layout();local positions=FieldKitDB.zoneThemePositions
+  local before=Layout();local positions=FieldKitRebornDB.zoneThemePositions
   local savedBefore=tostring(positions)
   SlashCmdList.FieldKit("diag on");D.Reset()
   C.Set("zoneThemeScale",90)
@@ -2974,21 +2974,21 @@ do
   assert(D.ops["C.Suspend(idle)"].calls==0,tag..": no suspension at all")
   SlashCmdList.FieldKit("diag off")
   local scaled=Layout()
-  assert(FieldKitDB.zoneThemeScale==90,tag..": the value is stored")
+  assert(FieldKitRebornDB.zoneThemeScale==90,tag..": the value is stored")
   assert(scaled.canvas~=before.canvas,tag..": the canvas really changed scale ("..scaled.canvas..")")
   -- same everything else: cards keep their anchors (they are children of the canvas), the map keeps its mode
   Same(before,scaled,tag.." at 90 %",true)
   for _,v in ipairs({75,110,85,100}) do C.Set("zoneThemeScale",v) end
   local after=Layout()
   Same(before,after,tag.." back at 100 %")
-  assert(FieldKitDB.zoneThemePositions==positions and tostring(FieldKitDB.zoneThemePositions)==savedBefore,tag..": saved positions untouched")
+  assert(FieldKitRebornDB.zoneThemePositions==positions and tostring(FieldKitRebornDB.zoneThemePositions)==savedBefore,tag..": saved positions untouched")
   -- the state a rebuild would give: same as the old path
   local viaRebuild
   C.Suspend();C.Refresh(true);viaRebuild=Layout()
   Same(after,viaRebuild,tag..": the light path leaves the state a full rebuild would leave")
  end
  -- theme off: stored, nothing painted; the next activation uses it
- C.Set("zoneThemes",false);C.Set("zoneThemeScale",80);assert(FieldKitDB.zoneThemeScale==80)
+ C.Set("zoneThemes",false);C.Set("zoneThemeScale",80);assert(FieldKitRebornDB.zoneThemeScale==80)
  C.Set("zoneThemes",true);C.Refresh(true);assert(string.find(tostring(R.canvas:GetScale()),"%d"),"scale applied at activation")
  -- the budget: the HUD-scale change is now a normal refresh
  BUDGET.scaleWrites=6000
@@ -3026,11 +3026,11 @@ do
  assert(Writes(function() T.State(f,true) end)>0,"hover state changes: written")
  assert(Writes(function() T.State(f,true) end)==0,"and then remembered")
  T.State(f,false)
- local saveOpacity=FieldKitDB.cardOpacity
- FieldKitDB.cardOpacity=55
+ local saveOpacity=FieldKitRebornDB.cardOpacity
+ FieldKitRebornDB.cardOpacity=55
  assert(Writes(function() T.State(f,false) end)>0,"opacity changed: written")
  assert(Writes(function() T.State(f,false) end)==0)
- FieldKitDB.cardOpacity=saveOpacity;T.State(f,false)
+ FieldKitRebornDB.cardOpacity=saveOpacity;T.State(f,false)
  local fill=f.fieldkitFill
  f.fieldkitFill={color={.1,.2,.3},alpha=.5}
  assert(Writes(function() T.State(f,false) end)>0,"own fill colour / alpha: written")
@@ -3054,32 +3054,32 @@ do
  local realSetTexture=body.SetTexture;body.SetTexture=function(self,v) textureWrites=textureWrites+1;return mt.SetTexture(self,v) end
  for i=1,5 do C.Refresh() end
  assert(textureWrites==0,"the clean body texture is not re-assigned at every refresh ("..textureWrites..")")
- FieldKitDB.cardOpacity=40;C.Refresh();assert(body.alpha==.4,"a new opacity reaches the clean body ("..tostring(body.alpha)..")")
- FieldKitDB.cardOpacity=100;C.ApplyOpacity();assert(body.alpha==1);C.Refresh();assert(body.alpha==1)
+ FieldKitRebornDB.cardOpacity=40;C.Refresh();assert(body.alpha==.4,"a new opacity reaches the clean body ("..tostring(body.alpha)..")")
+ FieldKitRebornDB.cardOpacity=100;C.ApplyOpacity();assert(body.alpha==1);C.Refresh();assert(body.alpha==1)
  C.Set("zoneThemeMode","naxx");C.Refresh(true);assert(textureWrites>=1 and string.find(body.texture,"naxx_card_body",1,true),"another zone gives another texture")
  body.SetTexture=realSetTexture
  Setup("elwynn","complete")
 
  -- 3) the chat watcher forces a theme refresh only when a chat preference changed
- FieldKitDB.chatStyle=true;FieldKitDB.chatCopy=false;D.Enable(true)
+ FieldKitRebornDB.chatStyle=true;FieldKitRebornDB.chatCopy=false;D.Enable(true)
  local watcher=FieldKitChatWatcher
  local function Watch(n) for i=1,n do NOW=NOW+.2;arg1=.2;this=watcher;watcher.scripts.OnUpdate() end end
  Watch(1);D.Reset()
  Watch(50)
  local forced=D.ops["C.Refresh(forced)"] and D.ops["C.Refresh(forced)"].calls or 0
  assert(forced==0,"50 watcher ticks without any change force "..forced.." theme refreshes (was 100)")
- FieldKitDB.chatWidth=520;D.Reset();Watch(1)
+ FieldKitRebornDB.chatWidth=520;D.Reset();Watch(1)
  assert((D.ops["C.Refresh(forced)"] and D.ops["C.Refresh(forced)"].calls or 0)==1,"a changed chat width is applied at once, by one refresh")
  assert(R.chatPlan and R.chatPlan.textW==520,"and the plan follows it ("..tostring(R.chatPlan and R.chatPlan.textW)..")")
  D.Reset();Watch(10);assert((D.ops["C.Refresh(forced)"] and D.ops["C.Refresh(forced)"].calls or 0)==0,"then silence")
  for _,change in ipairs({{"chatHeight",260},{"chatBackgroundOpacity",30},{"chatFontSize",14},{"chatFontFace",2},{"chatBackgroundColor",3}}) do
-  FieldKitDB[change[1]]=change[2];D.Reset();Watch(2)
+  FieldKitRebornDB[change[1]]=change[2];D.Reset();Watch(2)
   assert((D.ops["C.Refresh(forced)"] and D.ops["C.Refresh(forced)"].calls or 0)==1,change[1].." change is applied once")
  end
  -- theme off and on again: the next themed pass synchronises once more
  C.Set("zoneThemes",false);Watch(3);C.Set("zoneThemes",true);C.Refresh(true);D.Reset();Watch(3)
  assert((D.ops["C.Refresh(forced)"] and D.ops["C.Refresh(forced)"].calls or 0)<=1,"after the theme comes back: at most one synchronisation")
- FieldKitDB.chatStyle=false;D.Enable(false)
+ FieldKitRebornDB.chatStyle=false;D.Enable(false)
 
  -- 4) the 5 Hz tick backs off after a slow refresh (graceful degradation) and is normal otherwise
  Setup("elwynn","complete")

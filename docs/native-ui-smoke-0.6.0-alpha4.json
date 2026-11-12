@@ -5,7 +5,7 @@
   "gameExeSha256": "069c800761120073cd0038322e3418f2a97454b510117d509aae07f1028aaf2f",
   "renderer": "Unmodified Sky native window captures; no montage or synthetic gameplay data used as in-game evidence",
   "scope": "Six reference layouts inspected in real zone scenes across alpha4 iterations. Final Elwynn combat with six acquired spells and racial, live proc resource, XP and counters. Native level choices retain priority. Independent dock 65% and combined map/identity 70% inspected together. Native options restored and test game closed. Captures span corrections; only the declared scope is certified.",
-  "proofDirectory": "H:\\Users\\kevin\\Desktop\\AzerothFieldKit_0.6.0_Concepts\\09_Implementation\\Tests_En_Jeu\\Audit_Alpha4",
+  "proofDirectory": "H:\\Users\\kevin\\Desktop\\AzerothFieldKitReborn_0.6.0_Concepts\\09_Implementation\\Tests_En_Jeu\\Audit_Alpha4",
   "notCertified": [
     "Numerical pixel fidelity or 100% conformity",
     "Naxxramas boss encounter",

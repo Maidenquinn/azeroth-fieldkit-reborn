@@ -1,5 +1,5 @@
 local function snapshot(v,seen,path)
- seen=seen or {};path=path or "FieldKitDB"
+ seen=seen or {};path=path or "FieldKitRebornDB"
  if type(v)=="table" then
   assert(not seen[v],"cycle at "..path.." first seen "..tostring(seen[v]));seen[v]=path
   local s="{";for k,x in pairs(v) do s=s.."["..snapshot(k,seen,path..".key").."]="..snapshot(x,seen,path.."."..tostring(k)).."," end

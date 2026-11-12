@@ -1,10 +1,10 @@
 -- Real constructors/callbacks: thin HUD pages, visibility-only preset Undo,
 -- native interactions, pinned identity and honest transport state.
-FieldKitDB={cardStyle=2,cardOpacity=37,windowsLocked=true,partyCards=false,uiPage="windows",windowPage="coop"}
+FieldKitRebornDB={cardStyle=2,cardOpacity=37,windowsLocked=true,partyCards=false,uiPage="windows",windowPage="coop"}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("");update(FieldKitFrame,.3)
 local U=FieldKitUI
 assert(table.getn(U.sections)>=13,"split HUD sections retained")
-assert(FieldKitDB.uiPage=="coop","legacy windows+coop subtab migrates")
+assert(FieldKitRebornDB.uiPage=="coop","legacy windows+coop subtab migrates")
 local writes=0
 local oldCvar,oldHud=SetCVar,AZS_SetHudShown
 SetCVar=function() writes=writes+1 end;AZS_SetHudShown=function() writes=writes+1 end
@@ -32,11 +32,11 @@ for _,name in ipairs({"Chat font family","Chat background color","Chat text colo
  assert(colorLabels[name],"Missing customizable chat option: "..name)
 end
 assert(appearances["Unlock chat position"],"Chat drag must be exposed in Chat layout")
-U.Select("chat");assert(FieldKitDB.uiPage=="chat")
-U.Select("chatcopy");assert(FieldKitDB.uiPage=="chatcopy")
+U.Select("chat");assert(FieldKitRebornDB.uiPage=="chat")
+U.Select("chatcopy");assert(FieldKitRebornDB.uiPage=="chatcopy")
 assert(not ids.windows,"mega Windows page removed")
 U.Select("cards");U.Select("meter");U.Select("layout");U.Select("look");U.Select("coop")
-assert(FieldKitDB.uiPage=="coop" and writes==0)
+assert(FieldKitRebornDB.uiPage=="coop" and writes==0)
 local sw,sh=UIParent.width,UIParent.height;UIParent.width=800;UIParent.height=600
 U.Reflow();U.Select("layout")
 local layoutPage
@@ -45,18 +45,18 @@ assert(layoutPage and layoutPage.contentHeight>layoutPage.scroll:GetHeight())
 UIParent.width=sw;UIParent.height=sh;U.Reflow()
 -- A visibility preset is explicit and reversible, including prior opt-outs.
 local before={}
-for _,key in ipairs({"statsFrame","gearFrame","runModeCard","takenFrame","meterFrame","moneyFrame","lairFrame","partyMeter"}) do before[key]=FieldKitDB[key] end
-FieldKitDB.moneyFrame=false;before.moneyFrame=false
-local anchors=FieldKitDB.frameAnchors;local sizes=FieldKitDB.cardSizes
+for _,key in ipairs({"statsFrame","gearFrame","runModeCard","takenFrame","meterFrame","moneyFrame","lairFrame","partyMeter"}) do before[key]=FieldKitRebornDB[key] end
+FieldKitRebornDB.moneyFrame=false;before.moneyFrame=false
+local anchors=FieldKitRebornDB.frameAnchors;local sizes=FieldKitRebornDB.cardSizes
 U.Select("home");local home=U.pages[1]
 click(home.essential)
-assert(not FieldKitDB.statsFrame and not FieldKitDB.gearFrame and not FieldKitDB.takenFrame and not FieldKitDB.runModeCard)
-assert(FieldKitDB.moneyFrame and FieldKitDB.meterFrame and U.previousHud)
-assert(FieldKitDB.frameAnchors==anchors and FieldKitDB.cardSizes==sizes)
-assert(FieldKitDB.windowsLocked and FieldKitDB.cardStyle==2 and FieldKitDB.cardOpacity==37 and writes==0)
+assert(not FieldKitRebornDB.statsFrame and not FieldKitRebornDB.gearFrame and not FieldKitRebornDB.takenFrame and not FieldKitRebornDB.runModeCard)
+assert(FieldKitRebornDB.moneyFrame and FieldKitRebornDB.meterFrame and U.previousHud)
+assert(FieldKitRebornDB.frameAnchors==anchors and FieldKitRebornDB.cardSizes==sizes)
+assert(FieldKitRebornDB.windowsLocked and FieldKitRebornDB.cardStyle==2 and FieldKitRebornDB.cardOpacity==37 and writes==0)
 click(home.essential) -- repeated application must keep the original Undo snapshot
 click(home.undoPreset)
-for key,value in pairs(before) do assert(FieldKitDB[key]==value,key) end
+for key,value in pairs(before) do assert(FieldKitRebornDB[key]==value,key) end
 assert(not U.previousHud)
 SetCVar=oldCvar;AZS_SetHudShown=oldHud
 -- Reordering the original schema cannot bind the boss page to a text option.
@@ -70,8 +70,8 @@ assert(rebuilt[3].items[1].kind=="preview" and rebuilt[3].items[2].id=="playerBa
 assert(U.nativeTextOptions[1].id=="hideDamage" and U.nativeTextOptions[2].id=="showCrits")
 -- Missing mode stays hidden by default, but the user can request the unknown card.
 AZS_ZONE={};FieldKitRunMode.Update();assert(not FieldKitModeFrame:IsShown())
-FieldKitDB.hideUnknownMode=false;FieldKitRunMode.Update();assert(FieldKitModeFrame:IsShown())
-FieldKitDB.hideUnknownMode=true
+FieldKitRebornDB.hideUnknownMode=false;FieldKitRunMode.Update();assert(FieldKitModeFrame:IsShown())
+FieldKitRebornDB.hideUnknownMode=true
 -- Every newly visible label has a French equivalent.
 for _,key in ipairs({"HUD cards","Combat meter","Layout & arrange","Look","Co-op / test","Previews","Pin","Unpin","Use essential HUD","Sharing disabled","Hide native teammate frames","Which HUD cards to show"}) do
  assert(FieldKitLocale.fr[key] and FieldKitLocale.fr[key]~=key,key)
@@ -101,7 +101,7 @@ assert(not D.pinned)
 this=own;own:GetScript("OnEnter")();assert(D.frame:IsShown())
 click(D.pin);AZS_RUN.ph=nil;update(FieldKitFrame,.3);assert(not D.frame:IsShown())
 assert(FieldKitPartySync.Status()=="Sharing disabled")
-FieldKitDB.partyDetailSync=true;local transport=SendAddonMessage;SendAddonMessage=nil
+FieldKitRebornDB.partyDetailSync=true;local transport=SendAddonMessage;SendAddonMessage=nil
 assert(FieldKitPartySync.Status()=="Sharing unavailable: no addon-message API")
 SendAddonMessage=transport
 print("Simplified window subpages, reversible essential preset, stable option ids and pinned detail identity passed")

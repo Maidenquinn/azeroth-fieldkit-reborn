@@ -1,11 +1,11 @@
 -- Exercise actual UI callbacks, group routing and content refreshes. Native
 -- StartMoving/clamping is mocked, so edge visibility still needs a client test.
-FieldKitDB={linkLeftCards=true,linkRightCards=true,runModeCard=true,meterValues=3,
+FieldKitRebornDB={linkLeftCards=true,linkRightCards=true,runModeCard=true,meterValues=3,
  cardSizes={Unknown={width=500},FieldKitModeFrame="bad",FieldKitStatsFrame={width=99999,height=-2}}}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")
-assert(FieldKitDB.cardSizes.Unknown==nil and FieldKitDB.cardSizes.FieldKitModeFrame==nil)
-assert(FieldKitDB.cardSizes.FieldKitStatsFrame.width==800 and FieldKitDB.cardSizes.FieldKitStatsFrame.height==22)
-FieldKitDB.cardSizes={}
+assert(FieldKitRebornDB.cardSizes.Unknown==nil and FieldKitRebornDB.cardSizes.FieldKitModeFrame==nil)
+assert(FieldKitRebornDB.cardSizes.FieldKitStatsFrame.width==800 and FieldKitRebornDB.cardSizes.FieldKitStatsFrame.height==22)
+FieldKitRebornDB.cardSizes={}
 AZS_ZONE.heroic=2;AZS_RUN.ph="playing"
 local lines={{name="Observed",dmg=420,dps=42,share=.8},{name="Other",dmg=105,dps=10.5,share=.2}}
 AZS_GetMeter=function() return lines,525,52.5 end
@@ -32,11 +32,11 @@ end
 -- Both sides can be unlinked directly from the arrangement dock.
 U.SetLayoutEditing(true,false)
 click(U.groupLeft);click(U.groupRight)
-assert(not FieldKitDB.linkLeftCards and not FieldKitDB.linkRightCards)
-local meterAnchor=FieldKitDB.frameAnchors.FieldKitMeterFrame
+assert(not FieldKitRebornDB.linkLeftCards and not FieldKitRebornDB.linkRightCards)
+local meterAnchor=FieldKitRebornDB.frameAnchors.FieldKitMeterFrame
 drag(FieldKitTakenFrame,"TOPLEFT",77,-130)
-assert(FieldKitDB.frameAnchors.FieldKitTakenFrame[3]==77)
-assert(FieldKitDB.frameAnchors.FieldKitMeterFrame==meterAnchor)
+assert(FieldKitRebornDB.frameAnchors.FieldKitTakenFrame[3]==77)
+assert(FieldKitRebornDB.frameAnchors.FieldKitMeterFrame==meterAnchor)
 drag(FieldKitGearFrame,"TOPRIGHT",-25,-60)
 drag(FieldKitStatsFrame,"BOTTOMRIGHT",-30,45)
 update(FieldKitFrame,.3)
@@ -44,7 +44,7 @@ assert(relative(FieldKitTakenFrame)==UIParent,"Taken reattached to damage")
 assert(offset(FieldKitTakenFrame)==77)
 assert(offset(FieldKitGearFrame)==-25)
 assert(offset(FieldKitStatsFrame)==-30)
-click(U.sizes);assert(not FieldKit.layoutEditing and FieldKitDB.uiPage=="layout")
+click(U.sizes);assert(not FieldKit.layoutEditing and FieldKitRebornDB.uiPage=="layout")
 
 -- Each card keeps its own width and height through unchanged native stamps.
 local selector,width,height=control("Window to resize"),control("Window width"),control("Window height")
@@ -74,19 +74,19 @@ assert(FieldKitStatsFrame:GetHeight()>=FieldKitStatsFrame.fieldkitMinimumHeight)
 
 -- Group dragging must save only the proxy anchor; unlink restores own anchors.
 U.SetLayoutEditing(true,false);click(U.groupRight);click(U.groupLeft)
-local oldGear=FieldKitDB.frameAnchors.FieldKitGearFrame
+local oldGear=FieldKitRebornDB.frameAnchors.FieldKitGearFrame
 this=FieldKitGearFrame;FieldKitGearFrame:GetScript("OnDragStart")()
 assert(C.root.azsMoving and not FieldKitGearFrame.azsMoving)
 C.root:ClearAllPoints();C.root:SetPoint("TOPRIGHT",UIParent,"TOPRIGHT",0,-10)
 FieldKitGearFrame:GetScript("OnDragStop")()
-assert(FieldKitDB.frameAnchors.FieldKitRightStack[3]==0)
-assert(FieldKitDB.frameAnchors.FieldKitGearFrame==oldGear)
+assert(FieldKitRebornDB.frameAnchors.FieldKitRightStack[3]==0)
+assert(FieldKitRebornDB.frameAnchors.FieldKitGearFrame==oldGear)
 assert(not C.root.mouseEnabled and C.root.clamped)
 assert(C.root:GetWidth()==math.max(FieldKitGearFrame:GetWidth(),FieldKitStatsFrame:GetWidth()))
 assert(FieldKitModeFrame:GetWidth()==490 and FieldKitMeterFrame:GetWidth()==500)
 local h=C.root:GetHeight()
 click(FieldKitGearFrame.mashCollapseButton);update(FieldKitFrame,.3)
-assert(C.root:GetHeight()<h and FieldKitDB.cardSizes.FieldKitGearFrame.height==330)
+assert(C.root:GetHeight()<h and FieldKitRebornDB.cardSizes.FieldKitGearFrame.height==330)
 click(FieldKitGearFrame.mashCollapseButton);update(FieldKitFrame,.3)
 click(U.groupRight);click(U.groupLeft)
 assert(offset(FieldKitGearFrame)==-25)
@@ -96,11 +96,11 @@ U.SetLayoutEditing(false,true)
 -- Reset size belongs to the selected card; reset positions leaves sizes intact.
 choose(selector,5);local automatic=control("Automatic size for this window")
 automatic:SetChecked(true);click(automatic)
-assert(FieldKitDB.cardSizes.FieldKitGearFrame==nil and FieldKitGearFrame:GetWidth()==220)
-assert(FieldKitDB.cardSizes.FieldKitMeterFrame.width==500)
+assert(FieldKitRebornDB.cardSizes.FieldKitGearFrame==nil and FieldKitGearFrame:GetWidth()==220)
+assert(FieldKitRebornDB.cardSizes.FieldKitMeterFrame.width==500)
 choose(selector,7);automatic:SetChecked(true);click(automatic)
 assert(FieldKitMoneyFrame:GetHeight()==22,"Automatic money height was not restored")
-U.ResetPositions();assert(FieldKitDB.cardSizes.FieldKitMeterFrame.height==360);U.UndoPositions()
+U.ResetPositions();assert(FieldKitRebornDB.cardSizes.FieldKitMeterFrame.height==360);U.UndoPositions()
 FieldKit_SetLanguage("fr");assert(FieldKit_L("Window width")=="Largeur de la fenêtre")
 FieldKit_SetLanguage("en")
 print("Independent cards, group proxies, per-card dimensions and collapse fixtures passed")

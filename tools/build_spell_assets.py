@@ -19,6 +19,6 @@ assert records[133]['icon'].endswith('Spell_Fire_FlameBolt') and records[1680]['
 lines=['-- Generated directly from local Spell.dbc (173 fields) and SpellIcon.dbc.', '-- Base class spell assets only; not an ability/rank/bonus prediction table.','FieldKitSpellAssets={']
 for key,r in sorted(records.items()):lines.append(' ['+str(key)+']={name='+json.dumps(r['name'],ensure_ascii=False)+',icon='+json.dumps(r['icon'],ensure_ascii=False)+'},')
 lines.append('}')
-(base/'AzerothFieldKit/SpellAssets.lua').write_text('\n'.join(lines)+'\n',encoding='utf8',newline='\n')
+(base/'AzerothFieldKitReborn/SpellAssets.lua').write_text('\n'.join(lines)+'\n',encoding='utf8',newline='\n')
 (base/'data/spell-assets-evidence.json').write_text(json.dumps({'source':'independent local DBC extraction','spellSha256':hashlib.sha256(sb).hexdigest(),'iconsSha256':hashlib.sha256(ib).hexdigest(),'records':len(records),'fields':{'name':120,'rank':129,'iconId':117,'family':160},'inGameTest':False},indent=2)+'\n',encoding='utf8')
 print(len(records),'native base class spell icon/name entries')

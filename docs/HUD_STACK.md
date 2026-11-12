@@ -15,7 +15,7 @@ and reuses anchors when unchanged. It never reparents another addon's frames.
 Drag handlers on any member forward to the same anchor while Move windows is
 active. Original handlers remain available when unlinked. The initial anchor is
 migrated from the saved damage card position; original individual coordinates
-are preserved. New position uses `FieldKitDB.pos.FieldKitLeftStack`. Reset/Undo
+are preserved. New position uses `FieldKitRebornDB.pos.FieldKitLeftStack`. Reset/Undo
 includes this new UI position, with canonical defaults kept separately. The
 group is clamped into the viewport when its full dimensions fit; it is not scaled
 down to unreadable text. Exceptionally tall content can still exceed a very short
@@ -59,7 +59,7 @@ position. This conversion is removed. The revised path retains native GetPoint
 anchors and offsets, following the existing Azeroth Stats persistence pattern.
 It avoids mixing those coordinate spaces and supports zero-offset edge anchors.
 
-`FieldKitDB.frameAnchors` is validated independently of legacy `pos` entries and
+`FieldKitRebornDB.frameAnchors` is validated independently of legacy `pos` entries and
 wins on restoration after a new drag. Only UIParent/implicit-viewport anchors are
 accepted; no external frame pointer is serialized. Unexpected anchor references
 are left untouched rather than forcibly recentered. Reset/Undo includes native

@@ -1,5 +1,5 @@
 -- Actual tooltip readers and row geometry with explicit synthetic native data.
-FieldKitDB={}
+FieldKitRebornDB={}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")
 local L,D=FieldKitLoadout,FieldKitTakenDetails
 local tip=FieldKitLoadoutScan
@@ -41,8 +41,8 @@ assert(L.CompactBonus("Réduit tous les dégâts subis de 10%")=="-10% dmg")
 assert(L.spells[1].rankValue==7)
 local r,g,b=L.RankColor(7);assert(r and g and b and r<.5)
 assert(L.Icon("Saccager") and L.Icon("Rafale") and L.Icon("Blessures profondes"))
-FieldKitDB.gearCollapsed=true;L.Render(L.frame);assert(not L.frame.spellRows[1]:IsShown())
-FieldKitDB.gearCollapsed=false;L.Render(L.frame);click(L.frame.loadoutTabs[1])
+FieldKitRebornDB.gearCollapsed=true;L.Render(L.frame);assert(not L.frame.spellRows[1]:IsShown())
+FieldKitRebornDB.gearCollapsed=false;L.Render(L.frame);click(L.frame.loadoutTabs[1])
 local meter=FieldKitMeterFrame.rows[1]
 FieldKit.UpdateMeterColumns(meter,{name="Fireball",dmg=100,dps=10,share=1},3,360)
 assert(meter.fieldkitSpellIcon:IsShown() and meter.fieldkitIconInset==18)
@@ -84,7 +84,7 @@ assert(FieldKitGearFrame.slots[1].bonus:GetText()=="+72% chance")
 -- Next boss is inside Lairs, independent of the separate reminders option.
 function AZS_GetLairs() return {{name="Guardian",state="asleep",x=1,y=1}} end
 function AZS_GetUpcomingBosses() return {{name="Scheduled boss",left=65,index=2}} end
-FieldKitDB.nextBossCard=false;AZS_UNITS={};update(FieldKitFrame,.3)
+FieldKitRebornDB.nextBossCard=false;AZS_UNITS={};update(FieldKitFrame,.3)
 assert(string.find(FieldKitLairFrame.nextBoss:GetText(),"Scheduled boss",1,true))
 assert(FieldKitLairFrame.fieldkitFooterHeight==28)
 AZS_UNITS={{kind="boss",name="Live Boss",hp=50,hpm=100,state=0}};update(FieldKitFrame,.3)

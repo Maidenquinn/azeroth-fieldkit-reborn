@@ -4,7 +4,7 @@ SlashCmdList.FieldKit("")
 local U=FieldKitUI
 assert(U and U.frame and U.sections)
 U.Select("profiles")
-assert(FieldKitDB.uiPage=="profiles")
+assert(FieldKitRebornDB.uiPage=="profiles")
 local row=U.profileView
 assert(row and table.getn(row.slots)==3)
 -- Each native EditBox and its decorative shell must be owned by its own card:
@@ -27,16 +27,16 @@ for i=1,3 do
 end
 
 local s1=row.slots[1]
-assert(not FieldKitDB.interfaceProfiles[1])
-local current=FieldKitDB.cardOpacity
+assert(not FieldKitRebornDB.interfaceProfiles[1])
+local current=FieldKitRebornDB.cardOpacity
 click(s1.save)
-assert(FieldKitDB.interfaceProfiles[1] and FieldKitDB.interfaceProfiles[1].values.cardOpacity==current)
+assert(FieldKitRebornDB.interfaceProfiles[1] and FieldKitRebornDB.interfaceProfiles[1].values.cardOpacity==current)
 -- All three editors use separate frame/card ownership and their native
 -- decorations must never become visible on a different profile card.
-local original2=FieldKitDB.interfaceProfiles[2]
-local original3=FieldKitDB.interfaceProfiles[3]
-FieldKitDB.interfaceProfiles[2]=FieldKitDB.interfaceProfiles[1]
-FieldKitDB.interfaceProfiles[3]=FieldKitDB.interfaceProfiles[1]
+local original2=FieldKitRebornDB.interfaceProfiles[2]
+local original3=FieldKitRebornDB.interfaceProfiles[3]
+FieldKitRebornDB.interfaceProfiles[2]=FieldKitRebornDB.interfaceProfiles[1]
+FieldKitRebornDB.interfaceProfiles[3]=FieldKitRebornDB.interfaceProfiles[1]
 U.Refresh()
 for i=1,3 do
  local x=row.slots[i]
@@ -49,8 +49,8 @@ for i=1,3 do
  click(x.abort)
  assert(not x.editor:IsShown())
 end
-FieldKitDB.interfaceProfiles[2]=original2
-FieldKitDB.interfaceProfiles[3]=original3
+FieldKitRebornDB.interfaceProfiles[2]=original2
+FieldKitRebornDB.interfaceProfiles[3]=original3
 U.Refresh()
 
 assert(s1.rename:IsShown())
@@ -78,39 +78,39 @@ assert(FieldKitProfiles.Name(1)=="Donjons FR")
 click(s1.abort)
 
 
-FieldKitDB.cardOpacity=39
+FieldKitRebornDB.cardOpacity=39
 click(s1.save)
-assert(FieldKitDB.interfaceProfiles[1].values.cardOpacity==current,"existing profile overwritten without confirmation")
+assert(FieldKitRebornDB.interfaceProfiles[1].values.cardOpacity==current,"existing profile overwritten without confirmation")
 click(s1.save)
-assert(FieldKitDB.interfaceProfiles[1].values.cardOpacity==39)
-FieldKitDB.cardOpacity=88
+assert(FieldKitRebornDB.interfaceProfiles[1].values.cardOpacity==39)
+FieldKitRebornDB.cardOpacity=88
 click(s1.loadButton)
-assert(FieldKitDB.activeHudProfile==1 and FieldKitDB.cardOpacity==39,
+assert(FieldKitRebornDB.activeHudProfile==1 and FieldKitRebornDB.cardOpacity==39,
  "UI profile load must apply the HUD immediately")
 assert(row.cancel:IsShown())
 click(row.cancel)
-assert(FieldKitDB.profilePendingSlot==nil and FieldKitDB.cardOpacity==88)
-assert(FieldKitDB.activeHudProfile==1)
+assert(FieldKitRebornDB.profilePendingSlot==nil and FieldKitRebornDB.cardOpacity==88)
+assert(FieldKitRebornDB.activeHudProfile==1)
 click(s1.delete)
-assert(FieldKitDB.interfaceProfiles[1],"first delete click must only ask for confirmation")
+assert(FieldKitRebornDB.interfaceProfiles[1],"first delete click must only ask for confirmation")
 click(s1.delete)
-assert(FieldKitDB.interfaceProfiles[1]==nil,"confirmed delete should remove profile")
+assert(FieldKitRebornDB.interfaceProfiles[1]==nil,"confirmed delete should remove profile")
 click(s1.save)
 assert(FieldKitProfiles.Rename(1,"Donjons FR"))
-FieldKitDB.cardOpacity=76
+FieldKitRebornDB.cardOpacity=76
 click(s1.loadButton)
 U.Refresh()
-assert(FieldKitDB.cardOpacity==88 and FieldKitDB.activeHudProfile==1)
+assert(FieldKitRebornDB.cardOpacity==88 and FieldKitRebornDB.activeHudProfile==1)
 U.Select("layout");U.Select("profiles")
-assert(FieldKitDB.activeHudProfile==1)
+assert(FieldKitRebornDB.activeHudProfile==1)
 -- Reflow and language switching must not mutate current HUD.
 local total=table.getn(objects)
 FieldKit_SetLanguage("fr");U.Refresh();U.Reflow()
-assert(FieldKitDB.cardOpacity==88 and FieldKitDB.activeHudProfile==1)
+assert(FieldKitRebornDB.cardOpacity==88 and FieldKitRebornDB.activeHudProfile==1)
 FieldKit_SetLanguage("en");U.Refresh()
 assert(table.getn(objects)==total,"profile UI must reuse existing controls")
 click(row.cancel)
-assert(FieldKitDB.activeHudProfile==1)
+assert(FieldKitRebornDB.activeHudProfile==1)
 
 -- Home quick switches are one click, and empty slots navigate to management.
 U.Select("home")
@@ -148,11 +148,11 @@ for i=1,3 do
 end
 
 
-FieldKitDB.cardOpacity=24
+FieldKitRebornDB.cardOpacity=24
 click(U.quickProfileButtons[1])
-assert(FieldKitDB.cardOpacity==88 and FieldKitDB.activeHudProfile==1)
+assert(FieldKitRebornDB.cardOpacity==88 and FieldKitRebornDB.activeHudProfile==1)
 click(U.quickProfileButtons[3])
-assert(FieldKitDB.uiPage=="profiles")
+assert(FieldKitRebornDB.uiPage=="profiles")
 -- Header controls remain available on every page, without reloading the UI.
 assert(U.headerProfileButtons and table.getn(U.headerProfileButtons)==3)
 assert(U.headerProfileLayer and U.headerProfileLayer:GetFrameLevel()>U.header:GetFrameLevel(),
@@ -167,9 +167,9 @@ assert(parent==U.frame and offx==-34 and offy==-72,
  "header shortcuts must retain the visible fixed right anchor")
 
 U.Select("look")
-FieldKitDB.cardOpacity=31
+FieldKitRebornDB.cardOpacity=31
 click(U.headerProfileButtons[1])
-assert(FieldKitDB.cardOpacity==88 and FieldKitDB.activeHudProfile==1)
+assert(FieldKitRebornDB.cardOpacity==88 and FieldKitRebornDB.activeHudProfile==1)
 assert(row.slots[1].activeTag:IsShown() and not row.slots[2].activeTag:IsShown())
 assert(U.headerProfileButtons[1].fieldkitSelected==true)
 assert(U.headerProfileButtons[3].fieldkitSelected==false)
@@ -179,9 +179,9 @@ assert(U.headerProfileButtons[1].fieldkitActive==true,
  "mouse leave must preserve active shortcut highlight")
 assert(string.find(U.headerProfileButtons[1].fieldkitLabel.text,"✓",1,true))
 
-assert(FieldKitDB.uiPage=="look","header switch should preserve current page")
+assert(FieldKitRebornDB.uiPage=="look","header switch should preserve current page")
 click(U.headerProfileButtons[3])
-assert(FieldKitDB.uiPage=="profiles","empty header slot should open manager")
+assert(FieldKitRebornDB.uiPage=="profiles","empty header slot should open manager")
 FieldKit_SetLanguage("fr")
 U.Refresh()
 assert(FieldKit_L("Empty slot — save your current HUD to start.")~=
@@ -208,12 +208,12 @@ assert(string.find(U.languageRow.fr.fieldkitLabel.text,"✓",1,true))
 click(U.languageRow.en)
 -- Reset HUD positions now resets chat placement and dimensions too, with Undo.
 U.Select("interface")
-FieldKitDB.chatWidth=650;FieldKitDB.chatHeight=260
-FieldKitDB.chatAnchor={x=240,y=340}
+FieldKitRebornDB.chatWidth=650;FieldKitRebornDB.chatHeight=260
+FieldKitRebornDB.chatAnchor={x=240,y=340}
 U.ResetPositions()
-assert(FieldKitDB.chatAnchor==nil and FieldKitDB.chatWidth==440
- and FieldKitDB.chatHeight==180)
+assert(FieldKitRebornDB.chatAnchor==nil and FieldKitRebornDB.chatWidth==440
+ and FieldKitRebornDB.chatHeight==180)
 U.UndoPositions()
-assert(FieldKitDB.chatWidth==650 and FieldKitDB.chatHeight==260)
-assert(FieldKitDB.chatAnchor.x==240 and FieldKitDB.chatAnchor.y==340)
+assert(FieldKitRebornDB.chatWidth==650 and FieldKitRebornDB.chatHeight==260)
+assert(FieldKitRebornDB.chatAnchor.x==240 and FieldKitRebornDB.chatAnchor.y==340)
 

@@ -25,7 +25,7 @@ This is a major HUD customization update compared with v0.4.2.
 - Improved French/English labels.
 - Safer profile saves, validation and rollback to reduce the risk of losing settings.
 
-**Before updating:** Back up your `SavedVariables` folder. Replace the old `AzerothFieldKit` addon folder, restart the game and open `/fieldkit`.
+**Before updating:** Back up your `SavedVariables` folder. Replace the old `AzerothFieldKitReborn` addon folder, restart the game and open `/fieldkit`.
 
 **Download:** [insert the published GitHub release URL]
 

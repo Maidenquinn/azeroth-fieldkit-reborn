@@ -19,7 +19,7 @@ import numpy as np
 from PIL import Image
 
 base = Path(__file__).resolve().parent.parent
-out = base / 'AzerothFieldKit/media/ReferenceHUD'
+out = base / 'AzerothFieldKitReborn/media/ReferenceHUD'
 NAMES = ['elwynn_complete_Accessories_1', 'elwynn_complete_Damage_1', 'elwynn_complete_Effects_1', 'elwynn_complete_Lairs_1', 'elwynn_complete_Stats_1',
          'naxx_complete_Accessories_1', 'naxx_complete_Damage_1', 'naxx_complete_Effects_1', 'naxx_complete_Lairs_1', 'naxx_complete_Stats_1']
 LO, HI = 16.0, 52.0

@@ -38,7 +38,7 @@ transport must not flood party chat with encoded statistics.
 
 ## Protocol and boundaries
 
-- Fixed prefix `AFKDETAIL1`, distribution **PARTY** only, never guild/whisper/HTTP.
+- Fixed prefix `AFKRDETAIL1`, distribution **PARTY** only, never guild/whisper/HTTP.
 - `Q:id:encodedTarget:runTime` requests the named player's own snapshot.
 - `R:id:part:count:chunk` carries printable ASCII fragments. Names are percent
   escaped, including reserved separators, non-ASCII bytes and WoW pipe escapes.

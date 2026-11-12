@@ -1,14 +1,14 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.6.0-alpha.50",
-  "runtimeModules": 48,
+  "candidate": "0.1.0-reborn.1",
+  "runtimeModules": 49,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
   "dynamicCombatEventNames": "See CombatText.lua events list; not all registrations are string literals.",
   "files": {
     "Runtime.lua": {
-      "bytes": 5187,
-      "sha256": "c287d216dba4ca7a23832767a9a2e717a640314a345b512f17e3053d907fe440",
+      "bytes": 5206,
+      "sha256": "8d1d5f2c07d2154f89f0aabdb6107fec62f4b1ee5d310dc81b166eac1f811fc2",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -53,9 +53,44 @@
       ],
       "literalEvents": []
     },
+    "Reborn.lua": {
+      "bytes": 2982,
+      "sha256": "441d9742a00a2406bf125b060e449639369f49c8757f13c19e363309fc7aceb1",
+      "namedFunctions": [
+        {
+          "name": "R.Capabilities",
+          "line": 4
+        },
+        {
+          "name": "R.SupportsHealing",
+          "line": 9
+        },
+        {
+          "name": "R.Icon",
+          "line": 15
+        },
+        {
+          "name": "R.Localize",
+          "line": 20
+        },
+        {
+          "name": "R.Spell",
+          "line": 26
+        },
+        {
+          "name": "R.Gear",
+          "line": 43
+        },
+        {
+          "name": "R.Portrait",
+          "line": 55
+        }
+      ],
+      "literalEvents": []
+    },
     "Diagnostics.lua": {
-      "bytes": 19304,
-      "sha256": "9b15eab8eda0b5cbe84b309ec7ad35fd97721646f916d352f6b3053729a0ffa9",
+      "bytes": 19322,
+      "sha256": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
       "namedFunctions": [
         {
           "name": "Say",
@@ -169,8 +204,8 @@
       "literalEvents": []
     },
     "Positions.lua": {
-      "bytes": 1687,
-      "sha256": "bb57bda856dfda1d8b406da7e83a6930c866d56924acac9fb006842ecd32b9ae",
+      "bytes": 1699,
+      "sha256": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
       "namedFunctions": [
         {
           "name": "P.Valid",
@@ -188,8 +223,8 @@
       "literalEvents": []
     },
     "Config.lua": {
-      "bytes": 9317,
-      "sha256": "a80c348ee3f5771f737215f7bb80aae1ebb4fefdd841f783d6476dbf41627943",
+      "bytes": 9340,
+      "sha256": "5aa756be35b488223548e7a6bfd84379ab1dbe2d3b659afa18015bde2996b552",
       "namedFunctions": [
         {
           "name": "FieldKit.InitializeSettings",
@@ -199,8 +234,8 @@
       "literalEvents": []
     },
     "Profiles.lua": {
-      "bytes": 15904,
-      "sha256": "558a966d596b6e2eebe7a358fc64dd720aa12ef6e4c5f975f2a600eb07fb547a",
+      "bytes": 16222,
+      "sha256": "6f6140c2c4a787fd7e96498e734a836ff87b4819156bbb7fba66b03e0111a49b",
       "namedFunctions": [
         {
           "name": "Include",
@@ -306,8 +341,8 @@
       "literalEvents": []
     },
     "Localization.lua": {
-      "bytes": 50038,
-      "sha256": "90ffd0025824f8383c5fd33e632ae6453c1aac0ae4fdffe8a4ea3679fb0e261d",
+      "bytes": 50223,
+      "sha256": "f285d1f416e9e57331827ceb3cdfad4beab810c22bb7acac1e1ecdd8616a5920",
       "namedFunctions": [
         {
           "name": "FieldKit_Language",
@@ -347,8 +382,8 @@
       "literalEvents": []
     },
     "Theme.lua": {
-      "bytes": 14614,
-      "sha256": "542e69d7228949459b505a72b49afee292b3574b412c2f1696a7a2b572cc23d1",
+      "bytes": 14644,
+      "sha256": "efa31b10c0320094192de5e2bc2f12386585da9390689c3fea9b07fa7ab902a1",
       "namedFunctions": [
         {
           "name": "T.Solid",
@@ -424,8 +459,8 @@
       "literalEvents": []
     },
     "Seed.lua": {
-      "bytes": 3910,
-      "sha256": "958925a3bfd1719530a3056f6a45a8281fdfac0ae75ff0215ec0907fe9aaf39e",
+      "bytes": 4208,
+      "sha256": "a1e79ab07c8b41dca34f8fa730f964cd7e79ece5700a1e5d407f941060ee655c",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -436,8 +471,8 @@
       "literalEvents": []
     },
     "Portraits.lua": {
-      "bytes": 4229,
-      "sha256": "f2a800f652d7495326b82d3207947a470b09681ca8808c9a82f046d0e9b04239",
+      "bytes": 4531,
+      "sha256": "c1451d1b391c9ac1051cde264f17e970fa2dd0261e6c9884e09e959bdf39f220",
       "namedFunctions": [
         {
           "name": "P.Apply",
@@ -447,8 +482,8 @@
       "literalEvents": []
     },
     "Settings.lua": {
-      "bytes": 11735,
-      "sha256": "3f60be48cc91595da3a37d4ffb4ddbec83c55a00cab2e4b8a4af1b1fa3e2c66b",
+      "bytes": 11817,
+      "sha256": "64bd4a6aa25e21b34cf247574bba88c9ba91e5514ab7e17c01e421455889c298",
       "namedFunctions": [
         {
           "name": "FieldKit_FormatHealth",
@@ -510,8 +545,8 @@
       "literalEvents": []
     },
     "GameCompatibility.lua": {
-      "bytes": 1546,
-      "sha256": "7e081ae1a650ef0b6d402341b0b9bee83f7281fdecf81aa7b449f1f778d25d56",
+      "bytes": 1567,
+      "sha256": "6be3f917a9287a5d710533c050db198da7722cd34758985a2de9155bf4bd16b7",
       "namedFunctions": [
         {
           "name": "FieldKit.GetHeroicLevel",
@@ -537,8 +572,8 @@
       "literalEvents": []
     },
     "RunMode.lua": {
-      "bytes": 5774,
-      "sha256": "0e9580257cfb408d5f72033e1d5346021daa9822e6f5757225cd120c345a3242",
+      "bytes": 6135,
+      "sha256": "abbb47db122077f143928c56f273099b213e848ad571543538f2403fe9fa8ace",
       "namedFunctions": [
         {
           "name": "R.Affixes",
@@ -550,26 +585,26 @@
         },
         {
           "name": "R.Tooltip",
-          "line": 69
+          "line": 70
         },
         {
           "name": "R.Create",
-          "line": 100
+          "line": 106
         },
         {
           "name": "R.Reflow",
-          "line": 114
+          "line": 120
         },
         {
           "name": "R.Update",
-          "line": 119
+          "line": 125
         }
       ],
       "literalEvents": []
     },
     "NativeData.lua": {
-      "bytes": 4910,
-      "sha256": "43c6c6c5e251e8ad7d91b0f68ee10faef1e405e18e4dd50acb38695bf9253289",
+      "bytes": 4977,
+      "sha256": "074a5cc2a94f11434c0fefaf29d8e33aaa1e53dd86db46f60a2ff160d6fd519c",
       "namedFunctions": [
         {
           "name": "N.Read",
@@ -619,8 +654,8 @@
       "literalEvents": []
     },
     "MeterLedger.lua": {
-      "bytes": 26954,
-      "sha256": "f9a2fe0866793ce76a3d4daff035c08913a1f742a084438b17e97f51eb9891d1",
+      "bytes": 27395,
+      "sha256": "051b7bfe7cd23da74d6f93646cae5db4283cd03b1bf4fd1a1cdb4e9797680636",
       "namedFunctions": [
         {
           "name": "Text",
@@ -668,131 +703,131 @@
         },
         {
           "name": "RunKey",
-          "line": 96
+          "line": 98
         },
         {
           "name": "L.Boundary",
-          "line": 102
+          "line": 104
         },
         {
           "name": "L.NoteHit",
-          "line": 117
+          "line": 123
         },
         {
           "name": "L.NoteKill",
-          "line": 131
+          "line": 137
         },
         {
           "name": "L.NoteDeath",
-          "line": 138
+          "line": 144
         },
         {
           "name": "L.KillsFor",
-          "line": 146
+          "line": 152
         },
         {
           "name": "ResolveBook",
-          "line": 151
+          "line": 157
         },
         {
           "name": "L.Stats",
-          "line": 163
+          "line": 169
         },
         {
           "name": "IngestCombatEvent",
-          "line": 181
+          "line": 187
         },
         {
           "name": "L.PollCombatText",
-          "line": 190
+          "line": 196
         },
         {
           "name": "CleanOwner",
-          "line": 213
+          "line": 219
         },
         {
           "name": "IsMine",
-          "line": 224
+          "line": 230
         },
         {
           "name": "Attribute",
-          "line": 234
-        },
-        {
-          "name": "L.ParseChat",
           "line": 240
         },
         {
+          "name": "L.ParseChat",
+          "line": 246
+        },
+        {
           "name": "L.ParseDeath",
-          "line": 319
+          "line": 325
         },
         {
           "name": "Snapshot",
-          "line": 330
+          "line": 336
         },
         {
           "name": "SortKey",
-          "line": 344
+          "line": 350
         },
         {
           "name": "HiddenSet",
-          "line": 351
+          "line": 357
         },
         {
           "name": "L.ToggleHide",
-          "line": 358
+          "line": 364
         },
         {
           "name": "L.ClearHidden",
-          "line": 367
-        },
-        {
-          "name": "SortLines",
           "line": 373
         },
         {
+          "name": "SortLines",
+          "line": 379
+        },
+        {
           "name": "FinishLines",
-          "line": 388
+          "line": 394
         },
         {
           "name": "SourceFamily",
-          "line": 403
+          "line": 409
         },
         {
           "name": "SourceIcon",
-          "line": 416
-        },
-        {
-          "name": "RowsFromSnap",
           "line": 422
         },
         {
+          "name": "RowsFromSnap",
+          "line": 428
+        },
+        {
           "name": "AttachKillStats",
-          "line": 476
+          "line": 482
         },
         {
           "name": "RunSeconds",
-          "line": 495
+          "line": 501
         },
         {
           "name": "L.Read",
-          "line": 504
+          "line": 510
         },
         {
           "name": "L.AppendStats",
-          "line": 597
+          "line": 600
         },
         {
           "name": "L.ShowTip",
-          "line": 622
+          "line": 625
         },
         {
           "name": "TipName",
-          "line": 638
+          "line": 641
         },
         {
           "name": "HookTooltipMethod",
-          "line": 644
+          "line": 647
         }
       ],
       "literalEvents": [
@@ -809,8 +844,8 @@
       ]
     },
     "MeterSuite.lua": {
-      "bytes": 19486,
-      "sha256": "4c3b8457bcf984db948aae61c3f92cc297da6a64a95fc02207a1c05383122a84",
+      "bytes": 19734,
+      "sha256": "abc5fe3246fa2735c2889e3b25b4957dead4aa56f70733edc25d7a70ca81cb59",
       "namedFunctions": [
         {
           "name": "DB",
@@ -834,74 +869,74 @@
         },
         {
           "name": "S.DrillParty",
-          "line": 53
+          "line": 54
         },
         {
           "name": "S.PartyBack",
-          "line": 61
+          "line": 62
         },
         {
           "name": "S.DetachKey",
-          "line": 68
+          "line": 69
         },
         {
           "name": "S.IsDetached",
-          "line": 72
+          "line": 73
         },
         {
           "name": "S.SetDetached",
-          "line": 76
+          "line": 77
         },
         {
           "name": "Short",
-          "line": 83
+          "line": 84
         },
         {
           "name": "SyncSubChrome",
-          "line": 91
+          "line": 92
         },
         {
           "name": "Paint",
-          "line": 110
+          "line": 112
         },
         {
           "name": "S.BindSpellTip",
-          "line": 201
+          "line": 203
         },
         {
           "name": "MakeSortHeader",
-          "line": 246
+          "line": 248
         },
         {
           "name": "EnsureChrome",
-          "line": 263
+          "line": 265
         },
         {
           "name": "SubBtn",
-          "line": 281
+          "line": 283
         },
         {
           "name": "TintTabs",
-          "line": 349
+          "line": 351
         },
         {
           "name": "S.EnsureDetach",
-          "line": 358
+          "line": 360
         },
         {
           "name": "S.HookMeter",
-          "line": 407
+          "line": 409
         },
         {
           "name": "S.Update",
-          "line": 414
+          "line": 416
         }
       ],
       "literalEvents": []
     },
     "BossTimeline.lua": {
-      "bytes": 11423,
-      "sha256": "6daecd0e389e40fbd9e6cd2d93d1b022808dca57802b28ed0f870dab24bf98a3",
+      "bytes": 11495,
+      "sha256": "8fb5bedc592fd38985bf33e9f0908c55dde99adf25f5c34ad2b0a45acc7fbb86",
       "namedFunctions": [
         {
           "name": "Clock",
@@ -955,8 +990,8 @@
       "literalEvents": []
     },
     "HudStack.lua": {
-      "bytes": 7082,
-      "sha256": "610d84dedad61bfd61ae3c433c21807fabd448f43a0420934f86e0abe45f7195",
+      "bytes": 7154,
+      "sha256": "01a843571c9e034e56618ac74155b01ddde0efb151e4c72590400f155c51b73f",
       "namedFunctions": [
         {
           "name": "S.Initialize",
@@ -986,8 +1021,8 @@
       "literalEvents": []
     },
     "CardLayout.lua": {
-      "bytes": 10417,
-      "sha256": "f766e9b564530538ee8497890635f314d506170f62b07fe45709bedc1c8bc7a1",
+      "bytes": 10531,
+      "sha256": "eeaf5a7ce67891f71e19eab70e3b6e6c24063aaa3440807787dd533177344f99",
       "namedFunctions": [
         {
           "name": "C.ValidName",
@@ -1045,8 +1080,8 @@
       "literalEvents": []
     },
     "Coop.lua": {
-      "bytes": 34398,
-      "sha256": "5d747f87ed95ebd5873100738620d1c71f87f98fd91743e0c692174dcb798b59",
+      "bytes": 34500,
+      "sha256": "9a48679a49f3b49667f1b1148a9eda642fec8ab8071d0a65811edcdc96596a7b",
       "namedFunctions": [
         {
           "name": "P.Taken",
@@ -1196,8 +1231,8 @@
       "literalEvents": []
     },
     "GroupHistory.lua": {
-      "bytes": 17215,
-      "sha256": "f81bbd197d9ca61df4dd4354815669b4780bb79e3c02088f60be33f8b56d392a",
+      "bytes": 17287,
+      "sha256": "77a5abe50cf781f15a31f6786f4e58dda2003951ff616a8ba60d823d6c246af8",
       "namedFunctions": [
         {
           "name": "H.Compile",
@@ -1307,8 +1342,8 @@
       "literalEvents": []
     },
     "PartySync.lua": {
-      "bytes": 10034,
-      "sha256": "c05b7ffaf4a274e1c287f9e8a71d5c867fe9195929c919553e003d97138f5aee",
+      "bytes": 10065,
+      "sha256": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
       "namedFunctions": [
         {
           "name": "S.Clear",
@@ -1382,8 +1417,8 @@
       "literalEvents": []
     },
     "PartyDetails.lua": {
-      "bytes": 17927,
-      "sha256": "db02505f8857532f18126b92054741239be703e3261a62c8de28a80607028509",
+      "bytes": 17933,
+      "sha256": "5f34281dd40164abe26835fdacd77ce7582850ebc478e90d967c18e4200b09ef",
       "namedFunctions": [
         {
           "name": "Short",
@@ -1469,8 +1504,8 @@
       "literalEvents": []
     },
     "ScreenLayers.lua": {
-      "bytes": 4346,
-      "sha256": "4729cd51700e54769c637aaceab5d3dece4e62fec10970f1a7d64a20b088761a",
+      "bytes": 4382,
+      "sha256": "75b3db41420299ef5a4165f021b0f1e87b875318e49ba3c73f11ec12f7d9644c",
       "namedFunctions": [
         {
           "name": "ChoiceNames",
@@ -1500,8 +1535,8 @@
       "literalEvents": []
     },
     "NativeTools.lua": {
-      "bytes": 13508,
-      "sha256": "44e5502153e3b2d302443e3ca734d1af722d11182062ee53b5edbea101b9b765",
+      "bytes": 13658,
+      "sha256": "d99e3438e51abbab70d1187dcc6a8e62f16a0fc7c8aa86cc53e713bd1a2c2591",
       "namedFunctions": [
         {
           "name": "Count",
@@ -1569,8 +1604,8 @@
       "literalEvents": []
     },
     "Loadout.lua": {
-      "bytes": 19885,
-      "sha256": "044a94e24f4d3ba755200878196fdd45bf3b50da7bb6ebeb2e8c8a4e2909d507",
+      "bytes": 20709,
+      "sha256": "a992518329ad90a6c3d4a2253cd41160db4c014afbc899c088c469d234470705",
       "namedFunctions": [
         {
           "name": "L.Plain",
@@ -1618,43 +1653,43 @@
         },
         {
           "name": "L.Icon",
-          "line": 160
+          "line": 173
         },
         {
           "name": "L.ClearIcon",
-          "line": 166
+          "line": 179
         },
         {
           "name": "L.Decorate",
-          "line": 171
+          "line": 184
         },
         {
           "name": "L.SpellsChanged",
-          "line": 181
+          "line": 194
         },
         {
           "name": "L.ContentKey",
-          "line": 193
+          "line": 206
         },
         {
           "name": "L.Scan",
-          "line": 214
+          "line": 228
         },
         {
           "name": "L.Tip",
-          "line": 289
+          "line": 308
         },
         {
           "name": "L.Attach",
-          "line": 298
-        },
-        {
-          "name": "L.Render",
           "line": 317
         },
         {
+          "name": "L.Render",
+          "line": 336
+        },
+        {
           "name": "L.Update",
-          "line": 372
+          "line": 392
         }
       ],
       "literalEvents": []
@@ -1695,8 +1730,8 @@
       ]
     },
     "Preview.lua": {
-      "bytes": 19581,
-      "sha256": "7de5610fb3383d0d786cc073e622a47f793ffad868e736f459977edcd4b70649",
+      "bytes": 19737,
+      "sha256": "0d42c42f5be64b40a2b1bcf5a69d635858dedaba409352d88555398f734a59bc",
       "namedFunctions": [
         {
           "name": "P.Initialize",
@@ -1793,8 +1828,8 @@
       "literalEvents": []
     },
     "OptionsSchema.lua": {
-      "bytes": 8140,
-      "sha256": "ceba3afc76e83968143a5305c4641ad451290cfc212a4e86b24a0295c7494202",
+      "bytes": 8398,
+      "sha256": "b0f51cdc54b222e95dbf45fbd3de1ca033a4434773c914463063c7f074d7a45e",
       "namedFunctions": [
         {
           "name": "FieldKit.CreateOptionsSchema",
@@ -1804,8 +1839,8 @@
       "literalEvents": []
     },
     "LegacyCrits.lua": {
-      "bytes": 4485,
-      "sha256": "2e33373ebde2c6a0d15e4a4f7c3566ff82e73402cd57c6c6d8f3ec8094cb2d21",
+      "bytes": 4503,
+      "sha256": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
       "namedFunctions": [
         {
           "name": "CreateCritLine",
@@ -1835,8 +1870,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 77101,
-      "sha256": "25e4387af55b9e21f96a73323f726f4ffa337a1277a0080724340a8adb190b3c",
+      "bytes": 77953,
+      "sha256": "fc58bdc7c0bb15e475beca7679fe182e2012b05465b5f612c7afc7ff9fee5d97",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -1974,8 +2009,8 @@
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 120726,
-      "sha256": "475534084830c58e54ff709805ac9fbc2827d37c66b4591e6e889cc1257560cb",
+      "bytes": 120768,
+      "sha256": "373a3fe93587a46295e47d1dd9e0eb03ad8ace09f5a65a05653b7dddd11d2069",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2437,8 +2472,8 @@
       ]
     },
     "WorldPins.lua": {
-      "bytes": 6332,
-      "sha256": "427cc69f04fa24aa8351f8ff7afa5b227ea193a4d47ec1ee0e90e6eb6be305c2",
+      "bytes": 6362,
+      "sha256": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
       "namedFunctions": [
         {
           "name": "Rotating",
@@ -2543,8 +2578,8 @@
       "literalEvents": []
     },
     "WorldMarkers.lua": {
-      "bytes": 16938,
-      "sha256": "c3e05c0d9315c58a1c88b02c8a9896b945961677a982be2debd6fec8b1e230b0",
+      "bytes": 16980,
+      "sha256": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
       "namedFunctions": [
         {
           "name": "updateAura",
@@ -2700,8 +2735,8 @@
       ]
     },
     "CombatText.lua": {
-      "bytes": 32008,
-      "sha256": "7210959baca1d2fad5cf2f0dc428be714d174d621410433430be0cc5f24a2c6f",
+      "bytes": 32595,
+      "sha256": "31e3ec5ede0904b6cdd7b566f1fe29a0fb6a554a889192cdb1b82293a7e53d44",
       "namedFunctions": [
         {
           "name": "C.Number",
@@ -2789,71 +2824,71 @@
         },
         {
           "name": "C.Clear",
-          "line": 425
+          "line": 428
         },
         {
           "name": "C.ResetWorldCursor",
-          "line": 429
+          "line": 432
         },
         {
           "name": "C.Preset",
-          "line": 433
+          "line": 436
         },
         {
           "name": "CopyTable",
-          "line": 446
+          "line": 449
         },
         {
           "name": "CaptureProfile",
-          "line": 450
+          "line": 453
         },
         {
           "name": "ApplyProfile",
-          "line": 456
+          "line": 459
         },
         {
           "name": "ValidProfile",
-          "line": 462
-        },
-        {
-          "name": "DefaultProfile",
           "line": 465
         },
         {
+          "name": "DefaultProfile",
+          "line": 468
+        },
+        {
           "name": "C.ActiveProfile",
-          "line": 473
+          "line": 476
         },
         {
           "name": "C.InitProfiles",
-          "line": 478
+          "line": 481
         },
         {
           "name": "C.SelectProfile",
-          "line": 502
+          "line": 505
         },
         {
           "name": "C.SaveActiveProfile",
-          "line": 512
+          "line": 515
         },
         {
           "name": "C.ResetActiveProfile",
-          "line": 517
+          "line": 520
         },
         {
           "name": "C.PreviewEmit",
-          "line": 542
+          "line": 545
         },
         {
           "name": "C.Preview",
-          "line": 556
+          "line": 559
         },
         {
           "name": "C.HideAnchors",
-          "line": 567
+          "line": 570
         },
         {
           "name": "C.ShowAnchors",
-          "line": 577
+          "line": 580
         }
       ],
       "literalEvents": [
@@ -2861,8 +2896,8 @@
       ]
     },
     "CombatOptions.lua": {
-      "bytes": 24065,
-      "sha256": "e976dd63d4f9343fa3666a0504dcbe7b98631d1cb8b81bf9847dbd6f3c44a4b6",
+      "bytes": 24191,
+      "sha256": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
       "namedFunctions": [
         {
           "name": "Name",
@@ -2940,8 +2975,8 @@
       "literalEvents": []
     },
     "CopyLog.lua": {
-      "bytes": 31998,
-      "sha256": "34c15ca01ffac46a10ddc9335dfe2ad568a430e9695f778c1a7f2928ca4d016a",
+      "bytes": 32310,
+      "sha256": "f04e895b1c0c0885a6f7ae36370a0790eb8bd4d62a3ac8741ef8ac49d8ed58d5",
       "namedFunctions": [
         {
           "name": "Themed",
@@ -3083,8 +3118,8 @@
       "literalEvents": []
     },
     "ThemeMinimap.lua": {
-      "bytes": 24726,
-      "sha256": "8a090ebce7a617b013e024c8d3f329e1236961312c06be2b526a739f71bf5f66",
+      "bytes": 24738,
+      "sha256": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2",
       "namedFunctions": [
         {
           "name": "M.Rotate",
@@ -3182,8 +3217,8 @@
       "literalEvents": []
     },
     "ThemeHUD.lua": {
-      "bytes": 35561,
-      "sha256": "28852e989368767db5005eb9935c90876ada9dc4e2113cc116b1abef175e6893",
+      "bytes": 35970,
+      "sha256": "43d8d28f78056d730c8ecfed3691d1686564c855d61c8553054bde2f38cce8c0",
       "namedFunctions": [
         {
           "name": "H.Points",
@@ -3235,50 +3270,50 @@
         },
         {
           "name": "Open",
-          "line": 138
-        },
-        {
-          "name": "NavButton",
-          "line": 139
-        },
-        {
-          "name": "H.Create",
           "line": 143
         },
         {
+          "name": "NavButton",
+          "line": 144
+        },
+        {
+          "name": "H.Create",
+          "line": 148
+        },
+        {
           "name": "H.CompositionCreate",
-          "line": 206
+          "line": 211
         },
         {
           "name": "Root",
-          "line": 208
+          "line": 213
         },
         {
           "name": "H.SetHealthFill",
-          "line": 226
+          "line": 231
         },
         {
           "name": "Place",
-          "line": 266
+          "line": 271
         },
         {
           "name": "H.ReferenceValues",
-          "line": 272
+          "line": 277
         },
         {
           "name": "H.Update",
-          "line": 294
+          "line": 299
         },
         {
           "name": "H.Summaries",
-          "line": 391
+          "line": 396
         }
       ],
       "literalEvents": []
     },
     "ThemeTarget.lua": {
-      "bytes": 7419,
-      "sha256": "a049825a014ea9c03ded821235d9c0e52abf8a8a9c8a50420a9ee43f631e1f00",
+      "bytes": 7425,
+      "sha256": "de3355c2c251e3dd6af4239816f3182cfb6d706263d6e9a76acc8184c71ec31c",
       "namedFunctions": [
         {
           "name": "C.Create",
@@ -3310,8 +3345,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 142188,
-      "sha256": "34f1aa82fe87448dba03a2c31a02e9cd198e74896cce024fc8780f2098c5f69c",
+      "bytes": 142366,
+      "sha256": "5f17ba092dd6ed3cc061c02f7dd92a3d710b5462efc769116c5710b72285eeb9",
       "namedFunctions": [
         {
           "name": "Short",
@@ -3781,8 +3816,8 @@
       "literalEvents": []
     },
     "ZoneThemes.lua": {
-      "bytes": 42736,
-      "sha256": "c588ceda15b16c30868d4fbc19b5b0be1e32d561c19af5a5dbf572d894a1843a",
+      "bytes": 43256,
+      "sha256": "6d15d50194d6093b9226d8763fd609da24c1ca9745bb6fc613d94a6803d5f735",
       "namedFunctions": [
         {
           "name": "C.NormalizeScales",
@@ -3846,103 +3881,103 @@
         },
         {
           "name": "C.Suspend",
-          "line": 159
+          "line": 160
         },
         {
           "name": "C.NativeRestore",
-          "line": 173
+          "line": 174
         },
         {
           "name": "C.NativeReplace",
-          "line": 181
+          "line": 182
         },
         {
           "name": "C.Mask",
-          "line": 203
+          "line": 204
         },
         {
           "name": "C.ShapeLabel",
-          "line": 210
+          "line": 211
         },
         {
           "name": "C.Refresh",
-          "line": 215
+          "line": 216
         },
         {
           "name": "C.Sample",
-          "line": 284
+          "line": 285
         },
         {
           "name": "C.Stack",
-          "line": 300
+          "line": 301
         },
         {
           "name": "Walk",
-          "line": 302
+          "line": 303
         },
         {
           "name": "FrameState",
-          "line": 324
+          "line": 325
         },
         {
           "name": "C.GearState",
-          "line": 331
+          "line": 332
         },
         {
           "name": "C.GearEvents",
-          "line": 338
+          "line": 339
         },
         {
           "name": "C.Tick",
-          "line": 353
+          "line": 354
         },
         {
           "name": "C.ApplyOpacity",
-          "line": 371
+          "line": 372
         },
         {
           "name": "C.SetHudScale",
-          "line": 383
+          "line": 384
         },
         {
           "name": "C.Set",
-          "line": 391
+          "line": 392
         },
         {
           "name": "C.ToggleNativeMeter",
-          "line": 402
+          "line": 404
         },
         {
           "name": "C.Open",
-          "line": 406
+          "line": 408
         },
         {
           "name": "C.Diagnostic",
-          "line": 425
+          "line": 427
         },
         {
           "name": "Slash",
-          "line": 430
+          "line": 432
         },
         {
           "name": "C.Command",
-          "line": 438
+          "line": 440
         },
         {
           "name": "FieldKitThemeUI",
-          "line": 493
+          "line": 495
         },
         {
           "name": "Button",
-          "line": 497
+          "line": 499
         },
         {
           "name": "C.CycleElement",
-          "line": 549
+          "line": 551
         },
         {
           "name": "C.RefreshElementUI",
-          "line": 555
+          "line": 557
         }
       ],
       "literalEvents": []
@@ -6158,23 +6193,23 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.6.0-alpha.50",
+    "version": "0.1.0-reborn.1",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
-    "gameTeamPublicationPermission": "reported by maintainer on 2026-10-28",
+    "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": true,
-    "githubPrerelease": false,
+    "inGameTestByAgent": false,
+    "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
-    "maintainerInGameTestingReported": true,
-    "inGameTestScope": "Alpha50: Lua 5.0.3/5.1 synthetic performance counters (OFF installs nothing and the measured functions are untouched, ON wraps a fixed list of 32 functions, counts / durations / frame histogram / reset / off, 60 on-off cycles without growth, nothing written to the SavedVariables, state identical with and without the diagnostics); the times are NOT native CPU or FPS measurements and the real client has NOT been measured; NOT validated natively. Previous scope - Alpha49: Lua 5.0.3/5.1 synthetic launcher icons (square rectangle / round circle / native untouched, 4 layouts, HUD 80/90/100, AzerLoot-style radius, AzerothStats border re-anchor, common apparent size, no overlap, corners clear, no drift over transitions and reloads, owners scripts and clicks untouched); the apparent diameters and the stock border proportions are derived from the standard 53/31 convention and are NOT measured natively; NOT validated natively. Previous scope - Alpha48: Lua 5.0.3/5.1 synthetic Elwynn Complete without the FieldKit/Journal shortcut plates and the version text (initial, refreshes, dressing on/off, shapes, theme changes, profile, reload, no clickable ghost, menu and version command reachable, other layouts unchanged); NOT validated natively. Previous scope - Alpha47: Lua 5.0.3/5.1 synthetic native banners (six tiles, caps never scaled, 6 px gap, centred text boxes, serif face, 12 refreshes without drift, reload, shape changes, profile) and the neutral row socket path; the banner art is NOT seen natively; the neutral socket rendering is NOT compared natively; NOT validated natively. Previous scope - Alpha46: Lua 5.0.3/5.1 synthetic opacity on every dark region of the five cards in both zones (clean body, tab band, body tile, matte), Effects 0/1/many/cycles/theme/reload, round medallion with texts above the ring, native banners, string-escape audit and alpha-layer checks of the generated textures; the freeze is NOT measured natively; the rendering is NOT seen natively; NOT validated natively. Previous scope - Alpha45: Lua 5.0.3/5.1 synthetic panel opacity (0/25/50/65/75/100, no HUD rebuild per slider event, body tiles faded with the frame matte on top, memo, reload, profile) and Elwynn round composition (curved plates, cartouches); the freeze is NOT measured natively, the matte/plates/cartouches are NOT seen natively; NOT validated natively. Previous scope - Alpha44: Lua 5.0.3/5.1 synthetic Elwynn round map on all three layouts (cut-away identity card, ring, zoom), honest native map, 48 shape transitions, real FieldKit/AzerothStats launcher buttons (own drag, edge, restore), choice states (selected/hover/normal), one-line shape buttons, profile persistence; the generated ring and the cut-away card are NOT seen natively; NOT validated natively. Previous scope - Alpha43: Lua 5.0.3/5.1 synthetic minimap square/round/native (2 zones x 3 variants, immediate switch, honest round fallback on identity-card layouts, restoration, cycles) and action bar with the dressing option on/off; the generated round ring is NOT seen natively; NOT validated natively. Previous scope - Alpha42: Lua 5.0.3/5.1 synthetic chat preferences with the theme (size, font, opacity, colour, corners, ten cycles, reload, profile) and chat restoration with a screen guard; NOT validated natively; layout-cache behaviour across /reload not observable here. Previous scope - Alpha41: Lua 5.0.3/5.1 synthetic Aethus life bar filling the measured opening with a ring overlay and the stock texture again; composite checked offline from the real art; NOT validated: needs a native capture at 100 percent. Previous scope - Alpha40: Lua 5.0.3/5.1 synthetic Aethus life bar fitted to the measured slot opening (art pixels), proportional at 100/99/80/50/1/0; NOT validated: needs a native capture at 100 percent. Previous scope - Alpha39: Lua 5.0.3/5.1 synthetic flat opaque fill of the player life bar, native/flat switch and held percentages; the stock texture could not be inspected; NOT validated: needs a native capture of a full uniform bar at 100 percent. Previous scope - Alpha38: diagnostic only (player life bar probe), synthetic test of the report; no rendering change; NOT yet run in the client. Previous scope - Alpha37: Lua 5.0.3/5.1 synthetic rows when there is room (0-24 spells, moved-low card, Damage 6-24 lines), Effects geometry from measured art, Lairs columns; alpha.36 dynamic height did not work in the client; NOT yet observed natively; life bar cause unknown (needs /fieldkit barprobe). Previous scope - Alpha36: Lua 5.0.3/5.1 synthetic dynamic Equipment/Spells card (0-12 spells), bar fill at 6 values x 4 scales, Effects margins; art cut points measured offline; NOT yet observed natively; alpha.35 flat fill did not fix the bar in the real client. Previous scope - Alpha35: Lua 5.0.3/5.1 synthetic chat controls, overlap row, Damage header and amounts, foot label vs baked icon, flat bar fill; NOT yet observed natively. Previous scope - Alpha34: Lua 5.0.3/5.1 synthetic Aethus-art group card geometry, Damage header/amounts FR-EN, chat fill inset; art composition checked offline from the real texture; NOT yet observed natively. Previous scope - Alpha33: Lua 5.0.3/5.1 synthetic card geometry (skin size, content box, 3 details x 3 scales) and provenance tooltip; NOT yet observed natively; alpha.32 passed its tests and still overflowed natively. Previous scope - Alpha32: Lua 5.0.3/5.1 synthetic group card component, options, history parser, probe; NOT yet observed natively; event delivery to be measured with groupprobe. Previous scope - Alpha31: Lua 5.0.3/5.1 synthetic compact teammate card (bars, values, states, sizes); NOT yet observed natively - alpha.30 passed the same kind of tests and failed natively. Previous scope - Alpha30: Lua 5.0.3/5.1 synthetic themed teammate cards (states, native replacement and restore, strata, individual moves, priority over main cards), both zones; NOT yet observed natively. Previous scope - Alpha29: Lua 5.0.3/5.1 synthetic teammate cards in the placement engine (0-4 members, collisions, drag, persistence, Bonuses expansion), both zones; NOT yet observed natively. Previous scope - Alpha28: Lua 5.0.3/5.1 synthetic launcher proxy click/tooltip, party dead status, leave and empty state; NOT yet observed natively. Previous scope - Alpha27: Lua 5.0.3/5.1 synthetic render order (gear above the art rim, native levels restored), both zones; NOT yet observed natively. Previous scope - Alpha26: Lua 5.0.3/5.1 synthetic ring geometry (border-centred, keep-outs, default on), both zones; NOT yet observed natively. Previous scope - Alpha25: Lua 5.0.3/5.1 synthetic regression reproducing the native mouse stack (owner 3, map 2, gear 2) and the corrected order, both zones; gear click/drag NOT yet observed natively. Previous scope - Alpha24: Lua 5.0.3/5.1 synthetic regression for diagnostic command routing (none opens the settings window, each prints, errors printed) and unchanged ordinary commands; commands in the real client NOT yet run. Previous scope - Alpha23: Lua 5.0.3/5.1 synthetic regression for the four real screen edges with a short UIParent measurement (all five cards, both zones, drop snap, persistence) and read-only gear diagnostics; real edges and the AzerothHub gear NOT observed natively. Previous scope - Alpha22: Lua 5.0.3/5.1 synthetic regression for protected parts measured where they really are, cards dropped on former places, clamp off, map/card probes; real mouse, AzerothHub gear and the clamp behaviour NOT observed natively. Previous scope - Alpha21: Lua 5.0.3/5.1 synthetic regression for real screen bounds (letterboxed canvas), edge-flush manual placement and drop snapping, protected-obstacle limit for Bonuses, no-cascade search, map mouse coverage; real mouse, AzerothHub and rendering NOT observed natively. Previous scope - Alpha20: Lua 5.0.3/5.1 synthetic regression bench on RENDERED rectangles with every card saved (captured case), map group owner, zoom buttons, seven permanent sockets; real mouse, AzerothHub and rendering NOT observed natively. Previous scope - Alpha19: Lua 5.0.3/5.1 synthetic regression for the vertical placement engine (determinism, drag freeze, pinned neighbours, option), seven spells, six damage categories, tooltip and map follower; real mouse, AzerothHub and rendering NOT observed natively. Previous scope - Alpha18: Lua 5.0.3/5.1 synthetic regression for Spells indicator, in-place Bonuses (4/12/29 rows, screen edge, Effects, saved positions), Damage hover tooltips (full and partial data) and gear placement; real mouse interaction and AzerothHub NOT observed natively. Previous scope - Alpha17: Lua 5.0.3/5.1 synthetic regression for 30-alternation click stability (Hide counted, mock fires no OnHide), six damage rows and stretched art, lair margins, repeated theme/map-button transitions; real mouse interaction and AzerothHub NOT observed natively. Previous scope - Alpha16: Lua 5.0.3/5.1 synthetic regression for drag across refreshes (mock does not fire OnHide: Hide calls counted), socket-centred icons, Damage foot clearance and third-party map buttons; drag and map NOT observed natively. Previous scope - Alpha15: Lua 5.0.3/5.1 synthetic regression for map opening fill and rim, header tabs, portrait socket, lair columns, empty damage state and tab stability; NOT observed natively. Previous scope - Alpha14: Lua 5.0.3/5.1 synthetic regression for portrait layering, damage 3x2 navigation, tab marks and boss/guardian card; NOT observed natively. Previous scope - Alpha13: Lua 5.0.3/5.1 synthetic regression for in-card tabs, scrolling lists, four guardians, buff mask/restore; NOT observed natively. Previous scope - Alpha12: Lua 5.0.3/5.1 synthetic regression for Spells access, buffs in Effects, lair guardian rows; NOT observed natively. Previous scope - Alpha11: Lua 5.0.3/5.1 synthetic regression for target buff/debuff rows, aura tooltips and clearing; NOT observed natively yet (no visual control tool in this session). Previous scope - Alpha10: Lua 5.0.3/5.1 reader drag with locked HUD and reopen-position regression, localized taken sources, single target surface, and existing suite. Native Elwynn Complete combat: title-handle drag moved the spell reader and its Return button; friendly self-target shows green health without duplicate native target, enemy target and native unit tooltip inspected. Stats/Lairs share the tested drag path and synthetic acceptance; not a full six-layout native certification."
+    "maintainerInGameTestingReported": false,
+    "inGameTestScope": "Offline validation only; Reborn live acceptance pending"
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,
     "nativeCallBoundary": "Runtime.lua",
-    "prefix": "AFKDETAIL1",
+    "prefix": "AFKRDETAIL1",
     "distribution": "PARTY",
     "maxBytes": 230,
     "maxCallsPerSecond": 4,

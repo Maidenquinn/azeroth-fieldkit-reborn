@@ -5,7 +5,7 @@ PickupAction=function(id) table.insert(calls,"pickup:"..id) end
 PlaceAction=function(id) table.insert(calls,"place:"..id) end
 ActionButton1=CreateFrame("Button","ActionButton1",MainMenuBar);ActionButton1:SetID(1)
 ActionButton2=CreateFrame("Button","ActionButton2",MainMenuBar);ActionButton2:SetID(2)
-FieldKitDB={compactBar=true}
+FieldKitRebornDB={compactBar=true}
 fire(FieldKitFrame,"VARIABLES_LOADED")
 update(FieldKitFrame,.1)
 assert(table.getn(calls)==0,"Automatic action-slot change")
@@ -22,7 +22,7 @@ assert(table.getn(calls)==0,"Drop outside changed a slot")
 -- Native choices hide the action controls. FieldKit must not repair them back
 -- into view or leave its own compact background/XP/docked money above cards.
 HasAction=function(id) return id==1 end
-local anchor=FieldKitDB.pos.FieldKitCompactBar
+local anchor=FieldKitRebornDB.pos.FieldKitCompactBar
 AZS_RUN.ph="choosing"
 ActionButton1:Hide()
 fire(FieldKitFrame,"CHAT_MSG_ADDON","AZSRUN")
@@ -33,9 +33,9 @@ update(FieldKitFrame,.3)
 fire(FieldKitFrame,"PLAYER_MONEY")
 assert(not FieldKitCompactBar:IsShown() and not FieldKitMoneyFrame:IsShown(),"Polling/money event undid choice suppression")
 assert(not ActionButton1:IsShown(),"Repair loop resurrected a hidden choice button")
-assert(FieldKitDB.compactBar and FieldKitDB.pos.FieldKitCompactBar==anchor,"Choice changed saved layout/preferences")
+assert(FieldKitRebornDB.compactBar and FieldKitRebornDB.pos.FieldKitCompactBar==anchor,"Choice changed saved layout/preferences")
 -- Regular HUD cards yield (alpha) so native level-up cards stay unobstructed.
-FieldKitDB.meterFrame=true;FieldKitMeterFrame:Show();FieldKitMeterFrame:SetAlpha(1)
+FieldKitRebornDB.meterFrame=true;FieldKitMeterFrame:Show();FieldKitMeterFrame:SetAlpha(1)
 update(FieldKitFrame,.05)
 assert(FieldKitMeterFrame:GetAlpha()==0,"Meter stayed painted over choice cards")
 if FieldKitBossTimelineFrame then
@@ -47,15 +47,15 @@ update(FieldKitFrame,.05)
 assert(FieldKitMeterFrame:GetAlpha()==1,"Meter alpha not restored after choices")
 assert(FieldKitCompactBar:IsShown() and FieldKitMoneyFrame:IsShown(),"Compact HUD did not return after choices")
 assert(ActionButton1:IsShown(),"Normal button repair did not resume")
-FieldKitDB.meterFrame=false;FieldKitMeterFrame:Hide()
+FieldKitRebornDB.meterFrame=false;FieldKitMeterFrame:Hide()
 
 -- Detached money must also yield to native choices; detachment stays saved.
-FieldKitDB.moneyDetached=true
+FieldKitRebornDB.moneyDetached=true
 AZS_RUN.ph="choosing";update(FieldKitFrame,.3)
 assert(not FieldKitCompactBar:IsShown() and not FieldKitMoneyFrame:IsShown())
-assert(FieldKitDB.moneyDetached==true)
+assert(FieldKitRebornDB.moneyDetached==true)
 AZS_RUN.ph="playing";update(FieldKitFrame,.3)
-FieldKitDB.moneyDetached=nil
+FieldKitRebornDB.moneyDetached=nil
 -- Do not restore a compact bar that was already hidden before the choice.
 FieldKitCompactBar:Hide()
 AZS_RUN.ph="choosing";update(FieldKitFrame,.3)

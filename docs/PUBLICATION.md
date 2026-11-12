@@ -8,7 +8,7 @@ newly supplied package-specific team approval or independent certification. Real
 peer-message forwarding and the actual affix encoding remain unconfirmed.
 
 - Release: https://github.com/Maidenquinn/azeroth-fieldkit/releases/tag/v0.3.4
-- Asset: `AzerothFieldKit-0.3.4.zip`.
+- Asset: `AzerothFieldKitReborn-0.3.4.zip`.
 - Maturity: GitHub prerelease, retaining the existing publication workflow.
 - Source/per-file identity: release `MANIFEST.json`; ZIP checksum: `SHA256SUMS.txt`.
 - Evidence: release `validation.json`; no new agent-performed game test claimed.
@@ -26,7 +26,7 @@ package-specific team approval or independent certification. Real peer-message
 forwarding and the actual affix encoding remain unconfirmed.
 
 - Release: https://github.com/Maidenquinn/azeroth-fieldkit/releases/tag/v0.3.2
-- Asset: `AzerothFieldKit-0.3.2.zip`.
+- Asset: `AzerothFieldKitReborn-0.3.2.zip`.
 - Maturity: GitHub prerelease, retaining the existing publication workflow.
 - Source/per-file identity: release `MANIFEST.json`; ZIP checksum: `SHA256SUMS.txt`.
 - Evidence: release `validation.json`; no new agent-performed game test claimed.
@@ -43,7 +43,7 @@ team approval or independent certification. Real peer-message forwarding and the
 actual affix encoding remain unconfirmed.
 
 - Release: https://github.com/Maidenquinn/azeroth-fieldkit/releases/tag/v0.3.0
-- Asset: `AzerothFieldKit-0.3.0.zip`.
+- Asset: `AzerothFieldKitReborn-0.3.0.zip`.
 - Maturity: GitHub prerelease, retaining the existing publication workflow.
 - Source/per-file identity: release `MANIFEST.json`; ZIP checksum: `SHA256SUMS.txt`.
 - Evidence: release `validation.json`; no new agent-performed game test claimed.
@@ -60,7 +60,7 @@ changelog. This records maintainer authorization, not a new game-team or indepen
 security certification. Live peer-message forwarding remains unconfirmed.
 
 - Release: https://github.com/Maidenquinn/azeroth-fieldkit/releases/tag/v0.2.3
-- Asset: `AzerothFieldKit-0.2.3.zip`.
+- Asset: `AzerothFieldKitReborn-0.2.3.zip`.
 - Maturity: GitHub prerelease, consistent with the existing publication workflow.
 - Source commit and per-file hashes: release `MANIFEST.json`.
 - Archive checksum: release `SHA256SUMS.txt` (kept outside the self-containing ZIP).
@@ -84,7 +84,7 @@ Do not invent any of those details or describe this as a security certification.
 
 - Version: **0.2.1-review.3**. The suffix remains the actual version; there is no 1.0 release.
 - Release: https://github.com/Maidenquinn/azeroth-fieldkit/releases/tag/v0.2.1-review.3
-- Asset: `AzerothFieldKit-0.2.1-review.3.zip` (5,806,371 bytes).
+- Asset: `AzerothFieldKitReborn-0.2.1-review.3.zip` (5,806,371 bytes).
 - SHA-256: `8b3d99a0d3375fca93eded03b6020c815aa91dffb4952b68d2c41085928b43f3`.
 - Source: `7b54fa035410280c4ac7d54e7d4e800eba330310`.
 

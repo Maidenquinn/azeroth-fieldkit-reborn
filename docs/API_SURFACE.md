@@ -30,7 +30,7 @@ must decide which of those capabilities are acceptable.
 
 PartySync.lua may request/share each consenting player's own native meter with
 current party peers. Runtime.lua alone calls SendAddonMessage with fixed prefix
-AFKDETAIL1, PARTY distribution, at most 230 printable bytes and four calls/second.
+AFKRDETAIL1, PARTY distribution, at most 230 printable bytes and four calls/second.
 No visible chat, whisper or external service fallback is used. Receive parsing
 checks channel, roster sender, nonce, limits and numeric fields; data is never
 executed. See PARTY_SYNC.md for wire format, TTLs, source/byte/queue caps, privacy
@@ -40,7 +40,7 @@ has this explicit Runtime.lua-only exception; it remains banned in other modules
 ### Always-installed addon UI
 
 The addon creates its own frames/fontstrings/textures, slash commands and event
-listeners, including a minimap settings shortcut. It stores its own FieldKitDB.
+listeners, including a minimap settings shortcut. It stores its own FieldKitRebornDB.
 Target health text is attached to the native target display. Local diagnostic
 messages use DEFAULT_CHAT_FRAME:AddMessage, which is not network chat sending.
 
@@ -119,7 +119,7 @@ another addon's later hook. No AddMessage replacement occurs before opt-in.
 
 ### What persistence contains
 
-FieldKitDB includes configuration, collapsed states, frame positions, selected
+FieldKitRebornDB includes configuration, collapsed states, frame positions, selected
 stats, learned non-player names, last native stats and the old fallback chest
 count. Positions are UI coordinates, not a player travel log. The engine writes
 this table on its normal lifecycle. Native game saves and MASHDB are not accessed.
@@ -153,7 +153,7 @@ GameCompatibility.lua reads AZS_ZONE.heroic only during an active native phase. 
 
 ## Linked HUD and run-mode reference
 
-RunMode.lua reads only the existing native rank/zone and phase; its versioned reference is static text, not live affix or multiplier data. HudStack.lua reanchors FieldKit-owned frames only. FieldKitDB.linkLeftCards, runModeCard and pos.FieldKitLeftStack persist configuration and a UI anchor. Legacy individual coordinates are retained; no world-position history or game progression is written.
+RunMode.lua reads only the existing native rank/zone and phase; its versioned reference is static text, not live affix or multiplier data. HudStack.lua reanchors FieldKit-owned frames only. FieldKitRebornDB.linkLeftCards, runModeCard and pos.FieldKitLeftStack persist configuration and a UI anchor. Legacy individual coordinates are retained; no world-position history or game progression is written.
 
 ## Co-op candidate 0.2.2-review.2
 
@@ -180,7 +180,7 @@ See COOP_EVIDENCE.json for inspected client hash and data-contract limitations.
 
 ## Native anchor persistence
 
-0.2.2-review.6 adds FieldKitDB.windowsLocked (default false). Normal dragging of
+0.2.2-review.6 adds FieldKitRebornDB.windowsLocked (default false). Normal dragging of
 owned HUD windows no longer depends on the temporary arrangement-mode flag.
 The option/commands/minimap shortcut change only this saved movement preference
 and owned drag/mouse state; they do not open settings or create previews. Explicit
@@ -197,12 +197,12 @@ partial views. No popup position or received data is saved; anchors are clamped
 natively. The popup now follows the HUD preset and background opacity.
 
 CardLayout.lua adds per-card own-frame dimensions and a right-side group proxy.
-Only FieldKitDB.cardSizes/linkRightCards and FieldKit-owned frames are written.
+Only FieldKitRebornDB.cardSizes/linkRightCards and FieldKit-owned frames are written.
 No native gameplay/HUD CVar, world position or action-slot API is added. The new
 file is loaded after HudStack.lua and before Interface.lua. Dimensions are bounded
 at settings load and by UI controls; visible-row minima prevent content cropping.
 
-Positions.lua reads GetPoint and writes only FieldKitDB.frameAnchors (validated own-frame names and point/relative-point/numeric offsets). Restoring uses UIParent-relative SetPoint; no frame pointers are serialized. Native SetClampedToScreen handles bounds of the linked group proxy, with child clamps disabled while linked. Legacy positions are retained and Reset/Undo includes both representations. No game/save/other-addon state is accessed.
+Positions.lua reads GetPoint and writes only FieldKitRebornDB.frameAnchors (validated own-frame names and point/relative-point/numeric offsets). Restoring uses UIParent-relative SetPoint; no frame pointers are serialized. Native SetClampedToScreen handles bounds of the linked group proxy, with child clamps disabled while linked. Legacy positions are retained and Reset/Undo includes both representations. No game/save/other-addon state is accessed.
 
 ## Native 0.130 tools (0.3.0-review.1 candidate)
 

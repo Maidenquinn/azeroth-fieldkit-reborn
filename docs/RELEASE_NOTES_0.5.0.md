@@ -41,8 +41,8 @@
 
 ## Upgrade instructions
 
-1. **Back up** your current `SavedVariables` and `AzerothFieldKit` directory before replacing anything.
-2. Install the versioned ZIP's `AzerothFieldKit` folder in the active client's AddOns directory.
+1. **Back up** your current `SavedVariables` and `AzerothFieldKitReborn` directory before replacing anything.
+2. Install the versioned ZIP's `AzerothFieldKitReborn` folder in the active client's AddOns directory.
 3. Restart the game and open settings with `/fieldkit`.
 4. Verify existing chat and HUD configuration, then create and switch profiles.
 

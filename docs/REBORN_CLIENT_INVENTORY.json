@@ -1,0 +1,324 @@
+{
+  "clientReadOnly": true,
+  "liveGameTest": false,
+  "counts": {
+    "classes": 12,
+    "zones": 48,
+    "jewels": 38,
+    "amulets": 20,
+    "gearTiers": 3,
+    "creatureIcons": 612,
+    "pieces": 6,
+    "achievements": 83,
+    "spells": 241
+  },
+  "zones": [
+    {
+      "key": "elwynn",
+      "name": "Elwynn Forest",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "duskwood",
+      "name": "Duskwood",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "wsg",
+      "name": "Warsong Gulch",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "ungoro",
+      "name": "Un'Goro Crater",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "ab",
+      "name": "Arathi Basin",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "feralas",
+      "name": "Feralas",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "arena",
+      "name": "Gurubashi Arena",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "sm",
+      "name": "Scarlet Monastery",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "av",
+      "name": "Alterac Valley",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "brm",
+      "name": "Blackrock Mountain",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "aq",
+      "name": "Gates of Ahn'Qiraj",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "naxx",
+      "name": "Naxxramas",
+      "world": 1,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "hellfire",
+      "name": "Hellfire Peninsula",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "zangarmarsh",
+      "name": "Zangarmarsh",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "terokkar",
+      "name": "Terokkar Forest",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "nagrand",
+      "name": "Nagrand",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "eots",
+      "name": "Eye of the Storm",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "bladesedge",
+      "name": "Blade's Edge Mountains",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "karazhan",
+      "name": "Karazhan",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "netherstorm",
+      "name": "Netherstorm",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "zulaman",
+      "name": "Zul'Aman",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "hyjal",
+      "name": "Hyjal Summit",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "queldanas",
+      "name": "Isle of Quel'Danas",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "shadowmoon",
+      "name": "Shadowmoon Valley",
+      "world": 2,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "borean",
+      "name": "Borean Tundra",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "fjord",
+      "name": "Howling Fjord",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "dragonblight",
+      "name": "Dragonblight",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "grizzly",
+      "name": "Grizzly Hills",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "zuldrak",
+      "name": "Zul'Drak",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "sholazar",
+      "name": "Sholazar Basin",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "azjolnerub",
+      "name": "Azjol-Nerub",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "coldarra",
+      "name": "Coldarra",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "stormpeaks",
+      "name": "The Storm Peaks",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "icecrown",
+      "name": "Icecrown",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "pitofsaron",
+      "name": "Pit of Saron",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "icc",
+      "name": "Icecrown Citadel",
+      "world": 3,
+      "scheduledBosses": 5
+    },
+    {
+      "key": "deepholm",
+      "name": "Deepholm",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "gilneas",
+      "name": "Gilneas",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "tol_barad",
+      "name": "Tol Barad",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "uldum",
+      "name": "Uldum",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "mount_hyjal",
+      "name": "Mount Hyjal",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "vashjir",
+      "name": "Vashj'ir",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "twilight_highlands",
+      "name": "Twilight Highlands",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "lost_isles",
+      "name": "The Lost Isles",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "firelands",
+      "name": "Firelands",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "grim_batol",
+      "name": "Grim Batol",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "blackwing_descent",
+      "name": "Blackwing Descent",
+      "world": 4,
+      "scheduledBosses": 1
+    },
+    {
+      "key": "dragon_soul",
+      "name": "Dragon Soul",
+      "world": 4,
+      "scheduledBosses": 1
+    }
+  ],
+  "clientEvidenceSHA256": {
+    "Anchors.lua": "2600dafc0c72a58bc761c6e8e6f4d9100a963bf10cd37cacdc70ed820038dd0f",
+    "Api.lua": "bad99b088322cd4947b8a74fc3b93f0e96816990d87b507bb35479bdb6d02210",
+    "AzerothSurvivorsAPI.toc": "1481390eb8ceb3dd517d725400e14624ae3a827f9ab6742110e02c4e03ff3af2",
+    "CombatText.lua": "5bb0fa1bcca406b113a2d22b90435588bbea9b78a14d380eb9303b1436705ad8",
+    "Hud.lua": "dabd26b1f364d2fddc250e70c43640283d4c5632fb7e2ef71246581529ec93ac",
+    "Meter.lua": "6edb2f35034a6c82f29e9cdcc3b67c27de32cd8244c90a36f69d4bb37b6b624d",
+    "Shims.lua": "4234db152513dceb9397c697c9007156718153c357443136dec021c07003988d",
+    "Generated/Content.lua": "70c1b3353afc590433bb77c3c1f8dcc18a6b20408765c285042be2646e5baac7"
+  },
+  "directCalls": [
+    "AZS_API_RunId",
+    "AZS_GetDebuffs",
+    "AZS_GetLairs",
+    "AZS_GetPhase",
+    "AZS_GetRunTime",
+    "AZS_UnitKind"
+  ],
+  "directCallsAbsentFromApiFiles": []
+}

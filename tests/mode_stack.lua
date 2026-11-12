@@ -1,5 +1,5 @@
 -- Whole-card geometry and native-rank/reference separation, using real handlers.
-FieldKitDB={bossFrame=false,linkLeftCards=true,runModeCard=true,meterValues=3}
+FieldKitRebornDB={bossFrame=false,linkLeftCards=true,runModeCard=true,meterValues=3}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")
 AZS_RUN.ph="playing";AZS_ZONE={zone="elwynn",zname="Elwynn Forest",heroic=2}
 AZS_GetMeter=function() return {{name="Observed spell",dmg=100,dps=10,share=1}},100,10 end
@@ -15,7 +15,7 @@ local function checkStack()
   if f:IsShown() then
    local point,relative,rp,x,offset=f:GetPoint()
    assert(point=="TOPLEFT" and relative==S.root and rp=="TOPLEFT" and x==0)
-   assert(offset==-y and f:GetWidth()==FieldKit.MeterWidth(FieldKitDB.meterValues))
+   assert(offset==-y and f:GetWidth()==FieldKit.MeterWidth(FieldKitRebornDB.meterValues))
    y=y+f:GetHeight()+6
   end
  end
@@ -26,7 +26,7 @@ assert(R.frame.total:GetText()=="Heroic II")
 assert(R.frame.rows[1].label:GetText()=="Elwynn Forest")
 assert(R.frame.mashVisibleRows==3 and R.frame.rows[2].label:GetText()=="HP x1.97 · Damage x1.77")
 assert(R.frame.rows[3].label:GetText()=="Marks x1.25 · Talent loot/XP x1.4")
-local legacyX,legacyY=FieldKitDB.pos.FieldKitMeterFrame[1],FieldKitDB.pos.FieldKitMeterFrame[2]
+local legacyX,legacyY=FieldKitRebornDB.pos.FieldKitMeterFrame[1],FieldKitRebornDB.pos.FieldKitMeterFrame[2]
 local oldHeight=FieldKitMeterFrame:GetHeight()
 local _,_,_,_,takenY=FieldKitTakenFrame:GetPoint()
 click(FieldKitMeterFrame.mashCollapseButton);update(FieldKitFrame,.06)
@@ -48,18 +48,18 @@ assert(not R.frame:IsShown());checkStack()
 local point,relative,rp,x,y=FieldKitMeterFrame:GetPoint();assert(y==0)
 mode:SetChecked(true);click(mode);checkStack()
 local values=control("Damage meter values");click(values);click(values.choiceButtons[1]);checkStack()
-assert(FieldKitDB.pos.FieldKitMeterFrame[1]==legacyX and FieldKitDB.pos.FieldKitMeterFrame[2]==legacyY)
+assert(FieldKitRebornDB.pos.FieldKitMeterFrame[1]==legacyX and FieldKitRebornDB.pos.FieldKitMeterFrame[2]==legacyY)
 
 -- Dragging any member in layout mode moves the same anchor, not one card.
 FieldKit.layoutEditing=true;this=FieldKitLairFrame;FieldKitLairFrame:GetScript("OnDragStart")()
 assert(FieldKitLairFrame.fieldkitHudDragging and S.root.azsMoving)
 FieldKitLairFrame:GetScript("OnDragStop")();FieldKit.layoutEditing=false
 assert(not S.root.azsMoving and not FieldKitLairFrame.fieldkitHudDragging)
-assert(FieldKitDB.pos.FieldKitMeterFrame[1]==legacyX)
+assert(FieldKitRebornDB.pos.FieldKitMeterFrame[1]==legacyX)
 
 local align=control("Align left HUD cards");align:SetChecked(false);click(align)
 assert(not S.linked and FieldKitMeterFrame:GetPoint()=="CENTER")
-assert(FieldKitDB.pos.FieldKitMeterFrame[1]==legacyX and FieldKitDB.pos.FieldKitMeterFrame[2]==legacyY)
+assert(FieldKitRebornDB.pos.FieldKitMeterFrame[1]==legacyX and FieldKitRebornDB.pos.FieldKitMeterFrame[2]==legacyY)
 align:SetChecked(true);click(align);checkStack()
 
 AZS_ZONE.heroic=5;update(FieldKitFrame,.3)
@@ -80,7 +80,7 @@ for i=1,4 do assert(frames[i].clamped==false,"A linked child added an independen
 UIParent.width=originalWidth;UIParent.height=originalHeight;S.Apply()
 AZS_ZONE.heroic=nil;update(FieldKitFrame,.3)
 assert(not R.frame:IsShown())
-FieldKitDB.hideUnknownMode=false;update(FieldKitFrame,.3)
+FieldKitRebornDB.hideUnknownMode=false;update(FieldKitFrame,.3)
 assert(R.frame:IsShown() and R.frame.total:GetText()=="Mode not provided" and R.frame.mashVisibleRows==2)
 AZS_ZONE.heroic=0;update(FieldKitFrame,.3)
 assert(R.frame.total:GetText()=="Normal difficulty" and R.frame.mashVisibleRows==3)

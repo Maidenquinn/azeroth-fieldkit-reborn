@@ -22,7 +22,7 @@ are never in that list. There is no modern module loader or required library.
 6. **Settings.lua:** small descriptor factories for health, language, minimap and
    privacy controls. The factories keep closure capture low for Lua 5.0.
 7. **OptionsSchema.lua:** declarative option pages. Local HUD actions are injected
-   in a table; descriptor getters read FieldKitDB only when the UI refreshes.
+   in a table; descriptor getters read FieldKitRebornDB only when the UI refreshes.
    Building the schema does not apply options.
 8. **LegacyCrits.lua:** the separate optional eight-line critical display. It
    preserves the old max-value-plus-count grouping; this is not a damage total.
@@ -41,7 +41,7 @@ are never in that list. There is no modern module loader or required library.
 ## Lifecycle and data flow
 
 At chunk load, modules define functions, static data and lightweight event frames.
-VARIABLES_LOADED is handled once: normalize FieldKitDB and create the fixed HUD
+VARIABLES_LOADED is handled once: normalize FieldKitRebornDB and create the fixed HUD
 frame pools. PLAYER_ENTERING_WORLD refreshes visible data and applies explicitly
 chosen native visual settings. Combat/unit/inventory events refresh their owners.
 

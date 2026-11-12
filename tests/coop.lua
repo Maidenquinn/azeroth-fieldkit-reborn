@@ -21,7 +21,7 @@ for i=1,4 do
  local f=CreateFrame("Frame","PartyMemberFrame"..i,UIParent)
  originals[i]=function() shows=shows+1 end;f:SetScript("OnShow",originals[i])
 end
-FieldKitDB={partyCards=false,partyMeter=true,meterValues=3}
+FieldKitRebornDB={partyCards=false,partyMeter=true,meterValues=3}
 fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")
 local P,U=FieldKitCoop,FieldKitUI
 local function control(label)
@@ -72,7 +72,7 @@ assert(PartyMemberFrame1:IsShown() and not P.frames[1]:IsShown(),"Replacement wa
 
 local cards=control("Co-op teammate cards");cards:SetChecked(true);click(cards)
 assert(PartyMemberFrame1:IsShown() and P.frames[1]:IsShown(),"Passive cards hid native interactions by default")
-FieldKitDB.replacePartyFrames=true;P.Update()
+FieldKitRebornDB.replacePartyFrames=true;P.Update()
 assert(not PartyMemberFrame1:IsShown())
 assert(P.frames[1].title:GetText()=="Denza")
 assert(P.frames[1].rows[1].value:GetText()=="400 / 800 (50%)")
@@ -88,11 +88,11 @@ assert(shows==1 and not PartyMemberFrame1:IsShown(),"Original OnShow was lost or
 
 -- Move/size one peer without moving another or the left HUD stack.
 U.SetLayoutEditing(true,false)
-local first=P.frames[1];local second=P.frames[2];local prior=FieldKitDB.frameAnchors.FieldKitPartyCard1
+local first=P.frames[1];local second=P.frames[2];local prior=FieldKitRebornDB.frameAnchors.FieldKitPartyCard1
 this=second;second:GetScript("OnDragStart")()
 second:ClearAllPoints();second:SetPoint("TOPRIGHT",UIParent,"TOPRIGHT",0,-90);second:GetScript("OnDragStop")()
-assert(FieldKitDB.frameAnchors.FieldKitPartyCard2[3]==0)
-assert(FieldKitDB.frameAnchors.FieldKitPartyCard1==prior)
+assert(FieldKitRebornDB.frameAnchors.FieldKitPartyCard2[3]==0)
+assert(FieldKitRebornDB.frameAnchors.FieldKitPartyCard1==prior)
 U.SetLayoutEditing(false,true)
 FieldKitCardLayout.selected=9;FieldKitCardLayout.SetDimension("width",440);FieldKitCardLayout.SetDimension("height",150)
 assert(first:GetWidth()==440 and first:GetHeight()==150 and second:GetWidth()==280)
@@ -129,9 +129,9 @@ print("Co-op native taken fallback, party DPS, opt-in frames, native restoration
 
 -- alpha.28: dead state is shown only when the client reports it; a member who leaves leaves no ghost card.
 do
- local cardsOn=FieldKitDB.partyCards
+ local cardsOn=FieldKitRebornDB.partyCards
  FieldKit_SetLanguage("en");AZS_RUN.ph="playing";AZS_RUN.t=1000;P.phase=nil;P.TrackRun()
- FieldKitDB.partyCards=true;members[1]={name="Denza",hp=400,max=800,mana=30,mp=100,class="Mage",key="MAGE",power=0,online=true}
+ FieldKitRebornDB.partyCards=true;members[1]={name="Denza",hp=400,max=800,mana=30,mp=100,class="Mage",key="MAGE",power=0,online=true}
  members[2]={name="Lockpin",hp=0,max=600,mana=0,mp=100,class="Priest",key="PRIEST",power=0,online=true}
  P.Update()
  assert(P.frames[2].rows[4].value:GetText()=="0 HP","without a dead flag from the client, 0 HP is shown as is")
@@ -144,6 +144,6 @@ do
  members[1]=nil;members[2]=nil;members[3]=nil;P.Update()
  for i=1,4 do assert(not P.frames[i]:IsShown(),"alone: no card") end
  assert(not P.meter:IsShown(),"alone: group meter hidden")
- FieldKitDB.partyCards=cardsOn;AZS_RUN.ph=nil;P.Update()
+ FieldKitRebornDB.partyCards=cardsOn;AZS_RUN.ph=nil;P.Update()
 end
 print("Party dead state, leave and empty state passed (synthetic)")

@@ -1,12 +1,12 @@
 -- Assert the properties relevant to review, using actual production callbacks.
-assert(FieldKitDB.chatCopy==false and FieldKitDB.compactBar==false)
-assert(FieldKitDB.partyDetailSync==false)
-assert(FieldKitDB.chestPins==false and FieldKitDB.guardianPins==false)
-assert(FieldKitDB.hidePlates==false and FieldKitDB.bossFrame==false)
+assert(FieldKitRebornDB.chatCopy==false and FieldKitRebornDB.compactBar==false)
+assert(FieldKitRebornDB.partyDetailSync==false)
+assert(FieldKitRebornDB.chestPins==false and FieldKitRebornDB.guardianPins==false)
+assert(FieldKitRebornDB.hidePlates==false and FieldKitRebornDB.bossFrame==false)
 -- A disabled filter must not overwrite transparency set by another UI component.
 WorldFrame:SetAlpha(.6);update(FieldKitFrame,.1);assert(WorldFrame:GetAlpha()==.6)
-FieldKitDB.hidePlates=true;update(FieldKitFrame,.1);assert(WorldFrame:GetAlpha()==0)
-FieldKitDB.hidePlates=false;update(FieldKitFrame,.1);assert(WorldFrame:GetAlpha()==.6)
+FieldKitRebornDB.hidePlates=true;update(FieldKitFrame,.1);assert(WorldFrame:GetAlpha()==0)
+FieldKitRebornDB.hidePlates=false;update(FieldKitFrame,.1);assert(WorldFrame:GetAlpha()==.6)
 assert(FieldKit.Number("NaN")==nil and FieldKit.Number(1/0)==nil)
 assert(FieldKit.Number(0/0)==nil and FieldKit.Number("12")==12)
 local writes=0
@@ -68,16 +68,16 @@ end
 -- The baseline layout tests begin with an empty native frame: changing native
 -- dimensions with untracked preexisting lines must now defer instead.
 ChatFrame1:Clear()
-FieldKitDB.chatWidth=510;FieldKitDB.chatHeight=230
-FieldKitDB.chatHistoryLines=400;FieldKitDB.chatFontSize=15
-FieldKitDB.chatFontFace=2;FieldKitDB.chatStyle=true
+FieldKitRebornDB.chatWidth=510;FieldKitRebornDB.chatHeight=230
+FieldKitRebornDB.chatHistoryLines=400;FieldKitRebornDB.chatFontSize=15
+FieldKitRebornDB.chatFontFace=2;FieldKitRebornDB.chatStyle=true
 FieldKit.SyncChat()
 assert(ChatFrame1:GetWidth()==510 and ChatFrame1:GetHeight()==230 and ChatFrame1.maxLines==400)
 assert(ChatFrame1.fontSize==15 and string.find(ChatFrame1.fontPath,"FRIZQT",1,true))
 assert(ChatFrame1:AddMessage("survive layout",.2,.4,.6)=="forwarded")
 assert(table.getn(visible)==1 and visible[1].text=="survive layout")
-FieldKitDB.chatWidth=570;FieldKitDB.chatHeight=260;FieldKitDB.chatHistoryLines=350
-FieldKitDB.chatFontSize=18;FieldKitDB.chatFontFace=3
+FieldKitRebornDB.chatWidth=570;FieldKitRebornDB.chatHeight=260;FieldKitRebornDB.chatHistoryLines=350
+FieldKitRebornDB.chatFontSize=18;FieldKitRebornDB.chatFontFace=3
 FieldKit.ApplyChatStyle()
 assert(ChatFrame1:GetWidth()==570 and ChatFrame1:GetHeight()==260 and ChatFrame1.maxLines==350)
 assert(ChatFrame1.fontSize==18 and string.find(ChatFrame1.fontPath,"ARIALN",1,true))
@@ -86,28 +86,28 @@ assert(visible[1].r==.2 and visible[1].g==.4 and visible[1].b==.6)
 assert(nativeOps==0)
 -- Opting out restores native dimensions/font only when all visible lines were
 -- captured. This client mock empties chat on every native setter.
-FieldKitDB.chatStyle=false;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatStyle=false;FieldKit.ApplyChatStyle()
 assert(ChatFrame1:GetWidth()==oldWidth and ChatFrame1:GetHeight()==oldHeight,
  "safe chat opt-out should restore original dimensions")
 assert(ChatFrame1.maxLines==200 and ChatFrame1.fontSize==12,
  "safe chat opt-out should restore original font and history length")
 assert(table.getn(visible)==1 and visible[1].text=="survive layout",
  "restoring native chat must not erase or duplicate visible messages")
-FieldKitDB.chatStyle=true;FieldKit.SyncChat()
+FieldKitRebornDB.chatStyle=true;FieldKit.SyncChat()
 assert(ChatFrame1:GetWidth()==570 and ChatFrame1:GetHeight()==260,
  "re-enabling chat styling should restore selected configuration")
 assert(table.getn(visible)==1 and visible[1].text=="survive layout")
 -- Real-client regression: the settings remain responsive after temporary
 -- opt-out even when additional native messages arrive while styling is off.
 -- The display journal must remain intact across the SyncChat 5 Hz ticker.
-FieldKitDB.chatStyle=false;FieldKit.ApplyChatStyle();FieldKit.SyncChat()
+FieldKitRebornDB.chatStyle=false;FieldKit.ApplyChatStyle();FieldKit.SyncChat()
 ChatFrame1:AddMessage("native message while styling off",.3,.6,.9)
 local retained=table.getn(visible)
 assert(retained==2,"native off-mode line must remain visible")
-FieldKitDB.chatWidth=620;FieldKitDB.chatHeight=275
-FieldKitDB.chatFontSize=17;FieldKitDB.chatFontFace=4
-FieldKitDB.chatHistoryLines=425
-FieldKitDB.chatStyle=true;FieldKit.SyncChat()
+FieldKitRebornDB.chatWidth=620;FieldKitRebornDB.chatHeight=275
+FieldKitRebornDB.chatFontSize=17;FieldKitRebornDB.chatFontFace=4
+FieldKitRebornDB.chatHistoryLines=425
+FieldKitRebornDB.chatStyle=true;FieldKit.SyncChat()
 assert(ChatFrame1:GetWidth()==620 and ChatFrame1:GetHeight()==275,
  "chat width and height must remain adjustable on re-enable")
 assert(ChatFrame1.fontSize==17 and string.find(ChatFrame1.fontPath,"MORPHEUS",1,true),
@@ -118,8 +118,8 @@ assert(visible[1].text=="survive layout" and visible[2].text=="native message wh
  "re-enable reordered or erased chat lines")
 -- The same four controls must also work on subsequent changes, with
 -- messages still visible even though native setters clear their display.
-FieldKitDB.chatWidth=590;FieldKitDB.chatHeight=295
-FieldKitDB.chatFontSize=16;FieldKitDB.chatFontFace=3
+FieldKitRebornDB.chatWidth=590;FieldKitRebornDB.chatHeight=295
+FieldKitRebornDB.chatFontSize=16;FieldKitRebornDB.chatFontFace=3
 FieldKit.ApplyChatStyle()
 assert(ChatFrame1:GetWidth()==590 and ChatFrame1:GetHeight()==295)
 assert(ChatFrame1.fontSize==16 and string.find(ChatFrame1.fontPath,"ARIALN",1,true))
@@ -145,16 +145,16 @@ assert(table.getn(visible)==retained and visible[2].text=="native message while 
 ChatFrame1:AddMessage("still receiving after reenable",.4,.7,.9)
 assert(table.getn(visible)==retained+1 and visible[retained+1].text=="still receiving after reenable")
 -- Reset the independent test scenario without clearing any real client data.
-FieldKitDB.chatStyle=false;FieldKit.SyncChat()
+FieldKitRebornDB.chatStyle=false;FieldKit.SyncChat()
 ChatFrame1:Clear()
-FieldKitDB.chatStyle=true;FieldKit.SyncChat()
+FieldKitRebornDB.chatStyle=true;FieldKit.SyncChat()
 ChatFrame1:AddMessage("survive layout",.2,.4,.6)
 assert(table.getn(visible)==1)
-FieldKitDB.chatOverrideText=true;FieldKitDB.chatTextColor=3
+FieldKitRebornDB.chatOverrideText=true;FieldKitRebornDB.chatTextColor=3
 ChatFrame1:AddMessage("|cffff0000Color sample|r",.1,.1,.1)
 assert(table.getn(visible)==2 and visible[2].text=="Color sample")
 assert(visible[2].r==1 and visible[2].g==.82 and visible[2].b==.49)
-FieldKitDB.chatOverrideText=false
+FieldKitRebornDB.chatOverrideText=false
 -- Simulate an older native line not observed by FieldKit.
 table.insert(visible,1,{text="legacy not captured",r=.3,g=.3,b=.3})
 -- Existing native lines that predate capture must never be cleared for recolor.
@@ -167,28 +167,28 @@ ChatFrame1.GetMessageInfo=function(self,i)
  local m=visible[i]
  if m then return m.text,m.r,m.g,m.b,m.id end
 end
-FieldKitDB.chatTextColor=5
-FieldKitDB.chatOverrideText=true
+FieldKitRebornDB.chatTextColor=5
+FieldKitRebornDB.chatOverrideText=true
 assert(FieldKit.RecolorDisplayedChat()==true)
 assert(table.getn(visible)==beforeUnsafe,"native snapshot recolor duplicated or lost lines")
 assert(visible[1].text=="legacy not captured")
 assert(visible[1].r==.69 and visible[1].g==.85 and visible[1].b==1)
 ChatFrame1.GetMessageInfo=nil
-FieldKitDB.chatOverrideText=false
+FieldKitRebornDB.chatOverrideText=false
 -- Controlled full-history case: simulate a native chat reset / fresh UI session.
-FieldKitDB.chatStyle=false;FieldKit.SyncChat()
+FieldKitRebornDB.chatStyle=false;FieldKit.SyncChat()
 ChatFrame1:Clear()
 FieldKit.ClearChatRenderHistory()
-FieldKitDB.chatStyle=true;FieldKit.SyncChat()
+FieldKitRebornDB.chatStyle=true;FieldKit.SyncChat()
 ChatFrame1:AddMessage("historical A",.25,.5,.75)
 ChatFrame1:AddMessage("|cffff0000historical B|r",.1,.2,.3)
 assert(table.getn(visible)==2)
-FieldKitDB.chatTextColor=4
-FieldKitDB.chatOverrideText=true
+FieldKitRebornDB.chatTextColor=4
+FieldKitRebornDB.chatOverrideText=true
 assert(FieldKit.RecolorDisplayedChat()==true)
 assert(table.getn(visible)==2 and visible[1].text=="historical A" and visible[2].text=="historical B")
 assert(visible[1].r==.69 and visible[1].g==.93 and visible[2].b==.77)
-FieldKitDB.chatOverrideText=false
+FieldKitRebornDB.chatOverrideText=false
 assert(FieldKit.RecolorDisplayedChat()==true)
 assert(table.getn(visible)==2 and visible[1].r==.25 and visible[1].g==.5)
 assert(visible[2].text=="|cffff0000historical B|r" and visible[2].r==.1)
@@ -202,12 +202,12 @@ for _,item in ipairs(chatSchema[1].items) do
 end
 assert(palette and type(palette.set)=="function")
 palette.set(2)
-assert(FieldKitDB.chatOverrideText==true)
+assert(FieldKitRebornDB.chatOverrideText==true)
 assert(table.getn(visible)==2 and visible[1].text=="historical A"
  and visible[2].text=="historical B","palette change must preserve messages and order")
 assert(visible[1].r==.95 and visible[2].g==.92 and visible[2].b==.83,
  "palette setter failed to recolor existing fully-tracked lines")
-FieldKitDB.chatOverrideText=false
+FieldKitRebornDB.chatOverrideText=false
 assert(FieldKit.RecolorDisplayedChat()==true)
 -- Real client regression: reset can be called when the chat has no native
 -- GetPoint anchor. SetPoint must never receive nil/partial argument lists.
@@ -217,38 +217,38 @@ ChatFrame1.SetPoint=function(self,point,relative,relPoint,x,y)
  assert(relative and type(x)=="number" and type(y)=="number")
  return strictSetPoint(self,point,relative,relPoint,x,y)
 end
-FieldKitDB.chatStyle=false;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatStyle=false;FieldKit.ApplyChatStyle()
 ChatFrame1:ClearAllPoints()
-FieldKitDB.chatStyle=true;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatStyle=true;FieldKit.ApplyChatStyle()
 FieldKit.ResetChatPosition()
 assert(ChatFrame1:AddMessage("after empty-anchor reset")=="forwarded")
 ChatFrame1:SetPoint("BOTTOMLEFT",UIParent,"BOTTOMLEFT",50,70)
-FieldKitDB.chatStyle=false;FieldKit.ApplyChatStyle()
-FieldKitDB.chatStyle=true;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatStyle=false;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatStyle=true;FieldKit.ApplyChatStyle()
 FieldKit.ResetChatPosition()
 assert(ChatFrame1:AddMessage("after valid-anchor reset")=="forwarded")
 ChatFrame1.SetPoint=strictSetPoint
 -- The player can drag the real chat and preserve its position without replacing it.
-FieldKitDB.chatStyle=true;FieldKitDB.chatMove=true;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatStyle=true;FieldKitRebornDB.chatMove=true;FieldKit.ApplyChatStyle()
 assert(FieldKitChatMoveHandle and FieldKitChatMoveHandle:IsShown())
 this=FieldKitChatMoveHandle;FieldKitChatMoveHandle:GetScript("OnDragStart")()
 ChatFrame1.left=210;ChatFrame1.bottom=150
 FieldKitChatMoveHandle:GetScript("OnDragStop")()
-assert(FieldKitDB.chatAnchor and FieldKitDB.chatAnchor.x==210 and FieldKitDB.chatAnchor.y==150,"Chat anchor: "..tostring(FieldKitDB.chatAnchor and FieldKitDB.chatAnchor.x)..","..tostring(FieldKitDB.chatAnchor and FieldKitDB.chatAnchor.y))
-FieldKitDB.chatMove=false;FieldKit.ApplyChatStyle()
+assert(FieldKitRebornDB.chatAnchor and FieldKitRebornDB.chatAnchor.x==210 and FieldKitRebornDB.chatAnchor.y==150,"Chat anchor: "..tostring(FieldKitRebornDB.chatAnchor and FieldKitRebornDB.chatAnchor.x)..","..tostring(FieldKitRebornDB.chatAnchor and FieldKitRebornDB.chatAnchor.y))
+FieldKitRebornDB.chatMove=false;FieldKit.ApplyChatStyle()
 assert(not FieldKitChatMoveHandle:IsShown())
-FieldKitDB.chatBackgroundOpacity=45;FieldKitDB.chatBackgroundColor=3
-FieldKitDB.chatFontFace=2;FieldKitDB.chatTextColor=3;FieldKit.ApplyChatStyle()
-assert(ChatFrame1:GetWidth()==FieldKitDB.chatWidth and FieldKitDB.chatBackgroundColor==3)
+FieldKitRebornDB.chatBackgroundOpacity=45;FieldKitRebornDB.chatBackgroundColor=3
+FieldKitRebornDB.chatFontFace=2;FieldKitRebornDB.chatTextColor=3;FieldKit.ApplyChatStyle()
+assert(ChatFrame1:GetWidth()==FieldKitRebornDB.chatWidth and FieldKitRebornDB.chatBackgroundColor==3)
 -- Safe mode must not rewrite the native message content or channel colors.
-FieldKitDB.chatStyle=true;FieldKitDB.chatOverrideText=true;FieldKitDB.chatTextColor=3
+FieldKitRebornDB.chatStyle=true;FieldKitRebornDB.chatOverrideText=true;FieldKitRebornDB.chatTextColor=3
 FieldKit.SyncChat()
 assert(ChatFrame1:AddMessage("|cffff0000Color sample|r",.1,.1,.1)=="forwarded")
 assert(lastMessage.text=="Color sample" and lastMessage.r==1 and lastMessage.g==.82 and lastMessage.b==.49)
-FieldKitDB.chatOverrideText=false
-FieldKitDB.chatStyle=false;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatOverrideText=false
+FieldKitRebornDB.chatStyle=false;FieldKit.ApplyChatStyle()
 -- Leave the native chat restored for the remaining security fixtures.
-FieldKitDB.chatStyle=false;FieldKit.ApplyChatStyle()
+FieldKitRebornDB.chatStyle=false;FieldKit.ApplyChatStyle()
 
 
 for i=1,120 do ChatFrame1:AddMessage("test"..i..string.rep("x",1000)) end
@@ -267,10 +267,10 @@ SlashCmdList.FieldKitLOG("on");SlashCmdList.FieldKitLOG("")
 assert(FieldKitCopyLogEdit:GetText()=="")
 SlashCmdList.FieldKitLOG("off")
 assert(forwarded>=127)
-local d=FieldKitDB
-FieldKitDB={known="bad",pos={broken="bad",nan={0/0,1}},collapsedWindows=true,cameraMax="bad",targetHealthMode=1/0,lowHealthPct=-10,talentToggles={bad=true}}
+local d=FieldKitRebornDB
+FieldKitRebornDB={known="bad",pos={broken="bad",nan={0/0,1}},collapsedWindows=true,cameraMax="bad",targetHealthMode=1/0,lowHealthPct=-10,talentToggles={bad=true}}
 FieldKit.InitializeSettings({"crit"})
-assert(type(FieldKitDB.known)=="table" and FieldKitDB.pos.broken==nil and FieldKitDB.pos.nan==nil)
-assert(FieldKitDB.cameraMax==nil and FieldKitDB.targetHealthMode==1 and FieldKitDB.lowHealthPct==10)
-assert(FieldKitDB.talentToggles==nil and AZS_TALENT_TOGGLES==sentinel)
-FieldKitDB=d
+assert(type(FieldKitRebornDB.known)=="table" and FieldKitRebornDB.pos.broken==nil and FieldKitRebornDB.pos.nan==nil)
+assert(FieldKitRebornDB.cameraMax==nil and FieldKitRebornDB.targetHealthMode==1 and FieldKitRebornDB.lowHealthPct==10)
+assert(FieldKitRebornDB.talentToggles==nil and AZS_TALENT_TOGGLES==sentinel)
+FieldKitRebornDB=d

@@ -22,6 +22,6 @@ Released 2026-11-05. This version consolidates three in-game reviewed lots on Az
 - English/French help text improved.
 
 ## Installation and attribution
-Back up AddOns/AzerothFieldKit and SavedVariables, replace the addon folder from AzerothFieldKit-0.4.2.zip, and restart. v0.4.1 remains available.
+Back up AddOns/AzerothFieldKitReborn and SavedVariables, replace the addon folder from AzerothFieldKitReborn-0.4.2.zip, and restart. v0.4.1 remains available.
 
 Maintained derivative of MASH by Malk. Refer to NOTICE.md, LICENSE.md and docs/PUBLICATION.md. No independent security certification or game-team rights clearance is asserted.

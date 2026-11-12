@@ -1,12 +1,12 @@
 # Matériaux de la correction visuelle 0.6.0-alpha.2
 
 Les PNG sources sont conservés ici ; les TGA RGBA utilisés par le client sont
-dans `AzerothFieldKit/media/ZoneThemes`. Les empreintes sont dans
+dans `AzerothFieldKitReborn/media/ZoneThemes`. Les empreintes sont dans
 `data/theme-assets.json`. Ce sont des créations assistées par génération
 d’image, pas des assets officiels Blizzard.
 
 Références : les maquettes Minimaliste approuvées, conservées dans
-`H:/Users/kevin/Desktop/AzerothFieldKit_0.6.0_Concepts/03_HUD_Concepts`.
+`H:/Users/kevin/Desktop/AzerothFieldKitReborn_0.6.0_Concepts/03_HUD_Concepts`.
 
 Les cadres carrés servent au découpage en neuf régions : acier givré/cyan pour
 Naxxramas, cuir vert/bois/laiton pour Elwynn. Les socles transparents reprennent

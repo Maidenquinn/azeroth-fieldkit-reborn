@@ -30,7 +30,7 @@ Changes **since the published v0.3.4 prerelease** (2026-11-02). Maintained by Ma
 - Maintainer reports successful in-game functional and preview testing. Static checks are not game-engine certification.
 
 ## Installation
-Download **AzerothFieldKit-0.4.0.zip** from the release **Assets** (not GitHub's automatic Source code ZIP). Back up SavedVariables, replace the old AzerothFieldKit folder in the actual game client's Interface/AddOns folder, disable legacy MASH if active, restart the client and open `/fieldkit`.
+Download **AzerothFieldKitReborn-0.4.0.zip** from the release **Assets** (not GitHub's automatic Source code ZIP). Back up SavedVariables, replace the old AzerothFieldKitReborn folder in the actual game client's Interface/AddOns folder, disable legacy MASH if active, restart the client and open `/fieldkit`.
 
 ## Credits / provenance
 Azeroth FieldKit is a maintained derivative of **MASH by Malk**. Previous rights/asset notices and publication limitations remain in effect; see `NOTICE.md`, `LICENSE.md` and `docs/PUBLICATION.md`.

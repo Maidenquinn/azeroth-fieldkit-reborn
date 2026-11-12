@@ -8,22 +8,24 @@ from lupa.lua51 import LuaRuntime
 from prototypes import Chunk
 
 base=Path(__file__).resolve().parent.parent
-root=base/'AzerothFieldKit'
+root=base/'AzerothFieldKitReborn'
 parser=argparse.ArgumentParser();parser.add_argument('--lua50',type=Path);args=parser.parse_args()
-toc=(root/'AzerothFieldKit.toc').read_text(encoding='utf8')
+toc=(root/'AzerothFieldKitReborn.toc').read_text(encoding='utf8')
 version=next(s.split(':',1)[1].strip() for s in toc.splitlines() if s.startswith('## Version:'))
 publication=json.loads((base/'data/publication-status.json').read_text(encoding='utf8'))
 assert publication['version']==version,'Refresh publication metadata explicitly for this version'
 files=[s for s in toc.splitlines() if s.endswith('.lua')]
 assert len(files)==len(set(files)) and set(files)=={p.name for p in root.glob('*.lua')}
-assert '## SavedVariables: FieldKitDB' in toc
+assert '## SavedVariables: FieldKitRebornDB' in toc
 
 def runtime(saved=None):
  l=LuaRuntime(unpack_returned_tuples=True)
  l.execute((base/'tests/mock.lua').read_text(encoding='utf8'))
  l.execute('string.match=nil;string.gmatch=nil')
- if saved:l.execute('FieldKitDB='+saved)
- for name in files:l.execute((root/name).read_text(encoding='utf8'),name=name)
+ if saved:l.execute('FieldKitRebornDB='+saved)
+ for name in files:
+  l.execute((root/name).read_text(encoding='utf8'),name=name)
+  if name=='Runtime.lua':l.execute('FieldKit.rebornLegacyFixture=true')
  return l
 
 # The profile-scope gate rejects new persisted settings until assigned either
@@ -37,9 +39,9 @@ legacy_042=runtime('{cardOpacity=37,moneyFrame=false,combatTextX=-217,chatWidth=
 legacy_042.execute('fire(FieldKitFrame,"VARIABLES_LOADED")')
 legacy_042.execute((base/'tests/migration_042.lua').read_text(encoding='utf8'))
 legacy_042.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-legacy_042_reload=runtime(legacy_042.eval('SNAPSHOT(FieldKitDB)'))
+legacy_042_reload=runtime(legacy_042.eval('SNAPSHOT(FieldKitRebornDB)'))
 legacy_042_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED")')
-legacy_042_reload.execute('assert(FieldKitDB.cardOpacity==37 and FieldKitDB.moneyFrame==false and FieldKitDB.combatTextX==-217 and FieldKitDB.chatWidth==560 and FieldKitDB.language=="fr" and FieldKitDB.activeHudProfile==1)')
+legacy_042_reload.execute('assert(FieldKitRebornDB.cardOpacity==37 and FieldKitRebornDB.moneyFrame==false and FieldKitRebornDB.combatTextX==-217 and FieldKitRebornDB.chatWidth==560 and FieldKitRebornDB.language=="fr" and FieldKitRebornDB.activeHudProfile==1)')
 print('PASS synthetic 0.4.2 flat SavedVariables migration')
 diagnostics=runtime();diagnostics.execute((base/'tests/diagnostics.lua').read_text(encoding='utf8'))
 profiles=runtime();profiles.execute((base/'tests/profiles.lua').read_text(encoding='utf8'))
@@ -50,45 +52,45 @@ profile_ui=runtime();profile_ui.execute((base/'tests/profile_ui.lua').read_text(
 profile_stage=runtime()
 profile_stage.execute('''
 fire(FieldKitFrame,"VARIABLES_LOADED")
-FieldKitDB.cardOpacity=51;FieldKitDB.frameAnchors.FieldKitLeftStack={"TOPLEFT","TOPLEFT",71,-91}
+FieldKitRebornDB.cardOpacity=51;FieldKitRebornDB.frameAnchors.FieldKitLeftStack={"TOPLEFT","TOPLEFT",71,-91}
 assert(FieldKitProfiles.Save(1))
-FieldKitDB.cardOpacity=94;FieldKitDB.chatWidth=720
+FieldKitRebornDB.cardOpacity=94;FieldKitRebornDB.chatWidth=720
 assert(FieldKitProfiles.Load(1))
-assert(FieldKitDB.cardOpacity==51 and FieldKitDB.profilePendingSlot==nil)
+assert(FieldKitRebornDB.cardOpacity==51 and FieldKitRebornDB.profilePendingSlot==nil)
 ''')
 profile_stage.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-profile_reload=runtime(profile_stage.eval('SNAPSHOT(FieldKitDB)'))
+profile_reload=runtime(profile_stage.eval('SNAPSHOT(FieldKitRebornDB)'))
 profile_reload.execute('''
 fire(FieldKitFrame,"VARIABLES_LOADED")
-assert(FieldKitDB.cardOpacity==51 and FieldKitDB.chatWidth==440) -- chat belongs to slot 1
-assert(FieldKitDB.frameAnchors.FieldKitLeftStack[3]==71)
-assert(FieldKitDB.profilePendingSlot==nil and FieldKitDB.activeHudProfile==1)
-assert(FieldKitDB.interfaceProfiles[1].tables.frameAnchors.FieldKitLeftStack[3]==71)
+assert(FieldKitRebornDB.cardOpacity==51 and FieldKitRebornDB.chatWidth==440) -- chat belongs to slot 1
+assert(FieldKitRebornDB.frameAnchors.FieldKitLeftStack[3]==71)
+assert(FieldKitRebornDB.profilePendingSlot==nil and FieldKitRebornDB.activeHudProfile==1)
+assert(FieldKitRebornDB.interfaceProfiles[1].tables.frameAnchors.FieldKitLeftStack[3]==71)
 ''')
 legacy_stage=runtime()
 legacy_stage.execute('''
 fire(FieldKitFrame,"VARIABLES_LOADED")
-FieldKitDB.cardOpacity=34;assert(FieldKitProfiles.Save(2))
-FieldKitDB.cardOpacity=89;FieldKitDB.profilePendingSlot=2
+FieldKitRebornDB.cardOpacity=34;assert(FieldKitProfiles.Save(2))
+FieldKitRebornDB.cardOpacity=89;FieldKitRebornDB.profilePendingSlot=2
 ''')
 legacy_stage.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-legacy_reload=runtime(legacy_stage.eval('SNAPSHOT(FieldKitDB)'))
+legacy_reload=runtime(legacy_stage.eval('SNAPSHOT(FieldKitRebornDB)'))
 legacy_reload.execute('''
 fire(FieldKitFrame,"VARIABLES_LOADED")
-assert(FieldKitDB.cardOpacity==34 and FieldKitDB.activeHudProfile==2)
-assert(FieldKitDB.profilePendingSlot==nil)
+assert(FieldKitRebornDB.cardOpacity==34 and FieldKitRebornDB.activeHudProfile==2)
+assert(FieldKitRebornDB.profilePendingSlot==nil)
 ''')
 fresh=runtime();fresh.execute('fire(FieldKitFrame,"VARIABLES_LOADED")')
 fresh.execute((base/'tests/security.lua').read_text(encoding='utf8'))
-assert fresh.globals().FieldKitDB.uiPage=='home'
+assert fresh.globals().FieldKitRebornDB.uiPage=='home'
 # Migrating navigation must preserve unrelated preferences and explicit opt-outs.
 for title,page in {'Nameplates':'nameplates','Player':'health','Target':'health','Combat':'bosses',
                    'Boss health':'bosses','Combat text':'combat','Camera':'interface','Windows':'cards'}.items():
  old=runtime('{panelSection='+json.dumps(title)+',panelTab=4,playerHealthMode=3,moneyFrame=false,combatTextX=-217}')
  old.execute('fire(FieldKitFrame,"VARIABLES_LOADED")')
- assert old.globals().FieldKitDB.uiPage==page
- assert old.globals().FieldKitDB.playerHealthMode==3 and old.globals().FieldKitDB.moneyFrame is False
- assert old.globals().FieldKitDB.combatTextX==-217
+ assert old.globals().FieldKitRebornDB.uiPage==page
+ assert old.globals().FieldKitRebornDB.playerHealthMode==3 and old.globals().FieldKitRebornDB.moneyFrame is False
+ assert old.globals().FieldKitRebornDB.combatTextX==-217
 defaults=runtime()
 defaults.execute('''
 local writes=0
@@ -125,19 +127,19 @@ portrait_native=runtime();portrait_native.execute((base/"tests/portraits_native.
 loadout=runtime();loadout.execute((base/"tests/loadout.lua").read_text(encoding="utf8"))
 
 native_tools=runtime();native_tools.execute((base/'tests/native_tools.lua').read_text(encoding='utf8'))
-native_tools.execute('FieldKitDB.meterView=2;FieldKitDB.onTopWindows.FieldKitEffectsFrame=true;FieldKitDB.onTopWindows.UIParent=true')
+native_tools.execute('FieldKitRebornDB.meterView=2;FieldKitRebornDB.onTopWindows.FieldKitEffectsFrame=true;FieldKitRebornDB.onTopWindows.UIParent=true')
 native_tools.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-native_reload=runtime(native_tools.eval('SNAPSHOT(FieldKitDB)'))
-native_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitDB.meterView==2 and FieldKitDB.onTopWindows.FieldKitEffectsFrame and not FieldKitDB.onTopWindows.UIParent);assert(FieldKitDB.cardSizes.FieldKitEffectsFrame.width==420)')
+native_reload=runtime(native_tools.eval('SNAPSHOT(FieldKitRebornDB)'))
+native_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitRebornDB.meterView==2 and FieldKitRebornDB.onTopWindows.FieldKitEffectsFrame and not FieldKitRebornDB.onTopWindows.UIParent);assert(FieldKitRebornDB.cardSizes.FieldKitEffectsFrame.width==420)')
 
 ux=runtime();ux.execute((base/'tests/ux_simplification.lua').read_text(encoding='utf8'))
 ux.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-ux_reload=runtime(ux.eval('SNAPSHOT(FieldKitDB)'))
-ux_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("");assert(FieldKitDB.uiPage=="layout" or FieldKitUI.sections)')
+ux_reload=runtime(ux.eval('SNAPSHOT(FieldKitRebornDB)'))
+ux_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("");assert(FieldKitRebornDB.uiPage=="layout" or FieldKitUI.sections)')
 locks=runtime();locks.execute((base/'tests/window_lock.lua').read_text(encoding='utf8'))
 locks.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-locked_reload=runtime(locks.eval('SNAPSHOT(FieldKitDB)'))
-locked_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitDB.windowsLocked and not FieldKitUI.frame);this=FieldKitMeterFrame;FieldKitMeterFrame:GetScript("OnDragStart")();assert(not FieldKitMeterFrame.azsMoving)')
+locked_reload=runtime(locks.eval('SNAPSHOT(FieldKitRebornDB)'))
+locked_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitRebornDB.windowsLocked and not FieldKitUI.frame);this=FieldKitMeterFrame;FieldKitMeterFrame:GetScript("OnDragStart")();assert(not FieldKitMeterFrame.azsMoving)')
 sync=runtime();sync.execute((base/'tests/party_sync.lua').read_text(encoding='utf8'))
 # Two isolated Lua clients, with an explicit simulated PARTY transport. This
 # proves protocol interoperability, not that this game's co-op forwards packets.
@@ -169,22 +171,22 @@ for _ in range(40):
  if clients[0].globals().FieldKitPartySync.completed:break
 clients[0].execute('local d=FieldKitPartySync.Get("Denza");assert(d and d.shared and d.damage==123456789012 and d.rows[1].dmg==123456789012);assert(d.rows[1].name=="Éclair; feu, 100%")')
 individual.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-restored=runtime(individual.eval('SNAPSHOT(FieldKitDB)'))
+restored=runtime(individual.eval('SNAPSHOT(FieldKitRebornDB)'))
 restored.execute('fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("");update(FieldKitFrame,.3)')
-restored.execute('assert(not FieldKitDB.linkLeftCards and not FieldKitDB.linkRightCards);assert(FieldKitMeterFrame:GetWidth()==500);assert(FieldKitDB.cardSizes.FieldKitMeterFrame.height==360)')
+restored.execute('assert(not FieldKitRebornDB.linkLeftCards and not FieldKitRebornDB.linkRightCards);assert(FieldKitMeterFrame:GetWidth()==500);assert(FieldKitRebornDB.cardSizes.FieldKitMeterFrame.height==360)')
 l=runtime('{compactBar=true,bossFrame=true,hidePlates=true,replaceTally=true,chestPins=true,guardianPins=true,moneyDetached=true,pos={FieldKitMoneyFrame={-2.5374755859375,-348.0493927001953}}}')
 assert l.globals().FieldKit.version==version,'TOC/runtime version mismatch'
 l.execute('fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")')
 for name in ('test_money.lua','tests.lua','test_worldpins.lua','test_combat_editor.lua','test_localization.lua','interface_journey.lua','card_preferences.lua'):
  l.execute((base/'tests'/name).read_text(encoding='utf8'),name=name)
  print('PASS',name)
-l.execute('FieldKitDB.linkRightCards=false;FieldKitDB.frameAnchors.FieldKitStatsFrame={"TOPRIGHT","TOPRIGHT",0,-30}')
+l.execute('FieldKitRebornDB.linkRightCards=false;FieldKitRebornDB.frameAnchors.FieldKitStatsFrame={"TOPRIGHT","TOPRIGHT",0,-30}')
 l.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
-saved=l.eval('SNAPSHOT(FieldKitDB)')
+saved=l.eval('SNAPSHOT(FieldKitRebornDB)')
 again=runtime(saved);again.execute('fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")')
 again.execute('local p,r,rp,x,y=FieldKitStatsFrame:GetPoint();assert(p=="TOPRIGHT" and r==UIParent and rp=="TOPRIGHT" and x==0 and y==-30)')
-again.execute('assert(FieldKitDB.cardStyle==2 and FieldKitDB.cardOpacity==37 and FieldKitDB.meterValues==2)')
-again.execute('assert(FieldKitDB.language=="fr");assert(FieldKitDB.guardianPins==false);assert(FieldKitDB.targetHealthMode==2);assert(FieldKitDB.combatTextX==-123);assert(FieldKitDB.combatEvents.crit.size=="31");assert(FieldKitDB.chatCopy==false)')
+again.execute('assert(FieldKitRebornDB.cardStyle==2 and FieldKitRebornDB.cardOpacity==37 and FieldKitRebornDB.meterValues==2)')
+again.execute('assert(FieldKitRebornDB.language=="fr");assert(FieldKitRebornDB.guardianPins==false);assert(FieldKitRebornDB.targetHealthMode==2);assert(FieldKitRebornDB.combatTextX==-123);assert(FieldKitRebornDB.combatEvents.crit.size=="31");assert(FieldKitRebornDB.chatCopy==false)')
 zone_themes=runtime();zone_themes.execute((base/"tests/zone_themes.lua").read_text(encoding="utf8"))
 # Walk every compiled nested function, even callbacks the mock did not reach.
 # Generated card and round-map textures: their alpha layers are checked, not trusted (alpha.45 shipped a matte that still carried the baked

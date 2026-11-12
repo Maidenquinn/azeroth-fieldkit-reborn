@@ -10,7 +10,7 @@ from PIL import Image
 
 base=Path(__file__).resolve().parent.parent
 source=base/'design/reference-skins'
-out=base/'AzerothFieldKit/media/ReferenceHUD'
+out=base/'AzerothFieldKitReborn/media/ReferenceHUD'
 out.mkdir(parents=True,exist_ok=True)
 layouts=json.loads((source/'layouts.json').read_text(encoding='utf-8'))
 media_path=base/'data/theme-assets.json'
@@ -100,7 +100,7 @@ retired_path=base/'build/reference-retired.json'
 retired=json.loads(retired_path.read_text(encoding='utf-8')) if retired_path.exists() else []
 for relative in list(media['files']):
     if relative.startswith('media/ReferenceHUD/') and Path(relative).name not in generated_paths:
-        target=(base/'AzerothFieldKit'/relative).resolve()
+        target=(base/'AzerothFieldKitReborn'/relative).resolve()
         assert target.parent==out.resolve() and target.suffix=='.tga'
         if target.exists():target.unlink()
         if relative not in retired:retired.append(relative)
@@ -108,5 +108,5 @@ for relative in list(media['files']):
 (base/'build').mkdir(exist_ok=True)
 (base/'build/reference-retired.json').write_bytes((json.dumps(retired,indent=2)+'\n').encode('utf-8'))
 media_path.write_bytes((json.dumps(media,indent=2)+'\n').encode('utf-8'))
-(base/'AzerothFieldKit/ReferenceArt.lua').write_bytes(('-- Generated texture geometry; no executable dynamic loading.\nFieldKitReferenceArt='+lua(art)+'\n').encode('utf-8'))
+(base/'AzerothFieldKitReborn/ReferenceArt.lua').write_bytes(('-- Generated texture geometry; no executable dynamic loading.\nFieldKitReferenceArt='+lua(art)+'\n').encode('utf-8'))
 print('Encoded reference skins:',', '.join(art))

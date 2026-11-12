@@ -1,0 +1,756 @@
+-- FieldKit-owned UI only. Never localize native protocol keys or game-provided names.
+-- Lua 5.0 compatible: no string.match/gmatch, no modern frame hooks.
+FieldKitLocale={bindings=setmetatable({},{__mode="k"}),callbacks={}}
+local T=FieldKitLocale
+T.fr={
+ ["Taken"]="Subis",["Groups"]="Groupes",["Kills short"]="Élim.",["HEALING"]="SOINS",["BOSS DAMAGE"]="BOSS",["DAMAGE TAKEN"]="SUBIS",["PARTY DPS"]="GROUPE",["KILLS"]="ÉLIMINATIONS",
+ ["Equip"]="Équipe",
+ ["DAMAGE"]="DÉGÂTS",["LAIRS"]="ANTRES",["EQUIPMENT"]="ÉQUIPEMENT",["BONUSES"]="BONUS",["EFFECTS"]="EFFETS",["Mode"]="Mode",["victims"]="victimes",["gold"]="or",["Cache"]="Coffre",["All spells"]="Tous les sorts",["View list"]="Voir la liste",["Equipment / spells"]="Équipement / sorts",["All statistics"]="Toutes les statistiques",["All effects"]="Tous les effets",["No combat data"]="En attente de combat",["No active lair"]="Aucune antre active",["active lairs"]="antres actives",["No active effect"]="Aucun effet actif",["Empty"]="Vide",
+ ["Back to HUD"]="Retour au HUD",
+ ["Full details"]="Détails complets",
+ ["Preview HUD"]="Prévisualiser le HUD",
+ ["Apply profile"]="Appliquer le profil",
+ ["Restore previous"]="Restaurer le précédent",
+ ["Close"]="Fermer",
+ ["FieldKit - drag dock"]="FieldKit - déplacer le dock",
+ ["Game mode"]="Mode de jeu",
+ ["Damage"]="Dégâts",
+ ["Damage taken"]="Dégâts subis",
+ ["Lairs"]="Antres",
+ ["Statistics"]="Statistiques",
+ ["Accessories / Spells"]="Accessoires / Sorts",
+ ["Effects"]="Effets",
+ ["Run reminders"]="Rappels de partie",
+ ["In use: "]="En cours : ",
+ ["Current"]="Actif",
+ ["Current profile: "]="Profil actif : ",
+ ["Save name"]="Enregistrer le nom",
+ ["Enter to save · Esc to cancel"]="Entrée : enregistrer · Échap : annuler",
+ ["Invalid name (1–40 bytes)."]="Nom invalide (1 à 40 octets).",
+
+ ["Rename"]="Renommer",
+ ["✓ English"]="✓ Anglais",
+ ["✓ Français"]="✓ Français",
+ ["Profiles"]="Profils",
+ ["Save all FieldKit preferences per profile, including chat. Game stats and message history stay shared."]="Chaque profil conserve tous les réglages FieldKit, y compris le chat. Les statistiques de partie et l'historique des messages restent partagés.",
+ ["Active profile: %d"]="Profil actif : %d",
+ ["No active profile."]="Aucun profil actif.",
+ ["Quick profiles"]="Profils rapides",
+ ["Switch complete FieldKit settings instantly. Empty slots open the profile manager."]="Applique immédiatement tous les réglages du profil. Un emplacement vide ouvre le gestionnaire.",
+
+ ["HUD profile %d"]="Profil HUD %d",
+ ["Profile %d"]="Profil %d",
+ ["Profile %d · active"]="Profil %d · actif",
+ ["Profile %d · empty"]="Profil %d · vide",
+ ["Active HUD profile: %d"]="Profil HUD actif : %d",
+ ["No active HUD profile."]="Aucun profil HUD actif.",
+ ["Undo last switch"]="Annuler le dernier changement",
+ ["Apply now"]="Appliquer maintenant",
+ ["Active"]="Actif",
+ ["Saved · %d positions · opacity %d%%"]="Enregistré · %d positions · opacité %d %%",
+ ["Empty slot — save your current HUD to start."]="Emplacement vide — enregistre ton HUD pour commencer.",
+ ["Quick HUD profiles"]="Profils HUD rapides",
+ ["Switch layouts instantly. Empty slots open the profile manager."]="Change de disposition immédiatement. Un emplacement vide ouvre la gestion des profils.",
+ ["HUD profiles"]="Profils HUD",
+ ["Save FieldKit HUD layouts. Chat and gameplay data are not included."]="Enregistre les dispositions du HUD FieldKit. Le chat et les données de jeu sont exclus.",
+ ["No pending profile change."]="Aucun changement de profil en attente.",
+ ["Cancel pending switch"]="Annuler le changement",
+ ["Save current HUD"]="Enregistrer le HUD",
+ ["Load on /reload"]="Charger au /reload",
+ ["Queued"]="En attente",
+ ["Delete"]="Supprimer",
+ ["Confirm overwrite"]="Confirmer l'écrasement",
+ ["Confirm delete"]="Confirmer la suppression",
+
+ ["Reset position"]="Réinit. position",
+ ["Chat layout"]="Disposition du chat",
+ ["Chat colors & fonts"]="Couleurs et polices",
+ ["Chat colors and typography"]="Couleurs et typographie",
+ ["Unlock chat position"]="Déverrouiller la position du chat",
+ ["Move chat"]="Déplacer le chat",
+ ["Reset chat position"]="Réinitialiser la position",
+ ["Chat font family"]="Police du chat",
+ ["Chat background color"]="Couleur du fond du chat",
+ ["Override chat text colors"]="Remplacer les couleurs du texte",
+ ["Chat text color"]="Couleur du texte",
+ ["Original font"]="Police d’origine",
+ ["Friz Quadrata"]="Friz Quadrata",
+ ["Arial Narrow"]="Arial Narrow",
+ ["Morpheus"]="Morpheus",
+ ["Skurri"]="Skurri",
+ ["Charcoal"]="Anthracite",
+ ["Obsidian"]="Obsidienne",
+ ["Midnight blue"]="Bleu nuit",
+ ["Warm brown"]="Brun chaud",
+ ["Forest"]="Vert forêt",
+ ["Black"]="Noir",
+ ["White"]="Blanc",
+ ["Warm white"]="Blanc chaud",
+ ["Gold"]="Or",
+ ["Soft green"]="Vert doux",
+ ["Ice blue"]="Bleu glacier",
+ ["Muted gray"]="Gris discret",
+ ["Unlock and drag the Move chat handle to any position. Lock it again to keep the saved layout."]="Déverrouille et fais glisser la petite poignée Déplacer le chat où tu le souhaites. Verrouille ensuite pour conserver la position.",
+ ["Choose a font and a subtle background. Text overrides affect only NEW messages; leave off to preserve channel colors."]="Choisis une police et un fond discret. Les couleurs forcées ne s’appliquent qu’aux NOUVEAUX messages. Désactive cette option pour conserver les couleurs des canaux.",
+ ["Displays a discreet Move chat handle just above the chat. Drag it anywhere, then lock to keep the position. Position persists after /reload."]="Affiche une petite poignée au-dessus du chat. Glisse-la où tu le souhaites, puis verrouille. La position est conservée après /reload.",
+ ["Optional monochrome colors for NEW messages, including channel-colored text. Existing chat history is not recolored. Disable to preserve native per-channel colors."]="Applique une couleur unique aux NOUVEAUX messages. L’historique existant n’est pas recoloré. Désactive cette option pour conserver les couleurs natives des canaux.",
+
+ ["Chat appearance"]="Apparence du chat",
+ ["Chat copy"]="Copie du chat",
+ ["Local chat copy"]="Copie locale du chat",
+ ["Chat layout"]="Présentation du chat",
+ ["Chat background opacity"]="Opacité du fond du chat",
+ ["Show chat Copy button"]="Afficher le bouton Copier",
+ ["Show a compact Copy shortcut just above the in-game chat. Capture remains disabled until you explicitly turn it on."]="Affiche un petit bouton Copier au-dessus du chat en jeu. L'enregistrement reste désactivé tant que vous ne l'activez pas.",
+ ["Enable capture to copy NEW messages. Open the copy window from the button beside your chat, or use /fieldkitlog. Messages are kept only in memory."]="Activez la capture pour copier les NOUVEAUX messages. Ouvrez la fenêtre depuis le bouton du chat ou avec /fieldkitlog. Les messages sont uniquement conservés en mémoire.",
+ ["Prat-inspired controls for the actual game chat. Change width, height, font and fading. No separate chat replacement is installed."]="Réglages inspirés de Prat pour le véritable chat du jeu : largeur, hauteur, police et atténuation. Aucun remplacement du chat natif.",
+
+ ["Copy"]="Copier",
+ ["No captured messages yet. Enable recording and wait for new chat messages."]="Aucun message enregistré. Activez la copie et attendez de nouveaux messages.",
+ ["Ctrl+A, then Ctrl+C to copy these captured messages."]="Ctrl+A, puis Ctrl+C pour copier les messages enregistrés.",
+
+ ["Open chat copy"]="Ouvrir la copie du chat",
+ ["Customize main chat"]="Personnaliser le chat principal",
+ ["Chat width"]="Largeur du chat",
+ ["Chat height"]="Hauteur du chat",
+ ["Chat font size"]="Taille de la police du chat",
+ ["Chat history lines"]="Lignes conservées dans le chat",
+ ["Fade older chat lines"]="Atténuer les anciens messages du chat",
+ ["Records up to 100 NEW messages from the main chat after enabling. Click Open chat copy, or type /fieldkitlog, then use Ctrl+A / Ctrl+C. Native chat text itself cannot be selected. Nothing is uploaded or saved."]="Conserve jusqu'à 100 nouveaux messages après activation. Cliquez sur Ouvrir la copie du chat, ou tapez /fieldkitlog, puis Ctrl+A et Ctrl+C. Le chat natif n'est pas sélectionnable. Aucune donnée n'est envoyée ou sauvegardée.",
+ ["Apply FieldKit's native chat size, font size and fading controls. Can be disabled to restore the previous chat appearance. Compatible with the main ChatFrame1."]="Personnalise la taille, la police et l'atténuation du chat natif. Désactivez pour rétablir son apparence précédente. Concerne le chat principal.",
+ ["Fade native chat text when not actively reading. Disable to keep messages visible until scrolled away."]="Atténue progressivement les anciens messages. Désactivez pour les laisser affichés.",
+
+ ["World markers"]="Marqueurs du monde",
+ ["World & client"]="Monde et client",
+ ["Boss"]="Boss",
+ ["Final boss"]="Boss final",
+ ["Revive"]="Réanimation",
+ ["Ally name: on"]="Nom de l’allié : oui",
+ ["Ally name: off"]="Nom de l’allié : non",
+ ["Distance: on"]="Distance : oui",
+ ["Distance: off"]="Distance : non",
+ ["Guardian"]="Gardien",
+ ["Elite"]="Élite",
+ ["Treasure"]="Trésor",
+ ["Spawn"]="Apparition",
+ ["Choose an icon to preview and configure. Changes apply immediately."]="Choisis un marqueur à prévisualiser et à configurer. Les modifications sont immédiates.",
+ ["Preview uses the exact installed texture."]="Aperçu de la texture réellement installée.",
+ ["Show marker: yes"]="Afficher ce marqueur : oui",
+ ["Show marker: no"]="Afficher ce marqueur : non",
+ ["Icon size"]="Taille de l’icône",
+ ["Marker visibility range"]="Portée du marqueur",
+ ["Aura intensity"]="Intensité de l’aura",
+ ["Aura: on"]="Aura : activée",
+ ["Aura: off"]="Aura : désactivée",
+ ["Pulse: on"]="Pulsation : activée",
+ ["Pulse: off"]="Pulsation : désactivée",
+ ["Engine: on"]="Moteur : actif",
+ ["Engine: off"]="Moteur : inactif",
+ ["Spawn hints: on"]="Indices d’apparition : activés",
+ ["Spawn hints: off"]="Indices d’apparition : désactivés",
+ ["Spawn point"]="Point d’apparition",
+ ["Guardian lair location; appearance does not guarantee a spawn is imminent."]="Emplacement d’un antre de gardien ; ce repère ne garantit pas une apparition imminente.",
+ ["Spawn hints show a tooltip when you hover the world marker. They do not predict future spawns."]="Les indices affichent une infobulle au survol du marqueur. Ils ne prédisent pas les prochaines apparitions.",
+
+ ["Language"]="Langue",
+ ["Choose the language used by FieldKit. Applies immediately; game-provided names keep the game's language."]="Choisis la langue de FieldKit. Application immédiate ; les noms fournis par le jeu gardent sa langue.",
+ ["Nameplates"]="Barres ennemies",
+ ["Target"]="Cible",
+ ["Combat"]="Combat",
+ ["Player"]="Joueur",
+ ["Warnings"]="Alertes",
+ ["Windows"]="Fenêtres",
+ ["Map"]="Carte",
+ ["Interface"]="Interface",
+ ["Camera"]="Caméra",
+ ["Combat text"]="Texte de combat",
+ ["Boss health"]="Vie des boss",
+ ["Show only elites and bosses"]="Afficher uniquement les élites et les boss",
+ ["Common monsters get no nameplate. The V key shows or hides the elite and boss plates."]="Les monstres ordinaires n'ont pas de barre. La touche V affiche ou masque les barres des élites et des boss.",
+ ["Hide unclassified monsters"]="Masquer les monstres non identifiés",
+ ["Monsters FieldKit has not learned yet are hidden too. They are learned when you target or mouse over them."]="Masque aussi les monstres encore inconnus de FieldKit. Cible-les ou survole-les pour les identifier.",
+ ["Enemy target health numbers"]="Afficher la vie de la cible ennemie",
+ ["Shows current / max health on the target frame."]="Affiche la vie actuelle / maximale sur le cadre de cible.",
+ ["Target health: percentage"]="Vie de la cible : pourcentage",
+ ["Switch between numeric health and percentage; use the next option to show both."]="Bascule entre les valeurs et le pourcentage. L'option suivante affiche les deux.",
+ ["Target health: numbers + percent"]="Vie de la cible : valeurs + pourcentage",
+ ["Display both numeric HP and percentage."]="Affiche les valeurs numériques et le pourcentage.",
+ ["Replace the game's boss bars"]="Remplacer les barres de boss du jeu",
+ ["Hides the big boss bars of the HUD and shows bosses and awake guardians in target-style frames instead. Use Move windows to position them."]="Remplace les grandes barres du jeu par des cadres pour les boss et les gardiens éveillés. Utilise Déplacer pour les positionner.",
+ ["Show target damage (game)"]="Afficher les dégâts sur la cible (jeu)",
+ ["Same as Options → Combat → Show Target Damage. Uncheck to keep only FieldKit combat text."]="Identique à Options → Combat → Afficher les dégâts sur la cible. Décochez pour ne garder que le texte FieldKit.",
+ ["Show my crits above the hero"]="Afficher mes critiques au-dessus du héros",
+ ["Your critical hits pop up above your character. Uncheck Show target damage (game) to avoid duplicates."]="Tes coups critiques s'affichent au-dessus du personnage. Décoche Afficher les dégâts sur la cible (jeu) pour éviter les doublons.",
+ ["Group crits"]="Regrouper les critiques",
+ ["Crits that land within a quarter second become one line: the biggest, with how many there were (x7)."]="Les critiques d'un quart de seconde sont réunis : valeur la plus élevée et nombre de coups (x7).",
+ ["Health bar under the character"]="Barre de vie sous le personnage",
+ ["A small green bar under your hero. Use Move windows to position it."]="Une petite barre verte sous ton héros. Utilise Déplacer pour la positionner.",
+ ["Player health: percentage"]="Vie du joueur : pourcentage",
+ ["Show player health as a percentage."]="Affiche la vie du joueur en pourcentage.",
+ ["Player health: numbers + percent"]="Vie du joueur : valeurs + pourcentage",
+ ["Show both health numbers and percentage."]="Affiche les valeurs de vie et le pourcentage.",
+ ["Buff icons under the health bar"]="Améliorations sous la barre de vie",
+ ["Your active buffs with their time left."]="Tes améliorations actives et leur durée restante.",
+ ["Shield on the health bar"]="Bouclier sur la barre de vie",
+ ["Your absorb shield shows as a light blue band over the health bar, with its value in numbers."]="Le bouclier d'absorption apparaît en bleu clair sur la barre de vie, avec sa valeur.",
+ ["Low health warning"]="Alerte de vie faible",
+ ["The health bar under your hero flashes red when your health drops below the limit."]="La barre sous ton héros clignote en rouge lorsque ta vie passe sous le seuil.",
+ ["Test"]="Tester",
+ ["Sound on low health"]="Son en cas de vie faible",
+ ["Plays a warning sound once each time your health drops below the limit."]="Joue un son chaque fois que ta vie passe sous le seuil.",
+ ["Low health limit"]="Seuil de vie faible",
+ ["Below this much health the warning starts."]="L'alerte se déclenche sous ce pourcentage de vie.",
+ ["Low health below "]="Vie faible sous ",
+ ["Stats"]="Statistiques",
+ ["Your run stats on screen, with gold and the next chest price below."]="Tes statistiques, avec l'or et le prix du prochain coffre en dessous.",
+ ["Choose..."]="Choisir...",
+ ["Kills under the gold"]="Victimes sous l'or",
+ ["Shows your kills below the gold and chest price, and hides the game's Kills / Gold / cache box."]="Affiche les victimes sous l'or et le prix du coffre, et masque le récapitulatif du jeu.",
+ ["Damage meter"]="Compteur de dégâts",
+ ["Damage, DPS and share of each spell this run. The game's own meter stays as it is."]="Dégâts, DPS et contribution de chaque sort pendant cette partie. Le compteur du jeu reste disponible.",
+ ["Damage taken"]="Dégâts subis",
+ ["Where the damage you took came from: bosses, elites, monsters or ground effects."]="Origine des dégâts subis : boss, élites, monstres ou effets au sol.",
+ ["Accessories"]="Accessoires",
+ ["Your amulet, trinkets and rings with rarity colors. Empty slots show in red."]="Amulette, bijoux et anneaux avec leur couleur de rareté. Les emplacements vides sont rouges.",
+ ["Chests on the minimap"]="Coffres sur la minicarte",
+ ["Every Battleground Cache on the field gets an icon on the minimap. Far ones sit on the edge, pointing the way."]="Chaque coffre du champ de bataille reçoit une icône. Les coffres éloignés sont placés au bord pour indiquer la direction.",
+ ["Lairs"]="Antres",
+ ["A window with every guardian lair: who holds it, asleep or awake, when an empty one fills again, and how far it is."]="Liste les antres : gardien, état endormi ou éveillé, retour et distance.",
+ ["Compact action bar"]="Barre d'actions compacte",
+ ["Your 6 spells and racial in a small bar with the XP bar below and the kills, gold and chest line above, and the menu buttons in the bottom right corner. Changing this reloads the interface."]="Les 6 sorts et le racial dans une petite barre, l'expérience en dessous, les victimes, l'or et le coffre au-dessus. Les menus sont en bas à droite. Cette option recharge l'interface.",
+ ["Hide gryphons"]="Masquer les griffons",
+ ["Hides the two gryphons at the ends of the action bar."]="Masque les deux griffons aux extrémités de la barre d'actions.",
+ ["Boss health: percentage"]="Vie des boss : pourcentage",
+ ["Percentage only. Uncheck to return to exact numbers."]="Pourcentage seul. Décoche pour revenir aux valeurs exactes.",
+ ["Boss health: numbers + percent"]="Vie des boss : valeurs + pourcentage",
+ ["Exact numeric values and percentage."]="Valeurs numériques exactes et pourcentage.",
+ ["Guardians on the minimap"]="Gardiens sur la minicarte",
+ ["Exact native lair positions, not moving guardian locations. White: asleep; red: fighting; orange: return countdown. Independent of the Lairs window."]="Positions exactes des antres, pas des gardiens en déplacement. Blanc : endormi ; rouge : combat ; orange : retour. Indépendant de la fenêtre des antres.",
+ ["Max camera distance: "]="Distance maximale de caméra : ",
+ ["How far the camera can zoom out. The game's own option stops at about 30 yd."]="Distance maximale de recul de la caméra. L'option du jeu s'arrête vers 30 mètres.",
+ ["Reset positions"]="Réinitialiser",
+ ["Puts every FieldKit window and the health bar back in its default place."]="Replace toutes les fenêtres FieldKit et la barre de vie à leur position initiale.",
+ ["window positions reset."]="positions des fenêtres réinitialisées.",
+ ["Drag FieldKit windows to move them  -  plates: %d (%d hidden)"]="Déplace les fenêtres FieldKit — barres : %d (%d masquées)",
+ ["Click to open the panel. Drag to move."]="Clique pour ouvrir le panneau. Glisse pour déplacer.",
+ ["Guardian"]="Gardien",
+ ["ENRAGED"]="ENRAGÉ",
+ ["Final boss"]="Boss final",
+ ["Boss"]="Boss",
+ ["drag to move"]="glisser pour déplacer",
+ ["Damage"]="Dégâts",
+ ["Haste"]="Hâte",
+ ["Crit Chance"]="Chances de critique",
+ ["Crit Dmg"]="Dégâts critiques",
+ ["Armor"]="Armure",
+ ["Area"]="Zone",
+ ["Targets"]="Cibles",
+ ["Echo"]="Écho",
+ ["Speed"]="Vitesse",
+ ["Regen"]="Régénération",
+ ["Pickup"]="Ramassage",
+ ["Lifesteal"]="Vol de vie",
+ ["Kill Heal"]="Soin par victime",
+ ["Thorns"]="Épines",
+ ["Lives"]="Vies",
+ ["Experience"]="Expérience",
+ ["Gold"]="Or",
+ ["Luck"]="Chance",
+ ["Buff Power"]="Puissance des bonus",
+ ["DoT Stacks"]="Cumuls périodiques",
+ ["DoT Haste"]="Hâte périodique",
+ ["Vs Elites"]="Contre élites",
+ ["Execute"]="Exécution",
+ ["Vs Controlled"]="Contre contrôlés",
+ ["Vs Afflicted"]="Contre affectés",
+ ["Shielded"]="Sous bouclier",
+ ["Melee"]="Mêlée",
+ ["Pet Damage"]="Dégâts du familier",
+ ["Chest:"]="Coffre :",
+ ["Kills:"]="Victimes :",
+ ["Amulet"]="Amulette",
+ ["Trinket 1"]="Bijou 1",
+ ["Trinket 2"]="Bijou 2",
+ ["Ring 1"]="Anneau 1",
+ ["Ring 2"]="Anneau 2",
+ ["(worn)"]="(équipé)",
+ ["empty"]="vide",
+ ["awake"]="en combat",
+ ["asleep"]="en attente",
+ ["back in "]="retour dans ",
+ [" held"]=" occupés",
+ ["Monsters"]="Monstres",
+ ["Monster melee"]="Mêlée des monstres",
+ ["Monster spells"]="Sorts des monstres",
+ ["Elites"]="Élites",
+ ["Boss spells"]="Sorts des boss",
+ ["Boss melee"]="Mêlée des boss",
+ ["Ground effects"]="Effets au sol",
+ ["Gold/chest bar restored above the action bar. Other positions unchanged."]="Barre d'or et de coffre replacée au-dessus des sorts. Les autres positions sont conservées.",
+ ["chests opened this run: "]="coffres ouverts cette partie : ",
+ ["unknown"]="inconnu",
+ [", next chest: "]=", prochain coffre : ",
+ ["nameplate filter "]="filtre des barres ",
+ ["ON"]="ACTIF",
+ ["off"]="inactif",
+ [", unknown monsters "]=", monstres inconnus ",
+ ["hidden"]="masqués",
+ ["shown"]="visibles",
+ [", target health "]=", vie de la cible ",
+ [", plates on screen "]=", barres à l'écran ",
+ [" hidden, max "]=" masquées, max ",
+ [" monsters learned, camera "]=" monstres identifiés, caméra ",
+ ["Battleground Cache"]="Coffre du champ de bataille",
+ ["Direction only: beyond minimap range"]="Direction seule : hors de portée de la minicarte",
+ ["Lair: guardian fighting (not its moving position)"]="Antre : gardien en combat (pas sa position mobile)",
+ ["Lair: guardian asleep"]="Antre : gardien en attente",
+ ["Lair empty; return in "]="Antre vide ; retour dans ",
+ ["Awaiting native return confirmation"]="En attente de confirmation du retour par le jeu",
+ ["appearance not identified"]="apparence non identifiée",
+ ["explicit display conflicts with verified catalog"]="apparence fournie différente du catalogue vérifié",
+ ["duplicate name: appearance not verified as shared"]="nom commun : apparence partagée non vérifiée",
+ ["zone unavailable or outside verified portrait catalog"]="zone indisponible ou absente du catalogue vérifié",
+ ["native static render; entry="]="rendu natif statique ; entrée=",
+ ["FieldKit portraits: "]="Portraits FieldKit : ",
+ [" scheduled bosses + "]=" boss planifiés + ",
+ [" elite/guardian definitions on "]=" définitions d'élites et de gardiens sur ",
+ [" maps. Static native renders; game validation remains map by map."]=" cartes. Rendus natifs statiques ; validation en jeu à effectuer carte par carte.",
+ ["FieldKit portrait "]="Portrait FieldKit ",
+ ["FieldKit portrait: "]="Portrait FieldKit : ",
+ [" source="]=" source=",
+ [" texture="]=" texture=",
+ [" display="]=" apparence=",
+ [" zone="]=" zone=",
+ ["Copy"]="Copier",
+ ["FieldKit - Copy chat"]="FieldKit - Copier le chat",
+ ["Ctrl+A then Ctrl+C - text without color codes"]="Ctrl+A puis Ctrl+C - texte sans codes de couleur",
+ ["General"]="Général",
+ ["Events"]="Événements",
+ ["Fonts"]="Police",
+ ["Filters"]="Filtres",
+ ["Areas"]="Zones",
+ ["Click to choose from the list."]="Cliquer pour choisir dans la liste.",
+ ["Enable FieldKit combat text"]="Activer le texte de combat FieldKit",
+ ["Group hits from the same ability"]="Regrouper les frappes d'une compétence",
+ ["Critical and normal hits stay separate."]="Les critiques et les dégâts normaux restent séparés.",
+ ["Simultaneous messages (all areas)"]="Messages simultanés (toutes zones)",
+ ["Message lifetime"]="Durée d'affichage",
+ ["Merge window"]="Fenêtre de regroupement",
+ ["Balanced"]="Équilibré",
+ ["Quiet"]="Discret",
+ ["All"]="Tout",
+ ["Preview (sample data)"]="Aperçu (exemples fictifs)",
+ ["Use only this combat text"]="Utiliser seulement ce texte",
+ ["Event category"]="Catégorie à personnaliser",
+ ["Show this category"]="Afficher cette catégorie",
+ ["Outgoing damage"]="Dégâts infligés",
+ ["Outgoing criticals"]="Critiques infligés",
+ ["Incoming damage"]="Dégâts reçus",
+ ["Incoming criticals"]="Critiques reçus",
+ ["Incoming healing"]="Soins reçus",
+ ["Outgoing periodic damage"]="Dégâts périodiques infligés",
+ ["Incoming periodic damage"]="Dégâts périodiques reçus",
+ ["Misses"]="Ratés",
+ ["Dodges"]="Esquives",
+ ["Parries"]="Parades",
+ ["Full blocks"]="Blocages complets",
+ ["Full resists"]="Résistances complètes",
+ ["Full absorbs"]="Absorptions complètes",
+ ["Immunities"]="Immunités",
+ ["Evades"]="Évitements",
+ ["Miss"]="Raté",
+ ["Dodge"]="Esquive",
+ ["Parry"]="Parade",
+ ["Block"]="Blocage",
+ ["Resist"]="Résisté",
+ ["Absorb"]="Absorbé",
+ ["Immune"]="Insensible",
+ ["Evade"]="Évitement",
+ ["Red"]="Rouge",
+ ["Green"]="Vert",
+ ["Blue"]="Bleu",
+ ["Category font size"]="Taille de cette catégorie",
+ ["use Fonts setting"]="héritée de Police",
+ ["Reset color / size"]="Couleur / taille par défaut",
+ ["Preview this category"]="Aperçu de cette catégorie",
+ ["Normal font"]="Police normale",
+ ["Critical font"]="Police des critiques",
+ ["Same as normal"]="Identique à la normale",
+ ["Outline"]="Contour",
+ ["None"]="Aucun",
+ ["Thin"]="Fin",
+ ["Thick"]="Épais",
+ ["Normal size"]="Taille normale",
+ ["Critical size"]="Taille des critiques",
+ ["Opacity"]="Opacité",
+ ["Show ability names"]="Afficher le nom des compétences",
+ ["Show merged hit counts"]="Afficher le nombre de frappes regroupées",
+ ["Preview"]="Aperçu",
+ ["Outgoing damage and actions"]="Dégâts et actions infligés",
+ ["Incoming damage and actions"]="Dégâts et actions reçus",
+ ["Minimum damage (per hit)"]="Dégât minimum (par frappe)",
+ ["Minimum healing (per update)"]="Soin minimum (par mise à jour)",
+ ["Reload list"]="Recharger la liste",
+ ["Apply list"]="Appliquer la liste",
+ ["Separate incoming / healing and outgoing"]="Séparer reçus / soins et dégâts infligés",
+ ["Scroll direction"]="Sens du défilement",
+ ["Upward"]="Vers le haut",
+ ["Downward"]="Vers le bas",
+ ["Show drag handles"]="Afficher les poignées de déplacement",
+ ["Hide handles"]="Masquer les poignées",
+ ["Line spacing"]="Espacement des lignes",
+ ["Preview areas"]="Aperçu des zones",
+ ["Outgoing: drag to move"]="Dégâts infligés : déplacer",
+ ["Incoming / healing: drag to move"]="Dégâts reçus / soins : déplacer",
+ ["[Preview]"]="[Aperçu]",
+ ["Hit"]="Coup",
+ ["Crit"]="Critique",
+ ["Taken"]="Subi",
+ ["Heal: "]="Soin : ",
+ ["Position to edit"]="Position à modifier",
+ ["Outgoing area"]="Zone des dégâts infligés",
+ ["Incoming / healing area"]="Zone des dégâts reçus et soins",
+ ["Horizontal offset"]="Décalage horizontal",
+ ["Vertical offset"]="Décalage vertical",
+ ["Offsets are measured from the screen center. Drag handles also save these values."]="Décalages par rapport au centre de l'écran. Les poignées enregistrent aussi ces valeurs.",
+ ["Quick presets change filters, merging and message limits. Fonts, colors and positions are kept."]="Les profils modifient les filtres, le regroupement et la limite de messages. Police, couleurs et positions sont conservées.",
+ ["Use only this combat text turns FieldKit on and unchecks Show target damage (game). Preview uses marked sample data. Healing uses native totals."]="« Utiliser seulement ce texte » active FieldKit et décoche Afficher les dégâts sur la cible (jeu). L'aperçu utilise des exemples. Les soins viennent des totaux natifs.",
+ ["Avoidance events appear only when the client sends the corresponding message. < = incoming; > = your action."]="Les évitements apparaissent uniquement si le client envoie le message correspondant. < = reçu ; > = action du joueur.",
+ ["Hidden abilities: one game-provided name per line. Example: Backstab. Maximum 32 names."]="Compétences masquées : un nom fourni par le jeu par ligne. Exemple : Backstab. 32 noms maximum.",
+ ["Matches the name received from the game, without the healing prefix. Small hits are filtered before merging. Partially blocked hits remain one damage message."]="Compare le nom reçu du jeu, sans préfixe de soin. Les petites valeurs sont filtrées avant regroupement. Un coup partiellement bloqué reste un seul message de dégâts.",
+ [" yd"]=" m",
+ ["%d yd"]="%d m",
+ ["%.0f yd"]="%.0f m",
+ [" instances="]=" instances=",
+ [" entry="]=" entrée=",
+ [" display="]=" apparence=",
+ ["15 yd"]="15 m",
+ ["50 yd"]="50 m",
+}
+-- Privacy controls added by the FieldKit fork (display strings only).
+T.fr["Enable local chat copy"]="Activer la copie locale du chat"
+T.fr["Off by default. Keeps up to 100 main-chat messages in memory only, including private messages. Nothing is sent or saved. Disabling clears the buffer."]="Désactivé par défaut. Conserve 100 messages du chat principal uniquement en mémoire, messages privés inclus. Aucun envoi ni sauvegarde. Désactiver efface le tampon."
+T.fr["Local chat copy is disabled. Enable it in Interface or use /fieldkitlog on."]="La copie locale est désactivée. Active-la dans Interface ou avec /fieldkitlog on."
+T.fr["FieldKit - Copy chat"]="FieldKit - Copier le chat"
+T.fr["No active run."]="Aucune partie en cours."
+T.fr['Choose a feature to customize. Your settings are saved.']='Choisissez une fonction à personnaliser. Vos réglages sont conservés.'
+T.fr['Choose which damage and healing messages appear.']='Dégâts et soins : choisissez ce qui apparaît.'
+T.fr['Health and buffs']='Vie et effets'
+T.fr['Health bars, shields and buffs.']='Barres de vie, boucliers et améliorations.'
+T.fr['Tracked bosses']='Boss suivis'
+T.fr['Portraits, health bars and timeline.']='Portraits, barres de vie et chronologie.'
+T.fr['Chests, bosses, runes and revives.']='Coffres, boss, runes et réanimations.'
+T.fr['Configure']='Configurer'
+T.fr['Arrange your HUD']='Organiser votre interface'
+T.fr['Drag active windows directly. Arrange hidden previews and combat areas here.']='Déplacez les fenêtres actives. Réglez ici les aperçus masqués et les zones de combat.'
+T.fr['Arrange previews']='Placer les aperçus'
+T.fr['Essential HUD: damage, lairs, gold and group totals. Other addons are unchanged.']='Interface essentielle : dégâts, antres, or et totaux du groupe. Les autres addons restent inchangés.'
+T.fr['Use essential HUD']='Activer l’interface essentielle'
+T.fr['Undo HUD preset']='Annuler le préréglage'
+-- C8 combat editor translations (native game names stay untouched).
+T.fr["Essentials"]="Essentiel"
+T.fr["Events"]="Événements"
+T.fr["Fonts"]="Police"
+T.fr["Filters"]="Filtres"
+T.fr["Positions"]="Zones"
+T.fr["Game"]="Jeu"
+T.fr["Advanced"]="Avancé"
+T.fr["Enable combat text, select a profile and try the previews."]="Activer le texte, choisir un profil et essayer les aperçus."
+T.fr["Choose which damage, healing and combat events to display."]="Choisir les types de dégâts, soins et événements à afficher."
+T.fr["Adjust fonts, sizes and readability."]="Régler la typographie, les tailles et la lisibilité."
+T.fr["Hide unwanted events or abilities."]="Masquer les événements ou compétences indésirables."
+T.fr["Move display areas and adjust scrolling."]="Déplacer les zones et ajuster le défilement."
+T.fr["Manage native game combat text options."]="Gérer les options de texte natives du jeu."
+T.fr["Fine-tune advanced combat text settings."]="Ajuster les paramètres avancés du texte de combat."
+T.fr["Enable FieldKit combat text"]="Activer le texte de combat FieldKit"
+T.fr["Merge hits from the same ability"]="Regrouper les frappes d'une compétence"
+T.fr["Critical and normal hits remain separate."]="Les critiques et les dégâts normaux restent séparés."
+T.fr["Anchor text to world (AS 0.138+)"]="Ancrer au monde (AS 0.138+)"
+T.fr["Select a profile, then customize its options if needed."]="Choisissez un profil, puis personnalisez les options si besoin."
+T.fr["Balanced"]="Équilibré"
+T.fr["Quiet"]="Discret"
+T.fr["All"]="Tout"
+T.fr["Reset this profile"]="Réinitialiser ce profil"
+T.fr["Confirm reset (5 s)"]="Confirmer la réinitialisation (5 s)"
+T.fr["Start / pause simulation"]="Démarrer / pause simulation"
+T.fr["On-screen preview: start / stop"]="Aperçu réel sur l'écran : activer / arrêter"
+T.fr["Profiles keep their own fonts, colors and positions."]="Les profils conservent vos polices, couleurs et positions."
+T.fr["Combat text fine-tuning"]="Ajustements fins du texte de combat"
+T.fr["Simultaneous messages (all areas)"]="Messages simultanés (toutes zones)"
+T.fr["Display duration"]="Durée d'affichage"
+T.fr["Merge window"]="Fenêtre de regroupement"
+T.fr["Use only FieldKit text"]="Utiliser seulement ce texte"
+T.fr["Back to essentials"]="Retour aux réglages essentiels"
+T.fr["Event category to customize"]="Catégorie à personnaliser"
+T.fr["Show this category"]="Afficher cette catégorie"
+T.fr["Red"]="Rouge"
+T.fr["Green"]="Vert"
+T.fr["Blue"]="Bleu"
+T.fr["Category font size"]="Taille de cette catégorie"
+T.fr["Reset color / size"]="Couleur / taille par défaut"
+T.fr["Preview this category"]="Aperçu de cette catégorie"
+T.fr["Normal font"]="Police normale"
+T.fr["Critical hit font"]="Police des critiques"
+T.fr["Same as normal"]="Identique à la normale"
+T.fr["Outline"]="Contour"
+T.fr["None"]="Aucun"
+T.fr["Thin"]="Fin"
+T.fr["Thick"]="Épais"
+T.fr["Normal font size"]="Taille normale"
+T.fr["Critical hit size"]="Taille des critiques"
+T.fr["Opacity"]="Opacité"
+T.fr["Show ability names"]="Afficher le nom des compétences"
+T.fr["Show merged hit count"]="Afficher le nombre de frappes regroupées"
+T.fr["Preview"]="Aperçu"
+T.fr["Outgoing damage and actions"]="Dégâts et actions infligés"
+T.fr["Incoming damage and actions"]="Dégâts et actions reçus"
+T.fr["Healing received"]="Soins reçus"
+T.fr["Minimum damage (per hit)"]="Dégât minimum (par frappe)"
+T.fr["Minimum healing (per update)"]="Soin minimum (par mise à jour)"
+T.fr["Reload list"]="Recharger la liste"
+T.fr["Apply list"]="Appliquer la liste"
+T.fr["Separate incoming / healing from outgoing"]="Séparer reçus / soins et dégâts infligés"
+T.fr["Scroll direction"]="Sens du défilement"
+T.fr["Up"]="Vers le haut"
+T.fr["Down"]="Vers le bas"
+T.fr["Show drag handles"]="Afficher les poignées de déplacement"
+T.fr["Hide drag handles"]="Masquer les poignées"
+T.fr["Line spacing"]="Espacement des lignes"
+T.fr["Position to edit"]="Position à modifier"
+T.fr["Outgoing area"]="Zone des dégâts infligés"
+T.fr["Incoming / healing area"]="Zone des dégâts reçus / soins"
+T.fr["Horizontal offset"]="Décalage horizontal"
+T.fr["Vertical offset"]="Décalage vertical"
+T.fr["Offsets are measured from the screen center. Drag handles also save these values."]="Les décalages sont calculés depuis le centre de l’écran. Déplacer les poignées enregistre également ces valeurs."
+T.fr["Native text is independent of FieldKit scrolling text. Disable duplicate displays here."]="Le texte natif est indépendant de celui de FieldKit. Désactive ici les affichages en double."
+T.fr["Hidden abilities: one game-provided name per line. Example: Backstab. Maximum 32 names."]="Compétences masquées : un nom du jeu par ligne. Exemple : Backstab. Maximum 32 noms."
+T.fr["Matches the name received from the game, without the healing prefix. Small hits are filtered before merging. Partially blocked hits remain one damage message."]="Correspond au nom reçu du jeu, sans le préfixe de soin. Les petits coups sont filtrés avant regroupement. Les coups partiellement bloqués restent un seul message."
+T.fr["Les esquives et parades n’apparaissent que si le client envoie l’événement. < = reçu ; > = votre action."]="Avoidance events appear only when the client sends the corresponding message. < = incoming; > = your action."
+T.fr["This disables native damage text. World anchoring requires AS 0.138+."]="Ce bouton désactive le texte de dégâts natif. L'ancrage au monde nécessite AS 0.138+."
+-- V2-C8.4: additional dynamic UI strings from the Lua module audit.
+T.fr["Arrives at"]="Arrive à"
+T.fr["In"]="Dans"
+T.fr["Next: %s"]="Suivant : %s"
+T.fr["Schedule"]="Calendrier"
+T.fr["Bonus details not provided"]="Détails du bonus indisponibles"
+T.fr["No spells yet"]="Aucun sort pour le moment"
+T.fr["Rank %d"]="Rang %d"
+T.fr["%d more sources"]="%d sources supplémentaires"
+T.fr["Combat log and native totals are not synchronized."]="Le journal de combat et les totaux natifs ne sont pas synchronisés."
+T.fr["No attributable creature hits received. The client only provided category totals."]="Aucun coup de créature attribuable reçu. Le client ne fournit que les totaux par catégorie."
+T.fr["Not identified"]="Non identifié"
+T.fr["Observed attacker details"]="Détails des attaquants observés"
+T.fr["Partial named hit log; native category totals remain authoritative."]="Journal nominatif partiel ; les totaux natifs par catégorie font référence."
+T.fr["hps"]="soins/s"
+T.fr["Heroic"]="Héroïque"
+T.fr["Normal difficulty"]="Difficulté normale"
+T.fr["Click to sort by this column."]="Cliquer pour trier selon cette colonne."
+T.fr["Keep this spell breakdown open. Unpin or close to hide it again."]="Garder le détail des sorts ouvert. Détacher ou fermer pour le masquer."
+T.fr["Pin"]="Épingler"
+T.fr["Shared spell snapshot · received %.0fs ago"]="Aperçu des sorts partagés · reçu il y a %.0f s"
+T.fr["Spells %d–%d / %d"]="Sorts %d–%d / %d"
+T.fr["Group damage"]="Dégâts du groupe"
+T.fr["Not provided"]="Non fourni"
+T.fr["Teammate"]="Coéquipier"
+T.fr["Waiting for group data"]="En attente des données du groupe"
+T.fr["Next boss"]="Prochain boss"
+T.fr["Card background opacity"]="Opacité du fond des cartes"
+T.fr["Combat and interface tools"]="Outils de combat et d’interface"
+T.fr["Warn %ds before a boss"]="Alerter %d s avant un boss"
+T.fr["Window width"]="Largeur de la fenêtre"
+T.fr["Window height: %d (minimum %d)"]="Hauteur de fenêtre : %d (minimum %d)"
+T.fr["Average"]="Moyenne"
+T.fr["Burst (1s)"]="Pic (1 s)"
+T.fr["Hits: %d   Crits: %d (%.0f%%)"]="Coups : %d   Critiques : %d (%.0f%%)"
+T.fr["Max crit"]="Critique maximal"
+T.fr["Max hit"]="Coup maximal"
+T.fr["No hit sample yet for this spell"]="Aucun coup enregistré pour ce sort"
+T.fr["Total"]="Total"
+T.fr["Left-click: ally spell breakdown."]="Clic gauche : détails des sorts de l’allié."
+T.fr["Left-click: switch tab. Right-click: detach / reattach window."]="Clic gauche : changer d’onglet. Clic droit : détacher / rattacher la fenêtre."
+T.fr["Meter hit stats cleared."]="Statistiques de coups du compteur effacées."
+T.fr["Meter reset (checkpoint)."]="Compteur réinitialisé (point de contrôle)."
+T.fr["Right-click: hide row (total unchanged)."]="Clic droit : masquer la ligne (total inchangé)."
+T.fr["Active affixes"]="Affixes actifs"
+T.fr["Affixes (raw)"]="Affixes (bruts)"
+T.fr["Difficulty screen values"]="Valeurs de l’écran de difficulté"
+T.fr["Mode not provided"]="Mode non fourni"
+T.fr["No difficulty data received."]="Aucune donnée de difficulté reçue."
+T.fr["Same multipliers as the Difficulty UI. Not live combat meters."]="Mêmes multiplicateurs que l’interface de difficulté. Ce ne sont pas des mesures de combat en direct."
+T.fr["Zone not provided"]="Zone non fournie"
+T.fr["Portrait texture rejected by client"]="Texture du portrait rejetée par le client"
+T.fr["%d more effects (adjust filters)"]="%d effets supplémentaires (ajuster les filtres)"
+T.fr["%s arrives in %ds"]="%s arrive dans %d s"
+T.fr["Effects API unavailable"]="API des effets indisponible"
+T.fr["Native remaining time; grouped durations show the soonest expiration."]="Temps restant natif ; les durées regroupées affichent la prochaine expiration."
+T.fr["Native warnings"]="Alertes natives"
+T.fr["Permanent"]="Permanent"
+T.fr["Ready"]="Prêt"
+T.fr["Revived by"]="Réanimé par"
+T.fr["Stored level-ups"]="Niveaux en attente"
+T.fr["You are down"]="Vous êtes à terre"
+T.fr["SIMULATION ACTIVE"]="SIMULATION ACTIVE"
+T.fr["SIMULATION PAUSED"]="SIMULATION EN PAUSE"
+T.fr["Balanced"]="Équilibré"
+T.fr["Quiet"]="Discret"
+T.fr["All"]="Tout"
+T.fr[" yd"]=" m"
+-- C8.7: explicit translations for navigation, presets and editor state.
+T.fr["01  HOME"]="01  ACCUEIL"
+T.fr["02  COMBAT"]="02  COMBAT"
+T.fr["03  INTERFACE"]="03  INTERFACE"
+T.fr["04  WORLD"]="04  MONDE"
+T.fr["05  MULTIPLAYER"]="05  MULTIJOUEUR"
+T.fr["06  PREFERENCES"]="06  PRÉFÉRENCES"
+T.fr["Essentials"]="Essentiel"
+T.fr["Events"]="Événements"
+T.fr["Fonts"]="Police"
+T.fr["Filters"]="Filtres"
+T.fr["Areas"]="Zones"
+T.fr["Game"]="Jeu"
+T.fr["Advanced"]="Avancé"
+T.fr["SIMULATION ACTIVE"]="SIMULATION ACTIVE"
+T.fr["SIMULATION PAUSED"]="SIMULATION EN PAUSE"
+T.fr["Position to edit"]="Position à modifier"
+T.fr["Outgoing area"]="Zone des dégâts infligés"
+T.fr["Incoming / healing area"]="Zone des dégâts reçus / soins"
+T.fr["Upward"]="Vers le haut"
+T.fr["Downward"]="Vers le bas"
+T.fr["Reset this profile"]="Réinitialiser ce profil"
+T.fr["Start / pause simulation"]="Démarrer / pause simulation"
+T.fr["On-screen preview: start / stop"]="Aperçu sur l'écran : démarrer / arrêter"
+T.fr["Select a profile, then customize its options if needed."]="Choisis un profil, puis personnalise ses options si besoin."
+T.fr["Line spacing"]="Espacement des lignes"
+T.fr["Scroll direction"]="Sens du défilement"
+T.fr["Show drag handles"]="Afficher les poignées de déplacement"
+T.fr["Hide handles"]="Masquer les poignées"
+T.fr["Separate incoming / healing and outgoing"]="Séparer reçus / soins et dégâts infligés"
+T.fr["The native text is independent of FieldKit scrolling text. Disable duplicate displays here."]="Le texte natif est indépendant de celui de FieldKit. Désactive ici les affichages en double."
+T.fr["Icon size"]="Taille de l'icône"
+T.fr["Marker visibility range"]="Portée du marqueur"
+T.fr["Aura intensity"]="Intensité de l'aura"
+T.fr["English"]="Anglais"
+T.fr["French"]="Français"
+
+-- C9: canonical labels used by secondary modules and the combat editor.
+T.fr["Spell"]="Sort"
+T.fr["Healing"]="Soins"
+T.fr["Kills"]="Victimes"
+T.fr["Left-click: settings. Right-click: lock/unlock windows. Drag: move this shortcut."]="Clic gauche : paramètres. Clic droit : verrouiller/déverrouiller les fenêtres. Glisser : déplacer le raccourci."
+T.fr["The header counts received players versus the current roster. Missing players or DPS stay unknown. Peer spell breakdowns are not provided by this API."]="L'en-tête compte les joueurs reçus par rapport au groupe actuel. Les joueurs absents et leurs DPS restent inconnus. Cette API ne fournit pas le détail des sorts des alliés."
+T.fr["Native party-unit health and resources. Damage and DPS require a fresh group-meter sample. Drag cards directly. Native teammate frames remain interactive unless explicitly hidden."]="Vie et ressources natives des membres du groupe. Les dégâts et DPS nécessitent un nouvel échantillon du compteur. Déplace les cartes directement. Les cadres natifs restent interactifs sauf s'ils sont masqués."
+T.fr["Left: grouped"]="Gauche : groupées"
+T.fr["Left: independent"]="Gauche : indépendantes"
+T.fr["Right: grouped"]="Droite : groupées"
+T.fr["Right: independent"]="Droite : indépendantes"
+T.fr["Window to resize"]="Fenêtre à redimensionner"
+T.fr["Enable FieldKit combat text"]="Activer le texte de combat FieldKit"
+T.fr["Merge hits from the same ability"]="Regrouper les frappes d'une compétence"
+T.fr["Anchor to world (AS 0.138+)"]="Ancrer au monde (AS 0.138+)"
+T.fr["Choose a profile, then customize its options if needed."]="Choisissez un profil, puis personnalisez les options si besoin."
+T.fr["Reset this profile"]="Réinitialiser ce profil"
+T.fr["Confirm reset (5 s)"]="Confirmer la réinitialisation (5 s)"
+T.fr["Start / pause simulation"]="Démarrer / pause simulation"
+T.fr["On-screen preview: start / stop"]="Aperçu réel sur l'écran : activer / arrêter"
+T.fr["Enable text, choose a profile and try the previews."]="Activer le texte, choisir un profil et essayer les aperçus."
+T.fr["Choose which damage, healing and events appear."]="Choisir les types de dégâts, soins et événements à afficher."
+T.fr["Adjust fonts, sizes and readability."]="Régler la typographie, les tailles et la lisibilité."
+T.fr["Hide unwanted events or abilities."]="Masquer les événements ou compétences indésirables."
+T.fr["Move areas and adjust scrolling."]="Déplacer les zones et ajuster le défilement."
+T.fr["Manage native game combat text options."]="Gérer les options de texte natives du jeu."
+T.fr["Adjust advanced combat text settings."]="Ajuster les paramètres avancés du texte de combat."
+
+-- Build the reverse dictionary after every extension has been loaded.
+-- Keep exact English keys authoritative if a translation happens to match one.
+-- C9.1: bilingual sample combat labels (canonical English keys).
+T.fr["Thunder Clap"]="Coup de tonnerre"
+T.fr["Cleave"]="Enchaînement"
+T.fr["CRITICAL!"]="CRITIQUE !"
+T.fr["Healing +"]="Soin +"
+T.fr["Damage taken -"]="Dégâts reçus -"
+T.fr["Bleeding"]="Saignement"
+-- v0.4.1 native chat guidance (previously untranslated in French UI).
+T.fr["Apply this color to new messages and safely recoverable history. Older untracked messages are preserved unchanged. Disable to restore native channel colors where recoverable."]="Applique la couleur choisie aux nouveaux messages et à l'historique récupérable sans risque. Les anciens messages non enregistrés restent inchangés. Désactivez pour rétablir les couleurs natives lorsque c'est possible."
+T.fr["Customize native chat width, height, font, background and colors. Changes do not replace ChatFrame1; native rendering may retain selected settings until UI reload."]="Personnalise la largeur, la hauteur, la police, le fond et les couleurs du chat natif sans remplacer ChatFrame1. Certains réglages natifs peuvent rester actifs jusqu'au rechargement de l'interface."
+T.fr["Copying is opt-in: capture up to 100 new messages in memory, including whispers. Chat styling separately keeps up to 500 recent messages in memory to protect visible history when native layout changes. No chat is saved or uploaded. Use Open chat copy or /fieldkitlog."]="La copie est facultative : elle conserve en mémoire jusqu'à 100 nouveaux messages, y compris les messages privés. La personnalisation du chat conserve séparément jusqu'à 500 messages récents en mémoire pour protéger l'historique visible lors des changements de disposition. Aucun message n'est enregistré ni envoyé. Utilise Ouvrir la copie du chat ou /fieldkitlog."
+T.fr["Reset HUD positions"]="Réinitialiser les positions HUD"
+T.fr["Undo"]="Annuler"
+T.fr["Previews"]="Aperçus"
+T.en={};for en,fr in pairs(T.fr) do if not T.en[fr] then T.en[fr]=en end end
+-- Read the saved UI language; game-provided names remain unchanged.
+function FieldKit_Language()
+ return FieldKitRebornDB and FieldKitRebornDB.language=="fr" and "fr" or "en"
+end
+-- Translate a known addon label; unknown/native strings are passed through.
+function FieldKit_L(text)
+ if type(text)~="string" then return text end
+ local en=T.fr[text] and text or (T.en[text] or text)
+ if FieldKit_Language()=="fr" then return T.fr[en] or text end
+ return en
+end
+-- Bind an addon label to a weakly tracked widget for later live language changes.
+function FieldKit_Text(object,text)
+ if type(text)=="string" then T.bindings[object]=text else T.bindings[object]=nil end
+ object:SetText(FieldKit_L(text));if object.fieldkitLabel then object.fieldkitLabel:SetText(FieldKit_L(text)) end
+end
+-- Register one refresh callback for dynamic UI labels.
+function FieldKit_RefreshLanguage(callback) table.insert(T.callbacks,callback) end
+-- Persist EN/FR and refresh bound widgets without rebuilding the UI.
+function FieldKit_SetLanguage(language)
+ if type(FieldKitRebornDB)~="table" or (language~="en" and language~="fr") then return end
+ FieldKitRebornDB.language=language
+ for object,text in pairs(T.bindings) do object:SetText(FieldKit_L(text));if object.fieldkitLabel then object.fieldkitLabel:SetText(FieldKit_L(text)) end end
+ for i=1,table.getn(T.callbacks) do T.callbacks[i]() end
+end
+-- Build two explicit language buttons; capture a distinct language in each callback.
+function FieldKit_CreateLanguageOption(page,y)
+ local label=page:CreateFontString(nil,"OVERLAY","GameFontNormal")
+ label:SetPoint("TOPLEFT",page,"TOPLEFT",0,y);FieldKit_Text(label,"Language")
+ for i=1,2 do
+  local language=i==1 and "en" or "fr"
+  local button=CreateFrame("Button",nil,page,"UIPanelButtonTemplate")
+  button:SetWidth(150);button:SetHeight(25);button:SetPoint("TOPLEFT",page,"TOPLEFT",(i-1)*160,y-24)
+  button:SetText(i==1 and "English" or "Français")
+  local function Refresh() button:SetText((FieldKit_Language()==language and "|cffffd100> " or "")..(language=="en" and "English" or "Français").."|r") end
+  button:SetScript("OnClick",function() FieldKit_SetLanguage(language) end)
+  FieldKit_RefreshLanguage(Refresh);Refresh()
+ end
+ local help=page:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall")
+ help:SetPoint("TOPLEFT",page,"TOPLEFT",0,y-62);help:SetWidth(page:GetWidth()-12);help:SetJustifyH("LEFT")
+ FieldKit_Text(help,"Choose the language used by FieldKit. Applies immediately; game-provided names keep the game's language.")
+ return y-115
+end
+
+FieldKitLocale.fr["One theme for HUD, windows and tooltips."]="Un même thème pour le HUD, les fenêtres et les infobulles."
+FieldKitLocale.fr["Essentials within reach."]="L’essentiel à portée de main."
+FieldKitLocale.fr["Detailed tracking and quick access."]="Suivi détaillé et accès rapides."
+FieldKitLocale.fr["Reorganized map and actions."]="Carte et actions réorganisées."
+FieldKitLocale.fr["Manage profiles"]="Gérer les profils"
+
+FieldKitLocale.fr["HUD scale"]="Échelle du HUD"
+FieldKitLocale.fr["Panel opacity"]="Opacité des panneaux"
+
+FieldKitLocale.fr["Battlefield"]="Champ de bataille"
+
+FieldKitLocale.fr["Next"]="Prochain"
+
+FieldKitLocale.fr["Elapsed time"]="Temps écoulé"
+
+FieldKitLocale.fr["Right click: quick menu and settings."]="Clic droit : menu rapide et paramètres."
+
+FieldKitLocale.fr["Native meter"]="Compteur natif du jeu"
+
+FieldKitLocale.fr["01  HOME"]="01  Accueil"
+FieldKitLocale.fr["02  COMBAT"]="02  Combat"
+FieldKitLocale.fr["03  INTERFACE"]="03  Interface"
+FieldKitLocale.fr["04  WORLD"]="04  Monde"
+FieldKitLocale.fr["05  MULTIPLAYER"]="05  Multijoueur"
+FieldKitLocale.fr["06  CHAT"]="06  Chat"
+FieldKitLocale.fr["07  PREFERENCES"]="07  Préférences"
+
+FieldKitLocale.fr["Stored levels"]="Niveaux en attente"
+FieldKitLocale.fr["Settings"]="Réglages"
+
+FieldKitLocale.fr["Level"]="Niveau"
+FieldKitLocale.fr["Drag window"]="Déplacer la fenêtre"
+FieldKitLocale.fr["Reborn difficulty: native rank only; multipliers unavailable."]="Difficulté Reborn : rang natif uniquement ; multiplicateurs indisponibles."

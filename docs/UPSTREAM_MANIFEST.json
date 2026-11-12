@@ -2,7 +2,7 @@
   "origin": "locally installed MASH 1.3.9; already community-modified",
   "originalAuthor": "Malk",
   "permission": "not found in inspected material",
-  "runtimeSnapshotInFirstCommit": "AzerothFieldKit/ (original filenames and bytes)",
+  "runtimeSnapshotInFirstCommit": "AzerothFieldKitReborn/ (original filenames and bytes)",
   "files": {
     "CHANGELOG-1.3.txt": {
       "bytes": 3282,
