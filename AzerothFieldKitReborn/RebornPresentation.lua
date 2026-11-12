@@ -57,7 +57,7 @@ function R.CounterBand()
  local x0,y0,x1,h
  for i=1,3 do local a=d.counts[i]
   if a then
-   x0=math.min(x0 or a[1]-30,a[1]-30);y0=math.min(y0 or a[2],a[2])
+   x0=math.min(x0 or a[1]-44,a[1]-44);y0=math.min(y0 or a[2],a[2])
    x1=math.max(x1 or a[1]+a[3],a[1]+a[3]);h=math.max(h or a[4],a[4])
   end
  end
