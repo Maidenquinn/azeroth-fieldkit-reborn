@@ -145,6 +145,7 @@ local function ChatSlider(key,label,minimum,maximum,step)
   get=function() return (FieldKitRebornDB and FieldKitRebornDB[key]) or minimum end,
   set=function(v)
    FieldKitRebornDB[key]=v
+   FieldKitRebornDB.chatStyle=true
    if FieldKit.ApplyChatStyle then FieldKit.ApplyChatStyle() end
   end,
   format=function(v) return FieldKit_L(label)..": "..v end}
@@ -154,6 +155,7 @@ local function ChatChoice(key,label,values)
   get=function() return FieldKitRebornDB[key] or 1 end,
   set=function(v)
    FieldKitRebornDB[key]=v
+   FieldKitRebornDB.chatStyle=true
    -- Selecting a custom text palette must visibly apply it. The separate
    -- checkbox can still restore the native channel colors explicitly.
    if key=="chatTextColor" then

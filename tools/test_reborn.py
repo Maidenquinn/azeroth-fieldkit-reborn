@@ -23,6 +23,7 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_visual_integration.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_ready_hud.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_presentation_regressions.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_chat_controls.lua').read_text(encoding='utf8'))
     if a.game:
         l=runtime()
         l.execute('''

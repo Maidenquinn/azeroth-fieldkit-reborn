@@ -569,7 +569,7 @@ function R.Update(variant,zone)
   H.Save(chat);chat:SetParent(R.chat)
   if FieldKit.ThemeChatFont then FieldKit.ThemeChatFont(plan.font,plan.fontSize,"") end
   if FieldKit.ResizeChatPreservingHistory then FieldKit.ResizeChatPreservingHistory(plan.textW,plan.textH) end
-  chat:ClearAllPoints();chat:SetPoint("TOPLEFT",R.chat,"TOPLEFT",plan.textX,plan.textY)
+  chat:ClearAllPoints();chat:SetPoint("TOPLEFT",R.chat,"TOPLEFT",plan.textX,-plan.textY)
  end
  for _,name in ipairs({"ChatFrame1UpButton","ChatFrame1DownButton","ChatFrame1BottomButton","ChatFrame1MenuButton","ChatFrameMenuButton","FieldKitChatCopyButton"}) do local f=getglobal(name);if f then FieldKitZoneThemes.Mask(f,true) end end
  if R.ShortcutsHidden(zone,variant) then R.footer:Hide()

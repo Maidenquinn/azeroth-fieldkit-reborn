@@ -455,7 +455,20 @@ end
 
 -- The only local observation of native AddMessage. Its forwarding wrapper
 -- preserves message order, return value, channel colors and links.
--- Render history is in-memory only and cleared when styling is disabled.
+-- Render history is in-memory only and cleared when neither styling nor theme uses it.
+local function ChatForwardResult(frame,...)
+ -- A full native ring buffer evicts its oldest message. Keep the render journal
+ -- aligned with that buffer, rather than retaining 500 entries for a 200-line
+ -- frame and subsequently refusing every history-preserving resize.
+ if not replaying and type(frame.GetNumMessages)=="function" then
+  local ok,count=pcall(frame.GetNumMessages,frame)
+  if ok and type(count)=="number" and count>=0 then
+   while table.getn(displayHistory)>count do table.remove(displayHistory,1) end
+  end
+ end
+ -- Lua 5.0's arg.n retains nil positions in the original native return tuple.
+ return unpack(arg,1,arg.n or table.getn(arg))
+end
 local function Hook(index)
  local frame=getglobal("ChatFrame"..index)
  if not frame or hooked[frame] or type(frame.AddMessage)~="function" then return end
@@ -476,7 +489,7 @@ local function Hook(index)
    text=string.gsub(text,"|r","")
    r,g,b=color[1],color[2],color[3]
   end
-  return original(self,text,r,g,b,id)
+  return ChatForwardResult(self,original(self,text,r,g,b,id))
  end
 end
 
@@ -578,7 +591,7 @@ function FieldKit.SyncChat()
   active=true;Hook(1)
   CopyButton()
  end
- if FieldKitRebornDB and FieldKitRebornDB.chatStyle then
+ if FieldKitRebornDB and (FieldKitRebornDB.chatStyle or Themed()) then
   styleWasEnabled=true
   Hook(1)
   FieldKit.ApplyChatStyle()

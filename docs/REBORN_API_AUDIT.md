@@ -1,4 +1,4 @@
-# Audit FieldKit Reborn — 12 novembre 2026, reborn.6
+# Audit FieldKit Reborn — 12 novembre 2026, reborn.7
 
 ## Sources contrôlées
 
@@ -16,6 +16,32 @@ TOML embarquées dans le PE installé, sans exécuter le binaire ni modifier le
 client. Il ne redistribue que les métadonnées de présentation nécessaires.
 [REBORN_CREATURE_COVERAGE.json](REBORN_CREATURE_COVERAGE.json) détaille chaque
 boss, sa zone, son entrée, son icône et la provenance de celle-ci.
+
+## Correctifs chat et menus reborn.7
+
+- Les descendants des listes déroulantes sont maintenant explicitement au-dessus
+  de leur fond : viewport, contenu, boutons et contrôles du template natif.
+  Le client ne leur attribuait pas automatiquement le niveau de leur parent.
+- Un changement explicite de taille, police ou palette active la personnalisation
+  du chat. Le réglage ne reste plus silencieusement ignoré lorsque la case était désactivée.
+- L’ancrage TOPLEFT du texte utilise une marge verticale négative vers l’intérieur,
+  au lieu de le pousser au-dessus du cadre.
+- Le journal de rendu temporaire reste actif lorsque le thème habille le chat,
+  même sans personnalisation facultative. Cela permet de redimensionner le vrai
+  ChatFrame1 sans perdre ses messages. Le client ne fournit pas GetMessageInfo :
+  les messages observés ne doivent donc pas être effacés à chaque tick.
+  Ce journal borné reste distinct de la copie opt-in et n’est jamais sauvegardé.
+- Après chaque ajout, le journal suit les évictions du tampon natif plein ; il
+  conserve aussi exactement les valeurs de retour natives, y compris les valeurs nil.
+
+Recette réelle ciblée : 460×210 → 550×280 → 460×210 via les curseurs du panneau,
+avec conservation des deux messages présents ; choix de police visible, sélection
+Arial Narrow puis retour à la police d’origine ; long texte natif /help contenu dans le cadre. Les assertions couvrent aussi le
+chat sans thème, les limites du texte et le cas de setters natifs destructifs sans
+getter de messages et le redimensionnement après éviction dans un tampon plein.
+Le diagnostic temporaire ne lit ni n’affiche le contenu du chat
+et est retiré avant distribution. Les paragraphes ci-dessous documentent le travail
+précédent de reborn.6, sans étendre sa validation en combat.
 
 ## Corrections reborn.6
 

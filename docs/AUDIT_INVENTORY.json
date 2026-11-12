@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.6",
+  "candidate": "0.1.0-reborn.7",
   "runtimeModules": 52,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5206,
-      "sha256": "fe2b4d181c941d0a40b962606474aa2800676548735fe9dfad58f93a56c34f3a",
+      "sha256": "8d5c8ba0366cb5e4e670a923f6f92b8950073c7d515cf92da7e043e7db3eaab4",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -608,8 +608,8 @@
       "literalEvents": []
     },
     "Settings.lua": {
-      "bytes": 11817,
-      "sha256": "64bd4a6aa25e21b34cf247574bba88c9ba91e5514ab7e17c01e421455889c298",
+      "bytes": 11887,
+      "sha256": "23e840592514422ac9ba8a29fd88bcf93ffa6f6e9a43624bbcf6a76fdfd34951",
       "namedFunctions": [
         {
           "name": "FieldKit_FormatHealth",
@@ -661,11 +661,11 @@
         },
         {
           "name": "ChatChoice",
-          "line": 152
+          "line": 153
         },
         {
           "name": "FieldKit_AddSettingsSections",
-          "line": 168
+          "line": 170
         }
       ],
       "literalEvents": []
@@ -2000,8 +2000,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 77953,
-      "sha256": "fc58bdc7c0bb15e475beca7679fe182e2012b05465b5f612c7afc7ff9fee5d97",
+      "bytes": 78557,
+      "sha256": "c3bcb8142a5eb4131aaf08f3e118d620a3ce7351b6509aff81ed6d22cb52aa7b",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -2020,120 +2020,124 @@
           "line": 233
         },
         {
-          "name": "U.Choice",
+          "name": "U.PopupLayer",
           "line": 241
         },
         {
+          "name": "U.Choice",
+          "line": 246
+        },
+        {
           "name": "U.CloseMenus",
-          "line": 279
+          "line": 289
         },
         {
           "name": "U.Wheel",
-          "line": 284
+          "line": 294
         },
         {
           "name": "Checkbox",
-          "line": 295
+          "line": 305
         },
         {
           "name": "Slider",
-          "line": 313
+          "line": 323
         },
         {
           "name": "BuildMarkerGallery",
-          "line": 338
+          "line": 348
         },
         {
           "name": "row.Refresh",
-          "line": 398
+          "line": 408
         },
         {
           "name": "ProfileActiveBorder",
-          "line": 442
+          "line": 452
         },
         {
           "name": "BuildProfileManager",
-          "line": 474
+          "line": 484
         },
         {
           "name": "row.Refresh",
-          "line": 558
+          "line": 568
         },
         {
           "name": "row.CloseEditors",
-          "line": 632
+          "line": 642
         },
         {
           "name": "U.EssentialHud",
-          "line": 646
+          "line": 656
         },
         {
           "name": "BuildHome",
-          "line": 661
+          "line": 671
         },
         {
           "name": "U.SelectWindowTab",
-          "line": 711
+          "line": 721
         },
         {
           "name": "U.BuildPage",
-          "line": 725
+          "line": 735
         },
         {
           "name": "U.UpdateRunContext",
-          "line": 793
-        },
-        {
-          "name": "U.UpdateSharingStatus",
-          "line": 800
-        },
-        {
-          "name": "U.Refresh",
           "line": 803
         },
         {
+          "name": "U.UpdateSharingStatus",
+          "line": 810
+        },
+        {
+          "name": "U.Refresh",
+          "line": 813
+        },
+        {
           "name": "U.Select",
-          "line": 875
+          "line": 885
         },
         {
           "name": "U.Reflow",
-          "line": 915
+          "line": 925
         },
         {
           "name": "U.SetLayoutEditing",
-          "line": 1019
+          "line": 1029
         },
         {
           "name": "U.StartLayout",
-          "line": 1033
+          "line": 1043
         },
         {
           "name": "U.ResetPositions",
-          "line": 1038
-        },
-        {
-          "name": "U.UndoPositions",
           "line": 1048
         },
         {
+          "name": "U.UndoPositions",
+          "line": 1058
+        },
+        {
           "name": "U.Build",
-          "line": 1062
+          "line": 1072
         },
         {
           "name": "U.LayoutNavigation",
-          "line": 1131
+          "line": 1141
         },
         {
           "name": "U.EnsureProfilePreviewBar",
-          "line": 1210
+          "line": 1220
         },
         {
           "name": "U.UpdateProfilePreviewBar",
-          "line": 1236
+          "line": 1246
         },
         {
           "name": "U.Toggle",
-          "line": 1242
+          "line": 1252
         }
       ],
       "literalEvents": []
@@ -3105,8 +3109,8 @@
       "literalEvents": []
     },
     "CopyLog.lua": {
-      "bytes": 32310,
-      "sha256": "f04e895b1c0c0885a6f7ae36370a0790eb8bd4d62a3ac8741ef8ac49d8ed58d5",
+      "bytes": 33025,
+      "sha256": "427633d497623d79fb553fc5df86a036b8bb69cff3dd53e64a578c8faacf6202",
       "namedFunctions": [
         {
           "name": "Themed",
@@ -3209,40 +3213,44 @@
           "line": 450
         },
         {
-          "name": "Hook",
+          "name": "ChatForwardResult",
           "line": 459
         },
         {
+          "name": "Hook",
+          "line": 472
+        },
+        {
           "name": "FieldKit.ClearChatRenderHistory",
-          "line": 485
+          "line": 498
         },
         {
           "name": "FieldKit.ResizeChatPreservingHistory",
-          "line": 491
+          "line": 504
         },
         {
           "name": "FieldKit.RestoreDisplayedChat",
-          "line": 516
+          "line": 529
         },
         {
           "name": "FieldKit.RecolorDisplayedChat",
-          "line": 534
+          "line": 547
         },
         {
           "name": "FieldKit.SyncChat",
-          "line": 570
+          "line": 583
         },
         {
           "name": "OpenCopy",
-          "line": 594
+          "line": 607
         },
         {
           "name": "FieldKit.OpenChatCopy",
-          "line": 632
+          "line": 645
         },
         {
           "name": "FieldKit.ThemeChatFont",
-          "line": 655
+          "line": 668
         }
       ],
       "literalEvents": []
@@ -3479,8 +3487,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 142832,
-      "sha256": "e122aff1a07eca59c6e45b1fe9c69788dc0b20191437a7d31417e4ef71b1c92f",
+      "bytes": 142833,
+      "sha256": "60a9590682dcf4c510a91ab7e52710c47b8dcf3e4fe74f2356f031dff19ad8c0",
       "namedFunctions": [
         {
           "name": "Short",
@@ -6327,7 +6335,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.6",
+    "version": "0.1.0-reborn.7",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6338,7 +6346,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Partial client 0.6.3 QA: themed boss/Horde bars at zero, correctly numbered lairs, theme and starting spells restored after reload. Modal rendering/sort/close validated in the real renderer using an explicitly labelled temporary synthetic fixture, removed afterwards. No real combat, full Horde, Steed charge cycles or co-op transport validation."
+    "inGameTestScope": "Client 0.6.3 chat QA: native ChatFrame1 dimensions changed through real width/height sliders from 460x210 to 550x280 and restored; both existing native messages retained. Font dropdown labels, selection of Arial Narrow and restoration of Original font verified. Negative top inset confirmed. Native chat without theme and destructive resize/history cases covered by production fixtures. No broad combat or co-op validation. Long native /help text observed inside the card; clean production reload performed after removing diagnostic."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

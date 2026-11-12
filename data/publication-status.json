@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.6",
+  "version": "0.1.0-reborn.7",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Partial client 0.6.3 QA: themed boss/Horde bars at zero, correctly numbered lairs, theme and starting spells restored after reload. Modal rendering/sort/close validated in the real renderer using an explicitly labelled temporary synthetic fixture, removed afterwards. No real combat, full Horde, Steed charge cycles or co-op transport validation."
+  "inGameTestScope": "Client 0.6.3 chat QA: native ChatFrame1 dimensions changed through real width/height sliders from 460x210 to 550x280 and restored; both existing native messages retained. Font dropdown labels, selection of Arial Narrow and restoration of Original font verified. Negative top inset confirmed. Native chat without theme and destructive resize/history cases covered by production fixtures. No broad combat or co-op validation. Long native /help text observed inside the card; clean production reload performed after removing diagnostic."
 }

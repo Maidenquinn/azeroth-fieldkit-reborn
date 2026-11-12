@@ -2148,7 +2148,7 @@ do
    assert(CF:GetWidth()==size[1] and CF:GetHeight()==size[2],st..": text area exactly the chosen size")
    assert(R.chat:GetWidth()==rect[3] and R.chat:GetHeight()==rect[4],st..": the card has the planned size")
    assert(rect[1]==base[1] and rect[2]+rect[4]==base[2]+base[4],st..": anchored by its bottom-left corner (it grows up and to the right)")
-   local _,_,_,cx,cy=CF:GetPoint();assert(cx==plan.textX and cy==plan.textY,st..": the text sits at the same inner margin from the card corner")
+   local _,_,_,cx,cy=CF:GetPoint();assert(cx==plan.textX and cy==-plan.textY,st..": the text sits at the same inner margin from the card corner")
    assert(plan.textX+size[1]+(zone=="elwynn" and (plan.cols*24+14) or 0)<=rect[3]+.001 or zone=="naxx",st..": the text area and the control column fit the card width")
    assert(-cy+size[2]<=rect[4]-(zone=="elwynn" and 9 or 0)+.001 or zone=="naxx",st..": the text area stays inside the card height")
    if zone=="elwynn" then
@@ -2172,7 +2172,7 @@ do
    local w,h=R.chat:GetWidth(),R.chat:GetHeight()
    R.chat:ClearAllPoints();R.chat:SetPoint("TOPLEFT",UIParent,"TOPLEFT",corner[1]*(UIW-w),-corner[2]*(UIH-h));assert(C.Remember(R.chat),tag..": corner "..k.." is stored")
    C.Refresh(true);C.Refresh(true)
-   local _,_,_,cx,cy=CF:GetPoint();assert(CF:GetParent()==R.chat and cx==R.chatPlan.textX and cy==R.chatPlan.textY and CF:GetWidth()==440,tag..": the chat follows its card in corner "..k)
+   local _,_,_,cx,cy=CF:GetPoint();assert(CF:GetParent()==R.chat and cx==R.chatPlan.textX and cy==-R.chatPlan.textY and CF:GetWidth()==440,tag..": the chat follows its card in corner "..k)
   end
   assert(FieldKitRebornDB.chatAnchor==anchorBefore,tag..": the themed move does not write the native chat anchor")
   FieldKitRebornDB.zoneThemePositions[C.currentLayout].FieldKitReferenceChat=nil;C.Refresh(true)

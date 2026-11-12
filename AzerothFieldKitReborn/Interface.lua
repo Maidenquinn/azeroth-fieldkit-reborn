@@ -238,6 +238,11 @@ function U.Tip(owner,label,detail)
 end
 
 -- Bound dropdown height, with native scrolling rather than a screen-sized list.
+function U.PopupLayer(frame,level,depth)
+ frame:SetFrameStrata("TOOLTIP");frame:SetFrameLevel(level)
+ if (depth or 0)>=8 or not frame.GetChildren then return end
+ for _,child in ipairs({frame:GetChildren()}) do U.PopupLayer(child,level+1,(depth or 0)+1) end
+end
 function U.Choice(parent,name,label,x,y,w,values,get,set,refresh)
  local button=T.Button(parent,name,"",x,y,w,30,nil)
  button.arrow=T.Glyph(button,1,w-23,8,14);button.arrow:SetTexture("Interface\\Buttons\\UI-ScrollBar-ScrollDownButton-Up")
@@ -246,14 +251,19 @@ function U.Choice(parent,name,label,x,y,w,values,get,set,refresh)
  menu:SetWidth(w);menu:SetHeight(math.min(7,table.getn(values))*28+12);menu:SetFrameStrata("TOOLTIP");menu:SetFrameLevel(300)
  T.Surface(menu,"card")
  local scroll=CreateFrame("ScrollFrame",name.."Scroll",menu,"UIPanelScrollFrameTemplate")
+ scroll:SetFrameStrata("TOOLTIP");scroll:SetFrameLevel(menu:GetFrameLevel()+1)
  scroll:SetPoint("TOPLEFT",menu,"TOPLEFT",5,-5);scroll:SetWidth(w-30);scroll:SetHeight(menu:GetHeight()-10)
  local content=CreateFrame("Frame",nil,scroll);content:SetWidth(w-30);content:SetHeight(table.getn(values)*28)
+ content:SetFrameStrata("TOOLTIP");content:SetFrameLevel(scroll:GetFrameLevel()+1)
  scroll:SetScrollChild(content);menu.scroll=scroll;menu.content=content;U.Wheel(scroll,content)
  button.choiceButtons={}
  for i=1,table.getn(values) do
   local index=i
   button.choiceButtons[i]=T.Button(content,nil,values[i],0,(i-1)*28,w-30,28,function() set(index);menu:Hide();if refresh then refresh() else U.Refresh() end end)
+  U.PopupLayer(button.choiceButtons[i],content:GetFrameLevel()+1)
  end
+ U.PopupLayer(menu,300);menu:EnableMouse(true)
+ if menu.SetClampedToScreen then menu:SetClampedToScreen(true) end
  menu:Hide();table.insert(U.menus,menu);button.menu=menu
  button.callback=function()
   local shown=menu:IsShown();U.CloseMenus()

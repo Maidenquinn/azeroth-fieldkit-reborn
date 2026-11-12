@@ -1,4 +1,4 @@
-Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.6
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.7
 
 Client de reference: Reborn 0.6.3, inventorie le 12 novembre 2026.
 Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
@@ -60,3 +60,13 @@ Recette reborn.6: jauges Elwynn, antres 1 a 4, theme et sorts apres reload.
 Rendu/tri/fermeture de la modale testes dans le vrai client avec une fixture
 clairement fictive, retiree du client et absente du paquet distribue.
 Aucun combat reel valide par cette recette.
+
+25. Chat: modifier largeur et hauteur avec puis sans theme. Desactiver
+    Customize main chat, puis bouger un curseur: la personnalisation se reactive.
+    Verifier les messages conserves sans GetMessageInfo et un long /help
+    entierement contenu dans le cadre. Ouvrir les listes de polices/couleurs,
+    choisir une valeur, faire defiler une longue liste, puis /reload.
+Recette reborn.7 dans le client: dimensions natives 460x210 vers 550x280
+    puis retour, deux messages conserves, liste de polices visible et cliquable,
+    Arial Narrow puis police d origine. Long /help contenu dans le cadre.
+    Diagnostic temporaire retire; aucune lecture du contenu du chat par celui-ci.
