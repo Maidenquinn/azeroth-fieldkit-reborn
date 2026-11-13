@@ -70,9 +70,9 @@ function FieldKit.BuildJourneySections(sections,actions)
   options.replaceTally,options.takenFrame,options.gearFrame,
   {kind="check",label="Effects tracker",tip="Contextual totems, summons and native talent timers. Hidden without relevant data; filters are in Health & buffs.",
    get=function() return FieldKitRebornDB.effectsFrame end,set=function(v) FieldKitRebornDB.effectsFrame=v;FieldKitNativeTools.Update() end},
-  {kind="check",label="Next boss reminder",tip="Compact native arrival countdown, not a prediction of boss attacks. Hidden when no schedule is available.",
+  {kind="check",label="Next boss reminder",tip="Next native boss and its progression. Hidden when no upcoming boss is provided.",
    get=function() return FieldKitRebornDB.nextBossCard end,set=function(v) FieldKitRebornDB.nextBossCard=v;FieldKitNativeTools.Update() end},
-  {kind="check",label="Next boss in Lairs",tip="Show the next native scheduled boss and countdown in the lair card.",
+  {kind="check",label="Next boss in Lairs",tip="Next native boss and its progression. Hidden when no upcoming boss is provided.",
    get=function() return FieldKitRebornDB.lairNextBoss end,set=function(v) FieldKitRebornDB.lairNextBoss=v;actions.UpdateLairFrame() end},
   {kind="check",label="Stored level-up reminder",tip="Show a count only while native stored level-ups are waiting. Does not open, spend or choose them.",
    get=function() return FieldKitRebornDB.storedLevelsBadge end,set=function(v) FieldKitRebornDB.storedLevelsBadge=v;FieldKitNativeTools.Update() end},
@@ -157,13 +157,13 @@ function FieldKit.BuildJourneySections(sections,actions)
   {"bossBannerWarnings","Boss banner messages","Include received banners explicitly flagged as boss messages."},
   {"mechanicWarnings","Mechanic banner messages","Include received banners whose kind is mechanic."},
   {"partyBannerWarnings","Party revive banners","Include co-op downed / friend-down / revived banners."},
-  {"nextBossAlert","Warn before the next boss","One warning before each observed arrival. Based on native scheduling; no attack prediction."}}) do
+  {"nextBossAlert","Warn before the next boss","Warn once when native boss progression reaches the selected threshold. No spawn timer or attack prediction."}}) do
   local key,label,tip=def[1],def[2],def[3]
   table.insert(alerts,{kind="check",label=label,tip=tip,get=function() return FieldKitRebornDB[key] end,
    set=function(v) FieldKitRebornDB[key]=v;FieldKitNativeTools.Update() end})
  end
  table.insert(alerts,{kind="slider",label="Boss arrival warning",min=3,max=30,step=1,
-  get=function() return FieldKitRebornDB.bossWarningLead end,format=function(v) return string.format(FieldKit_L("Warn %ds before a boss"),v) end,
+  get=function() return FieldKitRebornDB.bossWarningLead end,format=function(v) return string.format(FieldKit_L("Warn at %d%% boss progression"),100-v) end,
   set=function(v) FieldKitRebornDB.bossWarningLead=v end})
  table.insert(old.Map.items,{kind="check",label="Highlight the flagged lair",tip="Mark the lair selected by the game's flag in the existing lair list. Does not track a moving guardian.",
   get=function() return FieldKitRebornDB.highlightFlaggedLair end,set=function(v) FieldKitRebornDB.highlightFlaggedLair=v;actions.UpdateLairFrame() end})
@@ -204,7 +204,7 @@ function FieldKit.BuildJourneySections(sections,actions)
   {id="combat",title="Combat text",glyph=2,group="02  COMBAT",items={{kind="combat"}}},
   {id="health",title="Health & buffs",glyph=16,group="02  COMBAT",items=health},
   {id="bosses",title="Bosses",glyph=5,group="02  COMBAT",items={{kind="preview",preview=17},options.bossFrame,
-   {kind="check",label="Boss schedule timeline",tip="Chronicle bar under the top of the screen with upcoming boss markers. Hides the native run clock while shown. Off by default.",
+   {kind="check",label="Boss progression",tip="Shows the native boss progression gauge without a spawn countdown. With a theme, the gauge is already integrated below the run clock.",
     get=function() return FieldKitRebornDB.bossTimeline==true end,
     set=function(v) FieldKitRebornDB.bossTimeline=v and true or false;if FieldKitBossTimeline then FieldKitBossTimeline.Update() end;if not v and FieldKitBossTimeline then FieldKitBossTimeline.RestoreHud() end end},
    {kind="choice",label="Boss frame appearance",values={"Chronicle classic","Compact","Chronicle Premium"},

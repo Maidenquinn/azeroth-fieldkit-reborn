@@ -18,3 +18,8 @@ AZS_ZONE={};AZS_RUN.ph="ready";assert(FieldKit.GetHeroicLevel()==nil,"Old rank r
 AZS_ZONE={zone="hellfire",dt=2.5};assert(FieldKit.GetHeroicLevel()==nil)
 AZS_ZONE={zone="hellfire",dt=9};assert(FieldKit.GetHeroicLevel()==nil)
 print("PASS native difficulty dt/heroic and continuing-run reload; no Normal default, cross-zone, new ready, clock restart or packet leakage")
+
+AZS_ZONE={zone="hellfire",dt=0};AZS_RUN={ph="ready",t=0}
+FieldKit.CaptureDifficulty()
+AZS_ZONE={};AZS_RUN={ph="playing",t=1};FieldKitRebornDB.runDifficultyContext=nil
+assert(FieldKit.GetHeroicLevel()==0,"One-shot difficulty captured before HUD update was lost")

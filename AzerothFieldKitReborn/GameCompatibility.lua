@@ -11,6 +11,23 @@ local function WorldLabel()
   if ok and type(text)=="string" and text~="" and string.len(text)<=160 then return text end
  end
 end
+-- Capture the one-shot zone line immediately, including before the settings
+-- database or an active phase exists. Waiting for a HUD tick can lose it.
+function FieldKit.CaptureDifficulty()
+ if FieldKit.rebornLegacyFixture or type(AZS_ZONE)~="table" then return end
+ local rank=ValidRank(AZS_ZONE.heroic) or ValidRank(AZS_ZONE.dt)
+ local world=WorldLabel();local zone=AZS_ZONE.zone
+ if rank~=nil and world and type(zone)=="string" and zone~="" then
+  FieldKit.observedDifficulty={rank=rank,world=world,zone=zone,time=type(AZS_RUN)=="table" and FieldKit.Number(AZS_RUN.t,0,0) or 0}
+ end
+end
+if type(AZS)=="table" and type(AZS.On)=="function" then
+ AZS.On("AZSZONE",function()
+  FieldKit.observedDifficulty=nil
+  if FieldKitRebornDB then FieldKitRebornDB.runDifficultyContext=nil end
+  FieldKit.CaptureDifficulty()
+ end)
+end
 function FieldKit.GetHeroicLevel()
  if type(AZS_GetPhase)~="function" or not AZS_GetPhase() or type(AZS_ZONE)~="table" then return nil end
  local level=ValidRank(AZS_ZONE.heroic)
@@ -19,6 +36,11 @@ function FieldKit.GetHeroicLevel()
  if level==nil then level=ValidRank(AZS_ZONE.dt) end
  local db=FieldKitRebornDB;local phase=AZS_GetPhase();local time=type(AZS_RUN)=="table" and FieldKit.Number(AZS_RUN.t,nil,0)
  local world=WorldLabel()
+ local observed=FieldKit.observedDifficulty
+ if observed and db then
+  if observed.world==world and (not AZS_ZONE.zone or observed.zone==AZS_ZONE.zone) then db.runDifficultyContext=observed end
+  FieldKit.observedDifficulty=nil
+ end
  if level~=nil then
   if db and world and time and type(AZS_ZONE.zone)=="string" and AZS_ZONE.zone~="" then
    db.runDifficultyContext={rank=level,world=world,zone=AZS_ZONE.zone,time=time}

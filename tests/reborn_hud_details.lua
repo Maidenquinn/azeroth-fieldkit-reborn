@@ -3,10 +3,10 @@ local R,H,C=FieldKitReborn,FieldKitThemeHUD,FieldKitZoneThemes
 AZS_ZONE={zone="zangarmarsh",zname="Marécage de Zangar",class="hunter",heroic=0}
 AZS_RUN={ph="playing",t=300}
 AZS_SCHEDULE={{name="First",state="slain",at=240},{name="Second",state="due",at=480}}
-assert(R.BossProgress()==.25)
+assert(R.BossProgress()==nil,"A legacy time estimate was used as Reborn progression")
 AZS_RUN.rift=5;assert(R.BossProgress()==.05)
 AZS_RUN.rift=0;assert(R.BossProgress()==0)
-AZS_NextBossProgress=function() return .63,"Native" end;assert(R.BossProgress()==.63)
+AZS_NextBossProgress=function() return .63,"Legacy time estimate" end;assert(R.BossProgress()==0)
 AZS_NextBossProgress=nil;AZS_RUN.rift=5
 AZS_GetUpcomingBosses=function() return {{name="Second",left=180,index=2}} end
 AZS_EVENT={key="hallows_end",n=105}

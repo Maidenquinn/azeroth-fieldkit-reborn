@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.9",
+  "version": "0.1.0-reborn.10",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,24 +18,24 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.9",
+    "version": "0.1.0-reborn.10",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": false,
+    "inGameTestByAgent": true,
     "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Pending targeted live QA. Synthetic regressions cover difficulty dt and scoped reload context, closed square-map bounds, compact dock composition, and Taken card movement/collisions in both directions. Offline material reconstruction inspected. No live co-op validation claimed."
+    "inGameTestScope": "Targeted live solo QA in client 0.6.1: themed boss gauge and Horde visible after reload, inherited timed calendar absent, reminder shows native percentage. Difficulty remains unavailable in the ongoing reload session: AZS_ZONE contains only the API run id; native sync and hello did not recover zone metadata. Early zone capture and retention tested synthetically; fresh-run difficulty capture not validated live. No live co-op validation."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "07c4d0678dec1fde5561d2a111825bb911e34d8729eced0ede8c39ad431ca227"
+      "sha256": "9c4b4cf4b3c4219aee46b5906541c49a416c6e20f6b831ca6fec35c95f3d3f52"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -45,7 +45,7 @@
     "Reborn.lua": {
       "maxUpvalues": 2,
       "functions": 18,
-      "sha256": "569661ef1c151e3f9a0183b0d2cbcafb6172b885aab1934cee41010589c5ea0b"
+      "sha256": "4aef0c5d08f66d7733dd611f6d339da3cef7ad897f1e3b3989bc77c0e0678101"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -85,7 +85,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "b68edea211fc6d6985c14816d4952176d850734c1f058bed1319382caa8449cb"
+      "sha256": "e9a02a82826f9eb77c8efb969ead5c47b2ee6bc4b6a3803c7a3d120ab4740288"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
@@ -119,8 +119,8 @@
     },
     "GameCompatibility.lua": {
       "maxUpvalues": 2,
-      "functions": 8,
-      "sha256": "ff7e30a317aae27ade1e1a30473b4d62c2900707bbbf37cdc6be0a5119dcf0ef"
+      "functions": 10,
+      "sha256": "5c9e4fb8e2bbabfad6e9c0fc805bfb521f1271390f3f15fb6b34bf4833df499c"
     },
     "RunMode.lua": {
       "maxUpvalues": 1,
@@ -130,7 +130,7 @@
     "NativeData.lua": {
       "maxUpvalues": 2,
       "functions": 13,
-      "sha256": "953017c67c44ac76f89d26b84c1a7ae8aaee57c2612c2662a200805965ef522f"
+      "sha256": "190db327c57089177916f564c34c3735964b5ab286d2da39b4662df2f282c3a6"
     },
     "MeterLedger.lua": {
       "maxUpvalues": 11,
@@ -144,8 +144,8 @@
     },
     "BossTimeline.lua": {
       "maxUpvalues": 26,
-      "functions": 17,
-      "sha256": "8fb5bedc592fd38985bf33e9f0908c55dde99adf25f5c34ad2b0a45acc7fbb86"
+      "functions": 18,
+      "sha256": "62a2701e3eb27c5faa9cdff07d420eb1b7a5c46e657fb497a71ad571a164a320"
     },
     "HudStack.lua": {
       "maxUpvalues": 7,
@@ -184,8 +184,8 @@
     },
     "NativeTools.lua": {
       "maxUpvalues": 3,
-      "functions": 19,
-      "sha256": "fb04ac5fce7a84b7970626f73869bc6ee69dbab125c1ae257e53c8d825c7f18e"
+      "functions": 20,
+      "sha256": "91d44041071e1cf8cb9e56ee922d37be977ea3e09cc2f52caaef9dfe87dad2db"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -225,12 +225,12 @@
     "Interface.lua": {
       "maxUpvalues": 24,
       "functions": 213,
-      "sha256": "dca954e4afe0022dc93c0880a62df8410c98cdbcf7279aa0fbfccba41da5e914"
+      "sha256": "1821075bc058fff07ce6b105da19bf4207e3a7e69c85cb39aabeb305ed3ba345"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 189,
-      "sha256": "d0d0f8ac108934ff6a1c134f7e015b42b925c7e66839f86fa5c1e7970e73503d"
+      "sha256": "c7c75337b0d198a90f0f1443ae2f61f5d3b54bca43f807b6a533bfac2785edc5"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -270,7 +270,7 @@
     "ThemeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 42,
-      "sha256": "6e36e8bb85ce419ccdfe74665ca3a2d09d322c83a3c743daa513fa8f1fde0f62"
+      "sha256": "56b210027e8e0b61e29dbf34b4b2ebf9bc49428b04a812cd62d2b6ecf7604361"
     },
     "ThemeTarget.lua": {
       "maxUpvalues": 6,
@@ -285,7 +285,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 191,
-      "sha256": "e5a403f8a3f57f55a51dd2b503c7898b71e6001ed304b0645e01eb60b7ab4ebe"
+      "sha256": "08851e609af14b2f53d1909a4a76b391110a7568c30b6d136949ec76e685f787"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

@@ -447,3 +447,12 @@ FieldKitLocale.fr["Deep Wound"]="Blessures profondes"
 FieldKitLocale.fr["Deep Wounds"]="Blessures profondes"
 FieldKitLocale.fr["Demoralizing Shout"]="Cri démoralisant"
 FieldKitLocale.fr["Execute"]="Exécution"
+
+FieldKitLocale.fr["Boss progression"]="Progression des boss"
+FieldKitLocale.fr["Warn at %d%% boss progression"]="Avertir à %d%% de progression du boss"
+FieldKitLocale.fr["Warn once when native boss progression reaches the selected threshold. No spawn timer or attack prediction."]="Avertit une fois lorsque la progression native du boss atteint le seuil choisi. Aucun délai d’apparition ni prédiction d’attaque."
+FieldKitLocale.fr["Shows the native boss progression gauge without a spawn countdown. With a theme, the gauge is already integrated below the run clock."]="Affiche la jauge native de progression du boss, sans décompte d’apparition. Avec un thème, elle est déjà intégrée sous le temps de partie."
+
+FieldKitLocale.fr["Difficulty unavailable"]="Difficulté indisponible"
+
+FieldKitLocale.fr["Next native boss and its progression. Hidden when no upcoming boss is provided."]="Prochain boss natif et sa progression. Masqué si aucun prochain boss n’est fourni."

@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.9",
+  "version": "0.1.0-reborn.10",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
-  "inGameTestByAgent": false,
+  "inGameTestByAgent": true,
   "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Pending targeted live QA. Synthetic regressions cover difficulty dt and scoped reload context, closed square-map bounds, compact dock composition, and Taken card movement/collisions in both directions. Offline material reconstruction inspected. No live co-op validation claimed."
+  "inGameTestScope": "Targeted live solo QA in client 0.6.1: themed boss gauge and Horde visible after reload, inherited timed calendar absent, reminder shows native percentage. Difficulty remains unavailable in the ongoing reload session: AZS_ZONE contains only the API run id; native sync and hello did not recover zone metadata. Early zone capture and retention tested synthetically; fresh-run difficulty capture not validated live. No live co-op validation."
 }

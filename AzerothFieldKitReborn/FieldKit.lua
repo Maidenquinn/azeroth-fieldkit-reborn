@@ -2211,7 +2211,7 @@ function UpdateLairFrame()
   lairFrame.nextBoss:ClearAllPoints();lairFrame.nextBoss:SetPoint("BOTTOMLEFT",lairFrame,"BOTTOMLEFT",12,10)
   lairFrame.nextBoss:SetWidth(lairFrame:GetWidth()-86);lairFrame.nextBoss:Show()
   lairFrame.nextBossTime:ClearAllPoints();lairFrame.nextBossTime:SetPoint("BOTTOMRIGHT",lairFrame,"BOTTOMRIGHT",-14,10)
-  lairFrame.nextBossTime:SetWidth(56);lairFrame.nextBossTime:SetText(FieldKitNative.Clock(nextBoss.left))
+  lairFrame.nextBossTime:SetWidth(56);lairFrame.nextBossTime:SetText(FieldKitNativeTools.BossValue(nextBoss))
   lairFrame.nextBossTime:SetTextColor(1,.9,.75);lairFrame.nextBossTime:SetFontObject(GameFontNormal)
   lairFrame.nextBossTime:Show();lairFrame.bossBar:Hide();lairFrame.bossPct:Hide()
  end

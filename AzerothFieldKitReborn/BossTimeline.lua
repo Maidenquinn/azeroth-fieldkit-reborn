@@ -228,7 +228,34 @@ local function QuietHud()
  return FieldKit.layoutEditing or (FieldKitPreview and FieldKitPreview.mode)
 end
 
+function B.UpdateReborn()
+ -- The themed header already owns the same native gauge. Never draw the
+ -- inherited timed calendar on top of it, nor suppress the elapsed run clock.
+ SyncClockHud(false)
+ if not FieldKitRebornDB or not FieldKitRebornDB.bossTimeline or
+  (FieldKitZoneThemes and FieldKitZoneThemes.active) or
+  (FieldKit.IsChoiceScreen and FieldKit.IsChoiceScreen()) or
+  (not PhaseOk() and not FieldKit.layoutEditing and FieldKitNative.Read("AZS_GetPhase")~="ready") then
+  if root then root:Hide() end;return
+ end
+ B.Ensure()
+ local boss=FieldKitNativeTools.NextBoss()
+ if not boss and not FieldKit.layoutEditing then root:Hide();return end
+ local width=math.floor(FieldKit.Number(FieldKitRebornDB.bossTimelineWidth,560,360,780))
+ root:SetWidth(width);root:SetHeight(36);T.Surface(root,"card",true);T.Update(root)
+ rail:ClearAllPoints();rail:SetPoint("TOPLEFT",root,"TOPLEFT",9,-9);rail:SetPoint("BOTTOMRIGHT",root,"BOTTOMRIGHT",-9,9)
+ fill:SetValue(boss and boss.progress or 0);fill:SetStatusBarColor(.45,.32,.12,.95)
+ titleText:SetParent(fill);titleText:ClearAllPoints();titleText:SetPoint("CENTER",fill,"CENTER",0,0)
+ titleText:SetWidth(width-28);T.Font(titleText,14,T.text,true)
+ titleText:SetText(boss and (boss.name.." · "..FieldKitNativeTools.BossValue(boss)) or FieldKit_L("Boss progression"))
+ elapsedText:Hide();clockText:Hide();nextLabel:Hide();callout:Hide()
+ for _,mark in ipairs(marks) do mark:Hide() end
+ for _,tick in ipairs(ticks) do tick:Hide() end
+ root.progressFill=fill;root:Show()
+end
+
 function B.Update()
+ if not FieldKit.rebornLegacyFixture then B.UpdateReborn();return end
  local db=FieldKitRebornDB
  if not db or not db.bossTimeline then
   if not QuietHud() then SyncClockHud(false) end

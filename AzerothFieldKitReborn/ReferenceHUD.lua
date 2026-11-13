@@ -518,8 +518,9 @@ function R.Update(variant,zone)
   if H.zone.SetJustifyV then H.zone:SetJustifyV("MIDDLE") end;if H.mode.fieldkitLabel.SetJustifyV then H.mode.fieldkitLabel:SetJustifyV("MIDDLE") end
   if R.Fit then R.Fit(H.zone,cut.zoneSize,9);R.Fit(H.mode.fieldkitLabel,cut.modeSize,9) end
  end
- if d.heroic then Label(R.heroic,H.identity,d.heroic,variant=="alternative" and 18 or 19,true,nil,variant=="alternative" and "NotoSerif-Regular.ttf" or nil);R.heroic:SetText((FieldKit.GetHeroicLabel() or "?")..(variant=="alternative" and " · "..FieldKit_L("Mode") or ""));H.mode.fieldkitLabel:SetText(variant=="alternative" and "" or FieldKit_L("Mode"))
- else R.heroic:Hide();H.mode.fieldkitLabel:SetText((FieldKit.GetHeroicLabel() or "?")..(zone=="elwynn" and not cut and " · "..FieldKit_L("Mode") or "")) end
+ local modeLabel=FieldKit.GetHeroicLabel()
+ if d.heroic then Label(R.heroic,H.identity,d.heroic,variant=="alternative" and 18 or 19,true,nil,variant=="alternative" and "NotoSerif-Regular.ttf" or nil);R.heroic:SetText((modeLabel or FieldKit_L("Difficulty unavailable"))..(modeLabel and variant=="alternative" and (" · "..FieldKit_L("Mode")) or ""));H.mode.fieldkitLabel:SetText(variant=="alternative" and "" or FieldKit_L("Mode"))
+ else R.heroic:Hide();H.mode.fieldkitLabel:SetText((modeLabel or FieldKit_L("Difficulty unavailable"))..(modeLabel and zone=="elwynn" and not cut and (" · "..FieldKit_L("Mode")) or "")) end
  if zone=="elwynn" and variant~="alternative" and not cut then
   local a=dm;local icon=R.MODE_ICON[R.key]
   -- The info icon ("i" in a gold ring) is part of the foot art, at the right end of the button: the label stays in the free

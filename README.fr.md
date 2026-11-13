@@ -1,13 +1,13 @@
 # Azeroth FieldKit Reborn
 
 Version indépendante de FieldKit pour **Azeroth Survivors Reborn 0.6.3**.
-Le candidat **0.1.0-reborn.9** adapte le HUD et les compteurs au nouveau client.
+Le candidat **0.1.0-reborn.10** adapte le HUD et les compteurs au nouveau client.
 
 [Audit API et correctifs HUD](docs/REBORN_API_AUDIT.md) · [Audit paramètres/thèmes](docs/REBORN_SETTINGS_AUDIT.md) · [Audit du port](docs/REBORN_PORT.md) · [Recette en jeu](docs/REBORN_ACCEPTANCE.txt) ·
 [Téléchargements](https://github.com/Maidenquinn/azeroth-fieldkit-reborn/releases)
 
 Le contenu de partie vient des tables Reborn : sorts des nouvelles classes,
-bijoux de partie, boss, calendriers et cartes des extensions. Les thèmes illustrés
+bijoux de partie, boss, jauges de progression et cartes des extensions. Les thèmes illustrés
 restent ceux déjà disponibles ; le mode auto réutilise l'habillage Elwynn sur les
 autres cartes, en conservant leurs noms et données natives.
 Les données non exposées restent inconnues : aucun soin reçu, checkpoint,

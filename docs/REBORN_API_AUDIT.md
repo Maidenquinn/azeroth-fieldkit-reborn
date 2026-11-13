@@ -1,3 +1,38 @@
+# Correctif reborn.10 — progression et diagnostic du mode
+
+Le calendrier hérité est remplacé par `AZS_RUN.rift` pour le premier boss `due`
+de `AZS_SCHEDULE`. Les champs `at`, `nb`, `nbin`, `left` et le temps écoulé ne
+servent plus à calculer son apparition. Avec un thème, une seule jauge reste
+sous le temps de partie ; sans thème, l’option de calendrier affiche une jauge
+compacte. Les rappels et le pied des antres affichent le même pourcentage.
+L’avertissement optionnel utilise un seuil de progression, indiqué dans son réglage.
+Les décomptes réels d’effets et de retour d’antres restent des durées natives.
+
+Recette ciblée dans le client 0.6.1 : après reload, jauge Nazan 81 puis 82 %, Horde
+et rappel 82 % présents ; ancien panneau calendrier et décompte absents. La partie
+est remise en pause. Aucune validation générale ou multijoueur n’est revendiquée.
+
+Le mode reste **non résolu pour cette session déjà rechargée**. Diagnostic local
+borné : `AZS_ZONE` ne contient que `run`, ni `heroic`, ni `dt`, ni `diff`, ni `zone`.
+Le contexte sauvegardé est vide. Les commandes natives `sync` et `hello ... world`
+n’ont pas rétabli ces champs dans les essais. Le panneau temporaire de diagnostic
+et ses commandes ont été retirés ; aucun polling réseau ajouté au produit.
+Aucune difficulté n’est déduite des PV, d’un ancien récapitulatif ou de la carte.
+L’étiquette signale maintenant explicitement l’indisponibilité plutôt que `? · Mode`.
+
+Un abonnement `AZS.On("AZSZONE")` capture immédiatement le rang reçu, même avant
+l’initialisation du HUD, pour préserver ensuite le contexte borné déjà existant.
+Cette correction préventive est vérifiée par fixtures ; son efficacité sur un
+nouveau départ et les métadonnées effectivement envoyées au départ restent à
+valider en jeu. Elle ne peut recréer les données déjà perdues dans la session actuelle.
+
+Les régressions ajoutées couvrent un horaire dépassé, le mauvais nom `nbn`, une
+progression nulle ou absente, les thèmes on/off, le seuil d’avertissement et la
+capture de difficulté avant une mise à jour du HUD. Les fixtures ne prouvent pas
+la livraison de paquets par le serveur.
+
+---
+
 # Audit FieldKit Reborn — 13 novembre 2026, reborn.9
 
 ## Régressions visuelles et placement reborn.9

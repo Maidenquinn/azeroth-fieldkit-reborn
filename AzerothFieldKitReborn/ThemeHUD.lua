@@ -287,7 +287,7 @@ function H.ReferenceValues()
  local nativeZone=type(AZS_ZONE)=="table" and AZS_ZONE.zname;local key=type(AZS_ZONE)=="table" and AZS_ZONE.zone
  if not FieldKit.rebornLegacyFixture then nativeZone=FieldKitReborn.ZoneName() end
  if type(nativeZone)~="string" or nativeZone=="" then nativeZone=FieldKitZoneRegistry[key or ""] and FieldKit_L(FieldKitZoneRegistry[key].name) or FieldKit_L("Zone not provided") end
- H.zone:SetText(FieldKitNative.Text(nativeZone));H.clock:SetText(FieldKitNative.Clock(FieldKitNative.Time()));local boss=FieldKitNativeTools.NextBoss();H.next:SetText(boss and boss.name.." · "..FieldKitNative.Clock(boss.left) or FieldKit_L("No upcoming boss"))
+ H.zone:SetText(FieldKitNative.Text(nativeZone));H.clock:SetText(FieldKitNative.Clock(FieldKitNative.Time()));local boss=FieldKitNativeTools.NextBoss();H.next:SetText(boss and boss.name.." · "..FieldKitNativeTools.BossValue(boss) or FieldKit_L("No upcoming boss"))
  for _,slot in ipairs(slots) do local b=FieldKitReborn.ActionButton(slot);H.Save(b)
   -- Native Rejouer/reload can recreate the build while our persisted native
   -- visibility override is active. Its transient alpha must not become the
@@ -342,14 +342,14 @@ function H.Update(variant,zone)
  if not FieldKit.rebornLegacyFixture then nativeZone=FieldKitReborn.ZoneName() end
  if type(nativeZone)~="string" or nativeZone=="" then nativeZone=FieldKitZoneRegistry[key or ""] and FieldKit_L(FieldKitZoneRegistry[key].name) or FieldKit_L("Zone not provided") end
  H.zone:SetText(FieldKitNative.Text(nativeZone));FieldKit_Text(H.mode,(FieldKit.GetHeroicLabel() or FieldKit_L("Mode not provided")).."   ·   "..FieldKit_L("Game mode"))
- local time=FieldKitNative.Time();H.clock:SetText(FieldKitNative.Clock(time));local nextBoss=FieldKitNativeTools.NextBoss();H.next:SetText(nextBoss and nextBoss.name.." · "..FieldKitNative.Clock(nextBoss.left) or FieldKit_L("No upcoming boss"))
+ local time=FieldKitNative.Time();H.clock:SetText(FieldKitNative.Clock(time));local nextBoss=FieldKitNativeTools.NextBoss();H.next:SetText(nextBoss and nextBoss.name.." · "..FieldKitNativeTools.BossValue(nextBoss) or FieldKit_L("No upcoming boss"))
  H.header:SetWidth(alternative and 360 or 630)
  if alternative and zone=="elwynn" then Place(H.header,"TOPLEFT",UIParent,"TOPLEFT",22,-130)
  elseif alternative then Place(H.header,"TOPRIGHT",UIParent,"TOPRIGHT",-24,-110) else Place(H.header,"TOP",UIParent,"TOP",0,-16) end
  H.header:SetWidth(alternative and 360 or 630);H.timeline:SetWidth(alternative and 100 or 190);H.reminders:SetWidth(alternative and 240 or 400);H.clock:SetWidth(alternative and 90 or 170);H.next:SetWidth(alternative and 220 or 380)
  H.timeline:ClearAllPoints();H.timeline:SetPoint("TOPLEFT",H.header,"TOPLEFT",10,-7);H.reminders:ClearAllPoints();H.reminders:SetPoint("TOPRIGHT",H.header,"TOPRIGHT",-10,-7);T.Update(H.timeline);T.Update(H.reminders)
  H.schedule:Hide()
- if alternative then
+ if alternative and FieldKit.rebornLegacyFixture then
   if zone=="elwynn" then Place(H.schedule,"TOPLEFT",UIParent,"TOPLEFT",22,-180)
   else Place(H.schedule,"TOPRIGHT",UIParent,"TOPRIGHT",-24,-165) end
   local upcoming=FieldKitNative.Read("AZS_GetUpcomingBosses") or {}

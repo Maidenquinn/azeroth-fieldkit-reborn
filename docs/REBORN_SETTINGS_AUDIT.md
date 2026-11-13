@@ -1,6 +1,8 @@
 # Réglages et thèmes — audit du 13 novembre 2026
 
-Mise à jour reborn.9 : les retours en jeu ont montré les limites de la découpe
+Mise à jour reborn.10 : le calendrier et les rappels utilisent la progression native des boss ; la capture précoce de difficulté est ajoutée, mais le rang reste indisponible dans la session rechargée observée. La récupération du mode n’est pas acceptée en jeu. Voir [le compte rendu](REBORN_API_AUDIT.md).
+
+Historique reborn.9 : les retours en jeu ont montré les limites de la découpe
 de reborn.8. Les options sélectionnent maintenant un dock compact et un cadre
 de carte fermé, vérifiés aussi sur leurs limites de contenu. Dégâts subis rejoint
 le placement/collisions du thème ; le rang lit `dt` et dispose d’un contexte

@@ -68,22 +68,13 @@ function R.BossUnits()
  return out
 end
 function R.BossProgress()
- if type(AZS_NextBossProgress)=="function" then
-  local ok,share=pcall(AZS_NextBossProgress)
-  share=ok and FieldKit.Number(share,nil,0,1)
-  if share then return share end
- end
  local run=type(AZS_RUN)=="table" and AZS_RUN or {}
- local last=0
  for _,boss in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do
   if boss.state=="due" then
    local rift=FieldKit.Number(run.rift,nil,0,100)
    if rift then return rift/100 end
-   local now=FieldKitNative.Time();local at=FieldKit.Number(boss.at)
-   if now and at and at>last then return math.max(0,math.min(1,(now-last)/(at-last))) end
    return nil
   end
-  last=FieldKit.Number(boss.at,last)
  end
 end
 function R.EventCurrency()

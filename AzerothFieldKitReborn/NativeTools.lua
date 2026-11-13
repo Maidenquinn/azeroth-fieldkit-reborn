@@ -151,6 +151,16 @@ function T.Revive()
  T.ShowRows(frame,rows)
 end
 function T.NextBoss()
+ if not FieldKit.rebornLegacyFixture then
+  -- Schedule order/state identifies the next encounter; its legacy `at` and
+  -- `left` fields do not determine a Reborn spawn.
+  for _,boss in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do
+   if type(boss)=="table" and boss.state=="due" and type(boss.name)=="string" and boss.name~="" then
+    return {name=N.Text(boss.name),key=tostring(boss.index or boss.name),progress=FieldKitReborn.BossProgress()}
+   end
+  end
+  return nil
+ end
  local lines=N.Read("AZS_GetUpcomingBosses");local chosen
  if type(lines)=="table" then
   for i=1,math.min(64,table.getn(lines)) do
@@ -175,21 +185,30 @@ function T.NextBoss()
  end
  return chosen
 end
+function T.BossValue(boss)
+ if not boss then return "" end
+ if FieldKit.rebornLegacyFixture then return N.Clock(boss.left) end
+ return boss.progress and string.format("%.0f%%",math.floor(boss.progress*100)) or "?"
+end
 function T.Reminders()
  local frame=T.frames[3];local rows={}
  local boss=(FieldKitRebornDB.nextBossCard or FieldKitRebornDB.nextBossAlert) and T.NextBoss()
- if FieldKitRebornDB.nextBossCard and boss then table.insert(rows,{label=boss.name,value=N.Clock(boss.left)}) end
+ if FieldKitRebornDB.nextBossCard and boss then table.insert(rows,{label=boss.name,value=T.BossValue(boss)}) end
  if FieldKitRebornDB.storedLevelsBadge then
   local count=Count(N.Read("AZS_GetStoredLevels"))
   if count and count>0 then table.insert(rows,{label=FieldKit_L("Stored level-ups"),value=tostring(count)}) end
  end
- if boss and FieldKitRebornDB.nextBossAlert and N.Read("AZS_GetPhase")=="playing" and boss.left>0 and boss.left<=FieldKitRebornDB.bossWarningLead then
+ local approaching=boss and (FieldKit.rebornLegacyFixture and boss.left and boss.left>0 and boss.left<=FieldKitRebornDB.bossWarningLead
+  or not FieldKit.rebornLegacyFixture and boss.progress and boss.progress>=(100-FieldKitRebornDB.bossWarningLead)/100)
+ if approaching and FieldKitRebornDB.nextBossAlert and N.Read("AZS_GetPhase")=="playing" then
   local key=tostring(N.serial)..":"..boss.key
   if not T.lastBoss[key] then
    T.lastBoss[key]=true
    T.bossKeys=T.bossKeys or {};table.insert(T.bossKeys,key)
    if table.getn(T.bossKeys)>128 then T.lastBoss[table.remove(T.bossKeys,1)]=nil end
-   T.Push(string.format(FieldKit_L("%s arrives in %ds"),boss.name,math.ceil(boss.left)),"next:"..key)
+   local text=FieldKit.rebornLegacyFixture and string.format(FieldKit_L("%s arrives in %ds"),boss.name,math.ceil(boss.left))
+    or (boss.name.." · "..T.BossValue(boss))
+   T.Push(text,"next:"..key)
   end
  end
  if FieldKitRebornDB.nextBossCard or FieldKitRebornDB.storedLevelsBadge then T.ShowRows(frame,rows) else frame:Hide() end

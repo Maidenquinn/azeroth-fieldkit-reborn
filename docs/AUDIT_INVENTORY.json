@@ -1,14 +1,14 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.9",
+  "candidate": "0.1.0-reborn.10",
   "runtimeModules": 52,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
   "dynamicCombatEventNames": "See CombatText.lua events list; not all registrations are string literals.",
   "files": {
     "Runtime.lua": {
-      "bytes": 5206,
-      "sha256": "07c4d0678dec1fde5561d2a111825bb911e34d8729eced0ede8c39ad431ca227",
+      "bytes": 5207,
+      "sha256": "9c4b4cf4b3c4219aee46b5906541c49a416c6e20f6b831ca6fec35c95f3d3f52",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -60,8 +60,8 @@
       "literalEvents": []
     },
     "Reborn.lua": {
-      "bytes": 9450,
-      "sha256": "569661ef1c151e3f9a0183b0d2cbcafb6172b885aab1934cee41010589c5ea0b",
+      "bytes": 9063,
+      "sha256": "4aef0c5d08f66d7733dd611f6d339da3cef7ad897f1e3b3989bc77c0e0678101",
       "namedFunctions": [
         {
           "name": "R.ActionButton",
@@ -89,47 +89,47 @@
         },
         {
           "name": "R.EventCurrency",
-          "line": 89
+          "line": 80
         },
         {
           "name": "R.UpdateRunDetails",
-          "line": 97
+          "line": 88
         },
         {
           "name": "R.Capabilities",
-          "line": 101
+          "line": 92
         },
         {
           "name": "R.SupportsHealing",
-          "line": 106
+          "line": 97
         },
         {
           "name": "R.Icon",
-          "line": 112
+          "line": 103
         },
         {
           "name": "R.Localize",
-          "line": 117
+          "line": 108
         },
         {
           "name": "R.ZoneName",
-          "line": 122
+          "line": 113
         },
         {
           "name": "R.Spell",
-          "line": 135
+          "line": 126
         },
         {
           "name": "R.Gear",
-          "line": 152
+          "line": 143
         },
         {
           "name": "R.PlayerBuffs",
-          "line": 166
+          "line": 157
         },
         {
           "name": "R.Portrait",
-          "line": 194
+          "line": 185
         }
       ],
       "literalEvents": []
@@ -502,8 +502,8 @@
       "literalEvents": []
     },
     "InterfaceStrings.lua": {
-      "bytes": 40105,
-      "sha256": "b68edea211fc6d6985c14816d4952176d850734c1f058bed1319382caa8449cb",
+      "bytes": 41092,
+      "sha256": "e9a02a82826f9eb77c8efb969ead5c47b2ee6bc4b6a3803c7a3d120ab4740288",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -671,8 +671,8 @@
       "literalEvents": []
     },
     "GameCompatibility.lua": {
-      "bytes": 2920,
-      "sha256": "ff7e30a317aae27ade1e1a30473b4d62c2900707bbbf37cdc6be0a5119dcf0ef",
+      "bytes": 3976,
+      "sha256": "5c9e4fb8e2bbabfad6e9c0fc805bfb521f1271390f3f15fb6b34bf4833df499c",
       "namedFunctions": [
         {
           "name": "ValidRank",
@@ -683,24 +683,28 @@
           "line": 8
         },
         {
+          "name": "FieldKit.CaptureDifficulty",
+          "line": 16
+        },
+        {
           "name": "FieldKit.GetHeroicLevel",
-          "line": 14
+          "line": 31
         },
         {
           "name": "FieldKit.GetHeroicLabel",
-          "line": 36
+          "line": 58
         },
         {
           "name": "FieldKit.IsCriticalObjective",
-          "line": 45
+          "line": 67
         },
         {
           "name": "FieldKit.FormatPercent",
-          "line": 51
+          "line": 73
         },
         {
           "name": "FieldKit.FormatBonus",
-          "line": 57
+          "line": 79
         }
       ],
       "literalEvents": []
@@ -737,8 +741,8 @@
       "literalEvents": []
     },
     "NativeData.lua": {
-      "bytes": 5120,
-      "sha256": "953017c67c44ac76f89d26b84c1a7ae8aaee57c2612c2662a200805965ef522f",
+      "bytes": 5235,
+      "sha256": "190db327c57089177916f564c34c3735964b5ab286d2da39b4662df2f282c3a6",
       "namedFunctions": [
         {
           "name": "N.Read",
@@ -774,15 +778,15 @@
         },
         {
           "name": "N.Fresh",
-          "line": 60
+          "line": 64
         },
         {
           "name": "M.Mode",
-          "line": 72
+          "line": 76
         },
         {
           "name": "M.Read",
-          "line": 79
+          "line": 83
         }
       ],
       "literalEvents": []
@@ -1069,8 +1073,8 @@
       "literalEvents": []
     },
     "BossTimeline.lua": {
-      "bytes": 11495,
-      "sha256": "8fb5bedc592fd38985bf33e9f0908c55dde99adf25f5c34ad2b0a45acc7fbb86",
+      "bytes": 13087,
+      "sha256": "62a2701e3eb27c5faa9cdff07d420eb1b7a5c46e657fb497a71ad571a164a320",
       "namedFunctions": [
         {
           "name": "Clock",
@@ -1113,12 +1117,16 @@
           "line": 227
         },
         {
-          "name": "B.Update",
+          "name": "B.UpdateReborn",
           "line": 231
         },
         {
+          "name": "B.Update",
+          "line": 257
+        },
+        {
           "name": "B.RestoreHud",
-          "line": 315
+          "line": 342
         }
       ],
       "literalEvents": []
@@ -1669,8 +1677,8 @@
       "literalEvents": []
     },
     "NativeTools.lua": {
-      "bytes": 14010,
-      "sha256": "fb04ac5fce7a84b7970626f73869bc6ee69dbab125c1ae257e53c8d825c7f18e",
+      "bytes": 15017,
+      "sha256": "91d44041071e1cf8cb9e56ee922d37be977ea3e09cc2f52caaef9dfe87dad2db",
       "namedFunctions": [
         {
           "name": "Count",
@@ -1701,32 +1709,36 @@
           "line": 153
         },
         {
+          "name": "T.BossValue",
+          "line": 188
+        },
+        {
           "name": "T.Reminders",
-          "line": 178
+          "line": 193
         },
         {
           "name": "T.Push",
-          "line": 198
+          "line": 217
         },
         {
           "name": "T.Banner",
-          "line": 204
+          "line": 223
         },
         {
           "name": "T.Subscription",
-          "line": 213
+          "line": 232
         },
         {
           "name": "T.Warnings",
-          "line": 220
+          "line": 239
         },
         {
           "name": "T.Update",
-          "line": 246
+          "line": 265
         },
         {
           "name": "T.Diagnostic",
-          "line": 259
+          "line": 278
         }
       ],
       "literalEvents": []
@@ -2008,8 +2020,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 80660,
-      "sha256": "dca954e4afe0022dc93c0880a62df8410c98cdbcf7279aa0fbfccba41da5e914",
+      "bytes": 80675,
+      "sha256": "1821075bc058fff07ce6b105da19bf4207e3a7e69c85cb39aabeb305ed3ba345",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -2155,8 +2167,8 @@
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 121796,
-      "sha256": "d0d0f8ac108934ff6a1c134f7e015b42b925c7e66839f86fa5c1e7970e73503d",
+      "bytes": 121800,
+      "sha256": "c7c75337b0d198a90f0f1443ae2f61f5d3b54bca43f807b6a533bfac2785edc5",
       "namedFunctions": [
         {
           "name": "Print",
@@ -3367,8 +3379,8 @@
       "literalEvents": []
     },
     "ThemeHUD.lua": {
-      "bytes": 36100,
-      "sha256": "6e36e8bb85ce419ccdfe74665ca3a2d09d322c83a3c743daa513fa8f1fde0f62",
+      "bytes": 36141,
+      "sha256": "56b210027e8e0b61e29dbf34b4b2ebf9bc49428b04a812cd62d2b6ecf7604361",
       "namedFunctions": [
         {
           "name": "H.Points",
@@ -3499,8 +3511,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 152508,
-      "sha256": "e5a403f8a3f57f55a51dd2b503c7898b71e6001ed304b0645e01eb60b7ab4ebe",
+      "bytes": 152617,
+      "sha256": "08851e609af14b2f53d1909a4a76b391110a7568c30b6d136949ec76e685f787",
       "namedFunctions": [
         {
           "name": "Short",
@@ -3632,371 +3644,371 @@
         },
         {
           "name": "R.MapRim",
-          "line": 670
+          "line": 671
         },
         {
           "name": "R.LauncherLabel",
-          "line": 699
+          "line": 700
         },
         {
           "name": "R.MapRound",
-          "line": 707
+          "line": 708
         },
         {
           "name": "R.Map",
-          "line": 731
+          "line": 732
         },
         {
           "name": "R.EffectBox",
-          "line": 799
+          "line": 800
         },
         {
           "name": "R.EffectIcon",
-          "line": 805
+          "line": 806
         },
         {
           "name": "R.AmountParts",
-          "line": 811
+          "line": 812
         },
         {
           "name": "Row",
-          "line": 816
+          "line": 817
         },
         {
           "name": "R.DamageTabs",
-          "line": 828
+          "line": 829
         },
         {
           "name": "R.SocketY",
-          "line": 878
+          "line": 879
         },
         {
           "name": "R.SocketH",
-          "line": 888
-        },
-        {
-          "name": "R.SocketIcon",
           "line": 889
         },
         {
+          "name": "R.SocketIcon",
+          "line": 890
+        },
+        {
           "name": "R.DiagHook",
-          "line": 895
+          "line": 896
         },
         {
           "name": "R.DamageTip",
-          "line": 903
+          "line": 904
         },
         {
           "name": "Add",
-          "line": 909
+          "line": 910
         },
         {
           "name": "R.ToggleStats",
-          "line": 930
-        },
-        {
-          "name": "R.StatsCapFor",
           "line": 931
         },
         {
+          "name": "R.StatsCapFor",
+          "line": 932
+        },
+        {
           "name": "R.StatsPlan",
-          "line": 935
+          "line": 936
         },
         {
           "name": "R.DmgZone",
-          "line": 949
-        },
-        {
-          "name": "R.DmgDelta",
           "line": 950
         },
         {
-          "name": "R.AccZone",
-          "line": 957
+          "name": "R.DmgDelta",
+          "line": 951
         },
         {
-          "name": "R.AccMin",
+          "name": "R.AccZone",
           "line": 958
         },
         {
-          "name": "R.AccCut",
+          "name": "R.AccMin",
           "line": 959
         },
         {
+          "name": "R.AccCut",
+          "line": 960
+        },
+        {
           "name": "R.AccDelta",
-          "line": 964
+          "line": 965
         },
         {
           "name": "R.AccShape",
-          "line": 970
+          "line": 971
         },
         {
           "name": "R.AccPlan",
-          "line": 978
+          "line": 979
         },
         {
           "name": "R.DmgPlan",
-          "line": 991
+          "line": 992
         },
         {
           "name": "R.CardScale",
-          "line": 1016
-        },
-        {
-          "name": "R.AttachTaken",
           "line": 1017
         },
         {
+          "name": "R.AttachTaken",
+          "line": 1018
+        },
+        {
           "name": "R.TakenPass",
-          "line": 1041
+          "line": 1042
         },
         {
           "name": "Inset",
-          "line": 1050
-        },
-        {
-          "name": "R.CardVisible",
           "line": 1051
         },
         {
+          "name": "R.CardVisible",
+          "line": 1052
+        },
+        {
           "name": "R.ZoomXY",
-          "line": 1060
+          "line": 1061
         },
         {
           "name": "R.RingGeometry",
-          "line": 1066
+          "line": 1067
         },
         {
           "name": "Add",
-          "line": 1074
+          "line": 1075
         },
         {
           "name": "R.Preferred",
-          "line": 1086
+          "line": 1087
         },
         {
           "name": "R.LiveRect",
-          "line": 1094
+          "line": 1095
         },
         {
           "name": "R.NoteMoved",
-          "line": 1103
+          "line": 1104
         },
         {
           "name": "R.ScreenSize",
-          "line": 1123
+          "line": 1124
         },
         {
           "name": "Add",
-          "line": 1125
+          "line": 1126
         },
         {
           "name": "R.ScreenBounds",
-          "line": 1136
+          "line": 1137
         },
         {
           "name": "R.ApplyClamp",
-          "line": 1145
+          "line": 1146
         },
         {
           "name": "R.ClampToScreen",
-          "line": 1153
+          "line": 1154
         },
         {
           "name": "FixedObstacles",
-          "line": 1170
+          "line": 1171
         },
         {
           "name": "R.PreferredAny",
-          "line": 1187
+          "line": 1188
         },
         {
           "name": "R.StatsRoom",
-          "line": 1199
+          "line": 1200
         },
         {
           "name": "R.GrowSpan",
-          "line": 1214
+          "line": 1215
         },
         {
           "name": "R.AccMaxRows",
-          "line": 1226
+          "line": 1227
         },
         {
           "name": "R.DmgMaxRows",
-          "line": 1234
+          "line": 1235
         },
         {
           "name": "R.BarTestApply",
-          "line": 1246
+          "line": 1247
         },
         {
           "name": "R.BarTest",
-          "line": 1252
+          "line": 1253
         },
         {
           "name": "R.PlayerBarRect",
-          "line": 1265
+          "line": 1266
         },
         {
           "name": "R.BarOverlay",
-          "line": 1271
+          "line": 1272
         },
         {
           "name": "Num",
-          "line": 1285
-        },
-        {
-          "name": "FName",
           "line": 1286
         },
         {
+          "name": "FName",
+          "line": 1287
+        },
+        {
           "name": "Points",
-          "line": 1292
+          "line": 1293
         },
         {
           "name": "Size",
-          "line": 1303
-        },
-        {
-          "name": "Call",
           "line": 1304
         },
         {
-          "name": "Edges",
+          "name": "Call",
           "line": 1305
         },
         {
-          "name": "Scale",
+          "name": "Edges",
           "line": 1306
         },
         {
-          "name": "R.PlayerBarProbe",
+          "name": "Scale",
           "line": 1307
         },
         {
+          "name": "R.PlayerBarProbe",
+          "line": 1308
+        },
+        {
           "name": "R.Probe",
-          "line": 1392
+          "line": 1393
         },
         {
           "name": "PartySame",
-          "line": 1417
-        },
-        {
-          "name": "R.PartyFrames",
           "line": 1418
         },
         {
+          "name": "R.PartyFrames",
+          "line": 1419
+        },
+        {
           "name": "R.PartyPrepare",
-          "line": 1421
+          "line": 1422
         },
         {
           "name": "R.PartyApply",
-          "line": 1433
+          "line": 1434
         },
         {
           "name": "R.PartyRestore",
-          "line": 1444
+          "line": 1445
         },
         {
           "name": "R.PartyRestoreAll",
-          "line": 1448
+          "line": 1449
         },
         {
           "name": "R.PartyPass",
-          "line": 1450
+          "line": 1451
         },
         {
           "name": "R.Resolve",
-          "line": 1458
+          "line": 1459
         },
         {
           "name": "Opaque",
-          "line": 1466
+          "line": 1467
         },
         {
           "name": "Rank",
-          "line": 1496
+          "line": 1497
         },
         {
           "name": "Free",
-          "line": 1504
+          "line": 1505
         },
         {
           "name": "Hit",
-          "line": 1506
+          "line": 1507
         },
         {
           "name": "SearchY",
-          "line": 1511
+          "line": 1512
         },
         {
           "name": "Search",
-          "line": 1522
+          "line": 1523
         },
         {
           "name": "R.ApplyShift",
-          "line": 1550
+          "line": 1551
         },
         {
           "name": "R.PlanLayout",
-          "line": 1561
+          "line": 1562
         },
         {
           "name": "R.RowIcon",
-          "line": 1580
+          "line": 1581
         },
         {
           "name": "R.Stable",
-          "line": 1586
-        },
-        {
-          "name": "R.HideUnwanted",
           "line": 1587
         },
         {
+          "name": "R.HideUnwanted",
+          "line": 1588
+        },
+        {
           "name": "R.CardRect",
-          "line": 1590
+          "line": 1591
         },
         {
           "name": "R.Window",
-          "line": 1616
+          "line": 1617
         },
         {
           "name": "R.CardTabs",
-          "line": 1625
+          "line": 1626
         },
         {
           "name": "R.MaskBuffs",
-          "line": 1649
+          "line": 1650
         },
         {
           "name": "R.LairList",
-          "line": 1660
+          "line": 1661
         },
         {
           "name": "Tint",
-          "line": 1663
+          "line": 1664
         },
         {
           "name": "R.Panels",
-          "line": 1690
+          "line": 1691
         },
         {
           "name": "Wide",
-          "line": 1771
+          "line": 1772
         },
         {
           "name": "Wide",
-          "line": 1822
+          "line": 1823
         },
         {
           "name": "R.Settings",
-          "line": 1922
+          "line": 1923
         },
         {
           "name": "R.Buffs",
-          "line": 1937
+          "line": 1938
         }
       ],
       "literalEvents": []
@@ -6379,18 +6391,18 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.9",
+    "version": "0.1.0-reborn.10",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": false,
+    "inGameTestByAgent": true,
     "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Pending targeted live QA. Synthetic regressions cover difficulty dt and scoped reload context, closed square-map bounds, compact dock composition, and Taken card movement/collisions in both directions. Offline material reconstruction inspected. No live co-op validation claimed."
+    "inGameTestScope": "Targeted live solo QA in client 0.6.1: themed boss gauge and Horde visible after reload, inherited timed calendar absent, reminder shows native percentage. Difficulty remains unavailable in the ongoing reload session: AZS_ZONE contains only the API run id; native sync and hello did not recover zone metadata. Early zone capture and retention tested synthetically; fresh-run difficulty capture not validated live. No live co-op validation."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

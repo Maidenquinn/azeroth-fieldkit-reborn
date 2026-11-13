@@ -1,3 +1,5 @@
+reborn.10 targeted result: timed calendar removed; native boss progression, Horde and reminder visually checked after reload in the ongoing solo run. Difficulty recovery is NOT accepted: current AZS_ZONE lacks rank/zone metadata even after native resync. Fresh-run capture and co-op remain pending.
+
 Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.9
 
 Client de reference: Reborn 0.6.3, inventorie le 12 novembre 2026.

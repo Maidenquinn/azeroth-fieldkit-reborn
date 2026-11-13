@@ -6,10 +6,11 @@ import argparse,json
 from lupa.lua51 import LuaRuntime
 base=Path(__file__).resolve().parents[1]
 root=base/'AzerothFieldKitReborn'
-def runtime():
+def runtime(prelude=None):
     l=LuaRuntime(unpack_returned_tuples=True)
     l.execute((base/'tests/mock.lua').read_text(encoding='utf8'))
     l.execute('GetPlayerBuff=nil;GetPlayerBuffTexture=nil;GetPlayerBuffTimeLeft=nil;GetPlayerBuffApplications=nil')
+    if prelude: l.execute(prelude)
     for name in (root/'AzerothFieldKitReborn.toc').read_text().splitlines():
         if name.endswith('.lua'): l.execute((root/name).read_text(encoding='utf8'),name=name)
     return l
@@ -28,6 +29,21 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_optional_art.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_difficulty_context.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_taken_layout.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_boss_progression.lua').read_text(encoding='utf-8-sig'))
+    l=runtime('AZS={};function AZS.On(prefix,fn) if prefix=="AZSZONE" then ZONE_CAPTURE=fn end end')
+    l.execute('''
+    GetRealZoneText=function() return "Hellfire Peninsula" end
+    AZS_ZONE={zone="hellfire",dt=0};AZS_RUN={ph="ready",t=0}
+    assert(FieldKitRebornDB==nil and type(ZONE_CAPTURE)=="function")
+    ZONE_CAPTURE()
+    AZS_ZONE={};AZS_RUN={ph="playing",t=1}
+    fire(FieldKitFrame,"VARIABLES_LOADED")
+    assert(FieldKit.GetHeroicLevel()==0,"Native router capture before database initialization lost Normal")
+    AZS_ZONE={zone="hellfire",dt=3};ZONE_CAPTURE()
+    assert(FieldKit.GetHeroicLevel()==3)
+    AZS_ZONE={};ZONE_CAPTURE();assert(FieldKit.GetHeroicLevel()==nil,"New packet retained an unobserved rank")
+    print("PASS native zone callback before settings initialization and new zone invalidation")
+    ''')
     if a.game:
         l=runtime()
         l.execute('''
