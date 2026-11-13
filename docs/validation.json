@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.7",
+  "version": "0.1.0-reborn.8",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,24 +18,24 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.7",
+    "version": "0.1.0-reborn.8",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": true,
+    "inGameTestByAgent": false,
     "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Client 0.6.3 chat QA: native ChatFrame1 dimensions changed through real width/height sliders from 460x210 to 550x280 and restored; both existing native messages retained. Font dropdown labels, selection of Arial Narrow and restoration of Original font verified. Negative top inset confirmed. Native chat without theme and destructive resize/history cases covered by production fixtures. No broad combat or co-op validation. Long native /help text observed inside the card; clean production reload performed after removing diagnostic."
+    "inGameTestScope": "Candidate .8 settings client QA interrupted by the maintainer. Synthetic production setters: 18 pages, 119 schema entries, 924 setter cases in four theme contexts. Optional artwork checked for three layouts and three map shapes; production UV output reconstructed and visually inspected offline. Installed public API fixtures executed. No complete live visual or co-op acceptance claimed."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "8d5c8ba0366cb5e4e670a923f6f92b8950073c7d515cf92da7e043e7db3eaab4"
+      "sha256": "318dd0aa730683879f33a1de62fc1fc64e67019b26593baefb03f6d3c400f0b1"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -55,7 +55,7 @@
     "RebornHUD.lua": {
       "maxUpvalues": 1,
       "functions": 12,
-      "sha256": "69add9727d2b36ced36271c261f0f27af3d1d362e9af6556afb76bb2338d0fd2"
+      "sha256": "9a9cee32d896579f74124dea234cc880ee684f5823e31c7337c6e8274a23b7f7"
     },
     "Diagnostics.lua": {
       "maxUpvalues": 5,
@@ -70,7 +70,7 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "5aa756be35b488223548e7a6bfd84379ab1dbe2d3b659afa18015bde2996b552"
+      "sha256": "ec1cdc7fd449d4e3f869bfa6e91a9e63ae970de9b31f094e3e588b48f9904c67"
     },
     "Profiles.lua": {
       "maxUpvalues": 4,
@@ -85,12 +85,12 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "1e30fd01333ca4aaeeef30759b0a6886ca1c9a336cf2c36362a17241077ba036"
+      "sha256": "b68edea211fc6d6985c14816d4952176d850734c1f058bed1319382caa8449cb"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
       "functions": 20,
-      "sha256": "9c2fbbe720a03ce63e3d4491b8c6cbbec484bd65720ac2733db21996bbd95b90"
+      "sha256": "a3489f16e1733b81fb1e24bb894b37d6fdd7dac64922b164f41324faa024f56d"
     },
     "ZoneThemeRegistry.lua": {
       "maxUpvalues": 0,
@@ -160,7 +160,7 @@
     "Coop.lua": {
       "maxUpvalues": 6,
       "functions": 44,
-      "sha256": "9a48679a49f3b49667f1b1148a9eda642fec8ab8071d0a65811edcdc96596a7b"
+      "sha256": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1"
     },
     "GroupHistory.lua": {
       "maxUpvalues": 3,
@@ -215,7 +215,7 @@
     "OptionsSchema.lua": {
       "maxUpvalues": 1,
       "functions": 49,
-      "sha256": "b0f51cdc54b222e95dbf45fbd3de1ca033a4434773c914463063c7f074d7a45e"
+      "sha256": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07"
     },
     "LegacyCrits.lua": {
       "maxUpvalues": 7,
@@ -224,8 +224,8 @@
     },
     "Interface.lua": {
       "maxUpvalues": 24,
-      "functions": 206,
-      "sha256": "c3bcb8142a5eb4131aaf08f3e118d620a3ce7351b6509aff81ed6d22cb52aa7b"
+      "functions": 213,
+      "sha256": "dca954e4afe0022dc93c0880a62df8410c98cdbcf7279aa0fbfccba41da5e914"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
@@ -270,12 +270,12 @@
     "ThemeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 42,
-      "sha256": "d48347f589f50a24257c39dc90b7799e86784ab8fcbdb49905d914e3fe84d4af"
+      "sha256": "6e36e8bb85ce419ccdfe74665ca3a2d09d322c83a3c743daa513fa8f1fde0f62"
     },
     "ThemeTarget.lua": {
       "maxUpvalues": 6,
       "functions": 12,
-      "sha256": "4b018c935a737803c75b13b2ae47b8254ee7adbf1e47985ca53a5d102db6e04e"
+      "sha256": "9200eb58da65676a6e3aef3b0fe4d6cd4679adb4d9f8716332f0d8c60ee44140"
     },
     "ReferenceArt.lua": {
       "maxUpvalues": 0,
@@ -284,13 +284,13 @@
     },
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
-      "functions": 181,
-      "sha256": "60a9590682dcf4c510a91ab7e52710c47b8dcf3e4fe74f2356f031dff19ad8c0"
+      "functions": 185,
+      "sha256": "c565695b1a3b1162dcc61a86902db6f0c0702ebe923d8d821f6763532009f383"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "f562cb56eb7079c2d2d9abb453579f355f1f94bfa8e079c1fdf5ecc74ce36e65"
+      "sha256": "e0f979de8516594e65420bdf3918b8e934a7187fc4cc095fb7bab43914d41f68"
     }
   }
 }

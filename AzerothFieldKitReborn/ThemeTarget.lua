@@ -112,6 +112,7 @@ function C.Update(variant)
  local friendly=(type(UnitIsUnit)=="function" and UnitIsUnit("player","target")) or (type(UnitIsFriend)=="function" and UnitIsFriend("player","target"))
  if friendly then C.bar:SetStatusBarColor(.12,.62,.30) else C.bar:SetStatusBarColor(.72,.17,.20) end
  C.bar:SetMinMaxValues(0,max);C.bar:SetValue(hp);C.hp:SetText(FieldKit_FormatHealth(hp,max,FieldKitRebornDB.targetHealthMode))
+ if FieldKitRebornDB.targetHealth then C.hp:Show() else C.hp:Hide() end
  if FieldKitReferenceHUD and FieldKitReferenceHUD.active then FieldKitReferenceHUD.Fit(C.name,18,13);FieldKitReferenceHUD.Fit(C.kind,12,11);FieldKitReferenceHUD.Fit(C.hp,12,11) end
  H.Save(native);native:SetParent(H.Hidden());native:SetAlpha(0)
  local rows=C.UpdateAuras() -- children of the hidden summary stay hidden when the boss card is selected

@@ -213,6 +213,54 @@ function R.ApplyOpacity()
  end
  return n
 end
+function R.ModeShown()
+ return FieldKitRebornDB.runModeCard and (not FieldKitRebornDB.hideUnknownMode or FieldKit.GetHeroicLevel()~=nil)
+end
+-- Optional strips are baked into several atlases. Subtract their rectangles
+-- from the rendered quads as well as hiding their live labels/hit targets.
+-- This changes only UV geometry; assets and the map/actions/XP stay intact.
+function R.ArtHoles(component,d)
+ local holes={}
+ if not R.ModeShown() and component=="identity" then
+  local cut=R.modeCut
+  if cut and not cut.medal then table.insert(holes,{0,56,cut.rect[3],50})
+  elseif not cut then
+   local rect=({elwynn_complete={0,299,302,51},elwynn_minimal={258,0,107,89},elwynn_alternative={270,49,67,50},naxx_alternative={0,244,237,49}})[R.key]
+   if rect then table.insert(holes,rect) end
+  end
+ end
+ if not FieldKitRebornDB.moneyFrame and component=="dock" and d.counts then
+  local dock=d.rects.dock
+  if R.key=="naxx_alternative" then
+   for i=2,3 do local a=d.counts[i];table.insert(holes,{a[1]-dock[1]-65,a[2]-dock[2]-10,a[3]+95,a[4]+24}) end
+  else
+   local l,t,r,b
+   for _,a in ipairs(d.counts) do l=math.min(l or a[1],a[1]);t=math.min(t or a[2],a[2]);r=math.max(r or 0,a[1]+a[3]);b=math.max(b or 0,a[2]+a[4]) end
+   local topPad=R.key=="elwynn_minimal" and 8 or 14
+   table.insert(holes,{l-dock[1]-120,t-dock[2]-topPad,r-l+170,b-t+18+topPad})
+  end
+ end
+ return holes
+end
+function R.SubtractArt(pieces,holes)
+ for _,hole in ipairs(holes) do
+  local nextPieces={}
+  for _,p in ipairs(pieces) do
+   local x,y,w,h=p[2],p[3],p[4],p[5];local l,t=math.max(x,hole[1]),math.max(y,hole[2]);local r,b=math.min(x+w,hole[1]+hole[3]),math.min(y+h,hole[2]+hole[4])
+   if l>=r or t>=b then table.insert(nextPieces,p)
+   else
+    local function Keep(x0,y0,x1,y1)
+     if x1>x0 and y1>y0 then local u0=p[9] or 0;local du=(p[6]-u0)/w;local dv=(p[8]-p[7])/h
+      table.insert(nextPieces,{p[1],x0,y0,x1-x0,y1-y0,u0+(x1-x)*du,p[7]+(y0-y)*dv,p[7]+(y1-y)*dv,u0+(x0-x)*du})
+     end
+    end
+    Keep(x,y,x+w,t);Keep(x,b,x+w,y+h);Keep(x,t,l,b);Keep(r,t,x+w,b)
+   end
+  end
+  pieces=nextPieces
+ end
+ return pieces
+end
 function R.Art(frame,component,layout)
  local tiles=(layout or R.layout).tiles[component]
  if component=="dock" and not FieldKitRebornDB.zoneThemeArt then tiles=nil end
@@ -246,6 +294,8 @@ function R.Art(frame,component,layout)
    table.insert(pieces,{a[1],dx,(extra>0 and dy>=split) and dy+extra or dy,iw,ih,u0+(a[10] or iw)/tw,v0,v0+ih/th,u0})
   end
  end
+ local holes=R.ArtHoles(component,R.layout or layout);pieces=R.SubtractArt(pieces,holes)
+ frame.referenceDrawPieces=pieces;frame.referenceArtHoles=holes
  for i=1,math.max(table.getn(pieces),table.getn(frame.referenceTiles)) do
   local t=frame.referenceTiles[i]
   if not t then t=frame:CreateTexture(nil,"BACKGROUND");frame.referenceTiles[i]=t end
@@ -334,7 +384,7 @@ function R.PlainDock(d)
  end
  for _,name in ipairs({"bar","xp","counts"}) do
   local rect=rects[name];local f=R.plain[name]
-  if rect then
+  if rect and (name~="counts" or FieldKitRebornDB.moneyFrame) then
    if not f then f=CreateFrame("Frame",nil,H.dock);f:EnableMouse(false);R.plain[name]=f;T.Surface(f,"card",true) end
    R.Child(f,H.dock,rect);f:SetFrameLevel(H.dock:GetFrameLevel()+1);T.Surface(f,"card",true);f.fieldkitArtOnly=nil;T.State(f,false);f:Show()
   elseif f then f:Hide() end
@@ -407,6 +457,7 @@ function R.Update(variant,zone)
  -- Elwynn Complete: the map sits INSIDE the identity card, whose square frame is baked into the art. Round and native maps must not
  -- keep that frame: only the two banners (zone name above, mode below) are drawn, from the same art, cut away from the card.
  local cut=R.IdentityCut(d,zone,M.shape)
+ R.modeCut=cut
  local dm,dz=d.mode,d.zone
  if cut then dm,dz=cut.mode,cut.zone end
  for _,entry in ipairs({{H.identity,"identity"},{H.header,"header"},{H.healthRoot,"vitality"},{H.dock,"dock"},{H.nav,"nav"}}) do
@@ -512,7 +563,7 @@ function R.Update(variant,zone)
   local a=d.counts[i];t:ClearAllPoints();t:SetPoint("TOPLEFT",H.counterRoot,"TOPLEFT",a[1]-39,-a[2]+2);t:SetWidth(19);t:SetHeight(19);t:SetTexture(i==1 and "Interface\\TargetingFrame\\UI-TargetingFrame-Skull" or (i==2 and "Interface\\MoneyFrame\\UI-MoneyIcons" or T.media.."WorldMarkers\\cache.tga"));t:SetTexCoord(0,i==2 and .25 or 1,0,1);t:Show()
  else t:Hide() end end
  local stored=FieldKitNative.Read("AZS_GetStoredLevels")
- if type(stored)=="number" and stored>0 and type(AZS_OpenStoredLevels)=="function" and not (FieldKitUI and FieldKitUI.frame and FieldKitUI.frame:IsShown()) then
+ if FieldKitRebornDB.storedLevelsBadge and type(stored)=="number" and stored>0 and type(AZS_OpenStoredLevels)=="function" and not (FieldKitUI and FieldKitUI.frame and FieldKitUI.frame:IsShown()) then
   R.stored:ClearAllPoints();local boss=getglobal("FieldKitBossFrame1Compact");R.stored:SetPoint("TOP",R.canvas,"TOP",0,(boss and boss:IsShown()) and -290 or -180);R.stored:SetWidth(240);R.stored:SetHeight(30);R.stored.fieldkitLabel:SetWidth(220);R.stored.fieldkitLabel:SetText(FieldKit_L("Stored levels").." : "..stored.." · Y");T.Update(R.stored);R.stored:Show()
  else R.stored:Hide() end
  R.Buffs(false)
@@ -581,7 +632,7 @@ function R.Update(variant,zone)
 end
 -- Re-draw only the art tiles' strip around the map opening on a non-interactive frame above the native map.
 function R.MapRim(M,hole)
- if M.probe.rim==false or M.shape=="round" then if M.rim then M.rim:Hide() end;return end
+ if M.probe.rim==false or M.shape~="square" then if M.rim then M.rim:Hide() end;return end
  local rects=R.layout.rects;local name=rects.mapArt and "mapArt" or "identity";local comp=rects.mapArt and M.root or H.identity
  local origin=rects[name];local tiles=R.layout.tiles[name]
  if not comp or not origin or not tiles then if M.rim then M.rim:Hide() end;return end
@@ -589,15 +640,19 @@ function R.MapRim(M,hole)
  M.rim:SetParent(comp);M.rim:EnableMouse(false);M.rim:ClearAllPoints();M.rim:SetPoint("TOPLEFT",comp,"TOPLEFT",0,0);M.rim:SetWidth(origin[3]);M.rim:SetHeight(origin[4])
  M.rim:SetFrameLevel(Minimap:GetFrameLevel()+2)
  local margin=10;local zl,zt=hole[1]-margin-origin[1],hole[2]-margin-origin[2];local zr,zb=zl+hole[3]+2*margin,zt+hole[4]+2*margin
- local used=0
+ local pieces={}
  for _,tile in ipairs(tiles) do
   local x0,y0=math.max(tile[2],zl),math.max(tile[3],zt);local x1,y1=math.min(tile[2]+tile[4],zr),math.min(tile[3]+tile[5],zb)
   if x1>x0 and y1>y0 then
-   used=used+1;local t=M.rimTex[used]
-   if not t then t=M.rim:CreateTexture(nil,"ARTWORK");M.rimTex[used]=t end
-   t:SetTexture(T.media.."ReferenceHUD\\"..tile[1]);t:SetTexCoord((x0-tile[2])/tile[6],(x1-tile[2])/tile[6],(y0-tile[3])/tile[7],(y1-tile[3])/tile[7])
-   t:ClearAllPoints();t:SetPoint("TOPLEFT",M.rim,"TOPLEFT",x0,-y0);t:SetWidth(x1-x0);t:SetHeight(y1-y0);t:Show()
+   table.insert(pieces,{tile[1],x0,y0,x1-x0,y1-y0,(x1-tile[2])/tile[6],(y0-tile[3])/tile[7],(y1-tile[3])/tile[7],(x0-tile[2])/tile[6]})
   end
+ end
+ local holes=R.ArtHoles(name,R.layout);pieces=R.SubtractArt(pieces,holes)
+ M.rim.referenceDrawPieces=pieces;M.rim.referenceArtHoles=holes
+ local used=table.getn(pieces)
+ for i,p in ipairs(pieces) do
+  local t=M.rimTex[i];if not t then t=M.rim:CreateTexture(nil,"ARTWORK");M.rimTex[i]=t end
+  t:SetTexture(T.media.."ReferenceHUD\\"..p[1]);t:SetTexCoord(p[9] or 0,p[6],p[7],p[8]);t:ClearAllPoints();t:SetPoint("TOPLEFT",M.rim,"TOPLEFT",p[2],-p[3]);t:SetWidth(p[4]);t:SetHeight(p[5]);t:Show()
  end
  for i=used+1,table.getn(M.rimTex) do M.rimTex[i]:Hide() end
  M.rim:Show()
@@ -626,7 +681,15 @@ function R.MapRound(M,hole,side)
  local tex=T.media.."ReferenceHUD\\"..(medal and "map_round_medallion.tga" or "map_round_ring.tga")
  f.texture:ClearAllPoints()
  if f.textureAsset~=tex then f.texture:SetTexture(tex);f.textureAsset=tex end
- if medal then f.texture:SetPoint("CENTER",f,"CENTER",0,0);f.texture:SetWidth(2*box);f.texture:SetHeight(2*box) else f.texture:SetAllPoints(f) end
+ f.texture:SetTexCoord(0,1,0,1)
+ if f.modeRing then f.modeRing:Hide() end
+ if medal and not R.ModeShown() then
+  -- Keep the upper cartouche, remove the entire lower one and restore only
+  -- the plain ring segment it used to cover. No empty information badge.
+  f.texture:SetPoint("TOPLEFT",f,"CENTER",-box,box);f.texture:SetWidth(2*box);f.texture:SetHeight(2*box*361/512);f.texture:SetTexCoord(0,1,0,361/512)
+  if not f.modeRing then f.modeRing=f:CreateTexture(nil,"OVERLAY");f.modeRing:SetTexture(T.media.."ReferenceHUD\\map_round_ring.tga") end
+  f.modeRing:ClearAllPoints();f.modeRing:SetPoint("BOTTOMLEFT",f,"BOTTOMLEFT",0,0);f.modeRing:SetWidth(box);f.modeRing:SetHeight(box*23/256);f.modeRing:SetTexCoord(0,1,233/256,1);f.modeRing:Show()
+ elseif medal then f.texture:SetPoint("CENTER",f,"CENTER",0,0);f.texture:SetWidth(2*box);f.texture:SetHeight(2*box) else f.texture:SetAllPoints(f) end
  f:SetFrameLevel(Minimap:GetFrameLevel()+2);f:Show()
 end
 function R.Map()
@@ -726,6 +789,12 @@ end
 R.listTop=90 -- Elwynn: first list row (below the navigation row)
 R.tabTips={"Damage","Healing","Boss","Damage taken","Groups","Kills"}
 function R.DamageTabs(f,a,zone,index)
+ if FieldKitRebornDB.meterTabs==false then
+  for _,b in ipairs(R.tabs) do b:Hide() end
+  for _,t in ipairs(f.navDividers or {}) do t:Hide() end
+  for _,key in ipairs({"navBand","navRule","headRule"}) do if f[key] then f[key]:Hide() end end
+  return
+ end
  local elwynn=zone=="elwynn"
  local top=elwynn and 50 or 92
  local cols=elwynn and 6 or 3
@@ -1613,6 +1682,11 @@ function R.Panels(variant,zone)
      -- Two distinct pieces on one right-aligned line: the share (bright, readable) and the real amount (muted) after a thin
      -- separator. Both come from the existing ledger line (share, dmg), nothing recomputed; a missing one is simply absent.
      local pct=e and e.share and string.format("%.0f %%",e.share*100) or nil;local amount=e and type(e.dmg)=="number" and R.Amount(e.dmg) or nil
+     local perSecond=e and type(e.dps)=="number" and (R.Amount(e.dps)..unit) or nil
+     local values=FieldKitRebornDB.meterValues
+     if values==1 then amount=perSecond elseif values==2 then pct=perSecond end
+     if not r.rateText then r.rateText=T.Label(r,nil,0,0,82,12,10,T.muted);r.rateText:ClearAllPoints();r.rateText:SetPoint("BOTTOMRIGHT",r,"BOTTOMRIGHT",0,0);r.rateText:SetJustifyH("RIGHT") end
+     if values==3 and perSecond then r.rateText:SetText(perSecond);r.rateText:Show() else r.rateText:Hide() end
      R.AmountParts(r);r.value:SetText(pct or "");r.amount:SetText(amount or "")
      if e then r.fontSize=16;r.fontMin=12 end
      local function Wide(fs) return (fs.GetStringWidth and fs:GetStringWidth() or 60)+10 end -- R.Fit keeps an 8 px margin
@@ -1623,8 +1697,9 @@ function R.Panels(variant,zone)
      if not e then r.icon:Hide() end
      if e then
       if not r.trough then r.trough=r:CreateTexture(nil,"BACKGROUND") end
-      r.trough:ClearAllPoints();r.trough:SetPoint("TOPLEFT",r,"TOPLEFT",0,-20);r.trough:SetWidth(a[3]-160);r.trough:SetHeight(8);T.Solid(r.trough,{.12,.14,.08});r.trough:Show()
-      R.RowIcon(r,e.icon or FieldKitLoadout.Icon(e.name));r.bar:ClearAllPoints();r.bar:SetPoint("TOPLEFT",r,"TOPLEFT",0,-20);r.bar:SetWidth(a[3]-160);r.bar:SetMinMaxValues(0,1);r.bar:SetValue(0);r.bar:SetValue(math.max(0,math.min(1,e.share or 0)));r.bar:SetStatusBarColor(zone=="elwynn" and .65 or .1,zone=="elwynn" and .55 or .75,zone=="elwynn" and .18 or .85);r.bar:Show() end
+      local barWidth=math.max(32,a[3]-(values==3 and perSecond and 190 or 160))
+      r.trough:ClearAllPoints();r.trough:SetPoint("TOPLEFT",r,"TOPLEFT",0,-20);r.trough:SetWidth(barWidth);r.trough:SetHeight(8);T.Solid(r.trough,{.12,.14,.08});r.trough:Show()
+      R.RowIcon(r,e.icon or FieldKitLoadout.Icon(e.name));r.bar:ClearAllPoints();r.bar:SetPoint("TOPLEFT",r,"TOPLEFT",0,-20);r.bar:SetWidth(barWidth);r.bar:SetMinMaxValues(0,1);r.bar:SetValue(0);r.bar:SetValue(math.max(0,math.min(1,e.share or 0)));r.bar:SetStatusBarColor(zone=="elwynn" and .65 or .1,zone=="elwynn" and .55 or .75,zone=="elwynn" and .18 or .85);r.bar:Show() end
     end
     -- one pair of columns for every row (right-aligned): [name ........ share | amount]; the name takes the rest of the row
     local rowW=a[3]-100;local colA=math.min(rowW*.3,amountW or 0);local colP=math.min(rowW*.25,pctW or 0)
@@ -1724,8 +1799,12 @@ function R.Panels(variant,zone)
      f.more.fieldkitLabel:SetText("← "..FieldKit_L("Show less")..(total>capacity and ("   "..(offset+1).."-"..math.min(total,offset+capacity).."/"..total) or ""));f.more:Show();f.pager:Hide()
      for i=1,capacity do local s=shown[offset+i];local r=Row(f,i,sx,49+(i-1)*step,sw,27);r.label:SetText(s.label:GetText() or "?");r.value:SetText(s.value:GetText() or "?") end
     else
-    for i,name in ipairs(labels) do local r=Row(f,i,sx,49+(i-1)*step,sw,27);FieldKit_Text(r.label,name=="Crit Chance" and "Critique" or name);local value="?"
-     for _,s in ipairs(source and source.rows or {}) do if s.label:GetText()==FieldKit_L(name) then value=s.value:GetText() or "?" end end;r.value:SetText(value)
+    local chosen={};local seen={}
+    for _,name in ipairs(labels) do for _,s in ipairs(source and source.rows or {}) do
+     if s.label:IsShown() and s.label:GetText()==FieldKit_L(name) then table.insert(chosen,s);seen[s]=true end
+    end end
+    for _,s in ipairs(source and source.rows or {}) do if s.label:IsShown() and not seen[s] then table.insert(chosen,s) end end
+    for i=1,math.min(4,table.getn(chosen)) do local s=chosen[i];local r=Row(f,i,sx,49+(i-1)*step,sw,27);r.label:SetText(s.label:GetText());r.value:SetText(s.value:GetText() or "?")
     end
     end
    else
@@ -1771,13 +1850,18 @@ function R.Settings(U)
  end
  local a=d.rects.window
  R.Art(U.frame,"window",d)
- for i,tile in ipairs(d.tiles.window) do local t=U.frame.referenceTiles[i];t:ClearAllPoints();t:SetPoint("TOPLEFT",U.frame,"TOPLEFT",tile[2]*U.frame:GetWidth()/a[3],-tile[3]*U.frame:GetHeight()/a[4]);t:SetWidth(tile[4]*U.frame:GetWidth()/a[3]);t:SetHeight(tile[5]*U.frame:GetHeight()/a[4]) end
+ for i,tile in ipairs(d.tiles.window) do local t=U.frame.referenceTiles[i];t:ClearAllPoints();t:SetPoint("TOPLEFT",U.frame,"TOPLEFT",tile[2]*U.frame:GetWidth()/a[3],-tile[3]*U.frame:GetHeight()/a[4]);t:SetWidth(tile[4]*U.frame:GetWidth()/a[3]);t:SetHeight(tile[5]*U.frame:GetHeight()/a[4]);t:SetAlpha(T.Opacity(U.frame)) end
  U.seal:SetTexture(T.media.."ReferenceHUD\\"..T.zone.."_seal_v3.tga");U.seal:SetTexCoord(0,1,0,1);U.frame.fieldkitArtOnly=true;T.State(U.frame,false)
 end
 
 
 function R.Buffs(hover)
  local row=getglobal("FieldKitPlayerBuffs");if not row then return end
+ if FieldKitRebornDB.playerBar then
+  if H.saved[row] then H.RestoreOne(row) end
+  if R.buffDrawer then R.buffDrawer:Hide() end
+  return
+ end
  if not R.buffDrawer then
   local f=CreateFrame("Frame","FieldKitReferenceBuffDrawer",R.canvas);R.buffDrawer=f;f:SetFrameStrata("TOOLTIP");f:EnableMouse(true);f:SetClampedToScreen(true);T.Surface(f,"card");f:Hide()
   f:SetScript("OnUpdate",function()

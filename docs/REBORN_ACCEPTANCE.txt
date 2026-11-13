@@ -1,4 +1,4 @@
-Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.7
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.8
 
 Client de reference: Reborn 0.6.3, inventorie le 12 novembre 2026.
 Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
@@ -70,3 +70,11 @@ Recette reborn.7 dans le client: dimensions natives 460x210 vers 550x280
     puis retour, deux messages conserves, liste de polices visible et cliquable,
     Arial Narrow puis police d origine. Long /help contenu dans le cadre.
     Diagnostic temporaire retire; aucune lecture du contenu du chat par celui-ci.
+
+26. Dans Preferences, modifier taille et opacite du panneau avec/sans theme.
+    Les listes doivent suivre son echelle ; texte et controles restent opaques.
+27. Sous theme, tester la barre de vie centrale, son bouclier, ses buffs,
+    les nombres de cible, les PV de groupe, les onglets/valeurs du compteur.
+28. Desactiver Mode : aucun bandeau ni bouton i vide ; carte et zone conservees.
+    Desactiver Or/coffre : aucun decor ni icone vide dans le bandeau inferieur ;
+    sorts et XP inchanges. Reactiver : decor et interactions retablis.

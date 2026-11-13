@@ -142,7 +142,7 @@ local SECTIONS = {
 				kind = "check",
 				id = "statsFrame",
 				label = "Stats",
-				tip = "Your run stats on screen, with gold and the next chest price below.",
+				tip = "Your character bonuses: damage, haste, critical chance, lifesteal and other selected statistics. Currency counters are configured separately.",
 				get = function() return FieldKitRebornDB.statsFrame end,
 				set = function(v) FieldKitRebornDB.statsFrame = v; actions.UpdateStatsFrame() end,
 				button = { text = "Choose...", onClick = function() actions.ToggleStatsPicker() end },

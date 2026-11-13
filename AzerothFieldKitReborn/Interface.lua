@@ -21,6 +21,7 @@ function FieldKit.BuildJourneySections(sections,actions)
  end
  U.hudActions=actions
  options.meterFrame.label="Combat meter"
+ options.replaceTally.tip="Adds a separate kills line below the gold without a theme. With a theme, kills already belong to the main counter strip controlled by Gold and chest price."
  U.nativeTextOptions={options.hideDamage,options.showCrits,options.groupCrits}
  local interface=old.Interface.items
  for i=1,table.getn(interface) do
@@ -44,18 +45,27 @@ function FieldKit.BuildJourneySections(sections,actions)
   else table.insert(keep,item) end
  end
  interface=keep
+ table.insert(interface,1,{kind="slider",label="Settings panel opacity",min=0,max=100,step=5,
+  get=function() return FieldKitRebornDB.settingsPanelOpacity end,
+  set=function(v) FieldKitRebornDB.settingsPanelOpacity=FieldKit.Number(v,100,0,100);U.ApplyPanelAppearance() end,
+  format=function(v) return FieldKit_L("Settings panel opacity").." : "..v.." %" end})
+ table.insert(interface,1,{kind="slider",label="Settings panel size",min=60,max=110,step=5,
+  get=function() return FieldKitRebornDB.settingsPanelScale end,
+  set=function(v) FieldKitRebornDB.settingsPanelScale=FieldKit.Number(v,100,60,110);U.Reflow() end,
+  format=function(v) return FieldKit_L("Settings panel size").." : "..v.." %" end})
+ table.insert(interface,1,{kind="note",label="Settings panel",tip="Size and background opacity of this window, with or without a theme. Text and controls remain opaque. Independent of HUD scale, card opacity and HUD profiles."})
  table.insert(interface,{kind="camera"})
  table.insert(chatCopy,1,{kind="note",label="Local chat copy",tip="Capture new messages after opting in, then use the Copy button above chat or /fieldkitlog. Never uploads chat history."})
  table.insert(chatAppearance,1,{kind="note",label="Chat layout",tip="Unlock and drag the Move chat handle to any position. Lock it again to keep the saved layout."})
  table.insert(chatColors,1,{kind="note",label="Chat colors and typography",tip="Choose a font and a subtle background. Text overrides affect only NEW messages; leave off to preserve channel colors."})
  local cards={
   {kind="note",label="Which HUD cards to show",tip="Turn modules on or off here. Positions and sizes are under Layout & arrange."},
-  {kind="check",label="Run mode card",tip="Native difficulty and zone with Difficulty-screen multipliers. Hover for the full chart.",
+  {kind="check",label="Run mode card",tip="Show the difficulty block and its information button. With a theme, hides the entire mode strip; the map and zone name stay visible. Reborn provides the native difficulty rank, not the old game's multipliers.",
    get=function() return FieldKitRebornDB.runModeCard end,set=function(v) FieldKitRebornDB.runModeCard=v;actions.UpdateRunMode() end},
   {kind="check",label="Hide mode card without difficulty data",tip="Keep the HUD clear when the client does not supply the mode. Preview arrangement still shows the card.",
    get=function() return FieldKitRebornDB.hideUnknownMode end,set=function(v) FieldKitRebornDB.hideUnknownMode=v;actions.UpdateRunMode() end},
   options.statsFrame,
-  {kind="check",label="Gold and chest price",tip="Show the separate gold and next-chest strip. Hiding it restores the native tally if FieldKit replaced it.",
+  {kind="check",label="Gold and chest price",tip="Show the full counter strip: gold, chest price and, with a theme, kills and event currency. Off hides its artwork, icons and values together. With a theme, no empty native counters are substituted.",
    get=function() return FieldKitRebornDB.moneyFrame end,set=function(v) FieldKitRebornDB.moneyFrame=v;actions.SyncHudTally();actions.UpdateMoneyFrame() end},
   options.replaceTally,options.takenFrame,options.gearFrame,
   {kind="check",label="Effects tracker",tip="Contextual totems, summons and native talent timers. Hidden without relevant data; filters are in Health & buffs.",
@@ -114,7 +124,7 @@ function FieldKit.BuildJourneySections(sections,actions)
  }
  local layout={
   {kind="preview",preview=0},
-  {kind="note",label="Move and size your windows",tip="Drag windows in play by default. Use Arrange previews for hidden modules. Lock when the layout feels right."},
+  {kind="note",label="Move and size your windows",tip="Window dimensions and grouping below apply to unthemed cards and opened detail windows. For the themed HUD use Element scale in Look. Lock positions when finished."},
   {kind="check",label="Lock window positions",tip="Drag active windows during play by default. Locking keeps their current positions; grouping and dimensions stay unchanged.",
    get=function() return FieldKitRebornDB.windowsLocked end,set=function(v) FieldKit.SetWindowsLocked(v) end},
   {kind="check",label="Align left HUD cards",tip="Move the left cards together. Turn off to move every card independently. Custom sizes are kept in both modes.",
@@ -125,7 +135,7 @@ function FieldKit.BuildJourneySections(sections,actions)
  for _,item in ipairs(FieldKitCardLayout.Options()) do table.insert(layout,item) end
  local look={
   {kind="zoneThemes"},
-  {kind="note",label="Visual style",tip="Chronicle look for FieldKit cards only. Does not change other addons."},
+  {kind="note",label="Visual style",tip="Card style selects the unthemed cards. An active HUD theme supplies its own artwork. Card opacity affects HUD cards; settings window size and opacity are in Preferences."},
   {kind="choice",label="Card style",values={"Decorative","Classic"},get=function() return FieldKitRebornDB.cardStyle end,
    set=function(v) FieldKitRebornDB.cardStyle=v;T.Refresh() end},
   {kind="slider",label="Card background opacity",min=0,max=100,step=1,
@@ -268,6 +278,11 @@ function U.Choice(parent,name,label,x,y,w,values,get,set,refresh)
  button.callback=function()
   local shown=menu:IsShown();U.CloseMenus()
   if not shown then
+   -- Popup is parented outside the scroll viewport. Match its owner's scale
+   -- explicitly when the settings shell has been resized.
+   local ownerScale=button.GetEffectiveScale and button:GetEffectiveScale() or 1
+   local rootScale=UIParent.GetEffectiveScale and UIParent:GetEffectiveScale() or 1
+   menu:SetScale(ownerScale/math.max(.1,rootScale))
    menu:ClearAllPoints()
    local bottom=button.GetBottom and button:GetBottom()
    if bottom and bottom<menu:GetHeight()+12 then menu:SetPoint("BOTTOMLEFT",button,"TOPLEFT",0,3)
@@ -922,13 +937,19 @@ function U.Select(id)
 end
 
 -- Responsive width/reflow and vertical scrolling, not unreadable whole-window scaling.
+function U.ApplyPanelAppearance()
+ if not U.frame then return end
+ T.State(U.frame,false)
+ if FieldKitReferenceHUD then FieldKitReferenceHUD.Settings(U) end
+end
 function U.Reflow()
  if not U.frame then return end
  local sw,sh=UIParent:GetWidth(),UIParent:GetHeight()
  local themed=T.zone~="classic"
  local w,h=math.max(740,math.min(themed and 1260 or 1000,sw-24)),math.max(560,math.min(themed and 780 or 760,sh-24))
  U.screenWidth=sw;U.screenHeight=sh;U.frame:SetWidth(w);U.frame:SetHeight(h)
- U.frame:SetScale(math.min(1,(sw-48)/w,(sh-48)/h)/(themed and (UIParent.GetEffectiveScale and UIParent:GetEffectiveScale() or 1) or 1));T.Update(U.frame)
+ local size=FieldKit.Number(FieldKitRebornDB and FieldKitRebornDB.settingsPanelScale,100,60,110)/100
+ U.frame:SetScale(math.min(size,(sw-48)/w,(sh-48)/h)/(themed and (UIParent.GetEffectiveScale and UIParent:GetEffectiveScale() or 1) or 1));T.Update(U.frame)
  local sidebar=themed and math.floor(w*.218) or (w<900 and 174 or 204);local x=sidebar+36;local content=w-x-34
  if U.navigation then
   U.navigation:SetWidth(sidebar+6)

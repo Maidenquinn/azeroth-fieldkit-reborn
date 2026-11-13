@@ -30,6 +30,8 @@ shared = {
     "known", "lastStats", "chestsOpened",
     # Navigation and view history, not gameplay/interface settings.
     "uiSchema", "uiPage", "panelSection", "panelTab", "windowPage",
+    # Application shell: stays readable when switching HUD profiles.
+    "settingsPanelScale", "settingsPanelOpacity",
     # Profile storage and migration itself.
     "schema", "activeHudProfile", "interfaceProfiles", "profilePendingSlot",
     # Technical bookkeeping for native game-owned overlays. These are derived

@@ -30,6 +30,7 @@ function T.Style(frame)
  return FieldKitRebornDB and FieldKitRebornDB.cardStyle==2 and 2 or 1
 end
 function T.Opacity(frame)
+ if frame and frame.GetName and frame:GetName()=="FieldKitPanel" then return FieldKit.Number(FieldKitRebornDB and FieldKitRebornDB.settingsPanelOpacity,100,0,100)/100 end
  if not frame or not frame.fieldkitSkin or not frame.fieldkitSkin.hud then return 1 end
  return FieldKit.Number(FieldKitRebornDB and FieldKitRebornDB.cardOpacity,100,0,100)/100
 end

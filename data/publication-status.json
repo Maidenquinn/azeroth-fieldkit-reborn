@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.7",
+  "version": "0.1.0-reborn.8",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
-  "inGameTestByAgent": true,
+  "inGameTestByAgent": false,
   "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Client 0.6.3 chat QA: native ChatFrame1 dimensions changed through real width/height sliders from 460x210 to 550x280 and restored; both existing native messages retained. Font dropdown labels, selection of Arial Narrow and restoration of Original font verified. Negative top inset confirmed. Native chat without theme and destructive resize/history cases covered by production fixtures. No broad combat or co-op validation. Long native /help text observed inside the card; clean production reload performed after removing diagnostic."
+  "inGameTestScope": "Candidate .8 settings client QA interrupted by the maintainer. Synthetic production setters: 18 pages, 119 schema entries, 924 setter cases in four theme contexts. Optional artwork checked for three layouts and three map shapes; production UV output reconstructed and visually inspected offline. Installed public API fixtures executed. No complete live visual or co-op acceptance claimed."
 }

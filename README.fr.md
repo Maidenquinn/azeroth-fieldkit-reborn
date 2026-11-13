@@ -1,9 +1,9 @@
 # Azeroth FieldKit Reborn
 
 Version indépendante de FieldKit pour **Azeroth Survivors Reborn 0.6.3**.
-Le candidat **0.1.0-reborn.7** adapte le HUD et les compteurs au nouveau client.
+Le candidat **0.1.0-reborn.8** adapte le HUD et les compteurs au nouveau client.
 
-[Audit API et correctifs HUD](docs/REBORN_API_AUDIT.md) · [Audit du port](docs/REBORN_PORT.md) · [Recette en jeu](docs/REBORN_ACCEPTANCE.txt) ·
+[Audit API et correctifs HUD](docs/REBORN_API_AUDIT.md) · [Audit paramètres/thèmes](docs/REBORN_SETTINGS_AUDIT.md) · [Audit du port](docs/REBORN_PORT.md) · [Recette en jeu](docs/REBORN_ACCEPTANCE.txt) ·
 [Téléchargements](https://github.com/Maidenquinn/azeroth-fieldkit-reborn/releases)
 
 Le contenu de partie vient des tables Reborn : sorts des nouvelles classes,

@@ -59,6 +59,7 @@ for _,b in ipairs(button.choiceButtons) do
  assert(b:GetFrameStrata()=="TOOLTIP" and b:GetFrameLevel()>content:GetFrameLevel())
  assert(b.fieldkitLabel:GetText()~="")
 end
-button:Click();assert(menu:IsShown());button.choiceButtons[2]:Click()
+button.GetEffectiveScale=function() return .7 end
+button:Click();assert(menu:IsShown() and menu:GetScale()==.7);button.choiceButtons[2]:Click()
 assert(selected==2 and not menu:IsShown())
 print("PASS Reborn native/themed chat dimensions, opt-in from controls, wrapped-text bounds, history without getter, dropdown labels/clicks/template layers")

@@ -1,4 +1,9 @@
-# Audit FieldKit Reborn — 12 novembre 2026, reborn.7
+# Audit FieldKit Reborn — 13 novembre 2026, reborn.8
+
+Les réglages et leur cohérence avec les thèmes sont détaillés dans
+[l’audit des paramètres](REBORN_SETTINGS_AUDIT.md), avec un catalogue généré des
+18 pages et les limites de la recette. Les paragraphes historiques ci-dessous
+conservent la portée de validation propre à chaque version.
 
 ## Sources contrôlées
 
@@ -8,7 +13,7 @@ client. Les huit guides officiels ont été relus, dont
 [les parties et zones](https://azreborn.com/guides/runs-and-zones).
 [REBORN_API_COVERAGE.json](REBORN_API_COVERAGE.json) conserve les définitions,
 références, fichiers, lignes et empreintes des sources : 129 déclarations Lua
-AZS et 94 symboles documentés, dont 79 référencés. Une référence statique ne
+AZS, 94 symboles documentés et 79 symboles AZS référencés par l’addon. Une référence statique ne
 prouve ni une fonctionnalité active ni une validation en jeu.
 
 Le générateur `tools/build_reborn_creatures.py` lit également les définitions

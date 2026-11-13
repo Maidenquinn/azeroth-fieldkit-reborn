@@ -40,6 +40,7 @@ function Minimap:SetZoom(value) self.zoom=value end
 function Minimap:GetZoom() return self.zoom or 0 end
 function Minimap:GetZoomLevels() return 6 end
 local openedLevels=0
+FieldKitRebornDB.storedLevelsBadge=true
 function AZS_GetStoredLevels() return 2 end
 function AZS_OpenStoredLevels() openedLevels=openedLevels+1 end
 function AZS_IsHudShown(key) return state[key] end
@@ -144,7 +145,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
   C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant",variant);C.Set("zoneThemes",true)
   assert(H.healthRoot:IsShown() and H.health:IsShown() and H.hp:GetText()~="")
   assert(H.health:GetParent()==H.player and H.player:GetParent()==H.healthRoot)
-  assert(FieldKitPlayerBar:GetParent()==H.storage)
+  assert(FieldKitPlayerBar:GetParent()==UIParent,"Optional under-character HP is independent of portrait HP")
   assert(H.xpRoot:IsShown() and H.xp:IsShown())
   if FieldKitReferenceHUD.active then local r=FieldKitReferenceHUD.layout.rects.dock;assert(H.dock:GetWidth()==r[3] and H.dock:GetHeight()==r[4]) else assert(H.dock:GetHeight()==88 and H.dock:GetWidth()==500) end
   assert(not H.micro:IsShown(),"Native menus must be collapsed by default")
@@ -1574,6 +1575,7 @@ print("Themed teammate cards: states, native replacement, strata, individual mov
 -- alpha.34: compact amounts, real damage per spell next to the share, the premium Damage header, the chat fill inside the frame.
 do
  local savedLang=FieldKitRebornDB.language
+ local savedValues=FieldKitRebornDB.meterValues;FieldKitRebornDB.meterValues=3
  FieldKit_SetLanguage("en")
  assert(R.Amount(nil)=="?" and R.Amount("x")=="?","a missing value is never turned into a number")
  assert(R.Amount(0)=="0" and R.Amount(950)=="950" and R.Amount(1250)=="1,250" and R.Amount(9999)=="9,999" and R.Amount(12400)=="12.4 k" and R.Amount(999000)=="999.0 k" and R.Amount(1200000)=="1.2 M" and R.Amount(-1250)=="-1,250","EN amounts")
@@ -1595,7 +1597,10 @@ do
   -- six lines visible, one value column, right-aligned, nothing overflowing
   local shown={};for _,r in ipairs(f.rows) do if r:IsShown() and r.fieldkitLine then table.insert(shown,r) end end
   assert(table.getn(shown)==6,tag..": the six lines stay visible ("..table.getn(shown)..")")
-  assert(shown[1].value:GetText()=="42 %" and shown[1].amount:GetText()==A(12400),tag..": share and real amount as two pieces ("..tostring(shown[1].value:GetText()).." / "..tostring(shown[1].amount:GetText())..")")
+  local mode=FieldKitRebornDB.meterValues
+  local expectedValue=mode==2 and (A(120.5).." DPS") or "42 %"
+  local expectedAmount=mode==1 and (A(120.5).." DPS") or A(12400)
+  assert(shown[1].value:GetText()==expectedValue and shown[1].amount:GetText()==expectedAmount,tag..": selected meter value format: "..shown[1].value:GetText().." / "..shown[1].amount:GetText().." expected "..expectedValue.." / "..expectedAmount)
   assert(shown[2].value:GetText()=="30 %" and shown[2].amount:GetText()==A(1250),tag..": second line")
   assert(shown[3].value:GetText()=="20 %" and shown[3].amount:GetText()=="",tag..": no amount in the data -> only the share, nothing invented")
   assert(shown[4].value:GetText()=="" and shown[4].amount:GetText()==A(500),tag..": no share in the data -> only the amount")
@@ -1611,7 +1616,7 @@ do
   end
   assert(shown[1].amountSep:IsShown() and not shown[3].amountSep:IsShown() and not shown[4].amountSep:IsShown(),tag..": thin separator only when both pieces exist")
   assert(shown[2].label.referenceFullText==longName and shown[2].label:GetStringWidth()<=shown[2].label:GetWidth(),tag..": the full name is kept as data and the displayed text fits its box")
-  assert(shown[1].bar:IsShown() and shown[1].bar:GetWidth()==a[3]-160,tag..": the proportional bar keeps its width")
+  assert(shown[1].bar:IsShown() and shown[1].bar:GetWidth()==a[3]-190 and shown[1].rateText:IsShown(),tag..": rate fits beside the proportional bar")
   assert(shown[1].icon:IsShown(),tag..": icon")
   -- header: amount, rate, banner structure
   assert(f.total:GetText()==A(29250),tag..": header total with the compact format")
@@ -1635,7 +1640,7 @@ do
  FieldKitMeterLedger.Read=function() return {},0,nil,true end;C.Refresh(true)
  local anyValue=false;for _,r in ipairs(R.frames.Damage.rows) do if r:IsShown() and r.value:GetText()~="" then anyValue=true end end
  assert(not anyValue,"no data: no amount shown");FieldKitMeterLedger.Read=read
- FieldKit_SetLanguage(savedLang or "en")
+ FieldKitRebornDB.meterValues=savedValues;FieldKit_SetLanguage(savedLang or "en")
  -- chat: the dark fill stays inside the frame (the corners of the border art are cut diagonally)
  for _,zone in ipairs({"elwynn","naxx"}) do
   C.Set("zoneThemeMode",zone);C.Set("zoneThemeVariant","complete");C.Set("zoneThemes",true);C.Refresh(true)

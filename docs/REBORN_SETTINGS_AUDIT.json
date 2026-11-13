@@ -1,0 +1,1126 @@
+{
+  "schemaVersion": 1,
+  "validation": "synthetic production-schema setter matrix; not live visual/co-op acceptance",
+  "cases": 924,
+  "variants": [
+    "off",
+    "minimal",
+    "complete",
+    "alternative"
+  ],
+  "pages": [
+    {
+      "id": "home",
+      "title": "Overview",
+      "items": [
+        {
+          "kind": "home",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        }
+      ]
+    },
+    {
+      "id": "combat",
+      "title": "Combat text",
+      "items": [
+        {
+          "kind": "combat",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Health & buffs",
+      "items": [
+        {
+          "kind": "preview",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Health bar under the character",
+          "id": "playerBar",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Player health format",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Numbers",
+            "Percentage",
+            "Numbers + percentage"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Buff icons under the health bar",
+          "id": "playerBuffs",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Shield on the health bar",
+          "id": "playerShield",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Enemy target health numbers",
+          "id": "targetHealth",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Target health format",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Numbers",
+            "Percentage",
+            "Numbers + percentage"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Track totems",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Track summons",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Track native effect timers",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Track active buffs",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "bosses",
+      "title": "Bosses",
+      "items": [
+        {
+          "kind": "preview",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Replace the game's boss bars",
+          "id": "bossFrame",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Boss schedule timeline",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Boss frame appearance",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Chronicle classic",
+            "Compact",
+            "Chronicle Premium"
+          ]
+        },
+        {
+          "kind": "choice",
+          "label": "Boss health format",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Numbers",
+            "Percentage",
+            "Numbers + percentage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alerts",
+      "title": "Alerts",
+      "items": [
+        {
+          "kind": "preview",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Low health warning",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Sound on low health",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "slider",
+          "label": "Low health limit",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 10,
+          "maximum": 70
+        },
+        {
+          "kind": "check",
+          "label": "Native mechanic warnings",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Boss banner messages",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Mechanic banner messages",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Party revive banners",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Warn before the next boss",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "slider",
+          "label": "Boss arrival warning",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 3,
+          "maximum": 30
+        }
+      ]
+    },
+    {
+      "id": "cards",
+      "title": "HUD cards",
+      "items": [
+        {
+          "kind": "note",
+          "label": "Which HUD cards to show",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Run mode card",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Hide mode card without difficulty data",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Stats",
+          "id": "statsFrame",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Gold and chest price",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Kills under the gold",
+          "id": "replaceTally",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Damage taken",
+          "id": "takenFrame",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Accessories",
+          "id": "gearFrame",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Effects tracker",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Next boss reminder",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Next boss in Lairs",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Stored level-up reminder",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Show received active affixes",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Group damage meter",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "meter",
+      "title": "Combat meter",
+      "items": [
+        {
+          "kind": "note",
+          "label": "Your combat meter",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Combat meter",
+          "id": "meterFrame",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Local meter view",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Damage",
+            "Healing",
+            "Boss damage",
+            "Damage taken",
+            "Party DPS",
+            "Kills"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Meter tabs + reset",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Spell hit tips on hover",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Damage meter values",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "DPS + share",
+            "Damage + DPS",
+            "Damage + DPS + share"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Keep separate taken window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Detach Damage window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Detach Healing window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Detach Boss damage window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Detach Damage taken window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Detach Party DPS window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Detach Kills window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "layout",
+      "title": "Layout & arrange",
+      "items": [
+        {
+          "kind": "preview",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "note",
+          "label": "Move and size your windows",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Lock window positions",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Align left HUD cards",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Group accessories and statistics",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Window to resize",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Run mode",
+            "Damage",
+            "Damage taken",
+            "Lairs",
+            "Accessories",
+            "Statistics",
+            "Gold and chest price",
+            "Group damage",
+            "Teammate 1",
+            "Teammate 2",
+            "Teammate 3",
+            "Teammate 4",
+            "Effects",
+            "Revive",
+            "Run reminders",
+            "Native warnings",
+            "My card"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Automatic size for this window",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "slider",
+          "label": "Window width",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 220,
+          "maximum": 800
+        },
+        {
+          "kind": "slider",
+          "label": "Window height",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 22,
+          "maximum": 800
+        },
+        {
+          "kind": "check",
+          "label": "Keep this window above card choices",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "look",
+      "title": "Look",
+      "items": [
+        {
+          "kind": "zoneThemes",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "note",
+          "label": "Visual style",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "choice",
+          "label": "Card style",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Decorative",
+            "Classic"
+          ]
+        },
+        {
+          "kind": "slider",
+          "label": "Card background opacity",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "kind": "check",
+          "label": "Keep pinned details above card choices",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "profiles",
+      "title": "Profiles",
+      "items": [
+        {
+          "kind": "profiles",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        }
+      ]
+    },
+    {
+      "id": "worldmarkers",
+      "title": "World markers",
+      "items": [
+        {
+          "kind": "worldmarkers",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        }
+      ]
+    },
+    {
+      "id": "map",
+      "title": "Minimap",
+      "items": [
+        {
+          "kind": "check",
+          "label": "Chests on the minimap",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Lairs",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Guardians on the minimap",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Highlight the flagged lair",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "nameplates",
+      "title": "Nameplates",
+      "items": [
+        {
+          "kind": "check",
+          "label": "Show only elites and bosses",
+          "id": "hidePlates",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Hide unclassified monsters",
+          "id": "hideUnknown",
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "coop",
+      "title": "Group & co-op",
+      "items": [
+        {
+          "kind": "preview",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "note",
+          "label": "Experimental co-op",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Co-op teammate cards",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Teammate health format",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Numbers",
+            "Percentage",
+            "Numbers + percentage"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Show group cards",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Show my own card",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Card detail",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Compact",
+            "Standard",
+            "Full"
+          ]
+        },
+        {
+          "kind": "slider",
+          "label": "Card size",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 70,
+          "maximum": 130
+        },
+        {
+          "kind": "check",
+          "label": "Action history",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "slider",
+          "label": "Actions shown",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 1,
+          "maximum": 20
+        },
+        {
+          "kind": "check",
+          "label": "History: buffs",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "History: damage and healing",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "History: spell icons",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Co-op revive progress",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Hide native teammate frames",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Share spell breakdowns with group",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "syncStatus",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        }
+      ]
+    },
+    {
+      "id": "chat",
+      "title": "Chat layout",
+      "items": [
+        {
+          "kind": "note",
+          "label": "Chat layout",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Customize main chat",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Unlock chat position",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "slider",
+          "label": "Chat width",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 280,
+          "maximum": 800
+        },
+        {
+          "kind": "slider",
+          "label": "Chat height",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 100,
+          "maximum": 450
+        },
+        {
+          "kind": "slider",
+          "label": "Chat history lines",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 100,
+          "maximum": 500
+        }
+      ]
+    },
+    {
+      "id": "chatcolors",
+      "title": "Chat colors & fonts",
+      "items": [
+        {
+          "kind": "note",
+          "label": "Chat colors and typography",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "slider",
+          "label": "Chat font size",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 10,
+          "maximum": 20
+        },
+        {
+          "kind": "slider",
+          "label": "Chat background opacity",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "kind": "choice",
+          "label": "Chat font family",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Original font",
+            "Friz Quadrata",
+            "Arial Narrow",
+            "Morpheus",
+            "Skurri"
+          ]
+        },
+        {
+          "kind": "choice",
+          "label": "Chat background color",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "Charcoal",
+            "Obsidian",
+            "Midnight blue",
+            "Warm brown",
+            "Forest",
+            "Black"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Override chat text colors",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "choice",
+          "label": "Chat text color",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "choices": [
+            "White",
+            "Warm white",
+            "Gold",
+            "Soft green",
+            "Ice blue",
+            "Muted gray"
+          ]
+        },
+        {
+          "kind": "check",
+          "label": "Fade older chat lines",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "chatcopy",
+      "title": "Chat copy",
+      "items": [
+        {
+          "kind": "note",
+          "label": "Local chat copy",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Enable local chat copy",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Show chat Copy button",
+          "id": null,
+          "getter": true,
+          "setter": true
+        }
+      ]
+    },
+    {
+      "id": "interface",
+      "title": "Preferences",
+      "items": [
+        {
+          "kind": "note",
+          "label": "Settings panel",
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "slider",
+          "label": "Settings panel size",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 60,
+          "maximum": 110
+        },
+        {
+          "kind": "slider",
+          "label": "Settings panel opacity",
+          "id": null,
+          "getter": true,
+          "setter": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "kind": "language",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "kind": "check",
+          "label": "Compact action bar",
+          "id": "compactBar",
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "check",
+          "label": "Hide gryphons",
+          "id": null,
+          "getter": true,
+          "setter": true
+        },
+        {
+          "kind": "camera",
+          "label": null,
+          "id": null,
+          "getter": false,
+          "setter": false
+        }
+      ]
+    }
+  ],
+  "customEditors": "Combat text, world markers, theme composition and profiles use custom widgets, separately exercised by the full verification fixtures.",
+  "runtimeHashes": {
+    "BossTimeline.lua": "8fb5bedc592fd38985bf33e9f0908c55dde99adf25f5c34ad2b0a45acc7fbb86",
+    "CardLayout.lua": "eeaf5a7ce67891f71e19eab70e3b6e6c24063aaa3440807787dd533177344f99",
+    "CombatOptions.lua": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
+    "CombatText.lua": "31e3ec5ede0904b6cdd7b566f1fe29a0fb6a554a889192cdb1b82293a7e53d44",
+    "Config.lua": "ec1cdc7fd449d4e3f869bfa6e91a9e63ae970de9b31f094e3e588b48f9904c67",
+    "Coop.lua": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1",
+    "CopyLog.lua": "427633d497623d79fb553fc5df86a036b8bb69cff3dd53e64a578c8faacf6202",
+    "Diagnostics.lua": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
+    "FieldKit.lua": "d0d0f8ac108934ff6a1c134f7e015b42b925c7e66839f86fa5c1e7970e73503d",
+    "GameCompatibility.lua": "6be3f917a9287a5d710533c050db198da7722cd34758985a2de9155bf4bd16b7",
+    "GroupHistory.lua": "77a5abe50cf781f15a31f6786f4e58dda2003951ff616a8ba60d823d6c246af8",
+    "HudStack.lua": "01a843571c9e034e56618ac74155b01ddde0efb151e4c72590400f155c51b73f",
+    "Interface.lua": "dca954e4afe0022dc93c0880a62df8410c98cdbcf7279aa0fbfccba41da5e914",
+    "InterfaceStrings.lua": "b68edea211fc6d6985c14816d4952176d850734c1f058bed1319382caa8449cb",
+    "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
+    "Loadout.lua": "8de0c88266dc79d1ea924fe76c36e028c655be51b5355dffcbfd71fe8347faa5",
+    "Localization.lua": "f285d1f416e9e57331827ceb3cdfad4beab810c22bb7acac1e1ecdd8616a5920",
+    "MeterLedger.lua": "35c06d4fe2dbd888aae688ff8ec8523af15e293fc9231b85cf0c260bf2714536",
+    "MeterSuite.lua": "abc5fe3246fa2735c2889e3b25b4957dead4aa56f70733edc25d7a70ca81cb59",
+    "NativeData.lua": "5d7dffecc5b3a9450429fffdb97ffeb26287e9631e35d12a402c05ead3bd61c9",
+    "NativeTools.lua": "fb04ac5fce7a84b7970626f73869bc6ee69dbab125c1ae257e53c8d825c7f18e",
+    "OptionsSchema.lua": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07",
+    "PartyDetails.lua": "58e55afcca75f8d20c5b36fb8f42cc940a7fd1174afe2fdb2b73b8e379cdd1f4",
+    "PartySync.lua": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
+    "PortraitCatalog.lua": "e0e92f740f780fc084a5ed6ecc511e597d2380aae6703ea45fe2a2cba58e269b",
+    "Portraits.lua": "c1451d1b391c9ac1051cde264f17e970fa2dd0261e6c9884e09e959bdf39f220",
+    "Positions.lua": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
+    "Preview.lua": "0d42c42f5be64b40a2b1bcf5a69d635858dedaba409352d88555398f734a59bc",
+    "PreviewVisibility.lua": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
+    "Profiles.lua": "6f6140c2c4a787fd7e96498e734a836ff87b4819156bbb7fba66b03e0111a49b",
+    "Reborn.lua": "569661ef1c151e3f9a0183b0d2cbcafb6172b885aab1934cee41010589c5ea0b",
+    "RebornCreatures.lua": "5987d51d0128677a5ef34579177a25f8c8ec95dd7cb5544b9e6c2e153ccdcd9c",
+    "RebornHUD.lua": "9a9cee32d896579f74124dea234cc880ee684f5823e31c7337c6e8274a23b7f7",
+    "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
+    "ReferenceArt.lua": "b042e0777110f3a4519ccfadbf57bb4dcbb2e68ca9896f58f066775074605edf",
+    "ReferenceHUD.lua": "c565695b1a3b1162dcc61a86902db6f0c0702ebe923d8d821f6763532009f383",
+    "RunMode.lua": "efceae75720932ce171fd798b9c7c40ae45625d0f5d7ef1d1ae5e8ff66c2f48a",
+    "Runtime.lua": "318dd0aa730683879f33a1de62fc1fc64e67019b26593baefb03f6d3c400f0b1",
+    "ScreenLayers.lua": "75b3db41420299ef5a4165f021b0f1e87b875318e49ba3c73f11ec12f7d9644c",
+    "Seed.lua": "a1e79ab07c8b41dca34f8fa730f964cd7e79ece5700a1e5d407f941060ee655c",
+    "Settings.lua": "23e840592514422ac9ba8a29fd88bcf93ffa6f6e9a43624bbcf6a76fdfd34951",
+    "SpellAssets.lua": "5c443e759c4ff663fd0070f06566ac0de5e8c984c963341f50be72c8c4545681",
+    "TakenDetails.lua": "2444aa4578119eae2da08653ce627caccb7acc704ec2551dc3c8c06bcd71f563",
+    "Theme.lua": "a3489f16e1733b81fb1e24bb894b37d6fdd7dac64922b164f41324faa024f56d",
+    "ThemeHUD.lua": "6e36e8bb85ce419ccdfe74665ca3a2d09d322c83a3c743daa513fa8f1fde0f62",
+    "ThemeMinimap.lua": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2",
+    "ThemeTarget.lua": "9200eb58da65676a6e3aef3b0fe4d6cd4679adb4d9f8716332f0d8c60ee44140",
+    "WorldAnchors.lua": "e026f087e0b48acc4fb83ea45b66ad6d744799909c031b153bcc62e4beac4aeb",
+    "WorldMarkers.lua": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
+    "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
+    "ZoneThemeRegistry.lua": "b30035d19d58e17ffc93d360ad377e2bcbcb3fbe0292fe67155d3e02c92537ad",
+    "ZoneThemes.lua": "e0f979de8516594e65420bdf3918b8e934a7187fc4cc095fb7bab43914d41f68"
+  }
+}

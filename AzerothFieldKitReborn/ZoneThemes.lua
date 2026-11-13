@@ -205,7 +205,11 @@ function C.NativeReplace()
    if ok and type(value)=="boolean" then saved[key]=value end
   end
   if type(saved[key])=="boolean" and not (key=="meter" and C.nativeMeterOpen) then
-   local ok,current=pcall(AZS_IsHudShown,key);if ok and current==true then FieldKit.SetHudShown(key,false) end
+   -- The theme owns the entire native resources container. Turning its own
+   -- counter strip off must not bring back a second, partial native tally.
+   local restore=key=="levels" and not FieldKitRebornDB.storedLevelsBadge
+   local wanted=restore and saved[key] or false
+   local ok,current=pcall(AZS_IsHudShown,key);if ok and current~=wanted then FieldKit.SetHudShown(key,wanted) end
   end
  end
  end
@@ -261,6 +265,9 @@ function C.Refresh(force)
   return
  end
  H.Update(variant,zone);if FieldKitReferenceHUD.Has(zone,variant) then FieldKitReferenceHUD.Update(variant,zone) else FieldKitReferenceHUD.Stop() end;FieldKitThemeTarget.Update(variant)
+ -- The optional centre-screen HP bar is independent of the theme's portrait HP.
+ -- Keep its saved position and native visibility; choices still mask it above.
+ C.Mask(getglobal("FieldKitPlayerBar"),false)
  C.NativeReplace()
  FieldKitThemeMinimap.Apply(variant) -- square / round / native: Apply honours the requested shape (native = restore)
  H.back:Hide()
@@ -268,9 +275,10 @@ function C.Refresh(force)
  local rightY=(zone=="naxx" and variant~="alternative") and -312 or -116
  for _,kind in ipairs({"Damage","Lairs","Effects","Accessories","Stats","Timeline","Reminders"}) do
   local r=routes[kind];local frame=getglobal(r[1])
-  local visible=C.open[kind]
+  local persistent=(kind=="Timeline" or kind=="Reminders") and FieldKitRebornDB[r[2]]
+  local visible=C.open[kind] or persistent
   C.Mask(frame,not visible)
-  if frame and visible then
+  if frame and visible and not persistent then
    C.DetailHandle(frame)
    if kind=="Stats" then FieldKitCardLayout.Rows(frame,frame.fieldkitNaturalHeight or frame:GetHeight(),frame.fieldkitRowCount or table.getn(frame.rows),"stats",FieldKitRebornDB.statsCollapsed);T.Update(frame) end
    local right=kind=="Accessories" or kind=="Stats" or (kind=="Effects" and zone=="naxx") or variant=="alternative"

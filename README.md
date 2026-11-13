@@ -1,7 +1,7 @@
 # Azeroth FieldKit Reborn
 
 Independent FieldKit adaptation for **Azeroth Survivors Reborn**, initially
-targeting client **0.6.1**. Version **0.1.0-reborn.7** is a development candidate.
+targeting client **0.6.1**. Version **0.1.0-reborn.8** is a development candidate.
 
 [Français](README.fr.md) · [Port audit](docs/REBORN_PORT.md) ·
 [Native acceptance recipe](docs/REBORN_ACCEPTANCE.txt) ·

@@ -400,7 +400,7 @@ function P.Compact(frame,d)
  bar:Show();FieldKitTheme.Font(bar.text,10,{1,1,1});bar.text:SetText(d.hpText)
  layout.hp={x,width-right,box[3]+spec.hp,spec.hpH}
  local res=frame.mpBar
- local hasResource=spec.res and d.mana~=nil and d.manaMax~=nil and d.manaMax>0 and not d.muted
+ local hasResource=spec.res and type(d.mana)=="number" and type(d.manaMax)=="number" and d.manaMax>0 and not d.muted
  if hasResource then
   P.SizeBar(res,frame,x,box[3]+spec.res,width-right-x,spec.resH)
   P.FillBar(res,d.mana/d.manaMax,d.powerColor[1],d.powerColor[2],d.powerColor[3]);res.fieldkitColor=d.powerColor
@@ -433,7 +433,7 @@ function P.UpdateMember(index,active)
  if not P.CardsOn() or (not exists and not preview) then frame:Hide();if not isPlayer then P.Stock(index,false) end;return end
  local hp=type(UnitHealth)=="function" and FieldKit.Number(UnitHealth(frame.unit),nil,0)
  local max=type(UnitHealthMax)=="function" and FieldKit.Number(UnitHealthMax(frame.unit),nil,0)
- local known=not preview and hp~=nil and max and max>0
+ local known=not preview and type(hp)=="number" and type(max)=="number" and max>0
  if not known and not preview then frame:Hide();if not isPlayer then P.Stock(index,false) end;return end
  P.Style(frame,themed)
  frame:SetScale(math.floor(FieldKit.Number(FieldKitRebornDB.partyCardScale,100,70,130)/5+.5)*5/100)
@@ -464,7 +464,7 @@ function P.UpdateMember(index,active)
    detail=preview and FieldKit_L("Preview") or ((level and (FieldKit_L("Lvl").." "..level.." ") or "")..(class or "?")),
    state=status and string.upper(FieldKit_L(status)) or nil,
    fraction=known and (dead and 0 or fraction) or nil,barColor=P.HealthColor(fraction,muted),
-   hpText=known and FieldKit_FormatHealth(hp,max,3) or "",muted=muted,mana=mana,manaMax=manaMax,powerColor=powerColor,icons=icons})
+   hpText=known and FieldKit_FormatHealth(hp,max,FieldKitRebornDB.partyHealthMode) or "",muted=muted,mana=mana,manaMax=manaMax,powerColor=powerColor,icons=icons})
   frame:Show();if not isPlayer then P.Stock(index,P.ReplaceOn() and known and true or false) end;return
  end
  -- legacy (non-themed) card: the original generic window rows

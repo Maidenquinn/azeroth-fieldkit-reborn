@@ -74,6 +74,7 @@ function R.CounterBand()
    local value=FieldKit.Number(values[i],nil,0);f.label:SetText(V.Amount(value));f.counterTitle=names[i];f.counterValue=value and string.format("%.0f",value) or "?";f:Show()
   else f:Hide() end
  end
+ if FieldKitRebornDB.moneyFrame then H.counterRoot:Show() else H.counterRoot:Hide() end
 end
 -- Draw six copies of a clean existing socket from the atlas. Cover the complete
 -- baked seven-socket row first; the ornament/XP/footer artwork is unchanged.
@@ -123,6 +124,8 @@ function R.PlaceSteed()
 end
 function R.RefreshPresentationDetails()
  local H=FieldKitThemeHUD;R.ProgressBar();R.CounterBand()
+ local showMode=FieldKitReferenceHUD.ModeShown()
+ if showMode then H.mode:Show() else H.mode:Hide();if FieldKitReferenceHUD.heroic then FieldKitReferenceHUD.heroic:Hide() end end
  local r,g,b=R.HealthColor(UnitHealth("player"),UnitHealthMax("player"));if H.health and r then H.health:SetStatusBarColor(r,g,b) end
  R.CacheEnemyIcons()
 end

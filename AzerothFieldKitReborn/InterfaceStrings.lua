@@ -1,5 +1,15 @@
 -- Presentation-only additions. Native creature/spell names are never translated.
 local fr=FieldKitLocale.fr
+fr["Adds a separate kills line below the gold without a theme. With a theme, kills already belong to the main counter strip controlled by Gold and chest price."]="Ajoute une ligne de victimes sous l’or sans thème. Avec un thème, les victimes font déjà partie du bandeau principal commandé par Or et prix du coffre."
+fr["Your character bonuses: damage, haste, critical chance, lifesteal and other selected statistics. Currency counters are configured separately."]="Les bonus de votre personnage : dégâts, hâte, chances de critique, vol de vie et autres statistiques sélectionnées. Les compteurs de monnaies se règlent séparément."
+fr["Show the difficulty block and its information button. With a theme, hides the entire mode strip; the map and zone name stay visible. Reborn provides the native difficulty rank, not the old game's multipliers."]="Affiche le bloc de difficulté et son bouton d’information. Avec un thème, masque tout le bandeau du mode ; la carte et le nom de zone restent visibles. Reborn fournit le rang de difficulté, pas les multiplicateurs de l’ancien jeu."
+fr["Show the full counter strip: gold, chest price and, with a theme, kills and event currency. Off hides its artwork, icons and values together. With a theme, no empty native counters are substituted."]="Affiche le bandeau des compteurs : or, prix du coffre et, avec un thème, victimes et monnaie d’événement. Désactiver masque ensemble le décor, les icônes et les valeurs. Avec un thème, aucun compteur natif vide ne le remplace."
+fr["Settings panel"]="Panneau de réglages"
+fr["Settings panel size"]="Taille du panneau FieldKit"
+fr["Settings panel opacity"]="Opacité du panneau FieldKit"
+fr["Size and background opacity of this window, with or without a theme. Text and controls remain opaque. Independent of HUD scale, card opacity and HUD profiles."]="Taille et opacité du fond de cette fenêtre, avec ou sans thème. Le texte et les contrôles restent opaques. Ces réglages sont indépendants du HUD, de ses cartes et de ses profils."
+fr["Window dimensions and grouping below apply to unthemed cards and opened detail windows. For the themed HUD use Element scale in Look. Lock positions when finished."]="Les dimensions et regroupements ci-dessous concernent les cartes sans thème et les fenêtres de détails. Pour le HUD thématique, utilisez Taille de l’élément dans Style et thèmes. Verrouillez les positions une fois terminé."
+fr["Card style selects the unthemed cards. An active HUD theme supplies its own artwork. Card opacity affects HUD cards; settings window size and opacity are in Preferences."]="Le style des cartes concerne les cartes sans thème. Un thème actif utilise ses propres décors. L’opacité des cartes concerne le HUD ; la taille et l’opacité du panneau FieldKit sont dans Préférences."
 local labels={
  ["Unidentified source"]="Source non identifiée",
  ["Guardian · lair %d"]="Gardien · antre %d",

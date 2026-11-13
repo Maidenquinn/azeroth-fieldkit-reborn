@@ -3,18 +3,18 @@
   "liveGameValidation": false,
   "runtimeModules": 52,
   "runtimeSHA256": {
-    "Runtime.lua": "8d5c8ba0366cb5e4e670a923f6f92b8950073c7d515cf92da7e043e7db3eaab4",
+    "Runtime.lua": "318dd0aa730683879f33a1de62fc1fc64e67019b26593baefb03f6d3c400f0b1",
     "RebornCreatures.lua": "5987d51d0128677a5ef34579177a25f8c8ec95dd7cb5544b9e6c2e153ccdcd9c",
     "Reborn.lua": "569661ef1c151e3f9a0183b0d2cbcafb6172b885aab1934cee41010589c5ea0b",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
-    "RebornHUD.lua": "69add9727d2b36ced36271c261f0f27af3d1d362e9af6556afb76bb2338d0fd2",
+    "RebornHUD.lua": "9a9cee32d896579f74124dea234cc880ee684f5823e31c7337c6e8274a23b7f7",
     "Diagnostics.lua": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
     "Positions.lua": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
-    "Config.lua": "5aa756be35b488223548e7a6bfd84379ab1dbe2d3b659afa18015bde2996b552",
+    "Config.lua": "ec1cdc7fd449d4e3f869bfa6e91a9e63ae970de9b31f094e3e588b48f9904c67",
     "Profiles.lua": "6f6140c2c4a787fd7e96498e734a836ff87b4819156bbb7fba66b03e0111a49b",
     "Localization.lua": "f285d1f416e9e57331827ceb3cdfad4beab810c22bb7acac1e1ecdd8616a5920",
-    "InterfaceStrings.lua": "1e30fd01333ca4aaeeef30759b0a6886ca1c9a336cf2c36362a17241077ba036",
-    "Theme.lua": "9c2fbbe720a03ce63e3d4491b8c6cbbec484bd65720ac2733db21996bbd95b90",
+    "InterfaceStrings.lua": "b68edea211fc6d6985c14816d4952176d850734c1f058bed1319382caa8449cb",
+    "Theme.lua": "a3489f16e1733b81fb1e24bb894b37d6fdd7dac64922b164f41324faa024f56d",
     "ZoneThemeRegistry.lua": "b30035d19d58e17ffc93d360ad377e2bcbcb3fbe0292fe67155d3e02c92537ad",
     "Seed.lua": "a1e79ab07c8b41dca34f8fa730f964cd7e79ece5700a1e5d407f941060ee655c",
     "PortraitCatalog.lua": "e0e92f740f780fc084a5ed6ecc511e597d2380aae6703ea45fe2a2cba58e269b",
@@ -28,7 +28,7 @@
     "BossTimeline.lua": "8fb5bedc592fd38985bf33e9f0908c55dde99adf25f5c34ad2b0a45acc7fbb86",
     "HudStack.lua": "01a843571c9e034e56618ac74155b01ddde0efb151e4c72590400f155c51b73f",
     "CardLayout.lua": "eeaf5a7ce67891f71e19eab70e3b6e6c24063aaa3440807787dd533177344f99",
-    "Coop.lua": "9a48679a49f3b49667f1b1148a9eda642fec8ab8071d0a65811edcdc96596a7b",
+    "Coop.lua": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1",
     "GroupHistory.lua": "77a5abe50cf781f15a31f6786f4e58dda2003951ff616a8ba60d823d6c246af8",
     "PartySync.lua": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
     "PartyDetails.lua": "58e55afcca75f8d20c5b36fb8f42cc940a7fd1174afe2fdb2b73b8e379cdd1f4",
@@ -39,9 +39,9 @@
     "TakenDetails.lua": "2444aa4578119eae2da08653ce627caccb7acc704ec2551dc3c8c06bcd71f563",
     "Preview.lua": "0d42c42f5be64b40a2b1bcf5a69d635858dedaba409352d88555398f734a59bc",
     "PreviewVisibility.lua": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
-    "OptionsSchema.lua": "b0f51cdc54b222e95dbf45fbd3de1ca033a4434773c914463063c7f074d7a45e",
+    "OptionsSchema.lua": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07",
     "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
-    "Interface.lua": "c3bcb8142a5eb4131aaf08f3e118d620a3ce7351b6509aff81ed6d22cb52aa7b",
+    "Interface.lua": "dca954e4afe0022dc93c0880a62df8410c98cdbcf7279aa0fbfccba41da5e914",
     "FieldKit.lua": "d0d0f8ac108934ff6a1c134f7e015b42b925c7e66839f86fa5c1e7970e73503d",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "e026f087e0b48acc4fb83ea45b66ad6d744799909c031b153bcc62e4beac4aeb",
@@ -50,11 +50,11 @@
     "CombatOptions.lua": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
     "CopyLog.lua": "427633d497623d79fb553fc5df86a036b8bb69cff3dd53e64a578c8faacf6202",
     "ThemeMinimap.lua": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2",
-    "ThemeHUD.lua": "d48347f589f50a24257c39dc90b7799e86784ab8fcbdb49905d914e3fe84d4af",
-    "ThemeTarget.lua": "4b018c935a737803c75b13b2ae47b8254ee7adbf1e47985ca53a5d102db6e04e",
+    "ThemeHUD.lua": "6e36e8bb85ce419ccdfe74665ca3a2d09d322c83a3c743daa513fa8f1fde0f62",
+    "ThemeTarget.lua": "9200eb58da65676a6e3aef3b0fe4d6cd4679adb4d9f8716332f0d8c60ee44140",
     "ReferenceArt.lua": "b042e0777110f3a4519ccfadbf57bb4dcbb2e68ca9896f58f066775074605edf",
-    "ReferenceHUD.lua": "60a9590682dcf4c510a91ab7e52710c47b8dcf3e4fe74f2356f031dff19ad8c0",
-    "ZoneThemes.lua": "f562cb56eb7079c2d2d9abb453579f355f1f94bfa8e079c1fdf5ecc74ce36e65"
+    "ReferenceHUD.lua": "c565695b1a3b1162dcc61a86902db6f0c0702ebe923d8d821f6763532009f383",
+    "ZoneThemes.lua": "e0f979de8516594e65420bdf3918b8e934a7187fc4cc095fb7bab43914d41f68"
   },
   "nativeLuaSHA256": {
     "AzerothSurvivorsAPI/Anchors.lua": "2600dafc0c72a58bc761c6e8e6f4d9100a963bf10cd37cacdc70ed820038dd0f",
@@ -467,35 +467,35 @@
   },
   "webEvidence": {
     "https://azreborn.com/guides/addon-api": {
-      "sha256": "dedd327aaf5451c92c7ea064eaa6cd2d218cef070c466aebab46fc38daa3e0e9",
+      "sha256": "467b9b22a369174aadd8feb0c447409554c414b856809e140556e393b09083ed",
       "bytes": 284128
     },
     "https://azreborn.com/guides/runs-and-zones": {
-      "sha256": "cc808532f429764b3741bf3dfda85169c703da89998bdd711ac5033a1951c14b",
+      "sha256": "eac2a3add5aa411946ec8a1f9e76a7a83097c19db7bb1fb7d0a906422110e776",
       "bytes": 218849
     },
     "https://azreborn.com/guides/classes-and-talents": {
-      "sha256": "f4e0c8587e43066f5a7fff3a56b4b79fb27b52b54c0c27121353b66642827574",
+      "sha256": "b516be5b70ee1cc0c0dad7aab194211d1cb8263d11b481a4bc5ace50ab3daec2",
       "bytes": 154855
     },
     "https://azreborn.com/guides/co-op": {
-      "sha256": "79a6bbcafd3f42966d622dd5c5fd046d44f95f83b8f3b61a400308ccd29a3b92",
+      "sha256": "fc8cbe79daf9ba049cb767ca3cdc7db20c07e890329795f1a841d513ce5e509b",
       "bytes": 149578
     },
     "https://azreborn.com/guides/progression-and-cosmetics": {
-      "sha256": "f3dd765f87ccdb138822437e8c2d1d5b2c4e546717c976ecdb9b001b262474d3",
+      "sha256": "eeeee7644c8fd4b843714af5d777d4ca7e25a8565db60d6e086b6a452e04e97b",
       "bytes": 178522
     },
     "https://azreborn.com/guides/getting-started": {
-      "sha256": "8a3a7cc9c5d64c7b3d38e026152e667c015b59689a6fff80a8482f6a4ee4e5dd",
+      "sha256": "35222d18fc78c11623f3fc455b7064b737e8013e8c1fb42289ba5c0763d1abb7",
       "bytes": 151715
     },
     "https://azreborn.com/guides/troubleshooting": {
-      "sha256": "9d51eea2f32c3b79d7dd8a7cad2c97caebd3211f1608659d19accf2766536c1d",
+      "sha256": "6f0a30541113a400a2f2ab1d9c769e736ca7220e9bff6f9dbff72a60d6f4a9f7",
       "bytes": 149968
     },
     "https://azreborn.com/guides/leaderboards-and-discord": {
-      "sha256": "5a2c1e5aadeccc3773b32fe18e416a3c3da5ddacdb6bc24af9b43b14989cc3a8",
+      "sha256": "ca6bb02c3fab26c5b9c901a5e96baf588b39cc0a256048bf24b654595bcce092",
       "bytes": 148477
     }
   },
@@ -862,7 +862,7 @@
       "references": [
         {
           "file": "RebornHUD.lua",
-          "line": 109
+          "line": 110
         }
       ],
       "directCallSites": [],
@@ -1341,7 +1341,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 1647
+          "line": 1722
         }
       ],
       "directCallSites": [
@@ -1994,7 +1994,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 514
+          "line": 565
         },
         {
           "file": "ZoneThemes.lua",
@@ -2157,7 +2157,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 451
+          "line": 502
         }
       ],
       "directCallSites": [],
@@ -2344,7 +2344,7 @@
         },
         {
           "file": "ZoneThemes.lua",
-          "line": 208
+          "line": 212
         }
       ],
       "directCallSites": [],
@@ -2648,7 +2648,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 515
+          "line": 566
         },
         {
           "file": "ZoneThemes.lua",
@@ -3076,11 +3076,11 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 465
+          "line": 516
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 507
+          "line": 558
         }
       ],
       "directCallSites": [],
