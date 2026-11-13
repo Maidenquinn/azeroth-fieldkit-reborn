@@ -221,7 +221,7 @@ end
 -- This changes only UV geometry; assets and the map/actions/XP stay intact.
 function R.ArtHoles(component,d)
  local holes={}
- if not R.ModeShown() and component=="identity" then
+ if not R.ModeShown() and component=="identity" and not d.closedMap then
   local cut=R.modeCut
   if cut and not cut.medal then table.insert(holes,{0,56,cut.rect[3],50})
   elseif not cut then
@@ -238,6 +238,10 @@ function R.ArtHoles(component,d)
    for _,a in ipairs(d.counts) do l=math.min(l or a[1],a[1]);t=math.min(t or a[2],a[2]);r=math.max(r or 0,a[1]+a[3]);b=math.max(b or 0,a[2]+a[4]) end
    local topPad=R.key=="elwynn_minimal" and 8 or 14
    table.insert(holes,{l-dock[1]-120,t-dock[2]-topPad,r-l+170,b-t+18+topPad})
+  end
+  if d.sourceActions then
+   local a=d.sourceActions;table.insert(holes,{a[1]-dock[1]-12,a[2]-dock[2]-8,6*a[4]+a[3]+24,a[3]+16})
+   if d.integratedXP then local xp=d.sourceXP;table.insert(holes,{xp[1]-dock[1]-25,xp[2]-dock[2]-22,xp[3]+50,xp[4]+36}) end
   end
  end
  return holes
@@ -355,6 +359,7 @@ function R.Fit(label,size,minimum)
  label.fieldkitFit={path=path,baseSize=baseSize,minimum=requestedMinimum,renderSize=size,width=rawWidth,height=height,full=text,display=label:GetText()}
 end
 function R.Stop()
+ if R.frames.Taken then H.RestoreOne(R.frames.Taken);R.frames.Taken=nil end
  R.active=false;R.PartyRestoreAll()
  if R.canvas then R.canvas:Hide() end
  if R.buffDrawer then R.buffDrawer:Hide() end
@@ -447,6 +452,32 @@ function R.RoundZoom(i,d,hole)
  local a=math.rad(i==1 and -9 or 21) -- right side, between the two plates
  return cx+radius*math.cos(a)-12,cy-radius*math.sin(a)-12.5
 end
+-- Optional components select an alternate, closed composition. Never mutate
+-- approved atlas metadata: switching the preference back restores it exactly.
+function R.OptionalLayout(source,zone,variant,shape)
+ local compact=zone=="elwynn" and not FieldKitRebornDB.moneyFrame and FieldKitRebornDB.zoneThemeArt
+ local closed=zone=="elwynn" and variant=="complete" and shape=="square" and not R.ModeShown()
+ if not compact and not closed then return source end
+ R.optionalLayouts=R.optionalLayouts or {};local key=R.key..tostring(compact)..tostring(closed)
+ if R.optionalLayouts[key] then return R.optionalLayouts[key] end
+ local d={};for k,v in pairs(source) do d[k]=v end
+ d.rects={};for k,v in pairs(source.rects) do d.rects[k]=v end
+ d.tiles={};for k,v in pairs(source.tiles) do d.tiles[k]=v end
+ if compact then
+  local a=source.actions;local bottom=0;for _,c in ipairs(source.counts) do bottom=math.max(bottom,c[2]+c[4]) end
+  local ay=bottom-12-a[3];d.sourceActions=a;d.sourceXP=source.xp;d.actions={a[1],ay,a[3],a[4]}
+  local top=ay-12
+  if d.integratedXP then local xp=source.xp;d.xp={xp[1],ay-27,xp[3],xp[4]};top=d.xp[2]-10 end
+  d.compactDock={a[1]-12,top,6*a[4]+a[3]+24,bottom+5-top}
+ end
+ if closed then
+  local h=source.mapHole;d.closedMap=true;d.mapHole={h[1],h[2],h[3],h[3]}
+  d.mapFrame={h[1]-8,h[2]-8,h[3]+16,h[3]+16}
+  local r=source.rects.identity;d.rects.identity={r[1],r[2],r[3],d.mapFrame[2]+d.mapFrame[4]-r[2]}
+  local tile=source.tiles.identity[1];d.tiles.identity={{tile[1],0,0,r[3],48,tile[6],tile[7]}}
+ end
+ R.optionalLayouts[key]=d;return d
+end
 function R.Update(variant,zone)
  local key=zone.."_"..variant;local d=FieldKitReferenceArt[key]
  if not d then R.Stop();return end
@@ -454,6 +485,7 @@ function R.Update(variant,zone)
  local scale=math.min(UIParent:GetWidth()/d.size[1],UIParent:GetHeight()/d.size[2])
  R.canvas:SetAlpha(1);R.canvas:SetWidth(d.size[1]);R.canvas:SetHeight(d.size[2]);local inherited=UIParent.GetEffectiveScale and UIParent:GetEffectiveScale() or 1;R.canvas:SetScale(scale/math.max(.1,inherited)*(FieldKit.Number(FieldKitRebornDB.zoneThemeScale,100,75,110)/100));R.canvas:ClearAllPoints();R.canvas:SetPoint("CENTER",UIParent,"CENTER",0,0);R.canvas:Show()
  local M=FieldKitThemeMinimap;M.shape=M.Effective()
+ d=R.OptionalLayout(d,zone,variant,M.shape);R.layout=d
  -- Elwynn Complete: the map sits INSIDE the identity card, whose square frame is baked into the art. Round and native maps must not
  -- keep that frame: only the two banners (zone name above, mode below) are drawn, from the same art, cut away from the card.
  local cut=R.IdentityCut(d,zone,M.shape)
@@ -471,6 +503,10 @@ function R.Update(variant,zone)
   else entry[1]:Hide() end
  end
  if d.integratedVitals then R.Child(H.healthRoot,H.dock,d.rects.vitality);H.healthRoot:EnableMouse(false) else H.healthRoot:EnableMouse(true) end
+ if d.compactDock then
+  if not R.compactDock then R.compactDock=CreateFrame("Frame",nil,H.dock);R.compactDock:EnableMouse(false);T.Surface(R.compactDock,"card",true) end
+  R.Child(R.compactDock,H.dock,d.compactDock);R.compactDock:SetFrameLevel(H.dock:GetFrameLevel()+1);T.Update(R.compactDock);T.State(R.compactDock,false)
+ elseif R.compactDock then R.compactDock:Hide() end
  if key=="elwynn_complete" then local a=d.rects.header;R.Geometry(H.header,{a[1]-90,a[2],a[3]+180,a[4]}) end
  H.sculpture:Hide();H.left:Hide();H.right:Hide();H.namePlate:Hide();H.schedule:Hide()
  for _,rim in ipairs(H.actionRims) do rim:Hide() end
@@ -632,7 +668,7 @@ function R.Update(variant,zone)
 end
 -- Re-draw only the art tiles' strip around the map opening on a non-interactive frame above the native map.
 function R.MapRim(M,hole)
- if M.probe.rim==false or M.shape~="square" then if M.rim then M.rim:Hide() end;return end
+ if M.probe.rim==false or M.shape~="square" or R.layout.closedMap then if M.rim then M.rim:Hide() end;return end
  local rects=R.layout.rects;local name=rects.mapArt and "mapArt" or "identity";local comp=rects.mapArt and M.root or H.identity
  local origin=rects[name];local tiles=R.layout.tiles[name]
  if not comp or not origin or not tiles then if M.rim then M.rim:Hide() end;return end
@@ -695,6 +731,7 @@ end
 function R.Map()
  local M=FieldKitThemeMinimap;local a=R.layout.map
  if R.layout.rects.mapArt then R.Geometry(M.root,R.layout.rects.mapArt) else R.Child(M.root,H.identity,{a[1],a[2],a[3],a[3]}) end;Blank(M.root);R.Art(M.root,"mapArt")
+ if R.layout.closedMap then R.Child(M.root,H.identity,R.layout.mapFrame);M.root.fieldkitArtOnly=nil;T.Surface(M.root,"card",true);T.State(M.root,false) end
  local p=M.root.referenceRect
  -- The native map stays square (no stretching): it covers the whole opening of the frame art, and the
  -- art's own rim is redrawn above it (R.MapRim) so any overflow is masked instead of leaving black bands.
@@ -748,8 +785,8 @@ function R.Map()
  for i,b in ipairs({M.zoomOut,M.zoomIn}) do
   local x,y=R.ZoomXY(i,a);if round then x,y=R.RoundZoom(i,R.layout,hole) end
   R.Child(b,M.root,{x,y,24,25});R.Stable(b,"z"..R.key..tostring(M.shape)..":"..M.root:GetFrameLevel(),function() b:SetFrameStrata("DIALOG");b:SetFrameLevel(80);b:Hide();b:Show() end)
-  if round then b.fieldkitArtOnly=nil;T.State(b,false) else Blank(b) end -- the square art bakes the buttons; a round map draws its own
-  T.Font(b.fieldkitLabel,18,T.gold,true);b.fieldkitLabel:SetText((not round and (R.key=="elwynn_minimal" or R.key=="elwynn_complete")) and "" or (i==1 and "-" or "+"))
+  if round or R.layout.closedMap then b.fieldkitArtOnly=nil;T.State(b,false) else Blank(b) end -- square atlas includes its buttons; alternate frames draw their own
+  T.Font(b.fieldkitLabel,18,T.gold,true);b.fieldkitLabel:SetText((not round and not R.layout.closedMap and (R.key=="elwynn_minimal" or R.key=="elwynn_complete")) and "" or (i==1 and "-" or "+"))
   if T.zone=="elwynn" or over then if not b:IsShown() then b:Show() end else b:Hide() end
  end
  return true
@@ -965,7 +1002,7 @@ end
 -- ===== Placement: preferred position (default rectangle or the user's saved spot) vs displayed position. =====
 -- Pure function of the preferred layout, the visible card sizes and the protected HUD rectangles: nothing is stored,
 -- so a card returns to its preferred place as soon as the room is free again, and the search cannot oscillate.
-local CARDS={"Damage","Lairs","Accessories","Stats","Effects"}
+local CARDS={"Damage","Lairs","Accessories","Stats","Effects","Taken"}
 local OBSTACLES={"header","chat","identity","nav","vitality","mapArt"}
 local GAP,TOLERANCE=4,6 -- visual gap after a push; overlaps up to 6 px are the approved art's own and are left alone
 -- Opaque insets (left, top, right, bottom) measured on the approved art: collisions use what is really drawn.
@@ -974,10 +1011,45 @@ local OPAQUE={
   Damage={10,6,0,6},Lairs={10,9,9,7},Accessories={8,5,8,6},Stats={8,7,7,8},Effects={8,5,7,11}},
  naxx_complete={header={11,10,11,11},chat={8,7,0,13},identity={8,9,11,0},vitality={0,0,0,0},mapArt={9,9,11,5},
   Damage={4,1,6,5},Lairs={7,2,5,9},Accessories={9,0,11,0},Stats={10,0,11,0},Effects={9,3,9,10}}}
-local PREFS={Damage="meterFrame",Lairs="lairFrame",Accessories="gearFrame",Stats="statsFrame",Effects="effectsFrame"}
-local NATIVE={Damage="FieldKitMeterFrame",Lairs="FieldKitLairFrame",Accessories="FieldKitGearFrame",Stats="FieldKitStatsFrame",Effects="FieldKitEffectsFrame"}
-local function Inset(name) local t=OPAQUE[R.key];return (t and t[name]) or {6,6,6,6} end
+local PREFS={Damage="meterFrame",Lairs="lairFrame",Accessories="gearFrame",Stats="statsFrame",Effects="effectsFrame",Taken="takenFrame"}
+local NATIVE={Damage="FieldKitMeterFrame",Lairs="FieldKitLairFrame",Accessories="FieldKitGearFrame",Stats="FieldKitStatsFrame",Effects="FieldKitEffectsFrame",Taken="FieldKitTakenFrame"}
+function R.CardScale(kind) return FieldKitZoneThemes.ElementScale(kind=="Taken" and "FieldKitTakenFrame" or "FieldKitReferencePanel"..kind) end
+function R.AttachTaken(variant)
+ if FieldKit.rebornLegacyFixture then return end
+ local f=getglobal("FieldKitTakenFrame");if not f then return end
+ H.Save(f);R.frames.Taken=f
+ if not f.referenceTakenBound then
+  f.referenceTakenBound=true
+  local events={"OnDragStart","OnDragStop","OnMouseUp","OnHide"};local old={}
+  for _,event in ipairs(events) do old[event]=f:GetScript(event) end
+  FieldKitZoneThemes.Bind(f)
+  for _,event in ipairs(events) do local legacy=old[event];local themed=f:GetScript(event)
+   f:SetScript(event,function() if FieldKitZoneThemes.active then if themed then themed() end elseif legacy then legacy() end end)
+  end
+  for _,row in ipairs(f.rows or {}) do
+   row:RegisterForDrag("LeftButton")
+   for _,event in ipairs({"OnDragStart","OnDragStop","OnMouseUp"}) do local kind=event;local previous=row:GetScript(event)
+    row:SetScript(event,function()
+     if FieldKitZoneThemes.active then local before=this;this=f;local fn=f:GetScript(kind);if fn then fn() end;this=before
+     elseif previous then previous() end
+    end)
+   end
+  end
+ end
+ f:EnableMouse(not FieldKitRebornDB.windowsLocked)
+end
+function R.TakenPass(d)
+ local f=R.frames.Taken;if not f then return end
+ if R.CardVisible("Taken",d) then
+  local rect=R.CardRect("Taken",d);R.Geometry(f,rect);R.ApplyShift(f,"Taken");R.ApplyClamp(f,"Taken")
+  f.fieldkitWanted=true;f:SetFrameStrata("MEDIUM");f:Show();T.Update(f);T.State(f,false)
+  for _,row in ipairs(f.rows or {}) do H.Save(row);row:SetFrameStrata("MEDIUM");row:SetFrameLevel(f:GetFrameLevel()+3) end
+  if f.mashCollapseButton then H.Save(f.mashCollapseButton);f.mashCollapseButton:SetFrameStrata("MEDIUM");f.mashCollapseButton:SetFrameLevel(f:GetFrameLevel()+10) end
+ end
+end
+local function Inset(name) if name=="Taken" then return {0,0,0,0} end;local t=OPAQUE[R.key];return (t and t[name]) or {6,6,6,6} end
 function R.CardVisible(kind,d)
+ if kind=="Taken" then return R.frames.Taken and R.frames.Taken:IsShown() and FieldKitRebornDB.takenFrame and not (FieldKitRebornDB.collapsedWindows and FieldKitRebornDB.collapsedWindows.FieldKitTakenFrame) end
  local folded=(kind=="Stats" and FieldKitRebornDB.statsCollapsed) or (kind=="Accessories" and FieldKitRebornDB.gearCollapsed) or (FieldKitRebornDB.collapsedWindows and FieldKitRebornDB.collapsedWindows[NATIVE[kind]])
  return d.rects[kind] and FieldKitRebornDB[PREFS[kind]] and not folded and not (kind=="Damage" and FieldKitZoneThemes.nativeMeterOpen)
 end
@@ -1012,7 +1084,7 @@ function R.RingGeometry(d,hole)
  return band,keep
 end
 function R.Preferred(kind,d)
- local rect=R.CardRect(kind,d,true);local s=FieldKitZoneThemes.ElementScale("FieldKitReferencePanel"..kind) or 1
+ local rect=R.CardRect(kind,d,true);local s=R.CardScale(kind) or 1
  local w,h=rect[3]*s,rect[4]*s;local cx,cy=rect[1]+rect[3]/2,rect[2]+rect[4]/2
  local x=cx>d.size[1]*2/3 and rect[1]+rect[3]-w or (cx<d.size[1]/3 and rect[1] or rect[1]+(rect[3]-w)/2)
  local y=cy>d.size[2]*2/3 and rect[2]+rect[4]-h or (cy<d.size[2]/3 and rect[2] or rect[2]+(rect[4]-h)/2)
@@ -1030,7 +1102,7 @@ end
 -- left-to-right, then fixed card order. A card that must give way is moved: down first, then up, then sideways.
 function R.NoteMoved(name)
  local kind=nil
- for _,k in ipairs(CARDS) do if "FieldKitReferencePanel"..k==name then kind=k end end
+ for _,k in ipairs(CARDS) do if "FieldKitReferencePanel"..k==name or (k=="Taken" and name=="FieldKitTakenFrame") then kind=k end end
  if not kind then
   local i=nil;for n=0,4 do if name==(n==0 and "FieldKitPlayerCard" or "FieldKitPartyCard"..n) then i=n end end
   if i then local f=getglobal(name);R.lastParty="Party"..i;if f then f.fieldkitApplied=nil;f.fieldkitDX,f.fieldkitDY=nil,nil end;if R.shift then R.shift["Party"..i]=nil end;if R.shiftX then R.shiftX["Party"..i]=nil end end
@@ -1117,7 +1189,7 @@ function R.PreferredAny(kind,d)
  if f and FieldKitZoneThemes.Position(f) then
   local lx,ly=R.LiveRect(f)
   if not lx then return nil end
-  local rect=R.CardRect(kind,d,true);local s=FieldKitZoneThemes.ElementScale("FieldKitReferencePanel"..kind) or 1
+  local rect=R.CardRect(kind,d,true);local s=R.CardScale(kind) or 1
   return lx-(f.fieldkitDX or 0),ly-(f.fieldkitDY or 0),rect[3]*s,rect[4]*s,true
  end
  local x,y,w,h=R.Preferred(kind,d);return x,y,w,h,false
@@ -1148,7 +1220,7 @@ function R.GrowSpan(kind,d)
    if o[4]<=top then upper=math.max(upper,o[4]+GAP) elseif o[2]>top then limit=math.min(limit,o[2]-GAP) end
   end
  end
- local s=FieldKitZoneThemes.ElementScale("FieldKitReferencePanel"..kind) or 1
+ local s=R.CardScale(kind) or 1
  return (limit-upper+n[2]+n[4])/s
 end
 function R.AccMaxRows(zone,d)
@@ -1332,10 +1404,10 @@ function R.Probe()
  table.insert(out,string.format("  Damage: lines %s | rows created %s wanted %s held %s visible %s | scroll %s | frame height %.0f | room %s",tostring(dl),tostring(table.getn(R.frames.Damage.rows)),tostring(R.dmgWanted),tostring(R.dmgN),tostring(dvis),tostring(R.dmgScroll),R.frames.Damage:GetHeight() or 0,tostring(R.DmgMaxRows(d))))
  table.insert(out,string.format("  Equipment room (rows) %s",tostring(R.AccMaxRows(R.DmgZone(),d))))
  for _,kind in ipairs(CARDS) do
-  local f=R.frames[kind];local a=FieldKitZoneThemes.Position(f)
+  local f=R.frames[kind];if f then local a=FieldKitZoneThemes.Position(f)
   local lx,ly,lw,lh=R.LiveRect(f)
   table.insert(out,string.format("%-11s shown=%s saved=%s live=%s shift=%s,%s clamp=%s clampAPI=%s",kind,tostring(f:IsShown()),a and string.format("%s/%s %.0f,%.0f",a[1],a[2],a[3],a[4]) or "default",
-   lx and string.format("%.0f,%.0f %.0fx%.0f",lx,ly,lw,lh) or "?",tostring(R.shift and R.shift[kind]),tostring(R.shiftX and R.shiftX[kind]),tostring(f.IsClampedToScreen and f:IsClampedToScreen()),tostring(f.SetClampRectInsets~=nil)))
+   lx and string.format("%.0f,%.0f %.0fx%.0f",lx,ly,lw,lh) or "?",tostring(R.shift and R.shift[kind]),tostring(R.shiftX and R.shiftX[kind]),tostring(f.IsClampedToScreen and f:IsClampedToScreen()),tostring(f.SetClampRectInsets~=nil))) end
  end
  return out
 end
@@ -1400,7 +1472,7 @@ function R.Resolve(zone,d)
    if FieldKitZoneThemes.Position(f) then
     -- A card the user placed: its PREFERRED rectangle is where it really is minus the displacement we applied.
     local lx,ly=R.LiveRect(f)
-    if lx then local rect=R.CardRect(kind,d,true);local s=FieldKitZoneThemes.ElementScale("FieldKitReferencePanel"..kind) or 1
+    if lx then local rect=R.CardRect(kind,d,true);local s=R.CardScale(kind) or 1
      x,y,w,h=lx-(f.fieldkitDX or 0),ly-(f.fieldkitDY or 0),rect[3]*s,rect[4]*s end
    else x,y,w,h=R.Preferred(kind,d) end
    if x then
@@ -1517,6 +1589,12 @@ function R.HideUnwanted() for _,f in pairs(R.frames) do if not f.fieldkitWanted 
 -- stretched, so borders stay crisp. top = vertical shift, extra = added height (reference px).
 function R.CardRect(kind,d,noShift)
  local base=d.rects[kind];local grow=base and GROW[R.key] and GROW[R.key][kind]
+ if kind=="Taken" and R.frames.Taken then
+  local f=R.frames.Taken;local a=d.rects.Damage or {22,260,360,0}
+  local old=R.takenRect
+  if not old or old[3]~=f:GetWidth() or old[4]~=f:GetHeight() or old[1]~=a[1] or old[2]~=a[2]+a[4]+8 then R.takenRect={a[1],a[2]+a[4]+8,f:GetWidth(),f:GetHeight()} end
+  base=R.takenRect
+ end
  if base and kind=="Damage" and (R.dmgN or 6)>6 and (R.key=="elwynn_complete" or R.key=="naxx_complete") then
   local k=DMG[R.DmgZone()];grow={top=0,extra=((grow and grow.extra) or 0)+R.DmgDelta(R.dmgN),split=k.split}
  end
@@ -1610,11 +1688,12 @@ function R.LairList(lairs)
  return list
 end
 function R.Panels(variant,zone)
+ R.AttachTaken(variant)
  -- A card under the mouse must not be hidden by the 0.2 s refresh: OnHide ends the drag (C.Bind -> C.Finish).
  for _,f in pairs(H.summaries or {}) do if not f.azsMoving then f:Hide() end end
  local detail=false;for _,kind in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do if FieldKitZoneThemes.open[kind] then detail=true end end
  for _,f in pairs(R.frames) do f.fieldkitWanted=nil end
- if variant~="complete" then R.PartyRestoreAll();R.HideUnwanted();R.MaskBuffs(false);return end
+ if variant~="complete" then R.PartyRestoreAll();R.Resolve(zone,R.layout);R.TakenPass(R.layout);R.HideUnwanted();R.MaskBuffs(false);return end
  R.effectBuffs=false
  local d=R.layout;R.PlanLayout(zone,d);R.PartyPass()
  if not FieldKitNative.Active() and (not R.readyAt or GetTime()>R.readyAt or R.readySerial~=FieldKitNative.serial) then
@@ -1836,7 +1915,7 @@ function R.Panels(variant,zone)
    end end
   end
  end
- R.HideUnwanted();R.MaskBuffs(R.effectBuffs and R.frames.Effects:IsShown())
+ R.TakenPass(d);R.HideUnwanted();R.MaskBuffs(R.effectBuffs and R.frames.Effects:IsShown())
 end
 
 -- One settings shell for every existing page; all controls retain their handlers.

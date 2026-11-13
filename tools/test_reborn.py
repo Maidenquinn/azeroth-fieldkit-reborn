@@ -26,6 +26,8 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_chat_controls.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_settings_audit.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_optional_art.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_difficulty_context.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_taken_layout.lua').read_text(encoding='utf8'))
     if a.game:
         l=runtime()
         l.execute('''

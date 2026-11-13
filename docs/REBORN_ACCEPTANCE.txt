@@ -1,4 +1,4 @@
-Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.8
+Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.9
 
 Client de reference: Reborn 0.6.3, inventorie le 12 novembre 2026.
 Les tests automatiques hors jeu ne prouvent pas le rendu ou les performances.
@@ -78,3 +78,11 @@ Recette reborn.7 dans le client: dimensions natives 460x210 vers 550x280
 28. Desactiver Mode : aucun bandeau ni bouton i vide ; carte et zone conservees.
     Desactiver Or/coffre : aucun decor ni icone vide dans le bandeau inferieur ;
     sorts et XP inchanges. Reactiver : decor et interactions retablis.
+
+29. Mode actif : comparer difficulte native et FieldKit avant/apres reload.
+    Mode masque : carte carree dans un cadre ferme, aucune fuite en bas.
+30. Compteurs masques : sorts/XP dans le dock compact, sans emplacement vide
+    du bandeau. Reactiver rend la composition originale.
+31. Activer Degats subis : deplacer depuis le fond puis depuis une ligne,
+    superposer Degats et Degats subis dans les deux sens, verifier le
+    deplacement de la carte qui cede et la sauvegarde apres reload.

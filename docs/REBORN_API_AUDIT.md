@@ -1,4 +1,28 @@
-# Audit FieldKit Reborn — 13 novembre 2026, reborn.8
+# Audit FieldKit Reborn — 13 novembre 2026, reborn.9
+
+## Régressions visuelles et placement reborn.9
+
+Le rang provient de `heroic` ou, sur Reborn, de `dt` comme dans Run.lua/Tracker.lua.
+Un contexte borné de présentation `{rank, world, zone, time}` garde un rang
+effectivement observé pendant un reload qui ne rejoue pas AZSZONE. Il n’appartient
+pas aux profils HUD, n’écrit aucune donnée native et n’est pas une progression
+restaurée. Un nouveau paquet de zone, un départ prêt, un monde différent ou une
+horloge repartie invalident ce contexte. Sans preuve utilisable, le rang reste inconnu.
+
+Les variantes optionnelles sont maintenant des compositions : carte carrée avec
+cadre fermé et texture bornée à son intérieur ; dock sans compteurs avec sorts et
+XP repositionnés dans un panneau compact, en conservant les personnages décoratifs.
+Les quads de l’illustration d’origine ne sont plus l’unique preuve de validité :
+les fixtures vérifient aussi les bornes réelles du cadre et la marge sous les sorts.
+
+La carte Dégâts subis conserve son lecteur natif, mais rejoint le planificateur du
+thème, son ordre de priorité et ses positions sauvegardées. Les lignes transmettent
+le glisser-déposer à la carte et sont explicitement élevées au-dessus du matériau.
+La sortie du thème restitue les parents et niveaux classiques. Les tests déplacent
+successivement chaque carte sur l’autre et vérifient la séparation de leurs zones
+opaques, puis les présentations minimale et alternative.
+
+Les reconstructions graphiques hors jeu ne valent pas recette dans le client.
 
 Les réglages et leur cohérence avec les thèmes sont détaillés dans
 [l’audit des paramètres](REBORN_SETTINGS_AUDIT.md), avec un catalogue généré des

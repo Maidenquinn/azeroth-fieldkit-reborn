@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.8",
+  "version": "0.1.0-reborn.9",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Candidate .8 settings client QA interrupted by the maintainer. Synthetic production setters: 18 pages, 119 schema entries, 924 setter cases in four theme contexts. Optional artwork checked for three layouts and three map shapes; production UV output reconstructed and visually inspected offline. Installed public API fixtures executed. No complete live visual or co-op acceptance claimed."
+  "inGameTestScope": "Pending targeted live QA. Synthetic regressions cover difficulty dt and scoped reload context, closed square-map bounds, compact dock composition, and Taken card movement/collisions in both directions. Offline material reconstruction inspected. No live co-op validation claimed."
 }

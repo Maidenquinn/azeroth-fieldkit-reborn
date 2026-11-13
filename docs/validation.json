@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.8",
+  "version": "0.1.0-reborn.9",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.8",
+    "version": "0.1.0-reborn.9",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Candidate .8 settings client QA interrupted by the maintainer. Synthetic production setters: 18 pages, 119 schema entries, 924 setter cases in four theme contexts. Optional artwork checked for three layouts and three map shapes; production UV output reconstructed and visually inspected offline. Installed public API fixtures executed. No complete live visual or co-op acceptance claimed."
+    "inGameTestScope": "Pending targeted live QA. Synthetic regressions cover difficulty dt and scoped reload context, closed square-map bounds, compact dock composition, and Taken card movement/collisions in both directions. Offline material reconstruction inspected. No live co-op validation claimed."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "318dd0aa730683879f33a1de62fc1fc64e67019b26593baefb03f6d3c400f0b1"
+      "sha256": "07c4d0678dec1fde5561d2a111825bb911e34d8729eced0ede8c39ad431ca227"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -55,7 +55,7 @@
     "RebornHUD.lua": {
       "maxUpvalues": 1,
       "functions": 12,
-      "sha256": "9a9cee32d896579f74124dea234cc880ee684f5823e31c7337c6e8274a23b7f7"
+      "sha256": "00fc412902cb292343ae21a0bc9b39482ebf26fc6f19832f0f13888aa0b91911"
     },
     "Diagnostics.lua": {
       "maxUpvalues": 5,
@@ -70,7 +70,7 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "ec1cdc7fd449d4e3f869bfa6e91a9e63ae970de9b31f094e3e588b48f9904c67"
+      "sha256": "5f3c9ecfee303a2af7ac5fb38d60a15fc6c6591d871537abc6b61892f4ff7595"
     },
     "Profiles.lua": {
       "maxUpvalues": 4,
@@ -118,9 +118,9 @@
       "sha256": "23e840592514422ac9ba8a29fd88bcf93ffa6f6e9a43624bbcf6a76fdfd34951"
     },
     "GameCompatibility.lua": {
-      "maxUpvalues": 1,
-      "functions": 6,
-      "sha256": "6be3f917a9287a5d710533c050db198da7722cd34758985a2de9155bf4bd16b7"
+      "maxUpvalues": 2,
+      "functions": 8,
+      "sha256": "ff7e30a317aae27ade1e1a30473b4d62c2900707bbbf37cdc6be0a5119dcf0ef"
     },
     "RunMode.lua": {
       "maxUpvalues": 1,
@@ -130,7 +130,7 @@
     "NativeData.lua": {
       "maxUpvalues": 2,
       "functions": 13,
-      "sha256": "5d7dffecc5b3a9450429fffdb97ffeb26287e9631e35d12a402c05ead3bd61c9"
+      "sha256": "953017c67c44ac76f89d26b84c1a7ae8aaee57c2612c2662a200805965ef522f"
     },
     "MeterLedger.lua": {
       "maxUpvalues": 11,
@@ -284,13 +284,13 @@
     },
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
-      "functions": 185,
-      "sha256": "c565695b1a3b1162dcc61a86902db6f0c0702ebe923d8d821f6763532009f383"
+      "functions": 191,
+      "sha256": "e5a403f8a3f57f55a51dd2b503c7898b71e6001ed304b0645e01eb60b7ab4ebe"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "e0f979de8516594e65420bdf3918b8e934a7187fc4cc095fb7bab43914d41f68"
+      "sha256": "9534fb51523da9a8d2716e2c0ff9530a244931eaf540cc9ccdf0f8a52659774f"
     }
   }
 }

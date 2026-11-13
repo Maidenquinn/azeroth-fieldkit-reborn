@@ -1,11 +1,37 @@
--- Read-only 0.121 compatibility. See docs/GAME_0_121.md for local evidence.
--- Missing fields remain unknown: zone difficulty is not the Heroic rank.
+-- Read-only original/Reborn rank compatibility. Reborn's native run UI reads
+-- dt as its difficulty tier. Missing data is never assumed to mean Normal.
 local ranks={"I","II","III","IV","V"}
+local function ValidRank(value)
+ local n=FieldKit.Number(value)
+ if n and n==math.floor(n) and n>=0 and n<=5 then return n end
+end
+local function WorldLabel()
+ if type(GetRealZoneText)=="function" then
+  local ok,text=pcall(GetRealZoneText)
+  if ok and type(text)=="string" and text~="" and string.len(text)<=160 then return text end
+ end
+end
 function FieldKit.GetHeroicLevel()
  if type(AZS_GetPhase)~="function" or not AZS_GetPhase() or type(AZS_ZONE)~="table" then return nil end
- local level=FieldKit.Number(AZS_ZONE.heroic)
- if not level or level~=math.floor(level) or level<0 or level>5 then return nil end
- return level
+ local level=ValidRank(AZS_ZONE.heroic)
+ if FieldKit.rebornLegacyFixture then return level end
+ -- Reborn's native Run.lua/Tracker.lua also expose the difficulty tier as dt.
+ if level==nil then level=ValidRank(AZS_ZONE.dt) end
+ local db=FieldKitRebornDB;local phase=AZS_GetPhase();local time=type(AZS_RUN)=="table" and FieldKit.Number(AZS_RUN.t,nil,0)
+ local world=WorldLabel()
+ if level~=nil then
+  if db and world and time and type(AZS_ZONE.zone)=="string" and AZS_ZONE.zone~="" then
+   db.runDifficultyContext={rank=level,world=world,zone=AZS_ZONE.zone,time=time}
+  end
+  return level
+ end
+ -- /reload can replay RUN without ZONE. Reuse only observed presentation data
+ -- for this same world and a clock that did not restart. Never default to Normal.
+ local c=db and db.runDifficultyContext
+ if type(c)=="table" and ValidRank(c.rank) and world==c.world and time and FieldKit.Number(c.time,nil,0) and time>=c.time-1
+  and (phase=="playing" or phase=="paused" or phase=="choosing" or phase=="dead" or phase=="victory")
+  and (not AZS_ZONE.zone or AZS_ZONE.zone==c.zone) then c.time=time;return c.rank end
+ if db then db.runDifficultyContext=nil end
 end
 function FieldKit.GetHeroicLabel()
  local level=FieldKit.GetHeroicLevel()

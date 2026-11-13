@@ -80,7 +80,8 @@ end
 -- baked seven-socket row first; the ornament/XP/footer artwork is unchanged.
 function R.PrepareSixSlots(d)
  local H,V=FieldKitThemeHUD,FieldKitReferenceHUD;local a=d.actions;local dock=d.rects.dock
- local sx=a[1]-dock[1]+2*a[4];local sy=a[2]-dock[2];local size=a[3]
+ local source=d.sourceActions or a
+ local sx=source[1]-dock[1]+2*source[4];local sy=source[2]-dock[2];local size=a[3]
  if not R.sixPlate then R.sixPlate=CreateFrame("Frame",nil,H.dock);R.sixPlate.fill=R.sixPlate:CreateTexture(nil,"ARTWORK");R.sixPlate.fill:SetAllPoints(R.sixPlate);R.sixPlate:EnableMouse(false) end
  local plate=R.sixPlate;plate:SetFrameLevel(H.dock:GetFrameLevel()+4);plate:ClearAllPoints();plate:SetPoint("TOPLEFT",H.dock,"TOPLEFT",a[1]-dock[1]-3,dock[2]-a[2]+3);plate:SetWidth(6*a[4]+size+6);plate:SetHeight(size+6);FieldKitTheme.Solid(plate.fill,FieldKitTheme.background);plate:Show()
  R.sixSlots=R.sixSlots or {}
@@ -88,7 +89,8 @@ function R.PrepareSixSlots(d)
   local f=R.sixSlots[i]
   if not f then f=CreateFrame("Frame",nil,H.dock);f.tiles={};f:EnableMouse(false);R.sixSlots[i]=f end
   f:SetFrameLevel(H.dock:GetFrameLevel()+5);f:ClearAllPoints();f:SetPoint("TOPLEFT",H.dock,"TOPLEFT",a[1]-dock[1]+a[4]/2+(i-1)*a[4],dock[2]-a[2]);f:SetWidth(size);f:SetHeight(size);f:Show()
-  if f.layoutKey~=V.key then
+  local artKey=V.key..tostring(d.compactDock~=nil)
+  if f.layoutKey~=artKey then
    local count=0
    for _,t in ipairs(d.tiles.dock or {}) do
     local x0=math.max(sx,t[2]);local y0=math.max(sy,t[3]);local x1=math.min(sx+size,t[2]+t[4]);local y1=math.min(sy+size,t[3]+t[5])
@@ -99,7 +101,7 @@ function R.PrepareSixSlots(d)
      tex:SetTexCoord(u0+(x0-t[2])*us,u0+(x1-t[2])*us,v0+(y0-t[3])/t[7],v0+(y1-t[3])/t[7]);tex:Show()
     end
    end
-   for j=count+1,table.getn(f.tiles) do f.tiles[j]:Hide() end;f.layoutKey=V.key
+   for j=count+1,table.getn(f.tiles) do f.tiles[j]:Hide() end;f.layoutKey=artKey
   end
  end
 end

@@ -1,5 +1,13 @@
 # Réglages et thèmes — audit du 13 novembre 2026
 
+Mise à jour reborn.9 : les retours en jeu ont montré les limites de la découpe
+de reborn.8. Les options sélectionnent maintenant un dock compact et un cadre
+de carte fermé, vérifiés aussi sur leurs limites de contenu. Dégâts subis rejoint
+le placement/collisions du thème ; le rang lit `dt` et dispose d’un contexte
+de présentation pour les reloads sans AZSZONE. Voir
+[les régressions corrigées](RELEASE_REBORN_0.1.0_9.md) et l’audit API pour les limites.
+Le catalogue initial de 924 setters ne constitue pas une validation visuelle complète.
+
 Le catalogue [REBORN_SETTINGS_AUDIT.json](REBORN_SETTINGS_AUDIT.json) est extrait
 du schéma réellement construit : 18 pages, 119 entrées (contrôles, notes et
 éditeurs spécialisés). `tools/audit_settings.py` appelle les vrais setters et

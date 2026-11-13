@@ -27,6 +27,9 @@ function FieldKit.InitializeSettings(defaultStats)
  d.spellsFrame=nil -- retired separate spell window; the existing card now has tabs
  d.loadoutTab=d.loadoutTab==2 and 2 or 1
  d.schema=1;
+ local ctx=d.runDifficultyContext
+ if type(ctx)~="table" or not FieldKit.Number(ctx.rank,nil,0,5) or ctx.rank~=math.floor(ctx.rank)
+  or type(ctx.world)~="string" or string.len(ctx.world)>160 or type(ctx.zone)~="string" or string.len(ctx.zone)>80 or not FieldKit.Number(ctx.time,nil,0) then d.runDifficultyContext=nil end
  d.zoneThemeScale=FieldKit.Number(d.zoneThemeScale,100,75,110)
  d.zoneThemePositions=FieldKitZoneThemes.NormalizePositions(d.zoneThemePositions)
  d.zoneThemeElementScales=FieldKitZoneThemes.NormalizeScales(d.zoneThemeElementScales)

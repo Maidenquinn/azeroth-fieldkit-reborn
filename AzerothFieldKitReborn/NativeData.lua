@@ -54,6 +54,7 @@ function N.Watch()
  N.initialized=true;N.phase=phase;N.time=time;N.zone=zone;N.wasActive=N.Active()
 end
 function N.Packet(prefix)
+ if prefix=="AZSZONE" and FieldKitRebornDB then FieldKitRebornDB.runDifficultyContext=nil end
  if sources[prefix] then N.generation[prefix]=(N.generation[prefix] or 0)+1 end
 end
 function N.Fresh(prefix)

@@ -25,7 +25,11 @@ for _,variant in ipairs({"minimal","complete","alternative"}) do for _,shape in 
  assert(not H.mode:IsShown() and not H.counterRoot:IsShown())
  assert(state.tally==false,"Counter strip was substituted with native counters")
  EmptyHoles(H.dock)
- if not V.modeCut or not V.modeCut.medal then EmptyHoles(H.identity)
+ if V.layout.closedMap then
+  local map=FieldKitThemeMinimap.root;local _,parent,_,x,y=Minimap:GetPoint()
+  assert(parent==map and x>=8 and y<=-8 and x+Minimap:GetWidth()<=map:GetWidth()-8 and -y+Minimap:GetHeight()<=map:GetHeight()-8,"Native map protrudes past its closed frame")
+  assert(map.fieldkitSkin and not map.fieldkitArtOnly,"Mode-off map has no closed material frame")
+ elseif not V.modeCut or not V.modeCut.medal then EmptyHoles(H.identity)
  else assert(FieldKitThemeMinimap.roundRing.modeRing:IsShown(),"Round mode foot wasn't replaced with a plain ring segment") end
  local rim=FieldKitThemeMinimap.rim
  if variant=="complete" and shape=="square" and rim and rim:IsShown() then EmptyHoles(rim) end
@@ -36,9 +40,15 @@ for _,variant in ipairs({"minimal","complete","alternative"}) do for _,shape in 
  local a=V.layout.actions;local dock=V.layout.rects.dock;local xp=V.layout.xp
  local actions={a[1]-dock[1],a[2]-dock[2],6*a[4],a[3]}
  local xpRect={xp[1]-dock[1],xp[2]-dock[2],xp[3],xp[4]}
- for _,hole in ipairs(H.dock.referenceArtHoles) do
-  assert(Disjoint({"",actions[1],actions[2],actions[3],actions[4]},hole),"Counter removal cut actions")
-  assert(Disjoint({"",xpRect[1],xpRect[2],xpRect[3],xpRect[4]},hole),"Counter removal cut XP")
+ local plate=V.layout.compactDock
+ if plate then
+  assert(V.compactDock:IsShown() and V.layout.actions[2]>V.layout.sourceActions[2],"Missing compact dock composition")
+  assert(a[2]>=plate[2] and a[2]+a[3]<=plate[2]+plate[4] and plate[2]+plate[4]-(a[2]+a[3])<=20,"Empty gap remains below actions")
+  assert(#FieldKitReborn.sixSlots==6 and FieldKitReborn.sixSlots[6]:IsShown())
+ else for _,hole in ipairs(H.dock.referenceArtHoles) do
+   assert(Disjoint({"",actions[1],actions[2],actions[3],actions[4]},hole),"Counter removal cut actions")
+   assert(Disjoint({"",xpRect[1],xpRect[2],xpRect[3],xpRect[4]},hole),"Counter removal cut XP")
+  end
  end
  d.moneyFrame=true;d.runModeCard=true;C.Refresh(true)
  assert(H.counterRoot:IsShown() and H.mode:IsShown() and state.tally==false)
