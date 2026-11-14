@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.24",
+  "version": "0.1.0-reborn.25",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "No live client pass for .24. Offline regression checks separate amount/rate rectangles and shared column width in all three meter-value modes, suppression of waiting/empty/zero-position guardian distances with a valid live 5-yard distance retained, and target health fill/text recovered above card material across all three Elwynn variants. Full runtime/settings/theme and installed 0.6.5 API/content fixtures are checked. Live visual acceptance remains pending."
+  "inGameTestScope": "No live client pass for .25. Offline regression covers six hunter spell names localised after structured-source, GetSpellInfo and action-tooltip overrides, canonical/localised icon aliases, inline native accessory bonuses in the Elwynn reference card, bounded name/bonus socket geometry, full native detail retention and gear/spell/empty transitions. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
 }

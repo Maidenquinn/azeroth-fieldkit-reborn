@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.24",
+  "version": "0.1.0-reborn.25",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.24",
+    "version": "0.1.0-reborn.25",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No live client pass for .24. Offline regression checks separate amount/rate rectangles and shared column width in all three meter-value modes, suppression of waiting/empty/zero-position guardian distances with a valid live 5-yard distance retained, and target health fill/text recovered above card material across all three Elwynn variants. Full runtime/settings/theme and installed 0.6.5 API/content fixtures are checked. Live visual acceptance remains pending."
+    "inGameTestScope": "No live client pass for .25. Offline regression covers six hunter spell names localised after structured-source, GetSpellInfo and action-tooltip overrides, canonical/localised icon aliases, inline native accessory bonuses in the Elwynn reference card, bounded name/bonus socket geometry, full native detail retention and gear/spell/empty transitions. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "b3a52fa7c1b0884bcf9389dacc776be6eb6f7dd40562fbeed934b72981afd7c1"
+      "sha256": "83b314816b46017213c47808cb2e9df032179b559de13187d32e71208f376352"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -220,7 +220,7 @@
     "Loadout.lua": {
       "maxUpvalues": 2,
       "functions": 34,
-      "sha256": "0b35126b25c9c9e67b5d158c1494869a35324299658b60cbd767a95d2bedc14d"
+      "sha256": "74f03eabd2b36bd14057ba7f78f7215a2ee774ecf1d1115ea709c784e249248e"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -310,7 +310,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 193,
-      "sha256": "a1c7475a53a5aa2ec0b83bf3f8145e7fa71eda30008ab203fd695bb3a8f67160"
+      "sha256": "a4c972ce90728071880b2deac12a1b41026cd70d811befcd482764853b1591e8"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

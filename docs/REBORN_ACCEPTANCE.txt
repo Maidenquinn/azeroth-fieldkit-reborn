@@ -1,3 +1,5 @@
+reborn.25 / 0.6.5: offline checks for all six hunter name translations after native override paths, canonical/localised icon aliases, Elwynn inline native equipment bonuses and bounded socket/tab/empty transitions. Full tooltip detail retained. Live visual acceptance pending.
+
 reborn.24 / 0.6.5: offline regression for separate amount/DPS rectangles and column widths, absent guardian distance suppression with valid live distance retained, and elite target HP visibility/strata/value across three Elwynn variants. Live visual acceptance pending.
 
 reborn.23 / 0.6.5: offline validation for native drag mouse eligibility, live proc/spell-buff merge and French names, and independent modal column text geometry/sorting. Live client was observed but Computer Use stopped with Escape before verification. Post-fix minimap dragging (positions unlocked), effects and column visibility still require visual acceptance.

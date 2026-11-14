@@ -37,6 +37,7 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_loadout_values.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_effects_headers.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_numeric_layout.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_loadout_locale.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_first_launch.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_065.lua').read_text(encoding='utf8'))
     l=runtime('AZS={};function AZS.On(prefix,fn) if prefix=="AZSZONE" then ZONE_CAPTURE=fn end end')

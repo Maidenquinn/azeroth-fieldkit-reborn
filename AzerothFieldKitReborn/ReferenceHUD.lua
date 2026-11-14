@@ -819,10 +819,10 @@ function R.AmountParts(r)
  r.amountSep=r:CreateTexture(nil,"ARTWORK");T.Solid(r.amountSep,{1,.82,.12},.3)
 end
 local function Row(f,i,x,y,w,h,hidden)
- local r=f.rows[i];r.label:SetJustifyH("LEFT");r.label:SetJustifyV("MIDDLE");r.value:SetJustifyH("RIGHT");r.fieldkitLine=nil;r.fieldkitSpell=nil;r.fontSize=nil;r.fontMin=nil;r.labelTint=nil;r.valueTint=nil;r.buffIndex=nil;r.statKey=nil;r.fieldkitUsed=true
+ local r=f.rows[i];r.label:SetJustifyH("LEFT");r.label:SetJustifyV("MIDDLE");r.value:SetJustifyH("RIGHT");r.value:SetJustifyV("MIDDLE");r.fieldkitLine=nil;r.fieldkitSpell=nil;r.fontSize=nil;r.fontMin=nil;r.labelTint=nil;r.valueTint=nil;r.buffIndex=nil;r.statKey=nil;r.fieldkitUsed=true
  -- Re-levelling / re-anchoring a button on every refresh can cancel a click in progress: only when it changes.
  R.Stable(r,table.concat({x,y,w,h,f:GetFrameLevel()},":"),function() r:SetFrameLevel(f:GetFrameLevel()+5);r.bar:SetFrameLevel(r:GetFrameLevel()+1);r:ClearAllPoints();r:SetPoint("TOPLEFT",f,"TOPLEFT",x,-y);r:SetWidth(w);r:SetHeight(h) end)
- r:SetAlpha(1);if not hidden then r:Show() end;r.icon:Hide();r.bar:Hide();if r.trough then r.trough:Hide() end;if r.lamp then r.lamp:Hide() end;r.entry=nil
+ r:SetAlpha(1);if not hidden then r:Show() end;r.icon:Hide();r.bar:Hide();if r.trough then r.trough:Hide() end;if r.lamp then r.lamp:Hide() end;if r.bonus then r.bonus:Hide() end;r.entry=nil
  if r.amount then r.amount:SetText("");r.amountSep:Hide() end
  r.label:ClearAllPoints();r.label:SetPoint("TOPLEFT",r,"TOPLEFT",0,0);r.label:SetWidth(w-96);r.label:SetHeight(h);r.value:ClearAllPoints();r.value:SetPoint("TOPRIGHT",r,"TOPRIGHT",0,0);r.value:SetWidth(94);r.value:SetHeight(h);return r
 end
@@ -1870,6 +1870,17 @@ function R.Panels(variant,zone)
       if FieldKit.rebornLegacyFixture then texture=type(GetInventoryItemTexture)=="function" and GetInventoryItemTexture("player",ids[i]) end
       if texture then R.SocketIcon(r,zone,texture) end
       r.fontSize=16;r.fontMin=16
+      if not FieldKit.rebornLegacyFixture and occupied then
+       local details=e.nativeDetails or e.bonuses or {}
+       if table.getn(details)>0 then
+        if not r.bonus then r.bonus=T.Label(r,nil,0,0,a[3]-100,12,11,{.3,1,.4}) end
+        r.label:SetHeight(14);r.label:SetJustifyV("TOP");r.value:SetHeight(14);r.value:SetJustifyV("TOP")
+        r.fontSize=14;r.fontMin=12
+        r.bonus:ClearAllPoints();r.bonus:SetPoint("TOPLEFT",r,"TOPLEFT",0,-15)
+        r.bonus:SetWidth(a[3]-100);r.bonus:SetHeight(12);r.bonus:SetJustifyH("LEFT");r.bonus:SetJustifyV("TOP")
+        r.bonus:SetText(table.concat(details," · "));T.Font(r.bonus,11,{.3,1,.4});R.Fit(r.bonus,11,10);r.bonus:Show()
+       end
+      end
      end
     else
      if total==0 then local r=Row(f,1,72,R.SocketY(zone,1,R.accN),a[3]-94,R.SocketH(zone));r.label:SetWidth(a[3]-98);r.label:SetText(FieldKit_L("No spells yet"));r.value:SetText("");r.value:SetWidth(0);r.fontSize=16;r.fontMin=12 end

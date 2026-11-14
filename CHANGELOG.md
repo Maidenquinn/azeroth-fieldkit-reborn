@@ -1,3 +1,9 @@
+# 0.1.0-reborn.25 — Localised loadout and Elwynn equipment bonuses
+
+- Localise learned spell names after every native source that can override them: structured loadout, GetSpellInfo and action tooltip. Preserve canonical and localised icon aliases.
+- Show a compact native bonus line under each equipped item's name in the Elwynn reference card, with the full native text retained on hover. Keep the existing artwork/socket positions and reset bonus visibility on tab or empty-slot changes.
+- Offline regression reproduces all six reported hunter names and the missing equipment bonus path, including row bounds and transitions. Full offline and installed API checks; no new live client pass claimed.
+
 # 0.1.0-reborn.24 — Readable meter values and target health
 
 - Separate the damage amount and DPS/HPS vertically in themed meter rows. Measure both texts for the shared right column, use a readable rate font and keep the percentage column clear. Other value modes retain a single line.

@@ -371,11 +371,14 @@ function L.Scan()
     if FieldKit.rebornLegacyFixture then asset=FieldKitSpellAssets[tonumber(s.spell)] or asset end
     local e={key=s.key,name=asset and asset.name or N.Text(s.key),icon=asset and asset.icon,rank=string.format(FieldKit_L("Rank %d"),rank),rankValue=rank,spellId=tonumber(s.spell),bonuses={},upgrades={}}
     if not FieldKit.rebornLegacyFixture then
-     if type(s.name)=="string" then e.name=N.Text(s.name) end
+     if type(s.name)=="string" then e.name=N.Text(FieldKitReborn.Localize(s.name)) end
      e.icon=FieldKitReborn.Icon(s.icon) or e.icon
      if type(GetSpellInfo)=="function" and tonumber(s.spell) then
       local ok,name,_,icon=pcall(GetSpellInfo,tonumber(s.spell))
-      if ok then if type(name)=="string" then e.name=N.Text(name) end;e.icon=FieldKitReborn.Icon(icon) or e.icon end
+      if ok then
+       e.icon=FieldKitReborn.Icon(icon) or e.icon
+       if type(name)=="string" then L.icons[L.Key(name)]=e.icon;e.name=N.Text(FieldKitReborn.Localize(name)) end
+      end
      end
     end
     if not FieldKit.rebornLegacyFixture and N.Fresh("AZSSPELLTIP") and type(AZS_SPELLTIPS)=="table" then
@@ -409,7 +412,9 @@ function L.Scan()
      local entry=byTexture[L.TextureKey(texture)]
      -- An icon shared by different native abilities cannot identify an action.
      if entry and not entry.action then
-      entry.action=slot;L.MergeBonuses(entry.bonuses,bonus);L.MergeBonuses(entry.upgrades,upgrades);entry.name=name or entry.name
+      entry.action=slot;L.MergeBonuses(entry.bonuses,bonus);L.MergeBonuses(entry.upgrades,upgrades)
+      entry.name=(name and not FieldKit.rebornLegacyFixture) and N.Text(FieldKitReborn.Localize(name)) or name or entry.name
+      if entry.icon then L.icons[L.Key(entry.name)]=entry.icon end
      end
     end
    end

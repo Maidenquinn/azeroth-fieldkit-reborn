@@ -364,3 +364,11 @@ a distance to world origin. Native pose/distance data is never extrapolated.
 Themed target HP uses the supplied UnitHealth/UnitHealthMax, with child strata
 and frame level explicitly above the card material. Meter amount/rate geometry
 is separate while both values remain ledger-owned, unchanged quantities.
+
+
+Reborn .25: all spell display-name overrides are normalised through native
+AZS_L via Reborn.Localize, including structured sources, GetSpellInfo and action
+tooltip titles. Canonical/localised icon aliases are retained. The reference
+Equipment card renders nativeDetails as a compact fitted bonus line rather
+than deriving stat values; full native details remain in the shared tooltip.
+The bonus region is hidden when a socket changes tab or becomes empty.

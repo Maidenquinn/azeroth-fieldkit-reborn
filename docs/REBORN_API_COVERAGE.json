@@ -3,7 +3,7 @@
   "liveGameValidation": false,
   "runtimeModules": 57,
   "runtimeSHA256": {
-    "Runtime.lua": "b3a52fa7c1b0884bcf9389dacc776be6eb6f7dd40562fbeed934b72981afd7c1",
+    "Runtime.lua": "83b314816b46017213c47808cb2e9df032179b559de13187d32e71208f376352",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "3f8c1c80def0671edd760ca5d6d30b3795675859e850bb7b0691c93dfd6ff6cf",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -40,7 +40,7 @@
     "ScreenLayers.lua": "406c14b9c9c4ec97dcc5655c7569d85a490c3292b49604684df5832d748dc7af",
     "NativeTools.lua": "841b6f79e3b4b0ca7a7a6dc514bd8215a51e2b5edcf4ef88c1ca40ced1fbb574",
     "SpellAssets.lua": "5c443e759c4ff663fd0070f06566ac0de5e8c984c963341f50be72c8c4545681",
-    "Loadout.lua": "0b35126b25c9c9e67b5d158c1494869a35324299658b60cbd767a95d2bedc14d",
+    "Loadout.lua": "74f03eabd2b36bd14057ba7f78f7215a2ee774ecf1d1115ea709c784e249248e",
     "TakenDetails.lua": "2444aa4578119eae2da08653ce627caccb7acc704ec2551dc3c8c06bcd71f563",
     "Preview.lua": "0d42c42f5be64b40a2b1bcf5a69d635858dedaba409352d88555398f734a59bc",
     "PreviewVisibility.lua": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
@@ -58,7 +58,7 @@
     "ThemeHUD.lua": "d4621b87677d5a7e4872d82a58456268ee3ee2dd6f95bec4b8382716464499a0",
     "ThemeTarget.lua": "46a244137cbfc17c39f0a9f108c8b17873c32dfa49f8cc0e086b4ce0304a7b4b",
     "ReferenceArt.lua": "b042e0777110f3a4519ccfadbf57bb4dcbb2e68ca9896f58f066775074605edf",
-    "ReferenceHUD.lua": "a1c7475a53a5aa2ec0b83bf3f8145e7fa71eda30008ab203fd695bb3a8f67160",
+    "ReferenceHUD.lua": "a4c972ce90728071880b2deac12a1b41026cd70d811befcd482764853b1591e8",
     "ZoneThemes.lua": "1c749527ab665904c1e5578b159b8877157b7629db1db85f0c6b01ca258f18bc"
   },
   "nativeLuaSHA256": {
@@ -1744,7 +1744,7 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 544
+          "line": 549
         },
         {
           "file": "FieldKit.lua",
@@ -3427,11 +3427,7 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 381
-        },
-        {
-          "file": "Loadout.lua",
-          "line": 382
+          "line": 384
         },
         {
           "file": "Loadout.lua",
@@ -3439,7 +3435,11 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 386
+          "line": 388
+        },
+        {
+          "file": "Loadout.lua",
+          "line": 389
         }
       ],
       "directCallSites": [],
