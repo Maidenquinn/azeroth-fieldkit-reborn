@@ -85,7 +85,16 @@ def main():
         FieldKitRebornDB.meterHealDone=true
         rows,total,rate,known=FieldKitMeterLedger.Read("healing")
         assert(known and total==50)
-        assert(FieldKitMeterLedger.Reset()==false)
+        local capabilities=AZS_GetMeterCapabilities()
+        local checkpoints=capabilities and capabilities.features and capabilities.features.atomicCheckpoints==true
+        assert(FieldKitMeterLedger.Reset()==checkpoints,"Reset did not follow native checkpoint capabilities")
+        if checkpoints then
+          rows,total,rate,known=FieldKitMeterLedger.Read("damage")
+          assert(known and total==0,"Checkpoint reset retained damage from before the reset")
+          ROUTE("AZSMETER","Jab,275,2.75,1,0,0")
+          rows,total,rate,known=FieldKitMeterLedger.Read("damage")
+          assert(known and total==75,"Checkpoint did not count only subsequent damage")
+        end
         AZS_RUN.ph="ready";AZS_ZONE.class="hunter"
         AZS_SPELLS={{key="auto_shot",spell=75,rank=1},{key="aimed_shot",spell=19434,rank=1}}
         FieldKitNative.Packet("AZSSPELLS");FieldKitLoadout.scanAt=0;FieldKitLoadout.Update()
@@ -114,7 +123,7 @@ def main():
             assert(s and s.name==spell.name and s.icon)
           end
         end
-        print("PASS installed Reborn Api.lua + Meter.lua: damage, healing, unsupported checkpoints; every generated class/spell and map")
+        print("PASS installed Reborn Api.lua + Meter.lua: damage, healing, capability-based checkpoints; every generated class/spell and map")
         ''')
     print(json.dumps({'rebornFixtures':True,'installedApiExecuted':bool(a.game),'liveGameTest':False}))
 if __name__=='__main__':main()
