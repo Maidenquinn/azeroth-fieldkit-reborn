@@ -1862,7 +1862,7 @@ function R.Panels(variant,zone)
     R.CardTabs(f,a,tab,{"Equipment","Spells"},function(i) FieldKitRebornDB.loadoutTab=i;R.scroll=R.scroll or {};R.scroll.Accessories=0;FieldKitZoneThemes.Refresh(true) end,{[2]=range})
     if tab==1 then
      local ids={2,13,14,11,12};local names={"Amulet","Trinket 1","Trinket 2","Ring 1","Ring 2"}
-     for i=1,5 do local r=Row(f,i,72,R.SocketY(zone,i),a[3]-94,R.SocketH(zone));local e=FieldKitLoadout.items[ids[i]] or (R.readyItems and R.readyItems[ids[i]]);r.entry=e;local occupied=e and e.name and e.name~="" and e.name~=FieldKit_L("Empty");if occupied then r.label:SetText(e.name);r.value:SetText("");r.label:SetWidth(a[3]-98);r.value:SetWidth(0) else FieldKit_Text(r.label,names[i]);r.value:SetText((e or (not FieldKit.rebornLegacyFixture and FieldKitNative.Fresh("AZSGEAR"))) and FieldKit_L("Empty") or "?");r.label:SetWidth(126);r.value:SetWidth(a[3]-228) end
+     for i=1,5 do local r=Row(f,i,72,R.SocketY(zone,i),a[3]-94,R.SocketH(zone));local e=FieldKitLoadout.items[ids[i]] or (R.readyItems and R.readyItems[ids[i]]);r.entry=e;local occupied=e and e.name and e.name~="" and e.name~=FieldKit_L("Empty");if occupied then r.label:SetText(e.name);r.value:SetText(e.rank or "");r.label:SetWidth(a[3]-98-(e.rank and 84 or 0));r.value:SetWidth(e.rank and 80 or 0) else FieldKit_Text(r.label,names[i]);r.value:SetText((e or (not FieldKit.rebornLegacyFixture and FieldKitNative.Fresh("AZSGEAR"))) and FieldKit_L("Empty") or "?");r.label:SetWidth(126);r.value:SetWidth(a[3]-228) end
       local texture=e and e.icon
       if FieldKit.rebornLegacyFixture then texture=type(GetInventoryItemTexture)=="function" and GetInventoryItemTexture("player",ids[i]) end
       if texture then R.SocketIcon(r,zone,texture) end

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.21",
+  "version": "0.1.0-reborn.22",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.21",
+    "version": "0.1.0-reborn.22",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No new live client pass for .21. Offline regressions cover invalid/duplicate boss and guardian rows, real endless rift percentage with missing/zero values, honest missing boss identity, visible noninteractive HUD behind reward cards with native duplicates suppressed across themes, exact input/layer restoration, and explicitly labelled native spell bonus extraction without action-tooltip dependency. Full runtime/settings/themes and installed 0.6.5 API/content fixtures are checked. Spell-specific upgrade values absent from the public API cannot be reconstructed; live acceptance remains pending."
+    "inGameTestScope": "No new live client pass for .22. Offline regressions reproduce the supplied native spell tooltip: current damage, target count, range and interval without a Bonus label; native text and combat statistics on loadout hover; exact range units and interval precision; native amulet ranks across themed/unthemed views, no fabricated ranks from ring/trinket stat values, and rank/value-only refresh. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "e06af360a7b56affa4141e3e821575067957feacff1891dfc4654cdaae0e7616"
+      "sha256": "0d9f0736f15766515493b6bc8d88d53633a7348a02aa438be1d4fd9678034706"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -45,7 +45,7 @@
     "Reborn.lua": {
       "maxUpvalues": 2,
       "functions": 19,
-      "sha256": "cc1ae59be762568b19b70c907a6daeaab3e45af2124f0119a9121c185defa25b"
+      "sha256": "55d02a5703dd43c5340252346d359d780281be4961c17dbe5b8dfe9d341e95df"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -95,7 +95,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "a88d2a251d090af4a7e5b6e86b93367569b6266c57aee93548aa969bece7a228"
+      "sha256": "0c95253366c38647f8c148583cfe6e51a94de62cf805b2240d3d0ed151d7d143"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
@@ -219,8 +219,8 @@
     },
     "Loadout.lua": {
       "maxUpvalues": 2,
-      "functions": 31,
-      "sha256": "8e7f2dd0acc03a6826189f145cc310c468e1ff10e11b42680a3d66cc31b9241a"
+      "functions": 34,
+      "sha256": "4cc4c21b2d64e61ce8f5fb0d37e1f09de6568fbef69dbf7c918b8c387aac23cb"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -310,7 +310,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 193,
-      "sha256": "dfe575a380189fd609fb102ec74d658377bb6866007e553e7e27f29faa9258c3"
+      "sha256": "1bb9e7a10cf5895fcf89b6f4b0bd43445796960f5c3f608639b5ba10abaf49ec"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

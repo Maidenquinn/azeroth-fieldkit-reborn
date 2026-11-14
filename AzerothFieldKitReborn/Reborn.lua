@@ -165,7 +165,11 @@ function R.Gear()
    local raw=type(g.text)=="string" and FieldKitNative.Text(g.text,2048) or ""
    local bonuses=FieldKitLoadout and FieldKitLoadout.ExpandStats({raw}) or {}
    if table.getn(bonuses)==0 and raw~="" then bonuses={raw} end
-   items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses=bonuses,rankValue=tonumber(g.amount),
+   -- amount is a rank only for amulets; on rings/trinkets it is a stat value.
+   local rank=FieldKit.Number(g.rank) or (g.slot=="amulet" and FieldKit.Number(g.amount))
+   if rank and (rank<1 or rank~=math.floor(rank)) then rank=nil end
+   items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses=bonuses,rankValue=rank,
+    rank=rank and string.format(FieldKit_L("Rank %d"),rank) or nil,
     nativeDetails=FieldKitReborn065 and FieldKitReborn065.JewelryDetails(raw) or nil}
   end
  end

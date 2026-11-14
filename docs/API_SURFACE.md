@@ -331,3 +331,14 @@ current/max health, and are deduplicated by id. Spell upgrade extraction reads
 only explicit bonus sections from fresh AZS_SPELLTIPS; current public APIs do not
 provide a structured per-spell upgrade breakdown. Base descriptions and rank
 numbers are not converted into guessed bonus values.
+
+
+Reborn .22: lack of a structured upgrade breakdown does not mean current spell
+values are unavailable. Fresh AZS_SPELLTIPS supplies the native current text.
+The loadout card extracts recognised FR/EN numeric effects without assuming a
+Bonus heading or computing them from rank; unknown translated prose remains
+available in the tooltip. Loadout hover reuses MeterLedger.AppendStats and its
+existing preference, as action-bar hover does. Raw AZS_SPELLS.cdmax metadata is
+retained alongside structured learned-source identities. AZS_GEAR.amount is a
+rank only for amulets (as the shipped Gear.lua uses it); other accessory stat
+amounts must not be labelled Rank. Explicit rank metadata takes precedence.

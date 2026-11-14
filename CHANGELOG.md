@@ -1,3 +1,11 @@
+# 0.1.0-reborn.22 — Native spell values and amulet ranks
+
+- Show compact current spell values from native spell tips even without an explicit Bonus section: damage, targets, range, duration, attack speed, slow and interval where recognised. Preserve the supplied numbers/units; do not infer upgrades from rank. Unknown prose stays available on hover.
+- Loadout spell hover includes the current native description and the same sampled combat statistics as the action-bar hover when explicit bonus sections are absent. Keep the combat-tooltip preference.
+- Show the native amulet rank in themed and unthemed accessory cards and tooltips. Ring/trinket stat amounts are not ranks; accept an explicit rank field if supplied.
+- Refresh on rank-only equipment changes, spell-tip changes and supplied interval changes. Preserve native interval metadata when reading the structured learned-spell API.
+- Regression uses the exact French tooltip from the report and English equivalents. Full offline/installed-API checks; no new live client pass claimed.
+
 # 0.1.0-reborn.21 — Endless progression and reward-screen HUD
 
 - Reject empty/dead/incomplete boss and guardian snapshots; deduplicate live ids.

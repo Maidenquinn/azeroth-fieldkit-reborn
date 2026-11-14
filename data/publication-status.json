@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.21",
+  "version": "0.1.0-reborn.22",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "No new live client pass for .21. Offline regressions cover invalid/duplicate boss and guardian rows, real endless rift percentage with missing/zero values, honest missing boss identity, visible noninteractive HUD behind reward cards with native duplicates suppressed across themes, exact input/layer restoration, and explicitly labelled native spell bonus extraction without action-tooltip dependency. Full runtime/settings/themes and installed 0.6.5 API/content fixtures are checked. Spell-specific upgrade values absent from the public API cannot be reconstructed; live acceptance remains pending."
+  "inGameTestScope": "No new live client pass for .22. Offline regressions reproduce the supplied native spell tooltip: current damage, target count, range and interval without a Bonus label; native text and combat statistics on loadout hover; exact range units and interval precision; native amulet ranks across themed/unthemed views, no fabricated ranks from ring/trinket stat values, and rank/value-only refresh. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
 }

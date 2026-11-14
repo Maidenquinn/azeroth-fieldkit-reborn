@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.21",
+  "candidate": "0.1.0-reborn.22",
   "runtimeModules": 57,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "e06af360a7b56affa4141e3e821575067957feacff1891dfc4654cdaae0e7616",
+      "sha256": "0d9f0736f15766515493b6bc8d88d53633a7348a02aa438be1d4fd9678034706",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -60,8 +60,8 @@
       "literalEvents": []
     },
     "Reborn.lua": {
-      "bytes": 10149,
-      "sha256": "cc1ae59be762568b19b70c907a6daeaab3e45af2124f0119a9121c185defa25b",
+      "bytes": 10440,
+      "sha256": "55d02a5703dd43c5340252346d359d780281be4961c17dbe5b8dfe9d341e95df",
       "namedFunctions": [
         {
           "name": "R.ActionButton",
@@ -129,11 +129,11 @@
         },
         {
           "name": "R.PlayerBuffs",
-          "line": 177
+          "line": 181
         },
         {
           "name": "R.Portrait",
-          "line": 205
+          "line": 209
         }
       ],
       "literalEvents": []
@@ -660,8 +660,8 @@
       "literalEvents": []
     },
     "InterfaceStrings.lua": {
-      "bytes": 44783,
-      "sha256": "a88d2a251d090af4a7e5b6e86b93367569b6266c57aee93548aa969bece7a228",
+      "bytes": 45040,
+      "sha256": "0c95253366c38647f8c148583cfe6e51a94de62cf805b2240d3d0ed151d7d143",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -2017,8 +2017,8 @@
       "literalEvents": []
     },
     "Loadout.lua": {
-      "bytes": 25754,
-      "sha256": "8e7f2dd0acc03a6826189f145cc310c468e1ff10e11b42680a3d66cc31b9241a",
+      "bytes": 29164,
+      "sha256": "4cc4c21b2d64e61ce8f5fb0d37e1f09de6568fbef69dbf7c918b8c387aac23cb",
       "namedFunctions": [
         {
           "name": "L.Plain",
@@ -2026,95 +2026,103 @@
         },
         {
           "name": "L.Key",
-          "line": 11
-        },
-        {
-          "name": "L.TextureKey",
           "line": 12
         },
         {
+          "name": "L.TextureKey",
+          "line": 13
+        },
+        {
           "name": "L.Green",
-          "line": 15
+          "line": 16
         },
         {
           "name": "L.IsStat",
-          "line": 25
+          "line": 26
         },
         {
           "name": "L.CompactBonus",
-          "line": 35
+          "line": 36
         },
         {
           "name": "L.RankColor",
-          "line": 60
+          "line": 61
         },
         {
           "name": "L.ExpandStats",
-          "line": 67
+          "line": 68
         },
         {
           "name": "L.BonusText",
-          "line": 85
+          "line": 86
         },
         {
           "name": "L.SpellBonuses",
-          "line": 93
+          "line": 94
         },
         {
           "name": "L.MergeBonuses",
-          "line": 124
+          "line": 125
+        },
+        {
+          "name": "L.SpellEffects",
+          "line": 134
+        },
+        {
+          "name": "capture",
+          "line": 141
         },
         {
           "name": "L.Tooltip",
-          "line": 130
+          "line": 164
         },
         {
           "name": "L.EnsureAssetIcons",
-          "line": 165
+          "line": 199
         },
         {
           "name": "L.Icon",
-          "line": 214
+          "line": 248
         },
         {
           "name": "L.ClearIcon",
-          "line": 221
+          "line": 255
         },
         {
           "name": "L.Decorate",
-          "line": 226
+          "line": 260
         },
         {
           "name": "L.SpellsChanged",
-          "line": 237
+          "line": 271
         },
         {
           "name": "L.ContentKey",
-          "line": 253
+          "line": 289
         },
         {
           "name": "L.Learned",
-          "line": 277
+          "line": 313
         },
         {
           "name": "L.Scan",
-          "line": 295
+          "line": 335
         },
         {
           "name": "L.Tip",
-          "line": 391
+          "line": 432
         },
         {
           "name": "L.Attach",
-          "line": 400
+          "line": 445
         },
         {
           "name": "L.Render",
-          "line": 419
+          "line": 464
         },
         {
           "name": "L.Update",
-          "line": 481
+          "line": 528
         }
       ],
       "literalEvents": []
@@ -3790,8 +3798,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 153515,
-      "sha256": "dfe575a380189fd609fb102ec74d658377bb6866007e553e7e27f29faa9258c3",
+      "bytes": 153563,
+      "sha256": "1bb9e7a10cf5895fcf89b6f4b0bd43445796960f5c3f608639b5ba10abaf49ec",
       "namedFunctions": [
         {
           "name": "Short",
@@ -6670,7 +6678,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.21",
+    "version": "0.1.0-reborn.22",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6681,7 +6689,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No new live client pass for .21. Offline regressions cover invalid/duplicate boss and guardian rows, real endless rift percentage with missing/zero values, honest missing boss identity, visible noninteractive HUD behind reward cards with native duplicates suppressed across themes, exact input/layer restoration, and explicitly labelled native spell bonus extraction without action-tooltip dependency. Full runtime/settings/themes and installed 0.6.5 API/content fixtures are checked. Spell-specific upgrade values absent from the public API cannot be reconstructed; live acceptance remains pending."
+    "inGameTestScope": "No new live client pass for .22. Offline regressions reproduce the supplied native spell tooltip: current damage, target count, range and interval without a Bonus label; native text and combat statistics on loadout hover; exact range units and interval precision; native amulet ranks across themed/unthemed views, no fabricated ranks from ring/trinket stat values, and rank/value-only refresh. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

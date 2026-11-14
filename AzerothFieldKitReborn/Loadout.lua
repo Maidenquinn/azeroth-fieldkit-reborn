@@ -6,6 +6,7 @@ local L=FieldKitLoadout
 local N=FieldKitNative
 function L.Plain(text,limit)
  if type(text)~="string" then return nil end
+ text=string.gsub(text,"[\r\n\t]+"," ")
  return N.Text(string.gsub(string.gsub(text,"|c%x%x%x%x%x%x%x%x",""),"|r",""),limit or 240)
 end
 function L.Key(text) return string.lower(string.gsub(text or "","[%s_%p]","")) end
@@ -127,6 +128,39 @@ function L.MergeBonuses(target,source)
   if not found then table.insert(target,line) end
  end
 end
+-- Compact current effects from the native description (not inferred upgrades).
+-- Preserve the supplied numbers verbatim; unrecognised/localised prose remains
+-- available in the tooltip. Never compute damage or a multiplier from rank.
+function L.SpellEffects(raw,interval)
+ local parts={}
+ local text=type(raw)=="string" and string.gsub(string.gsub(raw,"|c%x%x%x%x%x%x%x%x",""),"|r","") or ""
+ -- The Windows C locale can corrupt UTF-8 bytes in string.lower().
+ text=string.gsub(text,"[A-Z]",function(c) return string.char(string.byte(c)+32) end)
+ text=string.gsub(text,"’","'")
+ local number="(%d[%d%.,]*)"
+ local function capture(patterns)
+  for _,pattern in ipairs(patterns) do local _,_,v=string.find(text,pattern);if v then return v end end
+ end
+ local damage=capture({"pour "..number.." dégâts","inflige "..number.." dégâts",number.." damage"})
+ local targets=capture({"jusqu'à "..number.." ennemis","up to "..number.." enem", "hits "..number.." enem"})
+ local range=capture({"moins de "..number.." m"});local rangeUnit="m"
+ if not range then range=capture({"within "..number.." yards","within "..number.." yd"});rangeUnit="yd" end
+ local duration=capture({"pendant "..number.." s","for "..number.." sec"})
+ local haste=capture({"vitesse d'attaque de "..number.."%%","attack speed by "..number.."%%"})
+ local slow=capture({"ralentit.-de "..number.."%%","slows.-by "..number.."%%"})
+ if damage then table.insert(parts,FieldKit_L("Damage").." "..damage) end
+ if targets then table.insert(parts,FieldKit_L("Targets").." "..targets) end
+ if haste then table.insert(parts,FieldKit_L("Attack speed").." +"..haste.."%") end
+ if slow then table.insert(parts,FieldKit_L("Slow").." "..slow.."%") end
+ if range then table.insert(parts,FieldKit_L("Range").." "..range.." "..rangeUnit) end
+ if duration then table.insert(parts,FieldKit_L("Duration").." "..duration.." s") end
+ local every=capture({"toutes les "..number.." s","every "..number.." sec"})
+ if every then table.insert(parts,FieldKit_L("Interval").." "..every.." s")
+ elseif FieldKit.Number(interval) and interval>0 then table.insert(parts,FieldKit_L("Interval").." "..tostring(interval).." s") end
+ local lines={}
+ for i=1,table.getn(parts),2 do table.insert(lines,parts[i]..(parts[i+1] and " · "..parts[i+1] or "")) end
+ return lines
+end
 function L.Tooltip(method,a,b)
  if not L.tip then L.tip=CreateFrame("GameTooltip","FieldKitLoadoutScan",UIParent,"GameTooltipTemplate") end
  local tip=L.tip;if not tip[method] then return {},nil,nil,{} end
@@ -233,7 +267,7 @@ function L.Decorate(row,name)
  if icon then row.fieldkitSpellIcon:SetTexture(icon);row.fieldkitSpellIcon:Show() else row.fieldkitSpellIcon:Hide() end
 end
 -- Did the learned-spell packet change (keys, ranks)? Compared in place with the last one seen: no allocation.
-L.sigKeys,L.sigRanks,L.sigCount,L.sigTips={},{},0,{}
+L.sigKeys,L.sigRanks,L.sigCount,L.sigTips,L.sigIntervals={},{},0,{},{}
 function L.SpellsChanged()
  local list=type(AZS_SPELLS)=="table" and AZS_SPELLS or nil
  local count=list and math.min(32,table.getn(list)) or 0
@@ -241,6 +275,8 @@ function L.SpellsChanged()
  for i=1,count do
   local s=list[i];local key,rank=type(s)=="table" and s.key,type(s)=="table" and s.rank
   if L.sigKeys[i]~=key or L.sigRanks[i]~=rank then L.sigKeys[i]=key;L.sigRanks[i]=rank;changed=true end
+  local interval=type(s)=="table" and s.cdmax
+  if L.sigIntervals[i]~=interval then L.sigIntervals[i]=interval;changed=true end
   if not FieldKit.rebornLegacyFixture then
    local tip=type(AZS_SPELLTIPS)=="table" and AZS_SPELLTIPS[key]
    if L.sigTips[i]~=tip then L.sigTips[i]=tip;changed=true end
@@ -254,11 +290,11 @@ function L.ContentKey()
  local parts={};local n=0
  for i=1,table.getn(L.spells) do
   local e=L.spells[i];n=n+1
-  parts[n]=tostring(e.key)..":"..tostring(e.rank)..":"..tostring(e.name)..":"..tostring(e.icon)..":"..table.concat(e.bonuses or {},"|")..":"..table.concat(e.upgrades or {},"|")..":"..tostring(e.nativeText)
+  parts[n]=tostring(e.key)..":"..tostring(e.rank)..":"..tostring(e.name)..":"..tostring(e.icon)..":"..table.concat(e.bonuses or {},"|")..":"..table.concat(e.upgrades or {},"|")..":"..tostring(e.nativeText)..":"..table.concat(e.effects or {},"|")
  end
  for _,slot in ipairs({2,13,14,11,12}) do
   local it=L.items[slot];n=n+1
-  parts[n]=slot..":"..tostring(it and it.name)..":"..tostring(it and it.icon)..":"..table.concat(it and it.bonuses or {},"|")..":"..table.concat(it and it.nativeDetails or {},"|")
+  parts[n]=slot..":"..tostring(it and it.name)..":"..tostring(it and it.icon)..":"..tostring(it and it.rankValue)..":"..table.concat(it and it.bonuses or {},"|")..":"..table.concat(it and it.nativeDetails or {},"|")
  end
  return table.concat(parts,";;")
 end
@@ -283,11 +319,15 @@ function L.Learned()
  local success,snapshot=pcall(AZS_GetMeterLoadout,{apiVersion=1,runId=context.runId,ownerId=context.localOwnerId})
  if not success or type(snapshot)~="table" or type(snapshot.abilities)~="table" or type(snapshot.sources)~="table" then return fallback end
  local out={}
+ local intervals={}
+ for i=1,math.min(32,table.getn(fallback)) do local native=fallback[i]
+  if type(native)=="table" and type(native.key)=="string" then intervals[native.key]=FieldKit.Number(native.cdmax) end
+ end
  for i=1,math.min(32,table.getn(snapshot.abilities)) do
   local a=snapshot.abilities[i];local s=type(a)=="table" and snapshot.sources[a.sourceKey]
   if type(a)=="table" and a.learned and type(s)=="table" and type(s.abilityKey)=="string" then
    table.insert(out,{key=s.abilityKey,spell=s.spellIds and s.spellIds[1],rank=a.rank,
-    name=s.name,icon=type(s.icon)=="table" and s.icon.path})
+    name=s.name,icon=type(s.icon)=="table" and s.icon.path,cdmax=intervals[s.abilityKey]})
   end
  end
  return out
@@ -329,7 +369,7 @@ function L.Scan()
    if rank and type(s.key)=="string" then
     local asset=FieldKitReborn.Spell(s.key) or book[L.Key(s.key)]
     if FieldKit.rebornLegacyFixture then asset=FieldKitSpellAssets[tonumber(s.spell)] or asset end
-    local e={key=s.key,name=asset and asset.name or N.Text(s.key),icon=asset and asset.icon,rank=string.format(FieldKit_L("Rank %d"),rank),rankValue=rank,bonuses={},upgrades={}}
+    local e={key=s.key,name=asset and asset.name or N.Text(s.key),icon=asset and asset.icon,rank=string.format(FieldKit_L("Rank %d"),rank),rankValue=rank,spellId=tonumber(s.spell),bonuses={},upgrades={}}
     if not FieldKit.rebornLegacyFixture then
      if type(s.name)=="string" then e.name=N.Text(s.name) end
      e.icon=FieldKitReborn.Icon(s.icon) or e.icon
@@ -343,6 +383,7 @@ function L.Scan()
      if text and text~="" then
       e.nativeText=text
       e.bonuses,e.upgrades=L.SpellBonuses(AZS_SPELLTIPS[s.key])
+      e.effects=L.SpellEffects(AZS_SPELLTIPS[s.key],FieldKit.Number(s.cdmax))
      end
     end
     table.insert(L.spells,e)
@@ -394,7 +435,11 @@ function L.Tip(owner,entry)
  if entry.rank then GameTooltip:AddLine(entry.rank,.8,.8,.8) end
  for _,line in ipairs(entry.upgrades or {}) do GameTooltip:AddLine(line,1,1,1,true) end
  for _,line in ipairs(entry.nativeDetails or entry.bonuses or {}) do GameTooltip:AddLine(line,.3,1,.4,true) end
- if table.getn(entry.bonuses or {})==0 and table.getn(entry.upgrades or {})==0 then GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
+ if table.getn(entry.bonuses or {})==0 and table.getn(entry.upgrades or {})==0 then
+  if entry.nativeText and entry.nativeText~="" then GameTooltip:AddLine(entry.nativeText,1,.82,0,true)
+  else GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
+ end
+ if entry.spellId and FieldKitMeterLedger then FieldKitMeterLedger.AppendStats(entry.name,entry.spellId,entry.icon) end
  GameTooltip:Show()
 end
 function L.Attach(frame,readSlot,refresh)
@@ -428,7 +473,9 @@ function L.Render(frame)
   if spells and entry and not FieldKit.rebornLegacyFixture then
    source={};L.MergeBonuses(source,entry.upgrades);L.MergeBonuses(source,entry.bonuses)
   end
-  local text,lines=L.BonusText(source);row.bonus:SetText(text);row.fieldkitBonusLines=lines
+  local text,lines=L.BonusText(source)
+  if spells and lines==0 and entry and entry.effects then text=table.concat(entry.effects,"\n");lines=table.getn(entry.effects) end
+  row.bonus:SetText(text);row.fieldkitBonusLines=lines
   local rowH=(native and 22 or 16)+math.max(0,lines)*12;row.fieldkitRowHeight=rowH;totalH=totalH+rowH
   if spells then
    row.entry=entry;row.label:SetText(entry and entry.name or FieldKit_L("No spells yet"));row.value:SetText(entry and entry.rank or "")
@@ -440,7 +487,7 @@ function L.Render(frame)
    if FieldKit.rebornLegacyFixture then name,texture=L.readSlot(({2,13,14,11,12})[i]) end
    local slot=({"Amulet","Trinket 1","Trinket 2","Ring 1","Ring 2"})[i]
    -- Once equipped, the item name replaces the slot label; no need to repeat "Amulet".
-   if name then row.label:SetText(name);row.value:SetText("");row.value:SetTextColor(.85,.85,.9)
+   if name then row.label:SetText(name);row.value:SetText(entry and entry.rank or "");row.value:SetTextColor(L.RankColor(entry and entry.rankValue))
    else FieldKit_Text(row.label,slot);row.value:SetText(FieldKit_L("empty"));row.value:SetTextColor(.65,.7,.7) end
    row.icon:SetTexture(texture)
    if texture then row.icon:Show() else row.icon:Hide() end
@@ -458,10 +505,10 @@ function L.Render(frame)
    row:SetHeight(rowH-2)
    row.label:ClearAllPoints();row.label:SetPoint("TOPLEFT",row,"TOPLEFT",18,0)
    row.label:SetJustifyH("LEFT");row.label:SetJustifyV("TOP")
-   row.label:SetWidth(spells and frame:GetWidth()-96 or frame:GetWidth()-36);row.label:SetHeight(14)
+   row.label:SetWidth((spells or (row.entry and row.entry.rank)) and frame:GetWidth()-112 or frame:GetWidth()-36);row.label:SetHeight(14)
    row.value:ClearAllPoints();row.value:SetPoint("TOPRIGHT",row,"TOPRIGHT",-2,0)
    row.value:SetJustifyH("RIGHT")
-   row.value:SetWidth(spells and 68 or 48);row.value:SetHeight(14)
+   row.value:SetWidth((spells or (row.entry and row.entry.rank)) and 84 or 48);row.value:SetHeight(14)
    row.bonus:ClearAllPoints();row.bonus:SetPoint("TOPLEFT",row,"TOPLEFT",18,-14)
    row.bonus:SetJustifyH("LEFT");row.bonus:SetJustifyV("TOP")
    row.bonus:SetHeight(math.max(12,lines*12));row.bonus:SetWidth(frame:GetWidth()-32)
