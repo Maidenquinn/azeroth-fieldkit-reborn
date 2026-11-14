@@ -1,3 +1,5 @@
+reborn.26 / 0.6.5: Offline regression covers native French spell names in floating combat text from chat and world events, grouped amounts, critical hits, unknown names, live locale refresh, names-off and unchanged saved raw-name filters. Full runtime/settings/theme and installed API checks. No new live client visual test is claimed.
+
 reborn.25 / 0.6.5: offline checks for all six hunter name translations after native override paths, canonical/localised icon aliases, Elwynn inline native equipment bonuses and bounded socket/tab/empty transitions. Full tooltip detail retained. Live visual acceptance pending.
 
 reborn.24 / 0.6.5: offline regression for separate amount/DPS rectangles and column widths, absent guardian distance suppression with valid live distance retained, and elite target HP visibility/strata/value across three Elwynn variants. Live visual acceptance pending.

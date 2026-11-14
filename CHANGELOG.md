@@ -1,3 +1,8 @@
+# 0.1.0-reborn.26 — Localised floating combat text
+
+- Translate native spell names at display time for chat fallback and world-anchored events. Keep amounts, grouped hits, raw-name filters and names-off behaviour intact. Unknown names remain usable.
+- Regression checks cover both event paths and live locale refresh. No new live client pass claimed.
+
 # 0.1.0-reborn.25 — Localised loadout and Elwynn equipment bonuses
 
 - Localise learned spell names after every native source that can override them: structured loadout, GetSpellInfo and action tooltip. Preserve canonical and localised icon aliases.

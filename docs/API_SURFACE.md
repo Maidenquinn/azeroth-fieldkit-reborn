@@ -372,3 +372,5 @@ tooltip titles. Canonical/localised icon aliases are retained. The reference
 Equipment card renders nativeDetails as a compact fitted bonus line rather
 than deriving stat values; full native details remain in the shared tooltip.
 The bonus region is hidden when a socket changes tab or becomes empty.
+
+Floating combat labels (reborn.26): use AZS_L through Reborn.Localize at rendering time for native chat and world combat ability names. Canonical labels remain queue/group/filter identities. No new API dependency.

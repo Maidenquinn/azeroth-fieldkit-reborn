@@ -3,7 +3,7 @@
   "liveGameValidation": false,
   "runtimeModules": 57,
   "runtimeSHA256": {
-    "Runtime.lua": "83b314816b46017213c47808cb2e9df032179b559de13187d32e71208f376352",
+    "Runtime.lua": "59d1849601ab7a9e75185a84efab6fe93c37859919a3300abee19735503528db",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "3f8c1c80def0671edd760ca5d6d30b3795675859e850bb7b0691c93dfd6ff6cf",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -51,7 +51,7 @@
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "3156191b143809624e50039aa86ad9b8f77a1952776a5c3dc6473e115dca6a3b",
     "WorldMarkers.lua": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
-    "CombatText.lua": "31e3ec5ede0904b6cdd7b566f1fe29a0fb6a554a889192cdb1b82293a7e53d44",
+    "CombatText.lua": "583babab0171f827a6a736b8750d96cd396eeec3497012ca02031066c7cabb55",
     "CombatOptions.lua": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
     "CopyLog.lua": "ced8dba7c9b6182eb6e81c2fa94a52ff79e1b8fdcf9dc769ece3357dea3eb625",
     "ThemeMinimap.lua": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2",
@@ -1204,11 +1204,11 @@
       "references": [
         {
           "file": "CombatText.lua",
-          "line": 151
+          "line": 157
         },
         {
           "file": "CombatText.lua",
-          "line": 153
+          "line": 159
         }
       ],
       "directCallSites": [],
@@ -1254,19 +1254,19 @@
         },
         {
           "file": "CombatText.lua",
-          "line": 150
+          "line": 156
         },
         {
           "file": "CombatText.lua",
-          "line": 234
+          "line": 248
         },
         {
           "file": "CombatText.lua",
-          "line": 238
+          "line": 252
         },
         {
           "file": "CombatText.lua",
-          "line": 251
+          "line": 265
         },
         {
           "file": "CombatOptions.lua",
@@ -1820,7 +1820,7 @@
         },
         {
           "file": "CombatText.lua",
-          "line": 405
+          "line": 419
         },
         {
           "file": "ZoneThemes.lua",
@@ -1946,7 +1946,7 @@
         },
         {
           "file": "CombatText.lua",
-          "line": 405
+          "line": 419
         },
         {
           "file": "ZoneThemes.lua",
@@ -2352,23 +2352,23 @@
       "references": [
         {
           "file": "CombatText.lua",
-          "line": 146
+          "line": 152
         },
         {
           "file": "CombatText.lua",
-          "line": 402
+          "line": 416
         },
         {
           "file": "CombatText.lua",
-          "line": 414
+          "line": 428
         },
         {
           "file": "CombatText.lua",
-          "line": 418
+          "line": 432
         },
         {
           "file": "CombatText.lua",
-          "line": 419
+          "line": 433
         }
       ],
       "directCallSites": [],
@@ -2381,11 +2381,11 @@
       "references": [
         {
           "file": "CombatText.lua",
-          "line": 415
+          "line": 429
         },
         {
           "file": "CombatText.lua",
-          "line": 416
+          "line": 430
         }
       ],
       "directCallSites": [],
@@ -2944,15 +2944,15 @@
       "references": [
         {
           "file": "CombatText.lua",
-          "line": 150
+          "line": 156
         },
         {
           "file": "CombatText.lua",
-          "line": 263
+          "line": 277
         },
         {
           "file": "CombatText.lua",
-          "line": 273
+          "line": 287
         }
       ],
       "directCallSites": [],
@@ -3193,7 +3193,7 @@
         },
         {
           "file": "CombatText.lua",
-          "line": 406
+          "line": 420
         },
         {
           "file": "ThemeMinimap.lua",
@@ -3295,11 +3295,11 @@
       "references": [
         {
           "file": "CombatText.lua",
-          "line": 308
+          "line": 322
         },
         {
           "file": "CombatText.lua",
-          "line": 309
+          "line": 323
         }
       ],
       "directCallSites": [],
@@ -4504,7 +4504,7 @@
         },
         {
           "file": "CombatText.lua",
-          "line": 407
+          "line": 421
         },
         {
           "file": "ThemeHUD.lua",

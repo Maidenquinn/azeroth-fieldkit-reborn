@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.25",
+  "version": "0.1.0-reborn.26",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.25",
+    "version": "0.1.0-reborn.26",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No live client pass for .25. Offline regression covers six hunter spell names localised after structured-source, GetSpellInfo and action-tooltip overrides, canonical/localised icon aliases, inline native accessory bonuses in the Elwynn reference card, bounded name/bonus socket geometry, full native detail retention and gear/spell/empty transitions. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
+    "inGameTestScope": "Offline regression covers native French spell names in floating combat text from chat and world events, grouped amounts, critical hits, unknown names, live locale refresh, names-off and unchanged saved raw-name filters. Full runtime/settings/theme and installed API checks. No new live client visual test is claimed."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "83b314816b46017213c47808cb2e9df032179b559de13187d32e71208f376352"
+      "sha256": "59d1849601ab7a9e75185a84efab6fe93c37859919a3300abee19735503528db"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -274,8 +274,8 @@
     },
     "CombatText.lua": {
       "maxUpvalues": 12,
-      "functions": 48,
-      "sha256": "31e3ec5ede0904b6cdd7b566f1fe29a0fb6a554a889192cdb1b82293a7e53d44"
+      "functions": 49,
+      "sha256": "583babab0171f827a6a736b8750d96cd396eeec3497012ca02031066c7cabb55"
     },
     "CombatOptions.lua": {
       "maxUpvalues": 11,

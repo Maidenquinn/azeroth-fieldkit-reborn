@@ -118,6 +118,12 @@ local function Emit(v)
 end
 -- Merge same-skill/category events in a short window; cap pending groups at 64.
 -- Optional `anchor` (AS 0.138+) keeps the number over the hit / death spot.
+-- Localise only the displayed label. Queues, grouping and saved filters keep
+-- their native identities so changing language cannot merge unrelated hits.
+function C.NativeLabel(label)
+ if not FieldKit.rebornLegacyFixture and FieldKitReborn and type(label)=="string" then return FieldKitReborn.Localize(label) end
+ return label
+end
 local function Queue(label,amount,kind,incoming,filterName,generated,anchor)
  local v={label=label,amount=amount,kind=kind,incoming=incoming,filterName=filterName,generated=generated,count=1,start=GetTime(),anchor=anchor}
  if not Allowed(v) then return end
@@ -184,14 +190,22 @@ local function StyleSlot(s,v,size,now,lifetime)
  local text=v.label
  if v.previewKind then text=FieldKit_L("[Preview]").." "..FieldKit_L(C.byKind[v.previewKind][4] or C.byKind[v.previewKind][2]) end
  if v.generated then text=FieldKit_L(text) end
+ if not v.generated and not v.preview then text=C.NativeLabel(text) end
  if v.kind=="heal" then
   local _,_,name=string.find(v.label,"^Heal: (.*)$")
-  if name then text=FieldKit_L("Heal: ")..name end
+  if name then text=FieldKit_L("Heal: ")..C.NativeLabel(name) end
  end
  if C.byKind[v.kind] and C.byKind[v.kind][4] and not v.preview then
   local outcome=C.byKind[v.kind][4]
   local at=string.len(v.label)-string.len(outcome)+1
-  if at>0 and string.sub(v.label,at)==outcome then text=string.sub(v.label,1,at-1)..FieldKit_L(outcome)..string.sub(v.label,at+string.len(outcome)) end
+  if at>0 and string.sub(v.label,at)==outcome then
+   local prefix=string.sub(v.label,1,at-1)
+   if type(v.filterName)=="string" and v.filterName~="" then
+    local a,b=string.find(prefix,v.filterName,1,true)
+    if a then prefix=string.sub(prefix,1,a-1)..C.NativeLabel(v.filterName)..string.sub(prefix,b+1) end
+   end
+   text=prefix..FieldKit_L(outcome)..string.sub(v.label,at+string.len(outcome))
+  end
  end
  if v.amount then
   if not FieldKitRebornDB.combatTextNames and not v.preview then text="" end
