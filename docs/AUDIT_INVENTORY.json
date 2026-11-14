@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.17",
+  "candidate": "0.1.0-reborn.18",
   "runtimeModules": 57,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "715e5a5a41703c1607a138a92f30a182cbdbc90c5c1d28ca1b962dc0c6924c96",
+      "sha256": "bff59058d6d818b3e8c16fa8f01bf1b1b30e00a1feea092c8bc0b303311b5c10",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -215,8 +215,8 @@
       "literalEvents": []
     },
     "NativeHUD.lua": {
-      "bytes": 13791,
-      "sha256": "ca400597a160de1645b0949ded84f06cfd2c0e242fa34d36ea3a067d9f56676f",
+      "bytes": 16615,
+      "sha256": "fc871dc87625126d9f2785a170962272f9b33602222dc89ad1dd83c0f5ee5c52",
       "namedFunctions": [
         {
           "name": "Saved",
@@ -236,70 +236,86 @@
         },
         {
           "name": "Shown",
-          "line": 43
+          "line": 44
         },
         {
           "name": "Clock",
-          "line": 46
+          "line": 47
         },
         {
           "name": "N.RestoreLegacy",
-          "line": 63
+          "line": 64
         },
         {
           "name": "N.Update",
-          "line": 72
+          "line": 73
         },
         {
           "name": "Short",
-          "line": 115
+          "line": 119
         },
         {
           "name": "N.Money",
-          "line": 123
+          "line": 127
         },
         {
           "name": "N.BossLook",
-          "line": 161
+          "line": 165
         },
         {
           "name": "N.SeparateDefaults",
-          "line": 172
+          "line": 176
         },
         {
           "name": "N.ScaleCards",
-          "line": 189
+          "line": 193
         },
         {
           "name": "N.Polish",
-          "line": 201
+          "line": 205
         },
         {
           "name": "N.RestoreMeterFooter",
-          "line": 215
+          "line": 219
         },
         {
           "name": "N.MeterFooter",
-          "line": 221
+          "line": 225
         },
         {
           "name": "Forward",
-          "line": 227
+          "line": 231
+        },
+        {
+          "name": "N.ReleaseTargetLayout",
+          "line": 275
+        },
+        {
+          "name": "N.TargetLayout",
+          "line": 285
+        },
+        {
+          "name": "Stop",
+          "line": 308
         }
       ],
       "literalEvents": []
     },
     "NativeLayout.lua": {
-      "bytes": 3323,
-      "sha256": "b4a47f6b7b123f64469364bac9be5b8df1c7e262d453c53953bd336ce9c968e6",
+      "bytes": 3282,
+      "sha256": "c92f9b9def1a682fe8c27e7bd17f3797aeed010b0eb89f00d671750c72887593",
       "namedFunctions": [
+        {
+          "name": "Gap",
+          "line": 6
+        },
         {
           "name": "L.Rect",
           "line": 7
         },
         {
           "name": "L.Overlap",
-          "line": 20
+          "line": 19
         },
         {
           "name": "Free",
@@ -311,15 +327,15 @@
         },
         {
           "name": "Try",
-          "line": 31
+          "line": 32
         },
         {
           "name": "L.Apply",
-          "line": 48
+          "line": 49
         },
         {
           "name": "Add",
-          "line": 52
+          "line": 53
         }
       ],
       "literalEvents": []
@@ -459,8 +475,8 @@
       "literalEvents": []
     },
     "Config.lua": {
-      "bytes": 11566,
-      "sha256": "2eb3d87d20442f5948b92948b99db4f26bb1d71bd3899dab02b3b88076311a56",
+      "bytes": 11669,
+      "sha256": "80f09c18ce1c3ac1b999bcff620d0ff4c2cb54ecfcc6172c6671f9a89ad23d35",
       "namedFunctions": [
         {
           "name": "FieldKit.InitializeSettings",
@@ -616,8 +632,8 @@
       "literalEvents": []
     },
     "InterfaceStrings.lua": {
-      "bytes": 43692,
-      "sha256": "b3fb21ecdef92f6aa9fe9ae7104250801a98d41f100c137e28c4d4af23a60175",
+      "bytes": 44127,
+      "sha256": "ca7f2f5298515a516980304617b89371529d8846050bc3b8c7b14c6d48eadd89",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -1869,32 +1885,32 @@
       "literalEvents": []
     },
     "ScreenLayers.lua": {
-      "bytes": 4435,
-      "sha256": "a65af2000b8530efcd36a21c90e82b13f023c85999f9874f0347e1206b343aa3",
+      "bytes": 4900,
+      "sha256": "6d12f5a2f62023cdd77a1db82d974026da34c80b62672fdf19896c1850247f4d",
       "namedFunctions": [
         {
           "name": "ChoiceNames",
-          "line": 14
+          "line": 19
         },
         {
           "name": "RestoreChoice",
-          "line": 23
-        },
-        {
-          "name": "MaskChoice",
           "line": 31
         },
         {
+          "name": "MaskChoice",
+          "line": 39
+        },
+        {
           "name": "S.ClearChoice",
-          "line": 52
+          "line": 60
         },
         {
           "name": "S.ApplyChoice",
-          "line": 59
+          "line": 67
         },
         {
           "name": "S.Update",
-          "line": 70
+          "line": 78
         }
       ],
       "literalEvents": []
@@ -2243,8 +2259,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 83526,
-      "sha256": "b6641ba2cea375045e528d8276e8f5b34c5caaf8acf38ba70a374ce20d2e620a",
+      "bytes": 83900,
+      "sha256": "f67377f70d38e36ee05cfbce864803fd008d8455268034d918652a03e9999425",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -2256,146 +2272,146 @@
         },
         {
           "name": "U.HideTip",
-          "line": 251
+          "line": 255
         },
         {
           "name": "U.Tip",
-          "line": 254
+          "line": 258
         },
         {
           "name": "U.PopupLayer",
-          "line": 262
+          "line": 266
         },
         {
           "name": "U.Choice",
-          "line": 267
+          "line": 271
         },
         {
           "name": "U.CloseMenus",
-          "line": 315
+          "line": 319
         },
         {
           "name": "U.Wheel",
-          "line": 320
+          "line": 324
         },
         {
           "name": "Checkbox",
-          "line": 331
+          "line": 335
         },
         {
           "name": "Slider",
-          "line": 349
+          "line": 353
         },
         {
           "name": "BuildMarkerGallery",
-          "line": 374
+          "line": 378
         },
         {
           "name": "row.Refresh",
-          "line": 434
+          "line": 438
         },
         {
           "name": "ProfileActiveBorder",
-          "line": 478
+          "line": 482
         },
         {
           "name": "BuildProfileManager",
-          "line": 510
+          "line": 514
         },
         {
           "name": "row.Refresh",
-          "line": 596
+          "line": 600
         },
         {
           "name": "row.CloseEditors",
-          "line": 670
+          "line": 674
         },
         {
           "name": "U.EssentialHud",
-          "line": 684
+          "line": 688
         },
         {
           "name": "BuildHome",
-          "line": 699
+          "line": 703
         },
         {
           "name": "U.SelectWindowTab",
-          "line": 749
+          "line": 753
         },
         {
           "name": "U.BuildPage",
-          "line": 763
+          "line": 767
         },
         {
           "name": "U.UpdateRunContext",
-          "line": 839
+          "line": 843
         },
         {
           "name": "U.UpdateSharingStatus",
-          "line": 846
+          "line": 850
         },
         {
           "name": "U.Refresh",
-          "line": 849
+          "line": 853
         },
         {
           "name": "U.Select",
-          "line": 921
+          "line": 925
         },
         {
           "name": "U.ApplyPanelAppearance",
-          "line": 961
+          "line": 965
         },
         {
           "name": "U.Reflow",
-          "line": 966
+          "line": 970
         },
         {
           "name": "U.SetLayoutEditing",
-          "line": 1071
+          "line": 1075
         },
         {
           "name": "U.StartLayout",
-          "line": 1085
+          "line": 1089
         },
         {
           "name": "U.ResetPositions",
-          "line": 1090
+          "line": 1094
         },
         {
           "name": "U.UndoPositions",
-          "line": 1100
+          "line": 1104
         },
         {
           "name": "U.Build",
-          "line": 1114
+          "line": 1118
         },
         {
           "name": "U.LayoutNavigation",
-          "line": 1183
+          "line": 1187
         },
         {
           "name": "U.EnsureProfilePreviewBar",
-          "line": 1262
+          "line": 1266
         },
         {
           "name": "U.UpdateProfilePreviewBar",
-          "line": 1288
+          "line": 1292
         },
         {
           "name": "U.PreviewDefaults",
-          "line": 1294
+          "line": 1298
         },
         {
           "name": "U.Toggle",
-          "line": 1313
+          "line": 1317
         }
       ],
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 124014,
-      "sha256": "405aa0703d8a393f34944f489a0a19753c91457ef9749515e254d1dad6c0f12a",
+      "bytes": 124072,
+      "sha256": "f5ed59d07a496ce8a1529a08dd6a29493759e2d23b9651165e1c2be803c23c55",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2811,31 +2827,31 @@
         },
         {
           "name": "CreateMinimapButton",
-          "line": 2867
+          "line": 2868
         },
         {
           "name": "PlaceOnRim",
-          "line": 2877
+          "line": 2878
         },
         {
           "name": "InitDB",
-          "line": 2918
+          "line": 2919
         },
         {
           "name": "FieldKitEventLifecycle",
-          "line": 2942
+          "line": 2943
         },
         {
           "name": "FieldKitEventWorld",
-          "line": 2991
+          "line": 2992
         },
         {
           "name": "FieldKitEventOther",
-          "line": 3018
+          "line": 3019
         },
         {
           "name": "RefreshNativeData",
-          "line": 3072
+          "line": 3073
         }
       ],
       "literalEvents": [
@@ -3738,8 +3754,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 153540,
-      "sha256": "35c8af29bb677f6567daaed77ea918a19491ee0bd4cb391a2a44d41472dc102e",
+      "bytes": 153515,
+      "sha256": "dfe575a380189fd609fb102ec74d658377bb6866007e553e7e27f29faa9258c3",
       "namedFunctions": [
         {
           "name": "Short",
@@ -6618,18 +6634,18 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.17",
+    "version": "0.1.0-reborn.18",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": true,
+    "inGameTestByAgent": false,
     "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Client 0.6.5 campaign: first-launch themed view showed real spell damage, kills, boss charge, horde and elapsed clock; an off-theme transition reached a native level choice. Preview toolbar obscured reward cards and presentation stayed masked across this transition. Added choice-mask transaction isolation and toolbar yielding, covered by regression fixtures. One test run ended in death before re-pausing; no revival resource was spent by the agent. Active boss/co-op and full visual acceptance remain unverified. Repeated fresh-default previews and compact placement were inspected in the earlier ready-screen pass. Offline full runtime/settings/themes, recent-meter 5..120 and installed 0.6.5 API/content fixtures pass."
+    "inGameTestScope": "This .18 correction has not been live-tested by the agent. User campaign screenshots exposed native HUD returning beneath reward choices, fixed native target geometry and excessive card clearance. Offline regressions now cover retained replacement ownership and native choice masks with theme off/on, one-physical-pixel unthemed clearance, internal meter Reset, and native target drag/scale/lock/persistence/restoration. Full runtime/settings/themes and installed 0.6.5 API/content fixtures also pass. Earlier campaign observations apply to .17 only; they are not live acceptance of .18."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

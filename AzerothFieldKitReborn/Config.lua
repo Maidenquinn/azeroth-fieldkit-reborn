@@ -1,6 +1,6 @@
 -- All persisted data belongs to FieldKitRebornDB only. No automatic MASHDB import:
 -- old settings and game saves must not be overwritten by a renamed review build.
-local defaults={nativeCardScale=100,zoneThemes=false,zoneThemeMode="auto",zoneThemeVariant="complete",zoneThemeMinimap=true,zoneThemeMapShape="square",zoneThemeArt=true,zoneThemeOverlap=false,zoneThemeScale=100,lairNextBoss=true,windowsLocked=false,effectsFrame=false,effectTotems=true,effectSummons=true,effectTimers=true,effectBuffs=true,reviveFrame=false,
+local defaults={nativeTargetScale=100,nativeCardScale=100,zoneThemes=false,zoneThemeMode="auto",zoneThemeVariant="complete",zoneThemeMinimap=true,zoneThemeMapShape="square",zoneThemeArt=true,zoneThemeOverlap=false,zoneThemeScale=100,lairNextBoss=true,windowsLocked=false,effectsFrame=false,effectTotems=true,effectSummons=true,effectTimers=true,effectBuffs=true,reviveFrame=false,
  nextBossCard=false,nextBossAlert=false,bossTimeline=false,bossTimelineWidth=560,storedLevelsBadge=false,nativeWarnings=false,bossBannerWarnings=true,mechanicWarnings=true,partyBannerWarnings=true,
  highlightFlaggedLair=false,showNativeAffixes=true,hideUnknownMode=true,replacePartyFrames=false,partyDetailSync=false,partyCards=false,partyMeter=true,partyHealthMode=3,partyShow=true,partyPlayerCard=false,partyDetail=2,partyCardScale=100,partyHistory=false,partyHistoryCount=5,partyHistoryBuffs=true,partyHistoryCombat=true,partyHistoryIcons=true,linkRightCards=false,linkLeftCards=false,runModeCard=true,moneyFrame=true,hidePlates=false,hideUnknown=false,targetHealth=true,playerBar=true,
  bossFrame=false,bossStyle="classic",statsFrame=true,playerBuffs=true,gearFrame=true,meterFrame=true,
@@ -40,6 +40,7 @@ function FieldKit.InitializeSettings(defaultStats)
   d.cardSizes={FieldKitMeterFrame={width=380},FieldKitModeFrame={width=280},FieldKitGearFrame={width=320},FieldKitStatsFrame={width=280},FieldKitLairFrame={width=320},FieldKitTakenFrame={width=340},FieldKitMoneyFrame={width=320}}
   d.shownStats={dmg=true,haste=true,crit=true,lch=true}
  end
+ d.nativeTargetScale=math.floor(FieldKit.Number(d.nativeTargetScale,100,50,150))
  d.nativeCardScale=math.floor(FieldKit.Number(d.nativeCardScale,100,75,110))
  d.spellsFrame=nil -- retired separate spell window; the existing card now has tabs
  d.loadoutTab=d.loadoutTab==2 and 2 or 1

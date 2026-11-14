@@ -2860,6 +2860,7 @@ function FieldKit.SetWindowsLocked(locked)
  DB.windowsLocked=locked and true or false
  if FieldKit.layoutEditing and FieldKitUI.frame then FieldKitUI.SetLayoutEditing(false,false) end
  SetMovablesUnlocked(not DB.windowsLocked)
+ if FieldKitNativeHUD then FieldKitNativeHUD.Update() end
  if FieldKitUI.frame then FieldKitUI.Refresh() end
 end
 

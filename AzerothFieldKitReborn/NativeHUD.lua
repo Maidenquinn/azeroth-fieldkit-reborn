@@ -33,6 +33,7 @@ local function Mask(name,hide)
  end
 end
 function N.Release()
+ N.ReleaseTargetLayout()
  for f,scale in pairs(N.cardScales or {}) do f:SetScale(scale) end;N.cardScales={}
  N.RestoreMeterFooter()
  if FieldKitReborn065 then FieldKitReborn065.RestoreCastbar() end
@@ -75,18 +76,19 @@ function N.Update()
  if FieldKitZoneThemes and FieldKitZoneThemes.active then N.Release();return end
  local d=FieldKitRebornDB
  local phase=FieldKitNative.Read("AZS_GetPhase")
- local run=phase and not (FieldKit.IsChoiceScreen and FieldKit.IsChoiceScreen())
- local money=run and d.moneyFrame and Shown("FieldKitMoneyFrame")
- local gear=run and d.gearFrame and Shown("FieldKitGearFrame")
- local meter=run and d.meterFrame and Shown("FieldKitMeterFrame")
- local progress=run and d.bossTimeline and Shown("FieldKitBossTimelineFrame")
+ local choosing=FieldKit.IsChoiceScreen and FieldKit.IsChoiceScreen()
+ local run=phase
+ local money=run and d.moneyFrame and (choosing or Shown("FieldKitMoneyFrame"))
+ local gear=run and d.gearFrame and (choosing or Shown("FieldKitGearFrame"))
+ local meter=run and d.meterFrame and (choosing or Shown("FieldKitMeterFrame"))
+ local progress=run and d.bossTimeline and (choosing or Shown("FieldKitBossTimelineFrame"))
  local bosses,target=false,false
  local castOwner
  local represented={}
  local id=type(AZS_TARGET)=="table" and FieldKit.Number(AZS_TARGET.id)
  for i=1,4 do
   local f=getglobal("FieldKitBossFrame"..i)
-  if run and d.bossFrame and f and f:IsShown() and f.fieldkitUnitId then
+  if run and d.bossFrame and f and (choosing or f:IsShown()) and f.fieldkitUnitId then
    bosses=true;represented[f.fieldkitUnitId]=true;if id and id==f.fieldkitUnitId then target=true;castOwner=(f.compact and f.compact:IsShown()) and f.compact or f end
   end
  end
@@ -109,7 +111,9 @@ function N.Update()
  N.ScaleCards()
  N.Polish()
  if FieldKitNativeLayout then FieldKitNativeLayout.Apply() end
- if run then Clock() elseif N.clock then N.clock:Hide() end
+ N.TargetLayout()
+ if run and not choosing then Clock() elseif N.clock then N.clock:Hide() end
+ if choosing and FieldKitScreenLayers then FieldKitScreenLayers.ApplyChoice() end
 end
 
 local function Short(value)
@@ -254,7 +258,7 @@ function N.MeterFooter()
  if not source:IsShown() or source.mashCollapsed or not FieldKitRebornDB.meterTabs then p:Hide();p.reset:Hide();return end
  p:ClearAllPoints();p:SetPoint("BOTTOMLEFT",source,"BOTTOMLEFT",12,8);p:SetPoint("BOTTOMRIGHT",source,"BOTTOMRIGHT",-12,8)
  p:SetFrameLevel(source:GetFrameLevel()+3)
- local width=(source:GetWidth()-24)/6
+ local width=(source:GetWidth()-24-116)/6
  local labels={"Dmg","Heal","Boss","Taken","Party","Kills short"}
  if FieldKit_L("Kills short")=="Kills short" then labels[6]="Kills" end
  for i,b in ipairs(p.buttons) do
@@ -262,6 +266,60 @@ function N.MeterFooter()
   local selected=source.fieldkitMeterView==source.fieldkitTabs.buttons[i].fieldkitView
   if selected then b.line:Show();b.label:SetTextColor(1,.82,.25) else b.line:Hide();b.label:SetTextColor(.77,.77,.77) end
  end
- p.reset:ClearAllPoints();p.reset:SetPoint("TOPRIGHT",source,"TOPRIGHT",-6,46);p.reset.label:SetText(FieldKit_L("Reset"));p.reset:SetFrameLevel(source:GetFrameLevel()+3)
+ p.reset:ClearAllPoints();p.reset:SetPoint("BOTTOMRIGHT",source,"BOTTOMRIGHT",-12,10);p.reset.label:SetText(FieldKit_L("Reset"));p.reset:SetFrameLevel(source:GetFrameLevel()+3)
  p.reset:Show();p:Show()
+end
+
+-- An owned drag handle controls native target geometry without replacing its
+-- handlers or writing AzerothSurvivorsUI's profile. Theme handover restores it.
+function N.ReleaseTargetLayout()
+ local s=N.targetLayout
+ if not s then return end
+ s.frame:StopMovingOrSizing();s.frame:SetScale(s.scale)
+ s.frame:ClearAllPoints()
+ for _,point in ipairs(s.points) do s.frame:SetPoint(unpack(point)) end
+ s.frame:SetMovable(s.movable)
+ if N.targetMover then N.targetMover:Hide() end
+ N.targetLayout=nil
+end
+function N.TargetLayout()
+ local f=getglobal("AzerothSurvivorsUnitFrameTarget")
+ local d=FieldKitRebornDB
+ if not f or not d or FieldKit.rebornLegacyFixture then return end
+ if not N.targetLayout or N.targetLayout.frame~=f then
+  N.ReleaseTargetLayout()
+  local points={}
+  for i=1,(f.GetNumPoints and f:GetNumPoints() or 1) do
+   local point={f:GetPoint(i)};if point[1] then table.insert(points,point) end
+  end
+  N.targetLayout={frame=f,scale=f:GetScale(),points=points,movable=f.IsMovable and f:IsMovable() or false}
+ end
+ local s=N.targetLayout
+ if not N.targetMover then
+  local m=CreateFrame("Button","FieldKitNativeTargetMover",UIParent);N.targetMover=m
+  m:SetHeight(24);m:SetFrameStrata("DIALOG");m:RegisterForDrag("LeftButton")
+  FieldKitTheme.Surface(m,"button")
+  m.label=FieldKitTheme.Label(m,"Drag target frame",8,0,280,24,11,FieldKitTheme.gold)
+  m:SetScript("OnDragStart",function()
+   local state=N.targetLayout
+   if not state or FieldKitRebornDB.windowsLocked or FieldKit.IsChoiceScreen() then return end
+   state.dragging=true;state.frame:SetMovable(true);state.frame:StartMoving()
+  end)
+  local function Stop()
+   local state=N.targetLayout;if not state or not state.dragging then return end
+   state.dragging=nil;state.frame:StopMovingOrSizing();FieldKitPositions.Save(state.frame)
+  end
+  m:SetScript("OnDragStop",Stop);m:SetScript("OnMouseUp",Stop);m:SetScript("OnHide",Stop)
+ end
+ local key=f:GetName();local saved=d.frameAnchors[key]
+ if not s.dragging then
+  if FieldKitPositions.Valid(saved) then FieldKitPositions.Restore(f);s.applied=true
+  elseif s.applied then
+   f:ClearAllPoints();for _,point in ipairs(s.points) do f:SetPoint(unpack(point)) end;s.applied=nil
+  end
+  f:SetScale(s.scale*FieldKit.Number(d.nativeTargetScale,100,50,150)/100)
+ end
+ local m=N.targetMover;m:ClearAllPoints();m:SetPoint("BOTTOM",f,"TOP",0,3)
+ m:SetWidth(math.max(140,f:GetWidth()*f:GetScale()));m.label:SetWidth(m:GetWidth()-16);FieldKitTheme.Update(m)
+ if not d.windowsLocked and f:IsShown() and f:GetAlpha()>0 and not FieldKit.IsChoiceScreen() then m:Show() else m:Hide() end
 end

@@ -130,3 +130,54 @@ assert(FieldKitBossTimeline.NativeGauge(380,.25,"Boss 25%") and calls==1)
 AZS_BuildBossChargeBar=nil
 assert(not FieldKitBossTimeline.NativeGauge(380,.25,"Boss 25%"))
 print("PASS native material geometry, footer click forwarding/restoration, independent collision reflow and optional reusable native gauge")
+
+-- Choice cards hide the underlying native HUD without surrendering the
+-- replacement owners, even when those owners deliberately hide their widgets.
+d.moneyFrame=true;d.replaceTally=true;d.gearFrame=true;d.meterFrame=true;d.bossTimeline=true
+AZS_RUN.ph="playing";FieldKit.ApplyHUDProfileLive();N.Update()
+for _,name in ipairs({"AZSHudFrame","AZSTrackerFrame","AzerothSurvivorsUnitFramePlayer"}) do
+ local f=CreateFrame("Frame",name,UIParent);f:SetAlpha(.8);f:EnableMouse(true)
+end
+for _,themed in ipairs({false,true,false}) do
+ C.Set("zoneThemes",themed)
+ AZS_RUN.ph="choosing";FieldKitScreenLayers.ApplyChoice()
+ FieldKitMoneyFrame:Hide();FieldKitBossTimelineFrame:Hide()
+ for pass=1,3 do C.Refresh();N.Update();FieldKitScreenLayers.ApplyChoice() end
+ for _,name in ipairs({"AZSHudFrame","AZSTrackerFrame","AZSMeterFrame","AZSGearRow","AzerothSurvivorsSurvivorsResources","AzerothSurvivorsSurvivorsBossBar"}) do
+  assert(getglobal(name):GetAlpha()==0,"Native HUD returned under choices: "..name)
+ end
+ AZS_RUN.ph="playing";FieldKitScreenLayers.ApplyChoice();FieldKit.ApplyHUDProfileLive();C.Refresh();N.Update()
+ assert(AZSHudFrame:GetAlpha()==.8,"Unowned native alpha was not restored after choice")
+end
+
+-- Manual edge placement allows a single physical pixel; a real overlap still
+-- yields. Scale conversion must not grow the gap on a scaled UI.
+local overlap=FieldKitNativeLayout.Overlap
+assert(not overlap({x=0,y=0,w=100,h=100},{x=0,y=101,w=100,h=100}))
+assert(overlap({x=0,y=0,w=100,h=100},{x=0,y=99,w=100,h=100}))
+local effective=UIParent.GetEffectiveScale;UIParent.GetEffectiveScale=function() return 2 end
+assert(not overlap({x=0,y=0,w=100,h=100},{x=0,y=100.5,w=100,h=100}))
+UIParent.GetEffectiveScale=effective
+N.MeterFooter();local point,owner=N.meterProxy.reset:GetPoint()
+assert(point=="BOTTOMRIGHT" and owner==FieldKitMeterFrame,"Reset still reserves external collision space")
+
+-- Native target geometry is scoped to FieldKit, respects locking, survives
+-- refreshes and returns to the native geometry on a theme handover.
+local target=AzerothSurvivorsUnitFrameTarget
+N.ReleaseTargetLayout()
+target:SetAlpha(1);target:Show();target:SetParent(UIParent)
+target:ClearAllPoints();target:SetPoint("TOPRIGHT",UIParent,"TOPRIGHT",-35,-50)
+local scale=1;target.GetScale=function() return scale end;target.SetScale=function(_,v) scale=v end
+d.nativeTargetScale=75;d.windowsLocked=false;N.TargetLayout()
+assert(scale==.75 and N.targetMover:IsShown())
+N.targetMover:GetScript("OnDragStart")();assert(N.targetLayout.dragging)
+target:ClearAllPoints();target:SetPoint("TOPLEFT",UIParent,"TOPLEFT",200,-180)
+N.targetMover:GetScript("OnDragStop")();assert(not N.targetLayout.dragging)
+assert(d.frameAnchors[target:GetName()][3]==200)
+target:ClearAllPoints();target:SetPoint("CENTER",UIParent,"CENTER",0,0);N.TargetLayout()
+local point,owner,relative,x=target:GetPoint();assert(point=="TOPLEFT" and x==200)
+d.windowsLocked=true;N.TargetLayout();assert(not N.targetMover:IsShown())
+N.targetMover:GetScript("OnDragStart")();assert(not N.targetLayout.dragging)
+N.ReleaseTargetLayout();assert(scale==1 and not N.targetMover:IsShown())
+local point,owner,relative,x=target:GetPoint();assert(point=="TOPRIGHT" and x==-35)
+print("PASS choice/native ownership across skins, one-pixel collision clearance and native target drag/scale/lock/restore")

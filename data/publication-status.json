@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.17",
+  "version": "0.1.0-reborn.18",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
-  "inGameTestByAgent": true,
+  "inGameTestByAgent": false,
   "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Client 0.6.5 campaign Zangarmarsh: repeated fresh preference previews with theme off/on; compact independent native cards, one progress gauge/clock, real meter rows, kills/gold/event currency, six spell sockets, center HP, native target ownership and jewelry bonus (+31.9% max health) inspected. Reload restored difficulty and HUD after yielding to the replayed native reward choices. Fixed preview controls over reward cards, opacity ownership during skin transactions, missing unthemed chest texture and themed target/horde overlap. Final chest texture observed after reload; final target offset and empty-slot labels covered offline. One early test run ended in death before re-pausing; no revival resource spent by the agent. Sustained boss encounter/co-op and every optional panel combination remain unverified. Offline full runtime/settings/themes, all 116 recent-meter lengths 5..120 and installed 0.6.5 API/content fixtures pass."
+  "inGameTestScope": "This .18 correction has not been live-tested by the agent. User campaign screenshots exposed native HUD returning beneath reward choices, fixed native target geometry and excessive card clearance. Offline regressions now cover retained replacement ownership and native choice masks with theme off/on, one-physical-pixel unthemed clearance, internal meter Reset, and native target drag/scale/lock/persistence/restoration. Full runtime/settings/themes and installed 0.6.5 API/content fixtures also pass. Earlier campaign observations apply to .17 only; they are not live acceptance of .18."
 }

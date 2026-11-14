@@ -3,7 +3,7 @@
 -- Automatic displacement is never saved over a player's preferred anchor.
 FieldKitNativeLayout={}
 local L=FieldKitNativeLayout
-local GAP=16
+local function Gap() return 1/(UIParent:GetEffectiveScale() or 1) end
 function L.Rect(f,protected)
  if not f or not f.GetLeft or not f.GetTop or not f:IsShown() or (f.IsVisible and not f:IsVisible()) or f:GetAlpha()<=0 then return nil end
  local x,y=FieldKit.Number(f:GetLeft()),FieldKit.Number(f:GetTop())
@@ -12,12 +12,12 @@ function L.Rect(f,protected)
  local left,top,right,bottom=0,0,0,0
  if not protected then
   left,top,right,bottom=10,18,10,18
-  if f==getglobal("FieldKitMeterFrame") and FieldKitNativeHUD.meterProxy and FieldKitNativeHUD.meterProxy:IsShown() then top=48 end
  end
  return {frame=f,x=x*scale-left*scale,y=UIParent:GetHeight()-y*scale-top*scale,
   w=(f:GetWidth()+left+right)*scale,h=(f:GetHeight()+top+bottom)*scale,l=left*scale,t=top*scale,scale=scale}
 end
 function L.Overlap(a,b)
+ local GAP=Gap()
  return a.x<b.x+b.w+GAP and a.x+a.w+GAP>b.x and a.y<b.y+b.h+GAP and a.y+a.h+GAP>b.y
 end
 local function Free(r,placed,w,h)
@@ -26,6 +26,7 @@ local function Free(r,placed,w,h)
  return true
 end
 local function Fit(r,placed,w,h)
+ local GAP=Gap()
  if Free(r,placed,w,h) then return false end
  local best,score=nil,nil
  local function Try(x,y)

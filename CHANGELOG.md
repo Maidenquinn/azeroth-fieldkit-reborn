@@ -1,3 +1,11 @@
+# 0.1.0-reborn.18 — Reward screens and movable native target
+
+- Keep replaced native HUD containers hidden beneath level-up and jewelry choices, and restore prior presentation after choices.
+- Add an owned native-target drag handle when positions are unlocked; expose profile-scoped target scale from 50 to 150% without editing the native addon profile.
+- Reduce independent native-card clearance to one physical pixel. Move Reset inside the meter footer, removing its external collision reservation.
+- Reduce themed artwork clearance to one reference pixel while retaining its approved edge tolerance.
+- Regression-test choice ownership, close placement and target geometry restoration. This version has not received a new live client pass.
+
 # 0.1.0-reborn.17 — Choice-screen presentation restoration
 
 - Keep first-launch/profile preview controls behind native reward choices.

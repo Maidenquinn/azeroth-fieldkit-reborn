@@ -310,3 +310,13 @@ SpellAssets.lua is an independent local DBC name/icon index, not copied Azerloot
 data. GetSpellName is retained only for icon hints. No foreign addon API or saved
 variables are accessed. Portrait requests now include the explicit .tga extension;
 failed SetTexture results and raw zone keys remain diagnostic, not proof of render.
+
+
+Reborn .18 presentation: native reward choices keep native HUD containers masked
+while FieldKit yields its own cards. These alpha/mouse masks restore their exact
+prior state after choices. Unthemed native target placement uses an owned drag
+handle and saves the native frame's anchor only in FieldKitRebornDB.frameAnchors.
+Its scale is a profile-scoped 50–150% setting. Native click/event handlers and
+AzerothSurvivorsUI's saved profile are not modified; theme handover restores the
+original points, scale and movability. Collision clearance is one physical pixel
+for unthemed cards (including their metal border); Reset is inside the meter.

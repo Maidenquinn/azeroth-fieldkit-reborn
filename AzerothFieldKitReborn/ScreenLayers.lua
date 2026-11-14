@@ -11,12 +11,20 @@ local CHOICE_EXTRA={"FieldKitFirstLaunchBar","FieldKitProfilePreviewBar","FieldK
  "FieldKitMeterExtra_damage","FieldKitMeterExtra_healing","FieldKitMeterExtra_boss",
  "FieldKitMeterExtra_taken","FieldKitMeterExtra_party","FieldKitMeterExtra_kills"}
 
+local NATIVE_CHOICE={"AZSHudFrame","AZSTrackerFrame","AZSMeterFrame","AZSGearRow",
+ "AzerothSurvivorsSurvivorsResources","AzerothSurvivorsSurvivorsBossBar",
+ "AzerothSurvivorsUnitFrameTarget","AzerothSurvivorsUnitFramePlayer",
+ "AzerothSurvivorsMinimapStatusButton","AzerothSurvivorsActionBar1","AZSRiftBar","FieldKitNativeTargetMover"}
+
 local function ChoiceNames()
  local names={}
  if FieldKitCardLayout and FieldKitCardLayout.names then
   for i=1,table.getn(FieldKitCardLayout.names) do table.insert(names,FieldKitCardLayout.names[i]) end
  end
  for i=1,table.getn(CHOICE_EXTRA) do table.insert(names,CHOICE_EXTRA[i]) end
+ if not FieldKit.rebornLegacyFixture then
+  for i=1,table.getn(NATIVE_CHOICE) do table.insert(names,NATIVE_CHOICE[i]) end
+ end
  return names
 end
 

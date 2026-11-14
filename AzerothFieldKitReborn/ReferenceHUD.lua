@@ -1013,7 +1013,7 @@ end
 -- so a card returns to its preferred place as soon as the room is free again, and the search cannot oscillate.
 local CARDS={"Damage","Lairs","Accessories","Stats","Effects","Taken"}
 local OBSTACLES={"header","chat","identity","nav","vitality","mapArt"}
-local GAP,TOLERANCE=4,6 -- visual gap after a push; overlaps up to 6 px are the approved art's own and are left alone
+local GAP,TOLERANCE=1,6 -- close clearance; retain the approved artwork edge/bleed tolerance
 -- Opaque insets (left, top, right, bottom) measured on the approved art: collisions use what is really drawn.
 local OPAQUE={
  elwynn_complete={header={8,12,8,10},chat={4,9,0,11},identity={7,8,10,7},nav={0,11,7,0},vitality={6,9,8,8},

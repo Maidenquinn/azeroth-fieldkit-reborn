@@ -484,3 +484,7 @@ FieldKitLocale.fr["Preview first launch"]="Simuler un premier lancement"
 FieldKitLocale.fr["First launch preview"]="Aperçu du premier lancement"
 FieldKitLocale.fr["Without theme"]="Sans thème"
 FieldKitLocale.fr["With theme"]="Avec thème"
+
+FieldKitLocale.fr["Native target frame size"]="Taille de la cible native"
+FieldKitLocale.fr["Drag target frame"]="Déplacer la cible"
+FieldKitLocale.fr["Without a theme: unlock window positions, then drag the handle above the native target frame. This slider scales the whole target frame."]="Sans thème : déverrouillez les positions, puis glissez la poignée au-dessus de la cible native. Ce curseur redimensionne toute la cible."

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.17",
+  "version": "0.1.0-reborn.18",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,24 +18,24 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.17",
+    "version": "0.1.0-reborn.18",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": true,
+    "inGameTestByAgent": false,
     "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Client 0.6.5 campaign: first-launch themed view showed real spell damage, kills, boss charge, horde and elapsed clock; an off-theme transition reached a native level choice. Preview toolbar obscured reward cards and presentation stayed masked across this transition. Added choice-mask transaction isolation and toolbar yielding, covered by regression fixtures. One test run ended in death before re-pausing; no revival resource was spent by the agent. Active boss/co-op and full visual acceptance remain unverified. Repeated fresh-default previews and compact placement were inspected in the earlier ready-screen pass. Offline full runtime/settings/themes, recent-meter 5..120 and installed 0.6.5 API/content fixtures pass."
+    "inGameTestScope": "This .18 correction has not been live-tested by the agent. User campaign screenshots exposed native HUD returning beneath reward choices, fixed native target geometry and excessive card clearance. Offline regressions now cover retained replacement ownership and native choice masks with theme off/on, one-physical-pixel unthemed clearance, internal meter Reset, and native target drag/scale/lock/persistence/restoration. Full runtime/settings/themes and installed 0.6.5 API/content fixtures also pass. Earlier campaign observations apply to .17 only; they are not live acceptance of .18."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "715e5a5a41703c1607a138a92f30a182cbdbc90c5c1d28ca1b962dc0c6924c96"
+      "sha256": "bff59058d6d818b3e8c16fa8f01bf1b1b30e00a1feea092c8bc0b303311b5c10"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -59,13 +59,13 @@
     },
     "NativeHUD.lua": {
       "maxUpvalues": 5,
-      "functions": 27,
-      "sha256": "ca400597a160de1645b0949ded84f06cfd2c0e242fa34d36ea3a067d9f56676f"
+      "functions": 31,
+      "sha256": "fc871dc87625126d9f2785a170962272f9b33602222dc89ad1dd83c0f5ee5c52"
     },
     "NativeLayout.lua": {
       "maxUpvalues": 7,
-      "functions": 8,
-      "sha256": "b4a47f6b7b123f64469364bac9be5b8df1c7e262d453c53953bd336ce9c968e6"
+      "functions": 9,
+      "sha256": "c92f9b9def1a682fe8c27e7bd17f3797aeed010b0eb89f00d671750c72887593"
     },
     "Diagnostics.lua": {
       "maxUpvalues": 5,
@@ -80,7 +80,7 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "2eb3d87d20442f5948b92948b99db4f26bb1d71bd3899dab02b3b88076311a56"
+      "sha256": "80f09c18ce1c3ac1b999bcff620d0ff4c2cb54ecfcc6172c6671f9a89ad23d35"
     },
     "Profiles.lua": {
       "maxUpvalues": 4,
@@ -95,7 +95,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "b3fb21ecdef92f6aa9fe9ae7104250801a98d41f100c137e28c4d4af23a60175"
+      "sha256": "ca7f2f5298515a516980304617b89371529d8846050bc3b8c7b14c6d48eadd89"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
@@ -205,7 +205,7 @@
     "ScreenLayers.lua": {
       "maxUpvalues": 3,
       "functions": 7,
-      "sha256": "a65af2000b8530efcd36a21c90e82b13f023c85999f9874f0347e1206b343aa3"
+      "sha256": "6d12f5a2f62023cdd77a1db82d974026da34c80b62672fdf19896c1850247f4d"
     },
     "NativeTools.lua": {
       "maxUpvalues": 3,
@@ -249,13 +249,13 @@
     },
     "Interface.lua": {
       "maxUpvalues": 24,
-      "functions": 229,
-      "sha256": "b6641ba2cea375045e528d8276e8f5b34c5caaf8acf38ba70a374ce20d2e620a"
+      "functions": 231,
+      "sha256": "f67377f70d38e36ee05cfbce864803fd008d8455268034d918652a03e9999425"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 191,
-      "sha256": "405aa0703d8a393f34944f489a0a19753c91457ef9749515e254d1dad6c0f12a"
+      "sha256": "f5ed59d07a496ce8a1529a08dd6a29493759e2d23b9651165e1c2be803c23c55"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -310,7 +310,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 193,
-      "sha256": "35c8af29bb677f6567daaed77ea918a19491ee0bd4cb391a2a44d41472dc102e"
+      "sha256": "dfe575a380189fd609fb102ec74d658377bb6866007e553e7e27f29faa9258c3"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

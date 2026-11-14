@@ -131,6 +131,10 @@ function FieldKit.BuildJourneySections(sections,actions)
    set=function(v) if FieldKitMeterSuite then FieldKitMeterSuite.SetDetached("kills",v) else FieldKitRebornDB.meterDetach_kills=v and true or nil;actions.UpdateMeterFrames(true) end end},
  }
  local layout={
+  {kind="slider",label="Native target frame size",min=50,max=150,step=5,
+   tip="Without a theme: unlock window positions, then drag the handle above the native target frame. This slider scales the whole target frame.",
+   get=function() return FieldKitRebornDB.nativeTargetScale end,
+   set=function(v) FieldKitRebornDB.nativeTargetScale=v;FieldKitNativeHUD.Update() end},
   {kind="slider",label="Card size without theme",min=75,max=110,step=5,
    get=function() return FieldKitRebornDB.nativeCardScale end,
    set=function(v) FieldKitRebornDB.nativeCardScale=v;FieldKitNativeHUD.Update() end},
