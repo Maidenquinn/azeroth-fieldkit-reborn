@@ -1,3 +1,10 @@
+# 0.1.0-reborn.27 — French presentation audit
+
+- Unify native name display across meters/details, loadout, effects, combat text, group history and death details. Preserve raw ledger/filter keys and player names.
+- Prefer server spell names by id; join DBC aliases to the server name list with a bounded cache and AZSNAMES/late-packet invalidation. Correct Freezing Trap/Frost Trap aliases and English world miss labels.
+- Translate compact bonus suffixes and missing UI/help descriptors; refresh rank labels and late dictionary extensions on language changes.
+- Add French UI coverage and both-theme-family off/on matrix, fresh/persisted settings, and installed French catalog tests (241 spells, 66 jewelry names). No new live visual pass claimed.
+
 # 0.1.0-reborn.26 — Localised floating combat text
 
 - Translate native spell names at display time for chat fallback and world-anchored events. Keep amounts, grouped hits, raw-name filters and names-off behaviour intact. Unknown names remain usable.

@@ -166,7 +166,7 @@ local function Paint(frame,view,force)
   elseif view=="party" then row:SetStatusBarColor(.25,.45,.9,.55)
   elseif line.proc==1 then row:SetStatusBarColor(.25,.45,.9,.55)
   else row:SetStatusBarColor(.8,.55,.2,.55) end
-  row.label:SetText(line.name)
+  row.label:SetText(line.displayName or line.name)
   if view=="kills" then
    row.value:Show();row.value:SetText(tostring(line.dmg or 0))
    if row.meterColumns then for j=1,3 do row.meterColumns[j]:Hide() end end

@@ -582,7 +582,7 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
     compact.premiumArt:Show()
    end
    -- Avoid multi-line names: preserve the full value in the original boss data.
-   local displayName=name or ""
+   local displayName=FieldKitReborn.DisplayName(name) or ""
    if string.len(displayName)>28 then displayName=string.sub(displayName,1,25).."..." end
    compact.premiumName:SetText(displayName)
    compact.premiumTag:SetText(kind=="guardian" and FieldKit_L("Guardian") or (kind=="final" and FieldKit_L("Final boss") or FieldKit_L("Boss")))
@@ -592,7 +592,7 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
    else
     compact.premiumLegacyName:Show();compact.premiumLegacyTag:Show();compact.premiumLegacyHP:Show()
    end
-   compact.name:SetText(premium and "" or (name or ""))
+   compact.name:SetText(premium and "" or (FieldKitReborn.DisplayName(name) or ""))
    local maxHP=math.max(tonumber(hpm) or 1,1)
    local currentHP=math.max(0,math.min(tonumber(hp) or 0,maxHP))
    compact.bar:SetMinMaxValues(0,maxHP);compact.bar:SetValue(currentHP)
@@ -609,7 +609,7 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
    f:SetAlpha(1);compact:Hide()
   end
  end
-	f.name:SetText(name)
+	f.name:SetText(FieldKitReborn.DisplayName(name))
 	f.bar:SetMinMaxValues(0, math.max(hpm or 1, 1))
 	f.bar:SetValue(hp or 0)
 	FieldKit_Text(f.hp,FieldKit_FormatHealth(hp, hpm, DB.bossHealthMode))
@@ -2001,7 +2001,7 @@ local function UpdateMeterFrame(force)
   row:SetValue((line.dmg or 0)/math.max(top or 0,1))
   if line.proc==1 then row:SetStatusBarColor(.25,.45,.9,.55)
   else row:SetStatusBarColor(mode==2 and .2 or .8,mode==2 and .7 or .55,.2,.55) end
-  row.label:SetText(line.name);FieldKit.UpdateMeterColumns(row,line,DB.meterValues,width,rateLabel);row:Show()
+  row.label:SetText(line.displayName or line.name);FieldKit.UpdateMeterColumns(row,line,DB.meterValues,width,rateLabel);row:Show()
  end
  if n==0 and not known then
   local row=meterFrame.rows[1];FieldKitLoadout.ClearIcon(row);FieldKit_Text(row.label,"Meter data not provided");row.label:SetWidth(width-24)
@@ -2177,7 +2177,7 @@ function UpdateLairFrame()
 		row:SetValue(0)
 		local flaggedRow=type(flagged)=="table" and ((flagged.index and flagged.index==l.index) or (flagged.id and flagged.id==l.id))
 		local lairName=not FieldKit.rebornLegacyFixture and FieldKitReborn.LairName(l) or l.name or "?"
-		row.label:SetText((flaggedRow and "> " or "")..lairName)
+		row.label:SetText((flaggedRow and "> " or "")..FieldKitReborn.DisplayName(lairName))
 		row.label:SetTextColor(r, g, b)
 		row.value:SetText(FieldKit_L(state))
 		row.value:SetTextColor(r, g, b)
@@ -2219,7 +2219,7 @@ function UpdateLairFrame()
   local info=string.format("%d%%",math.floor(pct*100+.5))
   if live.enraged==1 or live.enraged==true then info=FieldKit_L("ENRAGED").."  "..info end
   -- Keep name / % / bar clear of the decorative corner chrome.
-  lairFrame.nextBoss:SetText(live.name);lairFrame.nextBoss:SetTextColor(1,.82,0)
+  lairFrame.nextBoss:SetText(FieldKitReborn.DisplayName(live.name));lairFrame.nextBoss:SetTextColor(1,.82,0)
   lairFrame.nextBoss:SetFontObject(GameFontNormal)
   lairFrame.nextBoss:ClearAllPoints();lairFrame.nextBoss:SetPoint("BOTTOMLEFT",lairFrame,"BOTTOMLEFT",12,24)
   lairFrame.nextBoss:SetWidth(lairFrame:GetWidth()-96);lairFrame.nextBoss:Show()
@@ -2833,6 +2833,7 @@ local function ResetPositions()
 end
 local function RefreshPanel() if panel then FieldKitUI.Refresh() end end
 function FieldKit_RefreshInterfaceLanguage()
+ if not FieldKit.rebornLegacyFixture then FieldKitLoadout.scanAt=0 end
  RefreshPanel();UpdateStatsFrame();UpdateGearFrame();UpdateMeterFrames(true);FieldKitNativeTools.Update();FieldKitLoadout.Update();FieldKitScreenLayers.Update()
  UpdateBossFrame();UpdateLairFrame();UpdateMoneyFrame();FieldKitRunMode.Update();FieldKitHudStack.Apply();FieldKitCardLayout.ApplyRight()
  FieldKitCoop.Update()

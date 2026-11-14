@@ -1690,7 +1690,7 @@ function R.LairList(lairs)
     elseif e.state=="asleep" then state=FieldKit_L("asleep")
     elseif FieldKit.Number(e.left) and e.left>0 then state=FieldKit_L("back in ")..FieldKitNative.Clock(e.left)
     else state=FieldKit_L("empty") end
-    table.insert(list,{name=FieldKitNative.Text(e.name),state=state,dist="",tint=Tint(state)})
+    table.insert(list,{name=FieldKitNative.Text(FieldKitReborn.DisplayName(e.name)),state=state,dist="",tint=Tint(state)})
    end
   end
  end
@@ -1739,10 +1739,10 @@ function R.Panels(variant,zone)
     FieldKit_Text(f.title,({"DAMAGE","HEALING","BOSS DAMAGE","DAMAGE TAKEN","PARTY DPS","KILLS"})[index] or "DAMAGE")
     f.title:SetText(FieldKitMeterWindow.Title(view,f.title:GetText()))
     f.total:ClearAllPoints();f.total:SetPoint("TOPRIGHT",f,"TOPRIGHT",-30,-11);f.total:SetWidth(a[3]-200);f.total:SetHeight(25);f.total:SetJustifyH("RIGHT");if index==6 then FieldKit_Text(f.title,"Kills short") end;f.total:SetText(R.Amount(total));f.total:Show();f.title:SetWidth(125)
-    local unit=index==2 and " HPS" or (index==6 and " /s" or " DPS");local rateText=rate and (R.Amount(rate)..unit) or nil
+    local unit=index==2 and (" "..FieldKit_L("HPS")) or (index==6 and " /s" or " DPS");local rateText=rate and (R.Amount(rate)..unit) or nil
     if zone=="naxx" then
      f.total:ClearAllPoints();f.total:SetPoint("TOPLEFT",f,"TOPLEFT",29,-53);f.total:SetWidth(155);f.total:SetHeight(34);f.total:SetJustifyH("LEFT");f.total:SetText(R.Amount(total));T.Font(f.total,30,R.body,true)
-     f.rateLabel:ClearAllPoints();f.rateLabel:SetPoint("TOPRIGHT",f,"TOPRIGHT",-23,-58);f.rateLabel:SetWidth(110);f.rateLabel:SetHeight(27);f.rateLabel:SetJustifyH("RIGHT");f.rateLabel:SetText(R.Amount(rate)..(index==2 and " HPS" or (index==6 and " /s" or " DPS")));T.Font(f.rateLabel,17,R.body);f.rateLabel:Show();R.Fit(f.rateLabel,17,12)
+     f.rateLabel:ClearAllPoints();f.rateLabel:SetPoint("TOPRIGHT",f,"TOPRIGHT",-23,-58);f.rateLabel:SetWidth(110);f.rateLabel:SetHeight(27);f.rateLabel:SetJustifyH("RIGHT");f.rateLabel:SetText(R.Amount(rate)..(index==2 and (" "..FieldKit_L("HPS")) or (index==6 and " /s" or " DPS")));T.Font(f.rateLabel,17,R.body);f.rateLabel:Show();R.Fit(f.rateLabel,17,12)
      f.title:SetWidth(a[3]-100);f.more:Hide()
      if not (type(total)=="number" and total>0) then f.total:Hide();f.rateLabel:Hide() end
     else

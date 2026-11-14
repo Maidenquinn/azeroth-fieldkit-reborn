@@ -14,8 +14,19 @@ def runtime(prelude=None):
     for name in (root/'AzerothFieldKitReborn.toc').read_text().splitlines():
         if name.endswith('.lua'): l.execute((root/name).read_text(encoding='utf8'),name=name)
     return l
+def native_locale(addons):
+    l=runtime()
+    l.execute('AZS_L={};function AZS_LocaleStrings(lang,t) if lang=="frFR" then for k,v in pairs(t) do AZS_L[k]=v end end end')
+    core=addons/'AzerothSurvivors'
+    for path in [core/'Generated/Content_frFR.lua',*sorted(core.glob('Locale_frFR*.lua'))]:
+        l.execute(path.read_text(encoding='utf8'),name=path.name)
+    l.execute((core/'Generated/Content.lua').read_text(encoding='utf8'))
+    l.execute((base/'tests/reborn_locale_native.lua').read_text(encoding='utf8'))
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--game',type=Path);a=p.parse_args()
+    from audit_locale import check
+    check(base,runtime())
     l=runtime();l.execute((base/'tests/reborn.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_party.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_buffs.lua').read_text(encoding='utf8'))
@@ -39,6 +50,8 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_numeric_layout.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_loadout_locale.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_combat_locale.lua').read_text(encoding='utf8'))
+    for prelude in (None,'FieldKitRebornDB={language="fr"}'):
+        l=runtime(prelude);l.execute((base/'tests/reborn_locale_matrix.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_first_launch.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_065.lua').read_text(encoding='utf8'))
     l=runtime('AZS={};function AZS.On(prefix,fn) if prefix=="AZSZONE" then ZONE_CAPTURE=fn end end')
@@ -141,5 +154,6 @@ def main():
             path=addons/'AzerothSurvivorsAPI'/name
             l.execute(path.read_text(encoding='utf8'),name=name)
         l.execute((base/'tests/reborn_065_native.lua').read_text(encoding='utf8'))
+    if a.game: native_locale(a.game/'Interface/AddOns')
     print(json.dumps({'rebornFixtures':True,'installedApiExecuted':bool(a.game),'liveGameTest':False}))
 if __name__=='__main__':main()

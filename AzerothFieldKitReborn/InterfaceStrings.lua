@@ -1,4 +1,4 @@
--- Presentation-only additions. Native creature/spell names are never translated.
+-- Presentation-only UI additions. Native names use the separate Reborn display adapter.
 local fr=FieldKitLocale.fr
 fr["Adds a separate kills line below the gold without a theme. With a theme, kills already belong to the main counter strip controlled by Gold and chest price."]="Ajoute une ligne de victimes sous l’or sans thème. Avec un thème, les victimes font déjà partie du bandeau principal commandé par Or et prix du coffre."
 fr["Your character bonuses: damage, haste, critical chance, lifesteal and other selected statistics. Currency counters are configured separately."]="Les bonus de votre personnage : dégâts, hâte, chances de critique, vol de vie et autres statistiques sélectionnées. Les compteurs de monnaies se règlent séparément."
@@ -503,3 +503,42 @@ FieldKitLocale.fr["Interval"]="Intervalle"
 
 FieldKitLocale.fr["Bonuses from this item"]="Bonus de cet objet"
 FieldKitLocale.fr["Upgrade cards compare character totals; these are this item's effects."]="Les cartes d'amélioration comparent les totaux du personnage ; ici figurent les effets de cet objet."
+
+fr["Buffs"]="Effets bénéfiques"
+fr["Chest price"]="Prix du coffre"
+fr["Horde"]="Horde"
+fr["Normal"]="Normal"
+fr["Preview: "]="Aperçu : "
+fr["Aura intensity: "]="Intensité de l’aura : "
+fr["Icon size: "]="Taille de l’icône : "
+fr["Marker visibility range: "]="Portée du marqueur : "
+fr["Cooldown"]="Recharge"
+fr[" haste"]=" hâte"
+fr[" HP"]=" PV"
+fr[" dmg"]=" dégâts"
+fr[" CD"]=" recharge"
+fr[" chance"]=" chance"
+fr[" cible"]=" cible"
+fr[" gold"]=" or"
+fr["Adds a card for your character with the same component as the teammates. Off by default: the theme already shows your health."]="Ajoute une carte pour votre personnage, identique à celles des alliés. Désactivé par défaut : le thème affiche déjà votre vie."
+fr["Advanced: hide originals only while a card has valid health. Field cards do not provide native targeting, menus or buff interactions. Turn off to restore originals."]="Avancé : masque les cadres natifs uniquement quand une carte dispose de données de vie valides. Les cartes ne proposent pas les interactions natives de ciblage, menus ou effets. Désactivez pour rétablir les cadres natifs."
+fr["Boss frame appearance"]="Apparence des cadres de boss"
+fr["Capture new messages after opting in, then use the Copy button above chat or /fieldkitlog. Never uploads chat history."]="Après activation, capture les nouveaux messages. Utilisez ensuite Copier au-dessus du chat ou /fieldkitlog. Aucun historique n’est envoyé."
+fr["Group & co-op"]="Groupe et coopération"
+fr["Group cards of the active theme (replace the native round teammate frames while the HUD theme is on). Off: the native frames stay."]="Cartes de groupe du thème actif : remplacent les cadres ronds natifs des alliés lorsque le thème est activé. Sinon, les cadres natifs restent visibles."
+fr["Preferences"]="Préférences"
+fr["Record buffs gained by teammates."]="Enregistrer les effets bénéfiques reçus par les alliés."
+fr["Record spells cast, damage, healing and interruptions reported for teammates."]="Enregistrer les sorts, dégâts, soins et interruptions signalés pour les alliés."
+fr["Short history of what each teammate casts, from the party combat-log messages the client sends. Only what is actually received is shown (tooltip on the card). Off by default."]="Bref historique des sorts lancés par chaque allié, selon les messages de combat reçus du client. Seules les données reçues apparaissent dans l’infobulle de la carte. Désactivé par défaut."
+fr["Show the icon of the last spells on the card. An icon exists only for spells in your own spellbook; the client gives no icon for another player's spell."]="Afficher les icônes des derniers sorts sur la carte. Seuls les sorts présents dans votre grimoire ont une icône ; le client ne fournit pas celle des sorts des autres joueurs."
+fr["Surge of Strength"]="Afflux de force"
+fr["Attack"]="Attaque"
+fr["Naxxramas"]="Naxxramas"
+fr["Chronicle classic"]="Chronique classique"
+fr["Chronicle Premium"]="Chronique premium"
+-- Include every extension in live language switching, not only the early catalog.
+local reverseKeys={};for key in pairs(fr) do table.insert(reverseKeys,key) end
+table.sort(reverseKeys)
+for _,key in ipairs(reverseKeys) do
+ if not FieldKitLocale.en[fr[key]] then FieldKitLocale.en[fr[key]]=key end
+end

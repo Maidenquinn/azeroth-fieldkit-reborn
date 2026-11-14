@@ -42,4 +42,8 @@ local handler
 function AZS_RegisterCombatTextFrameHandler(fn) handler=fn;return true end
 update(f,.3);assert(handler);handler();update(f,.3)
 assert(shown("Visée 1357"),"World API damage is not localised")
+events={{eventId="fr-miss",presentedAt=GetTime(),kind="miss",abilityName="Aimed Shot",result={key="miss",text="Miss"},anchorId="fr-anchor",anchorStatus="ready",sourceKind="player"}}
+FieldKit_SetLanguage("fr");handler();update(f,.3)
+assert(shown("> Visée: Raté"),"World miss uses raw English result text")
+assert(FieldKitReborn.DisplayName("My pet: Aimed Shot")=="My pet: Visée")
 print("PASS floating combat locale: chat/world, grouped amounts, critical, unknown names, locale refresh, names-off and raw filters")

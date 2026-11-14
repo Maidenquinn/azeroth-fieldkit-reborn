@@ -119,7 +119,7 @@ function T.Effects()
         text=tostring(count)..(cap and " / "..cap or "").." · "..(remaining and N.Clock(remaining) or (def[1]=="effectSummons" and Count(entry.permanent)==count and FieldKit_L("Permanent") or "?"))
        end
       end
-      if text then table.insert(rows,{label=N.Text(entry.name),value=text,icon=type(entry.icon)=="string" and N.Text(entry.icon,240) or nil}) end
+      if text then table.insert(rows,{label=N.Text(FieldKitReborn.DisplayName(entry.name,entry.spell)),value=text,icon=type(entry.icon)=="string" and N.Text(entry.icon,240) or nil}) end
      end
     end
    end
@@ -156,7 +156,7 @@ function T.NextBoss()
   if FieldKit.Number(run.endless)==1 or FieldKit.Number(run.endl)==1 then
    local progress=FieldKitReborn.BossProgress()
    if progress~=nil then
-    local name=type(run.nbn)=="string" and string.find(run.nbn,"%S") and N.Text(run.nbn) or FieldKit_L("Next boss")
+    local name=type(run.nbn)=="string" and string.find(run.nbn,"%S") and N.Text(FieldKitReborn.DisplayName(run.nbn)) or FieldKit_L("Next boss")
     return {name=name,key="endless:"..tostring(run.bs or ""),progress=progress}
    end
    return nil
@@ -165,7 +165,7 @@ function T.NextBoss()
   -- `left` fields do not determine a Reborn spawn.
   for _,boss in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do
    if type(boss)=="table" and boss.state=="due" and type(boss.name)=="string" and boss.name~="" then
-    return {name=N.Text(boss.name),key=tostring(boss.index or boss.name),progress=FieldKitReborn.BossProgress()}
+    return {name=N.Text(FieldKitReborn.DisplayName(boss.name)),key=tostring(boss.index or boss.name),progress=FieldKitReborn.BossProgress()}
    end
   end
   return nil
@@ -176,7 +176,7 @@ function T.NextBoss()
    local boss=lines[i]
    if type(boss)=="table" and type(boss.name)=="string" then
     local left=FieldKit.Number(boss.left)
-    if left and left>=0 and (not chosen or left<chosen.left) then chosen={name=N.Text(boss.name),left=left,key=tostring(boss.index or boss.name)} end
+    if left and left>=0 and (not chosen or left<chosen.left) then chosen={name=N.Text(FieldKitReborn.DisplayName(boss.name)),left=left,key=tostring(boss.index or boss.name)} end
    end
   end
  end
@@ -189,7 +189,7 @@ function T.NextBoss()
    if N.Read("AZS_GetPhase")=="playing" and stamp then left=math.max(0,left-math.max(0,GetTime()-stamp)) end
    if not T.endless or T.endless.name~=bossName or left>T.endless.left+2 then T.endlessCycle=(T.endlessCycle or 0)+1 end
    T.endless={name=bossName,left=left}
-   chosen={name=N.Text(bossName),left=left,key="endless:"..tostring(T.endlessCycle)}
+   chosen={name=N.Text(FieldKitReborn.DisplayName(bossName)),left=left,key="endless:"..tostring(T.endlessCycle)}
   end
  end
  return chosen

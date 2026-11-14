@@ -79,8 +79,8 @@ function Q.KillingBlow()
  if spell and spell>0 and type(GetSpellInfo)=="function" then
   local ok,a,b,c=pcall(GetSpellInfo,spell);if ok then name=a;icon=c end
  elseif spell==0 then name=FieldKit_L("Melee");icon="Interface\\Icons\\Ability_MeleeDamage" end
- return {name=FieldKitNative.Text(name or FieldKit_L("Unidentified source")),icon=FieldKitReborn.Icon(icon),
-  source=FieldKitNative.Text(hit.from or FieldKit_L("Unidentified source")),amount=amount,overkill=over,
+ return {name=FieldKitNative.Text(FieldKitReborn.DisplayName(name or FieldKit_L("Unidentified source"),spell)),icon=FieldKitReborn.Icon(icon),
+  source=FieldKitNative.Text(FieldKitReborn.DisplayName(hit.from or FieldKit_L("Unidentified source"))),amount=amount,overkill=over,
   total=over and amount+over or amount}
 end
 function Q.OpenDeathLog()

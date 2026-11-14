@@ -333,7 +333,7 @@ function D.Render()
   local row=frame.rows[i];local line=i<=shown and data.rows[D.offset+i]
   if line then
    row:ClearAllPoints();row:SetPoint("TOPLEFT",frame,"TOPLEFT",12,-128-(i-1)*22);row:SetWidth(width-24)
-   row.label:SetText(line.name);row.label:Show();row.fieldkitSpell=line.name;row.fieldkitLine=line
+   row.label:SetText(line.displayName or FieldKitReborn.DisplayName(line.name));row.label:Show();row.fieldkitSpell=line.name;row.fieldkitLine=line
    if hitMode then
     if row.meterColumns then for j=1,3 do row.meterColumns[j]:Hide() end end
     local cells=HitCells(line)

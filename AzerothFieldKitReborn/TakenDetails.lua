@@ -78,7 +78,7 @@ function D.Show(row)
  local list={};local total=0
  for name,damage in pairs(D.buckets[row.takenSource] or {}) do table.insert(list,{name=name,damage=damage});total=total+damage end
  table.sort(list,function(a,b) return a.damage>b.damage end)
- for i=1,math.min(12,table.getn(list)) do GameTooltip:AddLine(list[i].name..": "..string.format("%.0f",list[i].damage),1,1,1) end
+ for i=1,math.min(12,table.getn(list)) do GameTooltip:AddLine(FieldKitReborn.DisplayName(list[i].name)..": "..string.format("%.0f",list[i].damage),1,1,1) end
  if table.getn(list)==0 then GameTooltip:AddLine(FieldKit_L("No attributable creature hits received. The client only provided category totals."),.65,.7,.7,true) end
  if table.getn(list)>12 then GameTooltip:AddLine(string.format(FieldKit_L("%d more sources"),table.getn(list)-12),.65,.7,.7) end
  if total< (row.takenDamage or 0) then GameTooltip:AddLine(FieldKit_L("Not identified")..": "..string.format("%.0f",row.takenDamage-total),.65,.7,.7)

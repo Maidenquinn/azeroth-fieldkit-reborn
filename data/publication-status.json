@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.26",
+  "version": "0.1.0-reborn.27",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Offline regression covers native French spell names in floating combat text from chat and world events, grouped amounts, critical hits, unknown names, live locale refresh, names-off and unchanged saved raw-name filters. Full runtime/settings/theme and installed API checks. No new live client visual test is claimed."
+  "inGameTestScope": "No new live client visual pass. Offline French checks cover 477 literal UI labels/help texts, option descriptors and dropdown choices, 241 installed class spells and 66 jewelry names, both theme families off/minimal/complete/alternative, fresh and persisted French settings, damage/healing/boss/recent/fallback/detached/modal/tooltips, player-name and raw-key preservation, effects/procs, DBC/server aliases and late name updates, floating grouped hits/misses, ranks and language refresh. Full runtime/settings and installed public API checks are run."
 }

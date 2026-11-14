@@ -402,6 +402,12 @@ local function FinishLines(view,out,total,rate,known,truncated)
    if not (line.name and hidden[line.name]) then table.insert(shown,line) end
   end
  else shown=out end
+ for _,line in ipairs(shown) do
+  -- Owner rows are player names; source rows are spell/item/creature labels.
+  if not FieldKit.rebornLegacyFixture and not (view=="party" and not line.sourceKey and line.ownerId) then
+   line.displayName=FieldKitReborn.DisplayName(line.displayName or line.name,line.displaySpellId or line.spellId)
+  end
+ end
  SortLines(shown)
  return shown,total,rate,known,truncated
 end
@@ -461,6 +467,7 @@ local function RowsFromSnap(snap,seconds)
    if rate then line.dps=(line.dps or 0)+rate;line.dpsKnown=true end
    if amount>=(line._top or 0) then
     line._top=amount;line.name=name;line.sourceKey=row.sourceKey;line.ownerId=row.ownerId
+    line.displaySpellId=type(src)=="table" and type(src.spellIds)=="table" and src.spellIds[1] or nil
     local ic=SourceIcon(src);if ic then line.icon=ic end
    end
    if proc==1 then line.proc=1 end
@@ -633,7 +640,7 @@ function L.ShowTip(row)
  if type(name)~="string" or name=="" then return false end
  name=string.gsub(name,"^%d+%.%s*","")
  GameTooltip:SetOwner(row,"ANCHOR_RIGHT")
- FieldKit_Text(GameTooltip,name,1,.82,0)
+ GameTooltip:SetText((row.fieldkitLine and row.fieldkitLine.displayName) or FieldKitReborn.DisplayName(name),1,.82,0)
  local line=row.fieldkitLine
  local dmg=line and line.dmg
  local icon=(line and line.icon) or IconOf(name)

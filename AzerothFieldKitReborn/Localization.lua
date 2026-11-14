@@ -1,4 +1,4 @@
--- FieldKit-owned UI only. Never localize native protocol keys or game-provided names.
+-- FieldKit UI labels. Reborn.DisplayName separately localizes native display labels; protocol keys stay unchanged.
 -- Lua 5.0 compatible: no string.match/gmatch, no modern frame hooks.
 FieldKitLocale={bindings=setmetatable({},{__mode="k"}),callbacks={}}
 local T=FieldKitLocale

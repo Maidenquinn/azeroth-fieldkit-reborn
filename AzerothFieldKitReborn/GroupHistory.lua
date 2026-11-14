@@ -133,7 +133,7 @@ function H.Clear() H.log={};H.icons=nil end
 
 local COLORS={damage={1,.55,.35},periodic={.9,.5,.5},heal={.4,.95,.5},hot={.5,.9,.6},cast={.85,.85,.6},interrupt={1,.85,.3},buff={.5,.8,1},fade={.6,.6,.7}}
 function H.Line(e)
- local text=(e.stamp and (e.stamp.."  ") or "")..(e.spell or "?")
+ local text=(e.stamp and (e.stamp.."  ") or "")..FieldKitReborn.DisplayName(e.spell or "?")
  if e.kind=="fade" then text=text.." ("..FieldKit_L("faded")..")" end
  if e.target and e.kind~="buff" and e.kind~="fade" then text=text.." > "..e.target end
  if e.amount then text=text.."  "..e.amount..(e.crit and "!" or "") end
@@ -183,7 +183,7 @@ function H.Detail(unit,name)
  else
   local line=FieldKitCoop and FieldKitCoop.MemberDamage and FieldKitCoop.MemberDamage(name)
   if line and type(line.top)=="string" and line.top~="" then
-   Add("confirmed","Top spell this run",line.top..(line.topdps and (" ("..string.format("%.0f",line.topdps).." dps)") or ""))
+   Add("confirmed","Top spell this run",FieldKitReborn.DisplayName(line.top)..(line.topdps and (" ("..string.format("%.0f",line.topdps).." dps)") or ""))
   else Add("unknown","Top spell this run","no group packet for this player") end
   Add("unknown","Spells","the client exposes no spellbook or spell selection of another player")
   Add("unknown","Accessories","not exposed for another player (see /fieldkit groupprobe items)")

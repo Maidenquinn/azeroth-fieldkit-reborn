@@ -374,3 +374,11 @@ than deriving stat values; full native details remain in the shared tooltip.
 The bonus region is hidden when a socket changes tab or becomes empty.
 
 Floating combat labels (reborn.26): use AZS_L through Reborn.Localize at rendering time for native chat and world combat ability names. Canonical labels remain queue/group/filter identities. No new API dependency.
+
+Reborn .27 names: DisplayName uses AZS_L plus optional AZS_SpellName(id). The
+installed core Locale.lua also exposes AZS_SPELL_NAMES/AZSNAMES: these are used
+as optional display-only aliases from the client's GetSpellInfo English name to
+the server's localized name. The alias cache is bounded (1024 entries), refreshes
+at most once per two seconds and invalidates on a names packet. No protocol keys,
+filters, meter attribution or player names are rewritten. Missing optional
+functions/names retain known dictionary translations or the supplied name.

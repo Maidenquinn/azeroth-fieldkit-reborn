@@ -43,14 +43,14 @@ function L.CompactBonus(text)
  local lower=string.lower(text)
  local tag=""
  if string.find(lower,"crit") then tag=" crit"
- elseif string.find(lower,"haste") or string.find(lower,"te de") then tag=" haste"
- elseif string.find(lower,"vie") or string.find(lower,"health") or string.find(lower,"hit point") then tag=" HP"
- elseif string.find(lower,"damage") or string.find(lower,"ts subis") or string.find(lower,"ts de") or string.find(lower,"ts.") then tag=" dmg"
- elseif string.find(lower,"recharge") or string.find(lower,"cooldown") then tag=" CD"
- elseif string.find(lower,"chance") or string.find(lower,"luck") then tag=" chance"
- elseif string.find(lower,"cible") or string.find(lower,"target") then tag=" cible"
+ elseif string.find(lower,"haste") or string.find(lower,"te de") then tag=FieldKit_L(" haste")
+ elseif string.find(lower,"vie") or string.find(lower,"health") or string.find(lower,"hit point") then tag=FieldKit_L(" HP")
+ elseif string.find(lower,"damage") or string.find(lower,"ts subis") or string.find(lower,"ts de") or string.find(lower,"ts.") then tag=FieldKit_L(" dmg")
+ elseif string.find(lower,"recharge") or string.find(lower,"cooldown") then tag=FieldKit_L(" CD")
+ elseif string.find(lower,"chance") or string.find(lower,"luck") then tag=FieldKit_L(" chance")
+ elseif string.find(lower,"cible") or string.find(lower,"target") then tag=FieldKit_L(" cible")
  elseif string.find(lower,"experience") or string.find(lower,"rience") then tag=" XP"
- elseif string.find(lower,"gold") or string.find(lower,"l'or") or string.find(lower,"d'or") then tag=" gold"
+ elseif string.find(lower,"gold") or string.find(lower,"l'or") or string.find(lower,"d'or") then tag=FieldKit_L(" gold")
  end
  local sign="+"
  if string.find(lower,"duit") or string.find(lower,"reduc") or string.find(lower,"decreas") or string.find(lower,"moins") then
@@ -109,7 +109,7 @@ function L.SpellBonuses(raw)
     section=label[2];labelled=true
     -- A labelled damage bonus with only a signed percentage still identifies
     -- its stat, so retain it without importing the preceding description.
-    if label[1]=="Your damage bonus" or label[1]=="Votre bonus de dégâts" then value=value.." dmg" end
+    if label[1]=="Your damage bonus" or label[1]=="Votre bonus de dégâts" then value=value..FieldKit_L(" dmg") end
     for _,part in ipairs(L.ExpandStats({value})) do table.insert(section,part) end
     break
    end
@@ -206,7 +206,7 @@ function L.EnsureAssetIcons()
     local icon=FieldKitReborn.Icon(s.icon)
     if icon then
      L.assetIcons[L.Key(s.name)]=icon
-     L.assetIcons[L.Key(FieldKitReborn.Localize(s.name))]=icon
+     L.assetIcons[L.Key(FieldKitReborn.DisplayName(s.name,s.spell))]=icon
     end
    end
   end
@@ -371,13 +371,13 @@ function L.Scan()
     if FieldKit.rebornLegacyFixture then asset=FieldKitSpellAssets[tonumber(s.spell)] or asset end
     local e={key=s.key,name=asset and asset.name or N.Text(s.key),icon=asset and asset.icon,rank=string.format(FieldKit_L("Rank %d"),rank),rankValue=rank,spellId=tonumber(s.spell),bonuses={},upgrades={}}
     if not FieldKit.rebornLegacyFixture then
-     if type(s.name)=="string" then e.name=N.Text(FieldKitReborn.Localize(s.name)) end
+     if type(s.name)=="string" then e.name=N.Text(FieldKitReborn.DisplayName(s.name,s.spell)) end
      e.icon=FieldKitReborn.Icon(s.icon) or e.icon
      if type(GetSpellInfo)=="function" and tonumber(s.spell) then
       local ok,name,_,icon=pcall(GetSpellInfo,tonumber(s.spell))
       if ok then
        e.icon=FieldKitReborn.Icon(icon) or e.icon
-       if type(name)=="string" then L.icons[L.Key(name)]=e.icon;e.name=N.Text(FieldKitReborn.Localize(name)) end
+       if type(name)=="string" then L.icons[L.Key(name)]=e.icon;e.name=N.Text(FieldKitReborn.DisplayName(name,tonumber(s.spell))) end
       end
      end
     end
@@ -413,7 +413,7 @@ function L.Scan()
      -- An icon shared by different native abilities cannot identify an action.
      if entry and not entry.action then
       entry.action=slot;L.MergeBonuses(entry.bonuses,bonus);L.MergeBonuses(entry.upgrades,upgrades)
-      entry.name=(name and not FieldKit.rebornLegacyFixture) and N.Text(FieldKitReborn.Localize(name)) or name or entry.name
+      entry.name=(name and not FieldKit.rebornLegacyFixture) and N.Text(FieldKitReborn.DisplayName(name,entry.spellId)) or name or entry.name
       if entry.icon then L.icons[L.Key(entry.name)]=entry.icon end
      end
     end
@@ -436,7 +436,7 @@ function L.Scan()
 end
 function L.Tip(owner,entry)
  if not entry then return end
- GameTooltip:SetOwner(owner,"ANCHOR_LEFT");GameTooltip:SetText(entry.name or "?")
+ GameTooltip:SetOwner(owner,"ANCHOR_LEFT");GameTooltip:SetText(FieldKitReborn.DisplayName(entry.name or "?"))
  if entry.rank then GameTooltip:AddLine(entry.rank,.8,.8,.8) end
  if entry.nativeDetails then GameTooltip:AddLine(FieldKit_L("Bonuses from this item"),.7,.7,.7,true) end
  for _,line in ipairs(entry.upgrades or {}) do GameTooltip:AddLine(line,1,1,1,true) end

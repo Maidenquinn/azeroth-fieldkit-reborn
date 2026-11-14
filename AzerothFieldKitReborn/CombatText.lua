@@ -120,12 +120,12 @@ end
 -- Optional `anchor` (AS 0.138+) keeps the number over the hit / death spot.
 -- Localise only the displayed label. Queues, grouping and saved filters keep
 -- their native identities so changing language cannot merge unrelated hits.
-function C.NativeLabel(label)
- if not FieldKit.rebornLegacyFixture and FieldKitReborn and type(label)=="string" then return FieldKitReborn.Localize(label) end
+function C.NativeLabel(label,spellId)
+ if not FieldKit.rebornLegacyFixture and FieldKitReborn and type(label)=="string" then return FieldKitReborn.DisplayName(label,spellId) end
  return label
 end
-local function Queue(label,amount,kind,incoming,filterName,generated,anchor)
- local v={label=label,amount=amount,kind=kind,incoming=incoming,filterName=filterName,generated=generated,count=1,start=GetTime(),anchor=anchor}
+local function Queue(label,amount,kind,incoming,filterName,generated,anchor,spellId)
+ local v={label=label,amount=amount,kind=kind,incoming=incoming,filterName=filterName,generated=generated,spellId=spellId,count=1,start=GetTime(),anchor=anchor}
  if not Allowed(v) then return end
  if amount then
   if amount<=0 then return end
@@ -190,7 +190,7 @@ local function StyleSlot(s,v,size,now,lifetime)
  local text=v.label
  if v.previewKind then text=FieldKit_L("[Preview]").." "..FieldKit_L(C.byKind[v.previewKind][4] or C.byKind[v.previewKind][2]) end
  if v.generated then text=FieldKit_L(text) end
- if not v.generated and not v.preview then text=C.NativeLabel(text) end
+ if not v.generated and not v.preview then text=C.NativeLabel(text,v.spellId) end
  if v.kind=="heal" then
   local _,_,name=string.find(v.label,"^Heal: (.*)$")
   if name then text=FieldKit_L("Heal: ")..C.NativeLabel(name) end
@@ -202,7 +202,7 @@ local function StyleSlot(s,v,size,now,lifetime)
    local prefix=string.sub(v.label,1,at-1)
    if type(v.filterName)=="string" and v.filterName~="" then
     local a,b=string.find(prefix,v.filterName,1,true)
-    if a then prefix=string.sub(prefix,1,a-1)..C.NativeLabel(v.filterName)..string.sub(prefix,b+1) end
+    if a then prefix=string.sub(prefix,1,a-1)..C.NativeLabel(v.filterName,v.spellId)..string.sub(prefix,b+1) end
    end
    text=prefix..FieldKit_L(outcome)..string.sub(v.label,at+string.len(outcome))
   end
@@ -230,10 +230,10 @@ local function IngestWorldEvent(e)
   local key=result and result.key
   if type(key)~="string" or not C.byKind[key] then key="miss" end
   local spell=type(e.abilityName)=="string" and e.abilityName~="" and e.abilityName or nil
-  local text=result and type(result.text)=="string" and result.text~="" and result.text or (C.byKind[key] and C.byKind[key][4]) or key
+  local text=(C.byKind[key] and C.byKind[key][4]) or key
   if spell then text=spell..": "..text end
   text="> "..text
-  Queue(text,nil,key,false,spell,false,anchor)
+  Queue(text,nil,key,false,spell,false,anchor,e.spellId)
   return
  end
  if e.kind~="damage" then return end
@@ -241,7 +241,7 @@ local function IngestWorldEvent(e)
  local spell=type(e.abilityName)=="string" and e.abilityName~="" and e.abilityName or "Hit"
  local crit=e.critical and true or false
  local kind=e.periodic and "outPeriodic" or (crit and "crit" or "out")
- Queue(spell,amount,kind,false,spell,false,anchor)
+ Queue(spell,amount,kind,false,spell,false,anchor,e.spellId)
 end
 local function PollWorldCombat()
  if not WorldReady() then return false end

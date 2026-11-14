@@ -124,6 +124,61 @@ function R.Localize(value)
  if type(AZS_L)=="table" and type(AZS_L[value])=="string" then return AZS_L[value] end
  return value
 end
+-- The client DBC and the server can use different English names for one spell
+-- (Freezing Trap / Frost Trap). Join them by id, never by shared icon.
+function R.SpellAlias(value)
+ if type(AZS_SPELL_NAMES)~="table" or type(GetSpellInfo)~="function" then return nil end
+ local now=GetTime()
+ if not R.spellAliases or R.spellAliasSource~=AZS_SPELL_NAMES or now>=(R.spellAliasAt or 0)+2 then
+  local aliases,count={},0
+  for id,name in pairs(AZS_SPELL_NAMES) do
+   count=count+1;if count>1024 then break end
+   if tonumber(id) and type(name)=="string" and name~="" then
+    local ok,raw=pcall(GetSpellInfo,tonumber(id))
+    if ok and type(raw)=="string" and raw~="" then
+     if aliases[raw]~=nil and aliases[raw]~=name then aliases[raw]=false else aliases[raw]=name end
+    end
+   end
+  end
+  R.spellAliases=aliases;R.spellAliasSource=AZS_SPELL_NAMES;R.spellAliasAt=now
+ end
+ return R.spellAliases[value] or nil
+end
+-- Presentation only: never use a translated label as a ledger/filter key.
+function R.DisplayName(value,spellId)
+ if FieldKit.rebornLegacyFixture then return value end
+ if tonumber(spellId) and tonumber(spellId)>0 and type(AZS_SpellName)=="function" then
+  local ok,name=pcall(AZS_SpellName,tonumber(spellId))
+  if ok and type(name)=="string" and name~="" then
+   local at=type(value)=="string" and string.find(value,": ",1,true)
+   local found,raw=false,nil
+   if at and type(GetSpellInfo)=="function" then found,raw=pcall(GetSpellInfo,tonumber(spellId)) end
+   if found and raw==string.sub(value,at+2) then value=string.sub(value,1,at+1)..name else value=name end
+  end
+ end
+ local text=R.Localize(value)
+ if text==value and type(value)=="string" then text=R.SpellAlias(value) or text end
+ if FieldKit_Language()=="fr" then text=FieldKitLocale.fr[text] or text end
+ -- Summon ledgers keep "owner: ability" as their raw identity. Translate only
+ -- its display parts, without changing attribution or a player's custom name.
+ if text==value and type(value)=="string" then
+  local at=string.find(value,": ",1,true)
+  if at then
+   local raw=string.sub(value,at+2)
+   local suffix=R.Localize(raw)
+   if suffix==raw then suffix=R.SpellAlias(raw) or suffix end
+   if FieldKit_Language()=="fr" then suffix=FieldKitLocale.fr[suffix] or suffix end
+   text=string.sub(value,1,at+1)..suffix
+  end
+ end
+ return text
+end
+if type(AZS)=="table" and type(AZS.On)=="function" then
+ AZS.On("AZSNAMES",function()
+  R.spellAliases=nil
+  if FieldKitLoadout then FieldKitLoadout.scanAt=0;FieldKitLoadout.dirty=true end
+ end)
+end
 function R.ZoneName()
  local z=type(AZS_ZONE)=="table" and AZS_ZONE or {}
  if type(z.zname)=="string" and z.zname~="" then return z.zname end
@@ -168,7 +223,7 @@ function R.Gear()
    -- amount is a rank only for amulets; on rings/trinkets it is a stat value.
    local rank=FieldKit.Number(g.rank) or (g.slot=="amulet" and FieldKit.Number(g.amount))
    if rank and (rank<1 or rank~=math.floor(rank)) then rank=nil end
-   items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses=bonuses,rankValue=rank,
+   items[slot]={name=R.DisplayName(g.name),icon=R.Icon(g.icon),bonuses=bonuses,rankValue=rank,
     rank=rank and string.format(FieldKit_L("Rank %d"),rank) or nil,
     nativeDetails=FieldKitReborn065 and FieldKitReborn065.JewelryDetails(raw) or nil}
   end
@@ -181,7 +236,7 @@ end
 function R.PlayerBuffs()
  local out,seen={},{}
  local function Add(name,icon,count,remaining,spell)
-  name=R.Localize(name) or FieldKit_L("Effect")
+  name=R.DisplayName(name,spell) or FieldKit_L("Effect")
   icon=R.Icon(icon) or "Interface\\Icons\\INV_Misc_QuestionMark"
   local id=tonumber(spell);local visual=icon..":"..name
   if (id and seen[id]) or seen[visual] then return end

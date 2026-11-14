@@ -426,7 +426,7 @@ function H.Summaries(variant,zone)
    for _,entry in ipairs(rows) do
     local label=entry.label
     if kind=="Damage" and count<4 then
-     count=count+1;local r=f.rows[count];r.label:SetText(entry.name or "?");r.value:SetText(entry.dps and string.format("%.0f %s",entry.dps,FieldKit_L("dps")) or (entry.dmg and tostring(entry.dmg) or "?"));r.label:Show();r.value:Show()
+     count=count+1;local r=f.rows[count];r.label:SetText(entry.displayName or entry.name or "?");r.value:SetText(entry.dps and string.format("%.0f %s",entry.dps,FieldKit_L("dps")) or (entry.dmg and tostring(entry.dmg) or "?"));r.label:Show();r.value:Show()
     elseif label and label:IsShown() and (not entry.IsShown or entry:IsShown()) and count<5 then
      count=count+1;local r=f.rows[count];r.label:SetText(label:GetText() or "?")
      local value=entry.value and entry.value:GetText() or ""

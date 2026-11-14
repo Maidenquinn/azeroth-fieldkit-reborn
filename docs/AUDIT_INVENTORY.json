@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.26",
+  "candidate": "0.1.0-reborn.27",
   "runtimeModules": 57,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "59d1849601ab7a9e75185a84efab6fe93c37859919a3300abee19735503528db",
+      "sha256": "dbf0ab6307337bf1404e026084bb2a9f379b8d3b4d1c3fbbe530e0e9fbf1b2d9",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -60,8 +60,8 @@
       "literalEvents": []
     },
     "Reborn.lua": {
-      "bytes": 11541,
-      "sha256": "3f8c1c80def0671edd760ca5d6d30b3795675859e850bb7b0691c93dfd6ff6cf",
+      "bytes": 14088,
+      "sha256": "c4947db795e280337e9ecafd795d24668da22cf6e3f3cfcba3e6cbbfabf9e8f1",
       "namedFunctions": [
         {
           "name": "R.ActionButton",
@@ -116,28 +116,36 @@
           "line": 122
         },
         {
+          "name": "R.SpellAlias",
+          "line": 129
+        },
+        {
+          "name": "R.DisplayName",
+          "line": 148
+        },
+        {
           "name": "R.ZoneName",
-          "line": 127
+          "line": 182
         },
         {
           "name": "R.Spell",
-          "line": 140
+          "line": 195
         },
         {
           "name": "R.Gear",
-          "line": 157
+          "line": 212
         },
         {
           "name": "R.PlayerBuffs",
-          "line": 181
+          "line": 236
         },
         {
           "name": "Add",
-          "line": 183
+          "line": 238
         },
         {
           "name": "R.Portrait",
-          "line": 231
+          "line": 286
         }
       ],
       "literalEvents": []
@@ -629,8 +637,8 @@
       "literalEvents": []
     },
     "Localization.lua": {
-      "bytes": 50223,
-      "sha256": "f285d1f416e9e57331827ceb3cdfad4beab810c22bb7acac1e1ecdd8616a5920",
+      "bytes": 50252,
+      "sha256": "52b438733774cee70dbde43c0c57b7e2503087aff219d9095ef4ac9b66043001",
       "namedFunctions": [
         {
           "name": "FieldKit_Language",
@@ -664,8 +672,8 @@
       "literalEvents": []
     },
     "InterfaceStrings.lua": {
-      "bytes": 45302,
-      "sha256": "b10c87663d11d23847258f1e571546830ef92f7d8568732d635b710af4c331ff",
+      "bytes": 48622,
+      "sha256": "a479b030d26bdfccffd231ccc346f396b8226cb3ba208536042cdc66b5186ede",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -895,8 +903,8 @@
       "literalEvents": []
     },
     "Reborn065.lua": {
-      "bytes": 5510,
-      "sha256": "d367c1c02bf5089d19c3b5c111ed68eefd29d0651df4f70f84be29d16f9c12c8",
+      "bytes": 5572,
+      "sha256": "0aae3cf8ce7038673ddfffceafc64411aefca50e0df5cd03f5754837d1d2988a",
       "namedFunctions": [
         {
           "name": "Q.Control",
@@ -973,8 +981,8 @@
       "literalEvents": []
     },
     "NativeData.lua": {
-      "bytes": 5235,
-      "sha256": "190db327c57089177916f564c34c3735964b5ab286d2da39b4662df2f282c3a6",
+      "bytes": 5292,
+      "sha256": "4bad5e729b952c84b6e2014d9cc5a126a34a883ae17cff023ea76622f6f6f4e9",
       "namedFunctions": [
         {
           "name": "N.Read",
@@ -1059,8 +1067,8 @@
       "literalEvents": []
     },
     "MeterLedger.lua": {
-      "bytes": 28332,
-      "sha256": "92f18a689039ec611294fd38a7c7933d5b516fea51d60469c5df0f8fe8d8f2eb",
+      "bytes": 28853,
+      "sha256": "273b745ca73aa75a430f46d7b3812599271fd17072eff2afd15d757172ca4fb7",
       "namedFunctions": [
         {
           "name": "Text",
@@ -1196,43 +1204,43 @@
         },
         {
           "name": "SourceFamily",
-          "line": 411
+          "line": 417
         },
         {
           "name": "SourceIcon",
-          "line": 424
-        },
-        {
-          "name": "RowsFromSnap",
           "line": 430
         },
         {
+          "name": "RowsFromSnap",
+          "line": 436
+        },
+        {
           "name": "AttachKillStats",
-          "line": 485
+          "line": 492
         },
         {
           "name": "RunSeconds",
-          "line": 504
+          "line": 511
         },
         {
           "name": "L.Read",
-          "line": 513
+          "line": 520
         },
         {
           "name": "L.AppendStats",
-          "line": 606
+          "line": 613
         },
         {
           "name": "L.ShowTip",
-          "line": 631
+          "line": 638
         },
         {
           "name": "TipName",
-          "line": 647
+          "line": 654
         },
         {
           "name": "HookTooltipMethod",
-          "line": 653
+          "line": 660
         }
       ],
       "literalEvents": [
@@ -1249,8 +1257,8 @@
       ]
     },
     "MeterSuite.lua": {
-      "bytes": 20390,
-      "sha256": "7bf566c7c1f778d823b16fb5c965738a3eb782089405287cf4d5fa4ea634bfe0",
+      "bytes": 20410,
+      "sha256": "bf544841bb353fe97f01e8d2f41eabf255c6a0612d877c3f2ca26a6e75aaa164",
       "namedFunctions": [
         {
           "name": "DB",
@@ -1644,8 +1652,8 @@
       "literalEvents": []
     },
     "GroupHistory.lua": {
-      "bytes": 17287,
-      "sha256": "77a5abe50cf781f15a31f6786f4e58dda2003951ff616a8ba60d823d6c246af8",
+      "bytes": 17341,
+      "sha256": "9f3115ea52117e5e9fc056f8dc6585389a342c6438d2e5832e8550f507d886c7",
       "namedFunctions": [
         {
           "name": "H.Compile",
@@ -1830,8 +1838,8 @@
       "literalEvents": []
     },
     "PartyDetails.lua": {
-      "bytes": 19938,
-      "sha256": "533b3e017520e2925905c49fce4b3920450316461eceab460c0b7934b04a8f46",
+      "bytes": 19986,
+      "sha256": "a4f8d24cca2cf2e5a6b8e06b74ba0401bacbfdc40cb5fcd9b3cf0354c3bfdb01",
       "namedFunctions": [
         {
           "name": "Short",
@@ -1948,8 +1956,8 @@
       "literalEvents": []
     },
     "NativeTools.lua": {
-      "bytes": 15440,
-      "sha256": "841b6f79e3b4b0ca7a7a6dc514bd8215a51e2b5edcf4ef88c1ca40ced1fbb574",
+      "bytes": 15592,
+      "sha256": "a2800ef4d05e8c32c3d1a6d1a56d4ad348506b1adca707f1f7340e3befba45be",
       "namedFunctions": [
         {
           "name": "Count",
@@ -2021,8 +2029,8 @@
       "literalEvents": []
     },
     "Loadout.lua": {
-      "bytes": 30430,
-      "sha256": "74f03eabd2b36bd14057ba7f78f7215a2ee774ecf1d1115ea709c784e249248e",
+      "bytes": 30614,
+      "sha256": "41fa9c1cbd4a388e34da5c27f1c64be6bc0c07352e7e21ffdafde6cb40f08da9",
       "namedFunctions": [
         {
           "name": "L.Plain",
@@ -2132,8 +2140,8 @@
       "literalEvents": []
     },
     "TakenDetails.lua": {
-      "bytes": 5640,
-      "sha256": "2444aa4578119eae2da08653ce627caccb7acc704ec2551dc3c8c06bcd71f563",
+      "bytes": 5668,
+      "sha256": "9373f1cfad63e95f4fad5d316bae02573f27f94b9b900d536b59ba6449479822",
       "namedFunctions": [
         {
           "name": "D.Reset",
@@ -2458,8 +2466,8 @@
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 124695,
-      "sha256": "b90bb7b7ea6aba47763bb09798a66220c08344da969cd576f4509c5c733a963e",
+      "bytes": 124926,
+      "sha256": "9cbe95d2f1956283a8313d8cbea7a4e45dda90002f68efc254668d9c75acc3a4",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2863,43 +2871,43 @@
         },
         {
           "name": "CreatePanel",
-          "line": 2841
+          "line": 2842
         },
         {
           "name": "TogglePanel",
-          "line": 2854
+          "line": 2855
         },
         {
           "name": "FieldKit.SetWindowsLocked",
-          "line": 2861
+          "line": 2862
         },
         {
           "name": "CreateMinimapButton",
-          "line": 2871
+          "line": 2872
         },
         {
           "name": "PlaceOnRim",
-          "line": 2881
+          "line": 2882
         },
         {
           "name": "InitDB",
-          "line": 2922
+          "line": 2923
         },
         {
           "name": "FieldKitEventLifecycle",
-          "line": 2946
+          "line": 2947
         },
         {
           "name": "FieldKitEventWorld",
-          "line": 2995
+          "line": 2996
         },
         {
           "name": "FieldKitEventOther",
-          "line": 3022
+          "line": 3023
         },
         {
           "name": "RefreshNativeData",
-          "line": 3076
+          "line": 3077
         }
       ],
       "literalEvents": [
@@ -3184,8 +3192,8 @@
       ]
     },
     "CombatText.lua": {
-      "bytes": 33267,
-      "sha256": "583babab0171f827a6a736b8750d96cd396eeec3497012ca02031066c7cabb55",
+      "bytes": 33272,
+      "sha256": "7d147c9470529033dd57639db8b59e5f8b74b36005aabf3dade0b40d38f0b359",
       "namedFunctions": [
         {
           "name": "C.Number",
@@ -3674,8 +3682,8 @@
       "literalEvents": []
     },
     "ThemeHUD.lua": {
-      "bytes": 36366,
-      "sha256": "d4621b87677d5a7e4872d82a58456268ee3ee2dd6f95bec4b8382716464499a0",
+      "bytes": 36387,
+      "sha256": "6a3f7f3d8b027f049709bcc5f4dd3b5baf5f324783c7024b334a7a9a0efd3da5",
       "namedFunctions": [
         {
           "name": "H.Points",
@@ -3806,8 +3814,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 154722,
-      "sha256": "a4c972ce90728071880b2deac12a1b41026cd70d811befcd482764853b1591e8",
+      "bytes": 154786,
+      "sha256": "73dd0d5267c149277cc06f1faa76b618ddeb04038c31bfe2da1b78734d5a213d",
       "namedFunctions": [
         {
           "name": "Short",
@@ -6686,7 +6694,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.26",
+    "version": "0.1.0-reborn.27",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6697,7 +6705,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Offline regression covers native French spell names in floating combat text from chat and world events, grouped amounts, critical hits, unknown names, live locale refresh, names-off and unchanged saved raw-name filters. Full runtime/settings/theme and installed API checks. No new live client visual test is claimed."
+    "inGameTestScope": "No new live client visual pass. Offline French checks cover 477 literal UI labels/help texts, option descriptors and dropdown choices, 241 installed class spells and 66 jewelry names, both theme families off/minimal/complete/alternative, fresh and persisted French settings, damage/healing/boss/recent/fallback/detached/modal/tooltips, player-name and raw-key preservation, effects/procs, DBC/server aliases and late name updates, floating grouped hits/misses, ranks and language refresh. Full runtime/settings and installed public API checks are run."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

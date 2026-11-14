@@ -13,7 +13,7 @@ are never in that list. There is no modern module loader or required library.
 2. **Config.lua:** defines conservative defaults and repairs persisted data shapes.
    InitializeSettings runs after VARIABLES_LOADED. It never imports MASHDB.
 3. **Localization.lua:** addon-label dictionaries, weak widget bindings and live
-   refresh callbacks. Native data is not translated or used as executable code.
+   refresh callbacks. Native protocol keys stay unchanged; Reborn.DisplayName localizes only display names through the native language tables/server spell ids. Data is never executed.
 4. **Seed.lua / PortraitCatalog.lua:** declarative inherited/generated data. The
    seed helps name classification; the catalog links zone/name aliases to known
    native creature/display ids and packaged texture keys.
