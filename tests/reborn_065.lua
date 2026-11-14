@@ -26,7 +26,7 @@ local calls=0;SlashCmdList.AZSDEATHLOG=function() calls=calls+1 end
 SlashCmdList.FieldKit("");assert(calls==0,"Building the settings opened a native modal")
 local action
 for _,section in ipairs(FieldKitUI.sections) do for _,item in ipairs(section.items) do if item.kind=="action" and item.label=="Native death log" then action=item.action end end end
-assert(action);action();assert(calls==1);calls=0
+assert(action);action();assert(calls==1 and not FieldKitUI.frame:IsShown(),"Native log opened behind the settings panel");calls=0
 assert(Q.OpenDeathLog() and calls==1);SlashCmdList.AZSDEATHLOG=nil;assert(not Q.OpenDeathLog())
 AZS_DEATH={hits={{spell=123,from="Boss",health=0,amount=150,over=25}}}
 GetSpellInfo=function() return "Fatal spell",nil,"Interface\\Icons\\Spell_Fire_Fireball" end

@@ -86,7 +86,9 @@ end
 function Q.OpenDeathLog()
  local callback=SlashCmdList and SlashCmdList.AZSDEATHLOG
  if type(callback)~="function" then return false end
- return pcall(callback,"")
+ local ok=pcall(callback,"")
+ if ok and FieldKitUI and FieldKitUI.frame and FieldKitUI.frame:IsShown() then FieldKitUI.frame:Hide() end
+ return ok
 end
 function Q.DeathTip(owner)
  GameTooltip:SetOwner(owner,"ANCHOR_TOP");GameTooltip:SetText(FieldKit_L("Native death log"))

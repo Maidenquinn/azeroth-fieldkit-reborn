@@ -788,8 +788,8 @@
       "literalEvents": []
     },
     "Reborn065.lua": {
-      "bytes": 5390,
-      "sha256": "e008a7bb760bbf93c75641044af5e4cdd3c7931b5e4b583eb7429732986c9dc8",
+      "bytes": 5510,
+      "sha256": "d367c1c02bf5089d19c3b5c111ed68eefd29d0651df4f70f84be29d16f9c12c8",
       "namedFunctions": [
         {
           "name": "Q.Control",
@@ -825,11 +825,11 @@
         },
         {
           "name": "Q.DeathTip",
-          "line": 91
+          "line": 93
         },
         {
           "name": "Q.JewelryDetails",
-          "line": 104
+          "line": 106
         }
       ],
       "literalEvents": []
