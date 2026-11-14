@@ -130,7 +130,7 @@ function N.Money(frame,gold,chest)
  local entries={}
  if FieldKitRebornDB.replaceTally then table.insert(entries,{"Interface\\TargetingFrame\\UI-RaidTargetingIcon_8",type(AZS_RUN)=="table" and AZS_RUN.kills or 0,"Kills"}) end
  table.insert(entries,{"Interface\\MoneyFrame\\UI-GoldIcon",gold,"Gold"})
- table.insert(entries,{"Interface\\Icons\\INV_Misc_TreasureChest01",chest,"Chest"})
+ table.insert(entries,{FieldKitTheme.media.."WorldMarkers\\cache.tga",chest,"Chest"})
  local event=FieldKitReborn.EventCurrency()
  if event then table.insert(entries,{event.icon,event.count,event.name}) end
  frame.nativeCells=frame.nativeCells or {}

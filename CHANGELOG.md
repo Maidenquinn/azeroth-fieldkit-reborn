@@ -1,3 +1,11 @@
+# 0.1.0-reborn.17 — Choice-screen presentation restoration
+
+- Keep first-launch/profile preview controls behind native reward choices.
+- Release temporary choice masks before switching presentation owners; reapply them after the new skin, preventing zero-opacity restoration.
+- Restore the packaged chest icon, place the themed target below progression/horde gauges, and label known empty jewelry slots.
+- Add repeated choice/theme transition regressions and preserve the compact first-launch defaults.
+- Campaign combat data observed; complete live boss/co-op acceptance remains pending.
+
 # 0.1.0-reborn.16 — Compact first launch
 
 - Empty-database defaults: 85% independent cards, four bonuses, a single counter strip and direct boss progression.

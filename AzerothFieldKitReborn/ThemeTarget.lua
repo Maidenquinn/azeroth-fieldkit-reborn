@@ -105,8 +105,14 @@ function C.Update(variant)
  local f=C.frame;if not f.azsMoving then f:SetScale(math.min(1,UIParent:GetWidth()/1300)*FieldKitZoneThemes.ElementScale("FieldKitThemeTargetFrame")) end
  local mapLeft=(T.zone=="elwynn" and variant=="complete") or (T.zone=="naxx" and variant=="alternative")
  if FieldKitReferenceHUD and FieldKitReferenceHUD.active then
-  local boss=getglobal("FieldKitBossFrame1Compact") or getglobal("FieldKitBossFrame1");local y=(boss and boss:IsShown() and boss:GetAlpha()>0) and -195 or -96
-  FieldKitZoneThemes.Place(f,"TOP",UIParent,"TOP",0,y/(f:GetScale() or 1),true)
+  local boss=getglobal("FieldKitBossFrame1Compact") or getglobal("FieldKitBossFrame1")
+  local anchor=(boss and boss:IsShown() and boss:GetAlpha()>0) and boss
+  if not anchor and not FieldKit.rebornLegacyFixture then
+   local horde,progress=FieldKitReborn.hordeFrame,FieldKitReborn.progressFrame
+   anchor=(horde and horde:IsShown() and horde) or (progress and progress:IsShown() and progress) or H.header
+  end
+  if anchor then FieldKitZoneThemes.Place(f,"TOP",anchor,"BOTTOM",0,-18,true)
+  else FieldKitZoneThemes.Place(f,"TOP",UIParent,"TOP",0,-96/(f:GetScale() or 1),true) end
  elseif mapLeft or variant=="alternative" then FieldKitZoneThemes.Place(f,"TOP",UIParent,"TOP",0,-86)
  else FieldKitZoneThemes.Place(f,"TOPLEFT",UIParent,"TOPLEFT",22,-92) end
  C.name:SetText(FieldKitNative.Text(UnitName("target")))

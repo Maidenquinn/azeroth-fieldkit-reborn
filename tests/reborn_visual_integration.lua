@@ -40,6 +40,15 @@ AZS_DASH={seen=false,off=0};R.PlaceSteed();assert(R.steedPending:IsShown() and R
 assert(R.steedPending:GetScript("OnClick")==nil,"Unknown charges must not fabricate a usable ability")
 AZS_DASH.seen=true;R.PlaceSteed();assert(not R.steedPending:IsShown())
 assert(R.progressFrame.label:GetText()=="Hungarfen · 5%")
+local target=CreateFrame("Frame","AzerothSurvivorsUnitFrameTarget",UIParent)
+local unitExists=UnitExists;UnitExists=function(unit) return unit=="target" or unitExists(unit) end
+AZS_RUN.en=30;AZS_RUN.enm=120;R.ProgressBar();FieldKitThemeTarget.Update("complete")
+local _,anchor=FieldKitThemeTarget.frame:GetPoint()
+assert(anchor==R.hordeFrame,"The target frame covered the horde gauge")
+AZS_RUN.en=nil;R.ProgressBar();FieldKitThemeTarget.Update("complete")
+local _,anchor=FieldKitThemeTarget.frame:GetPoint()
+assert(anchor==R.progressFrame,"The target frame covered the boss progress gauge")
+UnitExists=unitExists;FieldKitThemeTarget.Stop()
 local run="run1";AZS_API_RunId=function() return run end
 AZS_GEN={creatureIcons={[42]="NativeBogGiant"}}
 AZS_WorldUnits=function() return {{name="Bog Giant",guid="native-guid",entry=42,player=false}} end

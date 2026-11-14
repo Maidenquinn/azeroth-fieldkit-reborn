@@ -2740,6 +2740,9 @@ local settingsActions={
 -- This is deliberately NOT a ReloadUI and never invokes chat styling, party
 -- transport, native action bar rebuilding, camera CVars or game-save changes.
 function FieldKit.ApplyHUDProfileLive()
+ -- Release the temporary choice mask before another presentation owner saves
+ -- widget alpha. Otherwise switching skins during a choice can save zero.
+ if FieldKitScreenLayers then FieldKitScreenLayers.ClearChoice() end
  if FieldKitZoneThemes then FieldKitZoneThemes.Suspend() end
  if not DB or FieldKit.layoutEditing then return false end
  if (FieldKitHudStack.root and FieldKitHudStack.root.azsMoving) or
@@ -2792,7 +2795,6 @@ function FieldKit.ApplyHUDProfileLive()
  settingsActions.UpdateGryphons()
  SyncNativePlates()
  ApplyCamera(false)
- if FieldKitScreenLayers then FieldKitScreenLayers.Update() end
  if FieldKitWorldMarkers and FieldKitWorldMarkers.ReloadProfileSettings then
   FieldKitWorldMarkers.ReloadProfileSettings()
  end
@@ -2804,6 +2806,7 @@ function FieldKit.ApplyHUDProfileLive()
  FieldKit_SetLanguage(DB.language)
  SetMovablesUnlocked(not DB.windowsLocked)
  if FieldKitZoneThemes then FieldKitZoneThemes.Refresh(true) end
+ if FieldKitScreenLayers then FieldKitScreenLayers.Update() end
  if FieldKitUI and FieldKitUI.frame then FieldKitUI.Refresh() end
  return true
 end

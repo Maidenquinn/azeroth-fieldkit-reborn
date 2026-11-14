@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.16",
+  "candidate": "0.1.0-reborn.17",
   "runtimeModules": 57,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "44f4e91c9224a1189d058316b7d745cc15f97dd4924462a3cdc9e0cc32533b90",
+      "sha256": "715e5a5a41703c1607a138a92f30a182cbdbc90c5c1d28ca1b962dc0c6924c96",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -215,8 +215,8 @@
       "literalEvents": []
     },
     "NativeHUD.lua": {
-      "bytes": 13789,
-      "sha256": "aa1be96c0c6a04dc831fa8254d51058d0476552092fe38fcc0a5b3f0655ab5e2",
+      "bytes": 13791,
+      "sha256": "ca400597a160de1645b0949ded84f06cfd2c0e242fa34d36ea3a067d9f56676f",
       "namedFunctions": [
         {
           "name": "Saved",
@@ -1869,8 +1869,8 @@
       "literalEvents": []
     },
     "ScreenLayers.lua": {
-      "bytes": 4382,
-      "sha256": "75b3db41420299ef5a4165f021b0f1e87b875318e49ba3c73f11ec12f7d9644c",
+      "bytes": 4435,
+      "sha256": "a65af2000b8530efcd36a21c90e82b13f023c85999f9874f0347e1206b343aa3",
       "namedFunctions": [
         {
           "name": "ChoiceNames",
@@ -2394,8 +2394,8 @@
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 123792,
-      "sha256": "be27a7cb3c506013d9acbed3a92df4c1094f77639f8643f3524b05344c85d2b6",
+      "bytes": 124014,
+      "sha256": "405aa0703d8a393f34944f489a0a19753c91457ef9749515e254d1dad6c0f12a",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2787,55 +2787,55 @@
         },
         {
           "name": "ResetPositions",
-          "line": 2816
+          "line": 2819
         },
         {
           "name": "RefreshPanel",
-          "line": 2828
+          "line": 2831
         },
         {
           "name": "FieldKit_RefreshInterfaceLanguage",
-          "line": 2829
+          "line": 2832
         },
         {
           "name": "CreatePanel",
-          "line": 2835
+          "line": 2838
         },
         {
           "name": "TogglePanel",
-          "line": 2848
+          "line": 2851
         },
         {
           "name": "FieldKit.SetWindowsLocked",
-          "line": 2855
+          "line": 2858
         },
         {
           "name": "CreateMinimapButton",
-          "line": 2864
+          "line": 2867
         },
         {
           "name": "PlaceOnRim",
-          "line": 2874
+          "line": 2877
         },
         {
           "name": "InitDB",
-          "line": 2915
+          "line": 2918
         },
         {
           "name": "FieldKitEventLifecycle",
-          "line": 2939
+          "line": 2942
         },
         {
           "name": "FieldKitEventWorld",
-          "line": 2988
+          "line": 2991
         },
         {
           "name": "FieldKitEventOther",
-          "line": 3015
+          "line": 3018
         },
         {
           "name": "RefreshNativeData",
-          "line": 3069
+          "line": 3072
         }
       ],
       "literalEvents": [
@@ -3701,8 +3701,8 @@
       "literalEvents": []
     },
     "ThemeTarget.lua": {
-      "bytes": 8340,
-      "sha256": "2d7dce0615b60e18050f975e497216df2ea8c8b64e5d496887dee4d1d0903f6a",
+      "bytes": 8682,
+      "sha256": "7d825056a10e26b2c187e1c3d4407c105a51a6f7185b3cea7fac5c02f1d8c41b",
       "namedFunctions": [
         {
           "name": "C.NativeFrame",
@@ -3738,8 +3738,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 153464,
-      "sha256": "8e4a95737938c8b5bd6ceeb99ed11ab6e55236595cbef86a18f23340746f9799",
+      "bytes": 153540,
+      "sha256": "35c8af29bb677f6567daaed77ea918a19491ee0bd4cb391a2a44d41472dc102e",
       "namedFunctions": [
         {
           "name": "Short",
@@ -6618,7 +6618,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.16",
+    "version": "0.1.0-reborn.17",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6629,7 +6629,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Campaign first-launch recipe in progress; final scope recorded after visual checks. Full regression suite and empty-database preview isolation tests."
+    "inGameTestScope": "Client 0.6.5 campaign: first-launch themed view showed real spell damage, kills, boss charge, horde and elapsed clock; an off-theme transition reached a native level choice. Preview toolbar obscured reward cards and presentation stayed masked across this transition. Added choice-mask transaction isolation and toolbar yielding, covered by regression fixtures. One test run ended in death before re-pausing; no revival resource was spent by the agent. Active boss/co-op and full visual acceptance remain unverified. Repeated fresh-default previews and compact placement were inspected in the earlier ready-screen pass. Offline full runtime/settings/themes, recent-meter 5..120 and installed 0.6.5 API/content fixtures pass."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

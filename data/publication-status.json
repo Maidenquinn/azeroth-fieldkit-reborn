@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.16",
+  "version": "0.1.0-reborn.17",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Client 0.6.5 campaign ready screen: repeated empty-database preference previews, independent compact native cards, four-stat selection, single native-style progress gauge and elapsed clock, event counter strip, Elwynn off/on and preference restoration. The visual pass found and fixed stale unselected statistics and stale loadout-tab text widths. Combat movement was not accepted by the UI automation input; active combat acceptance remains pending a player movement. Offline full runtime/settings/themes, recent-meter 5..120 and installed 0.6.5 API/content fixtures pass."
+  "inGameTestScope": "Client 0.6.5 campaign Zangarmarsh: repeated fresh preference previews with theme off/on; compact independent native cards, one progress gauge/clock, real meter rows, kills/gold/event currency, six spell sockets, center HP, native target ownership and jewelry bonus (+31.9% max health) inspected. Reload restored difficulty and HUD after yielding to the replayed native reward choices. Fixed preview controls over reward cards, opacity ownership during skin transactions, missing unthemed chest texture and themed target/horde overlap. Final chest texture observed after reload; final target offset and empty-slot labels covered offline. One early test run ended in death before re-pausing; no revival resource spent by the agent. Sustained boss encounter/co-op and every optional panel combination remain unverified. Offline full runtime/settings/themes, all 116 recent-meter lengths 5..120 and installed 0.6.5 API/content fixtures pass."
 }

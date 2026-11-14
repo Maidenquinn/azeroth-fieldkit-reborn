@@ -21,6 +21,7 @@ assert(state.clock==false and state.tally==false and state.meter==false and stat
 assert(N.clock:IsShown() and N.clock.text:GetText()=="2:05")
 assert(FieldKitMoneyFrame.nativeCells[4]:IsShown() and FieldKitMoneyFrame.nativeCells[4].value:GetText()=="0","Zero event currency missing")
 assert(FieldKitMoneyFrame.nativeCells[4].label=="Candy")
+assert(FieldKitMoneyFrame.nativeCells[3].icon:GetTexture()==FieldKitTheme.media.."WorldMarkers\\cache.tga","Chest counter must use the packaged verified texture")
 assert(not FieldKitMoneyFrame.coin:IsShown() and not FieldKitMoneyFrame.chestLabel:IsShown(),"Old footer labels survived")
 d.windowsLocked=false
 FieldKitMoneyFrame.nativeCells[1]:GetScript("OnDragStart")();assert(FieldKitMoneyFrame.azsMoving,"Counter tooltip cell blocked dragging")

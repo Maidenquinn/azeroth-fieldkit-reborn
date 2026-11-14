@@ -23,6 +23,26 @@ for pass=1,3 do for _,themed in ipairs({false,true}) do
  assert(d.cardOpacity==47 and d.nativeCardScale==105 and d.frameAnchors.FieldKitStatsFrame[3]==155)
  assert(d.interfaceProfiles[2]==slot and d.activeHudProfile==active)
 end end
+-- The preview toolbar must yield to reward choices, and repeated preference
+-- transactions must not persist the temporary zero-alpha mask in a skin owner.
+local toolbar=CreateFrame("Frame","FieldKitFirstLaunchBar",UIParent)
+toolbar:SetAlpha(.8);toolbar:EnableMouse(true);toolbar:Show()
+local phaseAPI=AZS_GetPhase
+AZS_GetPhase=function() return "choosing" end
+FieldKitScreenLayers.ApplyChoice()
+assert(toolbar:GetAlpha()==0 and not toolbar:IsMouseEnabled(),"Preview toolbar covered native reward choices")
+for _,themed in ipairs({true,false,true,false}) do
+ assert(P.PreviewDefaults(themed))
+ assert(toolbar:GetAlpha()==0,"Preference transaction uncovered the preview toolbar")
+ assert(P.CancelPreview())
+end
+AZS_GetPhase=function() return "playing" end
+FieldKitScreenLayers.ApplyChoice()
+assert(toolbar:GetAlpha()==.8 and toolbar:IsMouseEnabled(),"Preview toolbar did not restore after choices")
+assert(not next(FieldKitScreenLayers.choiceMasked),"Choice state leaked after restoration")
+FieldKit.ApplyHUDProfileLive();update(FieldKitFrame,.3)
+assert(FieldKitMeterFrame:GetAlpha()>0,"Meter stayed invisible after choice/theme transitions")
+AZS_GetPhase=phaseAPI
 assert(P.PreviewDefaults(false));fire(FieldKitFrame,"PLAYER_LOGOUT")
 assert(not P.preview and d.cardOpacity==47 and d.known.Preserved=="elite","Logout persisted temporary defaults")
 print("PASS first-launch defaults, six independent empty-DB simulations, theme off/on, profile/known-state isolation, cancellation and logout restoration")
