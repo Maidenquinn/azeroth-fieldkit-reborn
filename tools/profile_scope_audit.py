@@ -37,7 +37,7 @@ shared = {
     "schema", "activeHudProfile", "interfaceProfiles", "profilePendingSlot",
     # Technical bookkeeping for native game-owned overlays. These are derived
     # from individual display options, never copied as user preferences.
-    "zoneThemeNativeBefore", "hudBossesHidden", "hudMeterHidden", "hudTallyHidden", "moneyDockRepair",
+    "nativeHudBefore", "zoneThemeNativeBefore", "hudBossesHidden", "hudMeterHidden", "hudTallyHidden", "moneyDockRepair",
     # Native chat geometry remembered while the chat is not themed (restoration safety net, not a preference).
     "chatNative",
 }

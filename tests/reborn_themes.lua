@@ -26,9 +26,9 @@ for _,variant in ipairs({"minimal","complete","alternative"}) do
  assert(nativeState.clock==false and nativeState.meter==false and nativeState.build==false)
  button:Click();assert(click>0)
  C.Set("zoneThemes",false)
- assert(button:GetParent()==bar and player:GetParent()==UIParent and resources:GetParent()==UIParent)
+ assert(button:GetParent()==bar and player:GetParent()==UIParent and resources:GetParent()==FieldKitNativeHUD.storage)
  assert(player:GetAlpha()==.7 and player:IsMouseEnabled())
- assert(nativeState.clock==true and nativeState.meter==true and nativeState.build==true)
+ assert(nativeState.clock==false and nativeState.meter==false and nativeState.build==true)
 end
 AZS_ZONE.zone="future-map";FieldKitRebornDB.zoneThemes=true;assert(C.Resolve()=="elwynn")
 AZS_ZONE={};AZS_RUN.ph="playing";assert(C.Resolve()=="elwynn","Reload before AZSZONE disabled the auto theme")

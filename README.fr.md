@@ -1,9 +1,11 @@
 # Azeroth FieldKit Reborn
 
+Sans thème illustré, les cartes utilisent désormais l'habillage sombre natif. Les compteurs incluent les bonbons, une horloge affiche le temps écoulé, et chaque remplacement masque uniquement le widget natif correspondant. Désactiver la carte rétablit ce widget.
+
 Pour la 0.6.4 : **/fieldkit → Interface → Compteur de combat → Dégâts et soins récents**, puis choisir **5 à 120 secondes**. Le mode récent est désactivé par défaut et se sauvegarde par profil. Les bonus des bijoux et des DoT sont disponibles au survol de Statistiques ; les valeurs DoT se sélectionnent aussi dans la liste des statistiques.
 
 Version indépendante de FieldKit pour **Azeroth Survivors Reborn 0.6.4**.
-Le candidat **0.1.0-reborn.11** adapte le HUD et les compteurs au nouveau client.
+Le candidat **0.1.0-reborn.12** adapte le HUD et les compteurs au nouveau client.
 
 [Audit API et correctifs HUD](docs/REBORN_API_AUDIT.md) · [Audit paramètres/thèmes](docs/REBORN_SETTINGS_AUDIT.md) · [Audit du port](docs/REBORN_PORT.md) · [Recette en jeu](docs/REBORN_ACCEPTANCE.txt) ·
 [Téléchargements](https://github.com/Maidenquinn/azeroth-fieldkit-reborn/releases)

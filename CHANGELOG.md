@@ -1,3 +1,11 @@
+# 0.1.0-reborn.12 — Reborn native presentation without illustrated themes
+
+- Per-element native visibility ownership removes duplicated counters, jewelry, meters, boss progression and represented boss/target health. Native spell/Steed controls remain functional. Disabling replacements restores prior native visibility.
+- Unthemed money cells include event currency (including zero) with equal spacing and icon tooltips.
+- A separate elapsed run clock remains available without an illustrated theme or boss progression card.
+- Default cards use the native dark tooltip border and outlined font; illustrated compositions retain their own materials.
+- Offline regression tests cover opt-outs, paused time, identity-based target matching, reload bookkeeping and off/on/off across both theme families and all variants.
+
 # Changelog
 
 ## 0.6.0-alpha.50 - 2026-11-12 (P1-0 performance counters, unreleased)

@@ -301,6 +301,8 @@ local function CreateBossFrame(i,preview)
 	local sheenLow=f.bar:CreateTexture(nil,"OVERLAY")
 	sheenLow:SetTexture("Interface\\Buttons\\WHITE8X8");sheenLow:SetVertexColor(0,0,0,.25)
 	sheenLow:SetPoint("BOTTOMLEFT",f.bar,"BOTTOMLEFT",0,0);sheenLow:SetPoint("BOTTOMRIGHT",f.bar,"BOTTOMRIGHT",0,0);sheenLow:SetHeight(3)
+ f.nativeOrnaments={jewel,jewelGem,grain,sheen}
+ f.nativeEdges={chromeEdgeT,chromeEdgeB,chromeEdgeL,chromeEdgeR}
 
 	local border = CreateFrame("Frame", prefix.."TextureFrame", f)
 	border:SetAllPoints(f)
@@ -513,6 +515,7 @@ local function ZoneBosses() return FieldKitZoneThemes and FieldKitZoneThemes.act
 local function BossStyle() return ZoneBosses() and "compact" or DB.bossStyle end
 -- Hide the native boss section only for the replacement option; restore when disabled.
 local function SyncHudBosses()
+ if not FieldKit.rebornLegacyFixture then FieldKitNativeHUD.Update();return end
  if ZoneBosses() then return end
 	if ( not HasAPI() or not AZS_SetHudShown ) then
 		return
@@ -543,6 +546,7 @@ local function ZoneBossLayout(c,f,kind)
 end
 -- Fill one frame from a native instance id, HP and state, then its native debuffs.
 local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
+ f.fieldkitUnitId=FieldKit.Number(id)
  local compact=f.compact
  if compact then
   if BossStyle()=="compact" or BossStyle()=="premium" then
@@ -683,6 +687,7 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
 	end
 
 	FieldKit_Portraits.Apply(f, name, kind, id)
+ if FieldKitNativeHUD then FieldKitNativeHUD.BossLook(f) end
  if f.compact then f.compact.portrait:SetTexture(f.portrait:GetTexture()) end
 
 	f:Show()
@@ -1602,6 +1607,8 @@ local function UpdateMoneyFrame()
 	end
 	local gold = RunGold()
  FieldKitCardLayout.Money(moneyFrame)
+ if not FieldKit.rebornLegacyFixture and FieldKitNativeHUD.Money(moneyFrame,gold,ChestCost()) then return end
+ moneyFrame.coin:Show();moneyFrame.gold:Show();moneyFrame.chest:Show();moneyFrame.chestLabel:Show()
 	FieldKit_Text(moneyFrame.gold,Compact(gold))
 	local chestCost = ChestCost()
 	if ( chestCost ) then
@@ -1630,6 +1637,7 @@ end
 
 -- Synchronize only the native tally visibility for the user-selected replacement option.
 local function SyncHudTally()
+ if not FieldKit.rebornLegacyFixture then FieldKitNativeHUD.Update();return end
 	if ( not HasAPI() or not AZS_SetHudShown ) then
 		return
 	end
@@ -1670,6 +1678,7 @@ local function CreateMoneyFrame()
 	label:SetPoint("RIGHT", moneyFrame.chest, "LEFT", -3, 0)
 	moneyFrame.gold:SetPoint("RIGHT", label, "LEFT", -12, 0)
 	FieldKit_Text(label,"Chest:")
+ moneyFrame.chestLabel=label
 
 	moneyFrame.killsLabel = moneyFrame:CreateFontString("FieldKitMoneyFrameKillsLabel", "OVERLAY", "GameFontNormalSmall")
 	moneyFrame.killsLabel:SetPoint("LEFT", moneyFrame, "LEFT", 9, 0)
@@ -2022,6 +2031,7 @@ end
 
 -- Restore a native meter hidden by an older configuration; this addon does not replace it.
 local function SyncHudMeter()
+ if not FieldKit.rebornLegacyFixture then FieldKitNativeHUD.Update();return end
 	if ( DB.hudMeterHidden and HasAPI() and AZS_SetHudShown ) then
 		FieldKit.SetHudShown("meter", true)
 		DB.hudMeterHidden = nil
@@ -2496,6 +2506,8 @@ function AttachMoneyToBar(force)
 		if width and width > 0 then moneyFrame:SetWidth(width);FieldKitTheme.Update(moneyFrame) end
 		moneyFrame:SetHeight(22)
   FieldKitCardLayout.Money(moneyFrame)
+ if not FieldKit.rebornLegacyFixture and FieldKitNativeHUD.Money(moneyFrame,gold,ChestCost()) then return end
+ moneyFrame.coin:Show();moneyFrame.gold:Show();moneyFrame.chest:Show();moneyFrame.chestLabel:Show()
 		local point, relative, relativePoint, x, y = moneyFrame:GetPoint(1)
 		if point ~= "BOTTOM" or relative ~= compactBar or relativePoint ~= "TOP" or x ~= 0 or y ~= 2 then
 			moneyFrame:ClearAllPoints()
@@ -2919,6 +2931,7 @@ frame:RegisterEvent("CHAT_MSG_COMBAT_SELF_HITS")
 -- Initialize once on VARIABLES_LOADED; never persist or restore native talent state.
 local function FieldKitEventLifecycle()
  if event=="PLAYER_LOGOUT" then
+  FieldKitNativeHUD.Release()
   -- Persist edits to the current profile even if the user never explicitly
   -- pressed Save before quitting or /reload. Do not duplicate game data.
   if DB and FieldKitProfiles then
@@ -3148,6 +3161,7 @@ frame:SetScript("OnUpdate", function()
 	end
 	if not choosing then FieldKitPartySync.Tick() end
  if FieldKitZoneThemes then FieldKitZoneThemes.Tick() end
+ FieldKitNativeHUD.Update()
 end)
 
 SLASH_FieldKit1 = "/fieldkit"

@@ -190,6 +190,7 @@ function C.NativeRestore()
  FieldKitRebornDB.zoneThemeNativeBefore=nil
 end
 function C.NativeReplace()
+ FieldKitNativeHUD.RestoreLegacy();FieldKitNativeHUD.Release()
  if not FieldKit.rebornLegacyFixture then FieldKitReborn.ReplacePresentation() end
  if type(AZS_IsHudShown)~="function" then return end
  if type(FieldKitRebornDB.zoneThemeNativeBefore)~="table" then FieldKitRebornDB.zoneThemeNativeBefore={} end
@@ -248,7 +249,7 @@ function C.Refresh(force)
   C.statusLabel:SetText(FieldKit_L(FieldKitRebornDB.zoneThemes and "Enabled" or "Disabled").." · "..FieldKit_L(FieldKitRebornDB.zoneThemeMode).." · "..FieldKit_L(FieldKitRebornDB.zoneThemeVariant).."\n"..FieldKit_L("Minimap")..": "..FieldKit_L(C.ShapeLabel()).." · "..FieldKit_L("Character ornaments")..": "..FieldKit_L(FieldKitRebornDB.zoneThemeArt and "Enabled" or "Disabled"))
  end
  local zone=C.Resolve()
- if not zone then C.Suspend();T.SetZone("classic");if C.RefreshElementUI then C.RefreshElementUI() end;return end
+ if not zone then C.Suspend();T.SetZone("classic");FieldKitNativeHUD.Update();if C.RefreshElementUI then C.RefreshElementUI() end;return end
  if FieldKit.layoutEditing or (FieldKitPreview and FieldKitPreview.mode) then C.Suspend();T.SetZone(zone);return end
  local variant=FieldKitRebornDB.zoneThemeVariant
  C.currentLayout=zone..":"..variant..(FieldKitReferenceHUD.Has(zone,variant) and ":reference" or "")

@@ -26,6 +26,10 @@ end
 -- Display preferences affect only our material layers, never frame/text alpha.
 function T.Style(frame)
  if T.zone~="classic" then return 3 end
+ if not FieldKit.rebornLegacyFixture then
+  if frame and frame.fieldkitSkin and frame.fieldkitSkin.hud and FieldKitRebornDB and FieldKitRebornDB.cardStyle==2 then return 2 end
+  return 4
+ end
  if not frame or not frame.fieldkitSkin or not frame.fieldkitSkin.hud then return 1 end
  return FieldKitRebornDB and FieldKitRebornDB.cardStyle==2 and 2 or 1
 end
@@ -49,7 +53,7 @@ function T.Refresh()
   local frame=T.surfaces[i];T.State(frame,frame.fieldkitActive);T.Update(frame)
  end
  for i=1,table.getn(T.fonts) do
-  local r=T.fonts[i];r.label:SetTextColor(r.color[1],r.color[2],r.color[3])
+  local r=T.fonts[i];T.Font(r.label,r.size,r.color,r.heading,r.face)
  end
  for i=1,table.getn(T.controls) do T.PaintControl(T.controls[i]) end
 end
@@ -58,16 +62,20 @@ end
 function T.Font(label,size,color,heading,face)
  local path=T.media..(face or (heading and "NotoSerif-Regular.ttf" or "AzerothSans.ttf"))
  size=size or 14
+ local baseSize=size
+ local flags=""
+ if T.zone=="classic" and not FieldKit.rebornLegacyFixture and not face then path="Fonts\\FRIZQT__.TTF";flags="OUTLINE" end
  local fit=label.fieldkitFit
  if fit and fit.path==path and fit.baseSize==size and fit.width==label:GetWidth() and fit.height==label:GetHeight() and (label:GetText()==fit.full or label:GetText()==fit.display) then size=fit.renderSize end
  local oldPath,oldSize,oldFlags;if label.GetFont then oldPath,oldSize,oldFlags=label:GetFont() end
  local ok,result=true,true
- if oldPath~=path or oldSize~=size or (oldFlags or "")~="" then ok,result=pcall(label.SetFont,label,path,size,"") end
+ if oldPath~=path or oldSize~=size or (oldFlags or "")~=flags then ok,result=pcall(label.SetFont,label,path,size,flags) end
  if not ok or result==false then label:SetFont(heading and "Fonts\\FRIZQT__.TTF" or "Fonts\\ARIALN.TTF",size or 14,"") end
  color=color or T.text;label:SetTextColor(color[1],color[2],color[3])
  if not label.fieldkitFontRecord then
   label.fieldkitFontRecord={label=label,color=color};table.insert(T.fonts,label.fieldkitFontRecord)
  else label.fieldkitFontRecord.color=color end
+ local r=label.fieldkitFontRecord;r.size=baseSize;r.heading=heading;r.face=face
 end
 
 -- Explicit dimensions avoid this client's custom-backdrop tiling/stretch quirks.
@@ -83,7 +91,7 @@ function T.Update(frame)
  local c=math.min(T.Style(frame)==3 and 12 or (skin.kind=="window" and 24 or (skin.kind=="card" and 16 or 8)),w/3,h/3)
  -- The corners of the zone material are cut diagonally (transparent triangles): a full-size fill would show as a dark halo
  -- outside the gold border. In the reference style the fill covers only the INSIDE of the frame (inside the corner cut).
- local inset=style==3 and c or 0
+ local inset=style==4 and 5 or (style==3 and c or 0)
  skin.base:ClearAllPoints();skin.base:SetPoint("TOPLEFT",frame,"TOPLEFT",inset,-inset);skin.base:SetWidth(math.max(1,w-2*inset));skin.base:SetHeight(math.max(1,h-2*inset))
  skin.grain:ClearAllPoints();skin.grain:SetPoint("TOPLEFT",frame,"TOPLEFT",inset,-inset);skin.grain:SetWidth(math.max(1,w-2*inset));skin.grain:SetHeight(math.max(1,h-2*inset))
  skin.inset=inset
@@ -152,6 +160,23 @@ function T.State(frame,active)
  -- frame.fieldkitFill = {color={r,g,b},alpha=a}: the card's own interior colour and opacity (the chat preferences), applied to the
  -- fill and to the centre slice only; the gold border slices keep their own opacity.
  local fill=frame.fieldkitFill
+ if skin.nativeBorder then skin.nativeBorder:Hide() end
+ if T.Style(frame)==4 and not frame.fieldkitArtOnly then
+  if not skin.nativeBorder then
+   local border=CreateFrame("Frame",nil,frame);skin.nativeBorder=border;border:SetAllPoints(frame);border:EnableMouse(false)
+   local asset="Interface\\Tooltips\\UI-Tooltip-Border"
+   if type(IsAddOnLoaded)=="function" and IsAddOnLoaded("AzerothSurvivorsUI") then asset="Interface\\AddOns\\AzerothSurvivorsUI\\Assets\\border-tooltip" end
+   border:SetBackdrop({edgeFile=asset,edgeSize=16,insets={left=5,right=5,top=5,bottom=5}})
+   border:SetBackdropBorderColor(.65,.65,.68,1)
+  end
+  skin.nativeBorder:Show();skin.selected:Hide();skin.grain:SetAlpha(0)
+  for _,part in ipairs(skin.parts) do part.texture:Hide() end
+  T.Solid(skin.base,fill and fill.color or {.035,.035,.045})
+  skin.base:SetAlpha((skin.kind=="button" and 1 or (fill and fill.alpha or T.Opacity(frame)))*((frame.fieldkitNavigation and not active) and 0 or 1))
+  frame.fieldkitActive=active and true or false
+  if frame.fieldkitChoice then T.ChoiceLook(frame,frame.fieldkitSelected==true,active and true or false) end
+  return
+ end
  if frame.fieldkitArtOnly then skin.base:SetAlpha(0);skin.grain:SetAlpha(0);skin.selected:Hide();for _,part in ipairs(skin.parts) do part.texture:Hide() end;return end
  local alpha=(frame.fieldkitNavigation and not active) and 0 or 1
  local opacity=skin.kind=="button" and 1 or T.Opacity(frame)

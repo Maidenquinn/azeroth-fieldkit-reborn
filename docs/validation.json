@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.11",
+  "version": "0.1.0-reborn.12",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.11",
+    "version": "0.1.0-reborn.12",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Offline 0.6.4 adaptation: actual installed Api.lua/Meter.lua executed in a mock client for all 116 recent windows (damage/healing), checkpoints, stable run identity and history loss/recovery. Production setters, recent/missing/warming views, detached windows, jewelry/DoT tooltips and profiles exercised for both theme families, all three variants and themes off. No live client or co-op QA for this build."
+    "inGameTestScope": "Offline Reborn 0.6.4 validation: native ownership with themes off, counters and event currency, jewelry/meter/progression/boss/target deduplication, elapsed and paused clock, option restoration, reload bookkeeping and both theme families x all three variants. Existing 5..120 second damage/healing windows and jewelry/DoT suites rerun against installed public API. No live client or co-op QA for this build."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "735c238fad03aae365c8e90607a28518f3b25bb47faf684e7de22494bb0d2381"
+      "sha256": "440083e7e1d6581cd138a52743aacd260613c56a94826481b4219c44dc002962"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -57,6 +57,11 @@
       "functions": 12,
       "sha256": "00fc412902cb292343ae21a0bc9b39482ebf26fc6f19832f0f13888aa0b91911"
     },
+    "NativeHUD.lua": {
+      "maxUpvalues": 5,
+      "functions": 17,
+      "sha256": "66c47995ee52fd812662995d11aafc9fafe639d9e544c882fa088244edf7a855"
+    },
     "Diagnostics.lua": {
       "maxUpvalues": 5,
       "functions": 33,
@@ -70,7 +75,7 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "7ce407e3ed24a842b08a11f8fcb3c6525b0182ebd6f715159e411cb55ee11f25"
+      "sha256": "d8ee04bb0512bc60abbfb0f7d14c240f2d40e7238a7d1b3d5a1b3f93a1d167d4"
     },
     "Profiles.lua": {
       "maxUpvalues": 4,
@@ -90,7 +95,7 @@
     "Theme.lua": {
       "maxUpvalues": 1,
       "functions": 20,
-      "sha256": "a3489f16e1733b81fb1e24bb894b37d6fdd7dac64922b164f41324faa024f56d"
+      "sha256": "249e71f7a1777ccf89f630af1bae1080ecabce4cde4fb6e4984f90bf4f5e8d74"
     },
     "ZoneThemeRegistry.lua": {
       "maxUpvalues": 0,
@@ -155,7 +160,7 @@
     "BossTimeline.lua": {
       "maxUpvalues": 26,
       "functions": 18,
-      "sha256": "62a2701e3eb27c5faa9cdff07d420eb1b7a5c46e657fb497a71ad571a164a320"
+      "sha256": "f6752f836beb18fc7fb2dd0f2a9c8e111800c9521670b332d41c9cf229f3c03d"
     },
     "HudStack.lua": {
       "maxUpvalues": 7,
@@ -240,7 +245,7 @@
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 191,
-      "sha256": "83900181900314dd5fda7304f1f1e055677a5063ffb9b83c213aadddc2791c50"
+      "sha256": "ab969b3971f47a931f5f9ecc5e79b946892f2a819ead9a3c808d7327ee79af10"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -300,7 +305,7 @@
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "9534fb51523da9a8d2716e2c0ff9530a244931eaf540cc9ccdf0f8a52659774f"
+      "sha256": "160be152bc1793ed2233bf44e29e843d8533f35fb5a54c5eff648e36d111e777"
     }
   }
 }

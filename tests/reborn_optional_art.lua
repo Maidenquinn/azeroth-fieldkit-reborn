@@ -55,5 +55,6 @@ for _,variant in ipairs({"minimal","complete","alternative"}) do for _,shape in 
  assert(#H.dock.referenceArtHoles==0 and #H.identity.referenceArtHoles==0,"Re-enabling did not restore original artwork")
  if FieldKitThemeMinimap.roundRing and FieldKitThemeMinimap.roundRing.modeRing then assert(not FieldKitThemeMinimap.roundRing.modeRing:IsShown()) end
 end end
-C.Set("zoneThemes",false);assert(state.tally==true,"Turning the theme off did not restore original native tally")
+C.Set("zoneThemes",false);assert(state.tally==false,"Unthemed replacement must retain tally ownership")
+d.moneyFrame=false;FieldKitNativeHUD.Update();assert(state.tally==true,"Disabling replacement did not restore native tally")
 print("PASS optional HUD artwork: 3 layouts x 3 map shapes; complete strip removal, no baked badges, valid UVs, actions/XP preserved, original artwork and native tally restored")

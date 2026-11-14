@@ -33,6 +33,11 @@ function FieldKit.InitializeSettings(defaultStats)
  d.zoneThemeScale=FieldKit.Number(d.zoneThemeScale,100,75,110)
  d.zoneThemePositions=FieldKitZoneThemes.NormalizePositions(d.zoneThemePositions)
  d.zoneThemeElementScales=FieldKitZoneThemes.NormalizeScales(d.zoneThemeElementScales)
+ if type(d.nativeHudBefore)=="table" then
+  for key,value in pairs(d.nativeHudBefore) do
+   if (key~="clock" and key~="tally" and key~="bosses" and key~="meter") or type(value)~="boolean" then d.nativeHudBefore[key]=nil end
+  end
+ else d.nativeHudBefore=nil end
  if type(d.zoneThemeNativeBefore)=="table" then
   for key,value in pairs(d.zoneThemeNativeBefore) do
    if (key~="clock" and key~="tally" and key~="build" and key~="banners" and key~="bosses" and key~="meter" and key~="levels") or type(value)~="boolean" then d.zoneThemeNativeBefore[key]=nil end

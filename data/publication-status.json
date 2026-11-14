@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.11",
+  "version": "0.1.0-reborn.12",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Offline 0.6.4 adaptation: actual installed Api.lua/Meter.lua executed in a mock client for all 116 recent windows (damage/healing), checkpoints, stable run identity and history loss/recovery. Production setters, recent/missing/warming views, detached windows, jewelry/DoT tooltips and profiles exercised for both theme families, all three variants and themes off. No live client or co-op QA for this build."
+  "inGameTestScope": "Offline Reborn 0.6.4 validation: native ownership with themes off, counters and event currency, jewelry/meter/progression/boss/target deduplication, elapsed and paused clock, option restoration, reload bookkeeping and both theme families x all three variants. Existing 5..120 second damage/healing windows and jewelry/DoT suites rerun against installed public API. No live client or co-op QA for this build."
 }

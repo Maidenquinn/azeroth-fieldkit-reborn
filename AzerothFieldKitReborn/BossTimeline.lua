@@ -175,6 +175,7 @@ function B.Ensure()
  fill:SetStatusBarColor(.78,.32,.22,1)
  local fillGrain=fill:CreateTexture(nil,"OVERLAY")
  fillGrain:SetAllPoints(fill);fillGrain:SetTexture(T.media.."ChronicleGrain.tga");fillGrain:SetAlpha(.4)
+ rail.nativeOrnaments={railMetal,edgeT,edgeB,fillGrain}
 
  ticks={}
  for i=1,MAX_TICKS do
@@ -244,7 +245,8 @@ function B.UpdateReborn()
  local width=math.floor(FieldKit.Number(FieldKitRebornDB.bossTimelineWidth,560,360,780))
  root:SetWidth(width);root:SetHeight(36);T.Surface(root,"card",true);T.Update(root)
  rail:ClearAllPoints();rail:SetPoint("TOPLEFT",root,"TOPLEFT",9,-9);rail:SetPoint("BOTTOMRIGHT",root,"BOTTOMRIGHT",-9,9)
- fill:SetValue(boss and boss.progress or 0);fill:SetStatusBarColor(.45,.32,.12,.95)
+ fill:SetValue(boss and boss.progress or 0);fill:SetStatusBarColor(.55,.24,.83,.95)
+ for _,part in ipairs(rail.nativeOrnaments) do part:Hide() end
  titleText:SetParent(fill);titleText:ClearAllPoints();titleText:SetPoint("CENTER",fill,"CENTER",0,0)
  titleText:SetWidth(width-28);T.Font(titleText,14,T.text,true)
  titleText:SetText(boss and (boss.name.." · "..FieldKitNativeTools.BossValue(boss)) or FieldKit_L("Boss progression"))
