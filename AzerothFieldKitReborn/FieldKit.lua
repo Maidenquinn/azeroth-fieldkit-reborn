@@ -688,6 +688,7 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
 
 	FieldKit_Portraits.Apply(f, name, kind, id)
  if FieldKitNativeHUD then FieldKitNativeHUD.BossLook(f) end
+ if FieldKitReborn065 then FieldKitReborn065.BossStatus(f,id,kind~="guardian" and (state==1 or state==true)) end
  if f.compact then f.compact.portrait:SetTexture(f.portrait:GetTexture()) end
 
 	f:Show()
@@ -3170,6 +3171,7 @@ end)
 
 SLASH_FieldKit1 = "/fieldkit"
 SlashCmdList["FieldKit"] = function(msg)
+ if msg=="death" then if not FieldKitReborn065.OpenDeathLog() then Print(FieldKit_L("Native death log unavailable")) end;return end
  if msg=="sync" then FieldKitPartySync.Diagnostic();return end
  if msg=="coop" then FieldKitCoop.Diagnostic();return end
  -- Read-only diagnostics (map, cards, clicks) are recognised BEFORE anything that could open the settings window.

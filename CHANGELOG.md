@@ -1,3 +1,12 @@
+# 0.1.0-reborn.14 — Reborn 0.6.5
+
+- Refresh the installed creature presentation catalog: 240 bosses, 816 creatures, 48 zones. Validate boss/seasonal icon paths; label the missing Deathwing asset fallback explicitly.
+- Preserve complete native jewelry proc descriptions in tooltips, while keeping compact HUD bonuses.
+- Forward the native target castbar when replacing its frame. Read only supplied stun/root/immunity debuffs and remaining time; no inferred eight-second immunity.
+- Add native death log access in Combat meter and /fieldkit death, with a guarded killing-blow tooltip.
+- Add the addon icon and author-coloured title metadata. Bound world-anchor pages and test long-run cleanup against installed 0.6.5 projection code.
+- Prepare an English developer API request for unavailable control/telegraph/death-summary contracts; not sent.
+
 # 0.1.0-reborn.13 — Unthemed layout and readable controls
 
 - Draw native borders as parent backdrops behind text, removing the overlay that obscured short controls.

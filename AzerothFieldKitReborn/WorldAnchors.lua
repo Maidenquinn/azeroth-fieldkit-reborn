@@ -45,7 +45,7 @@ function M.Refresh()
   if type(page.entries)~="table" then return false,"BAD_PAGE" end
   if not first then first=page end
   if first.catalogId~=page.catalogId or first.streamId~=page.streamId or first.worldId~=page.worldId then return false,"CATALOG_CHANGED" end
-  for i=1,table.getn(page.entries) do
+  for i=1,math.min(256,table.getn(page.entries)) do
    local e=page.entries[i]
    if type(e)=="table" and type(e.anchorId)=="string" and not collected[e.anchorId] then
     collected[e.anchorId]=e;table.insert(list,e)

@@ -1,10 +1,12 @@
 # Azeroth FieldKit Reborn
 
+0.6.5 adaptation: 240-boss catalog, complete jewelry proc tooltips, native target castbar forwarding, and `/fieldkit death` for the native death log. Control states use supplied data only; missing API contracts are documented in a prepared developer request.
+
 Without an illustrated theme, cards use the native dark presentation. Resource counters include event currency, a clock shows elapsed run time, and each replacement hides only its corresponding native widget. Disabling a replacement restores that widget.
 
-For 0.6.4: **/fieldkit → Interface → Combat meter → Recent damage and healing**, then choose **5–120 seconds**. Recent mode is off by default and saved per HUD profile. Hover Statistics for native jewelry/DoT contributions; select DoT values in the Statistics picker.
+For 0.6.5: **/fieldkit → Interface → Combat meter → Recent damage and healing**, then choose **5–120 seconds**. Recent mode is off by default and saved per HUD profile. Hover Statistics for native jewelry/DoT contributions; select DoT values in the Statistics picker.
 
-Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.4**. Version **0.1.0-reborn.13** is a development candidate.
+Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.14** is a development candidate.
 
 [Français](README.fr.md) · [Port audit](docs/REBORN_PORT.md) ·
 [Native acceptance recipe](docs/REBORN_ACCEPTANCE.txt) ·
@@ -14,7 +16,7 @@ Combat HUD, meters, learned spells, run jewelry, boss progression, minimap/world
 markers, configurable themes and English/French settings. Reborn's native data
 supplies its maps and class spells, including expansion content. Dedicated
 illustrated themes reuse the existing Elwynn skin on other maps in Auto mode,
-with native zone names and data. Client 0.6.4 supplies recent damage/healing windows and native reset checkpoints. Received-healing counters and unidentified appearances stay unavailable.
+with native zone names and data. Client 0.6.5 supplies recent damage/healing windows and native reset checkpoints. Received-healing counters and unidentified appearances stay unavailable.
 
 ## Install
 

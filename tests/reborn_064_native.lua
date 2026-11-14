@@ -1,4 +1,4 @@
--- Executed against the actual installed 0.6.4 Api.lua and Meter.lua, in a mock VM.
+-- Executed against the installed Api.lua and Meter.lua (recent-meter contract introduced in 0.6.4), in a mock VM.
 local caps=AZS_GetMeterCapabilities()
 if not caps.features.nativeRecentWindows then return end
 local L,W,d=FieldKitMeterLedger,FieldKitMeterWindow,FieldKitRebornDB
@@ -43,4 +43,4 @@ assert(not known and total==nil and W.states.damage.reason=="history_not_retaine
 for t=138,143 do tick(t) end
 rows,total,rate,known=L.Read("damage")
 assert(known and total==500 and rate==100,"Recent window failed to recover after retaining sufficient history")
-print("PASS installed 0.6.4: all 116 window lengths for damage/healing, rates/shares, checkpoints, stable run id, missing reload history and recovery")
+print("PASS installed recent-meter contract (0.6.4+): all 116 window lengths for damage/healing, rates/shares, checkpoints, stable run id, missing reload history and recovery")

@@ -19,7 +19,7 @@ for zone,list in pairs(FieldKitRebornCreatures.zones) do
   end
  end
 end
-assert(n==192)
+assert(n==240)
 AZS_ZONE.zone="zangarmarsh"
 local l={index=1,name=""}
 assert(R.LairName(l)=="Guardian · lair 1")
@@ -54,4 +54,4 @@ for _,cap in ipairs(D.hitCaptions) do assert(cap.text==nil and cap:GetText()==ca
 local native=D.frame.rows[2].fieldkitSpellIcon
 assert(native and native:GetTexture()=="Interface\\Icons\\NativeAuto","Native source icon discarded")
 D.SetSort("dmg");assert(D.frame.rows[1]:GetValue()==.75 and D.frame.rows[2]:GetValue()==1,"Ascending sort changed damage bar scale")
-print("PASS all 192 boss icons across 48 zones, seasonal icons, lair identity freshness, modal layers and single captions, native meter icons")
+print("PASS all 240 boss icons across 48 zones, seasonal icons, lair identity freshness, modal layers and single captions, native meter icons")

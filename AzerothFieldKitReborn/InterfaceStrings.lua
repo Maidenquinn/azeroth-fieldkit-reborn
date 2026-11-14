@@ -473,3 +473,8 @@ FieldKitLocale.fr["DoT stacking is a character stat, not the current stacks on a
 FieldKitLocale.fr["Cooldown"]="Recharge"
 
 FieldKitLocale.fr["Recent results start no earlier than the latest reset."]="Les résultats récents commencent au plus tôt à la dernière remise à zéro."
+
+FieldKitLocale.fr["Native death log"]="Journal de mort natif"
+FieldKitLocale.fr["Open the game's last blows and killing-blow card."]="Ouvrir les derniers coups reçus et la fiche du coup fatal du jeu."
+FieldKitLocale.fr["Native death log unavailable"]="Journal de mort natif indisponible"
+FieldKitLocale.fr["Overkill"]="Dégâts excédentaires"

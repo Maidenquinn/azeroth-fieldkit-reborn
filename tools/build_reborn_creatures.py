@@ -77,6 +77,12 @@ def main():
         creatures = [(kind, c) for kind in ('enemy', 'elite', 'boss') for c in zone.get(kind, [])]
         assert all(c.get('entry') and c['name']['en'] for _, c in creatures)
         native_icons = {c['entry']: c.get('icon') for _, c in creatures}
+        # Reborn 0.6.5 ships this misspelled icon; neither spelling exists in
+        # the supplied archives. Keep an explicit verified dragon fallback.
+        for _, creature in creatures:
+            if creature.get('icon') in ('achievment_Boss_Madnessofdeathwing', 'inv_helm_armor_spiritvalkyr_d_01_blue'):
+                creature['icon'] = ('Achievement_Boss_Nefarion' if creature['icon'] == 'achievment_Boss_Madnessofdeathwing' else 'Spell_Holy_GuardianSpirit')
+                native_icons[creature['entry']] = None
         for kind, creature in creatures:
             if not creature.get('icon'):
                 creature['icon'] = boss_fallback.get(creature['entry'], zone['icon'])
@@ -113,14 +119,16 @@ def main():
             hashes.update((e.hash_a, e.hash_b) for e in archive.hash_table if e.block_table_index < 0xfffffffe)
             archive.file.close()
             archives.append(path.name)
-        icons = {b['icon'] for z in report['zones'] for b in z['bosses']} | {c['icon'] for c in report['seasonal']}
+        boss_icons = {b['icon'] for z in report['zones'] for b in z['bosses']} | {c['icon'] for c in report['seasonal']}
+        icons = {c['icon'] for zone in zones for kind in ('enemy', 'elite', 'boss') for c in zone.get(kind, [])} | boss_icons
         missing = []
         for icon in sorted(icons):
             path = 'Interface\\Icons\\'+icon+'.blp'
             if (archive._hash(path, 'HASH_A'), archive._hash(path, 'HASH_B')) not in hashes:
                 missing.append(icon)
         assert not missing, f'Unverified boss/seasonal icon paths: {missing}'
-        report['bossIconAssets'] = {'verifiedPaths': len(icons), 'archives': archives, 'missing': missing,
+        report['creatureIconAssets'] = {'verifiedPaths': len(icons), 'missing': missing, 'method': 'read-only MPQ hash tables; all creature kinds and seasonal fallbacks'}
+        report['bossIconAssets'] = {'verifiedPaths': len(boss_icons), 'archives': archives, 'missing': missing,
                                    'method': 'read-only MPQ hash tables; encrypted AZSR containers not opened'}
     (ROOT/'AzerothFieldKitReborn/RebornCreatures.lua').write_text('\n'.join(lines)+'\n', encoding='utf-8', newline='\n')
     (ROOT/'docs/REBORN_CREATURE_COVERAGE.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8', newline='\n')

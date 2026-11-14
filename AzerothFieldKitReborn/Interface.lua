@@ -82,6 +82,7 @@ function FieldKit.BuildJourneySections(sections,actions)
    get=function() return FieldKitRebornDB.partyMeter end,set=function(v) FieldKitRebornDB.partyMeter=v;FieldKitCoop.Update() end},
  }
  local meter={
+  {kind="action",label="Native death log",tip="Open the game's last blows and killing-blow card.",action=function() if not FieldKitReborn065.OpenDeathLog() then DEFAULT_CHAT_FRAME:AddMessage(FieldKit_L("Native death log unavailable")) end end},
   {kind="note",label="Your combat meter",tip="Main meter, tabs, tooltips and optional detached windows. Which other HUD cards appear is under HUD cards."},
   options.meterFrame,
   {kind="check",label="Recent damage and healing",tip="Use native recent amounts, DPS/HPS and shares for Damage and Healing. Boss, taken, party and kills keep their existing time basis. History is rebuilt after reload.",
@@ -781,6 +782,14 @@ function U.BuildPage(section,index)
    local compose=T.Button(row,nil,"Compose interface",202,32,190,28,function() U.SetLayoutEditing(true,false) end)
    row.Reflow=function(w) row:SetWidth(w);hint:SetWidth(w) end
    table.insert(page.flow,{frame=row,y=y});y=y+84
+  elseif item.kind=="action" then
+   local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(66)
+   local button=T.Button(row,nil,item.label,0,0,240,32,item.action)
+   button:SetScript("OnEnter",function() FieldKitReborn065.DeathTip(this) end)
+   button:SetScript("OnLeave",function() GameTooltip:Hide() end)
+   local label=T.Label(row,item.tip,0,38,500,22,12,T.muted)
+   row.Reflow=function(w) row:SetWidth(w);label:SetWidth(w) end
+   table.insert(page.flow,{frame=row,y=y});y=y+76
   elseif item.kind=="note" or item.kind=="syncStatus" then
    local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(104)
    local label=T.Label(row,item.label or "Sharing status",0,0,500,24,15,T.gold,true)

@@ -81,8 +81,10 @@ function C.Stop()
   if native:GetParent()==saved.parent or native:GetParent()==H.storage then H.RestoreOne(native)
   else if native:GetAlpha()==0 then native:SetAlpha(saved.alpha) end;H.saved[native]=nil end
  end
- local cast=getglobal("TargetFrameSpellBar")
- if cast and H.saved[cast] and cast:GetParent()==C.castOwner then H.RestoreOne(cast) end;C.castOwner=nil
+ local cast=(not FieldKit.rebornLegacyFixture and FieldKitReborn065.NativeCastbar()) or getglobal("TargetFrameSpellBar")
+ if cast and H.saved[cast] then
+  if cast:GetParent()==C.castOwner then H.RestoreOne(cast) else H.saved[cast]=nil end
+ end;C.castOwner=nil
 end
 function C.Update(variant)
  local native=C.NativeFrame()
@@ -95,7 +97,9 @@ function C.Update(variant)
  local matchedBoss
  if FieldKitReferenceHUD and FieldKitReferenceHUD.active then
   for i=1,4 do local boss=getglobal("FieldKitBossFrame"..i.."Compact")
-   if boss and boss:IsShown() and boss.name and boss.name:GetText()==UnitName("target") then matchedBoss=boss end
+   local source=getglobal("FieldKitBossFrame"..i)
+   local id=type(AZS_TARGET)=="table" and FieldKit.Number(AZS_TARGET.id)
+   if boss and boss:IsShown() and ((FieldKit.rebornLegacyFixture and boss.name and boss.name:GetText()==UnitName("target")) or (not FieldKit.rebornLegacyFixture and source and id and source.fieldkitUnitId==id)) then matchedBoss=boss end
   end
  end
  local f=C.frame;if not f.azsMoving then f:SetScale(math.min(1,UIParent:GetWidth()/1300)*FieldKitZoneThemes.ElementScale("FieldKitThemeTargetFrame")) end
@@ -109,6 +113,8 @@ function C.Update(variant)
  local level=UnitLevel("target");local classification=type(UnitClassification)=="function" and UnitClassification("target")
  local names={elite="Elite",rareelite="Rare elite",rare="Rare",worldboss="Boss",normal="Target"}
  C.kind:SetText(FieldKit_L(names[classification] or "Target").." · "..FieldKit_L("Level").." "..tostring(level and level>0 and level or "??"))
+ local control=FieldKitReborn065.ControlText(type(AZS_TARGET)=="table" and FieldKit.Number(AZS_TARGET.id))
+ if control then C.kind:SetText(control) end
  local friendly=(type(UnitIsUnit)=="function" and UnitIsUnit("player","target")) or (type(UnitIsFriend)=="function" and UnitIsFriend("player","target"))
  if friendly then C.bar:SetStatusBarColor(.12,.62,.30) else C.bar:SetStatusBarColor(.72,.17,.20) end
  C.bar:SetMinMaxValues(0,max);C.bar:SetValue(hp);C.hp:SetText(FieldKit_FormatHealth(hp,max,FieldKitRebornDB.targetHealthMode))
@@ -117,7 +123,7 @@ function C.Update(variant)
  H.Save(native);native:SetParent(H.Hidden());native:SetAlpha(0)
  local rows=C.UpdateAuras() -- children of the hidden summary stay hidden when the boss card is selected
  if matchedBoss then rows=0 end
- local cast=getglobal("TargetFrameSpellBar")
+ local cast=(not FieldKit.rebornLegacyFixture and FieldKitReborn065.NativeCastbar()) or getglobal("TargetFrameSpellBar")
  if cast and (cast:GetParent()==UIParent or cast:GetParent()==native or cast:GetParent()==f or cast:GetParent()==C.castOwner) then
   local owner=matchedBoss or f;H.Save(cast);cast:SetParent(owner);C.castOwner=owner
   H.Anchor(cast,"TOP",owner,"BOTTOM",0,-(6+rows*AURA_STEP),true);cast:SetWidth(280)

@@ -1,0 +1,15 @@
+Subject: Public addon API for boss control states and attack telegraphs (0.6.5)
+
+Hi! I am adapting Azeroth FieldKit Reborn to 0.6.5. The new Cataclysm content and public generated catalog are integrated. Thank you for the native projection and long-run cleanup fixes.
+
+Our custom frames forward the native target castbar, and display control names/remaining time only when AZS_GetDebuffs actually supplies them. The current addon API guide does not document a structured distinction between a boss winding up an attack, Stunned, Rooted and Stun immune. Could you expose a stable read-only getter by unit/instance id with the exact state, native remaining time (when known), and optional spell id? We deliberately do not guess an eight-second immunity timer.
+
+The guide also still says AZSUNITS.state is always zero, although the 0.6.4 changelog added enrage information. Could that section be brought up to date?
+
+For optional boss/guardian warnings, is there a supported read-only attack/ground-telegraph feed (instance id, attack/spell id, start/end, position/radius, interruptibility, phase)? The documented world-anchor kinds do not describe these telegraphs. Without such a feed FieldKit keeps the game's native ground warnings and does not predict them.
+
+We currently open the native death log through its registered /azsdeathlog callback. A documented death-summary getter with run identity, last blow, ability, source, damage and overkill would let us avoid relying on the internal AZS_DEATH table even for an optional tooltip.
+
+Content issue found while validating icon paths against the supplied archives: Deathwing (entry 700228) uses achievment_Boss_Madnessofdeathwing. Neither that file nor the corrected Achievement_Boss_Madnessofdeathwing exists in the readable installed archives. We use an explicitly labelled, verified dragon-icon fallback locally. Could the native icon be corrected/provided? The all-creature check also found inv_helm_armor_spiritvalkyr_d_01_blue missing; the local presentation fallback is Spell_Holy_GuardianSpirit.
+
+This is a prepared request only; it has not been sent.

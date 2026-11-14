@@ -1,3 +1,5 @@
+reborn.14 / 0.6.5: offline catalog, complete proc tooltips, native castbar ownership, supplied control states, death-log action, long-run cache/projection tests. Native API gaps documented in DEV_REQUEST_REBORN_065.txt. Live visual and co-op acceptance pending.
+
 reborn.13: native border layering and readable controls, independent initial HUD cards and existing-save migration tested offline. Visual acceptance in the actual client remains pending.
 
 reborn.12 / client 0.6.4: offline validation only. Unthemed native replacement ownership, candy at zero, event removal, elapsed/paused clock, boss/target identity, disabled native meter preference and off/on/off across both families/all variants covered in mock. Live visual acceptance remains pending; no reload or gameplay action was performed.

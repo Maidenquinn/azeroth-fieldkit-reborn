@@ -33,6 +33,7 @@ local function Mask(name,hide)
  end
 end
 function N.Release()
+ if FieldKitReborn065 then FieldKitReborn065.RestoreCastbar() end
  for f in pairs(N.frames) do Mask(f:GetName(),false) end
  if FieldKitRebornDB then for _,key in ipairs(parts) do Part(key,false) end;FieldKitRebornDB.nativeHudBefore=nil end
  if N.clock then N.clock:Hide() end
@@ -78,12 +79,13 @@ function N.Update()
  local meter=run and d.meterFrame and Shown("FieldKitMeterFrame")
  local progress=run and d.bossTimeline and Shown("FieldKitBossTimelineFrame")
  local bosses,target=false,false
+ local castOwner
  local represented={}
  local id=type(AZS_TARGET)=="table" and FieldKit.Number(AZS_TARGET.id)
  for i=1,4 do
   local f=getglobal("FieldKitBossFrame"..i)
   if run and d.bossFrame and f and f:IsShown() and f.fieldkitUnitId then
-   bosses=true;represented[f.fieldkitUnitId]=true;if id and id==f.fieldkitUnitId then target=true end
+   bosses=true;represented[f.fieldkitUnitId]=true;if id and id==f.fieldkitUnitId then target=true;castOwner=(f.compact and f.compact:IsShown()) and f.compact or f end
   end
  end
  -- This native frame alternates live boss health and next-boss progression.
@@ -101,6 +103,7 @@ function N.Update()
  Mask("AZSRiftBar",progress)
  Mask("AzerothSurvivorsSurvivorsBossBar",(bosses and covered) or (progress and not live))
  Mask("AzerothSurvivorsUnitFrameTarget",target)
+ if FieldKitReborn065 then FieldKitReborn065.MoveCastbar(target and castOwner or nil) end
  N.Polish()
  if run then Clock() elseif N.clock then N.clock:Hide() end
 end

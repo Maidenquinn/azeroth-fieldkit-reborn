@@ -218,7 +218,7 @@ function L.ContentKey()
  end
  for _,slot in ipairs({2,13,14,11,12}) do
   local it=L.items[slot];n=n+1
-  parts[n]=slot..":"..tostring(it and it.name)..":"..tostring(it and it.icon)..":"..table.concat(it and it.bonuses or {},"|")
+  parts[n]=slot..":"..tostring(it and it.name)..":"..tostring(it and it.icon)..":"..table.concat(it and it.bonuses or {},"|")..":"..table.concat(it and it.nativeDetails or {},"|")
  end
  return table.concat(parts,";;")
 end
@@ -350,7 +350,7 @@ function L.Tip(owner,entry)
  GameTooltip:SetOwner(owner,"ANCHOR_LEFT");GameTooltip:SetText(entry.name or "?")
  if entry.rank then GameTooltip:AddLine(entry.rank,.8,.8,.8) end
  for _,line in ipairs(entry.upgrades or {}) do GameTooltip:AddLine(line,1,1,1,true) end
- for _,line in ipairs(entry.bonuses or {}) do GameTooltip:AddLine(line,.3,1,.4,true) end
+ for _,line in ipairs(entry.nativeDetails or entry.bonuses or {}) do GameTooltip:AddLine(line,.3,1,.4,true) end
  if table.getn(entry.bonuses or {})==0 and table.getn(entry.upgrades or {})==0 then GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
  GameTooltip:Show()
 end

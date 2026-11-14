@@ -100,8 +100,11 @@ function R.SupportsHealing(perspective)
  for _,p in ipairs(c.healingPerspectives) do if p==perspective then return true end end
  return false
 end
+local iconFixes={achievment_boss_madnessofdeathwing="Achievement_Boss_Nefarion",inv_helm_armor_spiritvalkyr_d_01_blue="Spell_Holy_GuardianSpirit"}
 function R.Icon(value)
  if type(value)~="string" or value=="" then return nil end
+ local fix=iconFixes[string.lower(string.gsub(value,"^.*[\\/]",""))]
+ if fix then value=fix end
  if string.find(value,"[\\/]") then return value end
  return "Interface\\Icons\\"..value
 end
@@ -151,7 +154,8 @@ function R.Gear()
    local raw=type(g.text)=="string" and FieldKitNative.Text(g.text,2048) or ""
    local bonuses=FieldKitLoadout and FieldKitLoadout.ExpandStats({raw}) or {}
    if table.getn(bonuses)==0 and raw~="" then bonuses={raw} end
-   items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses=bonuses,rankValue=tonumber(g.amount)}
+   items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses=bonuses,rankValue=tonumber(g.amount),
+    nativeDetails=FieldKitReborn065 and FieldKitReborn065.JewelryDetails(raw) or nil}
   end
  end
  return items

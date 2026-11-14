@@ -1,5 +1,5 @@
 {
-  "clientSha256": "ab7b6332a6c47e4c29188e44932939e560b274cf06e0f212cb3ada119a3a3d35",
+  "clientSha256": "a02914e85f9b807308de4235af39e11b65182c80770fbbc10d85bd2b0aee3d1e",
   "source": "installed include_str TOML packs",
   "zones": [
     {
@@ -186,13 +186,37 @@
       "key": "blackwing_descent",
       "bosses": [
         {
+          "name": "Magmaw",
+          "entry": 701210,
+          "icon": "Ability_Hunter_Pet_Worm",
+          "status": "native"
+        },
+        {
+          "name": "Arcanotron",
+          "entry": 701211,
+          "icon": "INV_Misc_Gear_01",
+          "status": "native"
+        },
+        {
+          "name": "Maloriak",
+          "entry": 701212,
+          "icon": "Spell_Shadow_AbominationExplosion",
+          "status": "native"
+        },
+        {
+          "name": "Atramedes",
+          "entry": 701213,
+          "icon": "Ability_Hunter_Pet_Bat",
+          "status": "native"
+        },
+        {
           "name": "Nefarian",
           "entry": 700218,
           "icon": "Achievement_Boss_Nefarion",
-          "status": "presentation fallback; no native icon"
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "bladesedge",
@@ -342,25 +366,73 @@
       "key": "deepholm",
       "bosses": [
         {
+          "name": "Corborus",
+          "entry": 701010,
+          "icon": "INV_Elemental_Crystal_Earth",
+          "status": "native"
+        },
+        {
+          "name": "Slabhide",
+          "entry": 701011,
+          "icon": "INV_Misc_Head_Dragon_Bronze",
+          "status": "native"
+        },
+        {
+          "name": "High Priestess Azil",
+          "entry": 701012,
+          "icon": "Spell_Shadow_Twilight",
+          "status": "native"
+        },
+        {
+          "name": "Aeonaxx",
+          "entry": 701013,
+          "icon": "INV_Misc_Head_Dragon_Black",
+          "status": "native"
+        },
+        {
           "name": "Ozruk",
           "entry": 43391,
-          "icon": "Spell_Nature_EarthElemental_Totem",
-          "status": "presentation fallback; no native icon"
+          "icon": "Achievement_Boss_Archaedas",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "dragon_soul",
       "bosses": [
         {
+          "name": "Morchok",
+          "entry": 701230,
+          "icon": "Spell_Nature_EarthElemental_Totem",
+          "status": "native"
+        },
+        {
+          "name": "Warlord Zon’ozz",
+          "entry": 701231,
+          "icon": "Spell_Shadow_SummonVoidWalker",
+          "status": "native"
+        },
+        {
+          "name": "Yor’sahj the Unsleeping",
+          "entry": 701232,
+          "icon": "INV_Misc_Slime_01",
+          "status": "native"
+        },
+        {
+          "name": "Hagara the Stormbinder",
+          "entry": 701233,
+          "icon": "Spell_Frost_Frozencore",
+          "status": "native"
+        },
+        {
           "name": "Deathwing",
           "entry": 700228,
-          "icon": "INV_Misc_Head_Dragon_Black",
+          "icon": "Achievement_Boss_Nefarion",
           "status": "presentation fallback; no native icon"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "dragonblight",
@@ -546,13 +618,37 @@
       "key": "firelands",
       "bosses": [
         {
+          "name": "Shannox",
+          "entry": 701170,
+          "icon": "ability_hunter_pet_wolf",
+          "status": "native"
+        },
+        {
+          "name": "Beth'tilac",
+          "entry": 701171,
+          "icon": "achievement_boss_maexxna",
+          "status": "native"
+        },
+        {
+          "name": "Lord Rhyolith",
+          "entry": 701172,
+          "icon": "spell_fire_volcano",
+          "status": "native"
+        },
+        {
+          "name": "Alysrazor",
+          "entry": 701173,
+          "icon": "spell_fire_burningspeed",
+          "status": "native"
+        },
+        {
           "name": "Ragnaros",
           "entry": 700198,
-          "icon": "Achievement_Boss_Ragnaros",
-          "status": "presentation fallback; no native icon"
+          "icon": "achievement_boss_ragnaros",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "fjord",
@@ -594,25 +690,73 @@
       "key": "gilneas",
       "bosses": [
         {
+          "name": "Baron Ashbury",
+          "entry": 701030,
+          "icon": "Spell_Shadow_AnimateDead",
+          "status": "native"
+        },
+        {
+          "name": "Baron Silverlaine",
+          "entry": 701031,
+          "icon": "Ability_Druid_Mangle2",
+          "status": "native"
+        },
+        {
+          "name": "Commander Springvale",
+          "entry": 701032,
+          "icon": "INV_Helmet_08",
+          "status": "native"
+        },
+        {
+          "name": "Lord Walden",
+          "entry": 701033,
+          "icon": "Spell_Shadow_PlagueCloud",
+          "status": "native"
+        },
+        {
           "name": "Dark Ranger Thyala",
           "entry": 700118,
           "icon": "Ability_TheBlackArrow",
-          "status": "presentation fallback; no native icon"
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "grim_batol",
       "bosses": [
         {
+          "name": "General Umbriss",
+          "entry": 701190,
+          "icon": "Achievement_Boss_GeneralBjarngrim",
+          "status": "native"
+        },
+        {
+          "name": "Forgemaster Throngus",
+          "entry": 701191,
+          "icon": "Achievement_Boss_Forgemaster",
+          "status": "native"
+        },
+        {
+          "name": "Drahga Shadowburner",
+          "entry": 701192,
+          "icon": "INV_Misc_Head_Orc_01",
+          "status": "native"
+        },
+        {
+          "name": "Valiona",
+          "entry": 701193,
+          "icon": "Achievement_Boss_Nefarion",
+          "status": "native"
+        },
+        {
           "name": "Erudax",
           "entry": 700208,
-          "icon": "Spell_Shadow_Shadowfiend",
-          "status": "presentation fallback; no native icon"
+          "icon": "Spell_Shadow_UnholyFrenzy",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "grizzly",
@@ -834,25 +978,73 @@
       "key": "lost_isles",
       "bosses": [
         {
+          "name": "Ace",
+          "entry": 701150,
+          "icon": "Ability_Warrior_Rampage",
+          "status": "native"
+        },
+        {
+          "name": "Bamm Megabomb",
+          "entry": 701151,
+          "icon": "INV_Misc_Bomb_08",
+          "status": "native"
+        },
+        {
+          "name": "Warrior-Matic NX-01",
+          "entry": 701152,
+          "icon": "INV_Gizmo_KhoriumPowerCore",
+          "status": "native"
+        },
+        {
+          "name": "Trade Prince Gallywix",
+          "entry": 701153,
+          "icon": "INV_Misc_Coin_02",
+          "status": "native"
+        },
+        {
           "name": "Volcanoth",
           "entry": 700188,
-          "icon": "Spell_Fire_LavaSpawn",
-          "status": "presentation fallback; no native icon"
+          "icon": "Spell_Fire_Volcano",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "mount_hyjal",
       "bosses": [
         {
+          "name": "Lycanthoth",
+          "entry": 701090,
+          "icon": "spell_nature_spiritwolf",
+          "status": "native"
+        },
+        {
+          "name": "Azralon the Gatekeeper",
+          "entry": 701091,
+          "icon": "spell_fire_meteorstorm",
+          "status": "native"
+        },
+        {
+          "name": "Twilight Flamecaller Thalazan",
+          "entry": 701092,
+          "icon": "spell_fire_rune",
+          "status": "native"
+        },
+        {
+          "name": "Archdruid Aldryn",
+          "entry": 701093,
+          "icon": "ability_druid_catform",
+          "status": "native"
+        },
+        {
           "name": "Baron Geddon",
           "entry": 700148,
-          "icon": "Spell_Fire_Elemental_Totem",
-          "status": "presentation fallback; no native icon"
+          "icon": "Spell_Fire_SelfDestruct",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "nagrand",
@@ -1218,37 +1410,109 @@
       "key": "tol_barad",
       "bosses": [
         {
+          "name": "Warden Stillwater",
+          "entry": 701050,
+          "icon": "Spell_Shadow_Haunting",
+          "status": "native"
+        },
+        {
+          "name": "Commander Zanoth",
+          "entry": 701051,
+          "icon": "INV_Misc_Head_Orc_01",
+          "status": "native"
+        },
+        {
+          "name": "Occu'thar",
+          "entry": 701052,
+          "icon": "INV_Misc_Eye_01",
+          "status": "native"
+        },
+        {
+          "name": "Alizabal",
+          "entry": 701053,
+          "icon": "Spell_Shadow_ShadowWordPain",
+          "status": "native"
+        },
+        {
           "name": "Argaloth",
           "entry": 700128,
-          "icon": "Achievement_Boss_Magtheridon",
-          "status": "presentation fallback; no native icon"
+          "icon": "Spell_Fire_FelFlameStrike",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "twilight_highlands",
       "bosses": [
         {
+          "name": "Halfus Wyrmbreaker",
+          "entry": 701130,
+          "icon": "Achievement_Boss_Drakkisath",
+          "status": "native"
+        },
+        {
+          "name": "Theralion",
+          "entry": 701131,
+          "icon": "Ability_Mount_Drake_Twilight",
+          "status": "native"
+        },
+        {
+          "name": "Arion",
+          "entry": 701132,
+          "icon": "Spell_Nature_Cyclone",
+          "status": "native"
+        },
+        {
+          "name": "Sinestra",
+          "entry": 701133,
+          "icon": "Achievement_Boss_Onyxia",
+          "status": "native"
+        },
+        {
           "name": "Cho'gall",
           "entry": 700168,
-          "icon": "Achievement_Reputation_Ogre",
-          "status": "presentation fallback; no native icon"
+          "icon": "Spell_Shadow_DemonBreath",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "uldum",
       "bosses": [
         {
+          "name": "Lockmaw",
+          "entry": 701070,
+          "icon": "Ability_Hunter_Pet_Crocolisk",
+          "status": "native"
+        },
+        {
+          "name": "General Husam",
+          "entry": 701071,
+          "icon": "INV_Misc_Head_Orc_01",
+          "status": "native"
+        },
+        {
+          "name": "High Prophet Barim",
+          "entry": 701072,
+          "icon": "Spell_Holy_Crusade",
+          "status": "native"
+        },
+        {
+          "name": "Temple Guardian Anhuur",
+          "entry": 701073,
+          "icon": "INV_Misc_Gem_Ruby_01",
+          "status": "native"
+        },
+        {
           "name": "Siamat",
           "entry": 700138,
-          "icon": "Spell_Nature_Lightning",
-          "status": "presentation fallback; no native icon"
+          "icon": "Spell_Nature_Cyclone",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "ungoro",
@@ -1290,13 +1554,37 @@
       "key": "vashjir",
       "bosses": [
         {
+          "name": "Commander Ulthok",
+          "entry": 701110,
+          "icon": "Ability_Hunter_Pet_Crab",
+          "status": "native"
+        },
+        {
+          "name": "Erunak Stonespeaker",
+          "entry": 701111,
+          "icon": "Spell_Nature_EarthShock",
+          "status": "native"
+        },
+        {
+          "name": "Mindbender Ghur'sha",
+          "entry": 701112,
+          "icon": "Spell_Shadow_MindBomb",
+          "status": "native"
+        },
+        {
+          "name": "Ozumat",
+          "entry": 701113,
+          "icon": "Achievement_Boss_Ichoron",
+          "status": "native"
+        },
+        {
           "name": "Lady Naz'jar",
           "entry": 700158,
-          "icon": "Achievement_Boss_LadyVashj",
-          "status": "presentation fallback; no native icon"
+          "icon": "Spell_Frost_SummonWaterElemental_2",
+          "status": "native"
         }
       ],
-      "creatures": 6
+      "creatures": 17
     },
     {
       "key": "wsg",
@@ -1473,8 +1761,13 @@
       "status": "presentation fallback; no native icon"
     }
   ],
+  "creatureIconAssets": {
+    "verifiedPaths": 239,
+    "missing": [],
+    "method": "read-only MPQ hash tables; all creature kinds and seasonal fallbacks"
+  },
   "bossIconAssets": {
-    "verifiedPaths": 120,
+    "verifiedPaths": 155,
     "archives": [
       "common-2.MPQ",
       "common.MPQ",
