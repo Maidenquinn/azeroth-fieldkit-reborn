@@ -50,7 +50,7 @@ end
 for _,button in ipairs({D.pin,D.previous,D.next,D.close}) do
  assert(button:GetFrameLevel()>D.frame:GetFrameLevel() and button:GetFrameStrata()==D.frame:GetFrameStrata(),"Modal controls behind material")
 end
-for _,cap in ipairs(D.hitCaptions) do assert(cap.text==nil and cap:GetText()==cap.cap:GetText() and cap.cap:GetText()~="","Duplicate native caption") end
+for _,cap in ipairs(D.hitCaptions) do assert(cap.text==nil and cap.fontString==nil and cap.cap:GetParent()==D.headerLabels and cap.cap:GetText()~="","Caption must render once outside the native Button label") end
 local native=D.frame.rows[2].fieldkitSpellIcon
 assert(native and native:GetTexture()=="Interface\\Icons\\NativeAuto","Native source icon discarded")
 D.SetSort("dmg");assert(D.frame.rows[1]:GetValue()==.75 and D.frame.rows[2]:GetValue()==1,"Ascending sort changed damage bar scale")

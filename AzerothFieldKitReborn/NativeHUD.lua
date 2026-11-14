@@ -320,14 +320,17 @@ local function NativeHit(s,hit,index)
   if m.EnableMouseWheel then m:EnableMouseWheel(true);m:SetScript("OnMouseWheel",function() ForwardNative(hit,m.state.frame,"OnMouseWheel") end) end
  end
  s.hits[index]=m;m.state=s
- m:SetAllPoints(hit);m:SetFrameLevel(hit:GetFrameLevel()+(s.key=="map" and 0 or 20))
+ m:SetAllPoints(hit);m:SetFrameLevel(hit:GetFrameLevel()+(s.key=="map" and 1 or 20))
+ -- RegisterForDrag does not enable mouse input in Reborn. A visible Button
+ -- can otherwise pass all synthetic callback tests while receiving no clicks.
+ m:EnableMouse(s.enabled and true or false)
  if s.enabled then m:Show() else m:Hide() end
  return m
 end
 function N.ReleaseNativeLayout(key)
  local s=N.nativeLayouts and N.nativeLayouts[key];if not s then return end
  StopNative(s)
- for _,hit in ipairs(s.hits or {}) do hit:Hide() end
+ for _,hit in ipairs(s.hits or {}) do hit:EnableMouse(false);hit:Hide() end
  s.frame:SetScale(s.scale);RestorePoints(s.frame,s.points);s.frame:SetMovable(s.movable)
  if s.dash then s.dash.frame:SetScale(s.dash.scale);RestorePoints(s.dash.frame,s.dash.points) end
  N.nativeLayouts[key]=nil

@@ -23,6 +23,13 @@ assert(FieldKitGearFrame.spellRows[1].bonus:GetText()==compact)
 FieldKitRebornDB.loadoutTab=1;L.Render(FieldKitGearFrame)
 assert(FieldKitGearFrame.slots[1].value:GetText()==L.items[2].rank)
 assert(FieldKitGearFrame.slots[1].label:GetWidth()+FieldKitGearFrame.slots[1].value:GetWidth()<FieldKitGearFrame:GetWidth())
+local nativeThorns="Les attaquants de mêlée subissent 223.6% de leur coup"
+AZS_GEAR[1].text="+22.4% de réduction des dégâts · +33.5% de santé max. · "..nativeThorns
+L.scanAt=0;L.Scan();L.Render(FieldKitGearFrame)
+assert(string.find(FieldKitGearFrame.slots[1].bonus:GetText(),nativeThorns,1,true),'Thorns relabelled as damage bonus')
+AZS_STATS={dmg=8.016};AZS_GEAR[3].text="+364.3% de dégâts"
+L.scanAt=0;L.Scan()
+assert(L.items[13].nativeDetails[1]=="+364.3% de dégâts",'Item contribution replaced by character total')
 local lines={};local add=GameTooltip.AddLine
 GameTooltip.AddLine=function(_,text) table.insert(lines,text) end
 FieldKitRebornDB.meterSpellTips=true;FieldKitMeterLedger.NoteHit("Visée",5364,true)

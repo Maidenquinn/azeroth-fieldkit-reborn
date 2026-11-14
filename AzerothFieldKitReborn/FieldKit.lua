@@ -596,6 +596,11 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
    local maxHP=math.max(tonumber(hpm) or 1,1)
    local currentHP=math.max(0,math.min(tonumber(hp) or 0,maxHP))
    compact.bar:SetMinMaxValues(0,maxHP);compact.bar:SetValue(currentHP)
+   -- Reborn does not consistently inherit child strata. Keep the health
+   -- surface above its themed card material, including after skin changes.
+   compact.bar:SetFrameStrata(compact:GetFrameStrata())
+   compact.bar:SetFrameLevel(compact:GetFrameLevel()+3)
+   compact.bar:SetAlpha(1);compact.bar:Show();compact.hp:SetHeight(18);compact.hp:Show()
    compact.hp:SetText(premium and "" or FieldKit_FormatHealth(hp,hpm,DB.bossHealthMode))
    compact.bar:SetStatusBarColor(kind=="guardian" and .19 or .68,kind=="guardian" and .45 or .15,kind=="guardian" and .69 or .17)
    compact.tag:SetText(premium and "" or (kind=="guardian" and FieldKit_L("Guardian") or (kind=="final" and FieldKit_L("Final boss") or FieldKit_L("Boss"))))

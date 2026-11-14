@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.22",
+  "version": "0.1.0-reborn.23",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "No new live client pass for .22. Offline regressions reproduce the supplied native spell tooltip: current damage, target count, range and interval without a Bonus label; native text and combat statistics on loadout hover; exact range units and interval precision; native amulet ranks across themed/unthemed views, no fabricated ranks from ring/trinket stat values, and rank/value-only refresh. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
+  "inGameTestScope": "No post-fix live acceptance for .23. Client was observed on reward/pause screens; Computer Use was stopped by physical Escape before a drag could be verified. Offline tests cover explicit native drag hit mouse enable/disable, minimap input above map/below pins, combined UnitAura/UnitBuff and retained spell buffs, native French labels, deduplication/expiry/freshness, and modal sort captions rendered on a separate explicit text layer with geometry/visibility/sorting checks. Full runtime/settings/theme and installed 0.6.5 API fixtures are checked. Elwynn Le Recousu HP fill/label visibility, explicit strata and value recovery are covered across all three theme variants offline. Native jewelry wording/wrapped size and item contribution versus character-total semantics are checked with the reported thorns and Earthstrike values."
 }

@@ -28,7 +28,8 @@ AZS_RUN={ph="playing",t=10};N.TargetLayout()
 for i,def in ipairs(specs) do
  local key,f=def[1],frames[def[1]];local s=N.nativeLayouts[key];local hit=s.hits[1]
  assert(hit:IsShown() and not hit.label and not hit.fieldkitSkin,"Direct drag has a visible mover button")
- if key=="map" then assert(hit:GetFrameLevel()==f:GetFrameLevel(),"Map drag surface covers native pin/launcher children") end
+ assert(hit:IsMouseEnabled(),"Visible native drag surface cannot receive the mouse")
+ if key=="map" then assert(hit:GetFrameLevel()==f:GetFrameLevel()+1,"Map surface must sit above the map, below pins") end
  assert(hit:GetParent()==(f.Health or (key=="actions" and AzerothSurvivorsActionBar1Button1) or f))
  hit:Click("LeftButton")
  assert((key=="actions" and clicks.spell or clicks[key])==1,"Native click was lost")
@@ -45,7 +46,7 @@ end
 assert(N.nativeLayouts.actions.dash.applied,"Steed did not follow the moved spell bar")
 d.windowsLocked=true;N.TargetLayout()
 for _,s in pairs(N.nativeLayouts) do for _,hit in ipairs(s.hits) do
- assert(not hit:IsShown());hit:GetScript("OnDragStart")();assert(not s.dragging)
+ assert(not hit:IsShown() and not hit:IsMouseEnabled());hit:GetScript("OnDragStart")();assert(not s.dragging)
 end end
 d.windowsLocked=false;AZS_RUN.ph="choosing";N.TargetLayout()
 for _,s in pairs(N.nativeLayouts) do for _,hit in ipairs(s.hits) do assert(not hit:IsShown()) end end

@@ -179,29 +179,51 @@ end
 -- list supplies spell ids and remaining seconds; UnitBuff's shim supplies
 -- icon/count only when the server list has not arrived.
 function R.PlayerBuffs()
- local out={}
- local list=type(AZS_BUFFS)=="table" and AZS_BUFFS or {}
- if FieldKitNative and not FieldKitNative.Fresh("AZSBUFFS") then return out end
- local age=type(AZS_BUFFS_UPDATED)=="number" and math.max(0,GetTime()-AZS_BUFFS_UPDATED) or 0
- for i=1,math.min(32,table.getn(list)) do
-  local b=list[i]
-  if type(b)=="table" then
-   local name,rank,icon
-   if type(GetSpellInfo)=="function" and tonumber(b.spell) then
-    local ok,a,c,d=pcall(GetSpellInfo,tonumber(b.spell));if ok then name,rank,icon=a,c,d end
-   end
-   local left=FieldKit.Number(b.left)
-   local remaining=left and left>=0 and math.max(0,left-age) or nil
-   if not remaining or remaining>0 then
-    table.insert(out,{name=name or tostring(b.spell or "?"),icon=icon or "Interface\\Icons\\INV_Misc_QuestionMark",remaining=remaining})
-   end
+ local out,seen={},{}
+ local function Add(name,icon,count,remaining,spell)
+  name=R.Localize(name) or FieldKit_L("Effect")
+  icon=R.Icon(icon) or "Interface\\Icons\\INV_Misc_QuestionMark"
+  local id=tonumber(spell);local visual=icon..":"..name
+  if (id and seen[id]) or seen[visual] then return end
+  if remaining and remaining<=0 then return end
+  local row={name=name,icon=icon,count=FieldKit.Number(count,nil,0),remaining=remaining,spell=id}
+  table.insert(out,row);seen[visual]=true;if id then seen[id]=true end
+ end
+ -- UnitAura contains procs/consumables absent from the server's short spell-buff
+ -- list. Read that live list first, then merge the fresh retained snapshot.
+ local found=false
+ if type(UnitAura)=="function" then
+  for i=1,40 do
+   local ok,name,rank,icon,count,dispel,duration,expires,caster,stealable,consolidate,spell=pcall(UnitAura,"player",i,"HELPFUL")
+   if not ok or type(name)~="string" or name=="" then break end
+   found=true
+   local ending=FieldKit.Number(expires);local remaining=ending and ending>0 and math.max(0,ending-GetTime()) or nil
+   Add(name,icon,count,remaining,spell)
   end
  end
- if table.getn(list)>0 or type(UnitBuff)~="function" then return out end
- for i=1,32 do
-  local ok,icon,count=pcall(UnitBuff,"player",i)
-  if not ok or type(icon)~="string" or icon=="" then break end
-  table.insert(out,{name="Effect",icon=icon,count=FieldKit.Number(count,nil,0)})
+ if not found and type(UnitBuff)=="function" then
+  for i=1,40 do
+   local ok,a,b,c,d,e,f,g,h,j,k,spell=pcall(UnitBuff,"player",i)
+   if not ok or type(a)~="string" or a=="" then break end
+   if type(c)=="string" then
+    local ending=FieldKit.Number(g)
+    Add(a,c,d,ending and ending>0 and math.max(0,ending-GetTime()) or nil,spell)
+   else Add(nil,a,b,nil,nil) end -- legacy icon/count shim
+  end
+ end
+ if not FieldKitNative or FieldKitNative.Fresh("AZSBUFFS") then
+  local list=type(AZS_BUFFS)=="table" and AZS_BUFFS or {}
+  local age=type(AZS_BUFFS_UPDATED)=="number" and math.max(0,GetTime()-AZS_BUFFS_UPDATED) or 0
+  for i=1,math.min(40,table.getn(list)) do local buff=list[i]
+   if type(buff)=="table" then
+    local name,icon
+    if type(GetSpellInfo)=="function" and tonumber(buff.spell) then
+     local ok,a,b,c=pcall(GetSpellInfo,tonumber(buff.spell));if ok then name,icon=a,c end
+    end
+    local left=FieldKit.Number(buff.left)
+    Add(name or tostring(buff.spell or "?"),icon,buff.count,left and left>=0 and math.max(0,left-age) or nil,buff.spell)
+   end
+  end
  end
  return out
 end

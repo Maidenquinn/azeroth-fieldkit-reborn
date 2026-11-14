@@ -342,3 +342,17 @@ existing preference, as action-bar hover does. Raw AZS_SPELLS.cdmax metadata is
 retained alongside structured learned-source identities. AZS_GEAR.amount is a
 rank only for amulets (as the shipped Gear.lua uses it); other accessory stat
 amounts must not be labelled Rank. Explicit rank metadata takes precedence.
+
+
+Reborn .23: player effects merge the live UnitAura helpful list (or modern/legacy
+UnitBuff fallback) with fresh AZS_BUFFS rather than using the latter as an
+exclusive source. Native AZS_L localises available names. Timed expiry is used
+only when supplied; stacks/id deduplication do not invent proc identities.
+Native hit buttons explicitly EnableMouse while unlocked and disable it when
+locked/choosing/released. Minimap level +1 remains below FieldKit pins (+5) and
+native pings (+7). Modal captions are separate text-layer regions, not native
+Button font strings; visibility follows each active sort control.
+
+Elwynn compact boss health explicitly inherits the card strata and sits at card level +3, with visible fill/HP text restored on each boss update. This is presentation only; hp/hpm remain the public live boss values.
+
+Reborn jewelry card text now uses nativeDetails verbatim rather than heuristic percentage relabelling. Cards.lua WornLines uses AZS_GEAR.text for the individual piece while c.detail supplies the upgrade comparison; these are different scopes. Hover explicitly labels item contributions, and native wrapped text height is measured.

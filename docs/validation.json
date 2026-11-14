@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.22",
+  "version": "0.1.0-reborn.23",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.22",
+    "version": "0.1.0-reborn.23",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No new live client pass for .22. Offline regressions reproduce the supplied native spell tooltip: current damage, target count, range and interval without a Bonus label; native text and combat statistics on loadout hover; exact range units and interval precision; native amulet ranks across themed/unthemed views, no fabricated ranks from ring/trinket stat values, and rank/value-only refresh. Full runtime/settings/theme and installed 0.6.5 public API/content fixtures are checked. Live visual acceptance remains pending."
+    "inGameTestScope": "No post-fix live acceptance for .23. Client was observed on reward/pause screens; Computer Use was stopped by physical Escape before a drag could be verified. Offline tests cover explicit native drag hit mouse enable/disable, minimap input above map/below pins, combined UnitAura/UnitBuff and retained spell buffs, native French labels, deduplication/expiry/freshness, and modal sort captions rendered on a separate explicit text layer with geometry/visibility/sorting checks. Full runtime/settings/theme and installed 0.6.5 API fixtures are checked. Elwynn Le Recousu HP fill/label visibility, explicit strata and value recovery are covered across all three theme variants offline. Native jewelry wording/wrapped size and item contribution versus character-total semantics are checked with the reported thorns and Earthstrike values."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "0d9f0736f15766515493b6bc8d88d53633a7348a02aa438be1d4fd9678034706"
+      "sha256": "e95f187283d0471a709a2f3c775d3829b8196d8b4d290a99afcf56113d8126b8"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -43,9 +43,9 @@
       "sha256": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3"
     },
     "Reborn.lua": {
-      "maxUpvalues": 2,
-      "functions": 19,
-      "sha256": "55d02a5703dd43c5340252346d359d780281be4961c17dbe5b8dfe9d341e95df"
+      "maxUpvalues": 3,
+      "functions": 20,
+      "sha256": "3f8c1c80def0671edd760ca5d6d30b3795675859e850bb7b0691c93dfd6ff6cf"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -60,7 +60,7 @@
     "NativeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 45,
-      "sha256": "60e3960657686f15c3adc640cc812b111122f6693e941ec0c33095bc5933d8a1"
+      "sha256": "56affaad4b67254f7534968dbe936d9937525d039b0e0538eddf07482dc07e27"
     },
     "NativeLayout.lua": {
       "maxUpvalues": 7,
@@ -95,7 +95,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "0c95253366c38647f8c148583cfe6e51a94de62cf805b2240d3d0ed151d7d143"
+      "sha256": "b10c87663d11d23847258f1e571546830ef92f7d8568732d635b710af4c331ff"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
@@ -199,8 +199,8 @@
     },
     "PartyDetails.lua": {
       "maxUpvalues": 11,
-      "functions": 39,
-      "sha256": "673411d59b4735ddd1c9eb4215d5891529278a37892f621c9070dce2b96042ae"
+      "functions": 41,
+      "sha256": "533b3e017520e2925905c49fce4b3920450316461eceab460c0b7934b04a8f46"
     },
     "ScreenLayers.lua": {
       "maxUpvalues": 4,
@@ -220,7 +220,7 @@
     "Loadout.lua": {
       "maxUpvalues": 2,
       "functions": 34,
-      "sha256": "4cc4c21b2d64e61ce8f5fb0d37e1f09de6568fbef69dbf7c918b8c387aac23cb"
+      "sha256": "0b35126b25c9c9e67b5d158c1494869a35324299658b60cbd767a95d2bedc14d"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -255,7 +255,7 @@
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 191,
-      "sha256": "1548d627c6e4b293d7adf6bac73976b43d59a17619b41e9ede8cdf477ee24b0a"
+      "sha256": "7dbcf199c022c5602644fb25c0803d3400531d9e631214b3759ef1ef0322735c"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,

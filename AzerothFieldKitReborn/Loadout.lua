@@ -433,8 +433,10 @@ function L.Tip(owner,entry)
  if not entry then return end
  GameTooltip:SetOwner(owner,"ANCHOR_LEFT");GameTooltip:SetText(entry.name or "?")
  if entry.rank then GameTooltip:AddLine(entry.rank,.8,.8,.8) end
+ if entry.nativeDetails then GameTooltip:AddLine(FieldKit_L("Bonuses from this item"),.7,.7,.7,true) end
  for _,line in ipairs(entry.upgrades or {}) do GameTooltip:AddLine(line,1,1,1,true) end
  for _,line in ipairs(entry.nativeDetails or entry.bonuses or {}) do GameTooltip:AddLine(line,.3,1,.4,true) end
+ if entry.nativeDetails then GameTooltip:AddLine(FieldKit_L("Upgrade cards compare character totals; these are this item's effects."),.7,.7,.7,true) end
  if table.getn(entry.bonuses or {})==0 and table.getn(entry.upgrades or {})==0 then
   if entry.nativeText and entry.nativeText~="" then GameTooltip:AddLine(entry.nativeText,1,.82,0,true)
   else GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
@@ -474,9 +476,21 @@ function L.Render(frame)
    source={};L.MergeBonuses(source,entry.upgrades);L.MergeBonuses(source,entry.bonuses)
   end
   local text,lines=L.BonusText(source)
+  if not spells and not FieldKit.rebornLegacyFixture and entry and entry.nativeDetails then
+   -- Keep native semantics: thorns, leech and procs are not generic damage
+   -- bonuses. Never rewrite their percentage into an unrelated stat label.
+   text=table.concat(entry.nativeDetails,"\n");lines=table.getn(entry.nativeDetails)
+  end
   if spells and lines==0 and entry and entry.effects then text=table.concat(entry.effects,"\n");lines=table.getn(entry.effects) end
   row.bonus:SetText(text);row.fieldkitBonusLines=lines
-  local rowH=(native and 22 or 16)+math.max(0,lines)*12;row.fieldkitRowHeight=rowH;totalH=totalH+rowH
+  local bonusH=math.max(0,lines)*12
+  if not spells and not FieldKit.rebornLegacyFixture and lines>0 and row.bonus.GetStringHeight then
+   row.bonus:SetWidth(math.max(40,frame:GetWidth()-32));row.bonus:SetHeight(0)
+   local ok,h=pcall(row.bonus.GetStringHeight,row.bonus)
+   if ok and FieldKit.Number(h) and h>0 then bonusH=math.max(bonusH,math.min(512,h)) end
+  end
+  row.fieldkitBonusHeight=bonusH
+  local rowH=(native and 22 or 16)+bonusH;row.fieldkitRowHeight=rowH;totalH=totalH+rowH
   if spells then
    row.entry=entry;row.label:SetText(entry and entry.name or FieldKit_L("No spells yet"));row.value:SetText(entry and entry.rank or "")
    row.value:SetTextColor(L.RankColor(entry and entry.rankValue))
@@ -511,7 +525,7 @@ function L.Render(frame)
    row.value:SetWidth((spells or (row.entry and row.entry.rank)) and 84 or 48);row.value:SetHeight(14)
    row.bonus:ClearAllPoints();row.bonus:SetPoint("TOPLEFT",row,"TOPLEFT",18,-14)
    row.bonus:SetJustifyH("LEFT");row.bonus:SetJustifyV("TOP")
-   row.bonus:SetHeight(math.max(12,lines*12));row.bonus:SetWidth(frame:GetWidth()-32)
+   row.bonus:SetHeight(math.max(12,row.fieldkitBonusHeight or lines*12));row.bonus:SetWidth(frame:GetWidth()-32)
    if row.GetParent then
     row:ClearAllPoints();row:SetPoint("TOPLEFT",frame,"TOPLEFT",native and 12 or 6,-(native and 44 or 28)-y);row:SetPoint("TOPRIGHT",frame,"TOPRIGHT",native and -12 or -6,-(native and 44 or 28)-y)
    end

@@ -1,3 +1,12 @@
+# 0.1.0-reborn.23 — Native HUD input and display corrections
+
+- Explicitly enable mouse input on unlocked native drag surfaces; disable it on lock, choices and release. The minimap surface sits above the map and below world pins. Existing native click/wheel forwarding is preserved.
+- Merge live helpful UnitAura/UnitBuff effects with the fresh retained spell-buff list rather than treating them as alternatives. Include procs, preserve stacks, deduplicate ids/visual identities and expire known timers. Translate supplied names through native AZS_L.
+- Render modal column captions on a dedicated mouse-disabled text layer rather than native Button font strings. Give every caption explicit dimensions and visibility, retaining the sorting buttons beneath.
+- Preserve native jewelry descriptions without rewriting thorns/leech/proc percentages as unrelated damage bonuses. Label item contributions separately from upgrade-card character totals; measure wrapped native text.
+- Keep Elwynn boss health fills/text above the card material with explicit strata, frame level, alpha and dimensions, including after theme changes.
+- Offline regressions and installed client API fixtures. Live drag/visual acceptance remains pending after Computer Use was interrupted.
+
 # 0.1.0-reborn.22 — Native spell values and amulet ranks
 
 - Show compact current spell values from native spell tips even without an explicit Bonus section: damage, targets, range, duration, attack speed, slow and interval where recognised. Preserve the supplied numbers/units; do not infer upgrades from rank. Unknown prose stays available on hover.

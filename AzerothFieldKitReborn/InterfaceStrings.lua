@@ -500,3 +500,6 @@ FieldKitLocale.fr["Slow"]="Ralentissement"
 FieldKitLocale.fr["Range"]="Portée"
 FieldKitLocale.fr["Duration"]="Durée"
 FieldKitLocale.fr["Interval"]="Intervalle"
+
+FieldKitLocale.fr["Bonuses from this item"]="Bonus de cet objet"
+FieldKitLocale.fr["Upgrade cards compare character totals; these are this item's effects."]="Les cartes d'amélioration comparent les totaux du personnage ; ici figurent les effets de cet objet."

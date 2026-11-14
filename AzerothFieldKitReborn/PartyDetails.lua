@@ -6,7 +6,7 @@ FieldKitPartyDetails={offset=0,pool=10,sortKey="dmg",sortAsc=false}
 local D=FieldKitPartyDetails
 local T=FieldKitTheme
 local HIT_COLS=6
-local HIT_LABELS={"Total","Crit","Burst","Avg","Hits","Crit%"}
+local HIT_LABELS={"Total","Max crit","Burst","Avg","Hits","Crit%"}
 local HIT_KEYS={"dmg","maxCrit","burst","avg","hits","critPct"}
 local HIT_WIDTHS={72,58,58,52,44,48}
 -- Distance from row right edge to each column's right edge (Total … Crit%).
@@ -81,12 +81,16 @@ end
 
 local function MakeSortCap(parent,key,justify)
  local b=CreateFrame("Button",nil,parent)
- b:SetHeight(18);b.sortKey=key
+ b:SetHeight(18);b.sortKey=key;b:EnableMouse(true)
  -- Above the Spell header so numeric columns stay clickable (Spell used to cover them).
  if parent.GetFrameLevel then b:SetFrameLevel(parent:GetFrameLevel()+4) end
- local t=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
- t:SetAllPoints(b);t:SetJustifyH(justify or "RIGHT");T.Font(t,11,T.muted);b.cap=t
- if b.SetFontString then b:SetFontString(t) end
+ -- Keep captions out of the native Button font-string renderer, which can
+ -- swallow anonymous sort captions. Paint all headings on one explicit layer.
+ local t=D.headerLabels:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
+ t:SetPoint("TOPLEFT",b,"TOPLEFT",0,0);t:SetPoint("BOTTOMRIGHT",b,"BOTTOMRIGHT",0,0)
+ t:SetJustifyH(justify or "RIGHT");T.Font(t,11,T.gold);b.cap=t
+ b:SetScript("OnShow",function() t:Show() end)
+ b:SetScript("OnHide",function() t:Hide() end)
  b:SetScript("OnClick",function() D.SetSort(this.sortKey) end)
  b:SetScript("OnEnter",function()
   D.overPopup=true;D.deadline=nil
@@ -102,7 +106,7 @@ end
 
 local function CapText(btn,key)
  local shown=FieldKit_L(btn.fieldkitCaption or "")..SortMark(key)
- if btn.cap then btn.cap:SetText(shown)
+ if btn.cap then btn.cap:SetText(shown);if btn:IsShown() then btn.cap:Show() else btn.cap:Hide() end
  elseif btn.SetText then btn:SetText(shown) end
 end
 
@@ -170,6 +174,8 @@ function D.Build()
  D.header=CreateFrame("Frame",nil,frame);D.header:SetPoint("TOPLEFT",frame,"TOPLEFT",12,-106);D.header:SetHeight(18)
  D.header:SetFrameStrata("TOOLTIP");D.header:SetFrameLevel(frame:GetFrameLevel()+2)
  D.header:EnableMouse(true);D.BindHover(D.header)
+ D.headerLabels=CreateFrame("Frame",nil,D.header);D.headerLabels:SetAllPoints(D.header)
+ D.headerLabels:SetFrameStrata("TOOLTIP");D.headerLabels:SetFrameLevel(frame:GetFrameLevel()+12);D.headerLabels:EnableMouse(false)
  D.spell=MakeSortCap(D.header,"name","LEFT")
  if D.header.GetFrameLevel then D.spell:SetFrameLevel(D.header:GetFrameLevel()+2) end
  D.spell:SetPoint("TOPLEFT",D.header,"TOPLEFT",3,0);D.spell:SetWidth(200)
@@ -188,7 +194,7 @@ function D.Build()
   local label=MakeSortCap(D.header,HIT_KEYS[i],"RIGHT")
   label:SetWidth(HIT_WIDTHS[i])
   label.fieldkitCaption=HIT_LABELS[i];CapText(label,HIT_KEYS[i])
-  D.hitCaptions[i]=label;label:Hide()
+   D.hitCaptions[i]=label;label:Hide();label.cap:Hide()
  end
  frame.rows={}
  for i=1,D.pool do
@@ -304,6 +310,14 @@ function D.Render()
  if hitMode then D.spell:SetWidth(math.max(80,headerW-(HIT_RIGHT[1]+HIT_WIDTHS[1])-10))
  elseif limited then D.spell:SetWidth(math.max(80,headerW-120))
  else D.spell:SetWidth(math.max(80,headerW-270)) end
+ local caps={D.spell}
+ for _,cap in ipairs(D.captions) do table.insert(caps,cap) end
+ for _,cap in ipairs(D.hitCaptions) do table.insert(caps,cap) end
+ for _,cap in ipairs(caps) do
+  cap.cap:ClearAllPoints();cap.cap:SetPoint("TOPLEFT",cap,"TOPLEFT",0,0)
+  cap.cap:SetWidth(cap:GetWidth());cap.cap:SetHeight(18)
+  if cap:IsShown() then cap.cap:Show() else cap.cap:Hide() end
+ end
  D.summary:SetText(string.format(FieldKit_L(data.mode==2 and "Healing: %s   HPS: %s" or "Damage: %s   DPS: %s"),data.damage and string.format("%.0f",data.damage) or "?",data.dps and string.format("%.0f",data.dps) or "?")..(data.windowSeconds and data.windowSeconds>0 and (" · "..string.format(FieldKit_L("Last %ds"),data.windowSeconds)) or ""))
  local hint=data.own and (hitMode and "Max Hit style: total, max crit, burst, average, hits and crit%. Click headers to sort." or "Your native spell breakdown. Scroll for more spells.") or "Allies: only their top spell is exposed. Full breakdown unavailable."
  if data.waiting then hint="Waiting for shared spells. The ally must enable sharing in FieldKit too." end

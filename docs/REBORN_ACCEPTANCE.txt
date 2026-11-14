@@ -1,3 +1,5 @@
+reborn.23 / 0.6.5: offline validation for native drag mouse eligibility, live proc/spell-buff merge and French names, and independent modal column text geometry/sorting. Live client was observed but Computer Use stopped with Escape before verification. Post-fix minimap dragging (positions unlocked), effects and column visibility still require visual acceptance.
+
 reborn.22 / 0.6.5: offline reproduction of the reported native spell tooltip (9 targets / 35 m / 5364 damage / 0.9 s), native effect text and combat statistics on loadout hover, actual amulet rank in theme off/on and rank/value refresh. Rings/trinkets must not show their stat amount as a rank. Live visual acceptance pending.
 
 reborn.21 / 0.6.5: offline and installed-public-API validation. Endless charge and invalid/duplicate guardians, visible read-only FieldKit HUD behind reward cards, native duplicate suppression, layer/input restoration and explicit native spell bonuses are covered. Repeat live in campaign/endless with theme off/on and after /reload; live visual acceptance remains pending. Current API may omit endless identity and spell-specific upgrade details; see DEVELOPER_API_REQUEST_21.md.
