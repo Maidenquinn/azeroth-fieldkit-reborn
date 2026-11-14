@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.10",
+  "version": "0.1.0-reborn.11",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
-  "inGameTestByAgent": true,
+  "inGameTestByAgent": false,
   "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Targeted live solo QA in client 0.6.1: themed boss gauge and Horde visible after reload, inherited timed calendar absent, reminder shows native percentage. Difficulty remains unavailable in the ongoing reload session: AZS_ZONE contains only the API run id; native sync and hello did not recover zone metadata. Early zone capture and retention tested synthetically; fresh-run difficulty capture not validated live. No live co-op validation."
+  "inGameTestScope": "Offline 0.6.4 adaptation: actual installed Api.lua/Meter.lua executed in a mock client for all 116 recent windows (damage/healing), checkpoints, stable run identity and history loss/recovery. Production setters, recent/missing/warming views, detached windows, jewelry/DoT tooltips and profiles exercised for both theme families, all three variants and themes off. No live client or co-op QA for this build."
 }

@@ -5,7 +5,7 @@ local defaults={zoneThemes=false,zoneThemeMode="auto",zoneThemeVariant="complete
  highlightFlaggedLair=false,showNativeAffixes=true,hideUnknownMode=true,replacePartyFrames=false,partyDetailSync=false,partyCards=false,partyMeter=true,partyHealthMode=3,partyShow=true,partyPlayerCard=false,partyDetail=2,partyCardScale=100,partyHistory=false,partyHistoryCount=5,partyHistoryBuffs=true,partyHistoryCombat=true,partyHistoryIcons=true,linkRightCards=true,linkLeftCards=true,runModeCard=true,moneyFrame=true,hidePlates=false,hideUnknown=false,targetHealth=true,playerBar=true,
  bossFrame=false,bossStyle="classic",statsFrame=true,playerBuffs=true,gearFrame=true,meterFrame=true,
  meterTabs=true,meterSpellTips=true,meterKeepTakenFrame=false,meterViewKey="damage",
- meterSortKey="dmg",meterSortAsc=false,meterHealDone=true,meterPartyOwner=nil,
+ meterSortKey="dmg",meterSortAsc=false,meterHealDone=true,meterPartyOwner=nil,meterRecent=false,meterWindowSeconds=15,
 
  takenFrame=true,replaceTally=false,playerShield=true,chestPins=false,guardianPins=false,
  lairFrame=true,compactBar=false,lowHealth=true,lowHealthSound=false,
@@ -47,6 +47,7 @@ d.language=d.language=="fr" and "fr" or "en"
  d.settingsPanelScale=math.floor(FieldKit.Number(d.settingsPanelScale,100,60,110))
  d.settingsPanelOpacity=math.floor(FieldKit.Number(d.settingsPanelOpacity,100,0,100))
  d.meterView=math.floor(FieldKit.Number(d.meterView,1,1,3))
+ d.meterWindowSeconds=math.floor(FieldKit.Number(d.meterWindowSeconds,15,5,120))
  d.bossWarningLead=math.floor(FieldKit.Number(d.bossWarningLead,10,3,30))
  d.bossTimeline=d.bossTimeline==true
  d.bossTimelineWidth=math.floor(FieldKit.Number(d.bossTimelineWidth,560,360,780))

@@ -1,3 +1,35 @@
+# Adaptation Reborn 0.6.4 — reborn.11, 14 novembre 2026
+
+Le correctif de replay après reload est annoncé dans 0.6.4 et confirmé par le mainteneur.
+Les limitations de reborn.10 ci-dessous sont historiques. Aucune nouvelle partie n’a
+été manipulée pour valider ce candidat.
+
+Le compteur demande `windowSeconds=5..120` pour les vues locales Dégâts et Soins.
+`displayAmount` reste un total de période dans l’API native : FieldKit lit donc
+explicitement `windowAmount`, avec `displayRate` et des proportions calculées sur
+le même total. `warming_up`, `unavailable` et les erreurs ne déclenchent aucun
+repli vers les totaux de partie. Les checkpoints bornent la fenêtre comme le prévoit
+l’API. Les compteurs de coups/critiques de partie ne sont pas mélangés aux fenêtres.
+
+Le mode récent, sa durée et le retour au cumul sont persistants et propres au profil.
+Les mesures Boss, Subis, Groupe et Éliminations ne changent pas de période.
+Les aperçus de groupe échangés conservent leurs totaux natifs de partie.
+
+Les champs `g*` reçus sont présentés comme apports agrégés des bijoux, jamais comme
+une part relative du total ou la contribution d’un objet particulier. Le modificateur
+de recharge conserve son signe natif. Les descriptions natives d’objets sont divisées
+sur leur séparateur médian pour afficher plusieurs bonus. La statistique `dots`
+conserve jusqu’à trois décimales ; aucun taux de chance ni plafond de cumuls actifs
+sur une cible n’est déduit. `doth` et `dotd` gardent leurs unités documentées de ratio.
+
+Les tests exécutent les lecteurs et contrôles réels dans les familles Elwynn/Naxx,
+sans thème et en minimal/complet/alternatif, y compris les fenêtres détachées,
+les détails et les profils. L’API installée Api.lua/Meter.lua est exécutée sous mock
+pour chaque durée et chaque métrique, avec remise à zéro et reconstitution d’historique.
+Cette vérification hors jeu ne constitue pas une recette visuelle dans le client.
+
+---
+
 # Correctif reborn.10 — progression et diagnostic du mode
 
 Le calendrier hérité est remplacé par `AZS_RUN.rift` pour le premier boss `due`

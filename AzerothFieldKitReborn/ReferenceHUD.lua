@@ -126,6 +126,10 @@ function R.Create()
   f.more=T.Button(f,nil,"",0,0,300,28,function() if route=="Stats" then R.ToggleStats() else FieldKitZoneThemes.Open(route) end end);Blank(f.more)
   f.pager=T.Label(f,nil,0,0,96,20,13,R.body);f.pager:ClearAllPoints();f.pager:SetPoint("TOPRIGHT",f,"TOPRIGHT",-34,-18);f.pager:SetJustifyH("RIGHT");f.pager:Hide()
   f.referenceKind=kind;f:EnableMouseWheel(true)
+  if kind=="Stats" then
+   f:SetScript("OnEnter",function() FieldKitRebornStats.Tip(this) end)
+   f:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  end
   local function Wheel() local p=this.referenceKind and this or this:GetParent();R.scroll=R.scroll or {};R.scroll[p.referenceKind]=(R.scroll[p.referenceKind] or 0)-(arg1 or 0);FieldKitZoneThemes.Refresh(true) end
   f:SetScript("OnMouseWheel",Wheel);for _,row in ipairs(f.rows) do row:EnableMouseWheel(true);row:SetScript("OnMouseWheel",Wheel) end
  end
@@ -815,7 +819,7 @@ function R.AmountParts(r)
  r.amountSep=r:CreateTexture(nil,"ARTWORK");T.Solid(r.amountSep,{1,.82,.12},.3)
 end
 local function Row(f,i,x,y,w,h,hidden)
- local r=f.rows[i];r.label:SetJustifyH("LEFT");r.label:SetJustifyV("MIDDLE");r.value:SetJustifyH("RIGHT");r.fieldkitLine=nil;r.fieldkitSpell=nil;r.fontSize=nil;r.fontMin=nil;r.labelTint=nil;r.valueTint=nil;r.buffIndex=nil;r.fieldkitUsed=true
+ local r=f.rows[i];r.label:SetJustifyH("LEFT");r.label:SetJustifyV("MIDDLE");r.value:SetJustifyH("RIGHT");r.fieldkitLine=nil;r.fieldkitSpell=nil;r.fontSize=nil;r.fontMin=nil;r.labelTint=nil;r.valueTint=nil;r.buffIndex=nil;r.statKey=nil;r.fieldkitUsed=true
  -- Re-levelling / re-anchoring a button on every refresh can cancel a click in progress: only when it changes.
  R.Stable(r,table.concat({x,y,w,h,f:GetFrameLevel()},":"),function() r:SetFrameLevel(f:GetFrameLevel()+5);r.bar:SetFrameLevel(r:GetFrameLevel()+1);r:ClearAllPoints();r:SetPoint("TOPLEFT",f,"TOPLEFT",x,-y);r:SetWidth(w);r:SetHeight(h) end)
  r:SetAlpha(1);if not hidden then r:Show() end;r.icon:Hide();r.bar:Hide();if r.trough then r.trough:Hide() end;if r.lamp then r.lamp:Hide() end;r.entry=nil
@@ -904,13 +908,17 @@ end
 function R.DamageTip(row)
  local e=row.fieldkitLine;if not e then return false end
  local ledger=FieldKitMeterLedger
- local st=ledger and ledger.Stats and FieldKitRebornDB.meterSpellTips~=false and ledger.Stats(e.name,e.spellId,e.icon) or nil
+ local st=ledger and ledger.Stats and FieldKitRebornDB.meterSpellTips~=false and not (e.windowSeconds and e.windowSeconds>0) and ledger.Stats(e.name,e.spellId,e.icon) or nil
  local share,dps,dmg=FieldKit.Number(e.share),FieldKit.Number(e.dps),FieldKit.Number(e.dmg)
  local white,soft={1,1,1},{.85,.85,.85}
  local function Add(list,label,value,color) list[table.getn(list)+1]={FieldKit_L(label)..": "..value,color or soft} end
  local damage,crits,other={},{},{}
  if dmg then Add(damage,"Total",string.format("%.0f",math.floor(dmg+.5)),white) end
- if dps then Add(damage,"DPS",string.format("%.1f",dps)) end
+ if dps then Add(damage,FieldKitMeterSuite.View()=="healing" and "HPS" or "DPS",string.format("%.1f",dps)) end
+ if e.windowSeconds and e.windowSeconds>0 then
+  local state=FieldKitMeterWindow.states[FieldKitMeterSuite.View()]
+  if state and state.approximate then table.insert(other,{FieldKit_L("Native rate approximated from one-second samples."),soft}) end
+ end
  if st then
   if st.avg>0 then Add(damage,"Average",string.format("%.0f",st.avg)) end
   if st.maxHit>0 then Add(damage,"Maximum",string.format("%.0f",st.maxHit)) end
@@ -922,7 +930,7 @@ function R.DamageTip(row)
   if st.kills>0 then Add(other,"Kills",tostring(st.kills),{.9,.75,.4}) end
  end
  H.RichTip(row,{icon=e.icon or (FieldKitLoadout and FieldKitLoadout.Icon and FieldKitLoadout.Icon(e.name)),title=tostring(e.displayName or e.name or "?"),
-  sub=share and (FieldKit_L("Share of total")..": "..string.format("%.1f%%",share*100)) or nil,
+  sub=(e.windowSeconds and e.windowSeconds>0 and (string.format(FieldKit_L("Last %ds"),e.windowSeconds).." · ") or "")..(share and (FieldKit_L("Share of total")..": "..string.format("%.1f%%",share*100)) or ""),
   sections={{head=FieldKit_L("Damage"),lines=damage},{head=FieldKit_L("Critical hits"),lines=crits},{head=FieldKit_L("Other"),lines=other}}})
  return true
 end
@@ -1729,6 +1737,7 @@ function R.Panels(variant,zone)
     FieldKit_Text(f.more,"All spells");f.more.fieldkitLabel:SetText(FieldKit_L("All spells").." →");local view,index=FieldKitMeterSuite.View();local lines,total,rate,known
     if R.dmgRead and R.dmgRead.view==view then lines,total,rate,known=R.dmgRead.lines,R.dmgRead.total,R.dmgRead.rate,R.dmgRead.known else lines,total,rate,known=FieldKitMeterLedger.Read(view) end
     FieldKit_Text(f.title,({"DAMAGE","HEALING","BOSS DAMAGE","DAMAGE TAKEN","PARTY DPS","KILLS"})[index] or "DAMAGE")
+    f.title:SetText(FieldKitMeterWindow.Title(view,f.title:GetText()))
     f.total:ClearAllPoints();f.total:SetPoint("TOPRIGHT",f,"TOPRIGHT",-30,-11);f.total:SetWidth(a[3]-200);f.total:SetHeight(25);f.total:SetJustifyH("RIGHT");if index==6 then FieldKit_Text(f.title,"Kills short") end;f.total:SetText(R.Amount(total));f.total:Show();f.title:SetWidth(125)
     local unit=index==2 and " HPS" or (index==6 and " /s" or " DPS");local rateText=rate and (R.Amount(rate)..unit) or nil
     if zone=="naxx" then
@@ -1796,7 +1805,7 @@ function R.Panels(variant,zone)
      -- Empty state: centred in the content area between the tab rows and the card foot, not in the whole frame.
      local top=zone=="naxx" and 144 or R.listTop;local bottom=zone=="naxx" and a[4]-30 or a[4]-52
      local r=Row(f,1,24,top,a[3]-48,bottom-top);r.label:SetWidth(a[3]-48);r.label:SetHeight(bottom-top);r.label:SetJustifyH("CENTER");r.label:SetJustifyV("MIDDLE")
-     r.label:SetText(FieldKit_L("No combat data"));r.value:SetText("");r.value:SetWidth(0)
+     r.label:SetText(FieldKitMeterWindow.Empty(view,"No combat data"));r.value:SetText("");r.value:SetWidth(0)
     end
    elseif kind=="Lairs" then
     FieldKit_Text(f.more,"View list");f.more.fieldkitLabel:SetText(FieldKit_L("View list").." →");local lairs=FieldKitNative.Read("AZS_GetLairs");local active=0;for _,e in ipairs(type(lairs)=="table" and lairs or {}) do if e.state=="awake" then active=active+1 end end
@@ -1877,14 +1886,14 @@ function R.Panels(variant,zone)
      local shown={};for _,s in ipairs(source and source.rows or {}) do if s.label:IsShown() then table.insert(shown,s) end end
      local total=table.getn(shown);local capacity=math.min(total,R.statsCap or total);local offset=R.Window(f,"Stats",total,capacity)
      f.more.fieldkitLabel:SetText("← "..FieldKit_L("Show less")..(total>capacity and ("   "..(offset+1).."-"..math.min(total,offset+capacity).."/"..total) or ""));f.more:Show();f.pager:Hide()
-     for i=1,capacity do local s=shown[offset+i];local r=Row(f,i,sx,49+(i-1)*step,sw,27);r.label:SetText(s.label:GetText() or "?");r.value:SetText(s.value:GetText() or "?") end
+     for i=1,capacity do local s=shown[offset+i];local r=Row(f,i,sx,49+(i-1)*step,sw,27);r.statKey=s.statKey;r.label:SetText(s.label:GetText() or "?");r.value:SetText(s.value:GetText() or "?") end
     else
     local chosen={};local seen={}
     for _,name in ipairs(labels) do for _,s in ipairs(source and source.rows or {}) do
      if s.label:IsShown() and s.label:GetText()==FieldKit_L(name) then table.insert(chosen,s);seen[s]=true end
     end end
     for _,s in ipairs(source and source.rows or {}) do if s.label:IsShown() and not seen[s] then table.insert(chosen,s) end end
-    for i=1,math.min(4,table.getn(chosen)) do local s=chosen[i];local r=Row(f,i,sx,49+(i-1)*step,sw,27);r.label:SetText(s.label:GetText());r.value:SetText(s.value:GetText() or "?")
+    for i=1,math.min(4,table.getn(chosen)) do local s=chosen[i];local r=Row(f,i,sx,49+(i-1)*step,sw,27);r.statKey=s.statKey;r.label:SetText(s.label:GetText());r.value:SetText(s.value:GetText() or "?")
     end
     end
    else
@@ -1911,7 +1920,8 @@ function R.Panels(variant,zone)
     T.Font(r.label,size,r.labelTint or R.body,false);T.Font(r.value,size,r.valueTint or r.labelTint or R.body,false);R.Fit(r.label,size,least);R.Fit(r.value,size,least)
     r.fullLines={r.label.referenceFullText or "",r.value.referenceFullText or ""}
     if kind=="Lairs" and r.amount and r.amount:GetText()~="" then T.Font(r.amount,size,r.valueTint or R.body,false);R.Fit(r.amount,size,least);table.insert(r.fullLines,r.amount.referenceFullText or "") end
-    r:SetScript("OnEnter",function() if this.entry and FieldKitLoadout then FieldKitLoadout.Tip(this,this.entry) elseif this.fieldkitLine and R.DamageTip(this) then -- complete tooltip, nothing to click
+    r:SetScript("OnEnter",function() if this.entry and FieldKitLoadout then FieldKitLoadout.Tip(this,this.entry) elseif this.statKey and FieldKitRebornStats.Tip(this,this.statKey) then
+  elseif this.fieldkitLine and R.DamageTip(this) then -- complete tooltip, nothing to click
   elseif this.buffIndex and GameTooltip.SetPlayerBuff then GameTooltip:SetOwner(this,"ANCHOR_LEFT");GameTooltip:SetPlayerBuff(this.buffIndex);GameTooltip:Show() else H.Tip(this,f.title:GetText(),this.fullLines) end end);r:SetScript("OnLeave",function() GameTooltip:Hide();H.HideTip() end)
    end end
   end

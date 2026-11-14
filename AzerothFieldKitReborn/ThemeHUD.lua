@@ -420,7 +420,7 @@ function H.Summaries(variant,zone)
    local count=0
    local rows=source.fieldkitLayoutRows or source.rows or source.slots or {}
    FieldKit_Text(f.title,kind=="Accessories" and FieldKitRebornDB.loadoutTab==2 and "Spells" or kind)
-   if kind=="Damage" then local view,index=FieldKitMeterSuite.View();rows=FieldKitMeterLedger.Read(view) or {};FieldKit_Text(f.title,FieldKitMeterLedger.labels[index] or kind) end
+   if kind=="Damage" then local view,index=FieldKitMeterSuite.View();rows=FieldKitMeterLedger.Read(view) or {};f.title:SetText(FieldKitMeterWindow.Title(view,FieldKitMeterLedger.labels[index] or kind)) end
    for _,entry in ipairs(rows) do
     local label=entry.label
     if kind=="Damage" and count<4 then
@@ -432,7 +432,7 @@ function H.Summaries(variant,zone)
      r.value:SetText(value);r.label:Show();r.value:Show()
     end
    end
-   if count==0 then count=1;f.rows[1].label:SetText(FieldKit_L("No data yet"));f.rows[1].value:SetText("");f.rows[1].label:Show();f.rows[1].value:Show() end
+   if count==0 then count=1;f.rows[1].label:SetText(kind=="Damage" and FieldKitMeterWindow.Empty(FieldKitMeterSuite.View(),"No data yet") or FieldKit_L("No data yet"));f.rows[1].value:SetText("");f.rows[1].label:Show();f.rows[1].value:Show() end
    for i=count+1,5 do f.rows[i].label:Hide();f.rows[i].value:Hide() end
    local height=80+count*31;f:SetHeight(height)
    f.more:ClearAllPoints();f.more:SetPoint("BOTTOMLEFT",f,"BOTTOMLEFT",14,12)

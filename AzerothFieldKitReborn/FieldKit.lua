@@ -1275,12 +1275,12 @@ local STATS = {
 	{ "gold", "Gold", function(s) return Pct(s.gold - 1) end },
 	{ "luck", "Luck", function(s) return Pct(s.luck) end },
 	{ "bp", "Buff Power", function(s) return Pct(s.bp) end },
-	{ "dots", "DoT Stacks", function(s) return string.format("%.0f", s.dots) end },
-	{ "doth", "DoT Haste", function(s) return Pct(s.doth) end },
+	{ "dots", "DoT Stacks", function(s) return FieldKitRebornStats.DotValue(s.dots) end },
+	{ "doth", "DoT Haste", function(s) return s.doth~=nil and Pct(s.doth) or "?" end },
 	{ "big", "Vs Elites", function(s) return Pct(s.big) end },
 	{ "exe", "Execute", function(s) return Pct(s.exe) end },
 	{ "cc", "Vs Controlled", function(s) return Pct(s.cc) end },
-	{ "dotd", "Vs Afflicted", function(s) return Pct(s.dotd) end },
+	{ "dotd", "Vs Afflicted", function(s) return s.dotd~=nil and Pct(s.dotd) or "?" end },
 	{ "shd", "Shielded", function(s) return Pct(s.shd) end },
 	{ "auto", "Melee", function(s) return Pct(s.auto) end },
 	{ "pet", "Pet Damage", function(s) return Pct(s.pet) end },
@@ -1372,6 +1372,7 @@ local function UpdateStatsFrame()
 				local ok, text = pcall(def[3], stats)
 				value = ok and text or "?"
 			end
+			row.statKey=def[1]
 			FieldKit_Text(row.label,def[2])
 			row.value:SetText(value)
 			row.label:Show()
@@ -1409,6 +1410,8 @@ local function CreateStatsFrame()
 	statsFrame.rows = {}
 	AddCompactButton(statsFrame, "statsCollapsed", UpdateStatsFrame)
 	MakeMovable(statsFrame, UIParent:GetWidth() / 2 - 100, 0, true)
+ statsFrame:SetScript("OnEnter",function() FieldKitRebornStats.Tip(this) end)
+ statsFrame:SetScript("OnLeave",function() GameTooltip:Hide() end)
 
 
 	if ( type(AZS_STATS) == "table" ) then
@@ -1761,6 +1764,7 @@ local function CreateGearFrame()
   row.bonus:SetJustifyH("LEFT");row.bonus:SetJustifyV("TOP");if row.bonus.SetNonSpaceWrap then row.bonus:SetNonSpaceWrap(true) end
 
 		row:SetScript("OnEnter", function()
+			if not FieldKit.rebornLegacyFixture and this.entry then FieldKitLoadout.Tip(this,this.entry);return end
 			if ( GetInventoryItemLink and GetInventoryItemLink("player", slotId) ) then
 				GameTooltip:SetOwner(this, "ANCHOR_LEFT")
 				GameTooltip:SetInventoryItem("player", slotId)

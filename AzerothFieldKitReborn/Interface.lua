@@ -84,6 +84,13 @@ function FieldKit.BuildJourneySections(sections,actions)
  local meter={
   {kind="note",label="Your combat meter",tip="Main meter, tabs, tooltips and optional detached windows. Which other HUD cards appear is under HUD cards."},
   options.meterFrame,
+  {kind="check",label="Recent damage and healing",tip="Use native recent amounts, DPS/HPS and shares for Damage and Healing. Boss, taken, party and kills keep their existing time basis. History is rebuilt after reload.",
+   get=function() return FieldKitRebornDB.meterRecent end,
+   set=function(v) FieldKitMeterWindow.Set(v,FieldKitRebornDB.meterWindowSeconds) end},
+  {kind="slider",label="Recent window",min=5,max=120,step=1,
+   format=function(v) return string.format(FieldKit_L("Last %ds"),v) end,
+   get=function() return FieldKitRebornDB.meterWindowSeconds end,
+   set=function(v) FieldKitMeterWindow.Set(FieldKitRebornDB.meterRecent,v) end},
   {kind="choice",label="Local meter view",values={"Damage","Healing","Boss damage","Damage taken","Party DPS","Kills"},
    get=function()
     if FieldKitMeterSuite and FieldKitMeterSuite.View then local _,i=FieldKitMeterSuite.View();return i or 1 end

@@ -118,6 +118,7 @@ local function Paint(frame,view,force)
   FieldKit_Text(frame.title,"Party spells")
  end
  frame.fieldkitMeterView=view
+ frame.title:SetText(FieldKitMeterWindow.Title(view,frame.title:GetText() or ""))
  local base=FieldKit.MeterWidth and FieldKit.MeterWidth(DB().meterValues) or 220
  if frame.fieldkitTabs then base=math.max(base,320) end
  -- Extra room so kill counts never crowd spell names / damage digits.
@@ -181,7 +182,8 @@ local function Paint(frame,view,force)
   row:SetPoint("TOPLEFT",frame,"TOPLEFT",6,-y0)
   row:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-6,-y0)
   row:SetValue(0)
-  FieldKit_Text(row.label,known and "No data yet" or "Meter data not provided")
+  FieldKitLoadout.ClearIcon(row);row.label:SetWidth(width-24)
+  row.label:SetText(FieldKitMeterWindow.Empty(view,known and "No data yet" or "Meter data not provided"))
   if row.meterColumns then for j=1,3 do row.meterColumns[j]:Hide() end end
   if row.killColumn then row.killColumn:Hide() end
   row.value:Hide();row.value:SetText("");row:Show();n=1
@@ -215,6 +217,7 @@ function S.BindSpellTip(row)
    GameTooltip:SetOwner(this,"ANCHOR_RIGHT")
    if this.fieldkitSpell then FieldKit_Text(GameTooltip,this.fieldkitSpell,1,.82,0) end
   end
+  FieldKitMeterWindow.Tip(this.fieldkitMeterView or S.View())
   if this.fieldkitLine and this.fieldkitLine.name then
    GameTooltip:AddLine(" ",.5,.5,.5)
    local view=this.fieldkitMeterView or S.View()

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.10",
+  "version": "0.1.0-reborn.11",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,24 +18,24 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.10",
+    "version": "0.1.0-reborn.11",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": true,
+    "inGameTestByAgent": false,
     "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Targeted live solo QA in client 0.6.1: themed boss gauge and Horde visible after reload, inherited timed calendar absent, reminder shows native percentage. Difficulty remains unavailable in the ongoing reload session: AZS_ZONE contains only the API run id; native sync and hello did not recover zone metadata. Early zone capture and retention tested synthetically; fresh-run difficulty capture not validated live. No live co-op validation."
+    "inGameTestScope": "Offline 0.6.4 adaptation: actual installed Api.lua/Meter.lua executed in a mock client for all 116 recent windows (damage/healing), checkpoints, stable run identity and history loss/recovery. Production setters, recent/missing/warming views, detached windows, jewelry/DoT tooltips and profiles exercised for both theme families, all three variants and themes off. No live client or co-op QA for this build."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "9c4b4cf4b3c4219aee46b5906541c49a416c6e20f6b831ca6fec35c95f3d3f52"
+      "sha256": "735c238fad03aae365c8e90607a28518f3b25bb47faf684e7de22494bb0d2381"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -45,7 +45,7 @@
     "Reborn.lua": {
       "maxUpvalues": 2,
       "functions": 18,
-      "sha256": "4aef0c5d08f66d7733dd611f6d339da3cef7ad897f1e3b3989bc77c0e0678101"
+      "sha256": "8797ba73c0894665ae36f18d11413d2ea610162048395437e13b0a996ec67343"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -70,7 +70,7 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "5f3c9ecfee303a2af7ac5fb38d60a15fc6c6591d871537abc6b61892f4ff7595"
+      "sha256": "7ce407e3ed24a842b08a11f8fcb3c6525b0182ebd6f715159e411cb55ee11f25"
     },
     "Profiles.lua": {
       "maxUpvalues": 4,
@@ -85,7 +85,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "e9a02a82826f9eb77c8efb969ead5c47b2ee6bc4b6a3803c7a3d120ab4740288"
+      "sha256": "f4b2375b7c9b265c03d642bcf2388d7aa9be8fc18306ba1ef2f3994c6224c3c6"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
@@ -122,6 +122,11 @@
       "functions": 10,
       "sha256": "5c9e4fb8e2bbabfad6e9c0fc805bfb521f1271390f3f15fb6b34bf4833df499c"
     },
+    "RebornStats.lua": {
+      "maxUpvalues": 2,
+      "functions": 4,
+      "sha256": "92e6ffc7fbe155415ac7dd5a7736b432cb4ec19408938d3e777f130b92f4b433"
+    },
     "RunMode.lua": {
       "maxUpvalues": 1,
       "functions": 11,
@@ -132,15 +137,20 @@
       "functions": 13,
       "sha256": "190db327c57089177916f564c34c3735964b5ab286d2da39b4662df2f282c3a6"
     },
+    "MeterWindow.lua": {
+      "maxUpvalues": 1,
+      "functions": 8,
+      "sha256": "bf12422a318c81fe7bfd7457e67adf65262fe8834e2b67663a6b27742d6f1a45"
+    },
     "MeterLedger.lua": {
       "maxUpvalues": 11,
       "functions": 50,
-      "sha256": "35c06d4fe2dbd888aae688ff8ec8523af15e293fc9231b85cf0c260bf2714536"
+      "sha256": "92f18a689039ec611294fd38a7c7933d5b516fea51d60469c5df0f8fe8d8f2eb"
     },
     "MeterSuite.lua": {
       "maxUpvalues": 6,
       "functions": 39,
-      "sha256": "abc5fe3246fa2735c2889e3b25b4957dead4aa56f70733edc25d7a70ca81cb59"
+      "sha256": "47197609eb64d0955094437f464858a2a407a26dc1389012e18c5995a8c9959b"
     },
     "BossTimeline.lua": {
       "maxUpvalues": 26,
@@ -175,7 +185,7 @@
     "PartyDetails.lua": {
       "maxUpvalues": 11,
       "functions": 39,
-      "sha256": "58e55afcca75f8d20c5b36fb8f42cc940a7fd1174afe2fdb2b73b8e379cdd1f4"
+      "sha256": "673411d59b4735ddd1c9eb4215d5891529278a37892f621c9070dce2b96042ae"
     },
     "ScreenLayers.lua": {
       "maxUpvalues": 3,
@@ -195,7 +205,7 @@
     "Loadout.lua": {
       "maxUpvalues": 2,
       "functions": 29,
-      "sha256": "8de0c88266dc79d1ea924fe76c36e028c655be51b5355dffcbfd71fe8347faa5"
+      "sha256": "8ddf28e1c2e0c879a06d04f6eab7fd2a93436a5e186123251562d5d9380f1b26"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -224,13 +234,13 @@
     },
     "Interface.lua": {
       "maxUpvalues": 24,
-      "functions": 213,
-      "sha256": "1821075bc058fff07ce6b105da19bf4207e3a7e69c85cb39aabeb305ed3ba345"
+      "functions": 218,
+      "sha256": "e628703e2a4560d8fad241df3a4f6cf2d31ca6f919ae1eb0d8568a40d39b3309"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
-      "functions": 189,
-      "sha256": "c7c75337b0d198a90f0f1443ae2f61f5d3b54bca43f807b6a533bfac2785edc5"
+      "functions": 191,
+      "sha256": "83900181900314dd5fda7304f1f1e055677a5063ffb9b83c213aadddc2791c50"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -270,7 +280,7 @@
     "ThemeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 42,
-      "sha256": "56b210027e8e0b61e29dbf34b4b2ebf9bc49428b04a812cd62d2b6ecf7604361"
+      "sha256": "44cbb9269b2b96db0635a075ac80b691b540d6b79633e601d34274c91ecfad3e"
     },
     "ThemeTarget.lua": {
       "maxUpvalues": 6,
@@ -284,8 +294,8 @@
     },
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
-      "functions": 191,
-      "sha256": "08851e609af14b2f53d1909a4a76b391110a7568c30b6d136949ec76e685f787"
+      "functions": 193,
+      "sha256": "8e4a95737938c8b5bd6ceeb99ed11ab6e55236595cbef86a18f23340746f9799"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

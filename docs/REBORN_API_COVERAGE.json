@@ -1,19 +1,19 @@
 {
   "scope": "All TOC runtime modules; public installed Lua declarations and official guide mentions. Engine binary implementation excluded.",
   "liveGameValidation": false,
-  "runtimeModules": 52,
+  "runtimeModules": 54,
   "runtimeSHA256": {
-    "Runtime.lua": "9c4b4cf4b3c4219aee46b5906541c49a416c6e20f6b831ca6fec35c95f3d3f52",
+    "Runtime.lua": "735c238fad03aae365c8e90607a28518f3b25bb47faf684e7de22494bb0d2381",
     "RebornCreatures.lua": "5987d51d0128677a5ef34579177a25f8c8ec95dd7cb5544b9e6c2e153ccdcd9c",
-    "Reborn.lua": "4aef0c5d08f66d7733dd611f6d339da3cef7ad897f1e3b3989bc77c0e0678101",
+    "Reborn.lua": "8797ba73c0894665ae36f18d11413d2ea610162048395437e13b0a996ec67343",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
     "RebornHUD.lua": "00fc412902cb292343ae21a0bc9b39482ebf26fc6f19832f0f13888aa0b91911",
     "Diagnostics.lua": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
     "Positions.lua": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
-    "Config.lua": "5f3c9ecfee303a2af7ac5fb38d60a15fc6c6591d871537abc6b61892f4ff7595",
+    "Config.lua": "7ce407e3ed24a842b08a11f8fcb3c6525b0182ebd6f715159e411cb55ee11f25",
     "Profiles.lua": "6f6140c2c4a787fd7e96498e734a836ff87b4819156bbb7fba66b03e0111a49b",
     "Localization.lua": "f285d1f416e9e57331827ceb3cdfad4beab810c22bb7acac1e1ecdd8616a5920",
-    "InterfaceStrings.lua": "e9a02a82826f9eb77c8efb969ead5c47b2ee6bc4b6a3803c7a3d120ab4740288",
+    "InterfaceStrings.lua": "f4b2375b7c9b265c03d642bcf2388d7aa9be8fc18306ba1ef2f3994c6224c3c6",
     "Theme.lua": "a3489f16e1733b81fb1e24bb894b37d6fdd7dac64922b164f41324faa024f56d",
     "ZoneThemeRegistry.lua": "b30035d19d58e17ffc93d360ad377e2bcbcb3fbe0292fe67155d3e02c92537ad",
     "Seed.lua": "a1e79ab07c8b41dca34f8fa730f964cd7e79ece5700a1e5d407f941060ee655c",
@@ -21,28 +21,30 @@
     "Portraits.lua": "c1451d1b391c9ac1051cde264f17e970fa2dd0261e6c9884e09e959bdf39f220",
     "Settings.lua": "23e840592514422ac9ba8a29fd88bcf93ffa6f6e9a43624bbcf6a76fdfd34951",
     "GameCompatibility.lua": "5c9e4fb8e2bbabfad6e9c0fc805bfb521f1271390f3f15fb6b34bf4833df499c",
+    "RebornStats.lua": "92e6ffc7fbe155415ac7dd5a7736b432cb4ec19408938d3e777f130b92f4b433",
     "RunMode.lua": "efceae75720932ce171fd798b9c7c40ae45625d0f5d7ef1d1ae5e8ff66c2f48a",
     "NativeData.lua": "190db327c57089177916f564c34c3735964b5ab286d2da39b4662df2f282c3a6",
-    "MeterLedger.lua": "35c06d4fe2dbd888aae688ff8ec8523af15e293fc9231b85cf0c260bf2714536",
-    "MeterSuite.lua": "abc5fe3246fa2735c2889e3b25b4957dead4aa56f70733edc25d7a70ca81cb59",
+    "MeterWindow.lua": "bf12422a318c81fe7bfd7457e67adf65262fe8834e2b67663a6b27742d6f1a45",
+    "MeterLedger.lua": "92f18a689039ec611294fd38a7c7933d5b516fea51d60469c5df0f8fe8d8f2eb",
+    "MeterSuite.lua": "47197609eb64d0955094437f464858a2a407a26dc1389012e18c5995a8c9959b",
     "BossTimeline.lua": "62a2701e3eb27c5faa9cdff07d420eb1b7a5c46e657fb497a71ad571a164a320",
     "HudStack.lua": "01a843571c9e034e56618ac74155b01ddde0efb151e4c72590400f155c51b73f",
     "CardLayout.lua": "eeaf5a7ce67891f71e19eab70e3b6e6c24063aaa3440807787dd533177344f99",
     "Coop.lua": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1",
     "GroupHistory.lua": "77a5abe50cf781f15a31f6786f4e58dda2003951ff616a8ba60d823d6c246af8",
     "PartySync.lua": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
-    "PartyDetails.lua": "58e55afcca75f8d20c5b36fb8f42cc940a7fd1174afe2fdb2b73b8e379cdd1f4",
+    "PartyDetails.lua": "673411d59b4735ddd1c9eb4215d5891529278a37892f621c9070dce2b96042ae",
     "ScreenLayers.lua": "75b3db41420299ef5a4165f021b0f1e87b875318e49ba3c73f11ec12f7d9644c",
     "NativeTools.lua": "91d44041071e1cf8cb9e56ee922d37be977ea3e09cc2f52caaef9dfe87dad2db",
     "SpellAssets.lua": "5c443e759c4ff663fd0070f06566ac0de5e8c984c963341f50be72c8c4545681",
-    "Loadout.lua": "8de0c88266dc79d1ea924fe76c36e028c655be51b5355dffcbfd71fe8347faa5",
+    "Loadout.lua": "8ddf28e1c2e0c879a06d04f6eab7fd2a93436a5e186123251562d5d9380f1b26",
     "TakenDetails.lua": "2444aa4578119eae2da08653ce627caccb7acc704ec2551dc3c8c06bcd71f563",
     "Preview.lua": "0d42c42f5be64b40a2b1bcf5a69d635858dedaba409352d88555398f734a59bc",
     "PreviewVisibility.lua": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
     "OptionsSchema.lua": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07",
     "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
-    "Interface.lua": "1821075bc058fff07ce6b105da19bf4207e3a7e69c85cb39aabeb305ed3ba345",
-    "FieldKit.lua": "c7c75337b0d198a90f0f1443ae2f61f5d3b54bca43f807b6a533bfac2785edc5",
+    "Interface.lua": "e628703e2a4560d8fad241df3a4f6cf2d31ca6f919ae1eb0d8568a40d39b3309",
+    "FieldKit.lua": "83900181900314dd5fda7304f1f1e055677a5063ffb9b83c213aadddc2791c50",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "e026f087e0b48acc4fb83ea45b66ad6d744799909c031b153bcc62e4beac4aeb",
     "WorldMarkers.lua": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
@@ -50,30 +52,30 @@
     "CombatOptions.lua": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
     "CopyLog.lua": "427633d497623d79fb553fc5df86a036b8bb69cff3dd53e64a578c8faacf6202",
     "ThemeMinimap.lua": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2",
-    "ThemeHUD.lua": "56b210027e8e0b61e29dbf34b4b2ebf9bc49428b04a812cd62d2b6ecf7604361",
+    "ThemeHUD.lua": "44cbb9269b2b96db0635a075ac80b691b540d6b79633e601d34274c91ecfad3e",
     "ThemeTarget.lua": "9200eb58da65676a6e3aef3b0fe4d6cd4679adb4d9f8716332f0d8c60ee44140",
     "ReferenceArt.lua": "b042e0777110f3a4519ccfadbf57bb4dcbb2e68ca9896f58f066775074605edf",
-    "ReferenceHUD.lua": "08851e609af14b2f53d1909a4a76b391110a7568c30b6d136949ec76e685f787",
+    "ReferenceHUD.lua": "8e4a95737938c8b5bd6ceeb99ed11ab6e55236595cbef86a18f23340746f9799",
     "ZoneThemes.lua": "9534fb51523da9a8d2716e2c0ff9530a244931eaf540cc9ccdf0f8a52659774f"
   },
   "nativeLuaSHA256": {
     "AzerothSurvivorsAPI/Anchors.lua": "2600dafc0c72a58bc761c6e8e6f4d9100a963bf10cd37cacdc70ed820038dd0f",
-    "AzerothSurvivorsAPI/Api.lua": "bad99b088322cd4947b8a74fc3b93f0e96816990d87b507bb35479bdb6d02210",
+    "AzerothSurvivorsAPI/Api.lua": "5a70d90d6bfba3d0feb101af3b036fcbe7aff29ade4a6b402b5c98fc78949bc5",
     "AzerothSurvivorsAPI/CombatText.lua": "5bb0fa1bcca406b113a2d22b90435588bbea9b78a14d380eb9303b1436705ad8",
     "AzerothSurvivorsAPI/Hud.lua": "dabd26b1f364d2fddc250e70c43640283d4c5632fb7e2ef71246581529ec93ac",
-    "AzerothSurvivorsAPI/Meter.lua": "6edb2f35034a6c82f29e9cdcc3b67c27de32cd8244c90a36f69d4bb37b6b624d",
+    "AzerothSurvivorsAPI/Meter.lua": "605564904bdb3cdb6cf2adfdcbd645878012ce7900db9722bdccc7f04906b38d",
     "AzerothSurvivorsAPI/Shims.lua": "4234db152513dceb9397c697c9007156718153c357443136dec021c07003988d",
     "AzerothSurvivors/AddonCost.lua": "6c0a95d7cd612b4bf14d67d031f8a1d7ce51419979eed4a46a608b7c85d1388b",
     "AzerothSurvivors/Banner.lua": "01ab3a44bb475a9afbf10cef4adde3f40fd8d824fc8e6dd4863ac48bfdb2b1c9",
     "AzerothSurvivors/Cards.lua": "40f9e8df3415b613bf999c24842cebddc8bc394da60499beced92b3cfcca9b07",
     "AzerothSurvivors/Chests.lua": "8bf4a6330fcc678fa97f8a2ce8f0c3a003aab38745cc0095a3fb671cf5fb6720",
-    "AzerothSurvivors/Controller.lua": "400ad7c61a0ad2da4d98b67bc9e75c9444ef1122789575f15f0e74f927190c4c",
+    "AzerothSurvivors/Controller.lua": "3bbeb7d8b1e7955ddfbb8d130ad6ddf1aeffd7378a82cd5873e0d0ea2e5b9a10",
     "AzerothSurvivors/Core.lua": "10ecf7b71647e921dd8613c2105dbe7cd71273ee2f15370bc5d3125b8eec9d47",
     "AzerothSurvivors/Dash.lua": "cbc18704c4bf15b528a5ffe342e20c1c66b5c378b812564dd67b24e60f13656d",
     "AzerothSurvivors/DeathLog.lua": "f7a794c6721fbc2685d44bca7dba3e2bbc034a74baa9a8cc4058233bdce07979",
     "AzerothSurvivors/EditMode.lua": "87f1cf3f0adc74764c8034f4d3fce6c2285866d325a923a57934dfbaef81c141",
     "AzerothSurvivors/Editor/CommunityMaps.lua": "09eaf603ee4903f288119805fe03f383dbaa7d99aff7c1406af512f06a924b0b",
-    "AzerothSurvivors/Editor/SurvivorsEditor.lua": "251527e2f3bdf1cad1b33b8e4d3f43e382a842fc443d2374de43edbddc552830",
+    "AzerothSurvivors/Editor/SurvivorsEditor.lua": "3536a4a30c922bbbf29243ab395c6bb7ea03147d8054c77fbbab1a8519cc9709",
     "AzerothSurvivors/Editor/SurvivorsSharing.lua": "caefa370e6329aefb2f3b67350a50c641458de42b30eea4a2dd283a740b4c096",
     "AzerothSurvivors/Emotes.lua": "40f5140cb21b52ea71fe392b339a14f02ed3b1ef0393f38dd1a493ef6bfdedf8",
     "AzerothSurvivors/Events.lua": "463811876dbfd123445947b13c78bd10695abb65692a2b8413ab415cf950bd26",
@@ -81,117 +83,117 @@
     "AzerothSurvivors/FriendsWindow.lua": "3ab9ccf583802ee18ff79594b4f33cb080ca0453b337c600f5b6540f2ae9e055",
     "AzerothSurvivors/GameMenu.lua": "61e877f205e0d9eb5687f5dd0da6c5dd425606edd04ec15517d3fea599142f7d",
     "AzerothSurvivors/Gear.lua": "71df26ef77e7d917c53d931fdaf811e420ffa7ae29803818ca702248a6e42ea9",
-    "AzerothSurvivors/Generated/Content.lua": "ccf1cae0f435d5772d9aea1310d16f198c273e53a432ce479921f7d1509428e6",
-    "AzerothSurvivors/Generated/Content_deDE.lua": "5ddf9dae661c0d633c80db51b492ca9a7cb74a421544fbb3033daae7881f2bb0",
-    "AzerothSurvivors/Generated/Content_esES.lua": "7043136f443ae45fb1c4375ea9794393360da1bf7516076b438d18d8ca3a065a",
-    "AzerothSurvivors/Generated/Content_frFR.lua": "26e140c1f7bdb7c57d53c1b056ef93407af8aa82072111bd33bd01ffb5989ce0",
-    "AzerothSurvivors/Generated/Content_itIT.lua": "25babe5a8496524b057e28f317b8c425e5d6824e49dde3a970d1e611780ff17f",
-    "AzerothSurvivors/Generated/Content_plPL.lua": "1d98fb4e13f0fbea33b16c92633dfd05636fecb37b321bd032c97c955c50385c",
-    "AzerothSurvivors/Generated/Content_ptBR.lua": "4cf48456803f3db5d05db96129a24f00a4acd652959587581949735517d201e1",
-    "AzerothSurvivors/Generated/Content_ruRU.lua": "019404c9ad46ff3975b5bf950e2cc3254205c232c55c25cfddb9ae71a72b8a65",
-    "AzerothSurvivors/Generated/Content_trTR.lua": "6d922b977c61bf4d09a5a08fbd46bcff112394d087832d75c0594c286d8f13fc",
-    "AzerothSurvivors/Graphics.lua": "5e15f0f7ac3ee81b782a9a90be09e097c60c7c20bd8c2ac66294a111a37ee4f8",
+    "AzerothSurvivors/Generated/Content.lua": "66791b007f09b3d8a271f53c9253613c96477b72d3fc1845d217f2ba8906318b",
+    "AzerothSurvivors/Generated/Content_deDE.lua": "7236c7b358618b94d467f69c629dedd022fd5bf42ad96945363332e25c90af21",
+    "AzerothSurvivors/Generated/Content_esES.lua": "a37dabfd67fa41d629e1dc84c2f1b0f4d8b3b50fa5e91ccfef769b4105f8bb1d",
+    "AzerothSurvivors/Generated/Content_frFR.lua": "d558dc1cbea17e5cd319221134b03de22f214b02b45c5e7fcfc40a8af294ba5c",
+    "AzerothSurvivors/Generated/Content_itIT.lua": "e3cce061b9e8d36f55e23724f93c209378a90ee0f8e15ad9d6971a95141f245b",
+    "AzerothSurvivors/Generated/Content_plPL.lua": "791677b388ea8987fe5b4302eda00c1de547bd5218177ebecea983236760af6d",
+    "AzerothSurvivors/Generated/Content_ptBR.lua": "0ee5b9f78c55276ac3f124c55305aead845ec79532a9dd0e4a241d35435bf168",
+    "AzerothSurvivors/Generated/Content_ruRU.lua": "5246307e207b3e7d39096b6a0465dd88291a719023154b3bd2504190f5ec6ee1",
+    "AzerothSurvivors/Generated/Content_trTR.lua": "ee61ed7d16be665e83da2ae99baf53c4ebbfd13b733875a81737eea5399630ac",
+    "AzerothSurvivors/Graphics.lua": "4bc81d5691efdf2a312627c33b9ab344a1425c45735f399a9c8755df05fee5f3",
     "AzerothSurvivors/Handover.lua": "998ecdcff865524a2c3c3ebc5603fc0a0a00bed4795fe261936cf2f1037a5c71",
     "AzerothSurvivors/Hub.lua": "530db58076775718a960531e4ec29a6317b13938781f60524850625991dbbcec",
-    "AzerothSurvivors/Inspect.lua": "b4852c264514f77518066063c53aaf20260dce8ffb6cf5f03b5dcf56b80523c0",
+    "AzerothSurvivors/Inspect.lua": "e31f07a73c92e367aa68b55fea695f497f47d25edd230fbe3edb78bf02e64185",
     "AzerothSurvivors/Lairs.lua": "fc036e161979bacf74a82aa41b291c3e13afc6f6b67674ac6b230f32f83cd82b",
     "AzerothSurvivors/Locale.lua": "f5bc039411ea68579bdcb704645e2a02d68b331eb5b105abc4f4943490b9a8e9",
-    "AzerothSurvivors/Locale_deDE.lua": "711a9bd006ef00263cae613ded037aa7a90b43cc1c55df4e9c256db0a950b632",
-    "AzerothSurvivors/Locale_deDE_Controller.lua": "98afb696f73189603404548d291b45a5a3ecdd7002d89d9707976c7f1e0328d5",
+    "AzerothSurvivors/Locale_deDE.lua": "37ecd777e470935a8b9e2e2b57422e790a808f1ca3d1038ebf0f436d8b62454e",
+    "AzerothSurvivors/Locale_deDE_Controller.lua": "adb9f8450f8ef24f3f92b9f0b51da360b240955a29ac402780a18b7a4cc13b31",
     "AzerothSurvivors/Locale_deDE_Dash.lua": "6820ec047033afcfc741eb2a188162c993c8a54d24f3a694b94f07ebde7bb887",
     "AzerothSurvivors/Locale_deDE_Events.lua": "14a11de67e4a2f2d0be57c26e5c130c36c51814c27937034833a23fa6ff0f034",
     "AzerothSurvivors/Locale_deDE_Handover.lua": "8a7f30c6f0215b062843af46ec80d2283b1e78c0a40d5b6d6ba9f51710a93b9b",
     "AzerothSurvivors/Locale_deDE_Hub.lua": "4ec11637f4a44e8b1049a12d690ea67b374882217c6d136f5930dc0213555b9e",
     "AzerothSurvivors/Locale_deDE_Net.lua": "98d4a8f3028add43483cfbeba0e0c3faa46a05ddfa0b9ebb15c436e2a22fc553",
     "AzerothSurvivors/Locale_deDE_Ping.lua": "eda3923ada50f9d06edd01bb866ac99319fc4a9baefd02b786ace6eecaf0e914",
-    "AzerothSurvivors/Locale_deDE_Run.lua": "fe70083ca330cd86abf42516ff011164ce22325563fd053f31e7263dafe23a8e",
+    "AzerothSurvivors/Locale_deDE_Run.lua": "5f4554acb20d20083e9262ae9f1acaaa829ce7f9249a7540feef6c7af7c4ab5f",
     "AzerothSurvivors/Locale_deDE_Spectate.lua": "f1bd9e78fa709639183922ceb2dfbe1205384a00acde0596cebde945482ff7f1",
     "AzerothSurvivors/Locale_deDE_Victory.lua": "e9b06f33bac5e46a72afa4eec087456335128bd863385da5936ed5a9f3e695ad",
-    "AzerothSurvivors/Locale_esES.lua": "a11f5f0b9fcdf500bf9257c255700aa0596c67d197cb2037ca60457fc20c9077",
-    "AzerothSurvivors/Locale_esES_Controller.lua": "f855cdc21c8a0f3e6080aa166aa854bc33c4a01bebd2877d01dc49f58505bdb5",
+    "AzerothSurvivors/Locale_esES.lua": "893864373ac2d52034a5eb282ff5c9ba8c81e49e331ef0c1644132ad102285a8",
+    "AzerothSurvivors/Locale_esES_Controller.lua": "f438f4a9edbfedaed7507a7c0ff8e6ee715d3f237a71085fe40d23d50ddfa423",
     "AzerothSurvivors/Locale_esES_Dash.lua": "d5a72bc738306568f6747b5330304eb315513db503e60bd897a9fe6a324cf521",
     "AzerothSurvivors/Locale_esES_Events.lua": "2b06eb838ffe8cab1d60172e5afe07976c45a6485444214adecbf0dd300ecf76",
     "AzerothSurvivors/Locale_esES_Handover.lua": "9142f51f43819f70409a3d3ac5a17f84ecb8799941651ea2364e9e6642762952",
     "AzerothSurvivors/Locale_esES_Hub.lua": "596de550e931ff6e82fa7586c49a8578917a18acdec374824e7f49ed8c590c1a",
     "AzerothSurvivors/Locale_esES_Net.lua": "59e59bb6db6db489dca512fae6fddd0bed67c16d17828f408b5c626d437b6af9",
     "AzerothSurvivors/Locale_esES_Ping.lua": "ee7902d77e298ec0e53cf9f2e6031edef21653312c2b7fc51cc6abfdf357c2a3",
-    "AzerothSurvivors/Locale_esES_Run.lua": "fcbaef34372c22fdd117e31782e776c32572a4fe521da775ddb5ee667cf6baa0",
+    "AzerothSurvivors/Locale_esES_Run.lua": "f29533c4fc04564fb2f610a8c2304313dd49d2c0e475db7e4e7964e5f7b84843",
     "AzerothSurvivors/Locale_esES_Spectate.lua": "7ffead32e5eafd5a9987607ef9b72dee512d17aa4ea0dc85404c3e1cdc150056",
     "AzerothSurvivors/Locale_esES_Victory.lua": "935c0f2648a2c15f4674813353257091ad5794111ef7c5eb09a866218196b44a",
-    "AzerothSurvivors/Locale_frFR.lua": "226b131b66f9a35f5107f1b381161edcb0060e8f7ded80ab17785c8e7a631d8e",
-    "AzerothSurvivors/Locale_frFR_Controller.lua": "a583fae29dc2123e2c190d6b411b045237d67d07e247cb50a33bb99e48249cfb",
+    "AzerothSurvivors/Locale_frFR.lua": "a216f1c60d00adcaea26af82b58efa15898a6c20a2cea727047b8d4c2aaa2812",
+    "AzerothSurvivors/Locale_frFR_Controller.lua": "571f5a6aba030437a08e5efe437eba8d069858fcf23177974122847af667f188",
     "AzerothSurvivors/Locale_frFR_Dash.lua": "a8b728464995ff2a3b7849233deda675fa9b50be03dd3540c902383ff21c41c3",
     "AzerothSurvivors/Locale_frFR_Events.lua": "dcb78b857707c08db9158ddba18f965139520f2329c362b27a2ac3d2ca56e607",
     "AzerothSurvivors/Locale_frFR_Handover.lua": "b8abd5fafcfcb82273aacbc2e44508c6e2560a290f1d6f7e98271c1d8a9f7a67",
     "AzerothSurvivors/Locale_frFR_Hub.lua": "9715b54bb039b6eacaf4c674b8b75f36ba17a2fa575100c6f944ddb0855f67ea",
     "AzerothSurvivors/Locale_frFR_Net.lua": "ca83df41cd2158e4c0bea15e59b19df36aa5137379966a5419e012971983916b",
     "AzerothSurvivors/Locale_frFR_Ping.lua": "25d6b719edb621760b09e4b21347b9e0966dc6253cfbc5b4709c04da58af8c39",
-    "AzerothSurvivors/Locale_frFR_Run.lua": "10f7965a78d3a46fa469c6b40954238eb07ad217cc1615926af03fc7aa1dd970",
+    "AzerothSurvivors/Locale_frFR_Run.lua": "3498e93e3584ee2d8d0e9325ca1db51c01ab088561700f7f5c91a693071f97a1",
     "AzerothSurvivors/Locale_frFR_Spectate.lua": "e55007c0347f38f0c05dbdbafd1054988d766ef698dcd732c91fbaaa462d5d1f",
     "AzerothSurvivors/Locale_frFR_Victory.lua": "13a2212d6fb3504798f4a1b30d5409e42c0353d0d37b3f5b008831c062f2f7ab",
-    "AzerothSurvivors/Locale_itIT.lua": "365706fde45c96b7718465bf4cba6bef3c8c5c4d29cebae7ab7d0de2697150d4",
-    "AzerothSurvivors/Locale_itIT_Controller.lua": "ef4156785ce929695b53089664ebcf9faf13b5480109fe68f8a57cf7f2e69a5c",
+    "AzerothSurvivors/Locale_itIT.lua": "8bc8113800bad2f2d56ac0fcd15922666345293fc3cfa1c0726ce7405b848985",
+    "AzerothSurvivors/Locale_itIT_Controller.lua": "cdbae6899ce27fc7bf634d92d6c56998db1a2af28d542e15b06ce7914a7cd709",
     "AzerothSurvivors/Locale_itIT_Dash.lua": "f3845367c2315e88cd01300403cd10fcb491c60948d99b64e3511c4feaeecfba",
     "AzerothSurvivors/Locale_itIT_Events.lua": "9ba35525757bbb7e671c150f3b3806d441be3ec3cde207e621b38fa1a3169512",
     "AzerothSurvivors/Locale_itIT_Handover.lua": "942993e03e715e1c9d0d731333bd15dae9c8d621a3cf3252c0d17d685943998b",
     "AzerothSurvivors/Locale_itIT_Hub.lua": "51cb2bdbc01ba69858aec6c2e8e8988e39d125143f9f6cf7c1719cfb7cc5f1e8",
     "AzerothSurvivors/Locale_itIT_Net.lua": "7c5d86864921df51e9e67b2642970d095b0cedddb801eb768ec5830ab91578e4",
     "AzerothSurvivors/Locale_itIT_Ping.lua": "bbdac89b88dd356cc2895e8b37b118c4fab64f1c582df81f79ee2f204292a48c",
-    "AzerothSurvivors/Locale_itIT_Run.lua": "f39b487e31a38da61e997814e6c4e63621ee8bb0c56a44634712ec3c8694f3e5",
+    "AzerothSurvivors/Locale_itIT_Run.lua": "8b105e1c55622ce2a380ed42d66ca29c712e31649736c4edfd5cd2e8f0f4c737",
     "AzerothSurvivors/Locale_itIT_Spectate.lua": "665d06fea262af4887963db5c0e1dcfd5f5aeb1b342f5e5771e17f4e5a36ecc4",
     "AzerothSurvivors/Locale_itIT_Victory.lua": "36a4bd7a38af35e3b278279442f72a0a9c7e047b55c37a9c4fd5db2e04154ced",
-    "AzerothSurvivors/Locale_plPL.lua": "350ee9eabd26c235c67a560ffe622f0a34f550aad1bd8e4b4091a2f037664fc6",
-    "AzerothSurvivors/Locale_plPL_Controller.lua": "9c07f8266904fd55cf03187c92a61d5bd5c009676eda0539719d333390d895ed",
+    "AzerothSurvivors/Locale_plPL.lua": "0ffb220eb49655c580d2cee395851b489d543e87ea324a33614b414b9fda9d32",
+    "AzerothSurvivors/Locale_plPL_Controller.lua": "62fbb78cb2c7be1b807ba32ee2da73ce00ff2ed3d0af3bb51fddbf31327007a8",
     "AzerothSurvivors/Locale_plPL_Dash.lua": "2c118abecbc878b89a6c9ed020f77fd4e3f110bfb22a0775b55214bd13ea379b",
     "AzerothSurvivors/Locale_plPL_Events.lua": "135fe8b90f2009c9c9ad92a06b88d5a47361c433cb09482d1a91baf0b0087893",
     "AzerothSurvivors/Locale_plPL_Handover.lua": "fca1e37d0e22f35c1a4fecfa121ec76f1138f657c283bdcc4253aa7096825ad3",
     "AzerothSurvivors/Locale_plPL_Hub.lua": "3894fbaa604472ba395b9b61d77829e4f9deadebe40899c51dbb3901342b370a",
     "AzerothSurvivors/Locale_plPL_Net.lua": "39acea4dcc2fde98489e20efe3898d61c032aed36634ca3c539228c754a954b3",
     "AzerothSurvivors/Locale_plPL_Ping.lua": "db0ae2fec41ffadedad72d1f975a6100dc46154a942669be9bc61127f0719bf5",
-    "AzerothSurvivors/Locale_plPL_Run.lua": "15f268328bd9e2fbbe25cafe7779c9b6763281ff2de9c08a2ad8b8fead4bf015",
+    "AzerothSurvivors/Locale_plPL_Run.lua": "4edcfd40a93130f0e0840c00a2125856ee3eb548bb51dee56c7352ab756fbdfe",
     "AzerothSurvivors/Locale_plPL_Spectate.lua": "285c2a49d94abe21f05d881e5179a941be4ff2250ccc136916b56e7b2bb90250",
     "AzerothSurvivors/Locale_plPL_Victory.lua": "21083281570810ef9a859c2563831d8907f4d713e3192abe6e979d0798c4a0ac",
-    "AzerothSurvivors/Locale_ptBR.lua": "9ec9dc164d12610fce3235715785af9da9e6f16987db7dc5ff9e7d7b9810fd4b",
-    "AzerothSurvivors/Locale_ptBR_Controller.lua": "032c7446bbe8bf8f5b1397aae11952d121583d591c46cc1c5718a51cc2aa261d",
+    "AzerothSurvivors/Locale_ptBR.lua": "11f13bcc20e2a3df52b5dc929c8e93db5a9b2fb326db7e4d091b3ddbfb225e00",
+    "AzerothSurvivors/Locale_ptBR_Controller.lua": "ac77e0992023f304cd747ba72cf12c799e683c4df55a581ca30d1cc8804bf18c",
     "AzerothSurvivors/Locale_ptBR_Dash.lua": "652c663d051c92808e47e372ed6186f778149e577c6b8dbc8b227a3950ea7744",
     "AzerothSurvivors/Locale_ptBR_Events.lua": "3d2efc9c8f47ec49ad88145a21825625b0581c432b2769e56f32dc5d22566389",
     "AzerothSurvivors/Locale_ptBR_Handover.lua": "da7b1b8080bbf2987cfe4b3448a857de4828e05f2211563cec0c3ad4bd83f2ad",
     "AzerothSurvivors/Locale_ptBR_Hub.lua": "ce8ffda85123a546b9545bf29ec35b25bcc2731f9b7fee5130b89a51dab7ab69",
     "AzerothSurvivors/Locale_ptBR_Net.lua": "578a721275db7fa29489a7d9b07271345d0432163381c4e0ce27c1a779fea2e1",
     "AzerothSurvivors/Locale_ptBR_Ping.lua": "dccbd1322dbab7ef13ecdeb67deb0c215dcbedc7a42ebeaa326008454ffae33d",
-    "AzerothSurvivors/Locale_ptBR_Run.lua": "bc7fc92107ec7586705db5fa703e67d38b9a79d00e1af2105651d47bcf4d2d2d",
+    "AzerothSurvivors/Locale_ptBR_Run.lua": "17514e42a77504fe558fd65291a3cbc41ca2db1d6a16758728253c4991c8becf",
     "AzerothSurvivors/Locale_ptBR_Spectate.lua": "7c5a6467e0e66ecb4f20e6f30654c77bf5b6f8e41b956eb719176b5a3dabf376",
     "AzerothSurvivors/Locale_ptBR_Victory.lua": "f44a9b0734939fa5500763c11080c2936ca8754cf3709a537e42efa1509d09b1",
-    "AzerothSurvivors/Locale_ruRU.lua": "129ad8416d1c86a95d1a8bfcd8d32fb9faf829ca78999f4c6fe4721c1483ba47",
-    "AzerothSurvivors/Locale_ruRU_Controller.lua": "f29407b3849225d333f4fe2194997682bfe8d90fec46bc21d898769d267d320e",
+    "AzerothSurvivors/Locale_ruRU.lua": "1fc3b43fcb6cf7267ab2a67fa0eb2766bf4955ce7ca1773c320f48d1743a360d",
+    "AzerothSurvivors/Locale_ruRU_Controller.lua": "6114360df5683a9dedf860a2837102729d197f11192c06db06fb19d1e19ee685",
     "AzerothSurvivors/Locale_ruRU_Dash.lua": "febc62a2401b71a151f299341a4b9127de22e300b50e5a1405d6183030f5c7a8",
     "AzerothSurvivors/Locale_ruRU_Events.lua": "d51981fc2464614342ffad9ec31e58a27e423ff02bdaa82c04dd1f44d9f13a8f",
     "AzerothSurvivors/Locale_ruRU_Handover.lua": "4774cc244314bcf7f1db39994be8df3bfea9ee837dd492f16e2e4aff21b603ea",
     "AzerothSurvivors/Locale_ruRU_Hub.lua": "6f3e2724f61a2dc878806d039dc657a572c4f43749c4b07af9c5fc39fc892670",
     "AzerothSurvivors/Locale_ruRU_Net.lua": "37105e7d62d85412e035556d280188211936307fb547391eaf8679db7b427a5a",
     "AzerothSurvivors/Locale_ruRU_Ping.lua": "b80a52389dd75478dc4161266dabef1f4eb90a1d6164648bccacabde3c663b77",
-    "AzerothSurvivors/Locale_ruRU_Run.lua": "ab5e5e8ba47ddcc08a33a99abf82c7802d393f658c30aa02e87eaee117231a0d",
+    "AzerothSurvivors/Locale_ruRU_Run.lua": "5b6f48e0ba1b20d6c02537447bdc0a444b5a574706b22794169d1af05a0b2e41",
     "AzerothSurvivors/Locale_ruRU_Spectate.lua": "9f32fce999d94e77d0bdbe6eedfa4cd612ae234650d7f78ee0c7ec69df6f72b5",
     "AzerothSurvivors/Locale_ruRU_Victory.lua": "b1be82e20d5df0870007993355d29fe296ee3427e6202f21d978a8461c258375",
-    "AzerothSurvivors/Locale_trTR.lua": "6ec8af4594438dd02709c2d044705e7412a3223e4185664a18f3d708e6ef9578",
-    "AzerothSurvivors/Locale_trTR_Controller.lua": "283ef7b2b3c87f381072a0ff4d905dc137b74e402de27ca5ab0f72e396e7f282",
+    "AzerothSurvivors/Locale_trTR.lua": "cb01423c839ca7d364495e954d5503c80a7bf62da99b6e564a3939e34fc46091",
+    "AzerothSurvivors/Locale_trTR_Controller.lua": "fdd32b98626011a38a76ff340b10d1441d7314bde70de9436823a831d979430b",
     "AzerothSurvivors/Locale_trTR_Dash.lua": "fb43b0252cab73ecb538542edbd1b23f9e1f004e773744a7901bfac07daa50f5",
     "AzerothSurvivors/Locale_trTR_Events.lua": "f5eb011d5f86ea63286a5e9d02141b118214b79601ea9eebb79635d61827b821",
     "AzerothSurvivors/Locale_trTR_Handover.lua": "71aeceee61c31ee57b8fb520147c953ce12f998b1e954e2fd99d8d512cf813e7",
     "AzerothSurvivors/Locale_trTR_Hub.lua": "08714e5fa55a8ab04631f211f370225fc97d31be05b3146ed8c8d488e0c5006f",
     "AzerothSurvivors/Locale_trTR_Net.lua": "9bf5e82245c1f25fbf258a62151d54049c71eefe6bc7c0271369af3bcc504a6c",
     "AzerothSurvivors/Locale_trTR_Ping.lua": "3b81eecbe4bcc75625f9b3a66cdd04512f4b99c7f2c7a8865df726da7dbcd6f3",
-    "AzerothSurvivors/Locale_trTR_Run.lua": "e9426fe0e04fbd0cbaef039bf70fd35ded45a4959e93069c8062c5303f56c4c6",
+    "AzerothSurvivors/Locale_trTR_Run.lua": "f7f27d6541800711d8d2762c31cf05c4b37c766ded57fb544f34ced40272968c",
     "AzerothSurvivors/Locale_trTR_Spectate.lua": "9f1137a194c8b2675471731e6c4765322dcb142d47f9be16e428b6e71ebaa694",
     "AzerothSurvivors/Locale_trTR_Victory.lua": "f9abc8ae775da2cf5b7d3423f457118c817bfb8f3819beef5d36bff45bc8b626",
-    "AzerothSurvivors/Loot.lua": "2bf01ffd2b0214a66226b080f4db272ff7a64bf9e4d2aec3a42da0c262770e08",
+    "AzerothSurvivors/Loot.lua": "a0606602183793b3eaf76e99adcd92d853aaf8dd857bd281663a2f7d864799eb",
     "AzerothSurvivors/Meter.lua": "518d67c613f364c524122bea36b84ace27bb8599fe9055c502d5252ed0bb753a",
     "AzerothSurvivors/Mount.lua": "df2485d1c07e68cc5070e6df3bb286dc801bb9502f11de819fa2ac72e4026965",
     "AzerothSurvivors/Net.lua": "607e64c3353372f046458a90c77d9daa068c8e7b104d22ac6e06a6b2961cf7d5",
     "AzerothSurvivors/Passage.lua": "b117e0be05845af8871aec41c8ff4cf942245ce2592308b6882bf0eb2a3499fb",
     "AzerothSurvivors/Ping.lua": "384fc0c7d9390c55bfbaffd28b89ac9d65d6c8f0a0a6c1fa965f59706f6aa099",
     "AzerothSurvivors/ProvingBuild.lua": "666e645d6ccc05855bb5ecf3c837e4e388d8da94c6a5cc8c76b946145345eb6d",
-    "AzerothSurvivors/ProvingGround.lua": "a1431e97e3afbf09ca922e951bc1a686e29969c719b2610c49211baaf9e23cb4",
+    "AzerothSurvivors/ProvingGround.lua": "69655dd16d03e8afa58d532e0185eb1c0e101e7e905cdc0fc6bbfc375941e24b",
     "AzerothSurvivors/Revive.lua": "86a82925b18001be2bd9d5d461b650b8a904e18617f2e04040056fe262995025",
     "AzerothSurvivors/Rift.lua": "da10ddf07d2a78bfd4b9995cca987c791330d764432fd2d66ad44c0755309c89",
     "AzerothSurvivors/Run.lua": "9972cf15abf6c80627d72c87b214c57c9f2a85b7549d6b347486dab6c9676fc8",
@@ -200,20 +202,20 @@
     "AzerothSurvivors/Settings.lua": "edf2206810fb5ddae2b08c408a0e3d5e034b0931560fba93edd72c1e29cdfd99",
     "AzerothSurvivors/Spectate.lua": "17661051251c2c524f2d548e022811de632ce9313dfd7ce7bafdddc2197f05c1",
     "AzerothSurvivors/Spells.lua": "fecd3772b9e01d0a2a4073f99b4e67bf6aff9cc046e3955f9d8b30733b64df20",
-    "AzerothSurvivors/Spoils.lua": "9e880b7db8f199072fbfd3a7000dd57920e2857110d62aa634dce01381e8a807",
+    "AzerothSurvivors/Spoils.lua": "854c56327b15158f04d7bfb97659cb92d2abd4655b4049e3dfad89a73c23fa59",
     "AzerothSurvivors/StockWindows.lua": "0238d0cf8d61d1035cc43160e8cdbca1dbd34a72ebceaf6c1537ab1debd93ca2",
-    "AzerothSurvivors/Talents/SurvivorsLocale_deDE_Talents.lua": "7398e09b1cb5fbc4baf4038a247b3d91a6208f86c3f0d1145d84d47f1c73e27a",
-    "AzerothSurvivors/Talents/SurvivorsLocale_esES_Talents.lua": "644625ff303b2885415dca3bdee5abc9bb12f5caa8fe905df8891326b3d25db0",
-    "AzerothSurvivors/Talents/SurvivorsLocale_frFR_Talents.lua": "f2bbd4d207e4d0ce9c4a1aa2549cb8e741225094d860bfcb9e4639abee2a0904",
-    "AzerothSurvivors/Talents/SurvivorsLocale_itIT_Talents.lua": "7148c0faa17d8f083d0380ee8953a6e4a474bf7c30c63221d13c920cd14d512d",
-    "AzerothSurvivors/Talents/SurvivorsLocale_plPL_Talents.lua": "6bd48a340065ebb05db1ad9e98fa6350730bda11b7f4284b22de061a76311b53",
-    "AzerothSurvivors/Talents/SurvivorsLocale_ptBR_Talents.lua": "dc9dec6efc8e18ddcbadb88d3fd36be7dc67cdb6776ecc63d7aee10454aec590",
-    "AzerothSurvivors/Talents/SurvivorsLocale_ruRU_Talents.lua": "e3b5fa0f8fce4fa056aa104df1cf7cd60318108bc55b72302c4d8c29536d86cc",
-    "AzerothSurvivors/Talents/SurvivorsLocale_trTR_Talents.lua": "f8b01f73b3b7c762e5a31a8763e0d7e55c41cd3e016216a08282f4932d13439f",
+    "AzerothSurvivors/Talents/SurvivorsLocale_deDE_Talents.lua": "207ad79449771eb965fce638fb468da1a480cbbea35c140fa0e4fa3edb0d3914",
+    "AzerothSurvivors/Talents/SurvivorsLocale_esES_Talents.lua": "668793c1544dffac9adac4d49f5d56be6366f5a5d971c89c672aa9612a105ad7",
+    "AzerothSurvivors/Talents/SurvivorsLocale_frFR_Talents.lua": "7e7500d514c4beec93fdce4dfbf746f605b19b57b4d8413630a8744ed714f758",
+    "AzerothSurvivors/Talents/SurvivorsLocale_itIT_Talents.lua": "329a6f76d0d35824de61cd7dd4bbd3fde4a0ce5b6f38600f7e185c69f0deb922",
+    "AzerothSurvivors/Talents/SurvivorsLocale_plPL_Talents.lua": "ddf218b43a10c522f8124c0b7ac3811d1400a0e12b1e07dba976bb8295bbe1e2",
+    "AzerothSurvivors/Talents/SurvivorsLocale_ptBR_Talents.lua": "086a47b9a481fc5ccfe8bb27a8cd9bdb063bb3a5594b878a91313183db03ed34",
+    "AzerothSurvivors/Talents/SurvivorsLocale_ruRU_Talents.lua": "1a6131f0bdfbabfb986c25db3bd0fa21cd7f140a791adbdfa5d12903c05f19d6",
+    "AzerothSurvivors/Talents/SurvivorsLocale_trTR_Talents.lua": "6b936ad9efcdd78319688575110642c16bacbf88da31b13f83b31328f4836d09",
     "AzerothSurvivors/Talents/SurvivorsTalents.lua": "2fdf253f1273f90e64fb480eb05a364f6badb11202cf4b3ec7618668478cdd31",
     "AzerothSurvivors/TouchControls.lua": "b8320d57334a7391527ce77587f008beffa4807e0dfb05ad00739aea3ec4be59",
     "AzerothSurvivors/Tracker.lua": "68a335cd98e316778fcefa47f97a8b9a9a8a317480e168259f1c64edb145fb59",
-    "AzerothSurvivors/Units.lua": "bba61c0d10d36d4cad090b9328224b70df67c48792a421594d5918bdd1a5b657",
+    "AzerothSurvivors/Units.lua": "fa1cf0e51c242776518593f2695c50455bd367b148659006eb90762ba896f5a1",
     "AzerothSurvivors/Vault.lua": "2926f473d7bb43a19011fc7f0b205d9598bcda17a02a580c3d83c335400fa2cb",
     "AzerothSurvivors/VictoryScene.lua": "80ec1fb9e7b7926173570c2f97f475ebbeafa90786102c347aabd16207e8bd87",
     "AzerothSurvivors/Voice.lua": "515bb3381001c7969d8611cd4192f88518246ce4a6acf51e6a556efc85be9c3d",
@@ -467,36 +469,36 @@
   },
   "webEvidence": {
     "https://azreborn.com/guides/addon-api": {
-      "sha256": "fe108c4ae0024466e54dca78094c8462bfc6478543099f4eefc24cfa0cf07697",
-      "bytes": 283997
+      "sha256": "781012a4273bf9a01e399bdc603f66959533abbb15cdd9e41609e94825b1033f",
+      "bytes": 287604
     },
     "https://azreborn.com/guides/runs-and-zones": {
-      "sha256": "d855154987ec1c04806fa826efc6fabacfe52b34d7cf7b13b633357107b6deac",
-      "bytes": 218718
+      "sha256": "75ba47f676ab49cd77d57531faa25c274c4f873eeef93e10b3c346c6c6685219",
+      "bytes": 222325
     },
     "https://azreborn.com/guides/classes-and-talents": {
-      "sha256": "2d945e748202246a443ebd5db618d7cda37add51d2758986e2d69bc137f894e0",
-      "bytes": 154724
+      "sha256": "67090d7f350941647442bc4e99749564eee7db404963fddc7ea6096c3f071b3e",
+      "bytes": 159140
     },
     "https://azreborn.com/guides/co-op": {
-      "sha256": "4a7f53543ca132202dd49381e64b9a69510f4fb37935d33ddd6d43602d253bc4",
-      "bytes": 149447
+      "sha256": "0f1ff629cc3c1d8b5c8f01aff7972887b5690a86736e8cb131b614686d11c9a8",
+      "bytes": 153054
     },
     "https://azreborn.com/guides/progression-and-cosmetics": {
-      "sha256": "5fe7306c4e093b00ab75f86afbd13439578c11451acf5a51503e4d1dfcab6106",
-      "bytes": 178391
+      "sha256": "13e65f8f9111d6bd972085e0a69d5bdd4f60aec67e0bfc8eecc63ac0b1accb72",
+      "bytes": 181998
     },
     "https://azreborn.com/guides/getting-started": {
-      "sha256": "41510cc9698947aebfcae3fb0399a5abf99c0485c977bd03bc36b406201dff21",
-      "bytes": 151584
+      "sha256": "0b24b9b4679904b2e56ffd4b1d561a638b9a3fbfb496518373aa799dd45b198d",
+      "bytes": 155960
     },
     "https://azreborn.com/guides/troubleshooting": {
-      "sha256": "25b199ed67d660fd9d0d0976e309e38ffb95beed0bea0360672115b9c3edccbc",
-      "bytes": 151662
+      "sha256": "9766ec8870b0cec151c76677c2033b8a04ae5fc11d8597954842a32dfccd409c",
+      "bytes": 155269
     },
     "https://azreborn.com/guides/leaderboards-and-discord": {
-      "sha256": "2db0078afd7fb801734632332c58cd5c678ea066e63adfe4effd2400738e436a",
-      "bytes": 148346
+      "sha256": "8b790562968b88fc97e54b8d6a4d51004df1142d153d9d11c63f9ab0f1285079",
+      "bytes": 151953
     }
   },
   "symbols": [
@@ -514,7 +516,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 60
+          "line": 63
         }
       ],
       "references": [
@@ -733,7 +735,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 159
+          "line": 164
         },
         {
           "file": "NativeData.lua",
@@ -750,7 +752,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 161
+          "line": 166
         }
       ],
       "directCallSites": [],
@@ -822,7 +824,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Meter.lua",
-          "line": 940
+          "line": 1324
         }
       ],
       "references": [
@@ -1041,11 +1043,11 @@
         },
         {
           "file": "Reborn.lua",
-          "line": 188
+          "line": 193
         },
         {
           "file": "Reborn.lua",
-          "line": 189
+          "line": 194
         },
         {
           "file": "RebornPresentation.lua",
@@ -1061,7 +1063,7 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 128
+          "line": 129
         }
       ],
       "directCallSites": [],
@@ -1073,7 +1075,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 448
+          "line": 457
         }
       ],
       "references": [
@@ -1091,7 +1093,7 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 585
+          "line": 590
         }
       ],
       "directCallSites": [],
@@ -1103,7 +1105,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 261
+          "line": 270
         }
       ],
       "references": [
@@ -1164,7 +1166,7 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 696
+          "line": 701
         },
         {
           "file": "CombatText.lua",
@@ -1200,7 +1202,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 222
+          "line": 231
         }
       ],
       "references": [
@@ -1249,7 +1251,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 486
+          "line": 495
         }
       ],
       "references": [
@@ -1259,7 +1261,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2107
+          "line": 2111
         }
       ],
       "directCallSites": [],
@@ -1271,7 +1273,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 290
+          "line": 299
         }
       ],
       "references": [
@@ -1293,7 +1295,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 444
+          "line": 453
         }
       ],
       "references": [
@@ -1311,7 +1313,7 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 585
+          "line": 590
         }
       ],
       "directCallSites": [],
@@ -1323,7 +1325,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 460
+          "line": 469
         }
       ],
       "references": [
@@ -1333,21 +1335,21 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2086
-        },
-        {
-          "file": "FieldKit.lua",
           "line": 2090
         },
         {
+          "file": "FieldKit.lua",
+          "line": 2094
+        },
+        {
           "file": "ReferenceHUD.lua",
-          "line": 1802
+          "line": 1811
         }
       ],
       "directCallSites": [
         {
           "file": "FieldKit.lua",
-          "line": 2090
+          "line": 2094
         }
       ],
       "coverage": "referenced"
@@ -1358,7 +1360,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 556
+          "line": 565
         }
       ],
       "references": [
@@ -1376,7 +1378,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 422
+          "line": 431
         }
       ],
       "references": [
@@ -1394,11 +1396,11 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 585
+          "line": 590
         },
         {
           "file": "MeterLedger.lua",
-          "line": 586
+          "line": 591
         },
         {
           "file": "PartySync.lua",
@@ -1418,7 +1420,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Meter.lua",
-          "line": 904
+          "line": 1230
         }
       ],
       "references": [
@@ -1440,7 +1442,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Meter.lua",
-          "line": 919
+          "line": 1245
         }
       ],
       "references": [
@@ -1462,11 +1464,11 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 239
+          "line": 240
         },
         {
           "file": "Loadout.lua",
-          "line": 240
+          "line": 241
         }
       ],
       "directCallSites": [],
@@ -1478,17 +1480,17 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Meter.lua",
-          "line": 936
+          "line": 1262
         }
       ],
       "references": [
         {
           "file": "Loadout.lua",
-          "line": 239
+          "line": 240
         },
         {
           "file": "Loadout.lua",
-          "line": 242
+          "line": 243
         }
       ],
       "directCallSites": [],
@@ -1500,7 +1502,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Meter.lua",
-          "line": 932
+          "line": 1258
         }
       ],
       "references": [
@@ -1510,7 +1512,7 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 344
+          "line": 345
         }
       ],
       "directCallSites": [],
@@ -1522,7 +1524,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 453
+          "line": 462
         }
       ],
       "references": [
@@ -1532,11 +1534,11 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 562
+          "line": 565
         },
         {
           "file": "MeterLedger.lua",
-          "line": 563
+          "line": 566
         },
         {
           "file": "Coop.lua",
@@ -1556,7 +1558,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 193
+          "line": 202
         }
       ],
       "references": [
@@ -1589,6 +1591,10 @@
           "line": 37
         },
         {
+          "file": "RebornStats.lua",
+          "line": 22
+        },
+        {
           "file": "RunMode.lua",
           "line": 130
         },
@@ -1610,7 +1616,7 @@
         },
         {
           "file": "MeterSuite.lua",
-          "line": 426
+          "line": 429
         },
         {
           "file": "BossTimeline.lua",
@@ -1642,7 +1648,7 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 433
+          "line": 435
         },
         {
           "file": "FieldKit.lua",
@@ -1666,51 +1672,51 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1527
+          "line": 1530
         },
         {
           "file": "FieldKit.lua",
-          "line": 1541
+          "line": 1544
         },
         {
           "file": "FieldKit.lua",
-          "line": 1583
+          "line": 1586
         },
         {
           "file": "FieldKit.lua",
-          "line": 1727
+          "line": 1730
         },
         {
           "file": "FieldKit.lua",
-          "line": 1955
+          "line": 1959
         },
         {
           "file": "FieldKit.lua",
-          "line": 2086
+          "line": 2090
         },
         {
           "file": "FieldKit.lua",
-          "line": 2101
+          "line": 2105
         },
         {
           "file": "FieldKit.lua",
-          "line": 2176
+          "line": 2180
         },
         {
           "file": "FieldKit.lua",
-          "line": 2471
+          "line": 2475
         },
         {
           "file": "FieldKit.lua",
-          "line": 2500
+          "line": 2504
         },
         {
           "file": "FieldKit.lua",
-          "line": 3046
+          "line": 3050
         },
         {
           "file": "FieldKit.lua",
-          "line": 3188
+          "line": 3192
         },
         {
           "file": "WorldPins.lua",
@@ -1743,6 +1749,10 @@
           "line": 37
         },
         {
+          "file": "RebornStats.lua",
+          "line": 22
+        },
+        {
           "file": "RunMode.lua",
           "line": 130
         },
@@ -1752,7 +1762,7 @@
         },
         {
           "file": "MeterSuite.lua",
-          "line": 426
+          "line": 429
         },
         {
           "file": "BossTimeline.lua",
@@ -1784,55 +1794,55 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1527
+          "line": 1530
         },
         {
           "file": "FieldKit.lua",
-          "line": 1541
+          "line": 1544
         },
         {
           "file": "FieldKit.lua",
-          "line": 1583
+          "line": 1586
         },
         {
           "file": "FieldKit.lua",
-          "line": 1727
+          "line": 1730
         },
         {
           "file": "FieldKit.lua",
-          "line": 1955
+          "line": 1959
         },
         {
           "file": "FieldKit.lua",
-          "line": 2086
+          "line": 2090
         },
         {
           "file": "FieldKit.lua",
-          "line": 2101
+          "line": 2105
         },
         {
           "file": "FieldKit.lua",
-          "line": 2176
+          "line": 2180
         },
         {
           "file": "FieldKit.lua",
-          "line": 2176
+          "line": 2180
         },
         {
           "file": "FieldKit.lua",
-          "line": 2471
+          "line": 2475
         },
         {
           "file": "FieldKit.lua",
-          "line": 2500
+          "line": 2504
         },
         {
           "file": "FieldKit.lua",
-          "line": 3046
+          "line": 3050
         },
         {
           "file": "FieldKit.lua",
-          "line": 3188
+          "line": 3192
         },
         {
           "file": "WorldPins.lua",
@@ -1855,17 +1865,17 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 525
+          "line": 534
         }
       ],
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 2101
+          "line": 2105
         },
         {
           "file": "FieldKit.lua",
-          "line": 2102
+          "line": 2106
         },
         {
           "file": "WorldPins.lua",
@@ -1897,7 +1907,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 214
+          "line": 223
         }
       ],
       "references": [
@@ -1923,7 +1933,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 201
+          "line": 210
         }
       ],
       "references": [],
@@ -1936,7 +1946,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 206
+          "line": 215
         }
       ],
       "references": [],
@@ -1967,7 +1977,7 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 503
+          "line": 505
         },
         {
           "file": "BossTimeline.lua",
@@ -1981,7 +1991,7 @@
       "directCallSites": [
         {
           "file": "MeterLedger.lua",
-          "line": 503
+          "line": 505
         }
       ],
       "coverage": "referenced"
@@ -1992,7 +2002,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 566
+          "line": 575
         }
       ],
       "references": [
@@ -2006,7 +2016,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 602
+          "line": 606
         },
         {
           "file": "ZoneThemes.lua",
@@ -2022,7 +2032,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 344
+          "line": 353
         }
       ],
       "references": [],
@@ -2035,7 +2045,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 350
+          "line": 359
         }
       ],
       "references": [
@@ -2061,7 +2071,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 319
+          "line": 328
         }
       ],
       "references": [],
@@ -2074,7 +2084,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 404
+          "line": 413
         }
       ],
       "references": [
@@ -2100,7 +2110,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 393
+          "line": 402
         }
       ],
       "references": [],
@@ -2113,7 +2123,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 380
+          "line": 389
         }
       ],
       "references": [
@@ -2139,7 +2149,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 302
+          "line": 311
         }
       ],
       "references": [
@@ -2169,7 +2179,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 539
+          "line": 543
         }
       ],
       "directCallSites": [],
@@ -2295,7 +2305,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivors/Inspect.lua",
-          "line": 644
+          "line": 1024
         }
       ],
       "references": [],
@@ -2390,7 +2400,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 576
+          "line": 585
         }
       ],
       "references": [],
@@ -2495,7 +2505,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 435
+          "line": 444
         }
       ],
       "references": [],
@@ -2568,7 +2578,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 620
+          "line": 629
         }
       ],
       "references": [],
@@ -2641,17 +2651,17 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 570
+          "line": 579
         }
       ],
       "references": [
         {
           "file": "ReferenceHUD.lua",
-          "line": 140
+          "line": 144
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 603
+          "line": 607
         },
         {
           "file": "ZoneThemes.lua",
@@ -2755,7 +2765,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 101
+          "line": 110
         }
       ],
       "references": [],
@@ -2768,7 +2778,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 612
+          "line": 621
         }
       ],
       "references": [],
@@ -2943,7 +2953,7 @@
         },
         {
           "file": "MeterLedger.lua",
-          "line": 505
+          "line": 507
         },
         {
           "file": "BossTimeline.lua",
@@ -2999,51 +3009,51 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1509
+          "line": 1512
         },
         {
           "file": "FieldKit.lua",
-          "line": 1510
+          "line": 1513
         },
         {
           "file": "FieldKit.lua",
-          "line": 1516
+          "line": 1519
         },
         {
           "file": "FieldKit.lua",
-          "line": 1528
+          "line": 1531
         },
         {
           "file": "FieldKit.lua",
-          "line": 1529
+          "line": 1532
         },
         {
           "file": "FieldKit.lua",
-          "line": 1542
+          "line": 1545
         },
         {
           "file": "FieldKit.lua",
-          "line": 1587
+          "line": 1590
         },
         {
           "file": "FieldKit.lua",
-          "line": 1617
+          "line": 1620
         },
         {
           "file": "FieldKit.lua",
-          "line": 1618
+          "line": 1621
         },
         {
           "file": "FieldKit.lua",
-          "line": 2096
+          "line": 2100
         },
         {
           "file": "FieldKit.lua",
-          "line": 2097
+          "line": 2101
         },
         {
           "file": "FieldKit.lua",
-          "line": 3048
+          "line": 3052
         },
         {
           "file": "WorldPins.lua",
@@ -3087,11 +3097,11 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 553
+          "line": 557
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 595
+          "line": 599
         }
       ],
       "directCallSites": [],
@@ -3137,7 +3147,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 594
+          "line": 603
         }
       ],
       "references": [
@@ -3203,7 +3213,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Meter.lua",
-          "line": 944
+          "line": 1328
         }
       ],
       "references": [
@@ -3272,11 +3282,11 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 197
+          "line": 198
         },
         {
           "file": "Loadout.lua",
-          "line": 238
+          "line": 239
         }
       ],
       "directCallSites": [],
@@ -3293,15 +3303,15 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 204
-        },
-        {
-          "file": "Loadout.lua",
-          "line": 300
+          "line": 205
         },
         {
           "file": "Loadout.lua",
           "line": 301
+        },
+        {
+          "file": "Loadout.lua",
+          "line": 302
         }
       ],
       "directCallSites": [],
@@ -3313,28 +3323,32 @@
       "definitions": [],
       "references": [
         {
-          "file": "FieldKit.lua",
-          "line": 1414
+          "file": "RebornStats.lua",
+          "line": 21
         },
         {
           "file": "FieldKit.lua",
-          "line": 1415
+          "line": 1417
         },
         {
           "file": "FieldKit.lua",
-          "line": 3015
+          "line": 1418
         },
         {
           "file": "FieldKit.lua",
-          "line": 3051
+          "line": 3019
         },
         {
           "file": "FieldKit.lua",
-          "line": 3052
+          "line": 3055
         },
         {
           "file": "FieldKit.lua",
-          "line": 3058
+          "line": 3056
+        },
+        {
+          "file": "FieldKit.lua",
+          "line": 3062
         }
       ],
       "directCallSites": [],
@@ -3347,11 +3361,11 @@
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 3051
+          "line": 3055
         },
         {
           "file": "FieldKit.lua",
-          "line": 3058
+          "line": 3062
         }
       ],
       "directCallSites": [],
@@ -3467,11 +3481,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1630
+          "line": 1633
         },
         {
           "file": "FieldKit.lua",
-          "line": 2021
+          "line": 2025
         }
       ],
       "directCallSites": [],
@@ -3496,7 +3510,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Meter.lua",
-          "line": 948
+          "line": 1332
         }
       ],
       "references": [],
@@ -3539,7 +3553,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivors/Inspect.lua",
-          "line": 45
+          "line": 197
         }
       ],
       "references": [],
@@ -3552,7 +3566,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 580
+          "line": 589
         }
       ],
       "references": [],
@@ -3617,7 +3631,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 468
+          "line": 477
         }
       ],
       "references": [],
@@ -3683,15 +3697,15 @@
       "references": [
         {
           "file": "MeterLedger.lua",
-          "line": 529
-        },
-        {
-          "file": "MeterLedger.lua",
           "line": 532
         },
         {
           "file": "MeterLedger.lua",
-          "line": 533
+          "line": 535
+        },
+        {
+          "file": "MeterLedger.lua",
+          "line": 536
         },
         {
           "file": "Coop.lua",
@@ -3804,7 +3818,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 473
+          "line": 482
         }
       ],
       "references": [],
@@ -3856,7 +3870,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivors/Inspect.lua",
-          "line": 658
+          "line": 1038
         }
       ],
       "references": [],
@@ -3869,7 +3883,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivors/ProvingGround.lua",
-          "line": 1714
+          "line": 1731
         }
       ],
       "references": [],
@@ -3934,7 +3948,7 @@
         },
         {
           "file": "Reborn.lua",
-          "line": 187
+          "line": 192
         },
         {
           "file": "Portraits.lua",
@@ -4010,15 +4024,15 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2176
+          "line": 2180
         },
         {
           "file": "FieldKit.lua",
-          "line": 2177
+          "line": 2181
         },
         {
           "file": "FieldKit.lua",
-          "line": 2178
+          "line": 2182
         },
         {
           "file": "ZoneThemes.lua",
@@ -4063,7 +4077,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 643
+          "line": 652
         }
       ],
       "references": [
@@ -4107,7 +4121,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivorsAPI/Api.lua",
-          "line": 603
+          "line": 612
         }
       ],
       "references": [
@@ -4164,7 +4178,7 @@
       "definitions": [
         {
           "file": "AzerothSurvivors/Spoils.lua",
-          "line": 728
+          "line": 692
         }
       ],
       "references": [],
@@ -4342,7 +4356,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3047
+          "line": 3051
         },
         {
           "file": "CombatText.lua",
@@ -4383,7 +4397,7 @@
     }
   ],
   "counts": {
-    "runtimeModules": 52,
+    "runtimeModules": 54,
     "nativeLuaFiles": 407,
     "declaredFunctions": 129,
     "documentedAZSSymbols": 94,

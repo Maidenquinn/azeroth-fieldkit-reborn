@@ -125,6 +125,7 @@ function D.Data(name,mode)
  end
  local lines,total,rate,known,truncated=FieldKitMeters.Read(mode or 1)
  result.mode=mode or 1
+ result.windowSeconds=FieldKitMeterWindow.Seconds(({"damage","healing","boss"})[mode or 1])
  if not known then result.unavailable=true;return result end
  result.rows=lines;result.damage=total;result.dps=rate;result.truncated=truncated
  return result
@@ -265,7 +266,7 @@ function D.Render()
  local data=D.data;if not data then return end
  local frame=D.frame
  -- Max Hit columns for own damage/boss breakdown; healing keeps HPS columns.
- local hitMode=data.own and data.mode~=2
+ local hitMode=data.own and data.mode~=2 and not (data.windowSeconds and data.windowSeconds>0)
  local width=hitMode and math.max(640,math.min(760,UIParent:GetWidth()-24)) or math.max(360,math.min(560,UIParent:GetWidth()-24))
  D.visible=math.max(1,math.min(D.pool,math.floor((UIParent:GetHeight()-200)/22)))
  ApplySort(data.rows)
@@ -303,12 +304,13 @@ function D.Render()
  if hitMode then D.spell:SetWidth(math.max(80,headerW-(HIT_RIGHT[1]+HIT_WIDTHS[1])-10))
  elseif limited then D.spell:SetWidth(math.max(80,headerW-120))
  else D.spell:SetWidth(math.max(80,headerW-270)) end
- D.summary:SetText(string.format(FieldKit_L(data.mode==2 and "Healing: %s   HPS: %s" or "Damage: %s   DPS: %s"),data.damage and string.format("%.0f",data.damage) or "?",data.dps and string.format("%.0f",data.dps) or "?"))
+ D.summary:SetText(string.format(FieldKit_L(data.mode==2 and "Healing: %s   HPS: %s" or "Damage: %s   DPS: %s"),data.damage and string.format("%.0f",data.damage) or "?",data.dps and string.format("%.0f",data.dps) or "?")..(data.windowSeconds and data.windowSeconds>0 and (" · "..string.format(FieldKit_L("Last %ds"),data.windowSeconds)) or ""))
  local hint=data.own and (hitMode and "Max Hit style: total, max crit, burst, average, hits and crit%. Click headers to sort." or "Your native spell breakdown. Scroll for more spells.") or "Allies: only their top spell is exposed. Full breakdown unavailable."
  if data.waiting then hint="Waiting for shared spells. The ally must enable sharing in FieldKit too." end
  if data.noTransport then hint="This client does not expose an addon-message transport." end
  if data.shared then hint=string.format(FieldKit_L("Shared spell snapshot · received %.0fs ago"),data.age) end
  if data.unavailable then hint="Your spell breakdown is not provided by the client." end
+ if data.unavailable and data.windowSeconds and data.windowSeconds>0 then hint=FieldKitMeterWindow.Empty(data.mode==2 and "healing" or "damage",hint) end
  if data.truncated then hint=data.shared and "Partial shared snapshot: safety limit reached." or "Partial view: the 512-source safety limit was reached." end
  FieldKit_Text(D.hint,hint)
  local top=1

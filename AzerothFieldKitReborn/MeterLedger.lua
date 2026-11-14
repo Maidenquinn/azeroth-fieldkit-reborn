@@ -333,15 +333,17 @@ function L.ParseDeath(msg)
  end
 end
 
-local function Snapshot(metric,scope,period,groupBy,ownerId,healPerspective)
+local function Snapshot(metric,scope,period,groupBy,ownerId,healPerspective,view)
  if type(AZS_GetMeterSnapshot)~="function" or type(AZS_GetMeterContext)~="function" then return nil end
  local ok,ctx=pcall(AZS_GetMeterContext)
  if not ok or type(ctx)~="table" or type(ctx.runId)~="string" then return nil end
  local q={apiVersion=1,runId=ctx.runId,metric=metric,scope=scope or "self",period=period or "run",groupBy=groupBy or "source",windowSeconds=0}
+ if view then q.windowSeconds=FieldKitMeterWindow.Seconds(view) end
  if metric=="healing" then q.healingPerspective=healPerspective or "received" end
  if ownerId then q.ownerId=ownerId;q.scope=scope or "owner" end
  if checkpoint then q.checkpointId=checkpoint end
- local ok2,snap=pcall(AZS_GetMeterSnapshot,q)
+ local ok2,snap,err=pcall(AZS_GetMeterSnapshot,q)
+ if view and not FieldKitMeterWindow.Accept(view,ok2 and snap or nil,err) then return nil end
  if not ok2 or type(snap)~="table" then return nil end
  if snap.status~="ready" and snap.status~="ready_empty" then return nil end
  return snap
@@ -425,7 +427,7 @@ local function SourceIcon(src)
  return nil
 end
 
-local function RowsFromSnap(snap)
+local function RowsFromSnap(snap,seconds)
  local out,total={},0
  if type(snap)~="table" then return out,0,nil,false end
  local sources=type(snap.sources)=="table" and snap.sources or {}
@@ -437,7 +439,7 @@ local function RowsFromSnap(snap)
  for i=1,math.min(512,nRows) do
   local row=rows[i]
   if type(row)=="table" then
-   local amount=Num(row.displayAmount or row.periodAmount,0) or 0
+   local amount=Num(seconds and seconds>0 and row.windowAmount or (row.displayAmount or row.periodAmount),0) or 0
    local src=row.sourceKey and sources[row.sourceKey] or nil
    local name
    if type(src)=="table" then name=Text(src.name,120) end
@@ -452,7 +454,7 @@ local function RowsFromSnap(snap)
    local bucket=fam.."#"..(proc==1 and "p" or "n")
    local line=merged[bucket]
    if not line then
-    line={name=name,dmg=0,dps=0,dpsKnown=false,share=nil,proc=proc,sourceKey=row.sourceKey,ownerId=row.ownerId,icon=SourceIcon(src) or IconOf(name),spellId=nil}
+    line={name=name,dmg=0,dps=0,dpsKnown=false,share=nil,proc=proc,sourceKey=row.sourceKey,ownerId=row.ownerId,icon=SourceIcon(src) or IconOf(name),spellId=nil,windowSeconds=seconds}
     merged[bucket]=line;table.insert(order,bucket)
    end
    line.dmg=line.dmg+amount
@@ -472,7 +474,7 @@ local function RowsFromSnap(snap)
   table.insert(out,line)
  end
  if type(snap.totals)=="table" then
-  local t=Num(snap.totals.displayAmount or snap.totals.periodAmount,0)
+  local t=Num(seconds and seconds>0 and snap.totals.windowAmount or (snap.totals.displayAmount or snap.totals.periodAmount),0)
   if t then total=t end
  end
  for i=1,table.getn(out) do if total and total>0 then out[i].share=out[i].dmg/total end end
@@ -486,7 +488,7 @@ local function AttachKillStats(lines)
   if type(line)=="table" and type(line.name)=="string" then
    local icon=line.icon or IconOf(line.name)
    line.icon=icon
-   local st=L.Stats(line.name,line.spellId,icon)
+   local st=not (line.windowSeconds and line.windowSeconds>0) and L.Stats(line.name,line.spellId,icon) or nil
    if st then
     line.kills=st.kills or 0
     line.hits=st.hits;line.crits=st.crits;line.critPct=st.critPct
@@ -511,6 +513,7 @@ end
 function L.Read(view)
  L.Boundary()
  view=view or "damage"
+ FieldKitMeterWindow.states[view]=nil
  local healPersp=(FieldKitRebornDB and FieldKitRebornDB.meterHealDone) and "performed" or "received"
  if view=="healing" and not FieldKit.rebornLegacyFixture and not FieldKitReborn.SupportsHealing(healPersp) then
   return {},nil,nil,false,false
@@ -576,11 +579,13 @@ function L.Read(view)
  end
  local metric=view=="healing" and "healing" or "damage"
  local period=view=="boss" and "encounter" or "run"
- local snap=Snapshot(metric,"self",period,"source",nil,view=="healing" and healPersp or nil)
+ local snap=Snapshot(metric,"self",period,"source",nil,view=="healing" and healPersp or nil,view)
  if snap then
-  local lines,total,rate,known,truncated=RowsFromSnap(snap)
+  local lines,total,rate,known,truncated=RowsFromSnap(snap,FieldKitMeterWindow.Seconds(view))
   return FinishLines(view,AttachKillStats(lines),total,rate,known,truncated)
  end
+ -- A cumulative getter cannot substitute for a requested recent window.
+ if FieldKitMeterWindow.Seconds(view)>0 then return {},nil,nil,false,false end
  -- Legacy getters (same 512-row bound as the previous FieldKitMeters.Read).
  local map={damage="AZS_GetMeter",healing="AZS_GetHealing",boss="AZS_GetBossMeter"}
  local fn=getglobal(map[view] or "AZS_GetMeter")
@@ -598,7 +603,7 @@ function L.Read(view)
  return FinishLines(view,AttachKillStats(out),Num(total,0),Num(rate,0),true,nLines>512)
 end
 
-function L.AppendStats(name,spellId,icon,dmg)
+function L.AppendStats(name,spellId,icon,dmg,recent)
  if not FieldKitRebornDB or FieldKitRebornDB.meterSpellTips==false then return false end
  if type(name)=="string" then
   name=string.gsub(name,"^%d+%.%s*","")
@@ -606,7 +611,7 @@ function L.AppendStats(name,spellId,icon,dmg)
   name=string.gsub(name,"^%s+","")
   name=string.gsub(name,"%s+$","")
  end
- local st=L.Stats(name,spellId,icon)
+ local st=not recent and L.Stats(name,spellId,icon) or nil
  if not st and not dmg then return false end
  GameTooltip:AddLine(" ")
  if dmg then GameTooltip:AddLine(FieldKit_L("Total")..": "..string.format("%.0f",math.floor(dmg+.5)),1,1,1) end
@@ -617,7 +622,7 @@ function L.AppendStats(name,spellId,icon,dmg)
   if st.avg>0 then GameTooltip:AddLine(FieldKit_L("Average")..": "..string.format("%.0f",st.avg),.85,.85,.85) end
   if st.burst>0 then GameTooltip:AddLine(FieldKit_L("Burst (1s)")..": "..string.format("%.0f",st.burst),.7,.85,1) end
   if st.kills>0 then GameTooltip:AddLine(FieldKit_L("Kills")..": "..tostring(st.kills),.9,.75,.4) end
- else
+ elseif not recent then
   GameTooltip:AddLine(FieldKit_L("No hit sample yet for this spell"),.6,.6,.6)
  end
  return true
@@ -633,7 +638,7 @@ function L.ShowTip(row)
  local dmg=line and line.dmg
  local icon=(line and line.icon) or IconOf(name)
  local spellId=line and line.spellId
- L.AppendStats(name,spellId,icon,dmg)
+ L.AppendStats(name,spellId,icon,dmg,line and line.windowSeconds and line.windowSeconds>0)
  GameTooltip:Show()
  return true
 end

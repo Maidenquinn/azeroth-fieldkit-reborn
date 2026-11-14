@@ -1,3 +1,5 @@
+reborn.11 / client 0.6.4: offline validation only. Native recent damage/healing windows 5..120, consistent amounts/rates/shares, checkpoints and unavailable history; jewelry/DoT tooltips, profiles and both theme families x all variants covered in mock. No live in-game/co-op acceptance for this build. Historical notes below apply to their stated releases.
+
 reborn.10 targeted result: timed calendar removed; native boss progression, Horde and reminder visually checked after reload in the ongoing solo run. Difficulty recovery is NOT accepted: current AZS_ZONE lacks rank/zone metadata even after native resync. Fresh-run capture and co-op remain pending.
 
 Azeroth FieldKit Reborn -- recette du candidat 0.1.0-reborn.9

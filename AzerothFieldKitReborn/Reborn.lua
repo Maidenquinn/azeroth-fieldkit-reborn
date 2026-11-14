@@ -147,7 +147,12 @@ function R.Gear()
   local slot=slots[g.slot]
   if g.slot=="ring" then rings=rings+1;slot=rings<=2 and (10+rings) or nil end
   if g.slot=="trinket" then trinkets=trinkets+1;slot=trinkets<=2 and (12+trinkets) or nil end
-  if slot then items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses={g.text or ""},rankValue=tonumber(g.amount)} end
+  if slot then
+   local raw=type(g.text)=="string" and FieldKitNative.Text(g.text,2048) or ""
+   local bonuses=FieldKitLoadout and FieldKitLoadout.ExpandStats({raw}) or {}
+   if table.getn(bonuses)==0 and raw~="" then bonuses={raw} end
+   items[slot]={name=g.name,icon=R.Icon(g.icon),bonuses=bonuses,rankValue=tonumber(g.amount)}
+  end
  end
  return items
 end

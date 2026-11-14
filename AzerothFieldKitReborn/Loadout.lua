@@ -68,6 +68,7 @@ function L.ExpandStats(lines)
  local out={}
  for _,line in ipairs(lines or {}) do
   local plain=string.gsub(tostring(line or ""),"^%s+","");plain=string.gsub(plain,"%s+$","")
+  plain=string.gsub(plain," · ",";")
   plain=string.gsub(plain,"^[Ee]quip%s*:%s*","");plain=string.gsub(plain,"^[Uu]se%s*:%s*","")
   plain=string.gsub(plain,"^[ÉéEe]quip[ée]*s?%s*:%s*","");plain=string.gsub(plain,"^[Uu]tiliser%s*:%s*","")
   local at=1;local count=0
@@ -387,6 +388,7 @@ function L.Render(frame)
    row.value:SetTextColor(L.RankColor(entry and entry.rankValue))
    L.Decorate(row,entry and entry.name);row.fieldkitSpellIcon:ClearAllPoints();row.fieldkitSpellIcon:SetPoint("TOPLEFT",row,"TOPLEFT",2,-1);row:SetValue(0)
   else
+   row.entry=entry
    local name,texture=entry and entry.name,entry and entry.icon
    if FieldKit.rebornLegacyFixture then name,texture=L.readSlot(({2,13,14,11,12})[i]) end
    local slot=({"Amulet","Trinket 1","Trinket 2","Ring 1","Ring 2"})[i]

@@ -456,3 +456,20 @@ FieldKitLocale.fr["Shows the native boss progression gauge without a spawn count
 FieldKitLocale.fr["Difficulty unavailable"]="Difficulté indisponible"
 
 FieldKitLocale.fr["Next native boss and its progression. Hidden when no upcoming boss is provided."]="Prochain boss natif et sa progression. Masqué si aucun prochain boss n’est fourni."
+
+-- Reborn 0.6.4 recent meters and native jewelry/DoT contributions.
+FieldKitLocale.fr["Recent damage and healing"]="Dégâts et soins récents"
+FieldKitLocale.fr["Recent window"]="Fenêtre récente"
+FieldKitLocale.fr["Last %ds"]="%d dernières secondes"
+FieldKitLocale.fr["Recent history unavailable"]="Historique récent indisponible"
+FieldKitLocale.fr["Building recent history"]="Collecte de l’historique récent"
+FieldKitLocale.fr["Native rate approximated from one-second samples."]="Débit natif approximé à partir d’échantillons d’une seconde."
+FieldKitLocale.fr["Recent history is rebuilt after reload. Hit and crit records cover the full run and are omitted here."]="L’historique récent se reconstruit après rechargement. Les relevés de coups et de critiques couvrent toute la partie et sont omis ici."
+FieldKitLocale.fr["Use native recent amounts, DPS/HPS and shares for Damage and Healing. Boss, taken, party and kills keep their existing time basis. History is rebuilt after reload."]="Utilise les montants, DPS/SPS et proportions natifs récents pour Dégâts et Soins. Boss, dégâts subis, groupe et éliminations conservent leur période actuelle. L’historique se reconstruit après rechargement."
+FieldKitLocale.fr["From worn jewelry"]="Apport des bijoux portés"
+FieldKitLocale.fr["Jewelry and DoT bonuses"]="Bonus des bijoux et des DoT"
+FieldKitLocale.fr["Native jewelry additions; already included in character totals."]="Apports natifs des bijoux, déjà inclus dans les totaux du personnage."
+FieldKitLocale.fr["DoT stacking is a character stat, not the current stacks on a target."]="Le cumul des DoT est une statistique du personnage ; ce n’est pas le nombre de cumuls actifs sur une cible."
+FieldKitLocale.fr["Cooldown"]="Recharge"
+
+FieldKitLocale.fr["Recent results start no earlier than the latest reset."]="Les résultats récents commencent au plus tôt à la dernière remise à zéro."

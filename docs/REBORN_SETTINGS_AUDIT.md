@@ -1,3 +1,5 @@
+Mise à jour reborn.11 / 0.6.4 : 18 pages, 121 entrées, 940 cas de setters. Deux contrôles ajoutent le mode récent et la durée 5–120 secondes. Les tests spécifiques utilisent aussi les deux familles de thèmes, leurs trois variantes et le mode sans thème ; les nouveaux réglages sont propres aux profils. Voir [les changements 0.6.4](RELEASE_REBORN_11.md). Recette hors jeu uniquement pour cette version.
+
 # Réglages et thèmes — audit du 13 novembre 2026
 
 Mise à jour reborn.10 : le calendrier et les rappels utilisent la progression native des boss ; la capture précoce de difficulté est ajoutée, mais le rang reste indisponible dans la session rechargée observée. La récupération du mode n’est pas acceptée en jeu. Voir [le compte rendu](REBORN_API_AUDIT.md).
