@@ -131,10 +131,6 @@ function FieldKit.BuildJourneySections(sections,actions)
    set=function(v) if FieldKitMeterSuite then FieldKitMeterSuite.SetDetached("kills",v) else FieldKitRebornDB.meterDetach_kills=v and true or nil;actions.UpdateMeterFrames(true) end end},
  }
  local layout={
-  {kind="slider",label="Native target frame size",min=50,max=150,step=5,
-   tip="Without a theme: unlock window positions, then drag the handle above the native target frame. This slider scales the whole target frame.",
-   get=function() return FieldKitRebornDB.nativeTargetScale end,
-   set=function(v) FieldKitRebornDB.nativeTargetScale=v;FieldKitNativeHUD.Update() end},
   {kind="slider",label="Card size without theme",min=75,max=110,step=5,
    get=function() return FieldKitRebornDB.nativeCardScale end,
    set=function(v) FieldKitRebornDB.nativeCardScale=v;FieldKitNativeHUD.Update() end},
@@ -147,6 +143,13 @@ function FieldKit.BuildJourneySections(sections,actions)
   {kind="check",label="Group accessories and statistics",tip="Move the right cards together. Turn off to move each window independently.",
    get=function() return FieldKitRebornDB.linkRightCards end,set=function(v) FieldKitRebornDB.linkRightCards=v;FieldKitCardLayout.ApplyRight() end},
  }
+ for i,def in ipairs({{"nativeTargetScale","Native target frame size"},{"nativeMinimapScale","Native minimap size"},{"nativePlayerScale","Native player frame size"},{"nativeActionScale","Native spell bar size"}}) do
+  local key,label=def[1],def[2]
+  table.insert(layout,i,{kind="slider",label=label,min=50,max=150,step=5,
+   tip="Without a theme: unlock window positions, then drag directly on the health bar, minimap or a spell icon. Lock positions to keep normal clicks. The size is saved separately for each element.",
+   get=function() return FieldKitRebornDB[key] end,
+   set=function(v) FieldKitRebornDB[key]=v;FieldKitNativeHUD.Update() end})
+ end
  for _,item in ipairs(FieldKitCardLayout.Options()) do table.insert(layout,item) end
  local look={
   {kind="zoneThemes"},

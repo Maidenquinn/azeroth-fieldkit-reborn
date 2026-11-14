@@ -488,3 +488,8 @@ FieldKitLocale.fr["With theme"]="Avec thème"
 FieldKitLocale.fr["Native target frame size"]="Taille de la cible native"
 FieldKitLocale.fr["Drag target frame"]="Déplacer la cible"
 FieldKitLocale.fr["Without a theme: unlock window positions, then drag the handle above the native target frame. This slider scales the whole target frame."]="Sans thème : déverrouillez les positions, puis glissez la poignée au-dessus de la cible native. Ce curseur redimensionne toute la cible."
+
+FieldKitLocale.fr["Native minimap size"]="Taille de la minimap native"
+FieldKitLocale.fr["Native player frame size"]="Taille de la vie du joueur native"
+FieldKitLocale.fr["Native spell bar size"]="Taille de la barre de sorts native"
+FieldKitLocale.fr["Without a theme: unlock window positions, then drag directly on the health bar, minimap or a spell icon. Lock positions to keep normal clicks. The size is saved separately for each element."]="Sans thème : déverrouillez les positions, puis glissez directement la barre de vie, la minimap ou une icône de sort. Verrouillez pour conserver les clics habituels. Chaque élément garde sa propre taille."

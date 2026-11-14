@@ -33,7 +33,7 @@ local function Mask(name,hide)
  end
 end
 function N.Release()
- N.ReleaseTargetLayout()
+ N.ReleaseNativeLayouts()
  for f,scale in pairs(N.cardScales or {}) do f:SetScale(scale) end;N.cardScales={}
  N.RestoreMeterFooter()
  if FieldKitReborn065 then FieldKitReborn065.RestoreCastbar() end
@@ -270,56 +270,116 @@ function N.MeterFooter()
  p.reset:Show();p:Show()
 end
 
--- An owned drag handle controls native target geometry without replacing its
--- handlers or writing AzerothSurvivorsUI's profile. Theme handover restores it.
-function N.ReleaseTargetLayout()
- local s=N.targetLayout
- if not s then return end
- s.frame:StopMovingOrSizing();s.frame:SetScale(s.scale)
- s.frame:ClearAllPoints()
- for _,point in ipairs(s.points) do s.frame:SetPoint(unpack(point)) end
- s.frame:SetMovable(s.movable)
- if N.targetMover then N.targetMover:Hide() end
- N.targetLayout=nil
+-- Invisible hit surfaces let unlocked native widgets drag directly. Locked
+-- widgets receive their original mouse input; no native script is replaced.
+local nativeLayouts={
+ {key="target",name="AzerothSurvivorsUnitFrameTarget",scale="nativeTargetScale",health=true},
+ {key="map",name="Minimap",scale="nativeMinimapScale"},
+ {key="player",name="AzerothSurvivorsUnitFramePlayer",scale="nativePlayerScale",health=true},
+ {key="actions",name="AzerothSurvivorsActionBar1",scale="nativeActionScale",actions=true}}
+local function Points(f)
+ local out={}
+ for i=1,(f.GetNumPoints and f:GetNumPoints() or 1) do
+  local a={f:GetPoint(i)};if a[1] then table.insert(out,a) end
+ end
+ return out
+end
+local function RestorePoints(f,points)
+ f:ClearAllPoints();for _,a in ipairs(points) do f:SetPoint(unpack(a)) end
+end
+local function StopNative(s)
+ if not s or not s.dragging then return end
+ s.dragging=nil;s.frame:StopMovingOrSizing();FieldKitPositions.Save(s.frame)
+end
+local function ForwardNative(hit,root,script)
+ local source=hit;local fn=source:GetScript(script)
+ if not fn and root~=hit then source=root;fn=source:GetScript(script) end
+ if fn then local prior=this;this=source;pcall(fn);this=prior end
+end
+local function NativeHit(s,hit,index)
+ s.hits=s.hits or {};N.nativeHits=N.nativeHits or {};local m=N.nativeHits[hit]
+ if not m then
+  m=CreateFrame("Button",nil,hit);N.nativeHits[hit]=m;m:RegisterForDrag("LeftButton");m:RegisterForClicks("LeftButtonUp","RightButtonUp")
+  m:SetScript("OnMouseDown",function() m.suppressClick=nil end)
+  m:SetScript("OnDragStart",function()
+   local state=m.state
+   if not state or FieldKitRebornDB.windowsLocked or FieldKit.IsChoiceScreen() then return end
+   m.suppressClick=true;state.dragging=true;state.frame:SetMovable(true);state.frame:StartMoving()
+  end)
+  m:SetScript("OnDragStop",function() StopNative(m.state) end)
+  m:SetScript("OnMouseUp",function() StopNative(m.state) end)
+  m:SetScript("OnHide",function() StopNative(m.state) end)
+  m:SetScript("OnClick",function()
+   if m.suppressClick then m.suppressClick=nil;return end
+   if hit.GetObjectType and hit:GetObjectType()=="Button" and hit.Click then hit:Click(arg1 or "LeftButton")
+   elseif m.state.frame.GetObjectType and m.state.frame:GetObjectType()=="Button" and m.state.frame.Click then m.state.frame:Click(arg1 or "LeftButton")
+   else ForwardNative(hit,m.state.frame,"OnMouseUp") end
+  end)
+  m:SetScript("OnEnter",function() ForwardNative(hit,m.state.frame,"OnEnter") end)
+  m:SetScript("OnLeave",function() ForwardNative(hit,m.state.frame,"OnLeave") end)
+  if m.EnableMouseWheel then m:EnableMouseWheel(true);m:SetScript("OnMouseWheel",function() ForwardNative(hit,m.state.frame,"OnMouseWheel") end) end
+ end
+ s.hits[index]=m;m.state=s
+ m:SetAllPoints(hit);m:SetFrameLevel(hit:GetFrameLevel()+20)
+ if s.enabled then m:Show() else m:Hide() end
+ return m
+end
+function N.ReleaseNativeLayout(key)
+ local s=N.nativeLayouts and N.nativeLayouts[key];if not s then return end
+ StopNative(s)
+ for _,hit in ipairs(s.hits or {}) do hit:Hide() end
+ s.frame:SetScale(s.scale);RestorePoints(s.frame,s.points);s.frame:SetMovable(s.movable)
+ if s.dash then s.dash.frame:SetScale(s.dash.scale);RestorePoints(s.dash.frame,s.dash.points) end
+ N.nativeLayouts[key]=nil
+ if key=="target" then N.targetLayout=nil end
+end
+function N.ReleaseTargetLayout() N.ReleaseNativeLayout("target") end
+function N.ReleaseNativeLayouts()
+ for _,def in ipairs(nativeLayouts) do N.ReleaseNativeLayout(def.key) end
 end
 function N.TargetLayout()
- local f=getglobal("AzerothSurvivorsUnitFrameTarget")
- local d=FieldKitRebornDB
- if not f or not d or FieldKit.rebornLegacyFixture then return end
- if not N.targetLayout or N.targetLayout.frame~=f then
-  N.ReleaseTargetLayout()
-  local points={}
-  for i=1,(f.GetNumPoints and f:GetNumPoints() or 1) do
-   local point={f:GetPoint(i)};if point[1] then table.insert(points,point) end
+ local d=FieldKitRebornDB;if not d or FieldKit.rebornLegacyFixture then return end
+ N.nativeLayouts=N.nativeLayouts or {}
+ for _,def in ipairs(nativeLayouts) do
+  local f=getglobal(def.name)
+  if f then
+   local s=N.nativeLayouts[def.key]
+   if s and s.frame~=f then N.ReleaseNativeLayout(def.key);s=nil end
+   if not s then
+    s={frame=f,scale=f:GetScale(),points=Points(f),movable=f.IsMovable and f:IsMovable() or false}
+    N.nativeLayouts[def.key]=s
+    if def.actions then
+     local dash=getglobal("AZSDashButton")
+     if dash and dash.GetCenter and f.GetCenter then
+      local dx,dy=dash:GetCenter();local x,y=f:GetCenter()
+      if dx and dy and x and y then
+       local ds=dash:GetEffectiveScale();local fs=f:GetEffectiveScale()
+       s.dash={frame=dash,points=Points(dash),scale=dash:GetScale(),x=(dx*ds-x*fs)/ds,y=(dy*ds-y*fs)/ds}
+      end
+     end
+    end
+   end
+   local factor=FieldKit.Number(d[def.scale],100,50,150)/100
+   local saved=d.frameAnchors[f:GetName()]
+   if not s.dragging then
+    if FieldKitPositions.Valid(saved) then FieldKitPositions.Restore(f);s.applied=true
+    elseif s.applied then RestorePoints(f,s.points);s.applied=nil end
+    f:SetScale(s.scale*factor)
+   end
+   if s.dash then
+    local dash=s.dash
+    if s.dragging or s.applied or factor~=1 then
+     dash.frame:SetScale(dash.scale*factor);dash.frame:ClearAllPoints();dash.frame:SetPoint("CENTER",f,"CENTER",dash.x,dash.y);dash.applied=true
+    elseif dash.applied then dash.frame:SetScale(dash.scale);RestorePoints(dash.frame,dash.points);dash.applied=nil end
+   end
+   s.enabled=not d.windowsLocked and f:IsShown() and f:GetAlpha()>0 and not FieldKit.IsChoiceScreen()
+   if def.actions then
+    for i=1,6 do local b=getglobal("AzerothSurvivorsActionBar1Button"..i);if b then NativeHit(s,b,i) end end
+   else
+    local hit=def.health and f.Health or f
+    local m=NativeHit(s,hit,1)
+    if def.key=="target" then N.targetLayout=s;N.targetMover=m end
+   end
   end
-  N.targetLayout={frame=f,scale=f:GetScale(),points=points,movable=f.IsMovable and f:IsMovable() or false}
  end
- local s=N.targetLayout
- if not N.targetMover then
-  local m=CreateFrame("Button","FieldKitNativeTargetMover",UIParent);N.targetMover=m
-  m:SetHeight(24);m:SetFrameStrata("DIALOG");m:RegisterForDrag("LeftButton")
-  FieldKitTheme.Surface(m,"button")
-  m.label=FieldKitTheme.Label(m,"Drag target frame",8,0,280,24,11,FieldKitTheme.gold)
-  m:SetScript("OnDragStart",function()
-   local state=N.targetLayout
-   if not state or FieldKitRebornDB.windowsLocked or FieldKit.IsChoiceScreen() then return end
-   state.dragging=true;state.frame:SetMovable(true);state.frame:StartMoving()
-  end)
-  local function Stop()
-   local state=N.targetLayout;if not state or not state.dragging then return end
-   state.dragging=nil;state.frame:StopMovingOrSizing();FieldKitPositions.Save(state.frame)
-  end
-  m:SetScript("OnDragStop",Stop);m:SetScript("OnMouseUp",Stop);m:SetScript("OnHide",Stop)
- end
- local key=f:GetName();local saved=d.frameAnchors[key]
- if not s.dragging then
-  if FieldKitPositions.Valid(saved) then FieldKitPositions.Restore(f);s.applied=true
-  elseif s.applied then
-   f:ClearAllPoints();for _,point in ipairs(s.points) do f:SetPoint(unpack(point)) end;s.applied=nil
-  end
-  f:SetScale(s.scale*FieldKit.Number(d.nativeTargetScale,100,50,150)/100)
- end
- local m=N.targetMover;m:ClearAllPoints();m:SetPoint("BOTTOM",f,"TOP",0,3)
- m:SetWidth(math.max(140,f:GetWidth()*f:GetScale()));m.label:SetWidth(m:GetWidth()-16);FieldKitTheme.Update(m)
- if not d.windowsLocked and f:IsShown() and f:GetAlpha()>0 and not FieldKit.IsChoiceScreen() then m:Show() else m:Hide() end
 end

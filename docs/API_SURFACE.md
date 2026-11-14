@@ -314,9 +314,12 @@ failed SetTexture results and raw zone keys remain diagnostic, not proof of rend
 
 Reborn .18 presentation: native reward choices keep native HUD containers masked
 while FieldKit yields its own cards. These alpha/mouse masks restore their exact
-prior state after choices. Unthemed native target placement uses an owned drag
-handle and saves the native frame's anchor only in FieldKitRebornDB.frameAnchors.
-Its scale is a profile-scoped 50–150% setting. Native click/event handlers and
+prior state after choices. Unthemed target, minimap, player and action-bar placement use invisible child
+hit surfaces over their own health/map/action regions while unlocked. Anchors
+are saved only in FieldKitRebornDB.frameAnchors. Each scale is a profile-scoped
+50–150% setting. Locked surfaces yield native input, unlocked clicks are forwarded
+without replacing native scripts, and drags suppress the resulting click. The
+Steed follows moved/scaled action bars and restores its original geometry. Native click/event handlers and
 AzerothSurvivorsUI's saved profile are not modified; theme handover restores the
 original points, scale and movability. Collision clearance is one physical pixel
 for unthemed cards (including their metal border); Reset is inside the meter.

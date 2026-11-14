@@ -1,3 +1,10 @@
+# 0.1.0-reborn.20 — Direct native HUD movement
+
+- Remove the visible target mover: unlocked target/player health bars and minimap drag directly, as do the native spell icons.
+- Add separate 50–150% native minimap, player-frame and spell-bar size controls beside the target size control. Anchors and scales are profile-scoped.
+- Preserve normal clicks and tooltips, suppress clicks after a drag, and yield input when locked or choosing rewards. Steed follows the spell bar.
+- Reuse invisible hit surfaces and restore original geometry on theme handover/logout. No new live client acceptance claimed.
+
 # 0.1.0-reborn.19 — Visible card collision bounds
 
 - Exclude transparent native atlas gutters from collision bounds. The visible metal extends 7 px beyond the content, rather than the backdrop quad's 10/18 px.

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.19",
+  "version": "0.1.0-reborn.20",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "No new live client pass for .19. User screenshot exposed excessive visible clearance after .18. Native tooltip atlas inspection shows transparent gutters around the metal. Collision bounds now use 7 px visible metal outsets rather than the full 10/18 px backdrop quad. Added a regression using actual Mode/Meter frame rectangles at a one-pixel visible separation and a true metal overlap. Earlier abstract overlap tests did not cover this geometry. Full offline verification and installed client API fixtures pass; live visual acceptance remains pending."
+  "inGameTestScope": "No new live client pass for .20. Offline regression covers invisible direct native dragging for target/player health bars, minimap and each spell icon; independent profile-scoped scales and anchors; forwarding clicks with native this/arg1 context, suppressing clicks after drag, locks/choices, reusable hit surfaces, original native geometry restoration and Steed following. Full runtime/settings/themes and installed 0.6.5 API/content fixtures pass. Live visual/input acceptance remains pending."
 }
