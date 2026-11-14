@@ -219,7 +219,7 @@ function B.Ensure()
   root:ClearAllPoints()
   root:SetPoint("CENTER",UIParent,"CENTER",FieldKitRebornDB.pos.FieldKitBossTimelineFrame[1] or 0,FieldKitRebornDB.pos.FieldKitBossTimelineFrame[2] or 0)
  else
-  root:ClearAllPoints();root:SetPoint("TOP",UIParent,"TOP",0,-6)
+  root:ClearAllPoints();root:SetPoint("TOP",UIParent,"TOP",0,FieldKit.rebornLegacyFixture and -6 or -20)
  end
  root:Hide()
  return root
@@ -227,6 +227,20 @@ end
 
 local function QuietHud()
  return FieldKit.layoutEditing or (FieldKitPreview and FieldKitPreview.mode)
+end
+
+function B.NativeGauge(width,share,text)
+ if type(AZS_BuildBossChargeBar)~="function" then return false end
+ if not root.nativeCharge and not root.nativeChargeFailed then
+  local frame=CreateFrame("Frame",nil,root)
+  local ok,paint=pcall(AZS_BuildBossChargeBar,frame)
+  if ok and type(paint)=="function" then root.nativeCharge=frame;root.nativeChargePaint=paint
+  else root.nativeChargeFailed=true;frame:Hide() end
+ end
+ if not root.nativeCharge then return false end
+ local frame=root.nativeCharge;frame:ClearAllPoints();frame:SetPoint("CENTER",root,"CENTER",0,0)
+ frame:SetScale(width/383);frame:Show()
+ return pcall(root.nativeChargePaint,share or 0,text)
 end
 
 function B.UpdateReborn()
@@ -253,6 +267,10 @@ function B.UpdateReborn()
  elapsedText:Hide();clockText:Hide();nextLabel:Hide();callout:Hide()
  for _,mark in ipairs(marks) do mark:Hide() end
  for _,tick in ipairs(ticks) do tick:Hide() end
+ local useNative=B.NativeGauge(width,boss and boss.progress,titleText:GetText())
+ root.fieldkitArtOnly=useNative and true or nil;T.State(root,false)
+ rail:SetAlpha(useNative and 0 or 1)
+ if root.nativeCharge and not useNative then root.nativeCharge:Hide() end
  root.progressFill=fill;root:Show()
 end
 

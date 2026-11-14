@@ -142,7 +142,11 @@ function S.Apply()
   local ownWidth=FieldKitCardLayout.Width(f,width)
   if f:GetWidth()~=ownWidth then f:SetWidth(ownWidth);FieldKitTheme.Update(f) end
   if f:IsShown() then
-   if shown>0 then height=height+6 end
+   if shown>0 then
+    local gap=6
+    if not FieldKit.rebornLegacyFixture and not (FieldKitZoneThemes and FieldKitZoneThemes.active) then gap=(i==2 and 84 or 54) end
+    height=height+gap
+   end
    local point,relative,rp,x,y=f:GetPoint(1)
    if point~="TOPLEFT" or relative~=S.root or rp~="TOPLEFT" or x~=0 or y~=-height then
     f:ClearAllPoints();f:SetPoint("TOPLEFT",S.root,"TOPLEFT",0,-height)

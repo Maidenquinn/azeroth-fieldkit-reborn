@@ -1,3 +1,11 @@
+# 0.1.0-reborn.15 — Native materials and spacing
+
+- Assemble the native metal border at full detail; preserve button caps and readable text.
+- Separate meter headers, single-line tabs and reset; forward original interactions.
+- Reflow independent cards around neighbours without replacing saved anchors.
+- Use optional native boss progress art; match the styled chat border and copy button.
+- Offline regression suites and live Proving Grounds visual checks; campaign/co-op acceptance remains pending.
+
 # 0.1.0-reborn.14 — Reborn 0.6.5
 
 - Refresh the installed creature presentation catalog: 240 bosses, 816 creatures, 48 zones. Validate boss/seasonal icon paths; label the missing Deathwing asset fallback explicitly.

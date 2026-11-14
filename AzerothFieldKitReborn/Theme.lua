@@ -78,6 +78,52 @@ function T.Font(label,size,color,heading,face)
  local r=label.fieldkitFontRecord;r.size=baseSize;r.heading=heading;r.face=face
 end
 
+-- Reproduce the native tooltip layout, not a miniature of its 512x64 atlas.
+-- Its 32px edge has 8/16px transparent padding; the plate therefore extends
+-- 10px horizontally and 18px vertically beyond the content. The matching
+-- frame level is essential: a child at parent+1 would cover the labels.
+function T.NativePaint(frame,active,fill)
+ local skin=frame.fieldkitSkin;local button=skin.kind=="button"
+ local native=type(IsAddOnLoaded)=="function" and IsAddOnLoaded("AzerothSurvivorsUI")
+ local opacity=button and 1 or (fill and fill.alpha or T.Opacity(frame))
+ skin.nativeBackdrop=true;skin.nativeFillAlpha=opacity
+ skin.grain:SetAlpha(0);skin.selected:Hide()
+ for _,part in ipairs(skin.parts) do part.texture:Hide() end
+ if button and native then
+  if not skin.nativeButtons then
+   skin.nativeButtons={}
+   for i=1,3 do local t=frame:CreateTexture(nil,"BORDER");t:SetTexture("Interface\\AddOns\\AzerothSurvivorsUI\\Assets\\nameplate_backdrop");skin.nativeButtons[i]=t end
+  end
+  local w,h=math.max(3,frame:GetWidth()),math.max(3,frame:GetHeight());local cap=math.min(h/2,w/3)
+  for i=1,3 do
+   local t=skin.nativeButtons[i];t:ClearAllPoints();t:SetPoint("TOPLEFT",frame,"TOPLEFT",i==1 and 0 or (i==2 and cap or w-cap),0)
+   t:SetWidth(i==2 and math.max(1,w-2*cap) or cap);t:SetHeight(h)
+   local cuts={0,.125,.875,1};t:SetTexCoord(cuts[i],cuts[i+1],0,1)
+   t:SetVertexColor(active and 1 or .85,active and .9 or .85,active and .7 or .85);t:Show()
+  end
+  T.Solid(skin.base,active and {.17,.14,.08} or {.075,.075,.085});skin.base:SetAlpha(1)
+ else
+  skin.base:SetAlpha(0)
+  if not skin.nativeMaterial then
+   local bg=CreateFrame("Frame",nil,frame);skin.nativeMaterial=bg;bg:EnableMouse(false)
+  end
+  local bg=skin.nativeMaterial;bg:SetFrameLevel(frame:GetFrameLevel());bg:ClearAllPoints()
+  local x,y=native and 10 or 6,native and 18 or 6
+  if button then x=0;y=0 end
+  bg:SetPoint("TOPLEFT",frame,"TOPLEFT",-x,y);bg:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",x,-y)
+  local key=(native and "native" or "stock")..(button and "button" or "panel")
+  if skin.nativeAssetKey~=key then
+   skin.nativeAssetKey=key
+   bg:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background",edgeFile=native and "Interface\\AddOns\\AzerothSurvivorsUI\\Assets\\border-tooltip" or "Interface\\Tooltips\\UI-Tooltip-Border",edgeSize=button and 8 or (native and 32 or 16),tile=true,tileSize=16,insets={left=native and 8 or 4,right=native and 8 or 4,top=native and 16 or 4,bottom=native and 16 or 4}})
+  end
+  local color=fill and fill.color or {.09,.09,.1}
+  bg:SetBackdropColor(color[1],color[2],color[3],opacity*.94)
+  bg:SetBackdropBorderColor(.753,.753,.753,1);bg:Show()
+ end
+ frame.fieldkitActive=active and true or false
+ if frame.fieldkitChoice then T.ChoiceLook(frame,frame.fieldkitSelected==true,active and true or false) end
+end
+
 -- Explicit dimensions avoid this client's custom-backdrop tiling/stretch quirks.
 function T.Update(frame)
  if not frame.fieldkitSkin then return end
@@ -85,9 +131,11 @@ function T.Update(frame)
  -- quads with a zero dimension can fall back to their intrinsic atlas size.
  local w,h=math.max(3,frame:GetWidth()),math.max(3,frame:GetHeight())
  local skin=frame.fieldkitSkin
+ if skin.nativeMaterial then skin.nativeMaterial:SetFrameLevel(frame:GetFrameLevel()) end
  local style=T.Style(frame)
  if skin.width==w and skin.height==h and skin.style==style then return end
  skin.width=w;skin.height=h;skin.style=style
+ if style==4 and skin.nativeButtons then T.NativePaint(frame,frame.fieldkitActive,frame.fieldkitFill) end
  local c=math.min(T.Style(frame)==3 and 12 or (skin.kind=="window" and 24 or (skin.kind=="card" and 16 or 8)),w/3,h/3)
  -- The corners of the zone material are cut diagonally (transparent triangles): a full-size fill would show as a dark halo
  -- outside the gold border. In the reference style the fill covers only the INSIDE of the frame (inside the corner cut).
@@ -151,33 +199,20 @@ function T.State(frame,active)
   local color=fillNow and fillNow.color
   local artNow=frame.fieldkitArtOnly and true or false;local activeNow=active and true or false;local navNow=frame.fieldkitNavigation and true or false
   local styleNow=T.Style(frame)
-  if m and m.gen==T.gen and m.art==artNow and m.active==activeNow and m.nav==navNow and m.opacity==opacityNow and m.style==styleNow
+  local nativeReady=type(IsAddOnLoaded)=="function" and IsAddOnLoaded("AzerothSurvivorsUI") and true or false
+  if m and m.gen==T.gen and m.art==artNow and m.active==activeNow and m.nav==navNow and m.opacity==opacityNow and m.style==styleNow and m.nativeReady==nativeReady
    and m.hasFill==(fillNow~=nil) and (not color or (m.r==color[1] and m.g==color[2] and m.b==color[3])) then return end
   if not m then m={};skin.memo=m end
-  m.gen=T.gen;m.art=artNow;m.active=activeNow;m.nav=navNow;m.opacity=opacityNow;m.style=styleNow;m.hasFill=(fillNow~=nil)
+  m.gen=T.gen;m.art=artNow;m.active=activeNow;m.nav=navNow;m.opacity=opacityNow;m.style=styleNow;m.nativeReady=nativeReady;m.hasFill=(fillNow~=nil)
   if color then m.r,m.g,m.b=color[1],color[2],color[3] else m.r,m.g,m.b=nil,nil,nil end
  end
  -- frame.fieldkitFill = {color={r,g,b},alpha=a}: the card's own interior colour and opacity (the chat preferences), applied to the
  -- fill and to the centre slice only; the gold border slices keep their own opacity.
  local fill=frame.fieldkitFill
  if skin.nativeBackdrop then frame:SetBackdrop({});skin.nativeBackdrop=nil end
- if T.Style(frame)==4 and not frame.fieldkitArtOnly then
-  if not skin.nativeBackdropSpec then
-   local asset="Interface\\Tooltips\\UI-Tooltip-Border"
-   if type(IsAddOnLoaded)=="function" and IsAddOnLoaded("AzerothSurvivorsUI") then asset="Interface\\AddOns\\AzerothSurvivorsUI\\Assets\\border-tooltip" end
-   skin.nativeBackdropSpec={edgeFile=asset,edgeSize=skin.kind=="button" and 8 or 12,insets={left=4,right=4,top=4,bottom=4}}
-  end
-  -- A backdrop belongs behind the parent's fontstrings, never on a child
-  -- frame above them: tall edge slices otherwise cover short button labels.
-  frame:SetBackdrop(skin.nativeBackdropSpec);frame:SetBackdropBorderColor(.65,.65,.68,1)
-  skin.nativeBackdrop=true;skin.selected:Hide();skin.grain:SetAlpha(0)
-  for _,part in ipairs(skin.parts) do part.texture:Hide() end
-  T.Solid(skin.base,fill and fill.color or {.035,.035,.045})
-  skin.base:SetAlpha((skin.kind=="button" and 1 or (fill and fill.alpha or T.Opacity(frame)))*((frame.fieldkitNavigation and not active) and 0 or 1))
-  frame.fieldkitActive=active and true or false
-  if frame.fieldkitChoice then T.ChoiceLook(frame,frame.fieldkitSelected==true,active and true or false) end
-  return
- end
+ if skin.nativeMaterial then skin.nativeMaterial:Hide() end
+ for _,part in ipairs(skin.nativeButtons or {}) do part:Hide() end
+ if T.Style(frame)==4 and not frame.fieldkitArtOnly then T.NativePaint(frame,active,fill);return end
  if frame.fieldkitArtOnly then skin.base:SetAlpha(0);skin.grain:SetAlpha(0);skin.selected:Hide();for _,part in ipairs(skin.parts) do part.texture:Hide() end;return end
  local alpha=(frame.fieldkitNavigation and not active) and 0 or 1
  local opacity=skin.kind=="button" and 1 or T.Opacity(frame)

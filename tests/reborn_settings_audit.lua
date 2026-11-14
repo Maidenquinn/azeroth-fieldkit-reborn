@@ -38,7 +38,7 @@ for _,variant in ipairs({"off","minimal","complete","alternative"}) do
  Option("Settings panel size").set(100);assert(U.frame:GetScale()>small)
  Option("Settings panel opacity").set(25)
  assert(U.frame:GetAlpha()==1,"Opacity faded the text/controls")
- if variant=="off" then assert(U.frame.fieldkitSkin.base:GetAlpha()==.25)
+ if variant=="off" then assert(U.frame.fieldkitSkin.nativeFillAlpha==.25)
  else for _,t in ipairs(U.frame.referenceTiles) do assert(t:GetAlpha()==.25,"Themed shell ignores opacity") end end
  Option("Health bar under the character").set(true);C.Refresh(true)
  assert(FieldKitPlayerBar:GetParent()==UIParent and FieldKitPlayerBar:GetAlpha()>0 and FieldKitPlayerBar:IsShown(),"HP bar masked by "..variant)

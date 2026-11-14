@@ -23,18 +23,19 @@ function FieldKit.InitializeSettings(defaultStats)
  local d=FieldKitRebornDB
  if FieldKit.rebornLegacyFixture then
   defaults.linkLeftCards=true;defaults.linkRightCards=true
- elseif d.schema~=2 then
+ elseif (tonumber(d.schema) or 0)<2 then
   -- One-time migration from the inherited compact linked defaults. Individual
   -- anchors and sizes stay intact; grouping remains an explicit preference.
   d.linkLeftCards=false;d.linkRightCards=false
   FieldKitNativeHUD.layoutReset=true
  end
+ if not FieldKit.rebornLegacyFixture and (tonumber(d.schema) or 0)<3 and (d.bossTimelineWidth==nil or d.bossTimelineWidth==560) then d.bossTimelineWidth=380 end
  for key,value in pairs(defaults) do
   if type(d[key])~=type(value) then d[key]=value end
  end
  d.spellsFrame=nil -- retired separate spell window; the existing card now has tabs
  d.loadoutTab=d.loadoutTab==2 and 2 or 1
- d.schema=FieldKit.rebornLegacyFixture and 1 or 2;
+ d.schema=FieldKit.rebornLegacyFixture and 1 or 3;
  local ctx=d.runDifficultyContext
  if type(ctx)~="table" or not FieldKit.Number(ctx.rank,nil,0,5) or ctx.rank~=math.floor(ctx.rank)
   or type(ctx.world)~="string" or string.len(ctx.world)>160 or type(ctx.zone)~="string" or string.len(ctx.zone)>80 or not FieldKit.Number(ctx.time,nil,0) then d.runDifficultyContext=nil end

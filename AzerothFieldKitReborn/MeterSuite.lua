@@ -139,19 +139,21 @@ local function Paint(frame,view,force)
   for i=1,n do if (lines[i].kills or 0)>0 then showKills=true;break end end
  end
  local subH=SyncSubChrome(frame,view)
+ local topInset=22
+ if not FieldKit.rebornLegacyFixture and not (FieldKitZoneThemes and FieldKitZoneThemes.active) then topInset=32 end
  local headerH=frame.fieldkitHeaderHeight or 0
  if frame.fieldkitColHeader then
   if view=="kills" then
    frame.fieldkitColHeader:Hide();headerH=0
   else
    frame.fieldkitColHeader:ClearAllPoints()
-   frame.fieldkitColHeader:SetPoint("TOPLEFT",frame,"TOPLEFT",6,-22-subH)
-   frame.fieldkitColHeader:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-6,-22-subH)
+   frame.fieldkitColHeader:SetPoint("TOPLEFT",frame,"TOPLEFT",12,-topInset-subH)
+   frame.fieldkitColHeader:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-12,-topInset-subH)
    FieldKit.UpdateMeterHeaders(frame.fieldkitColHeader,mode,width,showKills,rateLabel~="" and rateLabel or nil)
    headerH=frame.fieldkitHeaderHeight or 14
   end
  end
- local y0=22+subH+headerH
+ local y0=topInset+subH+headerH
  for i=1,n do
   local line,row=lines[i],frame.rows[i]
   row.fieldkitLine=line;row.fieldkitSpell=line.name;row.fieldkitMeterView=view
@@ -190,7 +192,7 @@ local function Paint(frame,view,force)
  end
  -- Fit like FieldKit FitRows without depending on locals.
  frame.mashVisibleRows=n
- local height=28+subH+headerH+(frame.fieldkitFooterHeight or 22)+15*math.max(n,1)
+ local height=topInset+6+subH+headerH+(frame.fieldkitFooterHeight or 22)+15*math.max(n,1)
  frame.mashExpandHeight=height
  if frame.mashCollapsed then
   frame:SetHeight(24);frame.total:Hide()
@@ -340,6 +342,7 @@ local function EnsureChrome(frame)
   end
   S.Update(true)
  end)
+ reset.fieldkitLabel=rt
  frame.fieldkitReset=reset
  local pop=CreateFrame("Button",frame:GetName().."Detach",frame)
  pop:SetWidth(16);pop:SetHeight(16);pop:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-22,-4)

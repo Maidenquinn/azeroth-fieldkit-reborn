@@ -167,6 +167,7 @@ end
 local function FinishMoving(frame)
 	if not frame or not frame.azsMoving then return end
 	frame.azsMoving = nil
+ if FieldKitNativeLayout then FieldKitNativeLayout.lastMoved=frame end
 	frame:StopMovingOrSizing()
  if FieldKitZoneThemes and FieldKitZoneThemes.Remember(frame) then return end
 	if FieldKitPositions.Save(frame,frame.fieldkitTopLeftAnchor) then FieldKitPositions.Restore(frame) end

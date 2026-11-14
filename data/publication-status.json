@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.14",
+  "version": "0.1.0-reborn.15",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
-  "inGameTestByAgent": false,
+  "inGameTestByAgent": true,
   "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Offline Reborn 0.6.5 adaptation: 240 boss icons/48 zones including all 60 Cataclysm bosses; 44 generated jewelry definitions and full proc tooltip retention; public debuff states with no guessed immunity timer; native castbar forwarding/restoration; native death-log user action and guarded last-blow tooltip; native Anchors.lua/CombatText.lua executed with expiry/projection tests; bounded icon cache; existing themes/settings/recent-meter suites rerun. No live client or co-op QA for this build."
+  "inGameTestScope": "Client 0.6.5 hero menu and Proving Grounds visual inspection: native metal frames, separated unthemed cards, single-line French meter tabs and reset, settings window and controls. Offline full settings/themes/recent-meter/content regression suites. No normal campaign or co-op acceptance."
 }

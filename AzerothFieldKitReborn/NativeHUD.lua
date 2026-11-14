@@ -33,6 +33,7 @@ local function Mask(name,hide)
  end
 end
 function N.Release()
+ N.RestoreMeterFooter()
  if FieldKitReborn065 then FieldKitReborn065.RestoreCastbar() end
  for f in pairs(N.frames) do Mask(f:GetName(),false) end
  if FieldKitRebornDB then for _,key in ipairs(parts) do Part(key,false) end;FieldKitRebornDB.nativeHudBefore=nil end
@@ -50,7 +51,7 @@ local function Clock()
  end
  local f=N.clock;f:ClearAllPoints()
  local timeline=getglobal("FieldKitBossTimelineFrame")
- if timeline and timeline:IsShown() then f:SetPoint("TOP",timeline,"BOTTOM",0,-4) else f:SetPoint("TOP",UIParent,"TOP",0,-8) end
+ if timeline and timeline:IsShown() then f:SetPoint("TOP",timeline,"BOTTOM",0,-30) else f:SetPoint("TOP",UIParent,"TOP",0,-20) end
  local sec=FieldKit.Number(FieldKitNative.Read("AZS_GetRunTime"),nil,0)
  if not sec and type(AZS_RUN)=="table" then sec=FieldKit.Number(AZS_RUN.t,nil,0) end
  if sec then
@@ -105,6 +106,7 @@ function N.Update()
  Mask("AzerothSurvivorsUnitFrameTarget",target)
  if FieldKitReborn065 then FieldKitReborn065.MoveCastbar(target and castOwner or nil) end
  N.Polish()
+ if FieldKitNativeLayout then FieldKitNativeLayout.Apply() end
  if run then Clock() elseif N.clock then N.clock:Hide() end
 end
 
@@ -180,6 +182,7 @@ function N.SeparateDefaults()
 end
 
 function N.Polish()
+ N.MeterFooter()
  for _,name in ipairs(FieldKitCardLayout.names) do
   local f=getglobal(name)
   if f and f.title and f.total and f.mashCollapseButton then
@@ -190,4 +193,58 @@ function N.Polish()
    FieldKitTheme.Update(b)
   end
  end
+end
+
+function N.RestoreMeterFooter()
+ local p=N.meterProxy
+ if not p then return end
+ for f,parent in pairs(p.saved) do f:SetParent(parent) end
+ p.saved={};p:Hide();if p.reset then p.reset:Hide() end
+end
+function N.MeterFooter()
+ local source=getglobal("FieldKitMeterFrame")
+ if not source or not source.fieldkitTabs or not source.fieldkitReset then return end
+ local p=N.meterProxy
+ if not p then
+  p=CreateFrame("Frame",nil,source);N.meterProxy=p;p.saved={};p.buttons={};p:SetHeight(26)
+  local function Forward(original)
+   local callback=original and original:GetScript("OnClick");if not callback then return end
+   local prior=this;this=original;pcall(callback);this=prior
+  end
+  for i=1,6 do
+   local index=i;local b=CreateFrame("Button",nil,p);p.buttons[i]=b;b:SetHeight(26);b:RegisterForClicks("LeftButtonUp","RightButtonUp")
+   b.label=b:CreateFontString(nil,"OVERLAY");b.label:SetPoint("CENTER",b,"CENTER",0,1);b.label:SetHeight(18)
+   if b.label.SetWordWrap then b.label:SetWordWrap(false) end
+   FieldKitTheme.Font(b.label,11,FieldKitTheme.text)
+   b.line=b:CreateTexture(nil,"ARTWORK");FieldKitTheme.Solid(b.line,{1,.78,.18});b.line:SetHeight(2);b.line:SetPoint("BOTTOMLEFT",b,"BOTTOMLEFT",6,0);b.line:SetPoint("BOTTOMRIGHT",b,"BOTTOMRIGHT",-6,0)
+   b:SetScript("OnClick",function() Forward(source.fieldkitTabs.buttons[index]) end)
+   b:SetScript("OnEnter",function()
+    GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(FieldKit_L(source.fieldkitTabs.buttons[index].fieldkitFullLabel))
+    GameTooltip:AddLine(FieldKit_L("Left-click: switch tab. Right-click: detach / reattach window."),.8,.8,.8,true);GameTooltip:Show()
+   end)
+   b:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  end
+  p.reset=CreateFrame("Button",nil,source);p.reset:SetWidth(112);p.reset:SetHeight(22)
+  p.reset.label=p.reset:CreateFontString(nil,"OVERLAY");p.reset.label:SetAllPoints(p.reset)
+  if p.reset.label.SetWordWrap then p.reset.label:SetWordWrap(false) end
+  FieldKitTheme.Font(p.reset.label,11,FieldKitTheme.muted)
+  p.reset:SetScript("OnClick",function() Forward(source.fieldkitReset) end)
+ end
+ if not N.storage then N.storage=CreateFrame("Frame",nil,UIParent);N.storage:Hide() end
+ for _,f in ipairs({source.fieldkitTabs,source.fieldkitReset}) do
+  if not p.saved[f] then p.saved[f]=f:GetParent() end;f:SetParent(N.storage)
+ end
+ if not source:IsShown() or source.mashCollapsed or not FieldKitRebornDB.meterTabs then p:Hide();p.reset:Hide();return end
+ p:ClearAllPoints();p:SetPoint("BOTTOMLEFT",source,"BOTTOMLEFT",12,8);p:SetPoint("BOTTOMRIGHT",source,"BOTTOMRIGHT",-12,8)
+ p:SetFrameLevel(source:GetFrameLevel()+3)
+ local width=(source:GetWidth()-24)/6
+ local labels={"Dmg","Heal","Boss","Taken","Party","Kills short"}
+ if FieldKit_L("Kills short")=="Kills short" then labels[6]="Kills" end
+ for i,b in ipairs(p.buttons) do
+  b:SetWidth(width);b:ClearAllPoints();b:SetPoint("LEFT",p,"LEFT",(i-1)*width,0);b.label:SetWidth(math.max(12,width-8));b.label:SetText(FieldKit_L(labels[i]))
+  local selected=source.fieldkitMeterView==source.fieldkitTabs.buttons[i].fieldkitView
+  if selected then b.line:Show();b.label:SetTextColor(1,.82,.25) else b.line:Hide();b.label:SetTextColor(.77,.77,.77) end
+ end
+ p.reset:ClearAllPoints();p.reset:SetPoint("TOPRIGHT",source,"TOPRIGHT",-6,46);p.reset.label:SetText(FieldKit_L("Reset"));p.reset:SetFrameLevel(source:GetFrameLevel()+3)
+ p.reset:Show();p:Show()
 end

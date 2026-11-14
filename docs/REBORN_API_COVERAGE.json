@@ -1,21 +1,22 @@
 {
   "scope": "All TOC runtime modules; public installed Lua declarations and official guide mentions. Engine binary implementation excluded.",
   "liveGameValidation": false,
-  "runtimeModules": 56,
+  "runtimeModules": 57,
   "runtimeSHA256": {
-    "Runtime.lua": "34184f25b9b01445f38fffbeb593b6ce1e41baaf944ca8da9b4c0b54d26288b6",
+    "Runtime.lua": "86e7c647c508540484723f63a4521a27e0897e47e00c3221640fab079bba3c99",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "397d0cb28dba383fdf81d3a78df7c297b6c4c684770e864ef39e75a4d2a19bd3",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
     "RebornHUD.lua": "00fc412902cb292343ae21a0bc9b39482ebf26fc6f19832f0f13888aa0b91911",
-    "NativeHUD.lua": "15d632e6e82b22e744012833656275ba0a658fa6e0320b3d6cecd3576795bb88",
+    "NativeHUD.lua": "678596c7960546d514d0f48759607f68317d09f8f047af13918ec4b1c40fcdb1",
+    "NativeLayout.lua": "b4a47f6b7b123f64469364bac9be5b8df1c7e262d453c53953bd336ce9c968e6",
     "Diagnostics.lua": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
     "Positions.lua": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
-    "Config.lua": "b2bba0cc63b9d56c19c3f1baf5effbaaa708cd07a4bd43218cd1a5c188d52e8c",
+    "Config.lua": "bce4e29c1025fb48e78ea9dae342ce057f57afbbc6f10e1f51d8d05f9a5cb510",
     "Profiles.lua": "6f6140c2c4a787fd7e96498e734a836ff87b4819156bbb7fba66b03e0111a49b",
     "Localization.lua": "f285d1f416e9e57331827ceb3cdfad4beab810c22bb7acac1e1ecdd8616a5920",
     "InterfaceStrings.lua": "42759e05d933eea1e8f7114371677e6151c6f1808fa46861c83cecb58bc486b3",
-    "Theme.lua": "a59dec4ae38cad53f2c4e13f23e0e984037373e426de427f715c050fac5b7f13",
+    "Theme.lua": "eb0b89447ed76056a692fe5851145bca80dc29a4c39880e8350663c9a3a74806",
     "ZoneThemeRegistry.lua": "b30035d19d58e17ffc93d360ad377e2bcbcb3fbe0292fe67155d3e02c92537ad",
     "Seed.lua": "a1e79ab07c8b41dca34f8fa730f964cd7e79ece5700a1e5d407f941060ee655c",
     "PortraitCatalog.lua": "e0e92f740f780fc084a5ed6ecc511e597d2380aae6703ea45fe2a2cba58e269b",
@@ -28,10 +29,10 @@
     "NativeData.lua": "190db327c57089177916f564c34c3735964b5ab286d2da39b4662df2f282c3a6",
     "MeterWindow.lua": "bf12422a318c81fe7bfd7457e67adf65262fe8834e2b67663a6b27742d6f1a45",
     "MeterLedger.lua": "92f18a689039ec611294fd38a7c7933d5b516fea51d60469c5df0f8fe8d8f2eb",
-    "MeterSuite.lua": "ee9a2050e2e320326ecbed4468a764f21078d17e6fe5888ea21ec604d513dff4",
-    "BossTimeline.lua": "f6752f836beb18fc7fb2dd0f2a9c8e111800c9521670b332d41c9cf229f3c03d",
-    "HudStack.lua": "01a843571c9e034e56618ac74155b01ddde0efb151e4c72590400f155c51b73f",
-    "CardLayout.lua": "76f22c40a65fe359b3f73d5a8a0dc2132cd285f8121b7e3011a6cf58d71b0f64",
+    "MeterSuite.lua": "7bf566c7c1f778d823b16fb5c965738a3eb782089405287cf4d5fa4ea634bfe0",
+    "BossTimeline.lua": "3a34056b8b38d667f0f90be9d0ba9b5216f53541e6b25e3402d87ae9b9fd0cdf",
+    "HudStack.lua": "3b03b97ab491f6802c2847b5d44b8608dd90d1ae17f2f0f7aa0d66491fcceff8",
+    "CardLayout.lua": "7c3c1c30a3a3d2af4dc1cb1b7e13b2999eb82d61f14f415ddd693cdbf8244be4",
     "Coop.lua": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1",
     "GroupHistory.lua": "77a5abe50cf781f15a31f6786f4e58dda2003951ff616a8ba60d823d6c246af8",
     "PartySync.lua": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
@@ -46,13 +47,13 @@
     "OptionsSchema.lua": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07",
     "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
     "Interface.lua": "e3fa99f2e1928850e1090facf96375d63451303efed938e054740535f1061f48",
-    "FieldKit.lua": "697fb6ed0227ad594aa1c8dd86310a220e106d5c73f46e9747a2f931f51279b1",
+    "FieldKit.lua": "9370e2059d0f30c620d59ea08172dbd178f1c4106fd8b7bf24a1e031c3cd9b21",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "3156191b143809624e50039aa86ad9b8f77a1952776a5c3dc6473e115dca6a3b",
     "WorldMarkers.lua": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
     "CombatText.lua": "31e3ec5ede0904b6cdd7b566f1fe29a0fb6a554a889192cdb1b82293a7e53d44",
     "CombatOptions.lua": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
-    "CopyLog.lua": "427633d497623d79fb553fc5df86a036b8bb69cff3dd53e64a578c8faacf6202",
+    "CopyLog.lua": "ced8dba7c9b6182eb6e81c2fa94a52ff79e1b8fdcf9dc769ece3357dea3eb625",
     "ThemeMinimap.lua": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2",
     "ThemeHUD.lua": "44cbb9269b2b96db0635a075ac80b691b540d6b79633e601d34274c91ecfad3e",
     "ThemeTarget.lua": "2d7dce0615b60e18050f975e497216df2ea8c8b64e5d496887dee4d1d0903f6a",
@@ -824,9 +825,18 @@
           "line": 272
         }
       ],
-      "references": [],
+      "references": [
+        {
+          "file": "BossTimeline.lua",
+          "line": 233
+        },
+        {
+          "file": "BossTimeline.lua",
+          "line": 236
+        }
+      ],
       "directCallSites": [],
-      "coverage": "unused"
+      "coverage": "referenced"
     },
     {
       "name": "AZS_BuildBossStyleBar",
@@ -1286,17 +1296,17 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 647
+          "line": 648
         },
         {
           "file": "FieldKit.lua",
-          "line": 648
+          "line": 649
         }
       ],
       "directCallSites": [
         {
           "file": "FieldKit.lua",
-          "line": 648
+          "line": 649
         }
       ],
       "coverage": "referenced"
@@ -1339,7 +1349,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2122
+          "line": 2123
         }
       ],
       "directCallSites": [],
@@ -1413,11 +1423,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2101
+          "line": 2102
         },
         {
           "file": "FieldKit.lua",
-          "line": 2105
+          "line": 2106
         },
         {
           "file": "ReferenceHUD.lua",
@@ -1427,7 +1437,7 @@
       "directCallSites": [
         {
           "file": "FieldKit.lua",
-          "line": 2105
+          "line": 2106
         }
       ],
       "coverage": "referenced"
@@ -1658,7 +1668,7 @@
         },
         {
           "file": "NativeHUD.lua",
-          "line": 75
+          "line": 76
         },
         {
           "file": "Diagnostics.lua",
@@ -1702,7 +1712,7 @@
         },
         {
           "file": "MeterSuite.lua",
-          "line": 429
+          "line": 432
         },
         {
           "file": "BossTimeline.lua",
@@ -1710,7 +1720,7 @@
         },
         {
           "file": "BossTimeline.lua",
-          "line": 239
+          "line": 253
         },
         {
           "file": "Coop.lua",
@@ -1746,63 +1756,63 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 728
+          "line": 729
         },
         {
           "file": "FieldKit.lua",
-          "line": 1079
+          "line": 1080
         },
         {
           "file": "FieldKit.lua",
-          "line": 1369
+          "line": 1370
         },
         {
           "file": "FieldKit.lua",
-          "line": 1536
+          "line": 1537
         },
         {
           "file": "FieldKit.lua",
-          "line": 1550
+          "line": 1551
         },
         {
           "file": "FieldKit.lua",
-          "line": 1592
+          "line": 1593
         },
         {
           "file": "FieldKit.lua",
-          "line": 1740
+          "line": 1741
         },
         {
           "file": "FieldKit.lua",
-          "line": 1969
+          "line": 1970
         },
         {
           "file": "FieldKit.lua",
-          "line": 2101
+          "line": 2102
         },
         {
           "file": "FieldKit.lua",
-          "line": 2116
+          "line": 2117
         },
         {
           "file": "FieldKit.lua",
-          "line": 2191
+          "line": 2192
         },
         {
           "file": "FieldKit.lua",
-          "line": 2486
+          "line": 2487
         },
         {
           "file": "FieldKit.lua",
-          "line": 2517
+          "line": 2518
         },
         {
           "file": "FieldKit.lua",
-          "line": 3068
+          "line": 3069
         },
         {
           "file": "FieldKit.lua",
-          "line": 3212
+          "line": 3213
         },
         {
           "file": "WorldPins.lua",
@@ -1848,7 +1858,7 @@
         },
         {
           "file": "MeterSuite.lua",
-          "line": 429
+          "line": 432
         },
         {
           "file": "BossTimeline.lua",
@@ -1868,67 +1878,67 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 728
+          "line": 729
         },
         {
           "file": "FieldKit.lua",
-          "line": 1079
+          "line": 1080
         },
         {
           "file": "FieldKit.lua",
-          "line": 1369
+          "line": 1370
         },
         {
           "file": "FieldKit.lua",
-          "line": 1536
+          "line": 1537
         },
         {
           "file": "FieldKit.lua",
-          "line": 1550
+          "line": 1551
         },
         {
           "file": "FieldKit.lua",
-          "line": 1592
+          "line": 1593
         },
         {
           "file": "FieldKit.lua",
-          "line": 1740
+          "line": 1741
         },
         {
           "file": "FieldKit.lua",
-          "line": 1969
+          "line": 1970
         },
         {
           "file": "FieldKit.lua",
-          "line": 2101
+          "line": 2102
         },
         {
           "file": "FieldKit.lua",
-          "line": 2116
+          "line": 2117
         },
         {
           "file": "FieldKit.lua",
-          "line": 2191
+          "line": 2192
         },
         {
           "file": "FieldKit.lua",
-          "line": 2191
+          "line": 2192
         },
         {
           "file": "FieldKit.lua",
-          "line": 2486
+          "line": 2487
         },
         {
           "file": "FieldKit.lua",
-          "line": 2517
+          "line": 2518
         },
         {
           "file": "FieldKit.lua",
-          "line": 3068
+          "line": 3069
         },
         {
           "file": "FieldKit.lua",
-          "line": 3212
+          "line": 3213
         },
         {
           "file": "WorldPins.lua",
@@ -1957,11 +1967,11 @@
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 2116
+          "line": 2117
         },
         {
           "file": "FieldKit.lua",
-          "line": 2117
+          "line": 2118
         },
         {
           "file": "WorldPins.lua",
@@ -2051,7 +2061,7 @@
       "references": [
         {
           "file": "NativeHUD.lua",
-          "line": 54
+          "line": 55
         },
         {
           "file": "Diagnostics.lua",
@@ -2525,19 +2535,19 @@
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 699
+          "line": 700
         },
         {
           "file": "FieldKit.lua",
-          "line": 702
-        },
-        {
-          "file": "FieldKit.lua",
-          "line": 706
+          "line": 703
         },
         {
           "file": "FieldKit.lua",
           "line": 707
+        },
+        {
+          "file": "FieldKit.lua",
+          "line": 708
         },
         {
           "file": "WorldPins.lua",
@@ -3031,11 +3041,11 @@
         },
         {
           "file": "NativeHUD.lua",
-          "line": 55
+          "line": 56
         },
         {
           "file": "NativeHUD.lua",
-          "line": 127
+          "line": 129
         },
         {
           "file": "GameCompatibility.lua",
@@ -3107,15 +3117,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1079
-        },
-        {
-          "file": "FieldKit.lua",
           "line": 1080
         },
         {
           "file": "FieldKit.lua",
-          "line": 1518
+          "line": 1081
         },
         {
           "file": "FieldKit.lua",
@@ -3123,11 +3129,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1525
+          "line": 1520
         },
         {
           "file": "FieldKit.lua",
-          "line": 1537
+          "line": 1526
         },
         {
           "file": "FieldKit.lua",
@@ -3135,15 +3141,15 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1551
+          "line": 1539
         },
         {
           "file": "FieldKit.lua",
-          "line": 1596
+          "line": 1552
         },
         {
           "file": "FieldKit.lua",
-          "line": 1628
+          "line": 1597
         },
         {
           "file": "FieldKit.lua",
@@ -3151,7 +3157,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2111
+          "line": 1630
         },
         {
           "file": "FieldKit.lua",
@@ -3159,7 +3165,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3070
+          "line": 2113
+        },
+        {
+          "file": "FieldKit.lua",
+          "line": 3071
         },
         {
           "file": "WorldPins.lua",
@@ -3434,19 +3444,15 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1423
-        },
-        {
-          "file": "FieldKit.lua",
           "line": 1424
         },
         {
           "file": "FieldKit.lua",
-          "line": 3037
+          "line": 1425
         },
         {
           "file": "FieldKit.lua",
-          "line": 3073
+          "line": 3038
         },
         {
           "file": "FieldKit.lua",
@@ -3454,7 +3460,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3080
+          "line": 3075
+        },
+        {
+          "file": "FieldKit.lua",
+          "line": 3081
         }
       ],
       "directCallSites": [],
@@ -3467,11 +3477,11 @@
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 3073
+          "line": 3074
         },
         {
           "file": "FieldKit.lua",
-          "line": 3080
+          "line": 3081
         }
       ],
       "directCallSites": [],
@@ -3583,15 +3593,15 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 520
+          "line": 521
         },
         {
           "file": "FieldKit.lua",
-          "line": 1642
+          "line": 1643
         },
         {
           "file": "FieldKit.lua",
-          "line": 2036
+          "line": 2037
         }
       ],
       "directCallSites": [],
@@ -3865,7 +3875,7 @@
       "references": [
         {
           "file": "NativeHUD.lua",
-          "line": 84
+          "line": 85
         },
         {
           "file": "TakenDetails.lua",
@@ -4070,7 +4080,7 @@
         },
         {
           "file": "NativeHUD.lua",
-          "line": 93
+          "line": 94
         },
         {
           "file": "Portraits.lua",
@@ -4130,23 +4140,19 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 514
+          "line": 515
         },
         {
           "file": "FieldKit.lua",
-          "line": 698
+          "line": 699
         },
         {
           "file": "FieldKit.lua",
-          "line": 727
+          "line": 728
         },
         {
           "file": "FieldKit.lua",
-          "line": 743
-        },
-        {
-          "file": "FieldKit.lua",
-          "line": 2191
+          "line": 744
         },
         {
           "file": "FieldKit.lua",
@@ -4155,6 +4161,10 @@
         {
           "file": "FieldKit.lua",
           "line": 2193
+        },
+        {
+          "file": "FieldKit.lua",
+          "line": 2194
         },
         {
           "file": "ZoneThemes.lua",
@@ -4478,7 +4488,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3069
+          "line": 3070
         },
         {
           "file": "CombatText.lua",
@@ -4519,10 +4529,10 @@
     }
   ],
   "counts": {
-    "runtimeModules": 56,
+    "runtimeModules": 57,
     "nativeLuaFiles": 449,
     "declaredFunctions": 129,
     "documentedAZSSymbols": 94,
-    "referencedAZSSymbols": 80
+    "referencedAZSSymbols": 81
   }
 }

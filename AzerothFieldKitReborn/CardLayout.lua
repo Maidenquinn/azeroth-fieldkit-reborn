@@ -129,7 +129,11 @@ function C.ApplyRight()
  for i=1,2 do
   local f=frames[i];f:SetClampedToScreen(false)
   if f:IsShown() then
-   if shown>0 then height=height+6 end
+   if shown>0 then
+    local gap=6
+    if not FieldKit.rebornLegacyFixture and not (FieldKitZoneThemes and FieldKitZoneThemes.active) then gap=54 end
+    height=height+gap
+   end
    local p,r,rp,x,y=f:GetPoint(1)
    if p~="TOPLEFT" or r~=C.root or rp~="TOPLEFT" or x~=0 or y~=-height then
     f:ClearAllPoints();f:SetPoint("TOPLEFT",C.root,"TOPLEFT",0,-height)

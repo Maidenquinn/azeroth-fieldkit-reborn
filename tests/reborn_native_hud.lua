@@ -1,6 +1,6 @@
 fire(FieldKitFrame,"VARIABLES_LOADED")
 local N,C,d=FieldKitNativeHUD,FieldKitZoneThemes,FieldKitRebornDB
-assert(not d.linkLeftCards and not d.linkRightCards and d.schema==2,"Default cards are still grouped")
+assert(not d.linkLeftCards and not d.linkRightCards and d.schema==3,"Default cards are still grouped")
 assert(d.frameAnchors.FieldKitMeterFrame[4]~=d.frameAnchors.FieldKitTakenFrame[4],"Independent defaults overlap")
 N.Release()
 local state={clock=true,tally=true,bosses=true,meter=false,build=true}
@@ -65,15 +65,18 @@ methods.SetBackdrop=function(self,value) self.testBackdrop=value end
 IsAddOnLoaded=function(name) return name=="AzerothSurvivorsUI" end
 local skin=CreateFrame("Frame",nil,UIParent);FieldKitTheme.Surface(skin,"card",true)
 assert(skin.fieldkitSkin.nativeBorder==nil,"Border child can occlude labels")
-assert(string.find(skin.testBackdrop.edgeFile,"AzerothSurvivorsUI",1,true),"Native border asset not selected")
+assert(string.find(skin.fieldkitSkin.nativeMaterial.testBackdrop.edgeFile,"AzerothSurvivorsUI",1,true),"Native border asset not selected")
+local material=skin.fieldkitSkin.nativeMaterial
+assert(material.testBackdrop.edgeSize==32 and material.testBackdrop.insets.top==16 and material.testBackdrop.insets.left==8,"Native atlas was squeezed into a thin border")
+assert(material:GetFrameLevel()==skin:GetFrameLevel(),"Native backdrop child covers root text")
 local label=skin:CreateFontString(nil,"OVERLAY");FieldKitTheme.Font(label,12,FieldKitTheme.text)
 local path,size,flags=label:GetFont();assert(path=="Fonts\\FRIZQT__.TTF" and size==12 and flags=="OUTLINE","Native font not applied")
-d.cardOpacity=25;FieldKitTheme.RefreshOpacity();assert(skin.fieldkitSkin.base:GetAlpha()==.25 and skin.fieldkitSkin.nativeBackdrop)
+d.cardOpacity=25;FieldKitTheme.RefreshOpacity();assert(skin.fieldkitSkin.nativeFillAlpha==.25 and skin.fieldkitSkin.nativeBackdrop)
 FieldKitTheme.SetZone("elwynn");assert(not skin.fieldkitSkin.nativeBackdrop and FieldKitTheme.Style(skin)==3)
 FieldKitTheme.SetZone("classic");path,size,flags=label:GetFont();assert(path=="Fonts\\FRIZQT__.TTF" and flags=="OUTLINE" and skin.fieldkitSkin.nativeBackdrop)
 IsAddOnLoaded=nil
 local fallback=CreateFrame("Frame",nil,UIParent);FieldKitTheme.Surface(fallback,"card",true)
-assert(fallback.testBackdrop.edgeFile=="Interface\\Tooltips\\UI-Tooltip-Border","Missing UI addon had no fallback")
+assert(fallback.fieldkitSkin.nativeMaterial.testBackdrop.edgeFile=="Interface\\Tooltips\\UI-Tooltip-Border","Missing UI addon had no fallback")
 methods.SetBackdrop=oldBackdrop;IsAddOnLoaded=oldLoaded
 d.schema=1;d.linkLeftCards=true;d.linkRightCards=true
 d.frameAnchors.FieldKitMeterFrame={"TOPLEFT","TOPLEFT",99,-177}
@@ -88,3 +91,41 @@ SlashCmdList.FieldKit("");FieldKitUI.ResetPositions()
 assert(d.frameAnchors.FieldKitMeterFrame[4]==-120 and d.frameAnchors.FieldKitTakenFrame[4]==-400,"Position reset revived overlapping inherited defaults")
 FieldKitUI.UndoPositions();assert(d.frameAnchors.FieldKitMeterFrame[3]==99,"Position reset Undo lost dragged anchor")
 print("PASS unthemed native ownership: counters/candy, jewelry, meter, progression, boss/target identity, elapsed/paused clock, opt-outs, saved restoration and both themes x all variants")
+
+-- Footer proxies preserve the original left/right click handlers and restore
+-- their parents when an illustrated theme owns the meter again.
+d.meterTabs=true;FieldKitMeterFrame:Show();FieldKitMeterFrame.mashCollapsed=false
+N.MeterFooter()
+local proxy=N.meterProxy
+assert(proxy:IsShown() and proxy.reset:GetWidth()==112)
+local original=FieldKitMeterFrame.fieldkitTabs.buttons[2]
+local callback=original:GetScript("OnClick");local seen,button
+original:SetScript("OnClick",function() seen=this;button=arg1 end)
+proxy.buttons[2]:Click("RightButton")
+assert(seen==original and button=="RightButton","Proxy lost detach/right-click context")
+original:SetScript("OnClick",callback)
+N.RestoreMeterFooter()
+assert(FieldKitMeterFrame.fieldkitTabs:GetParent()==FieldKitMeterFrame and not proxy:IsShown())
+-- Real geometry exercises independent-card collisions, including material
+-- outsets. A user's saved anchor is not overwritten by automatic reflow.
+for _,name in ipairs(FieldKitCardLayout.names) do getglobal(name):Hide() end
+for _,name in ipairs({"Minimap","AzerothSurvivorsUnitFrameTarget"}) do local f=getglobal(name);if f then f:Hide() end end
+local a,b=FieldKitMeterFrame,FieldKitTakenFrame
+a:Show();b:Show();a.left=100;a.top=700;b.left=100;b.top=700
+a:SetWidth(280);a:SetHeight(100);b:SetWidth(280);b:SetHeight(100)
+FieldKitNativeLayout.lastMoved=a;d.zoneThemeOverlap=false;d.linkLeftCards=false;d.linkRightCards=false
+local saved=d.frameAnchors.FieldKitTakenFrame
+assert(FieldKitNativeLayout.Apply()>0,"Overlapping independent cards did not yield")
+assert(d.frameAnchors.FieldKitTakenFrame==saved,"Automatic displacement overwrote saved anchor")
+local point,relative,rp,x,y=b:GetPoint()
+assert(point=="TOPLEFT" and relative==UIParent and (x~=100 or y~=-100))
+d.zoneThemeOverlap=true;assert(FieldKitNativeLayout.Apply()==nil);d.zoneThemeOverlap=false
+-- The public native gauge constructor is optional and its own frame is reused.
+FieldKitBossTimeline.Ensure()
+local calls=0
+AZS_BuildBossChargeBar=function(frame) calls=calls+1;return function(share,text) assert(share==.25 and text=="Boss 25%") end end
+assert(FieldKitBossTimeline.NativeGauge(380,.25,"Boss 25%"))
+assert(FieldKitBossTimeline.NativeGauge(380,.25,"Boss 25%") and calls==1)
+AZS_BuildBossChargeBar=nil
+assert(not FieldKitBossTimeline.NativeGauge(380,.25,"Boss 25%"))
+print("PASS native material geometry, footer click forwarding/restoration, independent collision reflow and optional reusable native gauge")

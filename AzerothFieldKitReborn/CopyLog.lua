@@ -285,7 +285,7 @@ function FieldKit.ApplyChatStyle()
  if not f or not FieldKitRebornDB then return end
  if Themed() then
   -- the theme owns the geometry while it is active; keep the handle and the hooks, never restore a native snapshot onto a themed chat
-  if chatBackdrop then chatBackdrop:Hide() end
+  if chatBackdrop then chatBackdrop:Hide();if chatBackdrop.fieldkitBorder then chatBackdrop.fieldkitBorder:Hide() end end
   MoveControl()
   if ThemedChatChanged() and FieldKitReferenceHUD.ChatSync then FieldKitReferenceHUD.ChatSync() end
   return
@@ -293,7 +293,7 @@ function FieldKit.ApplyChatStyle()
  themedChatKnown=false -- the next themed pass synchronises once
  if not FieldKitRebornDB.chatStyle then
   if moving then FinishMove() end
-  if chatBackdrop then chatBackdrop:Hide() end
+  if chatBackdrop then chatBackdrop:Hide();if chatBackdrop.fieldkitBorder then chatBackdrop.fieldkitBorder:Hide() end end
   if moveHandle then moveHandle:Hide() end
   if styleBefore and chatFrame==f then
    local snap=styleBefore
@@ -347,7 +347,22 @@ function FieldKit.ApplyChatStyle()
   local c=backgrounds[bg]
   chatBackdrop:SetVertexColor(c[1],c[2],c[3],opacity/100)
   chatBackdrop:Show()
- elseif chatBackdrop then chatBackdrop:Hide() end
+  if not FieldKit.rebornLegacyFixture then
+   if not chatBackdrop.fieldkitBorder then
+    local edge=CreateFrame("Frame",nil,f);chatBackdrop.fieldkitBorder=edge;edge:EnableMouse(false)
+    edge:SetPoint("TOPLEFT",f,"TOPLEFT",-10,18);edge:SetPoint("BOTTOMRIGHT",f,"BOTTOMRIGHT",10,-18)
+   end
+   local edge=chatBackdrop.fieldkitBorder
+   local native=type(IsAddOnLoaded)=="function" and IsAddOnLoaded("AzerothSurvivorsUI")
+   edge:SetFrameLevel(f:GetFrameLevel())
+   local key=native and "native" or "stock"
+   if edge.fieldkitAssetKey~=key then
+    edge.fieldkitAssetKey=key
+    edge:SetBackdrop({edgeFile=native and "Interface\\AddOns\\AzerothSurvivorsUI\\Assets\\border-tooltip" or "Interface\\Tooltips\\UI-Tooltip-Border",edgeSize=native and 32 or 12})
+   end
+   edge:SetBackdropBorderColor(.753,.753,.753,1);edge:Show()
+  end
+ elseif chatBackdrop then chatBackdrop:Hide();if chatBackdrop.fieldkitBorder then chatBackdrop.fieldkitBorder:Hide() end end
  -- Preserve the native scrolling frame. The client's SetMaxLines,
  -- SetFont and size setters can empty its visible lines. Apply only on changes,
  -- then recover the messages observed since styling was enabled.
@@ -388,13 +403,14 @@ local function CopyButton()
  if FieldKitRebornDB and FieldKitRebornDB.chatShowCopyButton==false then return end
  if not button then
   button=CreateFrame("Button","FieldKitChatCopyButton",UIParent)
-  button:SetWidth(48);button:SetHeight(18)
+  button:SetWidth(72);button:SetHeight(26)
   button:SetFrameStrata("MEDIUM");button:SetFrameLevel(f:GetFrameLevel()+5)
   button:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=16,edgeSize=10,insets={left=3,right=3,top=3,bottom=3}})
   button:SetBackdropColor(.025,.045,.065,.85)
   button:SetBackdropBorderColor(.48,.38,.22,.8)
   local label=button:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
-  label:SetPoint("CENTER",button,"CENTER",0,0);FieldKit_Text(label,"Copy")
+  label:SetPoint("CENTER",button,"CENTER",0,0);FieldKit_Text(label,"Copy");FieldKitTheme.Font(label,12,FieldKitTheme.text)
+  FieldKitTheme.Surface(button,"button",true)
   button:SetScript("OnClick",function() FieldKit.OpenChatCopy() end)
   button:SetScript("OnEnter",function()
    if GameTooltip then
@@ -407,7 +423,7 @@ local function CopyButton()
  end
  if button.fieldkitChatAnchor~=f then
   button:ClearAllPoints()
-  button:SetPoint("BOTTOMLEFT",f,"TOPLEFT",0,2)
+  button:SetPoint("BOTTOMLEFT",f,"TOPLEFT",0,22)
   button.fieldkitChatAnchor=f
  end
  button:Show()

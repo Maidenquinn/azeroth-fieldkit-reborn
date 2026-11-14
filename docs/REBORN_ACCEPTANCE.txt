@@ -1,3 +1,4 @@
+reborn.15 / 0.6.5: native full-size border atlas, button cap geometry, independent collisions, native progress helper and chat rim. Hero-menu/Proving Grounds visual inspection and Elwynn on/off tested; campaign/co-op acceptance remains pending.
 reborn.14 / 0.6.5: offline catalog, complete proc tooltips, native castbar ownership, supplied control states, death-log action, long-run cache/projection tests. Native API gaps documented in DEV_REQUEST_REBORN_065.txt. Live visual and co-op acceptance pending.
 
 reborn.13: native border layering and readable controls, independent initial HUD cards and existing-save migration tested offline. Visual acceptance in the actual client remains pending.
