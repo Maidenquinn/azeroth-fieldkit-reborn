@@ -8,7 +8,7 @@ Without an illustrated theme, cards use the native dark presentation. Resource c
 
 For 0.6.5: **/fieldkit → Interface → Combat meter → Recent damage and healing**, then choose **5–120 seconds**. Recent mode is off by default and saved per HUD profile. Hover Statistics for native jewelry/DoT contributions; select DoT values in the Statistics picker.
 
-Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.18** is a development candidate.
+Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.19** is a development candidate.
 
 [Français](README.fr.md) · [Port audit](docs/REBORN_PORT.md) ·
 [Native acceptance recipe](docs/REBORN_ACCEPTANCE.txt) ·

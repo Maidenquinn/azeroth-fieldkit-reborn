@@ -158,6 +158,19 @@ assert(overlap({x=0,y=0,w=100,h=100},{x=0,y=99,w=100,h=100}))
 local effective=UIParent.GetEffectiveScale;UIParent.GetEffectiveScale=function() return 2 end
 assert(not overlap({x=0,y=0,w=100,h=100},{x=0,y=100.5,w=100,h=100}))
 UIParent.GetEffectiveScale=effective
+-- Exercise actual card rectangles, not only abstract overlap inputs. The
+-- backdrop's transparent 10/18 px quad is larger than its visible metal.
+local nativeLoaded=IsAddOnLoaded
+IsAddOnLoaded=function(name) return name=="AzerothSurvivorsUI" end
+local first,second=FieldKitModeFrame,FieldKitMeterFrame
+first:Show();second:Show();first:SetAlpha(1);second:SetAlpha(1)
+first.left=100;first.top=700;first:SetWidth(280);first:SetHeight(100)
+second.left=100;second.top=585;second:SetWidth(380);second:SetHeight(100)
+local ra,rb=FieldKitNativeLayout.Rect(first),FieldKitNativeLayout.Rect(second)
+assert(ra.l==7 and ra.t==7 and ra.h==114,"Collision includes transparent atlas gutters")
+assert(not overlap(ra,rb),"One pixel between visible card borders still triggers a push")
+second.top=587;assert(overlap(ra,FieldKitNativeLayout.Rect(second)),"Visible metal overlap was allowed")
+IsAddOnLoaded=nativeLoaded
 N.MeterFooter();local point,owner=N.meterProxy.reset:GetPoint()
 assert(point=="BOTTOMRIGHT" and owner==FieldKitMeterFrame,"Reset still reserves external collision space")
 

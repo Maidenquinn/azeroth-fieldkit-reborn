@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.18",
+  "version": "0.1.0-reborn.19",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.18",
+    "version": "0.1.0-reborn.19",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "This .18 correction has not been live-tested by the agent. User campaign screenshots exposed native HUD returning beneath reward choices, fixed native target geometry and excessive card clearance. Offline regressions now cover retained replacement ownership and native choice masks with theme off/on, one-physical-pixel unthemed clearance, internal meter Reset, and native target drag/scale/lock/persistence/restoration. Full runtime/settings/themes and installed 0.6.5 API/content fixtures also pass. Earlier campaign observations apply to .17 only; they are not live acceptance of .18."
+    "inGameTestScope": "No new live client pass for .19. User screenshot exposed excessive visible clearance after .18. Native tooltip atlas inspection shows transparent gutters around the metal. Collision bounds now use 7 px visible metal outsets rather than the full 10/18 px backdrop quad. Added a regression using actual Mode/Meter frame rectangles at a one-pixel visible separation and a true metal overlap. Earlier abstract overlap tests did not cover this geometry. Full offline verification and installed client API fixtures pass; live visual acceptance remains pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "bff59058d6d818b3e8c16fa8f01bf1b1b30e00a1feea092c8bc0b303311b5c10"
+      "sha256": "1027753c87a5fad7f3a49b9c6a255a673450364426848c6e83a00a976635d238"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -65,7 +65,7 @@
     "NativeLayout.lua": {
       "maxUpvalues": 7,
       "functions": 9,
-      "sha256": "c92f9b9def1a682fe8c27e7bd17f3797aeed010b0eb89f00d671750c72887593"
+      "sha256": "24214104987becd12c5728a1c8b49711c403e8ba4616f21cce922b6e174f2a2a"
     },
     "Diagnostics.lua": {
       "maxUpvalues": 5,

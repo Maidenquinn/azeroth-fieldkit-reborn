@@ -1,5 +1,5 @@
 -- Independent unthemed cards yield to visible neighbours, not a linked stack.
--- Collision bounds include the native material's outer metal and shadow.
+-- Collision bounds follow visible metal, allowing transparent shadows to meet.
 -- Automatic displacement is never saved over a player's preferred anchor.
 FieldKitNativeLayout={}
 local L=FieldKitNativeLayout
@@ -11,7 +11,13 @@ function L.Rect(f,protected)
  local scale=(f.GetEffectiveScale and f:GetEffectiveScale() or 1)/(UIParent:GetEffectiveScale() or 1)
  local left,top,right,bottom=0,0,0,0
  if not protected then
-  left,top,right,bottom=10,18,10,18
+  -- NativePaint's backdrop quad extends 10/18 px, but its atlas contains
+  -- transparent gutters. At edgeSize 32 the opaque metal starts 3 px inward
+  -- on the sides and 11 px inward vertically: the visible outset is 7 px.
+  -- Counting the full quad left a large empty band between the drawn cards.
+  local native=type(IsAddOnLoaded)=="function" and IsAddOnLoaded("AzerothSurvivorsUI")
+  local edge=native and 7 or 2
+  left,top,right,bottom=edge,edge,edge,edge
  end
  return {frame=f,x=x*scale-left*scale,y=UIParent:GetHeight()-y*scale-top*scale,
   w=(f:GetWidth()+left+right)*scale,h=(f:GetHeight()+top+bottom)*scale,l=left*scale,t=top*scale,scale=scale}

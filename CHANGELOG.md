@@ -1,3 +1,9 @@
+# 0.1.0-reborn.19 — Visible card collision bounds
+
+- Exclude transparent native atlas gutters from collision bounds. The visible metal extends 7 px beyond the content, rather than the backdrop quad's 10/18 px.
+- Add actual Mode/Meter rectangle regressions: one visible pixel remains free, metal overlap still yields.
+- No new live client acceptance is claimed for this correction.
+
 # 0.1.0-reborn.18 — Reward screens and movable native target
 
 - Keep replaced native HUD containers hidden beneath level-up and jewelry choices, and restore prior presentation after choices.
