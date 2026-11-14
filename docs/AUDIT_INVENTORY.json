@@ -2280,8 +2280,8 @@
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 123125,
-      "sha256": "f3b4964f1509a2492bd97ac3707f5328a9a1c89152059f2b2cac5deaae02c348",
+      "bytes": 123356,
+      "sha256": "e12c3bb8f3548906463cc9a6d23ada313409e756fdf93e8af9dff8bd204bf34e",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2677,51 +2677,51 @@
         },
         {
           "name": "RefreshPanel",
-          "line": 2821
+          "line": 2824
         },
         {
           "name": "FieldKit_RefreshInterfaceLanguage",
-          "line": 2822
+          "line": 2825
         },
         {
           "name": "CreatePanel",
-          "line": 2828
+          "line": 2831
         },
         {
           "name": "TogglePanel",
-          "line": 2841
+          "line": 2844
         },
         {
           "name": "FieldKit.SetWindowsLocked",
-          "line": 2848
+          "line": 2851
         },
         {
           "name": "CreateMinimapButton",
-          "line": 2857
+          "line": 2860
         },
         {
           "name": "PlaceOnRim",
-          "line": 2867
+          "line": 2870
         },
         {
           "name": "InitDB",
-          "line": 2908
+          "line": 2911
         },
         {
           "name": "FieldKitEventLifecycle",
-          "line": 2932
+          "line": 2935
         },
         {
           "name": "FieldKitEventWorld",
-          "line": 2981
+          "line": 2984
         },
         {
           "name": "FieldKitEventOther",
-          "line": 3008
+          "line": 3011
         },
         {
           "name": "RefreshNativeData",
-          "line": 3062
+          "line": 3065
         }
       ],
       "literalEvents": [

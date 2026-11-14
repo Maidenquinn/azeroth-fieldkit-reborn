@@ -2814,6 +2814,9 @@ local function ResetPositions()
  for i=1,table.getn(movableFrames) do
   local f=movableFrames[i];DB.pos[f:GetName()]={f.azsDefault[1],f.azsDefault[2]};PlaceMovable(f)
  end
+ if not FieldKit.rebornLegacyFixture and not (FieldKitZoneThemes and FieldKitZoneThemes.active) and not DB.linkLeftCards and not DB.linkRightCards then
+  FieldKitNativeHUD.layoutReset=true;FieldKitNativeHUD.SeparateDefaults()
+ end
  if AttachMoneyToBar then AttachMoneyToBar(true) end
  if FieldKit.ResetChatLayout then FieldKit.ResetChatLayout() end
  FieldKitHudStack.Apply();FieldKitCardLayout.ApplyRight()

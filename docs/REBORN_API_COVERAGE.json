@@ -45,7 +45,7 @@
     "OptionsSchema.lua": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07",
     "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
     "Interface.lua": "ad9c5e735fdc00885232dd63b76338640c086f3bfee6d998705a044a75e2da1e",
-    "FieldKit.lua": "f3b4964f1509a2492bd97ac3707f5328a9a1c89152059f2b2cac5deaae02c348",
+    "FieldKit.lua": "e12c3bb8f3548906463cc9a6d23ada313409e756fdf93e8af9dff8bd204bf34e",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "e026f087e0b48acc4fb83ea45b66ad6d744799909c031b153bcc62e4beac4aeb",
     "WorldMarkers.lua": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
@@ -1717,11 +1717,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3064
+          "line": 3067
         },
         {
           "file": "FieldKit.lua",
-          "line": 3207
+          "line": 3210
         },
         {
           "file": "WorldPins.lua",
@@ -1843,11 +1843,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3064
+          "line": 3067
         },
         {
           "file": "FieldKit.lua",
-          "line": 3207
+          "line": 3210
         },
         {
           "file": "WorldPins.lua",
@@ -3078,7 +3078,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3066
+          "line": 3069
         },
         {
           "file": "WorldPins.lua",
@@ -3361,19 +3361,19 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3033
+          "line": 3036
         },
         {
           "file": "FieldKit.lua",
-          "line": 3069
+          "line": 3072
         },
         {
           "file": "FieldKit.lua",
-          "line": 3070
+          "line": 3073
         },
         {
           "file": "FieldKit.lua",
-          "line": 3076
+          "line": 3079
         }
       ],
       "directCallSites": [],
@@ -3386,11 +3386,11 @@
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 3069
+          "line": 3072
         },
         {
           "file": "FieldKit.lua",
-          "line": 3076
+          "line": 3079
         }
       ],
       "directCallSites": [],
@@ -4389,7 +4389,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3065
+          "line": 3068
         },
         {
           "file": "CombatText.lua",
