@@ -268,7 +268,7 @@ end
 local function EnsureChrome(frame)
  if frame.fieldkitMeterChrome then return end
  frame.fieldkitMeterChrome=true
- frame.fieldkitFooterHeight=22
+ frame.fieldkitFooterHeight=FieldKit.rebornLegacyFixture and 22 or 38
  frame.fieldkitHeaderHeight=14
  local header=CreateFrame("Frame",frame:GetName().."ColHeader",frame)
  header:SetPoint("TOPLEFT",frame,"TOPLEFT",6,-22)
@@ -301,13 +301,13 @@ local function EnsureChrome(frame)
  local tabs=CreateFrame("Frame",frame:GetName().."Tabs",frame)
  tabs:SetPoint("BOTTOMLEFT",frame,"BOTTOMLEFT",4,3)
  tabs:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",-50,3)
- tabs:SetHeight(18);frame.fieldkitTabs=tabs;tabs.buttons={}
+ tabs:SetHeight(FieldKit.rebornLegacyFixture and 18 or 28);frame.fieldkitTabs=tabs;tabs.buttons={}
  local labels={"Dmg","Heal","Boss","Taken","Party","Kills"}
  for i=1,table.getn(views) do
   local key=views[i]
   local fullLabel=L.labels[i] or labels[i]
   local b=CreateFrame("Button",nil,tabs)
-  b:SetWidth(36);b:SetHeight(16);b:SetPoint("LEFT",tabs,"LEFT",(i-1)*38,0)
+  b:SetWidth(FieldKit.rebornLegacyFixture and 36 or 48);b:SetHeight(FieldKit.rebornLegacyFixture and 16 or 24);b:SetPoint("LEFT",tabs,"LEFT",(i-1)*(FieldKit.rebornLegacyFixture and 38 or 50),0)
   b:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",edgeSize=8,insets={left=1,right=1,top=1,bottom=1}})
   b:SetBackdropColor(0,0,0,.55);b:SetBackdropBorderColor(.5,.5,.5,.8)
   local t=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall");t:SetAllPoints(b);t:SetText(FieldKit_L(labels[i]))
@@ -327,7 +327,7 @@ local function EnsureChrome(frame)
   tabs.buttons[i]=b
  end
  local reset=CreateFrame("Button",frame:GetName().."Reset",frame)
- reset:SetWidth(44);reset:SetHeight(16);reset:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",-4,3)
+ reset:SetWidth(44);reset:SetHeight(FieldKit.rebornLegacyFixture and 16 or 24);reset:SetPoint("BOTTOMRIGHT",frame,"BOTTOMRIGHT",-4,3)
  reset:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",edgeSize=8,insets={left=1,right=1,top=1,bottom=1}})
  reset:SetBackdropColor(.25,.08,.08,.7);reset:SetBackdropBorderColor(.7,.3,.2,.9)
  local rt=reset:CreateFontString(nil,"OVERLAY","GameFontNormalSmall");rt:SetAllPoints(reset);FieldKit_Text(rt,"Reset")

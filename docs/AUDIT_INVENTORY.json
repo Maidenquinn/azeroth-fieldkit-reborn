@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.12",
+  "candidate": "0.1.0-reborn.13",
   "runtimeModules": 55,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "440083e7e1d6581cd138a52743aacd260613c56a94826481b4219c44dc002962",
+      "sha256": "39d1e7d57ff6d599822fb66f7374355ba1e5d51254d6a37acefa207ddb11d581",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -215,8 +215,8 @@
       "literalEvents": []
     },
     "NativeHUD.lua": {
-      "bytes": 8056,
-      "sha256": "66c47995ee52fd812662995d11aafc9fafe639d9e544c882fa088244edf7a855",
+      "bytes": 9384,
+      "sha256": "2a96745c9f777a65b3f2fb4258e2ff6c193229ff92abdc38303db470f35922a0",
       "namedFunctions": [
         {
           "name": "Saved",
@@ -252,15 +252,23 @@
         },
         {
           "name": "Short",
-          "line": 107
+          "line": 108
         },
         {
           "name": "N.Money",
-          "line": 115
+          "line": 116
         },
         {
           "name": "N.BossLook",
-          "line": 153
+          "line": 154
+        },
+        {
+          "name": "N.SeparateDefaults",
+          "line": 165
+        },
+        {
+          "name": "N.Polish",
+          "line": 179
         }
       ],
       "literalEvents": []
@@ -400,8 +408,8 @@
       "literalEvents": []
     },
     "Config.lua": {
-      "bytes": 10342,
-      "sha256": "d8ee04bb0512bc60abbfb0f7d14c240f2d40e7238a7d1b3d5a1b3f93a1d167d4",
+      "bytes": 10749,
+      "sha256": "b2bba0cc63b9d56c19c3f1baf5effbaaa708cd07a4bd43218cd1a5c188d52e8c",
       "namedFunctions": [
         {
           "name": "FieldKit.InitializeSettings",
@@ -559,8 +567,8 @@
       "literalEvents": []
     },
     "Theme.lua": {
-      "bytes": 16586,
-      "sha256": "249e71f7a1777ccf89f630af1bae1080ecabce4cde4fb6e4984f90bf4f5e8d74",
+      "bytes": 16909,
+      "sha256": "a59dec4ae38cad53f2c4e13f23e0e984037373e426de427f715c050fac5b7f13",
       "namedFunctions": [
         {
           "name": "T.Solid",
@@ -604,27 +612,27 @@
         },
         {
           "name": "T.ChoiceLook",
-          "line": 215
+          "line": 216
         },
         {
           "name": "T.PaintControl",
-          "line": 237
+          "line": 238
         },
         {
           "name": "T.Control",
-          "line": 246
+          "line": 247
         },
         {
           "name": "T.Button",
-          "line": 253
+          "line": 254
         },
         {
           "name": "T.Glyph",
-          "line": 269
+          "line": 271
         },
         {
           "name": "T.Label",
-          "line": 276
+          "line": 278
         }
       ],
       "literalEvents": []
@@ -1087,8 +1095,8 @@
       ]
     },
     "MeterSuite.lua": {
-      "bytes": 19966,
-      "sha256": "47197609eb64d0955094437f464858a2a407a26dc1389012e18c5995a8c9959b",
+      "bytes": 20202,
+      "sha256": "ee9a2050e2e320326ecbed4468a764f21078d17e6fe5888ea21ec604d513dff4",
       "namedFunctions": [
         {
           "name": "DB",
@@ -1268,8 +1276,8 @@
       "literalEvents": []
     },
     "CardLayout.lua": {
-      "bytes": 10531,
-      "sha256": "eeaf5a7ce67891f71e19eab70e3b6e6c24063aaa3440807787dd533177344f99",
+      "bytes": 11252,
+      "sha256": "76f22c40a65fe359b3f73d5a8a0dc2132cd285f8121b7e3011a6cf58d71b0f64",
       "namedFunctions": [
         {
           "name": "C.ValidName",
@@ -1281,47 +1289,47 @@
         },
         {
           "name": "C.Width",
-          "line": 24
+          "line": 28
         },
         {
           "name": "C.Rows",
-          "line": 32
+          "line": 36
         },
         {
           "name": "C.Money",
-          "line": 67
+          "line": 73
         },
         {
           "name": "C.Initialize",
-          "line": 76
+          "line": 82
         },
         {
           "name": "C.Bind",
-          "line": 101
+          "line": 107
         },
         {
           "name": "C.ApplyRight",
-          "line": 111
+          "line": 117
         },
         {
           "name": "C.Refresh",
-          "line": 142
+          "line": 148
         },
         {
           "name": "C.Frame",
-          "line": 147
+          "line": 153
         },
         {
           "name": "C.UpdateDock",
-          "line": 149
+          "line": 155
         },
         {
           "name": "C.SetDimension",
-          "line": 156
+          "line": 162
         },
         {
           "name": "C.Options",
-          "line": 163
+          "line": 169
         }
       ],
       "literalEvents": []
@@ -1855,8 +1863,8 @@
       "literalEvents": []
     },
     "Loadout.lua": {
-      "bytes": 23200,
-      "sha256": "8ddf28e1c2e0c879a06d04f6eab7fd2a93436a5e186123251562d5d9380f1b26",
+      "bytes": 23453,
+      "sha256": "6dea2b434899d7627d4b6fbb9ad45de417e6b2d0793b9c2e8efc55b1accb4e5b",
       "namedFunctions": [
         {
           "name": "L.Plain",
@@ -1944,7 +1952,7 @@
         },
         {
           "name": "L.Update",
-          "line": 433
+          "line": 434
         }
       ],
       "literalEvents": []
@@ -2125,8 +2133,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 81325,
-      "sha256": "e628703e2a4560d8fad241df3a4f6cf2d31ca6f919ae1eb0d8568a40d39b3309",
+      "bytes": 81307,
+      "sha256": "ad9c5e735fdc00885232dd63b76338640c086f3bfee6d998705a044a75e2da1e",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -2272,8 +2280,8 @@
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 123086,
-      "sha256": "ab969b3971f47a931f5f9ecc5e79b946892f2a819ead9a3c808d7327ee79af10",
+      "bytes": 123125,
+      "sha256": "f3b4964f1509a2492bd97ac3707f5328a9a1c89152059f2b2cac5deaae02c348",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2705,15 +2713,15 @@
         },
         {
           "name": "FieldKitEventWorld",
-          "line": 2980
+          "line": 2981
         },
         {
           "name": "FieldKitEventOther",
-          "line": 3007
+          "line": 3008
         },
         {
           "name": "RefreshNativeData",
-          "line": 3061
+          "line": 3062
         }
       ],
       "literalEvents": [
@@ -6496,7 +6504,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.12",
+    "version": "0.1.0-reborn.13",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6507,7 +6515,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Offline Reborn 0.6.4 validation: native ownership with themes off, counters and event currency, jewelry/meter/progression/boss/target deduplication, elapsed and paused clock, option restoration, reload bookkeeping and both theme families x all three variants. Existing 5..120 second damage/healing windows and jewelry/DoT suites rerun against installed public API. No live client or co-op QA for this build."
+    "inGameTestScope": "Offline layout fixes: native backdrop drawn behind content, minimum button text padding, roomier HUD rows and meter controls, independent defaults and existing-save migration retaining dragged anchors. Full legacy suite, 940 production setter cases, unthemed/themed ownership and installed 0.6.4 API tests. Live rendering and co-op acceptance pending."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

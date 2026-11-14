@@ -2,7 +2,7 @@
 -- old settings and game saves must not be overwritten by a renamed review build.
 local defaults={zoneThemes=false,zoneThemeMode="auto",zoneThemeVariant="complete",zoneThemeMinimap=true,zoneThemeMapShape="square",zoneThemeArt=true,zoneThemeOverlap=false,zoneThemeScale=100,lairNextBoss=true,windowsLocked=false,effectsFrame=false,effectTotems=true,effectSummons=true,effectTimers=true,effectBuffs=true,reviveFrame=false,
  nextBossCard=false,nextBossAlert=false,bossTimeline=false,bossTimelineWidth=560,storedLevelsBadge=false,nativeWarnings=false,bossBannerWarnings=true,mechanicWarnings=true,partyBannerWarnings=true,
- highlightFlaggedLair=false,showNativeAffixes=true,hideUnknownMode=true,replacePartyFrames=false,partyDetailSync=false,partyCards=false,partyMeter=true,partyHealthMode=3,partyShow=true,partyPlayerCard=false,partyDetail=2,partyCardScale=100,partyHistory=false,partyHistoryCount=5,partyHistoryBuffs=true,partyHistoryCombat=true,partyHistoryIcons=true,linkRightCards=true,linkLeftCards=true,runModeCard=true,moneyFrame=true,hidePlates=false,hideUnknown=false,targetHealth=true,playerBar=true,
+ highlightFlaggedLair=false,showNativeAffixes=true,hideUnknownMode=true,replacePartyFrames=false,partyDetailSync=false,partyCards=false,partyMeter=true,partyHealthMode=3,partyShow=true,partyPlayerCard=false,partyDetail=2,partyCardScale=100,partyHistory=false,partyHistoryCount=5,partyHistoryBuffs=true,partyHistoryCombat=true,partyHistoryIcons=true,linkRightCards=false,linkLeftCards=false,runModeCard=true,moneyFrame=true,hidePlates=false,hideUnknown=false,targetHealth=true,playerBar=true,
  bossFrame=false,bossStyle="classic",statsFrame=true,playerBuffs=true,gearFrame=true,meterFrame=true,
  meterTabs=true,meterSpellTips=true,meterKeepTakenFrame=false,meterViewKey="damage",
  meterSortKey="dmg",meterSortAsc=false,meterHealDone=true,meterPartyOwner=nil,meterRecent=false,meterWindowSeconds=15,
@@ -21,12 +21,20 @@ FieldKit.ProfilePreferenceDefaults=defaults
 function FieldKit.InitializeSettings(defaultStats)
  if type(FieldKitRebornDB)~="table" then FieldKitRebornDB={} end
  local d=FieldKitRebornDB
+ if FieldKit.rebornLegacyFixture then
+  defaults.linkLeftCards=true;defaults.linkRightCards=true
+ elseif d.schema~=2 then
+  -- One-time migration from the inherited compact linked defaults. Individual
+  -- anchors and sizes stay intact; grouping remains an explicit preference.
+  d.linkLeftCards=false;d.linkRightCards=false
+  FieldKitNativeHUD.layoutReset=true
+ end
  for key,value in pairs(defaults) do
   if type(d[key])~=type(value) then d[key]=value end
  end
  d.spellsFrame=nil -- retired separate spell window; the existing card now has tabs
  d.loadoutTab=d.loadoutTab==2 and 2 or 1
- d.schema=1;
+ d.schema=FieldKit.rebornLegacyFixture and 1 or 2;
  local ctx=d.runDifficultyContext
  if type(ctx)~="table" or not FieldKit.Number(ctx.rank,nil,0,5) or ctx.rank~=math.floor(ctx.rank)
   or type(ctx.world)~="string" or string.len(ctx.world)>160 or type(ctx.zone)~="string" or string.len(ctx.zone)>80 or not FieldKit.Number(ctx.time,nil,0) then d.runDifficultyContext=nil end

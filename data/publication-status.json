@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.12",
+  "version": "0.1.0-reborn.13",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Offline Reborn 0.6.4 validation: native ownership with themes off, counters and event currency, jewelry/meter/progression/boss/target deduplication, elapsed and paused clock, option restoration, reload bookkeeping and both theme families x all three variants. Existing 5..120 second damage/healing windows and jewelry/DoT suites rerun against installed public API. No live client or co-op QA for this build."
+  "inGameTestScope": "Offline layout fixes: native backdrop drawn behind content, minimum button text padding, roomier HUD rows and meter controls, independent defaults and existing-save migration retaining dragged anchors. Full legacy suite, 940 production setter cases, unthemed/themed ownership and installed 0.6.4 API tests. Live rendering and co-op acceptance pending."
 }

@@ -160,16 +160,17 @@ function T.State(frame,active)
  -- frame.fieldkitFill = {color={r,g,b},alpha=a}: the card's own interior colour and opacity (the chat preferences), applied to the
  -- fill and to the centre slice only; the gold border slices keep their own opacity.
  local fill=frame.fieldkitFill
- if skin.nativeBorder then skin.nativeBorder:Hide() end
+ if skin.nativeBackdrop then frame:SetBackdrop({});skin.nativeBackdrop=nil end
  if T.Style(frame)==4 and not frame.fieldkitArtOnly then
-  if not skin.nativeBorder then
-   local border=CreateFrame("Frame",nil,frame);skin.nativeBorder=border;border:SetAllPoints(frame);border:EnableMouse(false)
+  if not skin.nativeBackdropSpec then
    local asset="Interface\\Tooltips\\UI-Tooltip-Border"
    if type(IsAddOnLoaded)=="function" and IsAddOnLoaded("AzerothSurvivorsUI") then asset="Interface\\AddOns\\AzerothSurvivorsUI\\Assets\\border-tooltip" end
-   border:SetBackdrop({edgeFile=asset,edgeSize=16,insets={left=5,right=5,top=5,bottom=5}})
-   border:SetBackdropBorderColor(.65,.65,.68,1)
+   skin.nativeBackdropSpec={edgeFile=asset,edgeSize=skin.kind=="button" and 8 or 12,insets={left=4,right=4,top=4,bottom=4}}
   end
-  skin.nativeBorder:Show();skin.selected:Hide();skin.grain:SetAlpha(0)
+  -- A backdrop belongs behind the parent's fontstrings, never on a child
+  -- frame above them: tall edge slices otherwise cover short button labels.
+  frame:SetBackdrop(skin.nativeBackdropSpec);frame:SetBackdropBorderColor(.65,.65,.68,1)
+  skin.nativeBackdrop=true;skin.selected:Hide();skin.grain:SetAlpha(0)
   for _,part in ipairs(skin.parts) do part.texture:Hide() end
   T.Solid(skin.base,fill and fill.color or {.035,.035,.045})
   skin.base:SetAlpha((skin.kind=="button" and 1 or (fill and fill.alpha or T.Opacity(frame)))*((frame.fieldkitNavigation and not active) and 0 or 1))
@@ -252,10 +253,11 @@ end
 -- Native legacy Button with its own visible label; no red template underneath.
 function T.Button(parent,name,label,x,y,w,h,callback)
  local b=CreateFrame("Button",name,parent);b:SetPoint("TOPLEFT",parent,"TOPLEFT",x,-y)
- b:SetWidth(w);b:SetHeight(h or 28);T.Surface(b,"button",parent.fieldkitSkin and parent.fieldkitSkin.hud)
+ b:SetWidth(w);b:SetHeight((not FieldKit.rebornLegacyFixture and T.zone=="classic" and w>=50) and math.max(28,h or 28) or (h or 28));T.Surface(b,"button",parent.fieldkitSkin and parent.fieldkitSkin.hud)
  b.fieldkitLabel=b:CreateFontString(nil,"OVERLAY","GameFontNormal")
  local padding=w<50 and 2 or 10
- b.fieldkitLabel:SetPoint("LEFT",b,"LEFT",padding,0);b.fieldkitLabel:SetWidth(w-2*padding);b.fieldkitLabel:SetHeight(h or 28)
+ b.fieldkitLabel:SetPoint("LEFT",b,"LEFT",padding,0);b.fieldkitLabel:SetWidth(w-2*padding);b.fieldkitLabel:SetHeight(math.max(12,b:GetHeight()-8))
+ if b.fieldkitLabel.SetWordWrap then b.fieldkitLabel:SetWordWrap(false) end
  b.fieldkitLabel:SetJustifyH(w<50 and "CENTER" or "LEFT");b.fieldkitLabel:SetJustifyV("MIDDLE");T.Font(b.fieldkitLabel,w<50 and 11 or 13,T.gold)
  if b.SetFontString then b:SetFontString(b.fieldkitLabel) end
  b.callback=callback

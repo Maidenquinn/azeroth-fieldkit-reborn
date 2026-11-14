@@ -374,6 +374,7 @@ function L.Attach(frame,readSlot,refresh)
  end
 end
 function L.Render(frame)
+ local native=not FieldKit.rebornLegacyFixture and not (FieldKitZoneThemes and FieldKitZoneThemes.active)
  local spells=FieldKitRebornDB.loadoutTab==2;local rows=spells and frame.spellRows or frame.slots
  local n=spells and math.min(9,table.getn(L.spells)) or 5;local totalH=0
  for _,row in ipairs(spells and frame.slots or frame.spellRows) do row:Hide() end
@@ -382,7 +383,7 @@ function L.Render(frame)
   local source=entry and entry.bonuses or {}
   if spells and entry and table.getn(source)==0 then source=entry.upgrades or {} end
   local text,lines=L.BonusText(source);row.bonus:SetText(text);row.fieldkitBonusLines=lines
-  local rowH=16+math.max(0,lines)*12;row.fieldkitRowHeight=rowH;totalH=totalH+rowH
+  local rowH=(native and 22 or 16)+math.max(0,lines)*12;row.fieldkitRowHeight=rowH;totalH=totalH+rowH
   if spells then
    row.entry=entry;row.label:SetText(entry and entry.name or FieldKit_L("No spells yet"));row.value:SetText(entry and entry.rank or "")
    row.value:SetTextColor(L.RankColor(entry and entry.rankValue))
@@ -397,12 +398,12 @@ function L.Render(frame)
    else FieldKit_Text(row.label,slot);row.value:SetText(FieldKit_L("empty"));row.value:SetTextColor(.65,.7,.7) end
    row.icon:SetTexture(texture)
    if texture then row.icon:Show() else row.icon:Hide() end
-   if not name and not texture then row.bonus:SetText("");row.fieldkitBonusLines=0;row.fieldkitRowHeight=16;totalH=totalH-rowH+16 end
+   if not name and not texture then row.bonus:SetText("");row.fieldkitBonusLines=0;row.fieldkitRowHeight=native and 22 or 16;totalH=totalH-rowH+row.fieldkitRowHeight end
   end
  end
  frame.fieldkitLayoutRows=rows;frame.fieldkitDenseLoadout=false
  local collapsed=FieldKitRebornDB.gearCollapsed
- FieldKitCardLayout.Rows(frame,40+math.max(totalH,16),math.max(1,n),"loadout",collapsed)
+ FieldKitCardLayout.Rows(frame,(native and 56 or 40)+math.max(totalH,16),math.max(1,n),"loadout",collapsed)
  local y=0
  for i=1,table.getn(rows) do
   local row=rows[i]
@@ -419,7 +420,7 @@ function L.Render(frame)
    row.bonus:SetJustifyH("LEFT");row.bonus:SetJustifyV("TOP")
    row.bonus:SetHeight(math.max(12,lines*12));row.bonus:SetWidth(frame:GetWidth()-32)
    if row.GetParent then
-    row:ClearAllPoints();row:SetPoint("TOPLEFT",frame,"TOPLEFT",6,-28-y);row:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-6,-28-y)
+    row:ClearAllPoints();row:SetPoint("TOPLEFT",frame,"TOPLEFT",native and 12 or 6,-(native and 44 or 28)-y);row:SetPoint("TOPRIGHT",frame,"TOPRIGHT",native and -12 or -6,-(native and 44 or 28)-y)
    end
    y=y+rowH;row:Show()
   else row:Hide() end

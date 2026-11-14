@@ -2969,6 +2969,7 @@ local function FieldKitEventLifecycle()
   -- Capture native ownership only after the optional legacy compact bar exists.
   -- Options/profile refreshes during construction must not snapshot half-built UI.
   FieldKit.zoneThemeReady=true
+  FieldKitNativeHUD.SeparateDefaults()
 		return
 	end
 	if ( not DB ) then

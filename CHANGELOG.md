@@ -1,3 +1,10 @@
+# 0.1.0-reborn.13 — Unthemed layout and readable controls
+
+- Draw native borders as parent backdrops behind text, removing the overlay that obscured short controls.
+- Add button text padding, wider profile selectors, larger meter tabs and more room in HUD/loadout rows.
+- Default HUD cards are independent. Existing inherited grouping is migrated once, preserving dragged anchors and allowing grouping to be explicitly re-enabled.
+- Reserve separate initial regions for HUD cards. No live reload or gameplay actions performed; visual acceptance pending.
+
 # 0.1.0-reborn.12 — Reborn native presentation without illustrated themes
 
 - Per-element native visibility ownership removes duplicated counters, jewelry, meters, boss progression and represented boss/target health. Native spell/Steed controls remain functional. Disabling replacements restores prior native visibility.

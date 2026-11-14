@@ -1,5 +1,7 @@
 fire(FieldKitFrame,"VARIABLES_LOADED")
 local N,C,d=FieldKitNativeHUD,FieldKitZoneThemes,FieldKitRebornDB
+assert(not d.linkLeftCards and not d.linkRightCards and d.schema==2,"Default cards are still grouped")
+assert(d.frameAnchors.FieldKitMeterFrame[4]~=d.frameAnchors.FieldKitTakenFrame[4],"Independent defaults overlap")
 N.Release()
 local state={clock=true,tally=true,bosses=true,meter=false,build=true}
 AZS_IsHudShown=function(key) return state[key] end
@@ -62,14 +64,23 @@ local oldBackdrop,oldLoaded=methods.SetBackdrop,IsAddOnLoaded
 methods.SetBackdrop=function(self,value) self.testBackdrop=value end
 IsAddOnLoaded=function(name) return name=="AzerothSurvivorsUI" end
 local skin=CreateFrame("Frame",nil,UIParent);FieldKitTheme.Surface(skin,"card",true)
-assert(string.find(skin.fieldkitSkin.nativeBorder.testBackdrop.edgeFile,"AzerothSurvivorsUI",1,true),"Native border asset not selected")
+assert(skin.fieldkitSkin.nativeBorder==nil,"Border child can occlude labels")
+assert(string.find(skin.testBackdrop.edgeFile,"AzerothSurvivorsUI",1,true),"Native border asset not selected")
 local label=skin:CreateFontString(nil,"OVERLAY");FieldKitTheme.Font(label,12,FieldKitTheme.text)
 local path,size,flags=label:GetFont();assert(path=="Fonts\\FRIZQT__.TTF" and size==12 and flags=="OUTLINE","Native font not applied")
-d.cardOpacity=25;FieldKitTheme.RefreshOpacity();assert(skin.fieldkitSkin.base:GetAlpha()==.25 and skin.fieldkitSkin.nativeBorder:IsShown())
-FieldKitTheme.SetZone("elwynn");assert(not skin.fieldkitSkin.nativeBorder:IsShown() and FieldKitTheme.Style(skin)==3)
-FieldKitTheme.SetZone("classic");path,size,flags=label:GetFont();assert(path=="Fonts\\FRIZQT__.TTF" and flags=="OUTLINE" and skin.fieldkitSkin.nativeBorder:IsShown())
+d.cardOpacity=25;FieldKitTheme.RefreshOpacity();assert(skin.fieldkitSkin.base:GetAlpha()==.25 and skin.fieldkitSkin.nativeBackdrop)
+FieldKitTheme.SetZone("elwynn");assert(not skin.fieldkitSkin.nativeBackdrop and FieldKitTheme.Style(skin)==3)
+FieldKitTheme.SetZone("classic");path,size,flags=label:GetFont();assert(path=="Fonts\\FRIZQT__.TTF" and flags=="OUTLINE" and skin.fieldkitSkin.nativeBackdrop)
 IsAddOnLoaded=nil
 local fallback=CreateFrame("Frame",nil,UIParent);FieldKitTheme.Surface(fallback,"card",true)
-assert(fallback.fieldkitSkin.nativeBorder.testBackdrop.edgeFile=="Interface\\Tooltips\\UI-Tooltip-Border","Missing UI addon had no fallback")
+assert(fallback.testBackdrop.edgeFile=="Interface\\Tooltips\\UI-Tooltip-Border","Missing UI addon had no fallback")
 methods.SetBackdrop=oldBackdrop;IsAddOnLoaded=oldLoaded
+d.schema=1;d.linkLeftCards=true;d.linkRightCards=true
+d.frameAnchors.FieldKitMeterFrame={"TOPLEFT","TOPLEFT",99,-177}
+FieldKit.InitializeSettings({});N.SeparateDefaults()
+assert(not d.linkLeftCards and not d.linkRightCards,"Existing-save default grouping not migrated")
+assert(d.frameAnchors.FieldKitMeterFrame[3]==99,"Migration overwrote dragged card")
+d.linkLeftCards=true;FieldKit.InitializeSettings({});assert(d.linkLeftCards,"Migration repeated after explicit opt-in")
+local button=FieldKitTheme.Button(UIParent,nil,"Readable",0,0,140,16)
+assert(button:GetHeight()>=28 and button.fieldkitLabel:GetHeight()<=button:GetHeight()-8,"Button lacks internal text padding")
 print("PASS unthemed native ownership: counters/candy, jewelry, meter, progression, boss/target identity, elapsed/paused clock, opt-outs, saved restoration and both themes x all variants")

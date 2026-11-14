@@ -15,6 +15,10 @@ function C.ValidName(name)
 end
 
 function C.MinimumWidth(name)
+ if not FieldKit.rebornLegacyFixture and not (FieldKitZoneThemes and FieldKitZoneThemes.active) then
+  local widths={FieldKitMeterFrame=380,FieldKitModeFrame=280,FieldKitTakenFrame=340,FieldKitLairFrame=320,FieldKitGearFrame=320,FieldKitStatsFrame=280}
+  if widths[name] then return widths[name] end
+ end
  if name=="FieldKitNativeWarnings" then return 300 end
  if name=="FieldKitMeterFrame" or name=="FieldKitPartyMeterFrame" then return FieldKit.MeterWidth(FieldKitRebornDB.meterValues) end
  if string.find(name,"^FieldKitPartyCard[1-4]$") or name=="FieldKitPlayerCard" then return 280 end
@@ -33,26 +37,28 @@ function C.Rows(frame,natural,count,kind,collapsed)
  local name=frame:GetName();local size=FieldKitRebornDB.cardSizes[name]
  frame.fieldkitNaturalHeight=natural;frame.fieldkitRowCount=count;frame.fieldkitRowKind=kind
  local bar=kind=="bar" or kind=="loadout"
+ local native=not FieldKit.rebornLegacyFixture and not (FieldKitZoneThemes and FieldKitZoneThemes.active)
  local padding=bar and 28+(frame.fieldkitFooterHeight or 0)+(frame.fieldkitHeaderHeight or 0) or 14
  local rowMinimum=kind=="loadout" and (frame.fieldkitDenseLoadout and 16 or 32) or (kind=="gear" and 16 or 14)
+ if native and kind~="loadout" then padding=bar and (44+(frame.fieldkitFooterHeight or 0)+(frame.fieldkitHeaderHeight or 0)) or 24;rowMinimum=20 end
  local minimum=padding+math.max(count,1)*rowMinimum
  frame.fieldkitMinimumHeight=minimum
  local themedStats=kind=="stats" and FieldKitZoneThemes and FieldKitZoneThemes.active
  if themedStats then padding=32;rowMinimum=25;minimum=padding+math.max(count,1)*rowMinimum end
- local height=size and size.height and math.max(minimum,size.height) or math.max(themedStats and minimum or 0,natural)
+ local height=size and size.height and math.max(minimum,size.height) or math.max((themedStats or native) and minimum or 0,natural)
  frame.fieldkitExpandedHeight=height
  frame:SetWidth(C.Width(frame,frame:GetWidth()))
- frame:SetHeight(collapsed and (kind=="loadout" and 23 or (bar and 24 or 23)) or height)
+ frame:SetHeight(collapsed and (native and 36 or (kind=="loadout" and 23 or (bar and 24 or 23))) or height)
  local step=math.min(32,(height-padding)/math.max(count,1))
  local rows=frame.fieldkitLayoutRows or frame.rows or frame.slots or {}
  for i=1,table.getn(rows) do
   local row=rows[i]
   if bar then
-   row:ClearAllPoints();row:SetPoint("TOPLEFT",frame,"TOPLEFT",6,-22-(frame.fieldkitHeaderHeight or 0)-step*(i-1))
-   row:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-6,-22-(frame.fieldkitHeaderHeight or 0)-step*(i-1));row:SetHeight(math.max(12,step-2))
+   row:ClearAllPoints();row:SetPoint("TOPLEFT",frame,"TOPLEFT",native and 12 or 6,-(native and 34 or 22)-(frame.fieldkitHeaderHeight or 0)-step*(i-1))
+   row:SetPoint("TOPRIGHT",frame,"TOPRIGHT",native and -12 or -6,-(native and 34 or 22)-(frame.fieldkitHeaderHeight or 0)-step*(i-1));row:SetHeight(math.max(12,step-2))
   elseif kind=="stats" then
-   row.label:ClearAllPoints();row.label:SetPoint("TOPLEFT",frame,"TOPLEFT",themedStats and 16 or 9,-(themedStats and 16 or 8)-step*(i-1))
-   row.value:ClearAllPoints();row.value:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-27,-(themedStats and 16 or 8)-step*(i-1))
+   row.label:ClearAllPoints();row.label:SetPoint("TOPLEFT",frame,"TOPLEFT",themedStats and 16 or (native and 12 or 9),-(themedStats and 16 or (native and 12 or 8))-step*(i-1))
+   row.value:ClearAllPoints();row.value:SetPoint("TOPRIGHT",frame,"TOPRIGHT",-27,-(themedStats and 16 or (native and 12 or 8))-step*(i-1))
    row.label:SetWidth((frame:GetWidth()-44)*.64);row.value:SetWidth((frame:GetWidth()-44)*.34)
    row.label:SetHeight(themedStats and 24 or 14);row.value:SetHeight(themedStats and 24 or 14);if themedStats then FieldKitTheme.Font(row.label,14,FieldKitTheme.text);FieldKitTheme.Font(row.value,14,FieldKitTheme.text) end;row.value:SetJustifyH("RIGHT")
   else

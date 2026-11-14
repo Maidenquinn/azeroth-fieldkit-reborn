@@ -698,19 +698,19 @@ local function BuildHome(page)
   {"Tracked bosses","Portraits, health bars and timeline.",5,"bosses","bossFrame"},
   {"World markers","Chests, bosses, runes and revives.",6,"worldmarkers","worldMarkersEnabled"}}
  for i=1,4 do
-  local d=defs[i];local c=CreateFrame("Frame",nil,page);c:SetHeight(142);T.Surface(c,"card")
+  local d=defs[i];local c=CreateFrame("Frame",nil,page);c:SetHeight(154);T.Surface(c,"card")
   T.Glyph(c,d[3],14,16,32)
   c.title=T.Label(c,d[1],58,14,230,28,18,T.gold,true);FieldKit_Text(c.title,d[1])
   c.state=T.Label(c,"",58,45,230,20,12,T.muted)
   c.detail=T.Label(c,d[2],16,72,280,38,12,T.muted);FieldKit_Text(c.detail,d[2])
-  c.open=T.Button(c,nil,"Configure",16,110,260,25,function() U.Select(d[4]) end);FieldKit_Text(c.open,"Configure")
+  c.open=T.Button(c,nil,"Configure",16,112,260,30,function() U.Select(d[4]) end);FieldKit_Text(c.open,"Configure")
   c.key=d[5];table.insert(U.homeCards,c)
  end
  page.layoutCard=CreateFrame("Frame",nil,page);page.layoutCard:SetHeight(96);T.Surface(page.layoutCard,"card")
  page.layoutTitle=T.Label(page.layoutCard,"Arrange your HUD",16,12,400,26,19,T.gold,true);FieldKit_Text(page.layoutTitle,"Arrange your HUD")
  page.layoutHint=T.Label(page.layoutCard,"Drag active windows directly. Arrange hidden previews and combat areas here.",16,44,400,38,12,T.muted);FieldKit_Text(page.layoutHint,"Drag active windows directly. Arrange hidden previews and combat areas here.")
  page.layoutAction=T.Button(page.layoutCard,nil,"Arrange previews",0,32,164,30,function() U.SetLayoutEditing(true,false) end);FieldKit_Text(page.layoutAction,"Arrange previews")
- page.presetHint=T.Label(page,"Essential HUD: damage, lairs, gold and group totals. Other addons are unchanged.",0,540,650,46,12,T.muted);FieldKit_Text(page.presetHint,"Essential HUD: damage, lairs, gold and group totals. Other addons are unchanged.")
+ page.presetHint=T.Label(page,"Essential HUD: damage, lairs, gold and group totals. Other addons are unchanged.",0,566,650,46,12,T.muted);FieldKit_Text(page.presetHint,"Essential HUD: damage, lairs, gold and group totals. Other addons are unchanged.")
  page.essential=T.Button(page,nil,"Use essential HUD",0,594,190,30,function() U.EssentialHud(false) end);FieldKit_Text(page.essential,"Use essential HUD")
  page.undoPreset=T.Button(page,nil,"Undo HUD preset",202,594,190,30,function() U.EssentialHud(true) end);FieldKit_Text(page.undoPreset,"Undo HUD preset")
  U.presetUndo=page.undoPreset
@@ -969,7 +969,7 @@ function U.Reflow()
  -- close button and panel header's drag hit area.
  -- Fit three named buttons inside a single fixed-width header band.
  -- Avoid the window close icon, title and native draggable header region.
- local selectorWidth=math.min(themed and 470 or 386,math.max(218,w*.40))
+ local selectorWidth=math.min(470,math.max(218,w*.40))
  U.headerProfileLayer:SetWidth(selectorWidth)
  U.headerProfileLayer:ClearAllPoints()
  U.headerProfileLayer:SetPoint("TOPRIGHT",U.frame,"TOPRIGHT",-34,-72)
@@ -1027,11 +1027,11 @@ function U.Reflow()
    page.intro:SetWidth(content-16);page.presetHint:SetWidth(content-16)
    local cw=(content-28)/2
    for j=1,4 do
-    local c=U.homeCards[j];c:ClearAllPoints();c:SetPoint("TOPLEFT",page,"TOPLEFT",math.mod(j-1,2)*(cw+12),-108-math.floor((j-1)/2)*154)
+    local c=U.homeCards[j];c:ClearAllPoints();c:SetPoint("TOPLEFT",page,"TOPLEFT",math.mod(j-1,2)*(cw+12),-108-math.floor((j-1)/2)*166)
     c:SetWidth(cw);c.title:SetWidth(cw-70);c.state:SetWidth(cw-70);c.detail:SetWidth(cw-32)
     c.open:SetWidth(cw-32);c.open.fieldkitLabel:SetWidth(cw-52);T.Update(c);T.Update(c.open)
    end
-   page.layoutCard:ClearAllPoints();page.layoutCard:SetPoint("TOPLEFT",page,"TOPLEFT",0,-426);page.layoutCard:SetWidth(content-16)
+   page.layoutCard:ClearAllPoints();page.layoutCard:SetPoint("TOPLEFT",page,"TOPLEFT",0,-452);page.layoutCard:SetWidth(content-16)
    page.layoutTitle:SetWidth(content-204);page.layoutHint:SetWidth(content-204)
    page.layoutAction:ClearAllPoints();page.layoutAction:SetPoint("TOPRIGHT",page.layoutCard,"TOPRIGHT",-16,-32);T.Update(page.layoutCard)
     if page.quickButtons then

@@ -101,6 +101,7 @@ function N.Update()
  Mask("AZSRiftBar",progress)
  Mask("AzerothSurvivorsSurvivorsBossBar",(bosses and covered) or (progress and not live))
  Mask("AzerothSurvivorsUnitFrameTarget",target)
+ N.Polish()
  if run then Clock() elseif N.clock then N.clock:Hide() end
 end
 
@@ -156,5 +157,34 @@ function N.BossLook(frame)
  for i,part in ipairs(frame.nativeEdges or {}) do
   local color=native and {.4,.4,.44} or ((i==1 or i==3) and FieldKitTheme.gold or FieldKitTheme.bronze)
   part:SetVertexColor(color[1],color[2],color[3])
+ end
+end
+
+-- Reserve independent default regions rather than tethering cards to a group.
+-- Existing individually dragged anchors win over the inherited auto positions.
+function N.SeparateDefaults()
+ if not N.layoutReset or not FieldKit.zoneThemeReady then return end
+ N.layoutReset=nil
+ local d=FieldKitRebornDB
+ local locations={FieldKitModeFrame={24,40},FieldKitMeterFrame={24,120},FieldKitTakenFrame={24,400},FieldKitLairFrame={24,570},FieldKitGearFrame={-24,40},FieldKitStatsFrame={-24,410}}
+ for name,point in pairs(locations) do
+  local f=getglobal(name)
+  if f and not d.frameAnchors[name] then
+   local side=point[1]<0 and "TOPRIGHT" or "TOPLEFT"
+   d.frameAnchors[name]={side,side,point[1],-point[2]};FieldKitPositions.Restore(f)
+  end
+ end
+end
+
+function N.Polish()
+ for _,name in ipairs(FieldKitCardLayout.names) do
+  local f=getglobal(name)
+  if f and f.title and f.total and f.mashCollapseButton then
+   if f.mashCollapsed and f:GetHeight()<36 then f:SetHeight(36);FieldKitTheme.Update(f) end
+   f.title:ClearAllPoints();f.title:SetPoint("TOPLEFT",f,"TOPLEFT",12,-12)
+   f.total:ClearAllPoints();f.total:SetPoint("TOPRIGHT",f,"TOPRIGHT",-42,-12)
+   local b=f.mashCollapseButton;b:SetWidth(24);b:SetHeight(24);b:ClearAllPoints();b:SetPoint("TOPRIGHT",f,"TOPRIGHT",-6,-6)
+   FieldKitTheme.Update(b)
+  end
  end
 end
