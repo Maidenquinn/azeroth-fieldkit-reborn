@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.20",
+  "version": "0.1.0-reborn.21",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.20",
+    "version": "0.1.0-reborn.21",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No new live client pass for .20. Offline regression covers invisible direct native dragging for target/player health bars, minimap and each spell icon; independent profile-scoped scales and anchors; forwarding clicks with native this/arg1 context, suppressing clicks after drag, locks/choices, reusable hit surfaces, original native geometry restoration and Steed following. Full runtime/settings/themes and installed 0.6.5 API/content fixtures pass. Live visual/input acceptance remains pending."
+    "inGameTestScope": "No new live client pass for .21. Offline regressions cover invalid/duplicate boss and guardian rows, real endless rift percentage with missing/zero values, honest missing boss identity, visible noninteractive HUD behind reward cards with native duplicates suppressed across themes, exact input/layer restoration, and explicitly labelled native spell bonus extraction without action-tooltip dependency. Full runtime/settings/themes and installed 0.6.5 API/content fixtures are checked. Spell-specific upgrade values absent from the public API cannot be reconstructed; live acceptance remains pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "20a057331ea792df31d5ab3e498ffde8f981414e0713b41d9868d3dafbd0c927"
+      "sha256": "e06af360a7b56affa4141e3e821575067957feacff1891dfc4654cdaae0e7616"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -44,8 +44,8 @@
     },
     "Reborn.lua": {
       "maxUpvalues": 2,
-      "functions": 18,
-      "sha256": "397d0cb28dba383fdf81d3a78df7c297b6c4c684770e864ef39e75a4d2a19bd3"
+      "functions": 19,
+      "sha256": "cc1ae59be762568b19b70c907a6daeaab3e45af2124f0119a9121c185defa25b"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -60,7 +60,7 @@
     "NativeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 45,
-      "sha256": "74cdc0150984f438ff580c67ee0d5e9c7702a9d3d652788ed3a8f1b785fdfe5e"
+      "sha256": "60e3960657686f15c3adc640cc812b111122f6693e941ec0c33095bc5933d8a1"
     },
     "NativeLayout.lua": {
       "maxUpvalues": 7,
@@ -170,7 +170,7 @@
     "BossTimeline.lua": {
       "maxUpvalues": 26,
       "functions": 19,
-      "sha256": "3a34056b8b38d667f0f90be9d0ba9b5216f53541e6b25e3402d87ae9b9fd0cdf"
+      "sha256": "e82893e528559c72063b57f7b4090332008d7687a2893462aec63f0a3668f754"
     },
     "HudStack.lua": {
       "maxUpvalues": 7,
@@ -203,14 +203,14 @@
       "sha256": "673411d59b4735ddd1c9eb4215d5891529278a37892f621c9070dce2b96042ae"
     },
     "ScreenLayers.lua": {
-      "maxUpvalues": 3,
+      "maxUpvalues": 4,
       "functions": 7,
-      "sha256": "6d12f5a2f62023cdd77a1db82d974026da34c80b62672fdf19896c1850247f4d"
+      "sha256": "406c14b9c9c4ec97dcc5655c7569d85a490c3292b49604684df5832d748dc7af"
     },
     "NativeTools.lua": {
       "maxUpvalues": 3,
       "functions": 20,
-      "sha256": "91d44041071e1cf8cb9e56ee922d37be977ea3e09cc2f52caaef9dfe87dad2db"
+      "sha256": "841b6f79e3b4b0ca7a7a6dc514bd8215a51e2b5edcf4ef88c1ca40ced1fbb574"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -219,8 +219,8 @@
     },
     "Loadout.lua": {
       "maxUpvalues": 2,
-      "functions": 29,
-      "sha256": "7bcb19e089957fa6b9229c1dfcae90c0cea4c3cfd070f5753726fd928b260110"
+      "functions": 31,
+      "sha256": "8e7f2dd0acc03a6826189f145cc310c468e1ff10e11b42680a3d66cc31b9241a"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -255,7 +255,7 @@
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 191,
-      "sha256": "f5ed59d07a496ce8a1529a08dd6a29493759e2d23b9651165e1c2be803c23c55"
+      "sha256": "1548d627c6e4b293d7adf6bac73976b43d59a17619b41e9ede8cdf477ee24b0a"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -295,7 +295,7 @@
     "ThemeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 42,
-      "sha256": "44cbb9269b2b96db0635a075ac80b691b540d6b79633e601d34274c91ecfad3e"
+      "sha256": "d4621b87677d5a7e4872d82a58456268ee3ee2dd6f95bec4b8382716464499a0"
     },
     "ThemeTarget.lua": {
       "maxUpvalues": 6,
@@ -315,7 +315,7 @@
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "160be152bc1793ed2233bf44e29e843d8533f35fb5a54c5eff648e36d111e777"
+      "sha256": "1c749527ab665904c1e5578b159b8877157b7629db1db85f0c6b01ca258f18bc"
     }
   }
 }

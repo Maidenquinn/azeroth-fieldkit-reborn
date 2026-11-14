@@ -112,7 +112,7 @@ function N.Update()
  N.Polish()
  if FieldKitNativeLayout then FieldKitNativeLayout.Apply() end
  N.TargetLayout()
- if run and not choosing then Clock() elseif N.clock then N.clock:Hide() end
+ if run then Clock() elseif N.clock then N.clock:Hide() end
  if choosing and FieldKitScreenLayers then FieldKitScreenLayers.ApplyChoice() end
 end
 

@@ -3,12 +3,12 @@
   "liveGameValidation": false,
   "runtimeModules": 57,
   "runtimeSHA256": {
-    "Runtime.lua": "20a057331ea792df31d5ab3e498ffde8f981414e0713b41d9868d3dafbd0c927",
+    "Runtime.lua": "e06af360a7b56affa4141e3e821575067957feacff1891dfc4654cdaae0e7616",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
-    "Reborn.lua": "397d0cb28dba383fdf81d3a78df7c297b6c4c684770e864ef39e75a4d2a19bd3",
+    "Reborn.lua": "cc1ae59be762568b19b70c907a6daeaab3e45af2124f0119a9121c185defa25b",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
     "RebornHUD.lua": "dd028b7ef78266d0a6d7221cd1b7c0dcdb5b2da7f23b50c72b281e164a9e0b04",
-    "NativeHUD.lua": "74cdc0150984f438ff580c67ee0d5e9c7702a9d3d652788ed3a8f1b785fdfe5e",
+    "NativeHUD.lua": "60e3960657686f15c3adc640cc812b111122f6693e941ec0c33095bc5933d8a1",
     "NativeLayout.lua": "24214104987becd12c5728a1c8b49711c403e8ba4616f21cce922b6e174f2a2a",
     "Diagnostics.lua": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
     "Positions.lua": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
@@ -30,24 +30,24 @@
     "MeterWindow.lua": "bf12422a318c81fe7bfd7457e67adf65262fe8834e2b67663a6b27742d6f1a45",
     "MeterLedger.lua": "92f18a689039ec611294fd38a7c7933d5b516fea51d60469c5df0f8fe8d8f2eb",
     "MeterSuite.lua": "7bf566c7c1f778d823b16fb5c965738a3eb782089405287cf4d5fa4ea634bfe0",
-    "BossTimeline.lua": "3a34056b8b38d667f0f90be9d0ba9b5216f53541e6b25e3402d87ae9b9fd0cdf",
+    "BossTimeline.lua": "e82893e528559c72063b57f7b4090332008d7687a2893462aec63f0a3668f754",
     "HudStack.lua": "3b03b97ab491f6802c2847b5d44b8608dd90d1ae17f2f0f7aa0d66491fcceff8",
     "CardLayout.lua": "7c3c1c30a3a3d2af4dc1cb1b7e13b2999eb82d61f14f415ddd693cdbf8244be4",
     "Coop.lua": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1",
     "GroupHistory.lua": "77a5abe50cf781f15a31f6786f4e58dda2003951ff616a8ba60d823d6c246af8",
     "PartySync.lua": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
     "PartyDetails.lua": "673411d59b4735ddd1c9eb4215d5891529278a37892f621c9070dce2b96042ae",
-    "ScreenLayers.lua": "6d12f5a2f62023cdd77a1db82d974026da34c80b62672fdf19896c1850247f4d",
-    "NativeTools.lua": "91d44041071e1cf8cb9e56ee922d37be977ea3e09cc2f52caaef9dfe87dad2db",
+    "ScreenLayers.lua": "406c14b9c9c4ec97dcc5655c7569d85a490c3292b49604684df5832d748dc7af",
+    "NativeTools.lua": "841b6f79e3b4b0ca7a7a6dc514bd8215a51e2b5edcf4ef88c1ca40ced1fbb574",
     "SpellAssets.lua": "5c443e759c4ff663fd0070f06566ac0de5e8c984c963341f50be72c8c4545681",
-    "Loadout.lua": "7bcb19e089957fa6b9229c1dfcae90c0cea4c3cfd070f5753726fd928b260110",
+    "Loadout.lua": "8e7f2dd0acc03a6826189f145cc310c468e1ff10e11b42680a3d66cc31b9241a",
     "TakenDetails.lua": "2444aa4578119eae2da08653ce627caccb7acc704ec2551dc3c8c06bcd71f563",
     "Preview.lua": "0d42c42f5be64b40a2b1bcf5a69d635858dedaba409352d88555398f734a59bc",
     "PreviewVisibility.lua": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
     "OptionsSchema.lua": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07",
     "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
     "Interface.lua": "171d04189922b07d05f4fdbed60ae12e56393894232637323ad8a58ab656f1e5",
-    "FieldKit.lua": "f5ed59d07a496ce8a1529a08dd6a29493759e2d23b9651165e1c2be803c23c55",
+    "FieldKit.lua": "1548d627c6e4b293d7adf6bac73976b43d59a17619b41e9ede8cdf477ee24b0a",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "3156191b143809624e50039aa86ad9b8f77a1952776a5c3dc6473e115dca6a3b",
     "WorldMarkers.lua": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
@@ -55,11 +55,11 @@
     "CombatOptions.lua": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
     "CopyLog.lua": "ced8dba7c9b6182eb6e81c2fa94a52ff79e1b8fdcf9dc769ece3357dea3eb625",
     "ThemeMinimap.lua": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2",
-    "ThemeHUD.lua": "44cbb9269b2b96db0635a075ac80b691b540d6b79633e601d34274c91ecfad3e",
+    "ThemeHUD.lua": "d4621b87677d5a7e4872d82a58456268ee3ee2dd6f95bec4b8382716464499a0",
     "ThemeTarget.lua": "7d825056a10e26b2c187e1c3d4407c105a51a6f7185b3cea7fac5c02f1d8c41b",
     "ReferenceArt.lua": "b042e0777110f3a4519ccfadbf57bb4dcbb2e68ca9896f58f066775074605edf",
     "ReferenceHUD.lua": "dfe575a380189fd609fb102ec74d658377bb6866007e553e7e27f29faa9258c3",
-    "ZoneThemes.lua": "160be152bc1793ed2233bf44e29e843d8533f35fb5a54c5eff648e36d111e777"
+    "ZoneThemes.lua": "1c749527ab665904c1e5578b159b8877157b7629db1db85f0c6b01ca258f18bc"
   },
   "nativeLuaSHA256": {
     "AzerothSurvivorsAPI/Anchors.lua": "025d92433f111b48c1cdcbe627593c938773519eaee4d22c5c16625dab8c945d",
@@ -780,7 +780,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 168
+          "line": 179
         },
         {
           "file": "NativeData.lua",
@@ -797,7 +797,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 170
+          "line": 181
         }
       ],
       "directCallSites": [],
@@ -994,7 +994,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 81
+          "line": 92
         }
       ],
       "directCallSites": [],
@@ -1012,11 +1012,11 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 82
+          "line": 93
         },
         {
           "file": "Reborn.lua",
-          "line": 83
+          "line": 94
         }
       ],
       "directCallSites": [],
@@ -1089,7 +1089,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 149
+          "line": 160
         },
         {
           "file": "NativeData.lua",
@@ -1106,15 +1106,15 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 130
+          "line": 141
         },
         {
           "file": "Reborn.lua",
-          "line": 197
+          "line": 208
         },
         {
           "file": "Reborn.lua",
-          "line": 198
+          "line": 209
         },
         {
           "file": "RebornPresentation.lua",
@@ -1130,7 +1130,7 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 129
+          "line": 169
         }
       ],
       "directCallSites": [],
@@ -1191,7 +1191,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 54
+          "line": 59
         }
       ],
       "directCallSites": [],
@@ -1349,7 +1349,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2123
+          "line": 2122
         }
       ],
       "directCallSites": [],
@@ -1367,11 +1367,11 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 60
+          "line": 65
         },
         {
           "file": "Reborn.lua",
-          "line": 61
+          "line": 66
         }
       ],
       "directCallSites": [],
@@ -1423,11 +1423,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2102
+          "line": 2101
         },
         {
           "file": "FieldKit.lua",
-          "line": 2106
+          "line": 2105
         },
         {
           "file": "ReferenceHUD.lua",
@@ -1437,7 +1437,7 @@
       "directCallSites": [
         {
           "file": "FieldKit.lua",
-          "line": 2106
+          "line": 2105
         }
       ],
       "coverage": "referenced"
@@ -1514,11 +1514,11 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 93
+          "line": 104
         },
         {
           "file": "Reborn.lua",
-          "line": 94
+          "line": 105
         }
       ],
       "directCallSites": [],
@@ -1552,11 +1552,11 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 240
+          "line": 280
         },
         {
           "file": "Loadout.lua",
-          "line": 241
+          "line": 281
         }
       ],
       "directCallSites": [],
@@ -1574,11 +1574,11 @@
       "references": [
         {
           "file": "Loadout.lua",
-          "line": 240
+          "line": 280
         },
         {
           "file": "Loadout.lua",
-          "line": 243
+          "line": 283
         }
       ],
       "directCallSites": [],
@@ -1664,7 +1664,7 @@
         },
         {
           "file": "Reborn.lua",
-          "line": 121
+          "line": 132
         },
         {
           "file": "NativeHUD.lua",
@@ -1720,7 +1720,7 @@
         },
         {
           "file": "BossTimeline.lua",
-          "line": 253
+          "line": 252
         },
         {
           "file": "Coop.lua",
@@ -1732,19 +1732,19 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 180
+          "line": 189
         },
         {
           "file": "NativeTools.lua",
-          "line": 203
+          "line": 212
         },
         {
           "file": "NativeTools.lua",
-          "line": 280
+          "line": 289
         },
         {
           "file": "Loadout.lua",
-          "line": 437
+          "line": 483
         },
         {
           "file": "FieldKit.lua",
@@ -1780,39 +1780,39 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1741
+          "line": 1740
         },
         {
           "file": "FieldKit.lua",
-          "line": 1970
+          "line": 1969
         },
         {
           "file": "FieldKit.lua",
-          "line": 2102
+          "line": 2101
         },
         {
           "file": "FieldKit.lua",
-          "line": 2117
+          "line": 2116
         },
         {
           "file": "FieldKit.lua",
-          "line": 2192
+          "line": 2191
         },
         {
           "file": "FieldKit.lua",
-          "line": 2487
+          "line": 2486
         },
         {
           "file": "FieldKit.lua",
-          "line": 2518
+          "line": 2517
         },
         {
           "file": "FieldKit.lua",
-          "line": 3075
+          "line": 3069
         },
         {
           "file": "FieldKit.lua",
-          "line": 3219
+          "line": 3213
         },
         {
           "file": "WorldPins.lua",
@@ -1834,7 +1834,7 @@
         },
         {
           "file": "Reborn.lua",
-          "line": 121
+          "line": 132
         },
         {
           "file": "GameCompatibility.lua",
@@ -1902,43 +1902,43 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1741
+          "line": 1740
         },
         {
           "file": "FieldKit.lua",
-          "line": 1970
+          "line": 1969
         },
         {
           "file": "FieldKit.lua",
-          "line": 2102
+          "line": 2101
         },
         {
           "file": "FieldKit.lua",
-          "line": 2117
+          "line": 2116
         },
         {
           "file": "FieldKit.lua",
-          "line": 2192
+          "line": 2191
         },
         {
           "file": "FieldKit.lua",
-          "line": 2192
+          "line": 2191
         },
         {
           "file": "FieldKit.lua",
-          "line": 2487
+          "line": 2486
         },
         {
           "file": "FieldKit.lua",
-          "line": 2518
+          "line": 2517
         },
         {
           "file": "FieldKit.lua",
-          "line": 3075
+          "line": 3069
         },
         {
           "file": "FieldKit.lua",
-          "line": 3219
+          "line": 3213
         },
         {
           "file": "WorldPins.lua",
@@ -1967,11 +1967,11 @@
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 2117
+          "line": 2116
         },
         {
           "file": "FieldKit.lua",
-          "line": 2118
+          "line": 2117
         },
         {
           "file": "WorldPins.lua",
@@ -2017,7 +2017,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 282
+          "line": 291
         }
       ],
       "directCallSites": [],
@@ -2112,7 +2112,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 198
+          "line": 207
         },
         {
           "file": "ReferenceHUD.lua",
@@ -2159,7 +2159,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 281
+          "line": 290
         }
       ],
       "directCallSites": [],
@@ -2198,7 +2198,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 282
+          "line": 291
         }
       ],
       "directCallSites": [],
@@ -2237,7 +2237,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 281
+          "line": 290
         }
       ],
       "directCallSites": [],
@@ -2271,11 +2271,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 164
+          "line": 173
         },
         {
           "file": "ThemeHUD.lua",
-          "line": 355
+          "line": 357
         },
         {
           "file": "ReferenceHUD.lua",
@@ -2522,7 +2522,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 113
+          "line": 124
         }
       ],
       "directCallSites": [],
@@ -3029,7 +3029,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 71
+          "line": 78
         },
         {
           "file": "RebornHUD.lua",
@@ -3105,15 +3105,19 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 175
+          "line": 155
         },
         {
           "file": "NativeTools.lua",
-          "line": 176
+          "line": 184
         },
         {
           "file": "NativeTools.lua",
-          "line": 178
+          "line": 185
+        },
+        {
+          "file": "NativeTools.lua",
+          "line": 187
         },
         {
           "file": "FieldKit.lua",
@@ -3149,7 +3153,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1597
+          "line": 1596
+        },
+        {
+          "file": "FieldKit.lua",
+          "line": 1628
         },
         {
           "file": "FieldKit.lua",
@@ -3157,7 +3165,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1630
+          "line": 2111
         },
         {
           "file": "FieldKit.lua",
@@ -3165,11 +3173,7 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 2113
-        },
-        {
-          "file": "FieldKit.lua",
-          "line": 3077
+          "line": 3071
         },
         {
           "file": "WorldPins.lua",
@@ -3197,19 +3201,19 @@
         },
         {
           "file": "ThemeHUD.lua",
-          "line": 163
+          "line": 165
         },
         {
           "file": "ThemeHUD.lua",
-          "line": 281
-        },
-        {
-          "file": "ThemeHUD.lua",
-          "line": 321
+          "line": 283
         },
         {
           "file": "ThemeHUD.lua",
           "line": 323
+        },
+        {
+          "file": "ThemeHUD.lua",
+          "line": 325
         },
         {
           "file": "ReferenceHUD.lua",
@@ -3238,7 +3242,7 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 179
+          "line": 188
         }
       ],
       "directCallSites": [],
@@ -3269,11 +3273,11 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 233
+          "line": 242
         },
         {
           "file": "NativeTools.lua",
-          "line": 234
+          "line": 243
         }
       ],
       "directCallSites": [],
@@ -3361,7 +3365,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 72
+          "line": 85
         },
         {
           "file": "BossTimeline.lua",
@@ -3377,7 +3381,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 157
+          "line": 166
         }
       ],
       "directCallSites": [],
@@ -3390,7 +3394,7 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 128
+          "line": 139
         },
         {
           "file": "NativeData.lua",
@@ -3398,11 +3402,11 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 198
+          "line": 238
         },
         {
           "file": "Loadout.lua",
-          "line": 239
+          "line": 279
         }
       ],
       "directCallSites": [],
@@ -3419,15 +3423,19 @@
         },
         {
           "file": "Loadout.lua",
-          "line": 205
+          "line": 245
         },
         {
           "file": "Loadout.lua",
-          "line": 301
+          "line": 341
         },
         {
           "file": "Loadout.lua",
-          "line": 302
+          "line": 342
+        },
+        {
+          "file": "Loadout.lua",
+          "line": 345
         }
       ],
       "directCallSites": [],
@@ -3452,19 +3460,19 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 3044
+          "line": 3038
         },
         {
           "file": "FieldKit.lua",
-          "line": 3080
+          "line": 3074
+        },
+        {
+          "file": "FieldKit.lua",
+          "line": 3075
         },
         {
           "file": "FieldKit.lua",
           "line": 3081
-        },
-        {
-          "file": "FieldKit.lua",
-          "line": 3087
         }
       ],
       "directCallSites": [],
@@ -3477,11 +3485,11 @@
       "references": [
         {
           "file": "FieldKit.lua",
-          "line": 3080
+          "line": 3074
         },
         {
           "file": "FieldKit.lua",
-          "line": 3087
+          "line": 3081
         }
       ],
       "directCallSites": [],
@@ -3597,11 +3605,11 @@
         },
         {
           "file": "FieldKit.lua",
-          "line": 1643
+          "line": 1642
         },
         {
           "file": "FieldKit.lua",
-          "line": 2037
+          "line": 2036
         }
       ],
       "directCallSites": [],
@@ -4068,15 +4076,15 @@
         },
         {
           "file": "Reborn.lua",
-          "line": 51
+          "line": 56
         },
         {
           "file": "Reborn.lua",
-          "line": 59
+          "line": 64
         },
         {
           "file": "Reborn.lua",
-          "line": 196
+          "line": 207
         },
         {
           "file": "NativeHUD.lua",
@@ -4156,15 +4164,15 @@
         },
         {
           "file": "FieldKit.lua",
+          "line": 2191
+        },
+        {
+          "file": "FieldKit.lua",
           "line": 2192
         },
         {
           "file": "FieldKit.lua",
           "line": 2193
-        },
-        {
-          "file": "FieldKit.lua",
-          "line": 2194
         },
         {
           "file": "ZoneThemes.lua",
@@ -4259,11 +4267,11 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 235
+          "line": 244
         },
         {
           "file": "NativeTools.lua",
-          "line": 236
+          "line": 245
         }
       ],
       "directCallSites": [],
@@ -4388,11 +4396,11 @@
       "references": [
         {
           "file": "Reborn.lua",
-          "line": 117
+          "line": 128
         },
         {
           "file": "Reborn.lua",
-          "line": 134
+          "line": 145
         },
         {
           "file": "RebornPresentation.lua",
@@ -4484,11 +4492,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 279
+          "line": 288
         },
         {
           "file": "FieldKit.lua",
-          "line": 3076
+          "line": 3070
         },
         {
           "file": "CombatText.lua",
@@ -4496,15 +4504,15 @@
         },
         {
           "file": "ThemeHUD.lua",
-          "line": 129
+          "line": 131
         },
         {
           "file": "ThemeHUD.lua",
-          "line": 287
+          "line": 289
         },
         {
           "file": "ThemeHUD.lua",
-          "line": 341
+          "line": 343
         },
         {
           "file": "ZoneThemes.lua",

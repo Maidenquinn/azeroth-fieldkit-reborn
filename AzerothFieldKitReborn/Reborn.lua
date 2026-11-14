@@ -47,6 +47,11 @@ function R.HealthColor(current,maximum)
 end
 -- Reborn intentionally keeps guardians out of AZS_UNITS. Merge read-only
 -- public snapshots for the Chronicle pool, without modifying native globals.
+function R.LiveBoss(u)
+ if type(u)~="table" then return false end
+ local id,hp,hpm=FieldKit.Number(u.id),FieldKit.Number(u.hp),FieldKit.Number(u.hpm)
+ return id and id>0 and hp and hp>0 and hpm and hpm>0 and type(u.name)=="string" and string.find(u.name,"%S")
+end
 function R.BossUnits()
  if FieldKit.rebornLegacyFixture then return AZS_UNITS or {} end
  local out={}
@@ -54,26 +59,32 @@ function R.BossUnits()
  if type(AZS_GetBosses)=="function" then ok,bosses=pcall(AZS_GetBosses) end
  if ok and type(bosses)=="table" then
   for i=1,math.min(64,table.getn(bosses)) do local b=bosses[i]
-   if type(b)=="table" then table.insert(out,{id=b.id,name=b.name,hp=b.hp,hpm=b.hpm,kind=b.final and "final" or "boss",state=b.enraged and 1 or 0}) end
+   if R.LiveBoss(b) then table.insert(out,{id=b.id,name=b.name,hp=b.hp,hpm=b.hpm,kind=b.final and "final" or "boss",state=b.enraged and 1 or 0}) end
   end
- else for _,u in ipairs(type(AZS_UNITS)=="table" and AZS_UNITS or {}) do table.insert(out,u) end end
+ else for _,u in ipairs(type(AZS_UNITS)=="table" and AZS_UNITS or {}) do if R.LiveBoss(u) then table.insert(out,u) end end end
  if type(AZS_GetGuardians)=="function" then
   local success,guardians=pcall(AZS_GetGuardians)
   if success and type(guardians)=="table" then
    for i=1,math.min(64,table.getn(guardians)) do local g=guardians[i]
-    if type(g)=="table" then table.insert(out,{id=g.id,name=g.name,hp=g.hp,hpm=g.hpm,kind="guardian",state=g.awake and 1 or 0}) end
+    if R.LiveBoss(g) then table.insert(out,{id=g.id,name=g.name,hp=g.hp,hpm=g.hpm,kind="guardian",state=g.awake and 1 or 0}) end
    end
   end
  end
- return out
+ local unique,seen={},{}
+ for _,u in ipairs(out) do if not seen[u.id] then seen[u.id]=true;table.insert(unique,u) end end
+ return unique
 end
 function R.BossProgress()
  local run=type(AZS_RUN)=="table" and AZS_RUN or {}
+ local rift=FieldKit.Number(run.rift)
+ if rift and rift<0 then rift=nil end
+ if rift then rift=math.min(100,rift)/100 end
+ if FieldKit.Number(run.endless)==1 or FieldKit.Number(run.endl)==1 then
+  return rift
+ end
  for _,boss in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do
   if boss.state=="due" then
-   local rift=FieldKit.Number(run.rift,nil,0,100)
-   if rift then return rift/100 end
-   return nil
+   return rift
   end
  end
 end

@@ -1590,8 +1590,7 @@ local function UpdateMoneyFrame()
 	if ( not moneyFrame ) then
 		return
 	end
-	if not DB.moneyFrame or (HasAPI() and not AZS_GetPhase())
-  or FieldKit.IsChoiceScreen() then
+	if not DB.moneyFrame or (HasAPI() and not AZS_GetPhase()) or (FieldKit.rebornLegacyFixture and FieldKit.IsChoiceScreen()) then
   moneyFrame:Hide();return
  end
 	local exact=HasAPI() and type(AZS_RUN)=="table" and FieldKit.Number(AZS_RUN.ck,nil,0)
@@ -2484,7 +2483,7 @@ function CreateCompactBar()
 		local repair = DB.moneyDockRepair ~= 1
 		AttachMoneyToBar(repair)
 		DB.moneyDockRepair = 1
-		if not DB.moneyFrame or (HasAPI() and not AZS_GetPhase()) then moneyFrame:Hide() else moneyFrame:Show() end
+		if not DB.moneyFrame or (HasAPI() and not AZS_GetPhase()) or (FieldKit.rebornLegacyFixture and FieldKit.IsChoiceScreen()) then moneyFrame:Hide() else moneyFrame:Show() end
 	end
 
 
@@ -2515,7 +2514,7 @@ function AttachMoneyToBar(force)
 			moneyFrame:ClearAllPoints()
 			moneyFrame:SetPoint("BOTTOM", compactBar, "TOP", 0, 2)
 		end
-		if not DB.moneyFrame or (HasAPI() and not AZS_GetPhase()) or FieldKit.IsChoiceScreen() then
+		if not DB.moneyFrame or (HasAPI() and not AZS_GetPhase()) or (FieldKit.rebornLegacyFixture and FieldKit.IsChoiceScreen()) then
    moneyFrame:Hide()
   else moneyFrame:Show() end
 	end
@@ -2527,21 +2526,16 @@ function KeepCompactBar()
 	if ( not compactBar ) then
 		return
 	end
- -- The old repair loop resurrected action buttons hidden by native choices.
- -- Suppress our whole compact surface, including XP, before touching buttons.
- -- Remember only visibility we changed, so unrelated hidden state stays hidden.
+ -- Keep the existing HUD visible behind choices without resurrecting native buttons.
  if FieldKit.IsChoiceScreen() then
-  if compactBar:IsShown() then
-   compactBar.fieldkitChoiceHidden=true
-   compactBar:Hide()
+  if FieldKit.rebornLegacyFixture then
+   if compactBar:IsShown() then compactBar.fieldkitChoiceHidden=true;compactBar:Hide() end
+   if moneyFrame then moneyFrame:Hide() end
   end
-  if moneyFrame then moneyFrame:Hide() end
   return
  end
- if compactBar.fieldkitChoiceHidden then
-  compactBar.fieldkitChoiceHidden=nil
-  compactBar:Show()
- end
+ if compactBar.fieldkitChoiceHidden then compactBar.fieldkitChoiceHidden=nil;compactBar:Show() end
+
 	AttachMoneyToBar(false)
 	if ( ( ActionButton1 and ActionButton1:GetParent() ~= compactBar )
 		or ( MainMenuMicroButton and microMenu and MainMenuMicroButton:GetParent() ~= microMenu ) ) then

@@ -22,7 +22,7 @@ end
 
 local function PhaseOk()
  local ph=type(AZS_GetPhase)=="function" and AZS_GetPhase() or nil
- return ph=="playing" or ph=="paused" or ph=="dead" or ph=="victory"
+ return ph=="playing" or ph=="paused" or ph=="choosing" or ph=="dead" or ph=="victory"
 end
 
 local function RunNow()
@@ -249,7 +249,6 @@ function B.UpdateReborn()
  SyncClockHud(false)
  if not FieldKitRebornDB or not FieldKitRebornDB.bossTimeline or
   (FieldKitZoneThemes and FieldKitZoneThemes.active) or
-  (FieldKit.IsChoiceScreen and FieldKit.IsChoiceScreen()) or
   (not PhaseOk() and not FieldKit.layoutEditing and FieldKitNative.Read("AZS_GetPhase")~="ready") then
   if root then root:Hide() end;return
  end

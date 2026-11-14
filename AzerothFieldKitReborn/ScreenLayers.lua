@@ -1,20 +1,19 @@
 -- The new API covers level-up/jewelry screens, not every native modal.
 -- Register only named FieldKit HUD frames, only while explicitly opted in/shown.
--- During choosing, all other FieldKit HUD yields (alpha/mouse) so cards stay on top.
+-- During choosing, HUD stays visible below the reward cards, with input disabled.
 FieldKitScreenLayers={registered={},choiceMasked={},choiceOn=false}
 local S=FieldKitScreenLayers
 
 local CHOICE_EXTRA={"FieldKitFirstLaunchBar","FieldKitProfilePreviewBar","FieldKitReferenceCanvas","FieldKitThemeBack","FieldKitThemeSummaryDamage","FieldKitThemeSummaryLairs","FieldKitThemeSummaryAccessories","FieldKitThemeSummaryStats","FieldKitThemeSummaryEffects","FieldKitThemeIdentity","FieldKitThemeVitality","FieldKitThemeExperience","FieldKitThemeCounters","FieldKitThemeSchedule","FieldKitThemeUtility","FieldKitThemeMicro","FieldKitThemeTargetFrame","FieldKitBossFrame1Compact","FieldKitBossFrame2Compact","FieldKitBossFrame3Compact","FieldKitBossFrame4Compact","FieldKitThemeDock","FieldKitThemeHeader","FieldKitThemeNavigation","FieldKitThemeTooltip","FieldKitThemeMap","FieldKitBossTimelineFrame","FieldKitLeftStack","FieldKitRightStack",
  "FieldKitBossFrame1","FieldKitBossFrame2","FieldKitBossFrame3","FieldKitBossFrame4",
  "FieldKitPlayerBar","FieldKitPlayerBuffs","FieldKitLegacyCritFrame","FieldKitCombatText",
- "FieldKitCompactBar","FieldKitMinimapButton","FieldKitPartyDetailsFrame",
+ "FieldKitCompactBar","FieldKitRunClockFrame","FieldKitRebornBossProgress","FieldKitRebornHorde","FieldKitMinimapButton","FieldKitPartyDetailsFrame",
  "FieldKitMeterExtra_damage","FieldKitMeterExtra_healing","FieldKitMeterExtra_boss",
  "FieldKitMeterExtra_taken","FieldKitMeterExtra_party","FieldKitMeterExtra_kills"}
 
 local NATIVE_CHOICE={"AZSHudFrame","AZSTrackerFrame","AZSMeterFrame","AZSGearRow",
  "AzerothSurvivorsSurvivorsResources","AzerothSurvivorsSurvivorsBossBar",
- "AzerothSurvivorsUnitFrameTarget","AzerothSurvivorsUnitFramePlayer",
- "AzerothSurvivorsMinimapStatusButton","AzerothSurvivorsActionBar1","AZSRiftBar","FieldKitNativeTargetMover"}
+ "AzerothSurvivorsMinimapStatusButton","AZSRiftBar"}
 
 local function ChoiceNames()
  local names={}
@@ -31,30 +30,39 @@ end
 local function RestoreChoice(frame)
  local record=S.choiceMasked[frame]
  if not record then return end
+ if record.strata and frame.SetFrameStrata then pcall(frame.SetFrameStrata,frame,record.strata) end
  if record.alpha~=nil then pcall(frame.SetAlpha,frame,record.alpha) end
  if record.mouse~=nil and frame.EnableMouse then pcall(frame.EnableMouse,frame,record.mouse) end
  S.choiceMasked[frame]=nil
 end
 
-local function MaskChoice(frame,name)
- if not frame or not frame.SetAlpha or not frame.GetAlpha then return end
- -- Explicit "keep over cards" opt-in stays visible and clickable.
+local function MaskChoice(frame,name,hidden,visited)
+ if not frame or not frame.SetAlpha or not frame.GetAlpha or visited[frame] then return end
+ visited[frame]=true
+ -- Explicit opt-in remains above the cards. All other HUD is read-only behind them.
  if name and FieldKitRebornDB and FieldKitRebornDB.onTopWindows and FieldKitRebornDB.onTopWindows[name] then return end
- if S.choiceMasked[frame] then
-  pcall(frame.SetAlpha,frame,0)
-  if frame.EnableMouse then pcall(frame.EnableMouse,frame,false) end
-  return
+ local record=S.choiceMasked[frame]
+ if not record then
+  local ok,alpha=pcall(frame.GetAlpha,frame)
+  if not ok or type(alpha)~="number" then return end
+  record={alpha=alpha}
+  if frame.IsMouseEnabled and frame.EnableMouse then
+   local success,mouse=pcall(frame.IsMouseEnabled,frame)
+   if success then record.mouse=mouse and true or false end
+  end
+  if frame.GetFrameStrata and frame.SetFrameStrata then record.strata=frame:GetFrameStrata() end
+  S.choiceMasked[frame]=record
  end
- local ok,alpha=pcall(frame.GetAlpha,frame)
- if not ok or type(alpha)~="number" then return end
- local record={alpha=alpha}
- if frame.IsMouseEnabled and frame.EnableMouse then
-  local success,mouse=pcall(frame.IsMouseEnabled,frame)
-  if success then record.mouse=mouse and true or false end
- end
- S.choiceMasked[frame]=record
- pcall(frame.SetAlpha,frame,0)
+ local hide=hidden or FieldKit.rebornLegacyFixture
+ pcall(frame.SetAlpha,frame,hide and 0 or record.alpha)
  if frame.EnableMouse then pcall(frame.EnableMouse,frame,false) end
+ if not hide and frame.SetFrameStrata then pcall(frame.SetFrameStrata,frame,"MEDIUM") end
+ -- Disabling a parent does not disable interactive children (tabs, rows, native
+ -- action buttons). Record each child once and restore its own original state.
+ if not hide and frame.GetChildren then
+  local children={frame:GetChildren()}
+  for _,child in ipairs(children) do MaskChoice(child,child.GetName and child:GetName(),false,visited) end
+ end
 end
 
 function S.ClearChoice()
@@ -69,7 +77,10 @@ function S.ApplyChoice()
  if choosing then
   S.choiceOn=true
   local names=ChoiceNames()
-  for i=1,table.getn(names) do MaskChoice(getglobal(names[i]),names[i]) end
+  local hidden={FieldKitFirstLaunchBar=true,FieldKitProfilePreviewBar=true,FieldKitThemeTooltip=true}
+  for _,name in ipairs(NATIVE_CHOICE) do hidden[name]=true end
+  local visited={}
+  for i=1,table.getn(names) do MaskChoice(getglobal(names[i]),names[i],hidden[names[i]],visited) end
  else
   if S.choiceOn then S.ClearChoice() end
  end

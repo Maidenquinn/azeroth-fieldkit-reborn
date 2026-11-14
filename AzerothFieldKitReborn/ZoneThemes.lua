@@ -260,14 +260,24 @@ function C.Refresh(force)
  C.active=true;T.SetZone(zone)
  C.BossScales(false)
  -- Yield completely to native choice cards. No writes to card priority or game data.
- if FieldKit.IsChoiceScreen and FieldKit.IsChoiceScreen() then
+ if FieldKit.rebornLegacyFixture and FieldKit.IsChoiceScreen and FieldKit.IsChoiceScreen() then
   FieldKitThemeTarget.Stop();FieldKitReferenceHUD.Stop();C.NativeReplace()
   for _,name in ipairs({"MainMenuBar","PlayerFrame","FieldKitPlayerBar","FieldKitCompactBar","FieldKitMoneyFrame"}) do C.Mask(getglobal(name),true) end
   for _,f in pairs(H.summaries or {}) do f:Hide() end
   for _,f in ipairs({H.dock,H.header,H.nav,H.identity,H.healthRoot,H.xpRoot,H.counterRoot,H.utility,H.micro,H.schedule,H.back}) do f:Hide() end;H.pinned=false;H.HideTip()
   return
  end
- H.Update(variant,zone);if FieldKitReferenceHUD.Has(zone,variant) then FieldKitReferenceHUD.Update(variant,zone) else FieldKitReferenceHUD.Stop() end;FieldKitThemeTarget.Update(variant)
+ -- Keep the Reborn theme drawn below reward cards; ScreenLayers disables its input.
+
+ if FieldKitReferenceHUD.Has(zone,variant) then
+  H.Update(variant,zone);FieldKitReferenceHUD.Update(variant,zone)
+ else
+  -- Retire reference-only layers before repainting the generic theme, not
+  -- afterwards: Stop also hides shared health/resource surfaces.
+  FieldKitReferenceHUD.Stop();H.Update(variant,zone)
+  if not FieldKit.rebornLegacyFixture then FieldKitReborn.ProgressBar() end
+ end
+ FieldKitThemeTarget.Update(variant)
  -- The optional centre-screen HP bar is independent of the theme's portrait HP.
  -- Keep its saved position and native visibility; choices still mask it above.
  C.Mask(getglobal("FieldKitPlayerBar"),false)

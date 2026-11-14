@@ -312,9 +312,7 @@ variables are accessed. Portrait requests now include the explicit .tga extensio
 failed SetTexture results and raw zone keys remain diagnostic, not proof of render.
 
 
-Reborn .18 presentation: native reward choices keep native HUD containers masked
-while FieldKit yields its own cards. These alpha/mouse masks restore their exact
-prior state after choices. Unthemed target, minimap, player and action-bar placement use invisible child
+Reborn .21 presentation supersedes .18: native reward choices keep replaced native HUD containers masked, while FieldKit stays visible below the cards with its child input disabled. Original alpha, mouse state and strata restore after choices. Preview toolbars remain hidden. Unthemed target, minimap, player and action-bar placement use invisible child
 hit surfaces over their own health/map/action regions while unlocked. Anchors
 are saved only in FieldKitRebornDB.frameAnchors. Each scale is a profile-scoped
 50–150% setting. Locked surfaces yield native input, unlocked clicks are forwarded
@@ -323,3 +321,13 @@ Steed follows moved/scaled action bars and restores its original geometry. Nativ
 AzerothSurvivorsUI's saved profile are not modified; theme handover restores the
 original points, scale and movability. Collision clearance is one physical pixel
 for unthemed cards (including their metal border); Reset is inside the meter.
+
+
+Reborn .21 endless reads AZS_RUN.rift independently of an empty campaign schedule,
+accepts zero, rejects negative/missing charge, and uses nbn only when supplied.
+It does not infer encounter identity or percentage from a countdown. Boss and
+guardian display snapshots require a positive id, nonblank name and positive
+current/max health, and are deduplicated by id. Spell upgrade extraction reads
+only explicit bonus sections from fresh AZS_SPELLTIPS; current public APIs do not
+provide a structured per-spell upgrade breakdown. Base descriptions and rank
+numbers are not converted into guessed bonus values.

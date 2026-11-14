@@ -87,6 +87,46 @@ function L.BonusText(lines)
  if table.getn(parts)==0 then return "",0 end
  return table.concat(parts,"\n"),table.getn(parts)
 end
+-- AZSSPELLTIP is authoritative, but usually contains a full description rather
+-- than structured upgrades. Read only explicitly labelled bonus sections;
+-- never infer a rank's multiplier from damage in the spell's base description.
+function L.SpellBonuses(raw)
+ local bonuses,upgrades={},{}
+ if type(raw)~="string" then return bonuses,upgrades end
+ local plain=string.gsub(string.gsub(string.sub(raw,1,8192),"|c%x%x%x%x%x%x%x%x",""),"|r","")
+ local labels={{"Your bonuses",bonuses},{"Vos bonus",bonuses},{"Your damage bonus",bonuses},
+  {"Votre bonus de dégâts",bonuses},{"Upgrades",upgrades},{"Improvements",upgrades},{"Améliorations",upgrades}}
+ local at,section=1,nil
+ while at<=string.len(plain) do
+  local finish=string.find(plain,"\n",at,true) or string.len(plain)+1
+  local text=string.gsub(string.gsub(string.sub(plain,at,finish-1),"^%s+",""),"%s+$","");at=finish+1
+  local labelled=false
+  for _,label in ipairs(labels) do
+   local _,_,value=string.find(text,label[1].."%s*:%s*(.*)$")
+   if value then
+    value=string.gsub(value,"%.$","")
+    section=label[2];labelled=true
+    -- A labelled damage bonus with only a signed percentage still identifies
+    -- its stat, so retain it without importing the preceding description.
+    if label[1]=="Your damage bonus" or label[1]=="Votre bonus de dégâts" then value=value.." dmg" end
+    for _,part in ipairs(L.ExpandStats({value})) do table.insert(section,part) end
+    break
+   end
+  end
+  if not labelled then
+   if section and L.IsStat(text) then
+    for _,part in ipairs(L.ExpandStats({text})) do table.insert(section,part) end
+   elseif text~="" then section=nil end
+  end
+ end
+ return bonuses,upgrades
+end
+function L.MergeBonuses(target,source)
+ for _,line in ipairs(source or {}) do
+  local found=false;for _,old in ipairs(target) do if old==line then found=true end end
+  if not found then table.insert(target,line) end
+ end
+end
 function L.Tooltip(method,a,b)
  if not L.tip then L.tip=CreateFrame("GameTooltip","FieldKitLoadoutScan",UIParent,"GameTooltipTemplate") end
  local tip=L.tip;if not tip[method] then return {},nil,nil,{} end
@@ -300,7 +340,10 @@ function L.Scan()
     end
     if not FieldKit.rebornLegacyFixture and N.Fresh("AZSSPELLTIP") and type(AZS_SPELLTIPS)=="table" then
      local text=L.Plain(AZS_SPELLTIPS[s.key],2048)
-     if text and text~="" then e.nativeText=text end
+     if text and text~="" then
+      e.nativeText=text
+      e.bonuses,e.upgrades=L.SpellBonuses(AZS_SPELLTIPS[s.key])
+     end
     end
     table.insert(L.spells,e)
     if e.icon then
@@ -325,7 +368,7 @@ function L.Scan()
      local entry=byTexture[L.TextureKey(texture)]
      -- An icon shared by different native abilities cannot identify an action.
      if entry and not entry.action then
-      entry.action=slot;entry.bonuses=bonus;entry.upgrades=upgrades;entry.name=name or entry.name
+      entry.action=slot;L.MergeBonuses(entry.bonuses,bonus);L.MergeBonuses(entry.upgrades,upgrades);entry.name=name or entry.name
      end
     end
    end
@@ -382,6 +425,9 @@ function L.Render(frame)
   local row=rows[i];local entry=spells and L.spells[i] or L.items[({2,13,14,11,12})[i]]
   local source=entry and entry.bonuses or {}
   if spells and entry and table.getn(source)==0 then source=entry.upgrades or {} end
+  if spells and entry and not FieldKit.rebornLegacyFixture then
+   source={};L.MergeBonuses(source,entry.upgrades);L.MergeBonuses(source,entry.bonuses)
+  end
   local text,lines=L.BonusText(source);row.bonus:SetText(text);row.fieldkitBonusLines=lines
   local rowH=(native and 22 or 16)+math.max(0,lines)*12;row.fieldkitRowHeight=rowH;totalH=totalH+rowH
   if spells then

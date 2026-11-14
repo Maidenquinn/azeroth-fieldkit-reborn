@@ -1,3 +1,11 @@
+# 0.1.0-reborn.21 — Endless progression and reward-screen HUD
+
+- Reject empty/dead/incomplete boss and guardian snapshots; deduplicate live ids.
+- Keep real rift progression in endless when the campaign schedule is empty. Use the native next-boss name when provided, otherwise an honest generic label; never invent a spawn countdown or percentage.
+- Keep FieldKit HUD visible below reward cards, disable input including child controls, and continue suppressing replaced native HUD. Restore each frame’s opacity, input and layer afterwards.
+- Read explicitly labelled spell bonus/upgrade sections directly from fresh native spell tips, independently of action-slot icons; merge with available action tooltip bonuses. Full base descriptions remain excluded. Structured spell upgrades are still unavailable in the current public API.
+- Offline and installed-API regressions; no new live client validation claimed.
+
 # 0.1.0-reborn.20 — Direct native HUD movement
 
 - Remove the visible target mover: unlocked target/player health bars and minimap drag directly, as do the native spell icons.

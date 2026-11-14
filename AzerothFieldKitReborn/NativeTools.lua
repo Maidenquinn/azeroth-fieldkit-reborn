@@ -152,6 +152,15 @@ function T.Revive()
 end
 function T.NextBoss()
  if not FieldKit.rebornLegacyFixture then
+  local run=type(AZS_RUN)=="table" and AZS_RUN or {}
+  if FieldKit.Number(run.endless)==1 or FieldKit.Number(run.endl)==1 then
+   local progress=FieldKitReborn.BossProgress()
+   if progress~=nil then
+    local name=type(run.nbn)=="string" and string.find(run.nbn,"%S") and N.Text(run.nbn) or FieldKit_L("Next boss")
+    return {name=name,key="endless:"..tostring(run.bs or ""),progress=progress}
+   end
+   return nil
+  end
   -- Schedule order/state identifies the next encounter; its legacy `at` and
   -- `left` fields do not determine a Reborn spawn.
   for _,boss in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do

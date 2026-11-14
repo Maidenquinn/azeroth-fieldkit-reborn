@@ -25,7 +25,9 @@ function H.Save(frame)
  local points=H.Points(frame)
  local font;if frame.GetFont and frame.SetFont then local ok,path,size,flags=pcall(frame.GetFont,frame);if ok and path then font={path,size,flags} end end
  local choice=FieldKitScreenLayers and FieldKitScreenLayers.choiceMasked[frame]
- H.saved[frame]={font=font,parent=frame:GetParent(),points=points,width=frame:GetWidth(),height=frame:GetHeight(),alpha=choice and choice.alpha or frame:GetAlpha(),scale=frame.GetScale and frame:GetScale() or 1,mouse=frame.IsMouseEnabled and frame:IsMouseEnabled(),strata=frame.GetFrameStrata and frame:GetFrameStrata(),level=frame.GetFrameLevel and frame:GetFrameLevel()}
+ local mouse=frame.IsMouseEnabled and frame:IsMouseEnabled()
+ if choice and choice.mouse~=nil then mouse=choice.mouse end
+ H.saved[frame]={font=font,parent=frame:GetParent(),points=points,width=frame:GetWidth(),height=frame:GetHeight(),alpha=choice and choice.alpha or frame:GetAlpha(),scale=frame.GetScale and frame:GetScale() or 1,mouse=mouse,strata=choice and choice.strata or (frame.GetFrameStrata and frame:GetFrameStrata()),level=frame.GetFrameLevel and frame:GetFrameLevel()}
 end
 function H.Anchor(frame,point,relative,rp,x,y,force)
  if not frame or frame.azsMoving or frame.fieldkitHudDragging then return end

@@ -1,3 +1,7 @@
+reborn.21 / 0.6.5: offline and installed-public-API validation. Endless charge and invalid/duplicate guardians, visible read-only FieldKit HUD behind reward cards, native duplicate suppression, layer/input restoration and explicit native spell bonuses are covered. Repeat live in campaign/endless with theme off/on and after /reload; live visual acceptance remains pending. Current API may omit endless identity and spell-specific upgrade details; see DEVELOPER_API_REQUEST_21.md.
+
+reborn.20: direct drag on native target/player bars, minimap and spell icons; separate sizes/anchors, click forwarding and Steed following verified offline. Live input acceptance pending.
+
 reborn.16 / 0.6.5: repeat Interface > Profiles > Preview first launch before each recipe, select Without theme / With theme, then Restore previous. Check four stats, separate cards, single native replacement for each resource/progress/target widget, active meter data and bosses. Campaign ready-screen checked; active movement/combat/boss and co-op live acceptance pending.
 reborn.15 / 0.6.5: native full-size border atlas, button cap geometry, independent collisions, native progress helper and chat rim. Hero-menu/Proving Grounds visual inspection and Elwynn on/off tested; campaign/co-op acceptance remains pending.
 reborn.14 / 0.6.5: offline catalog, complete proc tooltips, native castbar ownership, supplied control states, death-log action, long-run cache/projection tests. Native API gaps documented in DEV_REQUEST_REBORN_065.txt. Live visual and co-op acceptance pending.
