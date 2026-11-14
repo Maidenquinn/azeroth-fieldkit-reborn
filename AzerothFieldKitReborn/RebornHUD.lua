@@ -121,7 +121,8 @@ function R.PlaceSteed()
    f:SetScript("OnLeave",function() GameTooltip:Hide() end)
   end
   local f=R.steedPending;f:ClearAllPoints();f:SetPoint("BOTTOMLEFT",H.dock,"BOTTOMRIGHT",8,24);f:SetFrameLevel(H.dock:GetFrameLevel()+12)
-  f.icon:SetTexture(b.icon and b.icon:GetTexture() or "Interface\\Icons\\INV_Misc_QuestionMark");f:Show()
+  local icon=b.icon and b.icon:GetTexture()
+  f.icon:SetTexture(R.Icon(icon) or "Interface\\Icons\\Ability_Mount_RidingHorse");f:Show()
  elseif R.steedPending then R.steedPending:Hide() end
 end
 function R.RefreshPresentationDetails()

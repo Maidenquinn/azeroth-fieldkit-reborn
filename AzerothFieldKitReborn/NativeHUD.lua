@@ -33,6 +33,7 @@ local function Mask(name,hide)
  end
 end
 function N.Release()
+ for f,scale in pairs(N.cardScales or {}) do f:SetScale(scale) end;N.cardScales={}
  N.RestoreMeterFooter()
  if FieldKitReborn065 then FieldKitReborn065.RestoreCastbar() end
  for f in pairs(N.frames) do Mask(f:GetName(),false) end
@@ -105,6 +106,7 @@ function N.Update()
  Mask("AzerothSurvivorsSurvivorsBossBar",(bosses and covered) or (progress and not live))
  Mask("AzerothSurvivorsUnitFrameTarget",target)
  if FieldKitReborn065 then FieldKitReborn065.MoveCastbar(target and castOwner or nil) end
+ N.ScaleCards()
  N.Polish()
  if FieldKitNativeLayout then FieldKitNativeLayout.Apply() end
  if run then Clock() elseif N.clock then N.clock:Hide() end
@@ -171,12 +173,27 @@ function N.SeparateDefaults()
  if not N.layoutReset or not FieldKit.zoneThemeReady then return end
  N.layoutReset=nil
  local d=FieldKitRebornDB
- local locations={FieldKitModeFrame={24,40},FieldKitMeterFrame={24,120},FieldKitTakenFrame={24,400},FieldKitLairFrame={24,570},FieldKitGearFrame={-24,40},FieldKitStatsFrame={-24,410}}
+ local locations={FieldKitModeFrame={24,32},FieldKitMeterFrame={24,150},FieldKitTakenFrame={24,610},FieldKitLairFrame={24,420},FieldKitGearFrame={-24,32},FieldKitStatsFrame={-24,300},FieldKitEffectsFrame={-24,480}}
  for name,point in pairs(locations) do
   local f=getglobal(name)
   if f and not d.frameAnchors[name] then
    local side=point[1]<0 and "TOPRIGHT" or "TOPLEFT"
    d.frameAnchors[name]={side,side,point[1],-point[2]};FieldKitPositions.Restore(f)
+  end
+ end
+ if not d.frameAnchors.FieldKitMoneyFrame then
+  d.frameAnchors.FieldKitMoneyFrame={"BOTTOM","BOTTOM",0,30};FieldKitPositions.Restore(FieldKitMoneyFrame)
+ end
+end
+
+function N.ScaleCards()
+ N.cardScales=N.cardScales or {}
+ local scale=FieldKit.Number(FieldKitRebornDB.nativeCardScale,100,75,110)/100
+ for _,name in ipairs(FieldKitCardLayout.names) do
+  local f=getglobal(name)
+  if f then
+   if not N.cardScales[f] then N.cardScales[f]=f:GetScale() end
+   if f:GetScale()~=scale then f:SetScale(scale) end
   end
  end
 end

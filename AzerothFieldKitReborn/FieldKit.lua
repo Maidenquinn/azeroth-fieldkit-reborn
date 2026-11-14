@@ -1343,8 +1343,8 @@ local function ApplyCompactPanel(f, key, expandedHeight)
         if f.slots then
             if collapsed then row:Hide() else row:Show() end
         else
-            if row.label then if collapsed then row.label:Hide() else row.label:Show() end end
-            if row.value then if collapsed then row.value:Hide() else row.value:Show() end end
+            if row.label then if collapsed or i>count then row.label:Hide() else row.label:Show() end end
+            if row.value then if collapsed or i>count then row.value:Hide() else row.value:Show() end end
         end
     end
     if f.mashCollapseButton then
@@ -2751,8 +2751,10 @@ function FieldKit.ApplyHUDProfileLive()
  -- Restore saved geometry only for registered FieldKit-owned movable frames.
  for i=1,table.getn(movableFrames) do
   local f=movableFrames[i]
-  if DB.pos[f:GetName()] then PlaceMovable(f) end
+  if not DB.pos[f:GetName()] then DB.pos[f:GetName()]={f.azsDefault[1],f.azsDefault[2]} end
+  PlaceMovable(f)
  end
+ FieldKitNativeHUD.SeparateDefaults()
  -- Recompute cached group anchors even when the root size is unchanged.
  FieldKitHudStack.appliedAnchor=nil
  FieldKitHudStack.legacyX=nil
@@ -2936,13 +2938,13 @@ frame:RegisterEvent("CHAT_MSG_COMBAT_SELF_HITS")
 -- Initialize once on VARIABLES_LOADED; never persist or restore native talent state.
 local function FieldKitEventLifecycle()
  if event=="PLAYER_LOGOUT" then
-  FieldKitNativeHUD.Release()
   -- Persist edits to the current profile even if the user never explicitly
   -- pressed Save before quitting or /reload. Do not duplicate game data.
   if DB and FieldKitProfiles then
    if FieldKitProfiles.preview then FieldKitProfiles.CancelPreview() end
    if not FieldKitProfiles.preview then FieldKitProfiles.SaveActive() end
   end
+  FieldKitNativeHUD.Release()
   if FieldKitZoneThemes then FieldKitZoneThemes.NativeRestore() end
   return
  end

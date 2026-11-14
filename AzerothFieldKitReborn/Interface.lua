@@ -131,6 +131,9 @@ function FieldKit.BuildJourneySections(sections,actions)
    set=function(v) if FieldKitMeterSuite then FieldKitMeterSuite.SetDetached("kills",v) else FieldKitRebornDB.meterDetach_kills=v and true or nil;actions.UpdateMeterFrames(true) end end},
  }
  local layout={
+  {kind="slider",label="Card size without theme",min=75,max=110,step=5,
+   get=function() return FieldKitRebornDB.nativeCardScale end,
+   set=function(v) FieldKitRebornDB.nativeCardScale=v;FieldKitNativeHUD.Update() end},
   {kind="preview",preview=0},
   {kind="note",label="Move and size your windows",tip="Window dimensions and grouping below apply to unthemed cards and opened detail windows. For the themed HUD use Element scale in Look. Lock positions when finished."},
   {kind="check",label="Lock window positions",tip="Drag active windows during play by default. Locking keeps their current positions; grouping and dimensions stay unchanged.",
@@ -508,7 +511,9 @@ local function BuildProfileManager(page,y)
  local P=FieldKitProfiles
  local row=CreateFrame("Frame",nil,page)
  row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y)
- row:SetWidth(610);row:SetHeight(636)
+ row:SetWidth(610);row:SetHeight(686)
+ local first=T.Button(row,"FieldKitFirstLaunchPreview","Preview first launch",240,74,260,30,function() U.PreviewDefaults(false) end)
+
  local intro=T.Label(row,"Save all FieldKit preferences per profile, including chat. Game stats and message history stay shared.",0,0,600,38,13,T.muted)
  local pending=T.Label(row,"",0,42,600,25,13,T.gold)
  local cancel=T.Button(row,nil,"Undo last switch",0,74,210,29,function()
@@ -1284,6 +1289,25 @@ function U.UpdateProfilePreviewBar()
  U.EnsureProfilePreviewBar()
  local slot=U.profilePreviewSlot
  FieldKit_Text(U.profilePreviewTitle,"Preview: "..(slot and (FieldKitProfiles.Name(slot) or ("Profile "..slot)) or "HUD"))
+end
+
+function U.PreviewDefaults(themed)
+ if FieldKit.layoutEditing then U.SetLayoutEditing(false,true) end
+ if FieldKitProfiles.preview and not FieldKitProfiles.preview.defaults then return false end
+ if FieldKitProfiles.preview then FieldKitProfiles.CancelPreview() end
+ if not FieldKitProfiles.PreviewDefaults(themed) then return false end
+ if not U.defaultsBar then
+  local bar=CreateFrame("Frame","FieldKitFirstLaunchBar",UIParent);U.defaultsBar=bar
+  bar:SetWidth(410);bar:SetHeight(76);bar:SetPoint("TOP",UIParent,"TOP",0,-170);bar:SetFrameStrata("DIALOG");T.Surface(bar,"window")
+  T.Label(bar,"First launch preview",12,4,380,22,14,T.gold,true)
+  T.Button(bar,nil,"Without theme",12,36,118,28,function() U.PreviewDefaults(false) end)
+  T.Button(bar,nil,"With theme",142,36,118,28,function() U.PreviewDefaults(true) end)
+  local restore=T.Button(bar,nil,"Restore previous",272,36,126,28,function()
+   if FieldKitProfiles.CancelPreview() then bar:Hide();U.frame:Show();U.Refresh() end
+  end)
+  T.Font(restore.fieldkitLabel,11,T.gold)
+ end
+ U.frame:Hide();U.defaultsBar:Show();return true
 end
 
 function U.Toggle()

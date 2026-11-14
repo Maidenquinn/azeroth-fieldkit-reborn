@@ -88,7 +88,7 @@ local button=FieldKitTheme.Button(UIParent,nil,"Readable",0,0,140,16)
 assert(button:GetHeight()>=28 and button.fieldkitLabel:GetHeight()<=button:GetHeight()-8,"Button lacks internal text padding")
 d.linkLeftCards=false;d.linkRightCards=false
 SlashCmdList.FieldKit("");FieldKitUI.ResetPositions()
-assert(d.frameAnchors.FieldKitMeterFrame[4]==-120 and d.frameAnchors.FieldKitTakenFrame[4]==-400,"Position reset revived overlapping inherited defaults")
+assert(d.frameAnchors.FieldKitMeterFrame[4]==-150 and d.frameAnchors.FieldKitTakenFrame[4]==-610,"Position reset revived overlapping inherited defaults")
 FieldKitUI.UndoPositions();assert(d.frameAnchors.FieldKitMeterFrame[3]==99,"Position reset Undo lost dragged anchor")
 print("PASS unthemed native ownership: counters/candy, jewelry, meter, progression, boss/target identity, elapsed/paused clock, opt-outs, saved restoration and both themes x all variants")
 

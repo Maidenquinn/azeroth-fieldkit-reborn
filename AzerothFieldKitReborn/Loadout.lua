@@ -427,6 +427,7 @@ function L.Render(frame)
  end
  for i,b in ipairs(frame.loadoutTabs) do
   b:SetWidth((frame:GetWidth()-34)/2);b:ClearAllPoints();b:SetPoint("TOPLEFT",frame,"TOPLEFT",6+(i-1)*(frame:GetWidth()-22)/2,-5)
+  b.fieldkitLabel:SetWidth(math.max(20,b:GetWidth()-20))
   FieldKitTheme.State(b,i==(spells and 2 or 1));FieldKitTheme.Update(b);if collapsed then b:Hide() else b:Show() end
  end
  frame:Show()

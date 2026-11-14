@@ -1,4 +1,5 @@
 fire(FieldKitFrame,"VARIABLES_LOADED")
+FieldKitRebornDB.replaceTally=false -- isolate themed restoration from the independent counter owner
 local R,H,C,V=FieldKitReborn,FieldKitThemeHUD,FieldKitZoneThemes,FieldKitReferenceHUD
 AZS_ZONE={zone="zangarmarsh",zname="Zangarmarsh",class="hunter",heroic=0}
 AZS_RUN={ph="playing",t=20,rift=5,kills=10,gold=4,chest=20}

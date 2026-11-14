@@ -1,3 +1,11 @@
+# 0.1.0-reborn.16 — Compact first launch
+
+- Empty-database defaults: 85% independent cards, four bonuses, a single counter strip and direct boss progression.
+- Repeatable first-launch preview with theme comparison and restoration of original preferences.
+- Fix stale statistics below shortened cards, loadout-tab label widths and transparent inner rims.
+- Add native-card scale control and test preview cancellation/logout isolation.
+- Campaign ready-screen visual QA; active combat acceptance still pending player movement.
+
 # 0.1.0-reborn.15 — Native materials and spacing
 
 - Assemble the native metal border at full detail; preserve button caps and readable text.

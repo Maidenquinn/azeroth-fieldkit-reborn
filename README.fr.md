@@ -1,5 +1,7 @@
 # Azeroth FieldKit Reborn
 
+Premier lancement : cartes natives indépendantes à 85 %, quatre bonus et un seul bandeau de compteurs. **Interface → Profils → Simuler un premier lancement** permet de comparer avec/sans thème et de rétablir tes préférences. Les réglages existants sont conservés.
+
 Adaptation 0.6.5 : catalogue de 240 boss, descriptions complètes des effets de bijoux au survol, barre d'incantation native conservée et accès au journal de mort via `/fieldkit death`. Les états de contrôle utilisent uniquement les informations réellement fournies ; les API manquantes font l'objet d'une demande préparée pour le développeur.
 
 Sans thème illustré, les cartes utilisent désormais l'habillage sombre natif. Les compteurs incluent les bonbons, une horloge affiche le temps écoulé, et chaque remplacement masque uniquement le widget natif correspondant. Désactiver la carte rétablit ce widget.
@@ -7,7 +9,7 @@ Sans thème illustré, les cartes utilisent désormais l'habillage sombre natif.
 Pour la 0.6.5 : **/fieldkit → Interface → Compteur de combat → Dégâts et soins récents**, puis choisir **5 à 120 secondes**. Le mode récent est désactivé par défaut et se sauvegarde par profil. Les bonus des bijoux et des DoT sont disponibles au survol de Statistiques ; les valeurs DoT se sélectionnent aussi dans la liste des statistiques.
 
 Version indépendante de FieldKit pour **Azeroth Survivors Reborn 0.6.5**.
-Le candidat **0.1.0-reborn.15** adapte le HUD et les compteurs au nouveau client.
+Le candidat **0.1.0-reborn.16** adapte le HUD et les compteurs au nouveau client.
 
 [Audit API et correctifs HUD](docs/REBORN_API_AUDIT.md) · [Audit paramètres/thèmes](docs/REBORN_SETTINGS_AUDIT.md) · [Audit du port](docs/REBORN_PORT.md) · [Recette en jeu](docs/REBORN_ACCEPTANCE.txt) ·
 [Téléchargements](https://github.com/Maidenquinn/azeroth-fieldkit-reborn/releases)

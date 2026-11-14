@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.15",
+  "version": "0.1.0-reborn.16",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Client 0.6.5 hero menu and Proving Grounds visual inspection: native metal frames, separated unthemed cards, single-line French meter tabs and reset, settings window and controls. Offline full settings/themes/recent-meter/content regression suites. No normal campaign or co-op acceptance."
+  "inGameTestScope": "Client 0.6.5 campaign ready screen: repeated empty-database preference previews, independent compact native cards, four-stat selection, single native-style progress gauge and elapsed clock, event counter strip, Elwynn off/on and preference restoration. The visual pass found and fixed stale unselected statistics and stale loadout-tab text widths. Combat movement was not accepted by the UI automation input; active combat acceptance remains pending a player movement. Offline full runtime/settings/themes, recent-meter 5..120 and installed 0.6.5 API/content fixtures pass."
 }

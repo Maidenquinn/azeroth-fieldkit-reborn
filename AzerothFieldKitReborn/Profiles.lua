@@ -250,6 +250,27 @@ function P.Preview(number)
  P.preview={before=before,slot=slot,active=FieldKitRebornDB.activeHudProfile}
  return true
 end
+-- Construct through the same initializer as an empty SavedVariables file.
+-- Only a bounded preference snapshot is applied; profiles, game data and the
+-- real saved-variable table stay intact. Logout restores the original view.
+function P.PreviewDefaults(themed)
+ if P.preview or FieldKit.layoutEditing or not FieldKitRebornDB then return false end
+ local before=Capture();if not before then return false end
+ local live=FieldKitRebornDB;local reset=FieldKitNativeHUD.layoutReset
+ local owner=FieldKitCombat and FieldKitCombat.owner
+ local ok,fresh=pcall(function()
+  FieldKitRebornDB={};FieldKit.InitializeSettings({})
+  FieldKitRebornDB.zoneThemes=themed and true or false
+  return Capture()
+ end)
+ FieldKitRebornDB=live;FieldKitNativeHUD.layoutReset=reset
+ if FieldKitCombat then FieldKitCombat.owner=owner end
+ if not ok or not fresh then return false end
+ FieldKitNativeHUD.layoutReset=true;FieldKitNativeLayout.lastMoved=nil
+ P.preview={before=before,defaults=true,active=live.activeHudProfile}
+ if not ApplySnapshot(fresh) or not FieldKit.ApplyHUDProfileLive() then P.CancelPreview();return false end
+ return true
+end
 function P.CancelPreview()
  if not P.preview then return false end
  local state=P.preview

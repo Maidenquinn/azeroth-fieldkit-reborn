@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.15",
+  "version": "0.1.0-reborn.16",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.15",
+    "version": "0.1.0-reborn.16",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Client 0.6.5 hero menu and Proving Grounds visual inspection: native metal frames, separated unthemed cards, single-line French meter tabs and reset, settings window and controls. Offline full settings/themes/recent-meter/content regression suites. No normal campaign or co-op acceptance."
+    "inGameTestScope": "Campaign first-launch recipe in progress; final scope recorded after visual checks. Full regression suite and empty-database preview isolation tests."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "86e7c647c508540484723f63a4521a27e0897e47e00c3221640fab079bba3c99"
+      "sha256": "44f4e91c9224a1189d058316b7d745cc15f97dd4924462a3cdc9e0cc32533b90"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -55,12 +55,12 @@
     "RebornHUD.lua": {
       "maxUpvalues": 1,
       "functions": 12,
-      "sha256": "00fc412902cb292343ae21a0bc9b39482ebf26fc6f19832f0f13888aa0b91911"
+      "sha256": "dd028b7ef78266d0a6d7221cd1b7c0dcdb5b2da7f23b50c72b281e164a9e0b04"
     },
     "NativeHUD.lua": {
       "maxUpvalues": 5,
-      "functions": 26,
-      "sha256": "678596c7960546d514d0f48759607f68317d09f8f047af13918ec4b1c40fcdb1"
+      "functions": 27,
+      "sha256": "aa1be96c0c6a04dc831fa8254d51058d0476552092fe38fcc0a5b3f0655ab5e2"
     },
     "NativeLayout.lua": {
       "maxUpvalues": 7,
@@ -80,12 +80,12 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "bce4e29c1025fb48e78ea9dae342ce057f57afbbc6f10e1f51d8d05f9a5cb510"
+      "sha256": "2eb3d87d20442f5948b92948b99db4f26bb1d71bd3899dab02b3b88076311a56"
     },
     "Profiles.lua": {
       "maxUpvalues": 4,
-      "functions": 30,
-      "sha256": "6f6140c2c4a787fd7e96498e734a836ff87b4819156bbb7fba66b03e0111a49b"
+      "functions": 32,
+      "sha256": "b3842e8ae4aa4065408d2f48998f49076504f67d6be374aa370795b060236780"
     },
     "Localization.lua": {
       "maxUpvalues": 2,
@@ -95,12 +95,12 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "42759e05d933eea1e8f7114371677e6151c6f1808fa46861c83cecb58bc486b3"
+      "sha256": "b3fb21ecdef92f6aa9fe9ae7104250801a98d41f100c137e28c4d4af23a60175"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
       "functions": 21,
-      "sha256": "eb0b89447ed76056a692fe5851145bca80dc29a4c39880e8350663c9a3a74806"
+      "sha256": "0246f0ff84187b05d8dca179be50d24dbf51614932f37c914478dbcb4d609813"
     },
     "ZoneThemeRegistry.lua": {
       "maxUpvalues": 0,
@@ -220,7 +220,7 @@
     "Loadout.lua": {
       "maxUpvalues": 2,
       "functions": 29,
-      "sha256": "f4f08ddd37345683f5cb4449f49fdb1ad75a84c7543527841ab58a478e7c0e7f"
+      "sha256": "7bcb19e089957fa6b9229c1dfcae90c0cea4c3cfd070f5753726fd928b260110"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
@@ -249,13 +249,13 @@
     },
     "Interface.lua": {
       "maxUpvalues": 24,
-      "functions": 222,
-      "sha256": "e3fa99f2e1928850e1090facf96375d63451303efed938e054740535f1061f48"
+      "functions": 229,
+      "sha256": "b6641ba2cea375045e528d8276e8f5b34c5caaf8acf38ba70a374ce20d2e620a"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 191,
-      "sha256": "9370e2059d0f30c620d59ea08172dbd178f1c4106fd8b7bf24a1e031c3cd9b21"
+      "sha256": "be27a7cb3c506013d9acbed3a92df4c1094f77639f8643f3524b05344c85d2b6"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,

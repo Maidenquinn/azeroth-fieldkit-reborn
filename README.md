@@ -1,12 +1,14 @@
 # Azeroth FieldKit Reborn
 
+First launch: independent native cards at 85%, four bonuses and one counter strip. Compare a fresh installation through **Interface → Profiles → Preview first launch**; Restore previous returns your settings. Existing preferences are retained.
+
 0.6.5 adaptation: 240-boss catalog, complete jewelry proc tooltips, native target castbar forwarding, and `/fieldkit death` for the native death log. Control states use supplied data only; missing API contracts are documented in a prepared developer request.
 
 Without an illustrated theme, cards use the native dark presentation. Resource counters include event currency, a clock shows elapsed run time, and each replacement hides only its corresponding native widget. Disabling a replacement restores that widget.
 
 For 0.6.5: **/fieldkit → Interface → Combat meter → Recent damage and healing**, then choose **5–120 seconds**. Recent mode is off by default and saved per HUD profile. Hover Statistics for native jewelry/DoT contributions; select DoT values in the Statistics picker.
 
-Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.15** is a development candidate.
+Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.16** is a development candidate.
 
 [Français](README.fr.md) · [Port audit](docs/REBORN_PORT.md) ·
 [Native acceptance recipe](docs/REBORN_ACCEPTANCE.txt) ·

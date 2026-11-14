@@ -103,7 +103,7 @@ function T.NativePaint(frame,active,fill)
   end
   T.Solid(skin.base,active and {.17,.14,.08} or {.075,.075,.085});skin.base:SetAlpha(1)
  else
-  skin.base:SetAlpha(0)
+  T.Solid(skin.base,fill and fill.color or {.035,.04,.05});skin.base:SetAlpha(opacity)
   if not skin.nativeMaterial then
    local bg=CreateFrame("Frame",nil,frame);skin.nativeMaterial=bg;bg:EnableMouse(false)
   end
@@ -117,7 +117,7 @@ function T.NativePaint(frame,active,fill)
    bg:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background",edgeFile=native and "Interface\\AddOns\\AzerothSurvivorsUI\\Assets\\border-tooltip" or "Interface\\Tooltips\\UI-Tooltip-Border",edgeSize=button and 8 or (native and 32 or 16),tile=true,tileSize=16,insets={left=native and 8 or 4,right=native and 8 or 4,top=native and 16 or 4,bottom=native and 16 or 4}})
   end
   local color=fill and fill.color or {.09,.09,.1}
-  bg:SetBackdropColor(color[1],color[2],color[3],opacity*.94)
+  bg:SetBackdropColor(color[1],color[2],color[3],0)
   bg:SetBackdropBorderColor(.753,.753,.753,1);bg:Show()
  end
  frame.fieldkitActive=active and true or false
@@ -139,7 +139,7 @@ function T.Update(frame)
  local c=math.min(T.Style(frame)==3 and 12 or (skin.kind=="window" and 24 or (skin.kind=="card" and 16 or 8)),w/3,h/3)
  -- The corners of the zone material are cut diagonally (transparent triangles): a full-size fill would show as a dark halo
  -- outside the gold border. In the reference style the fill covers only the INSIDE of the frame (inside the corner cut).
- local inset=style==4 and 5 or (style==3 and c or 0)
+ local inset=style==4 and (skin.kind=="button" and 2 or -2) or (style==3 and c or 0)
  skin.base:ClearAllPoints();skin.base:SetPoint("TOPLEFT",frame,"TOPLEFT",inset,-inset);skin.base:SetWidth(math.max(1,w-2*inset));skin.base:SetHeight(math.max(1,h-2*inset))
  skin.grain:ClearAllPoints();skin.grain:SetPoint("TOPLEFT",frame,"TOPLEFT",inset,-inset);skin.grain:SetWidth(math.max(1,w-2*inset));skin.grain:SetHeight(math.max(1,h-2*inset))
  skin.inset=inset
