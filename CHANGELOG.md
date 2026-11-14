@@ -1,3 +1,10 @@
+# 0.1.0-reborn.24 — Readable meter values and target health
+
+- Separate the damage amount and DPS/HPS vertically in themed meter rows. Measure both texts for the shared right column, use a readable rate font and keep the percentage column clear. Other value modes retain a single line.
+- Hide guardian distances for empty/waiting lairs, missing live ids or placeholder world positions. Keep valid live guardian distances and stable tie ordering.
+- Put themed target health bars explicitly on their card strata and above its material; restore visible fill/text geometry after theme transitions, as already done for boss cards.
+- Targeted regressions plus full offline/runtime and installed client API checks; no new live visual test claimed.
+
 # 0.1.0-reborn.23 — Native HUD input and display corrections
 
 - Explicitly enable mouse input on unlocked native drag surfaces; disable it on lock, choices and release. The minimap surface sits above the map and below world pins. Existing native click/wheel forwarding is preserved.

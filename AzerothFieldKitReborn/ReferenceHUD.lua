@@ -1775,12 +1775,13 @@ function R.Panels(variant,zone)
      local values=FieldKitRebornDB.meterValues
      if values==1 then amount=perSecond elseif values==2 then pct=perSecond end
      if not r.rateText then r.rateText=T.Label(r,nil,0,0,82,12,10,T.muted);r.rateText:ClearAllPoints();r.rateText:SetPoint("BOTTOMRIGHT",r,"BOTTOMRIGHT",0,0);r.rateText:SetJustifyH("RIGHT") end
-     if values==3 and perSecond then r.rateText:SetText(perSecond);r.rateText:Show() else r.rateText:Hide() end
+     if values==3 and perSecond then r.rateText:SetText(perSecond);T.Font(r.rateText,12,T.muted);r.rateText:Show() else r.rateText:Hide() end
      R.AmountParts(r);r.value:SetText(pct or "");r.amount:SetText(amount or "")
      if e then r.fontSize=16;r.fontMin=12 end
      local function Wide(fs) return (fs.GetStringWidth and fs:GetStringWidth() or 60)+10 end -- R.Fit keeps an 8 px margin
      if pct then pctW=math.max(pctW or 0,Wide(r.value)) end
      if amount then amountW=math.max(amountW or 0,Wide(r.amount)) end
+     if values==3 and perSecond then amountW=math.max(amountW or 0,Wide(r.rateText)) end
      if e then r.fieldkitLine=e;r.fieldkitSpell=e.name end
      if e or i==1 then r:SetHitRectInsets(-48,0,0,0) end
      if not e then r.icon:Hide() end
@@ -1794,12 +1795,14 @@ function R.Panels(variant,zone)
     local rowW=a[3]-100;local colA=math.min(rowW*.3,amountW or 0);local colP=math.min(rowW*.25,pctW or 0)
     local gap=(colA>0 and colP>0) and 10 or 0
     for _,r in ipairs(shownRows) do if r.fieldkitLine then
-     r.amount:ClearAllPoints();r.amount:SetPoint("TOPRIGHT",r,"TOPRIGHT",0,0);r.amount:SetWidth(math.max(1,colA));r.amount:SetHeight(r:GetHeight());r.amount:SetJustifyH("RIGHT")
+     r.amount:ClearAllPoints();r.amount:SetPoint("TOPRIGHT",r,"TOPRIGHT",0,0);r.amount:SetWidth(math.max(1,colA));r.amount:SetHeight(15);r.amount:SetJustifyH("RIGHT");r.amount:SetJustifyV("TOP")
+     r.rateText:ClearAllPoints();r.rateText:SetPoint("TOPRIGHT",r,"TOPRIGHT",0,-16);r.rateText:SetWidth(math.max(1,colA));r.rateText:SetHeight(12);r.rateText:SetJustifyV("TOP")
      r.value:ClearAllPoints();r.value:SetPoint("TOPRIGHT",r,"TOPRIGHT",-(colA+gap),0);r.value:SetWidth(math.max(1,colP));r.value:SetHeight(r:GetHeight());r.value:SetJustifyH("RIGHT")
      r.amountSep:ClearAllPoints();r.amountSep:SetPoint("TOPRIGHT",r,"TOPRIGHT",-(colA+gap/2),-6);r.amountSep:SetHeight(12);r.amountSep:SetWidth(1)
      if colA>0 and colP>0 and r.value:GetText()~="" and r.amount:GetText()~="" then r.amountSep:Show() else r.amountSep:Hide() end
      r.label:SetWidth(rowW-colA-colP-gap-10)
      if R.Fit then R.Fit(r.value,16,12);R.Fit(r.amount,14,11) end
+     if R.Fit and r.rateText:IsShown() then R.Fit(r.rateText,12,10) end
     end end
     if not lines[1] then
      -- Empty state: centred in the content area between the tab rows and the card foot, not in the whole frame.

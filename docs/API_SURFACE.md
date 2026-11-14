@@ -356,3 +356,11 @@ Button font strings; visibility follows each active sort control.
 Elwynn compact boss health explicitly inherits the card strata and sits at card level +3, with visible fill/HP text restored on each boss update. This is presentation only; hp/hpm remain the public live boss values.
 
 Reborn jewelry card text now uses nativeDetails verbatim rather than heuristic percentage relabelling. Cards.lua WornLines uses AZS_GEAR.text for the individual piece while c.detail supplies the upgrade comparison; these are different scopes. Hover explicitly labels item contributions, and native wrapped text height is measured.
+
+
+Reborn .24: lair distance requires awake/asleep state, positive live id and finite
+non-placeholder world coordinates. Empty/waiting lair positions must not produce
+a distance to world origin. Native pose/distance data is never extrapolated.
+Themed target HP uses the supplied UnitHealth/UnitHealthMax, with child strata
+and frame level explicitly above the card material. Meter amount/rate geometry
+is separate while both values remain ledger-owned, unchanged quantities.

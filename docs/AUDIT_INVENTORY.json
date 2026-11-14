@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.23",
+  "candidate": "0.1.0-reborn.24",
   "runtimeModules": 57,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "e95f187283d0471a709a2f3c775d3829b8196d8b4d290a99afcf56113d8126b8",
+      "sha256": "b3a52fa7c1b0884bcf9389dacc776be6eb6f7dd40562fbeed934b72981afd7c1",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -2458,8 +2458,8 @@
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 124438,
-      "sha256": "7dbcf199c022c5602644fb25c0803d3400531d9e631214b3759ef1ef0322735c",
+      "bytes": 124695,
+      "sha256": "b90bb7b7ea6aba47763bb09798a66220c08344da969cd576f4509c5c733a963e",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2779,127 +2779,127 @@
         },
         {
           "name": "CreateLairFrame",
-          "line": 2243
+          "line": 2247
         },
         {
           "name": "ApplyDamageNumbers",
-          "line": 2275
+          "line": 2279
         },
         {
           "name": "FieldKit_UseCombatTextOnly",
-          "line": 2286
+          "line": 2290
         },
         {
           "name": "SlotOf",
-          "line": 2310
+          "line": 2314
         },
         {
           "name": "SwapSlots",
-          "line": 2318
+          "line": 2322
         },
         {
           "name": "HookBarDrag",
-          "line": 2328
+          "line": 2332
         },
         {
           "name": "PlaceMicroMenu",
-          "line": 2362
+          "line": 2366
         },
         {
           "name": "PlaceBarButtons",
-          "line": 2392
+          "line": 2396
         },
         {
           "name": "UpdateCompactXP",
-          "line": 2409
+          "line": 2413
         },
         {
           "name": "CreateCompactBar",
-          "line": 2420
+          "line": 2424
         },
         {
           "name": "AttachMoneyToBar",
-          "line": 2503
+          "line": 2507
         },
         {
           "name": "KeepCompactBar",
-          "line": 2529
+          "line": 2533
         },
         {
           "name": "UpdateGryphons",
-          "line": 2569
+          "line": 2573
         },
         {
           "name": "PlaceCollapseDock",
-          "line": 2588
+          "line": 2592
         },
         {
           "name": "DockEntries",
-          "line": 2604
+          "line": 2608
         },
         {
           "name": "BuildCollapseDock",
-          "line": 2617
+          "line": 2621
         },
         {
           "name": "StopDockDrag",
-          "line": 2639
+          "line": 2643
         },
         {
           "name": "FieldKit.ApplyHUDProfileLive",
-          "line": 2741
+          "line": 2745
         },
         {
           "name": "ResetPositions",
-          "line": 2818
+          "line": 2822
         },
         {
           "name": "RefreshPanel",
-          "line": 2830
+          "line": 2834
         },
         {
           "name": "FieldKit_RefreshInterfaceLanguage",
-          "line": 2831
+          "line": 2835
         },
         {
           "name": "CreatePanel",
-          "line": 2837
+          "line": 2841
         },
         {
           "name": "TogglePanel",
-          "line": 2850
+          "line": 2854
         },
         {
           "name": "FieldKit.SetWindowsLocked",
-          "line": 2857
+          "line": 2861
         },
         {
           "name": "CreateMinimapButton",
-          "line": 2867
+          "line": 2871
         },
         {
           "name": "PlaceOnRim",
-          "line": 2877
+          "line": 2881
         },
         {
           "name": "InitDB",
-          "line": 2918
+          "line": 2922
         },
         {
           "name": "FieldKitEventLifecycle",
-          "line": 2942
+          "line": 2946
         },
         {
           "name": "FieldKitEventWorld",
-          "line": 2991
+          "line": 2995
         },
         {
           "name": "FieldKitEventOther",
-          "line": 3018
+          "line": 3022
         },
         {
           "name": "RefreshNativeData",
-          "line": 3072
+          "line": 3076
         }
       ],
       "literalEvents": [
@@ -3765,8 +3765,8 @@
       "literalEvents": []
     },
     "ThemeTarget.lua": {
-      "bytes": 8682,
-      "sha256": "7d825056a10e26b2c187e1c3d4407c105a51a6f7185b3cea7fac5c02f1d8c41b",
+      "bytes": 8963,
+      "sha256": "46a244137cbfc17c39f0a9f108c8b17873c32dfa49f8cc0e086b4ce0304a7b4b",
       "namedFunctions": [
         {
           "name": "C.NativeFrame",
@@ -3802,8 +3802,8 @@
       "literalEvents": []
     },
     "ReferenceHUD.lua": {
-      "bytes": 153563,
-      "sha256": "1bb9e7a10cf5895fcf89b6f4b0bd43445796960f5c3f608639b5ba10abaf49ec",
+      "bytes": 153948,
+      "sha256": "a1c7475a53a5aa2ec0b83bf3f8145e7fa71eda30008ab203fd695bb3a8f67160",
       "namedFunctions": [
         {
           "name": "Short",
@@ -4291,15 +4291,15 @@
         },
         {
           "name": "Wide",
-          "line": 1832
+          "line": 1835
         },
         {
           "name": "R.Settings",
-          "line": 1933
+          "line": 1936
         },
         {
           "name": "R.Buffs",
-          "line": 1948
+          "line": 1951
         }
       ],
       "literalEvents": []
@@ -6682,7 +6682,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.23",
+    "version": "0.1.0-reborn.24",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6693,7 +6693,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No post-fix live acceptance for .23. Client was observed on reward/pause screens; Computer Use was stopped by physical Escape before a drag could be verified. Offline tests cover explicit native drag hit mouse enable/disable, minimap input above map/below pins, combined UnitAura/UnitBuff and retained spell buffs, native French labels, deduplication/expiry/freshness, and modal sort captions rendered on a separate explicit text layer with geometry/visibility/sorting checks. Full runtime/settings/theme and installed 0.6.5 API fixtures are checked. Elwynn Le Recousu HP fill/label visibility, explicit strata and value recovery are covered across all three theme variants offline. Native jewelry wording/wrapped size and item contribution versus character-total semantics are checked with the reported thorns and Earthstrike values."
+    "inGameTestScope": "No live client pass for .24. Offline regression checks separate amount/rate rectangles and shared column width in all three meter-value modes, suppression of waiting/empty/zero-position guardian distances with a valid live 5-yard distance retained, and target health fill/text recovered above card material across all three Elwynn variants. Full runtime/settings/theme and installed 0.6.5 API/content fixtures are checked. Live visual acceptance remains pending."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

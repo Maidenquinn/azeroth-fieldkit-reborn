@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.23",
+  "version": "0.1.0-reborn.24",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.23",
+    "version": "0.1.0-reborn.24",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No post-fix live acceptance for .23. Client was observed on reward/pause screens; Computer Use was stopped by physical Escape before a drag could be verified. Offline tests cover explicit native drag hit mouse enable/disable, minimap input above map/below pins, combined UnitAura/UnitBuff and retained spell buffs, native French labels, deduplication/expiry/freshness, and modal sort captions rendered on a separate explicit text layer with geometry/visibility/sorting checks. Full runtime/settings/theme and installed 0.6.5 API fixtures are checked. Elwynn Le Recousu HP fill/label visibility, explicit strata and value recovery are covered across all three theme variants offline. Native jewelry wording/wrapped size and item contribution versus character-total semantics are checked with the reported thorns and Earthstrike values."
+    "inGameTestScope": "No live client pass for .24. Offline regression checks separate amount/rate rectangles and shared column width in all three meter-value modes, suppression of waiting/empty/zero-position guardian distances with a valid live 5-yard distance retained, and target health fill/text recovered above card material across all three Elwynn variants. Full runtime/settings/theme and installed 0.6.5 API/content fixtures are checked. Live visual acceptance remains pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "e95f187283d0471a709a2f3c775d3829b8196d8b4d290a99afcf56113d8126b8"
+      "sha256": "b3a52fa7c1b0884bcf9389dacc776be6eb6f7dd40562fbeed934b72981afd7c1"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -255,7 +255,7 @@
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 191,
-      "sha256": "7dbcf199c022c5602644fb25c0803d3400531d9e631214b3759ef1ef0322735c"
+      "sha256": "b90bb7b7ea6aba47763bb09798a66220c08344da969cd576f4509c5c733a963e"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -300,7 +300,7 @@
     "ThemeTarget.lua": {
       "maxUpvalues": 6,
       "functions": 12,
-      "sha256": "7d825056a10e26b2c187e1c3d4407c105a51a6f7185b3cea7fac5c02f1d8c41b"
+      "sha256": "46a244137cbfc17c39f0a9f108c8b17873c32dfa49f8cc0e086b4ce0304a7b4b"
     },
     "ReferenceArt.lua": {
       "maxUpvalues": 0,
@@ -310,7 +310,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 193,
-      "sha256": "1bb9e7a10cf5895fcf89b6f4b0bd43445796960f5c3f608639b5ba10abaf49ec"
+      "sha256": "a1c7475a53a5aa2ec0b83bf3f8145e7fa71eda30008ab203fd695bb3a8f67160"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

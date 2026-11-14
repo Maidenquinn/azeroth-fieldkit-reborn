@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.23",
+  "version": "0.1.0-reborn.24",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "No post-fix live acceptance for .23. Client was observed on reward/pause screens; Computer Use was stopped by physical Escape before a drag could be verified. Offline tests cover explicit native drag hit mouse enable/disable, minimap input above map/below pins, combined UnitAura/UnitBuff and retained spell buffs, native French labels, deduplication/expiry/freshness, and modal sort captions rendered on a separate explicit text layer with geometry/visibility/sorting checks. Full runtime/settings/theme and installed 0.6.5 API fixtures are checked. Elwynn Le Recousu HP fill/label visibility, explicit strata and value recovery are covered across all three theme variants offline. Native jewelry wording/wrapped size and item contribution versus character-total semantics are checked with the reported thorns and Earthstrike values."
+  "inGameTestScope": "No live client pass for .24. Offline regression checks separate amount/rate rectangles and shared column width in all three meter-value modes, suppression of waiting/empty/zero-position guardian distances with a valid live 5-yard distance retained, and target health fill/text recovered above card material across all three Elwynn variants. Full runtime/settings/theme and installed 0.6.5 API/content fixtures are checked. Live visual acceptance remains pending."
 }

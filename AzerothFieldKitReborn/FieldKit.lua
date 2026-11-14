@@ -2130,7 +2130,11 @@ function UpdateLairFrame()
 
 	local dists, order = {}, {}
 	for i = 1, n do
-		if ( px and py and FieldKit.Number(lairs[i].x) and FieldKit.Number(lairs[i].y) ) then
+  local l=lairs[i]
+  local positioned=FieldKit.rebornLegacyFixture or
+   ((l.state=="awake" or l.state=="asleep") and FieldKit.Number(l.id) and tonumber(l.id)>0 and
+    not (tonumber(l.x)==0 and tonumber(l.y)==0))
+		if ( positioned and px and py and FieldKit.Number(l.x) and FieldKit.Number(l.y) ) then
 			local east, north = py-tonumber(lairs[i].y), tonumber(lairs[i].x)-px
 			if ( east ) then
 				dists[i] = math.sqrt(east * east + north * north)
@@ -2138,7 +2142,7 @@ function UpdateLairFrame()
 			end
 		end
 	end
-	table.sort(order, function(a, b) return dists[a] < dists[b] end)
+	table.sort(order, function(a, b) if dists[a]==dists[b] then return a<b end;return dists[a] < dists[b] end)
 	local rank = {}
 	for k = 1, table.getn(order) do
 		rank[order[k]] = k
