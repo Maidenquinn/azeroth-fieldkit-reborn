@@ -3,7 +3,7 @@ local specs={
  {"map","Minimap","nativeMinimapScale"},
  {"player","AzerothSurvivorsUnitFramePlayer","nativePlayerScale"},
  {"actions","AzerothSurvivorsActionBar1","nativeActionScale"}}
-local clicks,frames={},{}
+local clicks,frames,received={},{},{}
 for i,def in ipairs(specs) do
  local key=def[1];local scale=1
  local f=CreateFrame((key=="target" or key=="player") and "Button" or "Frame",def[2],UIParent)
@@ -11,7 +11,7 @@ for i,def in ipairs(specs) do
  f.kind=(key=="target" or key=="player") and "Button" or "Frame"
  f:SetPoint("TOPLEFT",UIParent,"TOPLEFT",i*100,-50);f:SetAlpha(1)
  f.GetScale=function() return scale end;f.SetScale=function(_,v) scale=v end
- f:SetScript(key=="map" and "OnMouseUp" or "OnClick",function() clicks[key]=(clicks[key] or 0)+1;assert(this==f) end)
+ f:SetScript(key=="map" and "OnMouseUp" or "OnClick",function(self,button) received[key]={this,self,button};clicks[key]=(clicks[key] or 0)+1;assert(this==f);if key=="map" then assert(self==f and button=="LeftButton","Native callback arguments were lost") end end)
  if key=="target" or key=="player" then f.Health=CreateFrame("StatusBar",nil,f) end
  frames[key]=f
 end
@@ -28,9 +28,11 @@ AZS_RUN={ph="playing",t=10};N.TargetLayout()
 for i,def in ipairs(specs) do
  local key,f=def[1],frames[def[1]];local s=N.nativeLayouts[key];local hit=s.hits[1]
  assert(hit:IsShown() and not hit.label and not hit.fieldkitSkin,"Direct drag has a visible mover button")
+ if key=="map" then assert(hit:GetFrameLevel()==f:GetFrameLevel(),"Map drag surface covers native pin/launcher children") end
  assert(hit:GetParent()==(f.Health or (key=="actions" and AzerothSurvivorsActionBar1Button1) or f))
  hit:Click("LeftButton")
  assert((key=="actions" and clicks.spell or clicks[key])==1,"Native click was lost")
+ if key=="map" then assert(received[key][1]==f and received[key][2]==f and received[key][3]=="LeftButton","Native callback context/arguments were lost") end
  hit:GetScript("OnDragStart")();assert(s.dragging)
  f:ClearAllPoints();f:SetPoint("TOPLEFT",UIParent,"TOPLEFT",600+i,-200)
  hit:GetScript("OnDragStop")();assert(not s.dragging)

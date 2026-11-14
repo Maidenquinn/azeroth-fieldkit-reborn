@@ -294,7 +294,7 @@ end
 local function ForwardNative(hit,root,script)
  local source=hit;local fn=source:GetScript(script)
  if not fn and root~=hit then source=root;fn=source:GetScript(script) end
- if fn then local prior=this;this=source;pcall(fn);this=prior end
+ if fn then local prior=this;this=source;pcall(fn,source,arg1);this=prior end
 end
 local function NativeHit(s,hit,index)
  s.hits=s.hits or {};N.nativeHits=N.nativeHits or {};local m=N.nativeHits[hit]
@@ -320,7 +320,7 @@ local function NativeHit(s,hit,index)
   if m.EnableMouseWheel then m:EnableMouseWheel(true);m:SetScript("OnMouseWheel",function() ForwardNative(hit,m.state.frame,"OnMouseWheel") end) end
  end
  s.hits[index]=m;m.state=s
- m:SetAllPoints(hit);m:SetFrameLevel(hit:GetFrameLevel()+20)
+ m:SetAllPoints(hit);m:SetFrameLevel(hit:GetFrameLevel()+(s.key=="map" and 0 or 20))
  if s.enabled then m:Show() else m:Hide() end
  return m
 end
@@ -346,7 +346,7 @@ function N.TargetLayout()
    local s=N.nativeLayouts[def.key]
    if s and s.frame~=f then N.ReleaseNativeLayout(def.key);s=nil end
    if not s then
-    s={frame=f,scale=f:GetScale(),points=Points(f),movable=f.IsMovable and f:IsMovable() or false}
+    s={key=def.key,frame=f,scale=f:GetScale(),points=Points(f),movable=f.IsMovable and f:IsMovable() or false}
     N.nativeLayouts[def.key]=s
     if def.actions then
      local dash=getglobal("AZSDashButton")

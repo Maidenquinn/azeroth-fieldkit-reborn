@@ -215,8 +215,8 @@
       "literalEvents": []
     },
     "NativeHUD.lua": {
-      "bytes": 19513,
-      "sha256": "f73f64b7ee123980e0abe7dccd8e24794c2e8f6e952ca3d91183b262ab454665",
+      "bytes": 19561,
+      "sha256": "74cdc0150984f438ff580c67ee0d5e9c7702a9d3d652788ed3a8f1b785fdfe5e",
       "namedFunctions": [
         {
           "name": "Saved",
