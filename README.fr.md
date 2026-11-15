@@ -1,6 +1,6 @@
 # Azeroth FieldKit Reborn
 
-Premier lancement : cartes natives indépendantes à 85 %, quatre bonus et un seul bandeau de compteurs. **Interface → Profils → Simuler un premier lancement** permet de comparer avec/sans thème et de rétablir tes préférences. Les réglages existants sont conservés.
+Premier lancement : le profil Elwynn validé est actif ; le profil 2 propose la disposition native validée. **Interface → Profils → Simuler un premier lancement** permet de comparer avec/sans thème et de rétablir tes préférences. Les réglages existants sont conservés.
 
 Adaptation 0.6.5 : catalogue de 240 boss, descriptions complètes des effets de bijoux au survol, barre d'incantation native conservée et accès au journal de mort via `/fieldkit death`. Les états de contrôle utilisent uniquement les informations réellement fournies ; les API manquantes font l'objet d'une demande préparée pour le développeur.
 
@@ -9,7 +9,7 @@ Sans thème illustré, les cartes utilisent désormais l'habillage sombre natif.
 Pour la 0.6.5 : **/fieldkit → Interface → Compteur de combat → Dégâts et soins récents**, puis choisir **5 à 120 secondes**. Le mode récent est désactivé par défaut et se sauvegarde par profil. Les bonus des bijoux et des DoT sont disponibles au survol de Statistiques ; les valeurs DoT se sélectionnent aussi dans la liste des statistiques.
 
 Version indépendante de FieldKit pour **Azeroth Survivors Reborn 0.6.5**.
-Le candidat **0.1.0-reborn.31** adapte le HUD et les compteurs au nouveau client.
+La version stable **0.1.0-reborn.31** adapte le HUD et les compteurs au nouveau client.
 
 Les nouvelles installations démarrent sur le profil Elwynn validé en emplacement 1. Le profil 2 propose la disposition sans thème, avec les tailles, positions, échelles et l’opacité à 70 % validées. Les réglages déjà enregistrés sont conservés.
 
@@ -37,10 +37,7 @@ optionnel entre joueurs utilise un protocole distinct et reste désactivé.
 
 Les tests hors jeu comprennent les vrais modules API du client installé et les
 métadonnées des 12 classes/241 sorts et 48 cartes. Ils ne prouvent pas le rendu,
-les performances d'une longue partie ou le réseau coop. Le statut du registre
-reste `untested` avant recette native. Une préversion GitHub est installable
-manuellement ; le lanceur attend une release éligible et l'index signé par les
-mainteneurs du jeu.
+les performances d'une longue partie ou le réseau coop. La recette de la `.31` est validée par le mainteneur le 15 novembre 2026. La fiche actualisée indique `works` sur le client 0.6.5. La version stable GitHub est installable manuellement ; la diffusion par le lanceur attend la fusion du nouveau pin et la signature de l’index par les mainteneurs du jeu.
 
 Le projet original [azeroth-fieldkit](https://github.com/Maidenquinn/azeroth-fieldkit)
 reste indépendant. Crédits : Kevin Radlowski / Maidenhead, MASH par Malk.

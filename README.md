@@ -1,6 +1,6 @@
 # Azeroth FieldKit Reborn
 
-First launch: independent native cards at 85%, four bonuses and one counter strip. Compare a fresh installation through **Interface → Profiles → Preview first launch**; Restore previous returns your settings. Existing preferences are retained.
+First launch: the approved Elwynn profile is active; profile 2 offers the approved native-style layout. Compare a fresh installation through **Interface → Profiles → Preview first launch**; Restore previous returns your settings. Existing preferences are retained.
 
 0.6.5 adaptation: 240-boss catalog, complete jewelry proc tooltips, native target castbar forwarding, and `/fieldkit death` for the native death log. Control states use supplied data only; missing API contracts are documented in a prepared developer request.
 
@@ -8,7 +8,7 @@ Without an illustrated theme, cards use the native dark presentation. Resource c
 
 For 0.6.5: **/fieldkit → Interface → Combat meter → Recent damage and healing**, then choose **5–120 seconds**. Recent mode is off by default and saved per HUD profile. Hover Statistics for native jewelry/DoT contributions; select DoT values in the Statistics picker.
 
-Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.31** is a development candidate.
+Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.31** is a stable release, accepted by the maintainer on 2026-11-15.
 
 New installations start with the maintainer-approved Elwynn profile in slot 1; slot 2 contains the matching native-style layout. Both presets include the approved 70% opacity, sizes, scales and positions. Existing saved settings are preserved.
 
@@ -52,9 +52,7 @@ modify the client. Automated fixtures do not prove live rendering, performance
 or co-op network transport. See the audit and acceptance recipe for actual scope.
 
 The launcher-registry entry is in `distribution/azeroth-fieldkit-reborn.toml`.
-Registry status is `untested`; availability in the launcher requires a qualifying
-release, maintainer review/merge and the game's signed index. A GitHub prerelease
-is manually downloadable but is not pinned by the registry.
+The entry is accepted in the registry. The updated entry reports `works` on client 0.6.5 after maintainer gameplay acceptance. Launcher delivery still requires the updated release pin to be merged and the game's index to be signed. The stable GitHub release can be installed manually now.
 
 ## Origins and rights
 

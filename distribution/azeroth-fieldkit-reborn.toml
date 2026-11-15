@@ -2,7 +2,7 @@ id = "azeroth-fieldkit-reborn"
 name = "Azeroth FieldKit Reborn"
 author = "Kevin Radlowski / Maidenhead; MASH by Malk"
 repo = "Maidenquinn/azeroth-fieldkit-reborn"
-description = "Combat HUD, meters, learned spells, run jewelry and world markers adapted to Reborn. Initial port; live validation pending."
+description = "Combat HUD, damage/healing meters, campaign bosses, jewelry, world markers and themed/native HUD presets for Reborn."
 category = "Combat"
 license = "LicenseRef-FieldKit-Notice"
 folders = ["AzerothFieldKitReborn"]
@@ -13,6 +13,6 @@ type = "release"
 asset = "AzerothFieldKitReborn-*.zip"
 
 [reborn]
-status = "untested"
-tested = ""
-notes = "Offline-tested against API files from client 0.6.1. Requires bundled AzerothSurvivorsAPI. Live gameplay and co-op acceptance pending. See repository notices for inherited rights."
+status = "works"
+tested = "0.6.5 / 0.1.0-reborn.31"
+notes = "Maintainer accepted the 0.1.0-reborn.31 gameplay recipe on client 0.6.5 (2026-11-15), with Elwynn and native-style presets. Automated API, settings and profile tests pass. Requires the game's bundled AzerothSurvivorsAPI. Co-op and other resolutions are not independently certified. See repository notices for inherited rights."
