@@ -1,9 +1,9 @@
 {
   "scope": "All TOC runtime modules; public installed Lua declarations and official guide mentions. Engine binary implementation excluded.",
   "liveGameValidation": false,
-  "runtimeModules": 57,
+  "runtimeModules": 58,
   "runtimeSHA256": {
-    "Runtime.lua": "9c762bad8d673a2faa5f5bb266b01b5c2c4732e2867877b849ecf521240e29e0",
+    "Runtime.lua": "06b38faa1d859b0351e2ae970174d5b0a70a06e29d654dcca1a2c56f1fc78d8d",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -12,8 +12,9 @@
     "NativeLayout.lua": "24214104987becd12c5728a1c8b49711c403e8ba4616f21cce922b6e174f2a2a",
     "Diagnostics.lua": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
     "Positions.lua": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
-    "Config.lua": "538837b78105b11b16992caed3553c1fbe2e63a31c13c4e904194d34a9a6d9a8",
-    "Profiles.lua": "b3842e8ae4aa4065408d2f48998f49076504f67d6be374aa370795b060236780",
+    "Config.lua": "fa79c46bdd1ac993a459d219d5082510453ba5e886e8a142f0f22c258f7bdfdc",
+    "Profiles.lua": "74dc00eef90047efa38b257a26541ef1ddb5b0fd66fdc84abc14600b9d30dcce",
+    "FactoryPresets.lua": "86daa0ceb57dcf9fca1f7e3d2ede467e78cf1f13a89e368b19f1857d836da66a",
     "Localization.lua": "52b438733774cee70dbde43c0c57b7e2503087aff219d9095ef4ac9b66043001",
     "InterfaceStrings.lua": "91d476e4461831aefe9e4f1baac7c6aefcfb3b9ed71935ad6c386b73e3a4f44d",
     "Theme.lua": "0246f0ff84187b05d8dca179be50d24dbf51614932f37c914478dbcb4d609813",
@@ -4615,7 +4616,7 @@
     }
   ],
   "counts": {
-    "runtimeModules": 57,
+    "runtimeModules": 58,
     "nativeLuaFiles": 449,
     "declaredFunctions": 129,
     "documentedAZSSymbols": 95,

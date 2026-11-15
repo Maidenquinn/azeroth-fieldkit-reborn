@@ -163,5 +163,6 @@ d.language=d.language=="fr" and "fr" or "en"
  -- Obsolete experiments and gameplay-state persistence are not supported.
  for _,key in ipairs({"talentToggles","talentStamp","chestSeq","goldSpent","runePins","runeRecord","runePickupSetup","runeObservations","runeProbe","worldProbe","runeTrace","runeOverlay"}) do d[key]=nil end
  if FieldKitCombat then FieldKitCombat.Ensure() end
+ if fresh and FieldKitProfiles and FieldKitProfiles.SeedDefaults then FieldKitProfiles.SeedDefaults() end
  return d
 end

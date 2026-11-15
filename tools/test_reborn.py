@@ -6,13 +6,16 @@ import argparse,json
 from lupa.lua51 import LuaRuntime
 base=Path(__file__).resolve().parents[1]
 root=base/'AzerothFieldKitReborn'
-def runtime(prelude=None):
+def runtime(prelude=None, factory=False):
     l=LuaRuntime(unpack_returned_tuples=True)
     l.execute((base/'tests/mock.lua').read_text(encoding='utf8'))
     l.execute('GetPlayerBuff=nil;GetPlayerBuffTexture=nil;GetPlayerBuffTimeLeft=nil;GetPlayerBuffApplications=nil')
     if prelude: l.execute(prelude)
     for name in (root/'AzerothFieldKitReborn.toc').read_text().splitlines():
         if name.endswith('.lua'): l.execute((root/name).read_text(encoding='utf8'),name=name)
+    # Focused regression fixtures retain their historical neutral preferences.
+    # Dedicated factory fixtures below exercise the real shipped first-install profiles.
+    if not factory: l.globals().FieldKitProfiles.factoryPresets=None
     return l
 def native_locale(addons):
     l=runtime()
@@ -25,6 +28,8 @@ def native_locale(addons):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--game',type=Path);a=p.parse_args()
+    l=runtime(factory=True);l.execute((base/"tests/reborn_factory_presets.lua").read_text(encoding="utf8"))
+    l=runtime(factory=True);l.execute((base/"tests/reborn_factory_install.lua").read_text(encoding="utf8"))
     from audit_locale import check
     check(base,runtime())
     l=runtime();l.execute((base/'tests/reborn.lua').read_text(encoding='utf8'))

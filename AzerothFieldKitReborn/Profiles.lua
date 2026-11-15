@@ -226,6 +226,24 @@ local function ApplySnapshot(snapshot)
  if FieldKitCombat then FieldKitCombat.owner=nil;FieldKitCombat.Ensure() end
  return true
 end
+-- Only an actually empty database receives the maintainer's two factory presets.
+-- Clone every table so edits and profile switches cannot mutate the shipped source.
+function P.SeedDefaults()
+ if type(P.factoryPresets)~="table" then return false end
+ local baseline=Capture();if not baseline then return false end
+ local slots={}
+ for i=1,2 do
+  local saved=Copy(P.factoryPresets[i]);if not Valid(saved) then return false end
+  Upgrade(saved,baseline)
+  -- The install's language is independent of the maintainer's client language.
+  saved.values.language=baseline.values.language;saved.nilValues.language=baseline.nilValues.language
+  slots[i]=saved
+ end
+ if not ApplySnapshot(slots[1]) then return false end
+ FieldKitRebornDB.interfaceProfiles=slots;FieldKitRebornDB.activeHudProfile=1
+ FieldKitRebornDB.factoryPresetVersion=1
+ return true
+end
 -- A preview changes only the live renderer temporarily. It never writes a
 -- profile slot, active profile ID, or undo history until explicitly accepted.
 function P.Preview(number)
@@ -260,7 +278,9 @@ function P.PreviewDefaults(themed)
  local owner=FieldKitCombat and FieldKitCombat.owner
  local ok,fresh=pcall(function()
   FieldKitRebornDB={};FieldKit.InitializeSettings({})
-  FieldKitRebornDB.zoneThemes=themed and true or false
+  local slots=FieldKitRebornDB.interfaceProfiles
+  if P.factoryPresets and slots and slots[themed and 1 or 2] then assert(ApplySnapshot(slots[themed and 1 or 2]))
+  else FieldKitRebornDB.zoneThemes=themed and true or false end
   return Capture()
  end)
  FieldKitRebornDB=live;FieldKitNativeHUD.layoutReset=reset

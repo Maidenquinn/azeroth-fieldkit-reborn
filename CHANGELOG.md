@@ -1,3 +1,9 @@
+# 0.1.0-reborn.31 — Maintainer-approved first-install profiles
+
+- Ship the approved Elwynn and native-style HUD profiles; activate profile 1 only on a truly empty database, leaving slot 3 free.
+- Preserve the install language, existing players, later edits and deleted slots. Deep-copy preset preferences without account/run data.
+- Make first-launch previews use the corresponding shipped profile and verify fresh startup, switching, previews and preservation.
+
 # 0.1.0-reborn.30 — Campaign card collisions and shared dock
 
 - Register Campaign bosses with the shared reference card resolver and scoped drag/scale/anchor controls, including direct row dragging and native restoration.

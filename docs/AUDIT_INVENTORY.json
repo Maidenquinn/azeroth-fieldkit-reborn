@@ -1,14 +1,14 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.30",
-  "runtimeModules": 57,
+  "candidate": "0.1.0-reborn.31",
+  "runtimeModules": 58,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
   "dynamicCombatEventNames": "See CombatText.lua events list; not all registrations are string literals.",
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "9c762bad8d673a2faa5f5bb266b01b5c2c4732e2867877b849ecf521240e29e0",
+      "sha256": "06b38faa1d859b0351e2ae970174d5b0a70a06e29d654dcca1a2c56f1fc78d8d",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -519,8 +519,8 @@
       "literalEvents": []
     },
     "Config.lua": {
-      "bytes": 11949,
-      "sha256": "538837b78105b11b16992caed3553c1fbe2e63a31c13c4e904194d34a9a6d9a8",
+      "bytes": 12055,
+      "sha256": "fa79c46bdd1ac993a459d219d5082510453ba5e886e8a142f0f22c258f7bdfdc",
       "namedFunctions": [
         {
           "name": "FieldKit.InitializeSettings",
@@ -530,8 +530,8 @@
       "literalEvents": []
     },
     "Profiles.lua": {
-      "bytes": 17349,
-      "sha256": "b3842e8ae4aa4065408d2f48998f49076504f67d6be374aa370795b060236780",
+      "bytes": 18368,
+      "sha256": "74dc00eef90047efa38b257a26541ef1ddb5b0fd66fdc84abc14600b9d30dcce",
       "namedFunctions": [
         {
           "name": "Include",
@@ -594,50 +594,60 @@
           "line": 193
         },
         {
-          "name": "P.Preview",
+          "name": "P.SeedDefaults",
           "line": 231
         },
         {
-          "name": "P.PreviewDefaults",
-          "line": 256
+          "name": "P.Preview",
+          "line": 249
         },
         {
-          "name": "P.CancelPreview",
+          "name": "P.PreviewDefaults",
           "line": 274
         },
         {
+          "name": "P.CancelPreview",
+          "line": 294
+        },
+        {
           "name": "P.AcceptPreview",
-          "line": 285
+          "line": 305
         },
         {
           "name": "P.SaveActive",
-          "line": 293
+          "line": 313
         },
         {
           "name": "P.Save",
-          "line": 307
+          "line": 327
         },
         {
           "name": "P.Load",
-          "line": 325
+          "line": 345
         },
         {
           "name": "P.Undo",
-          "line": 357
+          "line": 377
         },
         {
           "name": "P.ActivatePending",
-          "line": 384
+          "line": 404
         },
         {
           "name": "P.Delete",
-          "line": 403
+          "line": 423
         },
         {
           "name": "P.Command",
-          "line": 414
+          "line": 434
         }
       ],
+      "literalEvents": []
+    },
+    "FactoryPresets.lua": {
+      "bytes": 35312,
+      "sha256": "86daa0ceb57dcf9fca1f7e3d2ede467e78cf1f13a89e368b19f1857d836da66a",
+      "namedFunctions": [],
       "literalEvents": []
     },
     "Localization.lua": {
@@ -6726,7 +6736,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.30",
+    "version": "0.1.0-reborn.31",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -6737,7 +6747,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Automated bidirectional collision checks, row drag, preferred-position preservation, collapse/dock/restore through repeated refreshes, both theme families and all variants, native restoration; existing campaign data, locale, API and full runtime/settings regressions. No new live-client visual validation is claimed."
+    "inGameTestScope": "Synthetic fresh-database seeding and existing-player isolation; actual shipped-preset startup, six profile switches, visible live cards, theme on/off default previews, deep-copy checks and preservation of later edits; existing runtime, settings, installed API and locale regressions. Functional regression fixtures explicitly retain their historical neutral preferences; dedicated factory fixtures exercise the real shipped first installation. The maintainer visually approved these layouts in the supplied screenshots; no new live-client visual validation by the agent is claimed."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

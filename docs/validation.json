@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.30",
+  "version": "0.1.0-reborn.31",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.30",
+    "version": "0.1.0-reborn.31",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Automated bidirectional collision checks, row drag, preferred-position preservation, collapse/dock/restore through repeated refreshes, both theme families and all variants, native restoration; existing campaign data, locale, API and full runtime/settings regressions. No new live-client visual validation is claimed."
+    "inGameTestScope": "Synthetic fresh-database seeding and existing-player isolation; actual shipped-preset startup, six profile switches, visible live cards, theme on/off default previews, deep-copy checks and preservation of later edits; existing runtime, settings, installed API and locale regressions. Functional regression fixtures explicitly retain their historical neutral preferences; dedicated factory fixtures exercise the real shipped first installation. The maintainer visually approved these layouts in the supplied screenshots; no new live-client visual validation by the agent is claimed."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "9c762bad8d673a2faa5f5bb266b01b5c2c4732e2867877b849ecf521240e29e0"
+      "sha256": "06b38faa1d859b0351e2ae970174d5b0a70a06e29d654dcca1a2c56f1fc78d8d"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -80,12 +80,17 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "538837b78105b11b16992caed3553c1fbe2e63a31c13c4e904194d34a9a6d9a8"
+      "sha256": "fa79c46bdd1ac993a459d219d5082510453ba5e886e8a142f0f22c258f7bdfdc"
     },
     "Profiles.lua": {
-      "maxUpvalues": 4,
-      "functions": 32,
-      "sha256": "b3842e8ae4aa4065408d2f48998f49076504f67d6be374aa370795b060236780"
+      "maxUpvalues": 6,
+      "functions": 33,
+      "sha256": "74dc00eef90047efa38b257a26541ef1ddb5b0fd66fdc84abc14600b9d30dcce"
+    },
+    "FactoryPresets.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "86daa0ceb57dcf9fca1f7e3d2ede467e78cf1f13a89e368b19f1857d836da66a"
     },
     "Localization.lua": {
       "maxUpvalues": 2,

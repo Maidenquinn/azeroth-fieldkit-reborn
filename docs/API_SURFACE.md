@@ -1,3 +1,5 @@
+Version reborn.31 seeds only bounded HUD preference snapshots on an empty addon database. No new native API usage or account/run data is distributed.
+
 Version reborn.30 integrates the campaign card into existing layout and dock systems; native API/data semantics are unchanged.
 
 Version reborn.29 changes only campaign-card presentation; no native API additions or data inference.

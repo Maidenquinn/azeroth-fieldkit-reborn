@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.30",
+  "version": "0.1.0-reborn.31",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Automated bidirectional collision checks, row drag, preferred-position preservation, collapse/dock/restore through repeated refreshes, both theme families and all variants, native restoration; existing campaign data, locale, API and full runtime/settings regressions. No new live-client visual validation is claimed."
+  "inGameTestScope": "Synthetic fresh-database seeding and existing-player isolation; actual shipped-preset startup, six profile switches, visible live cards, theme on/off default previews, deep-copy checks and preservation of later edits; existing runtime, settings, installed API and locale regressions. Functional regression fixtures explicitly retain their historical neutral preferences; dedicated factory fixtures exercise the real shipped first installation. The maintainer visually approved these layouts in the supplied screenshots; no new live-client visual validation by the agent is claimed."
 }
