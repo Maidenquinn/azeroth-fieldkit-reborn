@@ -51,6 +51,7 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_native_controls.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_endless_choices.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_display_ownership.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_world_markers.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_boss_list.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_boss_list_layout.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_loadout_values.lua').read_text(encoding='utf8'))
@@ -162,6 +163,7 @@ def main():
             path=addons/'AzerothSurvivorsAPI'/name
             l.execute(path.read_text(encoding='utf8'),name=name)
         l.execute((base/'tests/reborn_065_native.lua').read_text(encoding='utf8'))
+        l.execute((base/'tests/reborn_world_markers_native.lua').read_text(encoding='utf8'))
     if a.game: native_locale(a.game/'Interface/AddOns')
     print(json.dumps({'rebornFixtures':True,'installedApiExecuted':bool(a.game),'liveGameTest':False}))
 if __name__=='__main__':main()

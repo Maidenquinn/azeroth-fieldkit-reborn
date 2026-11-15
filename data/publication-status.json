@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.31",
-  "maintainerAcceptedForPublication": true,
-  "maintainerAcceptanceDate": "2026-11-15",
+  "version": "0.1.0-reborn.32",
+  "maintainerAcceptedForPublication": false,
+  "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
   "inGameTestByAgent": false,
-  "githubPrerelease": false,
+  "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
-  "maintainerInGameTestingReported": true,
-  "inGameTestScope": "Synthetic fresh-database seeding and existing-player isolation; actual shipped-preset startup, six profile switches, visible live cards, theme on/off default previews, deep-copy checks and preservation of later edits; existing runtime, settings, installed API and locale regressions. Functional regression fixtures explicitly retain their historical neutral preferences; dedicated factory fixtures exercise the real shipped first installation. The maintainer visually approved these layouts in the supplied screenshots; no new live-client visual validation by the agent is claimed. Maintainer explicitly accepted the final 0.1.0-reborn.31 gameplay recipe and authorized a stable player release on 2026-11-15. Co-op and additional resolutions are not independently certified."
+  "maintainerInGameTestingReported": false,
+  "inGameTestScope": "Installed Reborn Anchors.lua execution demonstrates enable/catalogue/render callback/visible marker, off-screen hide, zone cleanup, callback reuse/unregistration and registration rejection. CI fixtures cover the bare Reborn contract, pagination, FR/EN with themes on/off, post-camera-only projection and distance filtering. Full runtime/settings/API regressions pass. No live-client visual acceptance of .32 is claimed; stable .31 remains available until this patch is accepted."
 }

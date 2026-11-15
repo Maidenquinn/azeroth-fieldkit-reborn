@@ -1,3 +1,9 @@
+# 0.1.0-reborn.32 — Reborn world-marker engine
+
+- Accept Reborn's public anchor operations without requiring the original client's capabilities endpoint or legacy projection metadata.
+- Keep projection inside the post-camera callback; reject failed registrations and clear old marker state at run/zone boundaries.
+- Verify actual installed Reborn catalogue/projection rendering and cleanup, plus the theme/locale/pagination/range matrix. Live .32 visual acceptance pending.
+
 # 0.1.0-reborn.31 — Maintainer-approved first-install profiles
 
 - Ship the approved Elwynn and native-style HUD profiles; activate profile 1 only on a truly empty database, leaving slot 3 free.

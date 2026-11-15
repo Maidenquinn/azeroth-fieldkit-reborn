@@ -1,4 +1,4 @@
--- Azeroth Survivors 0.139.2: optional, read-only world-anchor infrastructure.
+-- Read-only world anchors: original v1 contract and Reborn public catalogue/projection callbacks.
 -- No UI is created by this module. Consumers register their own render callbacks.
 FieldKitWorldAnchors = FieldKitWorldAnchors or {}
 local M = FieldKitWorldAnchors
@@ -7,6 +7,10 @@ local worldId, streamId, catalogId = nil, nil, nil
 local retryDelay, generation = 0, 0
 local enabled, registered = false, false
 local consumers = {}
+local inFrame, reborn, context = false, false, nil
+local function Context()
+ if FieldKitNative and FieldKitNative.Watch then FieldKitNative.Watch();return FieldKitNative.serial end
+end
 local query = {kinds={"elite","guardian","boss","finalBoss","cache","guardianLair","downedPartyMember"}}
 local function Clear()
  entries, ordered = {}, {}
@@ -15,14 +19,17 @@ local function Clear()
  for _,fn in pairs(consumers) do pcall(fn, nil, "cleared") end
 end
 local function Capable()
- return type(AZS_GetWorldAnchorCapabilities)=="function" and type(AZS_GetWorldAnchors)=="function"
-  and type(AZS_ProjectWorldAnchors)=="function" and type(AZS_RegisterWorldAnchorFrameHandler)=="function"
-  and type(AZS_UnregisterWorldAnchorFrameHandler)=="function"
+ return type(AZS_GetWorldAnchors)=="function" and type(AZS_ProjectWorldAnchors)=="function"
+  and type(AZS_RegisterWorldAnchorFrameHandler)=="function" and type(AZS_UnregisterWorldAnchorFrameHandler)=="function"
 end
 function M.Available()
  if not Capable() then return false end
- local ok,c=pcall(AZS_GetWorldAnchorCapabilities)
- return ok and type(c)=="table" and c.apiVersion==1 and c.frameHandler==true
+ if type(AZS_GetWorldAnchorCapabilities)=="function" then
+  local ok,c=pcall(AZS_GetWorldAnchorCapabilities)
+  return ok and type(c)=="table" and c.apiVersion==1 and c.frameHandler==true
+ end
+ -- Reborn exposes the four anchor operations directly, without the old capability endpoint.
+ return not FieldKit.rebornLegacyFixture and type(AZS_GetPhase)=="function" and type(AZS_ProjectWorldPoint)=="function"
 end
 function M.Snapshot() return ordered,generation end
 function M.Get(id) return entries[id] end
@@ -31,6 +38,7 @@ function M.Unsubscribe(key) consumers[key]=nil end
 -- One catalog must be collected in one invocation; no partial state is published.
 function M.Refresh()
  if not enabled or not M.Available() then return false,"UNAVAILABLE" end
+ local boundary=reborn and Context()
  local nextCursor, collected, list = nil, {}, {}
  local first, last, count = nil,nil,0
  repeat
@@ -56,6 +64,8 @@ function M.Refresh()
   nextCursor=page.nextCursor
  until not last.hasMore
  if worldId and (worldId~=first.worldId or streamId~=first.streamId) then Clear() end
+ if reborn and Context()~=boundary then Clear();return false,"STREAM_CHANGED" end
+ context=boundary
  entries,ordered=collected,list
  worldId,streamId,catalogId=first.worldId,first.streamId,first.catalogId
  generation=generation+1
@@ -65,27 +75,39 @@ end
 function M.Project(requests)
  if not enabled or type(requests)~="table" or table.getn(requests)>256 then return nil,"INVALID_REQUEST" end
  if type(AZS_ProjectWorldAnchors)~="function" then return nil,"UNAVAILABLE" end
+ if reborn and (not inFrame or context~=Context()) then
+  if context~=Context() then Clear() end
+  return nil,"NOT_CURRENT"
+ end
  local ok,result,err=pcall(AZS_ProjectWorldAnchors,requests)
  if not ok or type(result)~="table" then return nil,err or "NOT_READY" end
+ if reborn then
+  if type(result.entries)~="table" or type(result.frameId)~="number" then return nil,"NOT_CURRENT" end
+  return result
+ end
  if result.worldId~=worldId or result.streamId~=streamId then Clear();return nil,"STREAM_CHANGED" end
  if result.frameCurrent~=true then return nil,"NOT_CURRENT" end
  return result
 end
 local function Frame()
  if not enabled then return end
+ if reborn and context~=Context() then Clear();return end
+ inFrame=true
  for _,fn in pairs(consumers) do pcall(fn,ordered,"frame") end
+ inFrame=false
 end
 function M.Enable()
  if enabled then return true end
  if not M.Available() then return false end
- enabled=true
- local ok=pcall(AZS_RegisterWorldAnchorFrameHandler,Frame)
- if not ok then enabled=false;return false end
+ reborn=type(AZS_GetWorldAnchorCapabilities)~="function"
+ enabled=true;context=reborn and Context() or nil
+ local ok,result=pcall(AZS_RegisterWorldAnchorFrameHandler,Frame)
+ if not ok or result==false or (reborn and result~=true) then enabled=false;return false end
  registered=true
  return true
 end
 function M.Disable()
- enabled=false
+ enabled=false;inFrame=false
  if registered and type(AZS_UnregisterWorldAnchorFrameHandler)=="function" then pcall(AZS_UnregisterWorldAnchorFrameHandler,Frame) end
  registered=false;Clear()
 end

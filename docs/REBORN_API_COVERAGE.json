@@ -3,7 +3,7 @@
   "liveGameValidation": false,
   "runtimeModules": 58,
   "runtimeSHA256": {
-    "Runtime.lua": "06b38faa1d859b0351e2ae970174d5b0a70a06e29d654dcca1a2c56f1fc78d8d",
+    "Runtime.lua": "1986e0d822eb2d572aa1e62e7a00433ee53ecf8c44866e6faa07c9a8b2f6a65d",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -50,7 +50,7 @@
     "Interface.lua": "edc1e7363c9d63095ccba4a42664d796ff2802a8ef50a98e3a4d4d616e9f7d9c",
     "FieldKit.lua": "f8869c235216249529568a47afcd1f1875ca82db57cbd37c133b853256cae973",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
-    "WorldAnchors.lua": "3156191b143809624e50039aa86ad9b8f77a1952776a5c3dc6473e115dca6a3b",
+    "WorldAnchors.lua": "b8e326bcd250bd05698e7ac46dece0d46f4550f3f0bf6c523536ca13a2c7a61e",
     "WorldMarkers.lua": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
     "CombatText.lua": "6b0234bb4adc24fa588e4faa4cf72f117bc96a060853cde49bb834f0605fbd64",
     "CombatOptions.lua": "0a1c450585b3bed496b07fe8e635d0860ffed94c15f98cb225d365d16f6150d5",
@@ -1828,6 +1828,10 @@
           "line": 95
         },
         {
+          "file": "WorldAnchors.lua",
+          "line": 32
+        },
+        {
           "file": "CombatText.lua",
           "line": 419
         },
@@ -2318,11 +2322,15 @@
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 18
+          "line": 27
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 24
+          "line": 28
+        },
+        {
+          "file": "WorldAnchors.lua",
+          "line": 102
         }
       ],
       "directCallSites": [],
@@ -2344,11 +2352,11 @@
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 18
+          "line": 22
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 39
+          "line": 47
         }
       ],
       "directCallSites": [],
@@ -2995,15 +3003,15 @@
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 19
+          "line": 22
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 67
+          "line": 77
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 68
+          "line": 82
         }
       ],
       "directCallSites": [],
@@ -3013,9 +3021,14 @@
       "name": "AZS_ProjectWorldPoint",
       "documentedMention": true,
       "definitions": [],
-      "references": [],
+      "references": [
+        {
+          "file": "WorldAnchors.lua",
+          "line": 32
+        }
+      ],
       "directCallSites": [],
-      "coverage": "unused"
+      "coverage": "referenced"
     },
     {
       "name": "AZS_PushToTalk",
@@ -3342,11 +3355,11 @@
       "references": [
         {
           "file": "WorldAnchors.lua",
-          "line": 19
+          "line": 23
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 82
+          "line": 104
         }
       ],
       "directCallSites": [],
@@ -4360,11 +4373,11 @@
       "references": [
         {
           "file": "WorldAnchors.lua",
-          "line": 20
+          "line": 23
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 89
+          "line": 111
         }
       ],
       "directCallSites": [],
@@ -4620,6 +4633,6 @@
     "nativeLuaFiles": 449,
     "declaredFunctions": 129,
     "documentedAZSSymbols": 95,
-    "referencedAZSSymbols": 83
+    "referencedAZSSymbols": 84
   }
 }

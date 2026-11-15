@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.31",
+  "candidate": "0.1.0-reborn.32",
   "runtimeModules": 58,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "06b38faa1d859b0351e2ae970174d5b0a70a06e29d654dcca1a2c56f1fc78d8d",
+      "sha256": "1986e0d822eb2d572aa1e62e7a00433ee53ecf8c44866e6faa07c9a8b2f6a65d",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -3002,64 +3002,68 @@
       "literalEvents": []
     },
     "WorldAnchors.lua": {
-      "bytes": 5428,
-      "sha256": "3156191b143809624e50039aa86ad9b8f77a1952776a5c3dc6473e115dca6a3b",
+      "bytes": 6509,
+      "sha256": "b8e326bcd250bd05698e7ac46dece0d46f4550f3f0bf6c523536ca13a2c7a61e",
       "namedFunctions": [
         {
-          "name": "Clear",
+          "name": "Context",
           "line": 11
         },
         {
+          "name": "Clear",
+          "line": 15
+        },
+        {
           "name": "Capable",
-          "line": 17
+          "line": 21
         },
         {
           "name": "M.Available",
-          "line": 22
+          "line": 25
         },
         {
           "name": "M.Snapshot",
-          "line": 27
+          "line": 34
         },
         {
           "name": "M.Get",
-          "line": 28
+          "line": 35
         },
         {
           "name": "M.Subscribe",
-          "line": 29
+          "line": 36
         },
         {
           "name": "M.Unsubscribe",
-          "line": 30
+          "line": 37
         },
         {
           "name": "M.Refresh",
-          "line": 32
+          "line": 39
         },
         {
           "name": "M.Project",
-          "line": 65
+          "line": 75
         },
         {
           "name": "Frame",
-          "line": 74
-        },
-        {
-          "name": "M.Enable",
-          "line": 78
-        },
-        {
-          "name": "M.Disable",
-          "line": 87
-        },
-        {
-          "name": "M.IsEnabled",
           "line": 92
         },
         {
+          "name": "M.Enable",
+          "line": 99
+        },
+        {
+          "name": "M.Disable",
+          "line": 109
+        },
+        {
+          "name": "M.IsEnabled",
+          "line": 114
+        },
+        {
           "name": "Report",
-          "line": 108
+          "line": 130
         }
       ],
       "literalEvents": []
@@ -6736,10 +6740,10 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.31",
+    "version": "0.1.0-reborn.32",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
-    "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
+    "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
     "inGameTestByAgent": false,
@@ -6747,7 +6751,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Synthetic fresh-database seeding and existing-player isolation; actual shipped-preset startup, six profile switches, visible live cards, theme on/off default previews, deep-copy checks and preservation of later edits; existing runtime, settings, installed API and locale regressions. Functional regression fixtures explicitly retain their historical neutral preferences; dedicated factory fixtures exercise the real shipped first installation. The maintainer visually approved these layouts in the supplied screenshots; no new live-client visual validation by the agent is claimed."
+    "inGameTestScope": "Installed Reborn Anchors.lua execution demonstrates enable/catalogue/render callback/visible marker, off-screen hide, zone cleanup, callback reuse/unregistration and registration rejection. CI fixtures cover the bare Reborn contract, pagination, FR/EN with themes on/off, post-camera-only projection and distance filtering. Full runtime/settings/API regressions pass. No live-client visual acceptance of .32 is claimed; stable .31 remains available until this patch is accepted."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,
