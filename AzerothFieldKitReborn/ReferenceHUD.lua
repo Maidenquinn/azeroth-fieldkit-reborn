@@ -233,6 +233,9 @@ function R.BossListCard(f,rows,total,note)
   end
   return false
  end
+ R.AttachExternal("BossList","FieldKitBossListFrame")
+ f:SetFrameStrata("MEDIUM")
+ for _,row in ipairs(f.rows) do H.Save(row);row:SetFrameStrata("MEDIUM");row:SetFrameLevel(f:GetFrameLevel()+3) end
  if not f.bossReference then f.bossPreviousScale=f:GetScale();f.bossReference=true end
  Blank(f);f:SetAlpha(1)
  local zone=T.zone=="naxx" and "naxx" or "elwynn"
@@ -245,8 +248,8 @@ function R.BossListCard(f,rows,total,note)
  local h=math.max(header+20+count*28+footer,size and size.height or 0)
  f.fieldkitExpandedHeight=h;f.fieldkitNaturalHeight=header+20+count*28+footer
  if not f.azsMoving then
-  f:SetScale(R.canvas:GetScale()*FieldKitZoneThemes.ElementScale(f:GetName()))
   f:SetWidth(w);f:SetHeight(f.mashCollapsed and header or h)
+  R.Geometry(f,R.CardRect("BossList",R.layout));R.ApplyShift(f,"BossList");R.ApplyClamp(f,"BossList")
  end
  w=f:GetWidth();h=f:GetHeight()
  f.bossRim=f.bossRim or {}
@@ -268,7 +271,7 @@ function R.BossListCard(f,rows,total,note)
  f.title:SetText(FieldKit_L("Campaign bosses"));T.Font(f.title,20,T.gold);R.Fit(f.title,20,14)
  f.total:ClearAllPoints();f.total:SetPoint("TOPRIGHT",f,"TOPRIGHT",-43,-13);f.total:SetWidth(65);f.total:SetHeight(22);f.total:SetText(total);T.Font(f.total,14,R.body)
  local collapse=getglobal(f:GetName().."Collapse")
- if collapse then collapse:ClearAllPoints();collapse:SetPoint("TOPRIGHT",f,"TOPRIGHT",-8,-8);collapse:SetWidth(24);collapse:SetHeight(24);collapse:SetFrameLevel(f:GetFrameLevel()+25) end
+ if collapse then H.Save(collapse);collapse:SetFrameStrata("MEDIUM");collapse:ClearAllPoints();collapse:SetPoint("TOPRIGHT",f,"TOPRIGHT",-8,-8);collapse:SetWidth(24);collapse:SetHeight(24);collapse:SetFrameLevel(f:GetFrameLevel()+25) end
  f.lastRows=rows
  local step=count>0 and math.max(28,(h-header-20-footer)/count) or 28
  for i,row in ipairs(f.rows) do
@@ -433,6 +436,7 @@ function R.Fit(label,size,minimum)
  label.fieldkitFit={path=path,baseSize=baseSize,minimum=requestedMinimum,renderSize=size,width=rawWidth,height=height,full=text,display=label:GetText()}
 end
 function R.Stop()
+ if R.frames.BossList then H.RestoreOne(R.frames.BossList);R.frames.BossList=nil end
  if R.frames.Taken then H.RestoreOne(R.frames.Taken);R.frames.Taken=nil end
  R.active=false;R.PartyRestoreAll()
  if R.canvas then R.canvas:Hide() end
@@ -1081,7 +1085,7 @@ end
 -- ===== Placement: preferred position (default rectangle or the user's saved spot) vs displayed position. =====
 -- Pure function of the preferred layout, the visible card sizes and the protected HUD rectangles: nothing is stored,
 -- so a card returns to its preferred place as soon as the room is free again, and the search cannot oscillate.
-local CARDS={"Damage","Lairs","Accessories","Stats","Effects","Taken"}
+local CARDS={"Damage","Lairs","Accessories","Stats","Effects","Taken","BossList"}
 local OBSTACLES={"header","chat","identity","nav","vitality","mapArt"}
 local GAP,TOLERANCE=1,6 -- close clearance; retain the approved artwork edge/bleed tolerance
 -- Opaque insets (left, top, right, bottom) measured on the approved art: collisions use what is really drawn.
@@ -1090,13 +1094,13 @@ local OPAQUE={
   Damage={10,6,0,6},Lairs={10,9,9,7},Accessories={8,5,8,6},Stats={8,7,7,8},Effects={8,5,7,11}},
  naxx_complete={header={11,10,11,11},chat={8,7,0,13},identity={8,9,11,0},vitality={0,0,0,0},mapArt={9,9,11,5},
   Damage={4,1,6,5},Lairs={7,2,5,9},Accessories={9,0,11,0},Stats={10,0,11,0},Effects={9,3,9,10}}}
-local PREFS={Damage="meterFrame",Lairs="lairFrame",Accessories="gearFrame",Stats="statsFrame",Effects="effectsFrame",Taken="takenFrame"}
-local NATIVE={Damage="FieldKitMeterFrame",Lairs="FieldKitLairFrame",Accessories="FieldKitGearFrame",Stats="FieldKitStatsFrame",Effects="FieldKitEffectsFrame",Taken="FieldKitTakenFrame"}
-function R.CardScale(kind) return FieldKitZoneThemes.ElementScale(kind=="Taken" and "FieldKitTakenFrame" or "FieldKitReferencePanel"..kind) end
-function R.AttachTaken(variant)
+local PREFS={Damage="meterFrame",Lairs="lairFrame",Accessories="gearFrame",Stats="statsFrame",Effects="effectsFrame",Taken="takenFrame",BossList="bossListCard"}
+local NATIVE={Damage="FieldKitMeterFrame",Lairs="FieldKitLairFrame",Accessories="FieldKitGearFrame",Stats="FieldKitStatsFrame",Effects="FieldKitEffectsFrame",Taken="FieldKitTakenFrame",BossList="FieldKitBossListFrame"}
+function R.CardScale(kind) return FieldKitZoneThemes.ElementScale((kind=="Taken" or kind=="BossList") and NATIVE[kind] or "FieldKitReferencePanel"..kind) end
+function R.AttachExternal(kind,name)
  if FieldKit.rebornLegacyFixture then return end
- local f=getglobal("FieldKitTakenFrame");if not f then return end
- H.Save(f);R.frames.Taken=f
+ local f=getglobal(name);if not f then return end
+ H.Save(f);R.frames[kind]=f
  if not f.referenceTakenBound then
   f.referenceTakenBound=true
   local events={"OnDragStart","OnDragStop","OnMouseUp","OnHide"};local old={}
@@ -1117,6 +1121,14 @@ function R.AttachTaken(variant)
  end
  f:EnableMouse(not FieldKitRebornDB.windowsLocked)
 end
+function R.AttachTaken(variant) R.AttachExternal("Taken","FieldKitTakenFrame") end
+function R.BossListPass(d)
+ local f=R.frames.BossList;if not f then return end
+ if R.CardVisible("BossList",d) then
+  R.Geometry(f,R.CardRect("BossList",d));R.ApplyShift(f,"BossList");R.ApplyClamp(f,"BossList")
+  f.fieldkitWanted=true;f:Show()
+ else f:Hide() end
+end
 function R.TakenPass(d)
  local f=R.frames.Taken;if not f then return end
  if R.CardVisible("Taken",d) then
@@ -1126,8 +1138,9 @@ function R.TakenPass(d)
   if f.mashCollapseButton then H.Save(f.mashCollapseButton);f.mashCollapseButton:SetFrameStrata("MEDIUM");f.mashCollapseButton:SetFrameLevel(f:GetFrameLevel()+10) end
  end
 end
-local function Inset(name) if name=="Taken" then return {0,0,0,0} end;local t=OPAQUE[R.key];return (t and t[name]) or {6,6,6,6} end
+local function Inset(name) if name=="Taken" then return {0,0,0,0} end;if name=="BossList" then return {6,2,6,4} end;local t=OPAQUE[R.key];return (t and t[name]) or {6,6,6,6} end
 function R.CardVisible(kind,d)
+ if kind=="BossList" then local f=R.frames.BossList;return f and f.bossReference and FieldKitRebornDB.bossListCard and not f.mashCollapsed and f.bossListActive end
  if kind=="Taken" then return R.frames.Taken and R.frames.Taken:IsShown() and FieldKitRebornDB.takenFrame and not (FieldKitRebornDB.collapsedWindows and FieldKitRebornDB.collapsedWindows.FieldKitTakenFrame) end
  local folded=(kind=="Stats" and FieldKitRebornDB.statsCollapsed) or (kind=="Accessories" and FieldKitRebornDB.gearCollapsed) or (FieldKitRebornDB.collapsedWindows and FieldKitRebornDB.collapsedWindows[NATIVE[kind]])
  return d.rects[kind] and FieldKitRebornDB[PREFS[kind]] and not folded and not (kind=="Damage" and FieldKitZoneThemes.nativeMeterOpen)
@@ -1181,7 +1194,7 @@ end
 -- left-to-right, then fixed card order. A card that must give way is moved: down first, then up, then sideways.
 function R.NoteMoved(name)
  local kind=nil
- for _,k in ipairs(CARDS) do if "FieldKitReferencePanel"..k==name or (k=="Taken" and name=="FieldKitTakenFrame") then kind=k end end
+ for _,k in ipairs(CARDS) do if "FieldKitReferencePanel"..k==name or ((k=="Taken" or k=="BossList") and name==NATIVE[k]) then kind=k end end
  if not kind then
   local i=nil;for n=0,4 do if name==(n==0 and "FieldKitPlayerCard" or "FieldKitPartyCard"..n) then i=n end end
   if i then local f=getglobal(name);R.lastParty="Party"..i;if f then f.fieldkitApplied=nil;f.fieldkitDX,f.fieldkitDY=nil,nil end;if R.shift then R.shift["Party"..i]=nil end;if R.shiftX then R.shiftX["Party"..i]=nil end end
@@ -1667,6 +1680,12 @@ function R.HideUnwanted() for _,f in pairs(R.frames) do if not f.fieldkitWanted 
 -- Taller cards without new artwork: the art is cut at `split` (inside the uniform body) and a thin mid band is
 -- stretched, so borders stay crisp. top = vertical shift, extra = added height (reference px).
 function R.CardRect(kind,d,noShift)
+ if kind=="BossList" and R.frames.BossList then
+  local f=R.frames.BossList;local a=d.rects.Lairs or d.rects.Damage or {22,260,360,0}
+  local x,y=a[1],a[2]+a[4]+8
+  if not noShift and not FieldKitZoneThemes.Position(f) then x=x+((R.shiftX and R.shiftX.BossList) or 0);y=y+((R.shift and R.shift.BossList) or 0) end
+  return {x,y,f:GetWidth(),f:GetHeight()},0,0
+ end
  local base=d.rects[kind];local grow=base and GROW[R.key] and GROW[R.key][kind]
  if kind=="Taken" and R.frames.Taken then
   local f=R.frames.Taken;local a=d.rects.Damage or {22,260,360,0}
@@ -1772,7 +1791,7 @@ function R.Panels(variant,zone)
  for _,f in pairs(H.summaries or {}) do if not f.azsMoving then f:Hide() end end
  local detail=false;for _,kind in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do if FieldKitZoneThemes.open[kind] then detail=true end end
  for _,f in pairs(R.frames) do f.fieldkitWanted=nil end
- if variant~="complete" then R.PartyRestoreAll();R.Resolve(zone,R.layout);R.TakenPass(R.layout);R.HideUnwanted();R.MaskBuffs(false);return end
+ if variant~="complete" then R.PartyRestoreAll();R.Resolve(zone,R.layout);R.TakenPass(R.layout);R.BossListPass(R.layout);R.HideUnwanted();R.MaskBuffs(false);return end
  R.effectBuffs=false
  local d=R.layout;R.PlanLayout(zone,d);R.PartyPass()
  if not FieldKitNative.Active() and (not R.readyAt or GetTime()>R.readyAt or R.readySerial~=FieldKitNative.serial) then
@@ -2010,7 +2029,7 @@ function R.Panels(variant,zone)
    end end
   end
  end
- R.TakenPass(d);R.HideUnwanted();R.MaskBuffs(R.effectBuffs and R.frames.Effects:IsShown())
+ R.TakenPass(d);R.BossListPass(d);R.HideUnwanted();R.MaskBuffs(R.effectBuffs and R.frames.Effects:IsShown())
 end
 
 -- One settings shell for every existing page; all controls retain their handlers.

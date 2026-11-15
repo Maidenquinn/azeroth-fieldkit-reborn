@@ -57,10 +57,12 @@ function C.Elements()
  for _,kind in ipairs({"Damage","Lairs","Accessories","Stats","Effects"}) do if d.rects[kind] then Add("FieldKitReferencePanel"..kind) end end
  Add("FieldKitThemeTargetFrame");Add("FieldKitThemeBosses","Tracked bosses")
  if R.frames and R.frames.Taken then Add("FieldKitTakenFrame","Damage taken") end
+ if R.frames and R.frames.BossList then Add("FieldKitBossListFrame","Campaign bosses") end
  return out
 end
 C.elementNames.FieldKitThemeBosses="Tracked bosses"
 C.elementNames.FieldKitTakenFrame="Damage taken"
+C.elementNames.FieldKitBossListFrame="Campaign bosses"
 function C.BossScales(restore)
  C.bossBefore=C.bossBefore or {}
  if restore then for f,scale in pairs(C.bossBefore) do f:SetScale(scale) end;C.bossBefore={};return end

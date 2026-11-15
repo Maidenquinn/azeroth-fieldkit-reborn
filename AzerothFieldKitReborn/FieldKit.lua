@@ -2641,6 +2641,7 @@ local function DockEntries()
   {frame=gearFrame,label="Accessories / Spells",setting="gearCollapsed"},
   {frame=native[1],label="Effects"},
   {frame=native[3],label="Run reminders"},
+  {frame=native[4],label="Campaign bosses",enabled="bossListCard"},
  }
 end
 local function BuildCollapseDock()
@@ -2680,7 +2681,7 @@ local function BuildCollapseDock()
  grip:SetScript("OnDragStop",StopDockDrag)
  grip:SetScript("OnMouseUp",StopDockDrag)
  PlaceCollapseDock()
- for i=1,8 do
+ for i=1,table.getn(DockEntries()) do
   local index=i
   local button=FieldKitTheme.Button(collapseDock,nil,"",0,0,164,23,nil)
   button:ClearAllPoints()
@@ -2710,7 +2711,7 @@ RefreshCollapseDock=function()
   local f=entry.frame
   local folded=entry.setting and DB[entry.setting] or
    (f and DB.collapsedWindows and DB.collapsedWindows[f:GetName()])
-  local active=folded and f and (f:IsShown() or f.fieldkitDockHidden)
+  local active=folded and f and (not entry.enabled or DB[entry.enabled]) and (f:IsShown() or f.fieldkitDockHidden)
   local button=collapseDockButtons[i]
   if active then
    count=count+1
@@ -2730,6 +2731,7 @@ RefreshCollapseDock=function()
     if (i==5 and DB.statsFrame) or (i==6 and DB.gearFrame) or
      (i==1 and DB.runModeCard) or (i==7 and DB.effectsFrame) or
      (i==8 and (DB.nextBossCard or DB.storedLevelsBadge)) or
+     (i==9 and DB.bossListCard) or
      (i>=2 and i<=4) then f:Show() end
    end
   end

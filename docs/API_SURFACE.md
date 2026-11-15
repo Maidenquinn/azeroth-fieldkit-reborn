@@ -1,3 +1,5 @@
+Version reborn.30 integrates the campaign card into existing layout and dock systems; native API/data semantics are unchanged.
+
 Version reborn.29 changes only campaign-card presentation; no native API additions or data inference.
 
 # Native effects and data boundary

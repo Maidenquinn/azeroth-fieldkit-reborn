@@ -115,6 +115,8 @@ function T.BossListRows()
 end
 function T.BossList()
  local frame=T.frames[4];if not frame then return end
+ frame.bossListActive=not FieldKit.rebornLegacyFixture and FieldKitRebornDB.bossListCard and (N.Active() or N.Read("AZS_GetPhase")=="ready" or FieldKit.layoutEditing)
+ if frame.mashCollapsed and frame.fieldkitDockHidden then frame.note:Hide();frame:Hide();return end
  if FieldKit.rebornLegacyFixture or not FieldKitRebornDB.bossListCard or (not N.Active() and N.Read("AZS_GetPhase")~="ready" and not FieldKit.layoutEditing) then frame:Hide();return end
  if frame.bossListSerial~=N.serial then frame.bossListSerial=N.serial;frame.bossListOffset=0 end
  local all,dead,known=T.BossListRows();local total=table.getn(all)

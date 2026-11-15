@@ -1,3 +1,9 @@
+# 0.1.0-reborn.30 — Campaign card collisions and shared dock
+
+- Register Campaign bosses with the shared reference card resolver and scoped drag/scale/anchor controls, including direct row dragging and native restoration.
+- Add the card to the existing collapse dock; keep it hidden through refreshes until restored by its dock button.
+- Cover bidirectional collisions, drag, preferred anchors and repeated dock collapse/restore in both theme families/all variants and without themes.
+
 # 0.1.0-reborn.29 — Campaign card reference styling
 
 - Replace the generic themed campaign frame with the reference artwork, clean body, opaque rim and matching viewport scale.

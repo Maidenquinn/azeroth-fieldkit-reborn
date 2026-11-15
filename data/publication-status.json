@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.29",
+  "version": "0.1.0-reborn.30",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Automated runtime checks for reference material, header/row bounds, opaque edges and icons at 0/37/100 percent body opacity, viewport scaling, collapse and native restoration, plus the existing campaign/state/locale/settings and installed public API suites. No new live-client visual validation is claimed."
+  "inGameTestScope": "Automated bidirectional collision checks, row drag, preferred-position preservation, collapse/dock/restore through repeated refreshes, both theme families and all variants, native restoration; existing campaign data, locale, API and full runtime/settings regressions. No new live-client visual validation is claimed."
 }

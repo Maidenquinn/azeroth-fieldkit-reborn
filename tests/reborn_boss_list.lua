@@ -68,7 +68,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
  d.zoneThemeMode=zone;d.zoneThemeVariant="complete";C.Set("zoneThemes",true);T.Update()
  local f=FieldKitBossListFrame;local r=FieldKitReferenceHUD
  assert(f.bossReference and f.fieldkitArtOnly and #f.bossRim==8)
- assert(f:GetWidth()==400 and f:GetScale()==r.canvas:GetScale()*C.ElementScale(f:GetName()))
+ assert(f:GetWidth()==400 and f:GetParent()==r.canvas and f:GetScale()==C.ElementScale(f:GetName()))
  local _,_,_,tx,ty=f.title:GetPoint();local _,_,_,rx,ry=f.rows[1]:GetPoint()
  assert(tx==65 and -ry>=-ty+f.title:GetHeight()+8,"Roster header overlaps the first row")
  assert(rx>=20 and rx+f.rows[1]:GetWidth()<=f:GetWidth()-20)
@@ -78,7 +78,7 @@ for _,zone in ipairs({"elwynn","naxx"}) do
   for _,edge in ipairs(f.bossRim) do assert(edge:GetAlpha()==1) end
   assert(f.rows[1].icon:GetAlpha()==1 and f:GetAlpha()==1)
  end
- click(FieldKitBossListFrameCollapse);assert(f:GetHeight()>=46 and not f.rows[1]:IsShown())
+ click(FieldKitBossListFrameCollapse);assert(f.fieldkitDockHidden and not f:IsShown() and not f.rows[1]:IsShown())
  click(FieldKitBossListFrameCollapse);assert(f.rows[1]:IsShown())
  C.Set("zoneThemes",false);T.Update()
  assert(not f.bossReference and not f.fieldkitArtOnly and not f.cleanBody:IsShown())

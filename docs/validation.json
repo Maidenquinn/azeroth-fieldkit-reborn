@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.29",
+  "version": "0.1.0-reborn.30",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.29",
+    "version": "0.1.0-reborn.30",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Automated runtime checks for reference material, header/row bounds, opaque edges and icons at 0/37/100 percent body opacity, viewport scaling, collapse and native restoration, plus the existing campaign/state/locale/settings and installed public API suites. No new live-client visual validation is claimed."
+    "inGameTestScope": "Automated bidirectional collision checks, row drag, preferred-position preservation, collapse/dock/restore through repeated refreshes, both theme families and all variants, native restoration; existing campaign data, locale, API and full runtime/settings regressions. No new live-client visual validation is claimed."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "f3dfbc40f56cc439e4b59e4a93ce4485829a776202f2eee9dd0fe0aee3befcf2"
+      "sha256": "9c762bad8d673a2faa5f5bb266b01b5c2c4732e2867877b849ecf521240e29e0"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -210,7 +210,7 @@
     "NativeTools.lua": {
       "maxUpvalues": 3,
       "functions": 28,
-      "sha256": "8721304d17931eea665a0c486afe486607cb96f44ea28cc4316fcca0aea57dd5"
+      "sha256": "d53cb4e232854b4be2caedba044cd25bf18c7e109f69be00cb331905d38bebf1"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -255,7 +255,7 @@
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 192,
-      "sha256": "784c52de5e22f6f9ca1a413e29c3fec9c5d2547c7593b66f4a90ff5e1d9327d3"
+      "sha256": "f8869c235216249529568a47afcd1f1875ca82db57cbd37c133b853256cae973"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -309,13 +309,13 @@
     },
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
-      "functions": 194,
-      "sha256": "8fcdc425572bea7dc2a73a97118c77a46183d8e7437c77f478655d60d14e56e5"
+      "functions": 196,
+      "sha256": "f7bd656edf4a7b16da49db05335cce17f9ca47827930d53c77a8b6c83d1b41f6"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "1c749527ab665904c1e5578b159b8877157b7629db1db85f0c6b01ca258f18bc"
+      "sha256": "6824d1b8716067d209dc6856e17fdd0071ac8cf50bd57ba7aafc619bfb847534"
     }
   }
 }
