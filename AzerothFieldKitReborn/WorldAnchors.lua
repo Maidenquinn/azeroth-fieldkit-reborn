@@ -12,6 +12,8 @@ local function Context()
  if FieldKitNative and FieldKitNative.Watch then FieldKitNative.Watch();return FieldKitNative.serial end
 end
 local query = {kinds={"elite","guardian","boss","finalBoss","cache","guardianLair","downedPartyMember"}}
+local rebornQuery={kinds={"elite","guardian","boss","finalBoss","cache","guardianLair","downedPartyMember","enemy"}}
+function M.IsReborn() return reborn end
 local function Clear()
  entries, ordered = {}, {}
  worldId, streamId, catalogId = nil, nil, nil
@@ -44,7 +46,7 @@ function M.Refresh()
  repeat
   count=count+1
   if count>64 then return false,"PAGE_LIMIT" end
-  local ok,page,err=pcall(AZS_GetWorldAnchors,query,nextCursor,256)
+  local ok,page,err=pcall(AZS_GetWorldAnchors,reborn and rebornQuery or query,nextCursor,256)
   if not ok or type(page)~="table" then
    local code=type(err)=="table" and err.code or "NOT_READY"
    if code=="STREAM_CHANGED" then Clear() end
@@ -55,7 +57,7 @@ function M.Refresh()
   if first.catalogId~=page.catalogId or first.streamId~=page.streamId or first.worldId~=page.worldId then return false,"CATALOG_CHANGED" end
   for i=1,math.min(256,table.getn(page.entries)) do
    local e=page.entries[i]
-   if type(e)=="table" and type(e.anchorId)=="string" and not collected[e.anchorId] then
+   if type(e)=="table" and type(e.anchorId)=="string" and not collected[e.anchorId] and (not reborn or e.kind~="enemy") then
     collected[e.anchorId]=e;table.insert(list,e)
    end
   end

@@ -1,3 +1,5 @@
+Version reborn.33 requests enemy anchors only to make Reborn enumerate normal-rank guardians, then excludes ordinary enemies from the retained catalogue. Native ground/head projections provide bounded screen-space marker placement. No native files or coordinates are modified.
+
 Version reborn.32 supports the installed Reborn world-anchor contract: four public catalogue/projection/handler operations, snapshotId and frameId. Legacy capability/stream fields remain mandatory only on the original v1 protocol. Reborn projection is restricted to the native post-camera callback; native run/zone boundaries invalidate cached marker state.
 
 Version reborn.31 seeds only bounded HUD preference snapshots on an empty addon database. No new native API usage or account/run data is distributed.

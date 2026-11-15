@@ -1,3 +1,10 @@
+# 0.1.0-reborn.33 — Guardian markers and spacing
+
+- Recover normal-rank guardians from Reborn's full anchor catalogue while excluding ordinary enemy markers.
+- Bound oversized creature overhead projections and retain a visible ground-anchor fallback when only the head leaves the screen.
+- Add a small screen-space gap above chest markers; preserve range/category controls and legacy rendering.
+- Reproduce these cases using the installed native anchor API. Live visual acceptance pending.
+
 # 0.1.0-reborn.32 — Reborn world-marker engine
 
 - Accept Reborn's public anchor operations without requiring the original client's capabilities endpoint or legacy projection metadata.

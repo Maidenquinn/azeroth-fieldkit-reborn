@@ -9,7 +9,7 @@ Sans thème illustré, les cartes utilisent désormais l'habillage sombre natif.
 Pour la 0.6.5 : **/fieldkit → Interface → Compteur de combat → Dégâts et soins récents**, puis choisir **5 à 120 secondes**. Le mode récent est désactivé par défaut et se sauvegarde par profil. Les bonus des bijoux et des DoT sont disponibles au survol de Statistiques ; les valeurs DoT se sélectionnent aussi dans la liste des statistiques.
 
 Version indépendante de FieldKit pour **Azeroth Survivors Reborn 0.6.5**.
-Le correctif candidat **0.1.0-reborn.32** adapte le HUD et les compteurs au nouveau client.
+Le correctif candidat **0.1.0-reborn.33** adapte le HUD et les compteurs au nouveau client.
 
 Les nouvelles installations démarrent sur le profil Elwynn validé en emplacement 1. Le profil 2 propose la disposition sans thème, avec les tailles, positions, échelles et l’opacité à 70 % validées. Les réglages déjà enregistrés sont conservés.
 

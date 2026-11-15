@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.32",
+  "candidate": "0.1.0-reborn.33",
   "runtimeModules": 58,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "1986e0d822eb2d572aa1e62e7a00433ee53ecf8c44866e6faa07c9a8b2f6a65d",
+      "sha256": "8c76d0c1436f5eaf3ab6221c05861ab76c10e2edc5b3104eb1507b8dd16335c3",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -3002,75 +3002,79 @@
       "literalEvents": []
     },
     "WorldAnchors.lua": {
-      "bytes": 6509,
-      "sha256": "b8e326bcd250bd05698e7ac46dece0d46f4550f3f0bf6c523536ca13a2c7a61e",
+      "bytes": 6728,
+      "sha256": "bdd3b9d204f80f16e3f7b9279f78bef8e722cfe741ec80fbc47858526fe75610",
       "namedFunctions": [
         {
           "name": "Context",
           "line": 11
         },
         {
+          "name": "M.IsReborn",
+          "line": 16
+        },
+        {
           "name": "Clear",
-          "line": 15
+          "line": 17
         },
         {
           "name": "Capable",
-          "line": 21
+          "line": 23
         },
         {
           "name": "M.Available",
-          "line": 25
+          "line": 27
         },
         {
           "name": "M.Snapshot",
-          "line": 34
-        },
-        {
-          "name": "M.Get",
-          "line": 35
-        },
-        {
-          "name": "M.Subscribe",
           "line": 36
         },
         {
-          "name": "M.Unsubscribe",
+          "name": "M.Get",
           "line": 37
         },
         {
-          "name": "M.Refresh",
+          "name": "M.Subscribe",
+          "line": 38
+        },
+        {
+          "name": "M.Unsubscribe",
           "line": 39
         },
         {
+          "name": "M.Refresh",
+          "line": 41
+        },
+        {
           "name": "M.Project",
-          "line": 75
+          "line": 77
         },
         {
           "name": "Frame",
-          "line": 92
+          "line": 94
         },
         {
           "name": "M.Enable",
-          "line": 99
+          "line": 101
         },
         {
           "name": "M.Disable",
-          "line": 109
+          "line": 111
         },
         {
           "name": "M.IsEnabled",
-          "line": 114
+          "line": 116
         },
         {
           "name": "Report",
-          "line": 130
+          "line": 132
         }
       ],
       "literalEvents": []
     },
     "WorldMarkers.lua": {
-      "bytes": 16980,
-      "sha256": "5db4a42d699b5fda0c5a3d0d86c3f2a8c7aea0d352b518a3d5514526365bd95a",
+      "bytes": 18455,
+      "sha256": "54db90130c1aad830afecff5bf7d280427214b2d3507961e8596d81ba54b300e",
       "namedFunctions": [
         {
           "name": "updateAura",
@@ -3114,111 +3118,111 @@
         },
         {
           "name": "M.Enable",
-          "line": 244
+          "line": 273
         },
         {
           "name": "M.Disable",
-          "line": 252
+          "line": 281
         },
         {
           "name": "M.IsEnabled",
-          "line": 253
+          "line": 282
         },
         {
           "name": "M.SetLairHints",
-          "line": 254
+          "line": 283
         },
         {
           "name": "M.GetLairHints",
-          "line": 255
+          "line": 284
         },
         {
           "name": "M.SetAura",
-          "line": 256
+          "line": 285
         },
         {
           "name": "M.SetAuraPulse",
-          "line": 257
+          "line": 286
         },
         {
           "name": "M.SetAuraIntensity",
-          "line": 258
+          "line": 287
         },
         {
           "name": "M.GetReviveNames",
-          "line": 265
-        },
-        {
-          "name": "M.SetReviveNames",
-          "line": 266
-        },
-        {
-          "name": "M.GetReviveDistance",
-          "line": 267
-        },
-        {
-          "name": "M.SetReviveDistance",
-          "line": 268
-        },
-        {
-          "name": "M.SetReviveRing",
-          "line": 280
-        },
-        {
-          "name": "M.GetReviveRing",
-          "line": 289
-        },
-        {
-          "name": "M.GetAura",
-          "line": 290
-        },
-        {
-          "name": "M.GetAuraPulse",
-          "line": 291
-        },
-        {
-          "name": "M.GetAuraIntensity",
-          "line": 292
-        },
-        {
-          "name": "M.GetCategoryEnabled",
-          "line": 293
-        },
-        {
-          "name": "M.SetCategoryEnabled",
           "line": 294
         },
         {
+          "name": "M.SetReviveNames",
+          "line": 295
+        },
+        {
+          "name": "M.GetReviveDistance",
+          "line": 296
+        },
+        {
+          "name": "M.SetReviveDistance",
+          "line": 297
+        },
+        {
+          "name": "M.SetReviveRing",
+          "line": 309
+        },
+        {
+          "name": "M.GetReviveRing",
+          "line": 318
+        },
+        {
+          "name": "M.GetAura",
+          "line": 319
+        },
+        {
+          "name": "M.GetAuraPulse",
+          "line": 320
+        },
+        {
+          "name": "M.GetAuraIntensity",
+          "line": 321
+        },
+        {
+          "name": "M.GetCategoryEnabled",
+          "line": 322
+        },
+        {
+          "name": "M.SetCategoryEnabled",
+          "line": 323
+        },
+        {
           "name": "M.GetCategoryScale",
-          "line": 298
+          "line": 327
         },
         {
           "name": "M.SetCategoryScale",
-          "line": 299
+          "line": 328
         },
         {
           "name": "M.GetCategoryRange",
-          "line": 303
+          "line": 332
         },
         {
           "name": "M.SetCategoryRange",
-          "line": 304
+          "line": 333
         },
         {
           "name": "M.GetTexture",
-          "line": 311
+          "line": 340
         },
         {
           "name": "M.GetAuraTexture",
-          "line": 312
+          "line": 341
         },
         {
           "name": "M.ReloadProfileSettings",
-          "line": 316
+          "line": 345
         },
         {
           "name": "report",
-          "line": 332
+          "line": 361
         }
       ],
       "literalEvents": [
@@ -6740,7 +6744,7 @@
   "inGameTest": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.32",
+    "version": "0.1.0-reborn.33",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
@@ -6751,7 +6755,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Installed Reborn Anchors.lua execution demonstrates enable/catalogue/render callback/visible marker, off-screen hide, zone cleanup, callback reuse/unregistration and registration rejection. CI fixtures cover the bare Reborn contract, pagination, FR/EN with themes on/off, post-camera-only projection and distance filtering. Full runtime/settings/API regressions pass. No live-client visual acceptance of .32 is claimed; stable .31 remains available until this patch is accepted."
+    "inGameTestScope": "Installed Anchors.lua fixture reproduces normal-rank guardians omitted by special-only enumeration, excludes ordinary enemies, bounds exaggerated model height, keeps markers when only the head leaves the screen, checks chest spacing and off-screen/zone cleanup. Full runtime, theme/locale marker matrix, settings and installed API regressions pass. No live-client visual acceptance of .33 is claimed; stable .31 remains available."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,
