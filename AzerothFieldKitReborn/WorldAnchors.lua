@@ -58,6 +58,11 @@ function M.Refresh()
   for i=1,math.min(256,table.getn(page.entries)) do
    local e=page.entries[i]
    if type(e)=="table" and type(e.anchorId)=="string" and not collected[e.anchorId] and (not reborn or e.kind~="enemy") then
+    if reborn and (e.kind=="elite" or e.kind=="guardian" or e.kind=="boss" or e.kind=="finalBoss") and type(AZS_UnitWorldPosition)=="function" then
+     local ok,x,y,z,height=pcall(AZS_UnitWorldPosition,e.anchorId)
+     height=ok and FieldKit.Number(height,nil,0,1000) or nil
+     if height then local copy={};for key,value in pairs(e) do copy[key]=value end;copy.fieldkitHeight=height;e=copy end
+    end
     collected[e.anchorId]=e;table.insert(list,e)
    end
   end

@@ -25,7 +25,7 @@ for _,kind in ipairs({"boss","guardian","cache"}) do
  assert(found,"Installed native category missing: "..kind)
 end
 local _,relative,_,mx,my=marker:GetPoint();assert(relative==WorldFrame)
-assert(my-marker:GetHeight()/2==1100+8,"Large creature marker was clamped into its body instead of clearing its overhead anchor")
+assert(math.abs(my-marker:GetHeight()/2-(300+(30+50*.35+.5/.9144)*10+8))<.001,"Calibrated native height/metric offset were not projected in world space")
 for _,f in ipairs(objects) do if f.markerKind=="cache" and f:IsShown() then
  local _,_,_,_,cy=f:GetPoint();assert(cy==620+16,"Chest marker lacks its small screen-space gap")
 end end

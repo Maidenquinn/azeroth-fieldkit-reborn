@@ -555,6 +555,9 @@ fr["Upcoming"]="À venir"
 fr["Status not provided"]="État non fourni"
 fr["Boss list not provided"]="Liste des boss non fournie"
 fr["Endless: the game does not provide the upcoming boss sequence."]="Sans fin : le jeu ne fournit pas la suite des boss."
+fr["Extra height: %.2f m"]="Décalage supplémentaire : %.2f m"
+fr["Anchor height: %d%%"]="Hauteur d’ancrage : %d %%"
+
 -- Include every extension in live language switching, not only the early catalog.
 local reverseKeys={};for key in pairs(fr) do table.insert(reverseKeys,key) end
 table.sort(reverseKeys)

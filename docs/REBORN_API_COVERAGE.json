@@ -3,7 +3,7 @@
   "liveGameValidation": false,
   "runtimeModules": 58,
   "runtimeSHA256": {
-    "Runtime.lua": "1e0a7c921cf82864fa4f30cf4cd6682165cd4e5f2f0a4e1e739a038b8e595a2c",
+    "Runtime.lua": "2ac78f02c2ba897d110371187a6c5d0d69a7a1588b15a5f8a2fe35b9058aaab0",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -16,7 +16,7 @@
     "Profiles.lua": "74dc00eef90047efa38b257a26541ef1ddb5b0fd66fdc84abc14600b9d30dcce",
     "FactoryPresets.lua": "86daa0ceb57dcf9fca1f7e3d2ede467e78cf1f13a89e368b19f1857d836da66a",
     "Localization.lua": "52b438733774cee70dbde43c0c57b7e2503087aff219d9095ef4ac9b66043001",
-    "InterfaceStrings.lua": "91d476e4461831aefe9e4f1baac7c6aefcfb3b9ed71935ad6c386b73e3a4f44d",
+    "InterfaceStrings.lua": "e72cadd74562bd3dae3799f0482b0310a0f5b4f801ccdbb2ea23f57f775fc74e",
     "Theme.lua": "0246f0ff84187b05d8dca179be50d24dbf51614932f37c914478dbcb4d609813",
     "ZoneThemeRegistry.lua": "b30035d19d58e17ffc93d360ad377e2bcbcb3fbe0292fe67155d3e02c92537ad",
     "Seed.lua": "a1e79ab07c8b41dca34f8fa730f964cd7e79ece5700a1e5d407f941060ee655c",
@@ -47,11 +47,11 @@
     "PreviewVisibility.lua": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
     "OptionsSchema.lua": "522e82940bb25a5915f7d632d10c64acb8ef5a760e61818a5ab1e6103d91844e",
     "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
-    "Interface.lua": "edc1e7363c9d63095ccba4a42664d796ff2802a8ef50a98e3a4d4d616e9f7d9c",
+    "Interface.lua": "7cc27bece2809583830a382a7b70992c36eb665e937219ee3e07182a2966b9ad",
     "FieldKit.lua": "f8869c235216249529568a47afcd1f1875ca82db57cbd37c133b853256cae973",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
-    "WorldAnchors.lua": "bdd3b9d204f80f16e3f7b9279f78bef8e722cfe741ec80fbc47858526fe75610",
-    "WorldMarkers.lua": "e59d788f1447f99f5b645b0071e93866e458def2d93b0599cb43b67b7bd63db3",
+    "WorldAnchors.lua": "f5bd32198d1c369720cb8e53c0d8a3f66d399d23bbd8aaa0fcc8b2d86dd30887",
+    "WorldMarkers.lua": "055e04dfca362144c477546beba9809eda7357cef7671f0ee509c8356246c4db",
     "CombatText.lua": "6b0234bb4adc24fa588e4faa4cf72f117bc96a060853cde49bb834f0605fbd64",
     "CombatOptions.lua": "0a1c450585b3bed496b07fe8e635d0860ffed94c15f98cb225d365d16f6150d5",
     "CopyLog.lua": "ced8dba7c9b6182eb6e81c2fa94a52ff79e1b8fdcf9dc769ece3357dea3eb625",
@@ -1324,11 +1324,11 @@
       "references": [
         {
           "file": "WorldMarkers.lua",
-          "line": 92
+          "line": 98
         },
         {
           "file": "WorldMarkers.lua",
-          "line": 93
+          "line": 99
         }
       ],
       "directCallSites": [],
@@ -1996,11 +1996,11 @@
         },
         {
           "file": "WorldMarkers.lua",
-          "line": 194
+          "line": 203
         },
         {
           "file": "WorldMarkers.lua",
-          "line": 195
+          "line": 204
         },
         {
           "file": "ThemeMinimap.lua",
@@ -2330,7 +2330,7 @@
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 104
+          "line": 109
         }
       ],
       "directCallSites": [],
@@ -3007,11 +3007,11 @@
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 79
+          "line": 84
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 84
+          "line": 89
         }
       ],
       "directCallSites": [],
@@ -3359,7 +3359,7 @@
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 106
+          "line": 111
         }
       ],
       "directCallSites": [],
@@ -4334,6 +4334,14 @@
         {
           "file": "RebornPresentation.lua",
           "line": 51
+        },
+        {
+          "file": "WorldAnchors.lua",
+          "line": 61
+        },
+        {
+          "file": "WorldAnchors.lua",
+          "line": 62
         }
       ],
       "directCallSites": [],
@@ -4377,7 +4385,7 @@
         },
         {
           "file": "WorldAnchors.lua",
-          "line": 113
+          "line": 118
         }
       ],
       "directCallSites": [],

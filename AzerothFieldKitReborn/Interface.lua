@@ -386,7 +386,7 @@ local function BuildMarkerGallery(page,y)
  local M=FieldKitWorldMarkers
  local kinds={"boss","finalBoss","guardian","elite","cache","guardianLair","downedPartyMember"}
  local names={"Boss","Final boss","Guardian","Elite","Treasure","Spawn","Revive"}
- local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(720)
+ local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(920)
  local hint=T.Label(row,FieldKit_L("Choose an icon to preview and configure. Changes apply immediately."),0,0,560,38,13,T.muted)
  local tabs={};local selected="boss"
  local preview=CreateFrame("Frame",nil,row);preview:SetPoint("TOPLEFT",row,"TOPLEFT",8,-96);preview:SetWidth(156);preview:SetHeight(156)
@@ -421,11 +421,27 @@ local function BuildMarkerGallery(page,y)
   if lock then return end
   M.SetCategoryRange(selected,math.floor(this:GetValue()/5+0.5)*5);row.Refresh()
  end)
- local auraButton=T.Button(row,nil,"",0,456,166,30,function() M.SetAura(not M.GetAura());row.Refresh() end)
- local pulseButton=T.Button(row,nil,"",178,456,166,30,function() M.SetAuraPulse(not M.GetAuraPulse());row.Refresh() end)
- local intensity=T.Label(row,FieldKit_L("Aura intensity"),0,506,500,24,14,T.gold)
+ local anchorLabel=T.Label(row,"",0,456,500,24,14,T.gold)
+ local anchorSlider=CreateFrame("Slider","FieldKitMarkerAnchorSlider",row,"OptionsSliderTemplate")
+ anchorSlider:SetPoint("TOPLEFT",row,"TOPLEFT",8,-497);anchorSlider:SetHeight(18);anchorSlider:SetMinMaxValues(0,100);anchorSlider:SetValueStep(1)
+ local al=getglobal("FieldKitMarkerAnchorSliderLow");if al then al:SetText("0%") end
+ local ah=getglobal("FieldKitMarkerAnchorSliderHigh");if ah then ah:SetText("100%") end
+ local at=getglobal("FieldKitMarkerAnchorSliderText");if at then at:Hide() end
+ anchorSlider:SetScript("OnValueChanged",function() if lock then return end;M.SetAnchorHeight(selected,this:GetValue());row.Refresh() end)
+ local heightLabel=T.Label(row,"",0,556,500,24,14,T.gold)
+ local heightSlider=CreateFrame("Slider","FieldKitMarkerHeightSlider",row,"OptionsSliderTemplate")
+ heightSlider:SetPoint("TOPLEFT",row,"TOPLEFT",8,-597);heightSlider:SetHeight(18);heightSlider:SetMinMaxValues(0,3);heightSlider:SetValueStep(.05)
+ local hl=getglobal("FieldKitMarkerHeightSliderLow");if hl then hl:SetText("0 m") end
+ local hh=getglobal("FieldKitMarkerHeightSliderHigh");if hh then hh:SetText("3 m") end
+ local ht=getglobal("FieldKitMarkerHeightSliderText");if ht then ht:Hide() end
+ heightSlider:SetScript("OnValueChanged",function()
+  if lock then return end;M.SetCategoryHeight(selected,this:GetValue());row.Refresh()
+ end)
+ local auraButton=T.Button(row,nil,"",0,656,166,30,function() M.SetAura(not M.GetAura());row.Refresh() end)
+ local pulseButton=T.Button(row,nil,"",178,656,166,30,function() M.SetAuraPulse(not M.GetAuraPulse());row.Refresh() end)
+ local intensity=T.Label(row,FieldKit_L("Aura intensity"),0,706,500,24,14,T.gold)
  local auraName="FieldKitMarkerAuraSlider"
- local auraSlider=CreateFrame("Slider",auraName,row,"OptionsSliderTemplate");auraSlider:SetPoint("TOPLEFT",row,"TOPLEFT",8,-549);auraSlider:SetHeight(18);auraSlider:SetMinMaxValues(0,100);auraSlider:SetValueStep(5)
+ local auraSlider=CreateFrame("Slider",auraName,row,"OptionsSliderTemplate");auraSlider:SetPoint("TOPLEFT",row,"TOPLEFT",8,-749);auraSlider:SetHeight(18);auraSlider:SetMinMaxValues(0,100);auraSlider:SetValueStep(5)
  local lo=getglobal(auraName.."Low");if lo then lo:SetText("0%") end
  local hi=getglobal(auraName.."High");if hi then hi:SetText("100%") end
  local tx=getglobal(auraName.."Text");if tx then tx:Hide() end
@@ -433,10 +449,10 @@ local function BuildMarkerGallery(page,y)
   if lock then return end
   M.SetAuraIntensity(math.floor(this:GetValue()/5+0.5)*5/100);row.Refresh()
  end)
- local reviveName=T.Button(row,nil,"",0,642,166,30,function() M.SetReviveNames(not M.GetReviveNames());row.Refresh() end)
- local reviveDistance=T.Button(row,nil,"",178,642,166,30,function() M.SetReviveDistance(not M.GetReviveDistance());row.Refresh() end)
- local enable=T.Button(row,nil,"",0,600,166,30,function() if M.IsEnabled() then M.Disable() else M.Enable() end;row.Refresh() end)
- local hints=T.Button(row,nil,"",178,600,166,30,function() M.SetLairHints(not M.GetLairHints());row.Refresh() end)
+ local reviveName=T.Button(row,nil,"",0,842,166,30,function() M.SetReviveNames(not M.GetReviveNames());row.Refresh() end)
+ local reviveDistance=T.Button(row,nil,"",178,842,166,30,function() M.SetReviveDistance(not M.GetReviveDistance());row.Refresh() end)
+ local enable=T.Button(row,nil,"",0,800,166,30,function() if M.IsEnabled() then M.Disable() else M.Enable() end;row.Refresh() end)
+ local hints=T.Button(row,nil,"",178,800,166,30,function() M.SetLairHints(not M.GetLairHints());row.Refresh() end)
  FieldKit_RefreshLanguage(function()
   for i=1,table.getn(tabs) do if tabs[i] then FieldKit_Text(tabs[i],names[i]) end end
   FieldKit_Text(hint,"Choose an icon to preview and configure. Changes apply immediately.")
@@ -463,6 +479,11 @@ local function BuildMarkerGallery(page,y)
   else reviveName:Hide();reviveDistance:Hide() end
   FieldKit_Text(rangeLabel,"Marker visibility range: "..M.GetCategoryRange(selected).." yd")
   rangeSlider:SetValue(M.GetCategoryRange(selected))
+  local height=M.GetCategoryHeight(selected)
+  if height then
+   heightLabel:SetText(string.format(FieldKit_L("Extra height: %.2f m"),height));heightSlider:SetValue(height);heightLabel:Show();heightSlider:Show()
+   anchorLabel:SetText(string.format(FieldKit_L("Anchor height: %d%%"),M.GetAnchorHeight(selected)));anchorSlider:SetValue(M.GetAnchorHeight(selected));anchorLabel:Show();anchorSlider:Show()
+  else heightLabel:Hide();heightSlider:Hide();anchorLabel:Hide();anchorSlider:Hide() end
   FieldKit_Text(sizeLabel,"Icon size: "..M.GetCategoryScale(selected).."%")
   FieldKit_Text(intensity,"Aura intensity: "..math.floor(M.GetAuraIntensity()*100+0.5).."%")
   slider:SetValue(M.GetCategoryScale(selected));auraSlider:SetValue(M.GetAuraIntensity()*100)
@@ -479,9 +500,9 @@ local function BuildMarkerGallery(page,y)
    local b=tabs[i];b:ClearAllPoints();b:SetPoint("TOPLEFT",row,"TOPLEFT",math.mod(i-1,4)*(tw+4),-45-math.floor((i-1)/4)*34)
    b:SetWidth(tw);b.fieldkitLabel:SetWidth(tw-8);T.Update(b)
   end
-  slider:SetWidth(w-20);rangeSlider:SetWidth(w-20);auraSlider:SetWidth(w-20)
+  slider:SetWidth(w-20);rangeSlider:SetWidth(w-20);heightSlider:SetWidth(w-20);heightLabel:SetWidth(w);anchorSlider:SetWidth(w-20);anchorLabel:SetWidth(w);auraSlider:SetWidth(w-20)
  end
- row.Refresh();table.insert(page.flow,{frame=row,y=y});return y+730
+ row.Refresh();table.insert(page.flow,{frame=row,y=y});return y+930
 end
 
 -- Active profile highlight: gold borders resize with their owning frame

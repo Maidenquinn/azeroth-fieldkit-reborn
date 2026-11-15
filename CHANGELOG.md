@@ -1,3 +1,10 @@
+# 0.1.0-reborn.35 — Stable world markers and height controls
+
+- Connect world markers to Reborn's public anchor contract and recover normal-rank guardians without marking ordinary mobs.
+- Add per-category anchor height and extra height in metres, saved per HUD profile. Default calibration is 35% plus 0.5 m; project in native world space.
+- Preserve accepted chest spacing, distance/category filters and theme support. Copy native catalogue entries before attaching height metadata.
+- Maintainer accepted the final in-game recipe on 2026-11-15; full automated checks accompany the stable release.
+
 # 0.1.0-reborn.34 — Place creature icons above their native overhead anchor
 
 - Remove the foot-relative height cap that cut through large guardians and bosses. Keep the glyph bottom eight screen pixels above the native overhead point.

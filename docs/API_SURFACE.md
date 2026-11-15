@@ -1,3 +1,5 @@
+Version reborn.35 reads relative overhead height through public AZS_UnitWorldPosition and attaches it only to a copied addon-owned anchor entry. Calibrated creature anchor percentages and metre offsets are projected as position+Z offset in native yards; profile preferences are bounded, localized and live. Chest placement and the original v1 protocol remain unchanged.
+
 Version reborn.34 keeps native overhead anchors for creature glyphs and applies bottom-edge screen-pixel clearance. It removes the foot-relative cap/ground fallback; chest spacing and full-catalogue guardian discovery are unchanged.
 
 Version reborn.33 requests enemy anchors only to make Reborn enumerate normal-rank guardians, then excludes ordinary enemies from the retained catalogue. Native ground/head projections provide bounded screen-space marker placement. No native files or coordinates are modified.

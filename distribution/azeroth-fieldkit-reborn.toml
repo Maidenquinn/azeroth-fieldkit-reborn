@@ -14,5 +14,5 @@ asset = "AzerothFieldKitReborn-*.zip"
 
 [reborn]
 status = "works"
-tested = "0.6.5 / 0.1.0-reborn.31"
-notes = "Maintainer accepted the 0.1.0-reborn.31 gameplay recipe on client 0.6.5 (2026-11-15), with Elwynn and native-style presets. Automated API, settings and profile tests pass. Requires the game's bundled AzerothSurvivorsAPI. Co-op and other resolutions are not independently certified. See repository notices for inherited rights."
+tested = "0.6.5 / 0.1.0-reborn.35"
+notes = "Maintainer accepted the 0.1.0-reborn.35 gameplay recipe on client 0.6.5 (2026-11-15), including world-marker placement and height controls with native/illustrated layouts. Automated API, settings and profile tests pass. Requires the game's bundled AzerothSurvivorsAPI. Co-op and other resolutions are not independently certified. See repository notices for inherited rights."

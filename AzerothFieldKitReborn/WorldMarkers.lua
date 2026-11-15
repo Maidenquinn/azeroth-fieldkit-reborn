@@ -57,6 +57,8 @@ local downedSnapshotAge=0
 local DOWNED_SNAPSHOT_TTL=2.5
 local categoryEnabled={boss=true,finalBoss=true,elite=true,guardian=true,cache=true,guardianLair=true,downedPartyMember=true}
 local categoryScale={boss=100,finalBoss=100,elite=100,guardian=100,cache=100,guardianLair=100,downedPartyMember=100}
+local categoryHeight={boss=.5,finalBoss=.5,elite=.5,guardian=.5}
+local categoryAnchor={boss=35,finalBoss=35,elite=35,guardian=35}
 local function db()
  if type(FieldKitRebornDB)~="table" then return nil end
  if type(FieldKitRebornDB.worldMarkerSettings)~="table" then FieldKitRebornDB.worldMarkerSettings={} end
@@ -64,11 +66,15 @@ local function db()
 end
 local function save()
  local d=db();if not d then return end
+ d.heights=categoryHeight;d.anchorHeights=categoryAnchor
  d.enabled=wantedEnabled;d.aura=auraEnabled;d.pulse=auraPulse;d.intensity=auraIntensity
  d.reviveRing=reviveRingEnabled;d.hints=showLairHints;d.reviveNames=showReviveNames;d.reviveDistance=showReviveDistance;d.categories=categoryEnabled;d.scales=categoryScale;d.ranges=categoryRange
 end
 local function loadSettings()
  local d=db();if not d then return end
+ categoryHeight={boss=.5,finalBoss=.5,elite=.5,guardian=.5};categoryAnchor={boss=35,finalBoss=35,elite=35,guardian=35}
+ if type(d.heights)=="table" then for kind in pairs(categoryHeight) do categoryHeight[kind]=FieldKit.Number(d.heights[kind],.5,0,3) end end
+ if type(d.anchorHeights)=="table" then for kind in pairs(categoryAnchor) do categoryAnchor[kind]=FieldKit.Number(d.anchorHeights[kind],35,0,100) end end
  wantedEnabled=d.enabled~=false
  if type(d.aura)=="boolean" then auraEnabled=d.aura end
  if type(d.pulse)=="boolean" then auraPulse=d.pulse end
@@ -175,6 +181,9 @@ local function onFrame(entries,reason)
    updateAura(f)
    local req={anchorId=e.anchorId,attachment=(e.kind=="cache" or e.kind=="guardianLair") and "position" or "overhead"}
    if req.attachment=="position" then req.offset={z=2} end
+   if A and A.IsReborn and A.IsReborn() and categoryHeight[e.kind]~=nil and e.fieldkitHeight then
+    req.attachment="position";req.offset={z=e.fieldkitHeight*categoryAnchor[e.kind]/100+categoryHeight[e.kind]/.9144}
+   end
    table.insert(requests,req);table.insert(frames,f);table.insert(requestKinds,e.kind)
   end
  end
@@ -313,6 +322,18 @@ function M.GetCategoryScale(kind) return categoryScale[kind] or 100 end
 function M.SetCategoryScale(kind,value)
  if categoryScale[kind]==nil then return end
  categoryScale[kind]=math.max(60,math.min(150,tonumber(value) or 100));save()
+end
+function M.GetAnchorHeight(kind) return categoryAnchor[kind] end
+function M.SetAnchorHeight(kind,value)
+ if categoryAnchor[kind]==nil then return nil end
+ local n=FieldKit.Number(value,nil,0,100);if not n then return categoryAnchor[kind] end
+ categoryAnchor[kind]=math.floor(n+.5);save();return categoryAnchor[kind]
+end
+function M.GetCategoryHeight(kind) return categoryHeight[kind] end
+function M.SetCategoryHeight(kind,value)
+ if categoryHeight[kind]==nil then return nil end
+ local n=FieldKit.Number(value,nil,0,3);if not n then return categoryHeight[kind] end
+ categoryHeight[kind]=math.floor(n*20+.5)/20;save();return categoryHeight[kind]
 end
 function M.GetCategoryRange(kind) return categoryRange[kind] or 130 end
 function M.SetCategoryRange(kind,value)

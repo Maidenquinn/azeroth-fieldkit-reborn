@@ -1,6 +1,6 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.34",
+  "candidate": "0.1.0-reborn.35",
   "runtimeModules": 58,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
@@ -8,7 +8,7 @@
   "files": {
     "Runtime.lua": {
       "bytes": 5207,
-      "sha256": "1e0a7c921cf82864fa4f30cf4cd6682165cd4e5f2f0a4e1e739a038b8e595a2c",
+      "sha256": "2ac78f02c2ba897d110371187a6c5d0d69a7a1588b15a5f8a2fe35b9058aaab0",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -686,8 +686,8 @@
       "literalEvents": []
     },
     "InterfaceStrings.lua": {
-      "bytes": 50940,
-      "sha256": "91d476e4461831aefe9e4f1baac7c6aefcfb3b9ed71935ad6c386b73e3a4f44d",
+      "bytes": 51061,
+      "sha256": "e72cadd74562bd3dae3799f0482b0310a0f5b4f801ccdbb2ea23f57f775fc74e",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -2341,8 +2341,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 84842,
-      "sha256": "edc1e7363c9d63095ccba4a42664d796ff2802a8ef50a98e3a4d4d616e9f7d9c",
+      "bytes": 86833,
+      "sha256": "7cc27bece2809583830a382a7b70992c36eb665e937219ee3e07182a2966b9ad",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -2390,103 +2390,103 @@
         },
         {
           "name": "row.Refresh",
-          "line": 445
+          "line": 461
         },
         {
           "name": "ProfileActiveBorder",
-          "line": 489
+          "line": 510
         },
         {
           "name": "BuildProfileManager",
-          "line": 521
+          "line": 542
         },
         {
           "name": "row.Refresh",
-          "line": 607
+          "line": 628
         },
         {
           "name": "row.CloseEditors",
-          "line": 681
+          "line": 702
         },
         {
           "name": "U.EssentialHud",
-          "line": 695
+          "line": 716
         },
         {
           "name": "BuildHome",
-          "line": 710
+          "line": 731
         },
         {
           "name": "U.SelectWindowTab",
-          "line": 760
+          "line": 781
         },
         {
           "name": "U.BuildPage",
-          "line": 774
+          "line": 795
         },
         {
           "name": "U.UpdateRunContext",
-          "line": 850
+          "line": 871
         },
         {
           "name": "U.UpdateSharingStatus",
-          "line": 857
+          "line": 878
         },
         {
           "name": "U.Refresh",
-          "line": 860
+          "line": 881
         },
         {
           "name": "U.Select",
-          "line": 932
+          "line": 953
         },
         {
           "name": "U.ApplyPanelAppearance",
-          "line": 972
+          "line": 993
         },
         {
           "name": "U.Reflow",
-          "line": 977
+          "line": 998
         },
         {
           "name": "U.SetLayoutEditing",
-          "line": 1082
+          "line": 1103
         },
         {
           "name": "U.StartLayout",
-          "line": 1096
+          "line": 1117
         },
         {
           "name": "U.ResetPositions",
-          "line": 1101
+          "line": 1122
         },
         {
           "name": "U.UndoPositions",
-          "line": 1111
+          "line": 1132
         },
         {
           "name": "U.Build",
-          "line": 1125
+          "line": 1146
         },
         {
           "name": "U.LayoutNavigation",
-          "line": 1194
+          "line": 1215
         },
         {
           "name": "U.EnsureProfilePreviewBar",
-          "line": 1273
+          "line": 1294
         },
         {
           "name": "U.UpdateProfilePreviewBar",
-          "line": 1299
+          "line": 1320
         },
         {
           "name": "U.PreviewDefaults",
-          "line": 1305
+          "line": 1326
         },
         {
           "name": "U.Toggle",
-          "line": 1324
+          "line": 1345
         }
       ],
       "literalEvents": []
@@ -3002,8 +3002,8 @@
       "literalEvents": []
     },
     "WorldAnchors.lua": {
-      "bytes": 6728,
-      "sha256": "bdd3b9d204f80f16e3f7b9279f78bef8e722cfe741ec80fbc47858526fe75610",
+      "bytes": 7133,
+      "sha256": "f5bd32198d1c369720cb8e53c0d8a3f66d399d23bbd8aaa0fcc8b2d86dd30887",
       "namedFunctions": [
         {
           "name": "Context",
@@ -3047,34 +3047,34 @@
         },
         {
           "name": "M.Project",
-          "line": 77
+          "line": 82
         },
         {
           "name": "Frame",
-          "line": 94
+          "line": 99
         },
         {
           "name": "M.Enable",
-          "line": 101
+          "line": 106
         },
         {
           "name": "M.Disable",
-          "line": 111
-        },
-        {
-          "name": "M.IsEnabled",
           "line": 116
         },
         {
+          "name": "M.IsEnabled",
+          "line": 121
+        },
+        {
           "name": "Report",
-          "line": 132
+          "line": 137
         }
       ],
       "literalEvents": []
     },
     "WorldMarkers.lua": {
-      "bytes": 17649,
-      "sha256": "e59d788f1447f99f5b645b0071e93866e458def2d93b0599cb43b67b7bd63db3",
+      "bytes": 19120,
+      "sha256": "055e04dfca362144c477546beba9809eda7357cef7671f0ee509c8356246c4db",
       "namedFunctions": [
         {
           "name": "updateAura",
@@ -3082,147 +3082,163 @@
         },
         {
           "name": "db",
-          "line": 60
+          "line": 62
         },
         {
           "name": "save",
-          "line": 65
+          "line": 67
         },
         {
           "name": "loadSettings",
-          "line": 70
+          "line": 73
         },
         {
           "name": "updateDowned",
-          "line": 91
+          "line": 97
         },
         {
           "name": "newIcon",
-          "line": 106
+          "line": 112
         },
         {
           "name": "acquireGroundRing",
-          "line": 136
+          "line": 142
         },
         {
           "name": "recycle",
-          "line": 149
-        },
-        {
-          "name": "clear",
           "line": 155
         },
         {
+          "name": "clear",
+          "line": 161
+        },
+        {
           "name": "onFrame",
-          "line": 158
+          "line": 164
         },
         {
           "name": "M.Enable",
-          "line": 258
-        },
-        {
-          "name": "M.Disable",
-          "line": 266
-        },
-        {
-          "name": "M.IsEnabled",
           "line": 267
         },
         {
+          "name": "M.Disable",
+          "line": 275
+        },
+        {
+          "name": "M.IsEnabled",
+          "line": 276
+        },
+        {
           "name": "M.SetLairHints",
-          "line": 268
+          "line": 277
         },
         {
           "name": "M.GetLairHints",
-          "line": 269
+          "line": 278
         },
         {
           "name": "M.SetAura",
-          "line": 270
-        },
-        {
-          "name": "M.SetAuraPulse",
-          "line": 271
-        },
-        {
-          "name": "M.SetAuraIntensity",
-          "line": 272
-        },
-        {
-          "name": "M.GetReviveNames",
           "line": 279
         },
         {
-          "name": "M.SetReviveNames",
+          "name": "M.SetAuraPulse",
           "line": 280
         },
         {
-          "name": "M.GetReviveDistance",
+          "name": "M.SetAuraIntensity",
           "line": 281
         },
         {
+          "name": "M.GetReviveNames",
+          "line": 288
+        },
+        {
+          "name": "M.SetReviveNames",
+          "line": 289
+        },
+        {
+          "name": "M.GetReviveDistance",
+          "line": 290
+        },
+        {
           "name": "M.SetReviveDistance",
-          "line": 282
+          "line": 291
         },
         {
           "name": "M.SetReviveRing",
-          "line": 294
-        },
-        {
-          "name": "M.GetReviveRing",
           "line": 303
         },
         {
-          "name": "M.GetAura",
-          "line": 304
-        },
-        {
-          "name": "M.GetAuraPulse",
-          "line": 305
-        },
-        {
-          "name": "M.GetAuraIntensity",
-          "line": 306
-        },
-        {
-          "name": "M.GetCategoryEnabled",
-          "line": 307
-        },
-        {
-          "name": "M.SetCategoryEnabled",
-          "line": 308
-        },
-        {
-          "name": "M.GetCategoryScale",
+          "name": "M.GetReviveRing",
           "line": 312
         },
         {
-          "name": "M.SetCategoryScale",
+          "name": "M.GetAura",
           "line": 313
         },
         {
-          "name": "M.GetCategoryRange",
+          "name": "M.GetAuraPulse",
+          "line": 314
+        },
+        {
+          "name": "M.GetAuraIntensity",
+          "line": 315
+        },
+        {
+          "name": "M.GetCategoryEnabled",
+          "line": 316
+        },
+        {
+          "name": "M.SetCategoryEnabled",
           "line": 317
         },
         {
-          "name": "M.SetCategoryRange",
-          "line": 318
+          "name": "M.GetCategoryScale",
+          "line": 321
         },
         {
-          "name": "M.GetTexture",
-          "line": 325
+          "name": "M.SetCategoryScale",
+          "line": 322
         },
         {
-          "name": "M.GetAuraTexture",
+          "name": "M.GetAnchorHeight",
           "line": 326
         },
         {
+          "name": "M.SetAnchorHeight",
+          "line": 327
+        },
+        {
+          "name": "M.GetCategoryHeight",
+          "line": 332
+        },
+        {
+          "name": "M.SetCategoryHeight",
+          "line": 333
+        },
+        {
+          "name": "M.GetCategoryRange",
+          "line": 338
+        },
+        {
+          "name": "M.SetCategoryRange",
+          "line": 339
+        },
+        {
+          "name": "M.GetTexture",
+          "line": 346
+        },
+        {
+          "name": "M.GetAuraTexture",
+          "line": 347
+        },
+        {
           "name": "M.ReloadProfileSettings",
-          "line": 330
+          "line": 351
         },
         {
           "name": "report",
-          "line": 346
+          "line": 367
         }
       ],
       "literalEvents": [
@@ -6742,20 +6758,20 @@
     }
   },
   "inGameTest": false,
-  "approval": "development candidate; not accepted for publication",
+  "approval": "maintainer accepted for publication; not independently certified",
   "publication": {
-    "version": "0.1.0-reborn.34",
-    "maintainerAcceptedForPublication": false,
-    "maintainerAcceptanceDate": null,
+    "version": "0.1.0-reborn.35",
+    "maintainerAcceptedForPublication": true,
+    "maintainerAcceptanceDate": "2026-11-15",
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
     "inGameTestByAgent": false,
-    "githubPrerelease": true,
+    "githubPrerelease": false,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
-    "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Installed native anchor fixture checks clearance above a large overhead point, off-screen behaviour, guardian discovery and unchanged chest spacing. CI fixture checks exact bottom-edge clearance at two effective world scales, with/without themes in French/English. Full runtime/settings/API regressions pass. Live-client visual confirmation of .34 is pending; stable .31 remains available."
+    "maintainerInGameTestingReported": true,
+    "inGameTestScope": "Full runtime/settings/locale/API tests; installed native anchor catalogue and projection; guardian enumeration, creature height/metric projection, unchanged chest clearance, finite setting bounds and independent profile restoration. The maintainer confirmed final live gameplay acceptance and authorized stable release. The agent's visual check was interrupted by the physical Escape key; it is not recorded as completed agent visual validation. Co-op and other resolutions are not independently certified."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,
