@@ -1,3 +1,5 @@
+Version reborn.34 keeps native overhead anchors for creature glyphs and applies bottom-edge screen-pixel clearance. It removes the foot-relative cap/ground fallback; chest spacing and full-catalogue guardian discovery are unchanged.
+
 Version reborn.33 requests enemy anchors only to make Reborn enumerate normal-rank guardians, then excludes ordinary enemies from the retained catalogue. Native ground/head projections provide bounded screen-space marker placement. No native files or coordinates are modified.
 
 Version reborn.32 supports the installed Reborn world-anchor contract: four public catalogue/projection/handler operations, snapshotId and frameId. Legacy capability/stream fields remain mandatory only on the original v1 protocol. Reborn projection is restricted to the native post-camera callback; native run/zone boundaries invalidate cached marker state.

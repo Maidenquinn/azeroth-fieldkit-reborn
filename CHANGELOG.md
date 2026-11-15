@@ -1,3 +1,9 @@
+# 0.1.0-reborn.34 — Place creature icons above their native overhead anchor
+
+- Remove the foot-relative height cap that cut through large guardians and bosses. Keep the glyph bottom eight screen pixels above the native overhead point.
+- Remove the ground/body fallback and extra projection requests. Preserve normal-rank guardian discovery and the accepted chest spacing.
+- Verify exact clearance across effective scales, theme/locale combinations and the installed anchor API. Live visual confirmation pending.
+
 # 0.1.0-reborn.33 — Guardian markers and spacing
 
 - Recover normal-rank guardians from Reborn's full anchor catalogue while excluding ordinary enemy markers.

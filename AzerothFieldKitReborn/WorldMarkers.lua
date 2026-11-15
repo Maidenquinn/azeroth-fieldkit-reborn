@@ -225,19 +225,10 @@ local function onFrame(entries,reason)
   end
  end
  if table.getn(requests)==0 then return end
- -- Reborn's special-only enumeration can omit normal-rank guardians; the anchor adapter
- -- requests the full catalogue and retains only special kinds. Compare head and ground
- -- projections to bound oversized model overhead points in screen pixels.
- local groundIndices={};local reborn=A and A.IsReborn and A.IsReborn()
- if reborn then
-  for i=1,table.getn(frames) do
-   local kind=requestKinds[i]
-   if kind=="boss" or kind=="finalBoss" or kind=="guardian" or kind=="elite" then
-    table.insert(requests,{anchorId=requests[i].anchorId,attachment="position"})
-    groundIndices[i]=table.getn(requests)
-   end
-  end
- end
+ -- Creature glyphs sit above their native overhead anchor, never at a fixed height
+ -- from the feet: that height cuts through larger models. The glyph's bottom,
+ -- rather than its centre, gets a constant screen-pixel clearance.
+ local reborn=A and A.IsReborn and A.IsReborn()
  local projected=nil
  if A and type(A.Project)=="function" then projected=A.Project(requests) end
  if not projected or type(projected.entries)~="table" then
@@ -246,9 +237,6 @@ local function onFrame(entries,reason)
  end
  for i=1,table.getn(frames) do
   local f=frames[i];local e=projected.entries[i]
-  local ground=groundIndices[i] and projected.entries[groundIndices[i]]
-  local fallback=ground and ground.state=="onScreen" and (not e or e.state~="onScreen")
-  if fallback then e=ground end
   if e and e.state=="onScreen" and type(e.x)=="number" and type(e.y)=="number"
      and e.x==e.x and e.y==e.y and math.abs(e.x)<100000000 and math.abs(e.y)<100000000 then
    if not e.playerDistance or e.playerDistance<=(categoryRange[requestKinds[i]] or 130) then
@@ -257,12 +245,9 @@ local function onFrame(entries,reason)
     if reborn then
      local scale=WorldFrame.GetEffectiveScale and WorldFrame:GetEffectiveScale() or 1;scale=math.max(.1,scale)
      if requestKinds[i]=="cache" then lift=16/scale end
-     if fallback then y=y+32/scale end
-     local g=ground
-     if g and g.state=="onScreen" and type(g.x)=="number" and type(g.y)=="number" and g.x==g.x and g.y==g.y and math.abs(g.x)<100000000 and math.abs(g.y)<100000000 then
-      local dx,dy=x-g.x,y-g.y;local length=math.sqrt(dx*dx+dy*dy)
-      local ratio=length>48/scale and (48/scale)/length or 1
-      x,y=g.x+dx*ratio,g.y+dy*ratio;lift=f:GetHeight()/2+4/scale
+     local kind=requestKinds[i]
+     if kind=="boss" or kind=="finalBoss" or kind=="guardian" or kind=="elite" then
+      lift=f:GetHeight()/2+8/scale
      end
     end
     f:ClearAllPoints();f:SetPoint("CENTER",WorldFrame,"BOTTOMLEFT",x,y+lift);f:Show()

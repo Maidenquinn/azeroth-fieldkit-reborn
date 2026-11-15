@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.33",
+  "version": "0.1.0-reborn.34",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.33",
+    "version": "0.1.0-reborn.34",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Installed Anchors.lua fixture reproduces normal-rank guardians omitted by special-only enumeration, excludes ordinary enemies, bounds exaggerated model height, keeps markers when only the head leaves the screen, checks chest spacing and off-screen/zone cleanup. Full runtime, theme/locale marker matrix, settings and installed API regressions pass. No live-client visual acceptance of .33 is claimed; stable .31 remains available."
+    "inGameTestScope": "Installed native anchor fixture checks clearance above a large overhead point, off-screen behaviour, guardian discovery and unchanged chest spacing. CI fixture checks exact bottom-edge clearance at two effective world scales, with/without themes in French/English. Full runtime/settings/API regressions pass. Live-client visual confirmation of .34 is pending; stable .31 remains available."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "8c76d0c1436f5eaf3ab6221c05861ab76c10e2edc5b3104eb1507b8dd16335c3"
+      "sha256": "1e0a7c921cf82864fa4f30cf4cd6682165cd4e5f2f0a4e1e739a038b8e595a2c"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -275,7 +275,7 @@
     "WorldMarkers.lua": {
       "maxUpvalues": 19,
       "functions": 45,
-      "sha256": "54db90130c1aad830afecff5bf7d280427214b2d3507961e8596d81ba54b300e"
+      "sha256": "e59d788f1447f99f5b645b0071e93866e458def2d93b0599cb43b67b7bd63db3"
     },
     "CombatText.lua": {
       "maxUpvalues": 12,

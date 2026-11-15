@@ -3,7 +3,7 @@
   "liveGameValidation": false,
   "runtimeModules": 58,
   "runtimeSHA256": {
-    "Runtime.lua": "8c76d0c1436f5eaf3ab6221c05861ab76c10e2edc5b3104eb1507b8dd16335c3",
+    "Runtime.lua": "1e0a7c921cf82864fa4f30cf4cd6682165cd4e5f2f0a4e1e739a038b8e595a2c",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -51,7 +51,7 @@
     "FieldKit.lua": "f8869c235216249529568a47afcd1f1875ca82db57cbd37c133b853256cae973",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "bdd3b9d204f80f16e3f7b9279f78bef8e722cfe741ec80fbc47858526fe75610",
-    "WorldMarkers.lua": "54db90130c1aad830afecff5bf7d280427214b2d3507961e8596d81ba54b300e",
+    "WorldMarkers.lua": "e59d788f1447f99f5b645b0071e93866e458def2d93b0599cb43b67b7bd63db3",
     "CombatText.lua": "6b0234bb4adc24fa588e4faa4cf72f117bc96a060853cde49bb834f0605fbd64",
     "CombatOptions.lua": "0a1c450585b3bed496b07fe8e635d0860ffed94c15f98cb225d365d16f6150d5",
     "CopyLog.lua": "ced8dba7c9b6182eb6e81c2fa94a52ff79e1b8fdcf9dc769ece3357dea3eb625",

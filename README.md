@@ -8,7 +8,7 @@ Without an illustrated theme, cards use the native dark presentation. Resource c
 
 For 0.6.5: **/fieldkit → Interface → Combat meter → Recent damage and healing**, then choose **5–120 seconds**. Recent mode is off by default and saved per HUD profile. Hover Statistics for native jewelry/DoT contributions; select DoT values in the Statistics picker.
 
-Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.33** is a world-marker fix candidate; stable .31 remains available.
+Independent FieldKit adaptation for **Azeroth Survivors Reborn**, targeting client **0.6.5**. Version **0.1.0-reborn.34** is a world-marker fix candidate; stable .31 remains available.
 
 New installations start with the maintainer-approved Elwynn profile in slot 1; slot 2 contains the matching native-style layout. Both presets include the approved 70% opacity, sizes, scales and positions. Existing saved settings are preserved.
 

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.33",
+  "version": "0.1.0-reborn.34",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Installed Anchors.lua fixture reproduces normal-rank guardians omitted by special-only enumeration, excludes ordinary enemies, bounds exaggerated model height, keeps markers when only the head leaves the screen, checks chest spacing and off-screen/zone cleanup. Full runtime, theme/locale marker matrix, settings and installed API regressions pass. No live-client visual acceptance of .33 is claimed; stable .31 remains available."
+  "inGameTestScope": "Installed native anchor fixture checks clearance above a large overhead point, off-screen behaviour, guardian discovery and unchanged chest spacing. CI fixture checks exact bottom-edge clearance at two effective world scales, with/without themes in French/English. Full runtime/settings/API regressions pass. Live-client visual confirmation of .34 is pending; stable .31 remains available."
 }

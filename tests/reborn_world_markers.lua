@@ -24,12 +24,12 @@ for _,language in ipairs({"en","fr"}) do for _,themed in ipairs({false,true}) do
  local shown=0;for _,f in ipairs(objects) do if f.markerKind=="elite" and f:IsShown() then shown=shown+1 end end
  assert(shown==2,"Reborn marker missing with/without theme")
  for _,scale in ipairs({1,.5}) do
-  WorldFrame:SetScale(scale);handler()
+  WorldFrame:SetScale(scale);WorldFrame.GetEffectiveScale=function() return scale end;handler()
   for _,f in ipairs(objects) do if f.markerKind=="elite" and f:IsShown() then
-   local _,_,_,_,y=f:GetPoint();assert(y<=200+48/scale+f:GetHeight()/2+4/scale,"Marker lift is not bounded in screen pixels")
+   local _,_,_,_,y=f:GetPoint();assert(math.abs((y-f:GetHeight()/2-900)*scale-8)<.001,"Glyph bottom does not clear the native head by eight screen pixels")
   end end
  end
- WorldFrame:SetScale(1)
+ WorldFrame:SetScale(1);WorldFrame.GetEffectiveScale=nil
  M.SetCategoryRange("elite",10);handler()
  for _,f in ipairs(objects) do if f.markerKind=="elite" then assert(not f:IsShown()) end end
  M.SetCategoryRange("elite",130);M.Disable();A.Disable();calls=0;assert(not handler)

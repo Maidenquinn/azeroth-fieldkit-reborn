@@ -25,11 +25,11 @@ for _,kind in ipairs({"boss","guardian","cache"}) do
  assert(found,"Installed native category missing: "..kind)
 end
 local _,relative,_,mx,my=marker:GetPoint();assert(relative==WorldFrame)
-assert(my<=600+48+marker:GetHeight()/2+4,"Oversized overhead point left marker too high")
+assert(my-marker:GetHeight()/2==1100+8,"Large creature marker was clamped into its body instead of clearing its overhead anchor")
 for _,f in ipairs(objects) do if f.markerKind=="cache" and f:IsShown() then
  local _,_,_,_,cy=f:GetPoint();assert(cy==620+16,"Chest marker lacks its small screen-space gap")
 end end
-headVisible=false;AZS_OnWorldProjected();assert(marker:IsShown(),"Visible guardian lost its marker when oversized head left the screen")
+headVisible=false;AZS_OnWorldProjected();assert(not marker:IsShown(),"Off-screen head was replaced by a misleading marker inside the body")
 headVisible=true
 onScreen=false;AZS_OnWorldProjected();assert(not marker:IsShown(),"Off-screen native marker stayed visible")
 onScreen=true;AZS_OnWorldProjected();assert(marker:IsShown())
