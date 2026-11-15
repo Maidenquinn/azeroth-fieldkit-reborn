@@ -60,8 +60,8 @@
       "literalEvents": []
     },
     "Reborn.lua": {
-      "bytes": 14088,
-      "sha256": "c4947db795e280337e9ecafd795d24668da22cf6e3f3cfcba3e6cbbfabf9e8f1",
+      "bytes": 14240,
+      "sha256": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c",
       "namedFunctions": [
         {
           "name": "R.ActionButton",
@@ -88,64 +88,68 @@
           "line": 55
         },
         {
-          "name": "R.BossProgress",
+          "name": "R.IsEndless",
           "line": 77
         },
         {
+          "name": "R.BossProgress",
+          "line": 81
+        },
+        {
           "name": "R.EventCurrency",
-          "line": 91
+          "line": 95
         },
         {
           "name": "R.UpdateRunDetails",
-          "line": 99
-        },
-        {
-          "name": "R.Capabilities",
           "line": 103
         },
         {
+          "name": "R.Capabilities",
+          "line": 107
+        },
+        {
           "name": "R.SupportsHealing",
-          "line": 108
+          "line": 112
         },
         {
           "name": "R.Icon",
-          "line": 115
+          "line": 119
         },
         {
           "name": "R.Localize",
-          "line": 122
+          "line": 126
         },
         {
           "name": "R.SpellAlias",
-          "line": 129
+          "line": 133
         },
         {
           "name": "R.DisplayName",
-          "line": 148
+          "line": 152
         },
         {
           "name": "R.ZoneName",
-          "line": 182
+          "line": 186
         },
         {
           "name": "R.Spell",
-          "line": 195
+          "line": 199
         },
         {
           "name": "R.Gear",
-          "line": 212
+          "line": 216
         },
         {
           "name": "R.PlayerBuffs",
-          "line": 236
+          "line": 240
         },
         {
           "name": "Add",
-          "line": 238
+          "line": 242
         },
         {
           "name": "R.Portrait",
-          "line": 286
+          "line": 290
         }
       ],
       "literalEvents": []
@@ -196,8 +200,8 @@
       ]
     },
     "RebornHUD.lua": {
-      "bytes": 9587,
-      "sha256": "dd028b7ef78266d0a6d7221cd1b7c0dcdb5b2da7f23b50c72b281e164a9e0b04",
+      "bytes": 9693,
+      "sha256": "2cf597b35ef36ec73e8b8a33cd2baea8c4be42343f5d19d942788866c647cd51",
       "namedFunctions": [
         {
           "name": "R.ThinMeter",
@@ -515,8 +519,8 @@
       "literalEvents": []
     },
     "Config.lua": {
-      "bytes": 11882,
-      "sha256": "05206b69fbc086950b21acfa03df4749fc6b412837059844d8e8ecaf58a6744f",
+      "bytes": 11931,
+      "sha256": "76c39a31c3e50bcb00ef201c9c16eb6a0956aabce456779cc33171ffae6c4a28",
       "namedFunctions": [
         {
           "name": "FieldKit.InitializeSettings",
@@ -672,8 +676,8 @@
       "literalEvents": []
     },
     "InterfaceStrings.lua": {
-      "bytes": 48622,
-      "sha256": "a479b030d26bdfccffd231ccc346f396b8226cb3ba208536042cdc66b5186ede",
+      "bytes": 50246,
+      "sha256": "44dc19204ad1dbf14411e305422e1e6f1369aef5b398e663fe38f9704ebe428d",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -1956,8 +1960,8 @@
       "literalEvents": []
     },
     "NativeTools.lua": {
-      "bytes": 15592,
-      "sha256": "a2800ef4d05e8c32c3d1a6d1a56d4ad348506b1adca707f1f7340e3befba45be",
+      "bytes": 16627,
+      "sha256": "919209e4641eaf5f0c5fb6cad349d412f3e9db29554559718e0f6ae76011af50",
       "namedFunctions": [
         {
           "name": "Count",
@@ -1989,35 +1993,39 @@
         },
         {
           "name": "T.BossValue",
-          "line": 197
+          "line": 194
         },
         {
           "name": "T.Reminders",
-          "line": 202
+          "line": 199
         },
         {
           "name": "T.Push",
-          "line": 226
+          "line": 223
         },
         {
           "name": "T.Banner",
-          "line": 232
+          "line": 229
+        },
+        {
+          "name": "T.ReleaseBanners",
+          "line": 240
         },
         {
           "name": "T.Subscription",
-          "line": 241
+          "line": 246
         },
         {
           "name": "T.Warnings",
-          "line": 248
+          "line": 267
         },
         {
           "name": "T.Update",
-          "line": 274
+          "line": 293
         },
         {
           "name": "T.Diagnostic",
-          "line": 287
+          "line": 306
         }
       ],
       "literalEvents": []
@@ -2273,8 +2281,8 @@
       "literalEvents": []
     },
     "OptionsSchema.lua": {
-      "bytes": 8472,
-      "sha256": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07",
+      "bytes": 8711,
+      "sha256": "522e82940bb25a5915f7d632d10c64acb8ef5a760e61818a5ab1e6103d91844e",
       "namedFunctions": [
         {
           "name": "FieldKit.CreateOptionsSchema",
@@ -2315,8 +2323,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 84181,
-      "sha256": "171d04189922b07d05f4fdbed60ae12e56393894232637323ad8a58ab656f1e5",
+      "bytes": 84489,
+      "sha256": "8bddc58ef258a33b55add2dd9348fee19b546c8d8fd70c4b1c3ebd9249b9bf8c",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -2328,146 +2336,146 @@
         },
         {
           "name": "U.HideTip",
-          "line": 258
+          "line": 260
         },
         {
           "name": "U.Tip",
-          "line": 261
+          "line": 263
         },
         {
           "name": "U.PopupLayer",
-          "line": 269
+          "line": 271
         },
         {
           "name": "U.Choice",
-          "line": 274
+          "line": 276
         },
         {
           "name": "U.CloseMenus",
-          "line": 322
+          "line": 324
         },
         {
           "name": "U.Wheel",
-          "line": 327
+          "line": 329
         },
         {
           "name": "Checkbox",
-          "line": 338
+          "line": 340
         },
         {
           "name": "Slider",
-          "line": 356
+          "line": 358
         },
         {
           "name": "BuildMarkerGallery",
-          "line": 381
+          "line": 383
         },
         {
           "name": "row.Refresh",
-          "line": 441
+          "line": 443
         },
         {
           "name": "ProfileActiveBorder",
-          "line": 485
+          "line": 487
         },
         {
           "name": "BuildProfileManager",
-          "line": 517
+          "line": 519
         },
         {
           "name": "row.Refresh",
-          "line": 603
+          "line": 605
         },
         {
           "name": "row.CloseEditors",
-          "line": 677
+          "line": 679
         },
         {
           "name": "U.EssentialHud",
-          "line": 691
+          "line": 693
         },
         {
           "name": "BuildHome",
-          "line": 706
+          "line": 708
         },
         {
           "name": "U.SelectWindowTab",
-          "line": 756
+          "line": 758
         },
         {
           "name": "U.BuildPage",
-          "line": 770
+          "line": 772
         },
         {
           "name": "U.UpdateRunContext",
-          "line": 846
+          "line": 848
         },
         {
           "name": "U.UpdateSharingStatus",
-          "line": 853
+          "line": 855
         },
         {
           "name": "U.Refresh",
-          "line": 856
+          "line": 858
         },
         {
           "name": "U.Select",
-          "line": 928
+          "line": 930
         },
         {
           "name": "U.ApplyPanelAppearance",
-          "line": 968
+          "line": 970
         },
         {
           "name": "U.Reflow",
-          "line": 973
+          "line": 975
         },
         {
           "name": "U.SetLayoutEditing",
-          "line": 1078
+          "line": 1080
         },
         {
           "name": "U.StartLayout",
-          "line": 1092
+          "line": 1094
         },
         {
           "name": "U.ResetPositions",
-          "line": 1097
+          "line": 1099
         },
         {
           "name": "U.UndoPositions",
-          "line": 1107
+          "line": 1109
         },
         {
           "name": "U.Build",
-          "line": 1121
+          "line": 1123
         },
         {
           "name": "U.LayoutNavigation",
-          "line": 1190
+          "line": 1192
         },
         {
           "name": "U.EnsureProfilePreviewBar",
-          "line": 1269
+          "line": 1271
         },
         {
           "name": "U.UpdateProfilePreviewBar",
-          "line": 1295
+          "line": 1297
         },
         {
           "name": "U.PreviewDefaults",
-          "line": 1301
+          "line": 1303
         },
         {
           "name": "U.Toggle",
-          "line": 1320
+          "line": 1322
         }
       ],
       "literalEvents": []
     },
     "FieldKit.lua": {
-      "bytes": 124926,
-      "sha256": "9cbe95d2f1956283a8313d8cbea7a4e45dda90002f68efc254668d9c75acc3a4",
+      "bytes": 126280,
+      "sha256": "784c52de5e22f6f9ca1a413e29c3fec9c5d2547c7593b66f4a90ff5e1d9327d3",
       "namedFunctions": [
         {
           "name": "Print",
@@ -2794,120 +2802,124 @@
           "line": 2279
         },
         {
-          "name": "FieldKit_UseCombatTextOnly",
-          "line": 2290
+          "name": "FieldKit.ReleaseCombatDamage",
+          "line": 2306
         },
         {
-          "name": "SlotOf",
+          "name": "FieldKit_UseCombatTextOnly",
           "line": 2314
         },
         {
+          "name": "SlotOf",
+          "line": 2339
+        },
+        {
           "name": "SwapSlots",
-          "line": 2322
+          "line": 2347
         },
         {
           "name": "HookBarDrag",
-          "line": 2332
+          "line": 2357
         },
         {
           "name": "PlaceMicroMenu",
-          "line": 2366
+          "line": 2391
         },
         {
           "name": "PlaceBarButtons",
-          "line": 2396
+          "line": 2421
         },
         {
           "name": "UpdateCompactXP",
-          "line": 2413
+          "line": 2438
         },
         {
           "name": "CreateCompactBar",
-          "line": 2424
+          "line": 2449
         },
         {
           "name": "AttachMoneyToBar",
-          "line": 2507
+          "line": 2532
         },
         {
           "name": "KeepCompactBar",
-          "line": 2533
+          "line": 2558
         },
         {
           "name": "UpdateGryphons",
-          "line": 2573
+          "line": 2598
         },
         {
           "name": "PlaceCollapseDock",
-          "line": 2592
+          "line": 2617
         },
         {
           "name": "DockEntries",
-          "line": 2608
+          "line": 2633
         },
         {
           "name": "BuildCollapseDock",
-          "line": 2621
+          "line": 2646
         },
         {
           "name": "StopDockDrag",
-          "line": 2643
+          "line": 2668
         },
         {
           "name": "FieldKit.ApplyHUDProfileLive",
-          "line": 2745
+          "line": 2770
         },
         {
           "name": "ResetPositions",
-          "line": 2822
+          "line": 2847
         },
         {
           "name": "RefreshPanel",
-          "line": 2834
+          "line": 2859
         },
         {
           "name": "FieldKit_RefreshInterfaceLanguage",
-          "line": 2835
+          "line": 2860
         },
         {
           "name": "CreatePanel",
-          "line": 2842
+          "line": 2867
         },
         {
           "name": "TogglePanel",
-          "line": 2855
+          "line": 2880
         },
         {
           "name": "FieldKit.SetWindowsLocked",
-          "line": 2862
+          "line": 2887
         },
         {
           "name": "CreateMinimapButton",
-          "line": 2872
+          "line": 2897
         },
         {
           "name": "PlaceOnRim",
-          "line": 2882
+          "line": 2907
         },
         {
           "name": "InitDB",
-          "line": 2923
+          "line": 2948
         },
         {
           "name": "FieldKitEventLifecycle",
-          "line": 2947
+          "line": 2972
         },
         {
           "name": "FieldKitEventWorld",
-          "line": 2996
-        },
-        {
-          "name": "FieldKitEventOther",
           "line": 3023
         },
         {
+          "name": "FieldKitEventOther",
+          "line": 3050
+        },
+        {
           "name": "RefreshNativeData",
-          "line": 3077
+          "line": 3104
         }
       ],
       "literalEvents": [
@@ -3192,8 +3204,8 @@
       ]
     },
     "CombatText.lua": {
-      "bytes": 33272,
-      "sha256": "7d147c9470529033dd57639db8b59e5f8b74b36005aabf3dade0b40d38f0b359",
+      "bytes": 33571,
+      "sha256": "6b0234bb4adc24fa588e4faa4cf72f117bc96a060853cde49bb834f0605fbd64",
       "namedFunctions": [
         {
           "name": "C.Number",
@@ -3357,8 +3369,8 @@
       ]
     },
     "CombatOptions.lua": {
-      "bytes": 24191,
-      "sha256": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749",
+      "bytes": 24566,
+      "sha256": "0a1c450585b3bed496b07fe8e635d0860ffed94c15f98cb225d365d16f6150d5",
       "namedFunctions": [
         {
           "name": "Name",
@@ -3430,7 +3442,7 @@
         },
         {
           "name": "ui.Reflow",
-          "line": 380
+          "line": 381
         }
       ],
       "literalEvents": []
@@ -6705,7 +6717,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No new live client visual pass. Offline French checks cover 477 literal UI labels/help texts, option descriptors and dropdown choices, 241 installed class spells and 66 jewelry names, both theme families off/minimal/complete/alternative, fresh and persisted French settings, damage/healing/boss/recent/fallback/detached/modal/tooltips, player-name and raw-key preservation, effects/procs, DBC/server aliases and late name updates, floating grouped hits/misses, ranks and language refresh. Full runtime/settings and installed public API checks are run."
+    "inGameTestScope": "No new live client visual pass. Offline French checks cover 479 literal UI labels/help texts, option descriptors and dropdown choices, 241 installed class spells and 66 jewelry names, both theme families off/minimal/complete/alternative, fresh and persisted French settings, damage/healing/boss/recent/fallback/detached/modal/tooltips, player-name and raw-key preservation, effects/procs, DBC/server aliases and late name updates, floating grouped hits/misses, ranks and language refresh. Full runtime/settings and installed public API checks are run. Additional offline coverage: automatic native combat-damage takeover and restoration, explicit both-displays toggle, banner subscription/filters/native takeover/both/restore/failure, and endless nonzero/zero/missing charge across theme variants. Client observed at hero menu only; no live endless payload captured."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

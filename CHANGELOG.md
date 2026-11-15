@@ -1,8 +1,11 @@
-# 0.1.0-reborn.27 — French presentation audit
+# 0.1.0-reborn.27 — French presentation, native displays and endless
 
 - Unify native name display across meters/details, loadout, effects, combat text, group history and death details. Preserve raw ledger/filter keys and player names.
 - Prefer server spell names by id; join DBC aliases to the server name list with a bounded cache and AZSNAMES/late-packet invalidation. Correct Freezing Trap/Frost Trap aliases and English world miss labels.
 - Translate compact bonus suffixes and missing UI/help descriptors; refresh rank labels and late dictionary extensions on language changes.
+- Automatically hide native player/pet damage while FieldKit combat text is enabled; offer an explicit both-displays toggle and restore native values when relinquishing ownership.
+- Let the movable FieldKit notification panel replace native banners or display alongside them, including general game announcements; restore native visibility and fail open when subscription is unavailable.
+- Keep endless progression visible when charge is absent, with an explicit unavailable label; never infer a spawn timer or percentage.
 - Add French UI coverage and both-theme-family off/on matrix, fresh/persisted settings, and installed French catalog tests (241 spells, 66 jewelry names). No new live visual pass claimed.
 
 # 0.1.0-reborn.26 — Localised floating combat text

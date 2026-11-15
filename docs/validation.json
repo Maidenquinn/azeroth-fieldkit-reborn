@@ -29,7 +29,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "No new live client visual pass. Offline French checks cover 477 literal UI labels/help texts, option descriptors and dropdown choices, 241 installed class spells and 66 jewelry names, both theme families off/minimal/complete/alternative, fresh and persisted French settings, damage/healing/boss/recent/fallback/detached/modal/tooltips, player-name and raw-key preservation, effects/procs, DBC/server aliases and late name updates, floating grouped hits/misses, ranks and language refresh. Full runtime/settings and installed public API checks are run."
+    "inGameTestScope": "No new live client visual pass. Offline French checks cover 479 literal UI labels/help texts, option descriptors and dropdown choices, 241 installed class spells and 66 jewelry names, both theme families off/minimal/complete/alternative, fresh and persisted French settings, damage/healing/boss/recent/fallback/detached/modal/tooltips, player-name and raw-key preservation, effects/procs, DBC/server aliases and late name updates, floating grouped hits/misses, ranks and language refresh. Full runtime/settings and installed public API checks are run. Additional offline coverage: automatic native combat-damage takeover and restoration, explicit both-displays toggle, banner subscription/filters/native takeover/both/restore/failure, and endless nonzero/zero/missing charge across theme variants. Client observed at hero menu only; no live endless payload captured."
   },
   "files": {
     "Runtime.lua": {
@@ -44,8 +44,8 @@
     },
     "Reborn.lua": {
       "maxUpvalues": 3,
-      "functions": 23,
-      "sha256": "c4947db795e280337e9ecafd795d24668da22cf6e3f3cfcba3e6cbbfabf9e8f1"
+      "functions": 24,
+      "sha256": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -55,7 +55,7 @@
     "RebornHUD.lua": {
       "maxUpvalues": 1,
       "functions": 12,
-      "sha256": "dd028b7ef78266d0a6d7221cd1b7c0dcdb5b2da7f23b50c72b281e164a9e0b04"
+      "sha256": "2cf597b35ef36ec73e8b8a33cd2baea8c4be42343f5d19d942788866c647cd51"
     },
     "NativeHUD.lua": {
       "maxUpvalues": 5,
@@ -80,7 +80,7 @@
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "05206b69fbc086950b21acfa03df4749fc6b412837059844d8e8ecaf58a6744f"
+      "sha256": "76c39a31c3e50bcb00ef201c9c16eb6a0956aabce456779cc33171ffae6c4a28"
     },
     "Profiles.lua": {
       "maxUpvalues": 4,
@@ -95,7 +95,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "a479b030d26bdfccffd231ccc346f396b8226cb3ba208536042cdc66b5186ede"
+      "sha256": "44dc19204ad1dbf14411e305422e1e6f1369aef5b398e663fe38f9704ebe428d"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
@@ -209,8 +209,8 @@
     },
     "NativeTools.lua": {
       "maxUpvalues": 3,
-      "functions": 20,
-      "sha256": "a2800ef4d05e8c32c3d1a6d1a56d4ad348506b1adca707f1f7340e3befba45be"
+      "functions": 21,
+      "sha256": "919209e4641eaf5f0c5fb6cad349d412f3e9db29554559718e0f6ae76011af50"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -240,7 +240,7 @@
     "OptionsSchema.lua": {
       "maxUpvalues": 1,
       "functions": 49,
-      "sha256": "b141880072db635af67890e0841a783b1aef24778b253f3e763611de4b696f07"
+      "sha256": "522e82940bb25a5915f7d632d10c64acb8ef5a760e61818a5ab1e6103d91844e"
     },
     "LegacyCrits.lua": {
       "maxUpvalues": 7,
@@ -250,12 +250,12 @@
     "Interface.lua": {
       "maxUpvalues": 24,
       "functions": 231,
-      "sha256": "171d04189922b07d05f4fdbed60ae12e56393894232637323ad8a58ab656f1e5"
+      "sha256": "8bddc58ef258a33b55add2dd9348fee19b546c8d8fd70c4b1c3ebd9249b9bf8c"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
-      "functions": 191,
-      "sha256": "9cbe95d2f1956283a8313d8cbea7a4e45dda90002f68efc254668d9c75acc3a4"
+      "functions": 192,
+      "sha256": "784c52de5e22f6f9ca1a413e29c3fec9c5d2547c7593b66f4a90ff5e1d9327d3"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -275,12 +275,12 @@
     "CombatText.lua": {
       "maxUpvalues": 12,
       "functions": 49,
-      "sha256": "7d147c9470529033dd57639db8b59e5f8b74b36005aabf3dade0b40d38f0b359"
+      "sha256": "6b0234bb4adc24fa588e4faa4cf72f117bc96a060853cde49bb834f0605fbd64"
     },
     "CombatOptions.lua": {
       "maxUpvalues": 11,
-      "functions": 88,
-      "sha256": "18bf694c27c975678bfaf0f5a96609880d0459b8d71c948ee213112be6e6a749"
+      "functions": 90,
+      "sha256": "0a1c450585b3bed496b07fe8e635d0860ffed94c15f98cb225d365d16f6150d5"
     },
     "CopyLog.lua": {
       "maxUpvalues": 20,

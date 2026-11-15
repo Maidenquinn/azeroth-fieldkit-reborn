@@ -2,6 +2,7 @@ fire(FieldKitFrame,"VARIABLES_LOADED")
 SlashCmdList.FieldKit("")
 FieldKit_SetLanguage("fr")
 local d,L,C,R=FieldKitRebornDB,FieldKitLoadout,FieldKitZoneThemes,FieldKitReferenceHUD
+C.allowUnfinishedThemes=true
 AZS_LOCALE="frFR"
 AZS_L={["Aimed Shot"]="Visée",["Rapid Fire"]="Tir rapide",["Divine Shield"]="Bouclier divin",["Lifesteal"]="Vol de vie",["Earthstrike"]="Frappe-terre"}
 AZS_ZONE={zone="naxx",zname="Naxxramas",heroic=0};AZS_RUN={ph="playing",t=100}

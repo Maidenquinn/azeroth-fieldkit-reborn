@@ -12,7 +12,7 @@ assert(f.titleText:GetText()=="Nazan · 65%" and not f.clockText:IsShown() and n
 for _,m in ipairs(f.marks) do assert(not m:IsShown()) end
 AZS_RUN.t=20000;B.Update();assert(f.progressFill:GetValue()==.65,"Elapsed clock changed boss progression")
 AZS_RUN.rift=0;B.Update();assert(f.progressFill:GetValue()==0)
-AZS_RUN.rift=nil;B.Update();assert(f.titleText:GetText()=="Nazan · ?","Missing progression inferred from elapsed time")
+AZS_RUN.rift=nil;B.Update();assert(f.titleText:GetText()==("Nazan · "..FieldKit_L("Progress not provided")),"Missing progression inferred from elapsed time")
 FieldKitRebornDB.nextBossCard=true;FieldKitRebornDB.nextBossAlert=true;FieldKitRebornDB.bossWarningLead=10
 AZS_RUN.rift=89;T.Reminders();assert(T.frames[3].lastRows[1].value=="89%" and table.getn(T.warnings)==0)
 AZS_RUN.rift=90;T.Reminders();assert(table.getn(T.warnings)==1 and T.warnings[1].text=="Nazan · 90%")

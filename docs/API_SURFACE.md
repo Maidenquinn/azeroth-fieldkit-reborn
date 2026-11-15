@@ -382,3 +382,13 @@ the server's localized name. The alias cache is bounded (1024 entries), refreshe
 at most once per two seconds and invalidates on a names packet. No protocol keys,
 filters, meter attribution or player names are rewritten. Missing optional
 functions/names retain known dictionary translations or the supplied name.
+
+Native display ownership (.27): only the existing allowlisted CombatDamage,
+PetMeleeDamage and PetSpellDamage display CVars are changed. Their baseline is
+operational state, restored on relinquishment/logout. Banner replacement uses
+AZS_RegisterBannerHandler/UnregisterBannerHandler and AZS_SetHudShown("banners") /
+AZS_IsHudShown, as documented at https://azreborn.com/guides/addon-api/.
+Subscription failure preserves native announcements. Both displays are explicit
+profile preferences; baseline ownership is excluded from profile copies.
+Endless charge still comes solely from AZS_RUN.rift, and name from nbn. Missing
+charge is visible as unavailable; schedule/time do not supply a substitute.

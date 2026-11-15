@@ -2277,19 +2277,44 @@ local DAMAGE_CVARS = { "CombatDamage", "PetMeleeDamage", "PetSpellDamage" }
 
 -- Apply the three allowlisted native damage display switches only when configured.
 local function ApplyDamageNumbers()
-	if ( DB.hideDamage == nil ) then
-		return
-	end
-	for i = 1, table.getn(DAMAGE_CVARS) do
-		FieldKit.SetCVar(DAMAGE_CVARS[i], DB.hideDamage and "0" or "1")
-	end
+ if not FieldKit.rebornLegacyFixture then
+  local owned=DB.combatText and not DB.combatTextWithNative
+  local saved=type(DB.nativeDamageBefore)=="table" and DB.nativeDamageBefore or {}
+  if owned then
+   DB.nativeDamageBefore=saved
+   for _,key in ipairs(DAMAGE_CVARS) do
+    local value=FieldKit.GetCVar(key)
+    if saved[key]==nil and (value=="0" or value=="1") then saved[key]=value end
+    if value~="0" then FieldKit.SetCVar(key,"0") end
+   end
+   return
+  end
+  for _,key in ipairs(DAMAGE_CVARS) do
+   local value=saved[key]
+   if value=="0" or value=="1" then FieldKit.SetCVar(key,value) end
+  end
+  DB.nativeDamageBefore=nil
+  if DB.combatText and DB.combatTextWithNative then
+   for _,key in ipairs(DAMAGE_CVARS) do if FieldKit.GetCVar(key)~="1" then FieldKit.SetCVar(key,"1") end end
+   return
+  end
+ end
+ if DB.hideDamage==nil then return end
+ for _,key in ipairs(DAMAGE_CVARS) do local value=DB.hideDamage and "0" or "1";if FieldKit.rebornLegacyFixture or FieldKit.GetCVar(key)~=value then FieldKit.SetCVar(key,value) end end
+end
+FieldKit.ApplyDamageNumbers=ApplyDamageNumbers
+function FieldKit.ReleaseCombatDamage()
+ if not DB or type(DB.nativeDamageBefore)~="table" then return end
+ for _,key in ipairs(DAMAGE_CVARS) do local value=DB.nativeDamageBefore[key];if value=="0" or value=="1" then FieldKit.SetCVar(key,value) end end
+ DB.nativeDamageBefore=nil
 end
 
 
 -- Explicit editor action: enable scrolling text and suppress the two other damage displays.
 function FieldKit_UseCombatTextOnly()
  if not DB then return end
- DB.combatText=true;DB.hideDamage=true;DB.showCrits=false
+ DB.combatText=true;DB.combatTextWithNative=false;DB.showCrits=false
+ if FieldKit.rebornLegacyFixture then DB.hideDamage=true end
  ApplyDamageNumbers()
 end
 
@@ -2953,6 +2978,8 @@ local function FieldKitEventLifecycle()
    if not FieldKitProfiles.preview then FieldKitProfiles.SaveActive() end
   end
   FieldKitNativeHUD.Release()
+  FieldKit.ReleaseCombatDamage()
+  FieldKitNativeTools.ReleaseBanners()
   if FieldKitZoneThemes then FieldKitZoneThemes.NativeRestore() end
   return
  end

@@ -13,7 +13,7 @@ local nextBoss=FieldKitNativeTools.NextBoss();assert(nextBoss and nextBoss.progr
 assert(nextBoss.name==FieldKit_L("Next boss"),"Unknown endless boss identity invented")
 AZS_RUN.nbn="Native endless boss";assert(FieldKitNativeTools.NextBoss().name==AZS_RUN.nbn)
 AZS_RUN.rift=0;assert(R.BossProgress()==0)
-AZS_RUN.rift=nil;assert(R.BossProgress()==nil and FieldKitNativeTools.NextBoss()==nil,"Missing percentage inferred from a timer")
+AZS_RUN.rift=nil;assert(R.BossProgress()==nil and FieldKitNativeTools.NextBoss().unavailable==true,"Missing percentage inferred from a timer")
 AZS_RUN.rift=-1;assert(R.BossProgress()==nil,"Absent charge sentinel became zero progress")
 AZS_RUN.rift=37
 AZS_SCHEDULE={{name="Stale campaign boss",state="due",index=1}}

@@ -45,6 +45,7 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_native_hud.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_native_controls.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_endless_choices.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_display_ownership.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_loadout_values.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_effects_headers.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_numeric_layout.lua').read_text(encoding='utf8'))

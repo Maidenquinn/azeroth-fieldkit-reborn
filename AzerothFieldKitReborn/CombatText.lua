@@ -19,7 +19,7 @@ C.defaults={combatText=false,combatTextGroup=true,combatTextHealing=true,combatT
  combatTextX=180,combatTextY=-45,combatTextIncomingX=-180,combatTextIncomingY=-45,combatTextSplit=true,
  combatTextNames=true,combatTextCounts=true,combatTextDirection=1,combatTextIgnore="",
  -- AS 0.138+: pin numbers to the hit spot via AZS_GetCombatTextEvents / Project / Register.
- combatTextWorld=false}
+ combatTextWorld=false,combatTextWithNative=false}
 -- Read and clamp one numeric combat option, tolerating invalid saved values.
 function C.Number(key,default,min,max)
  local n=FieldKitRebornDB and tonumber(FieldKitRebornDB[key]) or default
@@ -624,6 +624,9 @@ f:SetScript("OnUpdate",function()
  local now=GetTime();elapsed=elapsed+(arg1 or 0)
  if elapsed>=.05 then
   elapsed=0
+  if not FieldKit.rebornLegacyFixture and FieldKit.ApplyDamageNumbers and (FieldKitRebornDB.combatText or C.hadNativeCombat or FieldKitRebornDB.nativeDamageBefore) then
+   FieldKit.ApplyDamageNumbers();C.hadNativeCombat=FieldKitRebornDB.combatText and true or false
+  end
   if FieldKitRebornDB.combatText then
    if FieldKitRebornDB.combatTextWorld then
     EnsureWorldHandler()

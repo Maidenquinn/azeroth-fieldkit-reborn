@@ -55,8 +55,8 @@ local SECTIONS = {
 				-- Same CVar as Options → Combat → Show Target Damage (CombatDamage).
 				label = "Show target damage (game)",
 				tip = "Same as Options → Combat → Show Target Damage. Uncheck to keep only FieldKit combat text.",
-				get = function() return FieldKitRebornDB.hideDamage ~= true end,
-				set = function(v) FieldKitRebornDB.hideDamage = not v; actions.ApplyDamageNumbers() end,
+				get = function() if not FieldKit.rebornLegacyFixture and FieldKitRebornDB.combatText then return FieldKitRebornDB.combatTextWithNative end;return FieldKitRebornDB.hideDamage ~= true end,
+				set = function(v) FieldKitRebornDB.hideDamage = not v;if not FieldKit.rebornLegacyFixture and FieldKitRebornDB.combatText then FieldKitRebornDB.combatTextWithNative=v end; actions.ApplyDamageNumbers() end,
 			},
 			{
 				kind = "check",

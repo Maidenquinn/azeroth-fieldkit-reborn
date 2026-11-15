@@ -171,7 +171,9 @@ function FieldKit.BuildJourneySections(sections,actions)
  end
  local alerts=old.Warnings.items
  table.insert(alerts,1,{kind="preview",preview=16})
- for _,def in ipairs({{"nativeWarnings","Native mechanic warnings","Show filtered received boss/mechanic messages, with duplicates suppressed. The native banner display is unchanged."},
+ for _,def in ipairs({{"nativeWarnings","FieldKit notifications","Show received announcements in a movable FieldKit panel. Native banners are replaced while this is enabled; filters apply below."},
+  {"keepNativeBanners","Also show native notifications","Display native banners alongside FieldKit notifications. Off keeps only the movable FieldKit panel."},
+  {"otherBannerWarnings","Other game announcements","Include other received game announcements, such as waves and guardian arrivals."},
   {"bossBannerWarnings","Boss banner messages","Include received banners explicitly flagged as boss messages."},
   {"mechanicWarnings","Mechanic banner messages","Include received banners whose kind is mechanic."},
   {"partyBannerWarnings","Party revive banners","Include co-op downed / friend-down / revived banners."},

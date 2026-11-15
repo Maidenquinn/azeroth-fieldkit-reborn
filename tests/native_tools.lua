@@ -103,14 +103,14 @@ assert(FieldKitEncounterFrame.mashVisibleRows==2 and FieldKitEncounterFrame.rows
 assert(FieldKitEncounterFrame.rows[2].value:GetText()=="3" and table.getn(T.warnings)==1)
 for i=1,10 do update(FieldKitFrame,.2) end
 assert(table.getn(T.warnings)==1,"Arrival warning repeated")
-toggle("Native mechanic warnings",true);assert(registrations==1)
+toggle("FieldKit notifications",true);assert(registrations==1)
 T.Banner({id=1,kind="rune",boss=false,text="Rune pickup is not a location"})
 assert(table.getn(T.warnings)==1)
 for i=1,12 do T.Banner({id=i,kind="mechanic",boss=false,text="Observed warning "..i}) end
 assert(table.getn(T.warnings)==3 and table.getn(T.recent)<=32)
 local last=T.warnings[3];T.Banner({id=12,kind="mechanic",text="Observed warning 12"});assert(T.warnings[3]==last)
 update(FieldKitFrame,5);assert(not FieldKitNativeWarnings:IsShown())
-toggle("Native mechanic warnings",false);assert(unregistrations==1)
+toggle("FieldKit notifications",false);assert(unregistrations==1)
 T.Push("Old native notice","banner:99");T.Warnings();assert(table.getn(T.warnings)==0,"Disabled native alerts leaked while arrivals stayed enabled")
 local setter=AZS_SetOnTopOfScreens;AZS_SetOnTopOfScreens=function() error("unsupported") end
 assert(not FieldKit.SetFrameOnTop("FieldKitEffectsFrame",true));AZS_SetOnTopOfScreens=nil

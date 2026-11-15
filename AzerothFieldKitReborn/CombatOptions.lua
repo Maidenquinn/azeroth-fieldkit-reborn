@@ -376,7 +376,8 @@ function FieldKit_CreateCombatOptions(parent)
  for i=1,table.getn(FieldKitUI.nativeTextOptions) do
   local item=FieldKitUI.nativeTextOptions[i];Check(p,item.label,-(i-1)*58,item.get,item.set,item.tip)
  end
- Text(p,"The native text is independent of FieldKit scrolling text. Disable duplicate displays here.",0,-200)
+ Check(p,"Also show native damage numbers",-250,function() return FieldKitRebornDB.combatTextWithNative end,function(v) FieldKitRebornDB.combatTextWithNative=v;if FieldKit.ApplyDamageNumbers then FieldKit.ApplyDamageNumbers() end end,"Off keeps only FieldKit damage text while it is enabled. On displays FieldKit and native numbers together.")
+ Text(p,"FieldKit hides native damage numbers by default while its combat text is enabled. Enable both displays above if preferred.",0,-310)
  function ui.Reflow(newWidth)
   width=newWidth;ui:SetWidth(width);navStatus:SetWidth(width)
   for i=1,table.getn(ui.pages) do ui.pages[i]:SetWidth(width) end

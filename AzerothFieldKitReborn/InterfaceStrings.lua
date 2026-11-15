@@ -536,6 +536,17 @@ fr["Attack"]="Attaque"
 fr["Naxxramas"]="Naxxramas"
 fr["Chronicle classic"]="Chronique classique"
 fr["Chronicle Premium"]="Chronique premium"
+fr["Progress not provided"]="Progression non fournie"
+fr["Endless"]="Sans fin"
+fr["Also show native damage numbers"]="Afficher aussi les dégâts natifs"
+fr["Off keeps only FieldKit damage text while it is enabled. On displays FieldKit and native numbers together."]="Désactivé : affiche uniquement le texte de dégâts FieldKit quand il est activé. Activé : affiche ensemble les nombres natifs et FieldKit."
+fr["FieldKit hides native damage numbers by default while its combat text is enabled. Enable both displays above if preferred."]="FieldKit masque par défaut les dégâts natifs quand son texte de combat est activé. Le réglage ci-dessus permet de conserver les deux affichages."
+fr["FieldKit notifications"]="Notifications FieldKit"
+fr["Show received announcements in a movable FieldKit panel. Native banners are replaced while this is enabled; filters apply below."]="Affiche les annonces reçues dans un panneau FieldKit déplaçable. Les annonces natives sont remplacées tant que ce réglage est activé ; les filtres ci-dessous s’appliquent."
+fr["Also show native notifications"]="Afficher aussi les notifications natives"
+fr["Display native banners alongside FieldKit notifications. Off keeps only the movable FieldKit panel."]="Affiche les annonces natives en plus des notifications FieldKit. Désactivé : conserve uniquement le panneau FieldKit déplaçable."
+fr["Other game announcements"]="Autres annonces du jeu"
+fr["Include other received game announcements, such as waves and guardian arrivals."]="Inclut les autres annonces reçues du jeu, notamment les vagues et l’arrivée des gardiens."
 -- Include every extension in live language switching, not only the early catalog.
 local reverseKeys={};for key in pairs(fr) do table.insert(reverseKeys,key) end
 table.sort(reverseKeys)

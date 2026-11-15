@@ -74,12 +74,16 @@ function R.BossUnits()
  for _,u in ipairs(out) do if not seen[u.id] then seen[u.id]=true;table.insert(unique,u) end end
  return unique
 end
+function R.IsEndless()
+ local run=type(AZS_RUN)=="table" and AZS_RUN or {}
+ return run.endless==true or run.endl==true or (FieldKit.Number(run.endless) or 0)>0 or (FieldKit.Number(run.endl) or 0)>0
+end
 function R.BossProgress()
  local run=type(AZS_RUN)=="table" and AZS_RUN or {}
  local rift=FieldKit.Number(run.rift)
  if rift and rift<0 then rift=nil end
  if rift then rift=math.min(100,rift)/100 end
- if FieldKit.Number(run.endless)==1 or FieldKit.Number(run.endl)==1 then
+ if R.IsEndless() then
   return rift
  end
  for _,boss in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do

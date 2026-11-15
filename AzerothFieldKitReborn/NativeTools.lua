@@ -153,13 +153,10 @@ end
 function T.NextBoss()
  if not FieldKit.rebornLegacyFixture then
   local run=type(AZS_RUN)=="table" and AZS_RUN or {}
-  if FieldKit.Number(run.endless)==1 or FieldKit.Number(run.endl)==1 then
+  if FieldKitReborn.IsEndless() then
    local progress=FieldKitReborn.BossProgress()
-   if progress~=nil then
-    local name=type(run.nbn)=="string" and string.find(run.nbn,"%S") and N.Text(FieldKitReborn.DisplayName(run.nbn)) or FieldKit_L("Next boss")
-    return {name=name,key="endless:"..tostring(run.bs or ""),progress=progress}
-   end
-   return nil
+   local name=type(run.nbn)=="string" and string.find(run.nbn,"%S") and N.Text(FieldKitReborn.DisplayName(run.nbn)) or FieldKit_L("Next boss")
+   return {name=name,key="endless:"..tostring(run.bs or ""),progress=progress,endless=true,unavailable=progress==nil}
   end
   -- Schedule order/state identifies the next encounter; its legacy `at` and
   -- `left` fields do not determine a Reborn spawn.
@@ -197,7 +194,7 @@ end
 function T.BossValue(boss)
  if not boss then return "" end
  if FieldKit.rebornLegacyFixture then return N.Clock(boss.left) end
- return boss.progress and string.format("%.0f%%",math.floor(boss.progress*100)) or "?"
+ return boss.progress and string.format("%.0f%%",math.floor(boss.progress*100)) or FieldKit_L("Progress not provided")
 end
 function T.Reminders()
  local frame=T.frames[3];local rows={}
@@ -233,18 +230,40 @@ function T.Banner(banner)
  if not FieldKitRebornDB or not FieldKitRebornDB.nativeWarnings or not N.Active() or type(banner)~="table" or type(banner.text)~="string" then return end
  local kind=banner.kind
  local party=kind=="downed" or kind=="frienddown" or kind=="revived"
- local allowed=(banner.boss==true and FieldKitRebornDB.bossBannerWarnings)
-  or (kind=="mechanic" and FieldKitRebornDB.mechanicWarnings)
-  or (party and FieldKitRebornDB.partyBannerWarnings~=false)
+ local allowed
+ if banner.boss==true or kind=="boss" then allowed=FieldKitRebornDB.bossBannerWarnings
+ elseif party then allowed=FieldKitRebornDB.partyBannerWarnings~=false
+ elseif kind=="mechanic" then allowed=FieldKitRebornDB.mechanicWarnings
+ else allowed=not FieldKit.rebornLegacyFixture and FieldKitRebornDB.otherBannerWarnings~=false end
  if allowed then T.Push(banner.text,"banner:"..tostring(banner.id)) end
 end
+function T.ReleaseBanners()
+ local d=FieldKitRebornDB
+ if d and type(d.nativeBannerBefore)=="boolean" then
+  if FieldKit.SetHudShown("banners",d.nativeBannerBefore) then d.nativeBannerBefore=nil end
+ end
+end
 function T.Subscription()
- if FieldKitRebornDB.nativeWarnings and type(AZS_RegisterBannerHandler)=="function" then
-  if not T.subscribed then local ok=pcall(AZS_RegisterBannerHandler,T.Banner);T.subscribed=ok end
+ local d=FieldKitRebornDB
+ local enabled=d.nativeWarnings and N.Active() and type(AZS_RegisterBannerHandler)=="function"
+ if enabled then
+  if not T.subscribed then local ok,result=pcall(AZS_RegisterBannerHandler,T.Banner);T.subscribed=ok and result~=false end
  elseif T.subscribed and type(AZS_UnregisterBannerHandler)=="function" then
   local ok=pcall(AZS_UnregisterBannerHandler,T.Banner);if ok then T.subscribed=false end
  end
+ -- Hide native banners only while their replacement can receive events.
+ if enabled and T.subscribed and not FieldKit.rebornLegacyFixture then
+  if type(d.nativeBannerBefore)~="boolean" and type(AZS_IsHudShown)=="function" then
+   local ok,value=pcall(AZS_IsHudShown,"banners");if ok and type(value)=="boolean" then d.nativeBannerBefore=value end
+  end
+  if type(d.nativeBannerBefore)=="boolean" then
+   local shown=d.keepNativeBanners and true or false
+   local ok,current=pcall(AZS_IsHudShown,"banners")
+   if not ok or current~=shown then FieldKit.SetHudShown("banners",shown) end
+  end
+ else T.ReleaseBanners() end
 end
+
 function T.Warnings()
  local frame=T.warningFrame
  local size=FieldKitRebornDB.cardSizes.FieldKitNativeWarnings
