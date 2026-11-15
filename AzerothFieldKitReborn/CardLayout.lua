@@ -5,9 +5,9 @@ FieldKitCardLayout={selected=1}
 local C=FieldKitCardLayout
 C.names={"FieldKitModeFrame","FieldKitMeterFrame","FieldKitTakenFrame","FieldKitLairFrame",
  "FieldKitGearFrame","FieldKitStatsFrame","FieldKitMoneyFrame","FieldKitPartyMeterFrame",
- "FieldKitPartyCard1","FieldKitPartyCard2","FieldKitPartyCard3","FieldKitPartyCard4","FieldKitEffectsFrame","FieldKitReviveFrame","FieldKitEncounterFrame","FieldKitNativeWarnings","FieldKitPlayerCard"}
+ "FieldKitPartyCard1","FieldKitPartyCard2","FieldKitPartyCard3","FieldKitPartyCard4","FieldKitEffectsFrame","FieldKitReviveFrame","FieldKitEncounterFrame","FieldKitNativeWarnings","FieldKitPlayerCard","FieldKitBossListFrame"}
 C.labels={"Run mode","Damage","Damage taken","Lairs","Accessories","Statistics","Gold and chest price","Group damage",
- "Teammate 1","Teammate 2","Teammate 3","Teammate 4","Effects","Revive","Run reminders","Native warnings","My card"}
+ "Teammate 1","Teammate 2","Teammate 3","Teammate 4","Effects","Revive","Run reminders","Native warnings","My card","Campaign bosses"}
 
 function C.ValidName(name)
  for i=1,table.getn(C.names) do if C.names[i]==name then return true end end

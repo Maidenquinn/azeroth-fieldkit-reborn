@@ -125,6 +125,7 @@ end
 -- Values are presentation fixtures, not a hypothetical damage attribution.
 function P.Rows(index)
  local hp=FieldKit_FormatHealth(6705,12200,FieldKitRebornDB.partyHealthMode)
+ if P.names[index]=="FieldKitBossListFrame" then return {{"Boss 1","Defeated"},{"Boss 2","Next"},{"Boss 3","Upcoming"}} end
  if index==1 then return {{"Heroic II","Example"},{"Bolstering","Example"},{"Next boss","1:24"}} end
  if index==2 then
   local mode=FieldKitMeters.Mode()

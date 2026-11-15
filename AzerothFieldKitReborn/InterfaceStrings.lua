@@ -547,6 +547,14 @@ fr["Also show native notifications"]="Afficher aussi les notifications natives"
 fr["Display native banners alongside FieldKit notifications. Off keeps only the movable FieldKit panel."]="Affiche les annonces natives en plus des notifications FieldKit. Désactivé : conserve uniquement le panneau FieldKit déplaçable."
 fr["Other game announcements"]="Autres annonces du jeu"
 fr["Include other received game announcements, such as waves and guardian arrivals."]="Inclut les autres annonces reçues du jeu, notamment les vagues et l’arrivée des gardiens."
+fr["Campaign bosses"]="Boss de la campagne"
+fr["Show the campaign boss list in native order: defeated, fighting, next and upcoming. Available with or without a HUD theme; endless never invents a future sequence."]="Affiche les boss de la campagne dans l’ordre natif : vaincus, en combat, prochain et à venir. Disponible avec ou sans thème ; aucune suite n’est inventée en Sans fin."
+fr["Defeated"]="Vaincu"
+fr["In combat"]="En combat"
+fr["Upcoming"]="À venir"
+fr["Status not provided"]="État non fourni"
+fr["Boss list not provided"]="Liste des boss non fournie"
+fr["Endless: the game does not provide the upcoming boss sequence."]="Sans fin : le jeu ne fournit pas la suite des boss."
 -- Include every extension in live language switching, not only the early catalog.
 local reverseKeys={};for key in pairs(fr) do table.insert(reverseKeys,key) end
 table.sort(reverseKeys)

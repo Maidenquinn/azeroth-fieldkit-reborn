@@ -1,3 +1,10 @@
+# 0.1.0-reborn.28 — Campaign boss roster card
+
+- Add a default-on Campaign bosses card for theme off/on using the shared card material and layout system. Retain completed bosses and distinguish active, next and upcoming encounters in native index order. Show only native next-boss charge, never an inferred timer.
+- Bound the row pool/scrolling, preserve full details on hover, and wire drag/size/opacity/collapse/profiles/reward-screen behaviour.
+- Reject stale schedule snapshots across run/zone boundaries; show explicit unavailable/endless-sequence notices instead of inventing future data.
+- Offline regression across all 48 installed maps and both theme families, plus full runtime/settings checks. No new live client visual acceptance claimed.
+
 # 0.1.0-reborn.27 — French presentation, native displays and endless
 
 - Unify native name display across meters/details, loadout, effects, combat text, group history and death details. Preserve raw ledger/filter keys and player names.

@@ -177,7 +177,7 @@ function N.SeparateDefaults()
  if not N.layoutReset or not FieldKit.zoneThemeReady then return end
  N.layoutReset=nil
  local d=FieldKitRebornDB
- local locations={FieldKitModeFrame={24,32},FieldKitMeterFrame={24,150},FieldKitTakenFrame={24,610},FieldKitLairFrame={24,420},FieldKitGearFrame={-24,32},FieldKitStatsFrame={-24,300},FieldKitEffectsFrame={-24,480}}
+ local locations={FieldKitBossListFrame={370,32},FieldKitModeFrame={24,32},FieldKitMeterFrame={24,150},FieldKitTakenFrame={24,610},FieldKitLairFrame={24,420},FieldKitGearFrame={-24,32},FieldKitStatsFrame={-24,300},FieldKitEffectsFrame={-24,480}}
  for name,point in pairs(locations) do
   local f=getglobal(name)
   if f and not d.frameAnchors[name] then

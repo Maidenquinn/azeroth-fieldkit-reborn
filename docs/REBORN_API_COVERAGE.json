@@ -3,19 +3,19 @@
   "liveGameValidation": false,
   "runtimeModules": 57,
   "runtimeSHA256": {
-    "Runtime.lua": "dbf0ab6307337bf1404e026084bb2a9f379b8d3b4d1c3fbbe530e0e9fbf1b2d9",
+    "Runtime.lua": "0a9ae03a03e3a8d34239411f6a01fd6c1b335ecb0c1bfe267228eb9b0f5e8be1",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
     "RebornHUD.lua": "2cf597b35ef36ec73e8b8a33cd2baea8c4be42343f5d19d942788866c647cd51",
-    "NativeHUD.lua": "56affaad4b67254f7534968dbe936d9937525d039b0e0538eddf07482dc07e27",
+    "NativeHUD.lua": "c60df3dbc81ebda8481de0cadc88e938e9596a6afa4afc527461a7086ed629a0",
     "NativeLayout.lua": "24214104987becd12c5728a1c8b49711c403e8ba4616f21cce922b6e174f2a2a",
     "Diagnostics.lua": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54",
     "Positions.lua": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81",
-    "Config.lua": "76c39a31c3e50bcb00ef201c9c16eb6a0956aabce456779cc33171ffae6c4a28",
+    "Config.lua": "538837b78105b11b16992caed3553c1fbe2e63a31c13c4e904194d34a9a6d9a8",
     "Profiles.lua": "b3842e8ae4aa4065408d2f48998f49076504f67d6be374aa370795b060236780",
     "Localization.lua": "52b438733774cee70dbde43c0c57b7e2503087aff219d9095ef4ac9b66043001",
-    "InterfaceStrings.lua": "44dc19204ad1dbf14411e305422e1e6f1369aef5b398e663fe38f9704ebe428d",
+    "InterfaceStrings.lua": "91d476e4461831aefe9e4f1baac7c6aefcfb3b9ed71935ad6c386b73e3a4f44d",
     "Theme.lua": "0246f0ff84187b05d8dca179be50d24dbf51614932f37c914478dbcb4d609813",
     "ZoneThemeRegistry.lua": "b30035d19d58e17ffc93d360ad377e2bcbcb3fbe0292fe67155d3e02c92537ad",
     "Seed.lua": "a1e79ab07c8b41dca34f8fa730f964cd7e79ece5700a1e5d407f941060ee655c",
@@ -26,27 +26,27 @@
     "RebornStats.lua": "92e6ffc7fbe155415ac7dd5a7736b432cb4ec19408938d3e777f130b92f4b433",
     "Reborn065.lua": "0aae3cf8ce7038673ddfffceafc64411aefca50e0df5cd03f5754837d1d2988a",
     "RunMode.lua": "efceae75720932ce171fd798b9c7c40ae45625d0f5d7ef1d1ae5e8ff66c2f48a",
-    "NativeData.lua": "4bad5e729b952c84b6e2014d9cc5a126a34a883ae17cff023ea76622f6f6f4e9",
+    "NativeData.lua": "5160e020d8ba09b830ea6a115d65987d042bb800bcfc754b86d47e84c7f0b7df",
     "MeterWindow.lua": "bf12422a318c81fe7bfd7457e67adf65262fe8834e2b67663a6b27742d6f1a45",
     "MeterLedger.lua": "273b745ca73aa75a430f46d7b3812599271fd17072eff2afd15d757172ca4fb7",
     "MeterSuite.lua": "bf544841bb353fe97f01e8d2f41eabf255c6a0612d877c3f2ca26a6e75aaa164",
     "BossTimeline.lua": "e82893e528559c72063b57f7b4090332008d7687a2893462aec63f0a3668f754",
     "HudStack.lua": "3b03b97ab491f6802c2847b5d44b8608dd90d1ae17f2f0f7aa0d66491fcceff8",
-    "CardLayout.lua": "7c3c1c30a3a3d2af4dc1cb1b7e13b2999eb82d61f14f415ddd693cdbf8244be4",
+    "CardLayout.lua": "2ed69c3b9dce9452293ee71ed5badae71267e15d643e80e0e0f15d6c643ee5e5",
     "Coop.lua": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1",
     "GroupHistory.lua": "9f3115ea52117e5e9fc056f8dc6585389a342c6438d2e5832e8550f507d886c7",
     "PartySync.lua": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
     "PartyDetails.lua": "a4f8d24cca2cf2e5a6b8e06b74ba0401bacbfdc40cb5fcd9b3cf0354c3bfdb01",
     "ScreenLayers.lua": "406c14b9c9c4ec97dcc5655c7569d85a490c3292b49604684df5832d748dc7af",
-    "NativeTools.lua": "919209e4641eaf5f0c5fb6cad349d412f3e9db29554559718e0f6ae76011af50",
+    "NativeTools.lua": "5c946d4176de2849b875af4f676fc575d6b57f15eb71ab28c6ade1f77c67ae65",
     "SpellAssets.lua": "5c443e759c4ff663fd0070f06566ac0de5e8c984c963341f50be72c8c4545681",
     "Loadout.lua": "41fa9c1cbd4a388e34da5c27f1c64be6bc0c07352e7e21ffdafde6cb40f08da9",
     "TakenDetails.lua": "9373f1cfad63e95f4fad5d316bae02573f27f94b9b900d536b59ba6449479822",
-    "Preview.lua": "0d42c42f5be64b40a2b1bcf5a69d635858dedaba409352d88555398f734a59bc",
+    "Preview.lua": "f52b65da2f320704df421c41c4d653e9e7548b00c0bf4cf42a4cbcad88cf49fe",
     "PreviewVisibility.lua": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
     "OptionsSchema.lua": "522e82940bb25a5915f7d632d10c64acb8ef5a760e61818a5ab1e6103d91844e",
     "LegacyCrits.lua": "8f7bd5d20fd2b47e3c0f3b1dcccb9b4cd40574c445cf9929ad3807684901844c",
-    "Interface.lua": "8bddc58ef258a33b55add2dd9348fee19b546c8d8fd70c4b1c3ebd9249b9bf8c",
+    "Interface.lua": "edc1e7363c9d63095ccba4a42664d796ff2802a8ef50a98e3a4d4d616e9f7d9c",
     "FieldKit.lua": "784c52de5e22f6f9ca1a413e29c3fec9c5d2547c7593b66f4a90ff5e1d9327d3",
     "WorldPins.lua": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f",
     "WorldAnchors.lua": "3156191b143809624e50039aa86ad9b8f77a1952776a5c3dc6473e115dca6a3b",
@@ -514,35 +514,35 @@
   },
   "webEvidence": {
     "https://azreborn.com/guides/addon-api": {
-      "sha256": "781012a4273bf9a01e399bdc603f66959533abbb15cdd9e41609e94825b1033f",
-      "bytes": 287604
+      "sha256": "c8dbf5e288b8ad5a6b8c6bae76ccca86192807a89a3d10932fd651c1cefd33b8",
+      "bytes": 297775
     },
     "https://azreborn.com/guides/runs-and-zones": {
-      "sha256": "75ba47f676ab49cd77d57531faa25c274c4f873eeef93e10b3c346c6c6685219",
-      "bytes": 222325
+      "sha256": "5c4ab95f6f475ba1fb62390ccac7f71d4d7378e003ce08164a4e4590b1ce43ed",
+      "bytes": 222449
     },
     "https://azreborn.com/guides/classes-and-talents": {
-      "sha256": "67090d7f350941647442bc4e99749564eee7db404963fddc7ea6096c3f071b3e",
-      "bytes": 159140
+      "sha256": "26b919c08922bbeddbb442b369062b88defaccdad9b00bf35e4fa6025d89bc5d",
+      "bytes": 160600
     },
     "https://azreborn.com/guides/co-op": {
-      "sha256": "0f1ff629cc3c1d8b5c8f01aff7972887b5690a86736e8cb131b614686d11c9a8",
+      "sha256": "0db5068633668672d1b34d87ec81c70e247d74480bd29a60620fad338036d5c3",
       "bytes": 153054
     },
     "https://azreborn.com/guides/progression-and-cosmetics": {
-      "sha256": "13e65f8f9111d6bd972085e0a69d5bdd4f60aec67e0bfc8eecc63ac0b1accb72",
+      "sha256": "7a08463b5116c1e2c025c918d60f09ff7a26170070c0b8c1d3944995dcd0426a",
       "bytes": 181998
     },
     "https://azreborn.com/guides/getting-started": {
-      "sha256": "0b24b9b4679904b2e56ffd4b1d561a638b9a3fbfb496518373aa799dd45b198d",
-      "bytes": 155960
+      "sha256": "73605ea57b14576e37b8d92c08612176f5b107ae3024393fd15105ff9fd5411b",
+      "bytes": 156763
     },
     "https://azreborn.com/guides/troubleshooting": {
-      "sha256": "9766ec8870b0cec151c76677c2033b8a04ae5fc11d8597954842a32dfccd409c",
-      "bytes": 155269
+      "sha256": "d5497a8800ee9225b777888ebae84f475ac6aa79d091d74a800243584af8ad41",
+      "bytes": 155504
     },
     "https://azreborn.com/guides/leaderboards-and-discord": {
-      "sha256": "8b790562968b88fc97e54b8d6a4d51004df1142d153d9d11c63f9ab0f1285079",
+      "sha256": "686229d0287ecafdaa51dab60235bae1159c861697b30f2d02a1eac75df65ab3",
       "bytes": 151953
     }
   },
@@ -1732,15 +1732,19 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 186
+          "line": 118
         },
         {
           "file": "NativeTools.lua",
-          "line": 209
+          "line": 262
         },
         {
           "file": "NativeTools.lua",
-          "line": 308
+          "line": 285
+        },
+        {
+          "file": "NativeTools.lua",
+          "line": 385
         },
         {
           "file": "Loadout.lua",
@@ -2013,11 +2017,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 139
+          "line": 215
         },
         {
           "file": "NativeTools.lua",
-          "line": 310
+          "line": 387
         }
       ],
       "directCallSites": [],
@@ -2112,7 +2116,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 204
+          "line": 280
         },
         {
           "file": "ReferenceHUD.lua",
@@ -2155,11 +2159,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 103
+          "line": 179
         },
         {
           "file": "NativeTools.lua",
-          "line": 309
+          "line": 386
         }
       ],
       "directCallSites": [],
@@ -2194,11 +2198,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 103
+          "line": 179
         },
         {
           "file": "NativeTools.lua",
-          "line": 310
+          "line": 387
         }
       ],
       "directCallSites": [],
@@ -2233,11 +2237,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 103
+          "line": 179
         },
         {
           "file": "NativeTools.lua",
-          "line": 309
+          "line": 386
         }
       ],
       "directCallSites": [],
@@ -2271,7 +2275,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 170
+          "line": 246
         },
         {
           "file": "ThemeHUD.lua",
@@ -2458,15 +2462,15 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 256
+          "line": 332
         },
         {
           "file": "NativeTools.lua",
-          "line": 257
+          "line": 333
         },
         {
           "file": "NativeTools.lua",
-          "line": 261
+          "line": 337
         },
         {
           "file": "ZoneThemes.lua",
@@ -3121,19 +3125,19 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 155
+          "line": 231
         },
         {
           "file": "NativeTools.lua",
-          "line": 181
+          "line": 257
         },
         {
           "file": "NativeTools.lua",
-          "line": 182
+          "line": 258
         },
         {
           "file": "NativeTools.lua",
-          "line": 184
+          "line": 260
         },
         {
           "file": "FieldKit.lua",
@@ -3258,7 +3262,7 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 185
+          "line": 261
         }
       ],
       "directCallSites": [],
@@ -3289,11 +3293,11 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 248
+          "line": 324
         },
         {
           "file": "NativeTools.lua",
-          "line": 250
+          "line": 326
         }
       ],
       "directCallSites": [],
@@ -3384,6 +3388,10 @@
           "line": 89
         },
         {
+          "file": "NativeData.lua",
+          "line": 9
+        },
+        {
           "file": "BossTimeline.lua",
           "line": 51
         },
@@ -3397,7 +3405,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 163
+          "line": 93
+        },
+        {
+          "file": "NativeTools.lua",
+          "line": 239
         }
       ],
       "directCallSites": [],
@@ -4321,11 +4333,11 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 251
+          "line": 327
         },
         {
           "file": "NativeTools.lua",
-          "line": 252
+          "line": 328
         }
       ],
       "directCallSites": [],
@@ -4546,7 +4558,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 307
+          "line": 384
         },
         {
           "file": "FieldKit.lua",
@@ -4577,6 +4589,14 @@
       "coverage": "referenced"
     },
     {
+      "name": "AZS_ZONE_UPDATED",
+      "documentedMention": true,
+      "definitions": [],
+      "references": [],
+      "directCallSites": [],
+      "coverage": "unused"
+    },
+    {
       "name": "AZS_ZoneTitle",
       "documentedMention": false,
       "definitions": [
@@ -4594,7 +4614,7 @@
     "runtimeModules": 57,
     "nativeLuaFiles": 449,
     "declaredFunctions": 129,
-    "documentedAZSSymbols": 94,
+    "documentedAZSSymbols": 95,
     "referencedAZSSymbols": 83
   }
 }

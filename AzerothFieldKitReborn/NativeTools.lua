@@ -7,10 +7,34 @@ local function Count(value) local n=FieldKit.Number(value,nil,0,10000);return n 
 function T.Create(create,fit,move)
  T.fit=fit
  local defs={{"FieldKitEffectsFrame","Effects",-430,-110},{"FieldKitReviveFrame","Revive",0,160},
-  {"FieldKitEncounterFrame","Run reminders",430,-180}}
+  {"FieldKitEncounterFrame","Run reminders",430,-180},{"FieldKitBossListFrame","Campaign bosses",-UIParent:GetWidth()/2+480,UIParent:GetHeight()/2-120}}
  for i,def in ipairs(defs) do
-  local f=create(def[1],def[2],i==1 and T.rows or 3);T.frames[i]=f
+  local f=create(def[1],def[2],i==4 and 8 or (i==1 and T.rows or 3));T.frames[i]=f
   f:SetWidth(300);move(f,def[3],def[4],true);f:Hide()
+ end
+ local list=T.frames[4]
+ list:SetWidth(320);list.bossListOffset=0
+ list.note=list:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall")
+ list.note:SetPoint("BOTTOMLEFT",list,"BOTTOMLEFT",12,7);list.note:SetHeight(30);list.note:SetJustifyH("LEFT");FieldKitTheme.Font(list.note,11,FieldKitTheme.muted)
+ if list.EnableMouseWheel then list:EnableMouseWheel(true) end
+ list:SetScript("OnMouseWheel",function()
+  local max=math.max(0,(list.bossListCount or 0)-table.getn(list.rows))
+  list.bossListOffset=math.max(0,math.min(max,(list.bossListOffset or 0)-(arg1 or 0)))
+  T.BossList()
+ end)
+ local collapse=getglobal("FieldKitBossListFrameCollapse")
+ local onCollapse=collapse and collapse:GetScript("OnClick")
+ if onCollapse then collapse:SetScript("OnClick",function() onCollapse();T.BossList() end) end
+ for _,row in ipairs(list.rows) do
+  row.icon=row:CreateTexture(nil,"ARTWORK");row.icon:SetWidth(14);row.icon:SetHeight(14);row.icon:SetPoint("LEFT",row,"LEFT",0,0)
+  row:SetScript("OnEnter",function()
+   if list.azsMoving or not this.bossListEntry then return end
+   local e=this.bossListEntry
+   GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(e.label,1,.85,.55);GameTooltip:AddLine(e.value,1,1,1,true)
+   if FieldKitReborn.IsEndless() then GameTooltip:AddLine(FieldKit_L("Endless: the game does not provide the upcoming boss sequence."),.7,.7,.7,true) end
+   GameTooltip:Show()
+  end)
+  row:SetScript("OnLeave",function() GameTooltip:Hide() end)
  end
  for _,row in ipairs(T.frames[1].rows) do
   row.icon=row:CreateTexture(nil,"ARTWORK");row.icon:SetWidth(14);row.icon:SetHeight(14)
@@ -61,6 +85,58 @@ function T.ShowRows(frame,rows,total)
  end
  if not moving then T.fit(frame,count) end
  frame:Show()
+end
+-- Campaign order and states are native data, never inferred from spawn times.
+function T.BossListRows()
+ local out,defeated,nextSeen={},0,false
+ if not N.Fresh("AZSBOSSES") then return out,defeated,false end
+ local source=type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}
+ local ordered={}
+ for i=1,math.min(64,table.getn(source)) do local b=source[i]
+  if type(b)=="table" and type(b.name)=="string" and string.find(b.name,"%S") then
+   table.insert(ordered,{boss=b,order=FieldKit.Number(b.index,nil,1) or i,original=i})
+  end
+ end
+ table.sort(ordered,function(a,b) if a.order==b.order then return a.original<b.original end;return a.order<b.order end)
+ local charge=not FieldKitReborn.IsEndless() and FieldKitReborn.BossProgress() or nil
+ for _,item in ipairs(ordered) do local b=item.boss;local state=b.state;local status="Status not provided";local fraction=0;local tint={.65,.68,.7}
+  if state=="dead" or state=="slain" then status="Defeated";defeated=defeated+1;fraction=1;tint={.3,.7,.3}
+  elseif state=="up" then status="In combat";tint={.85,.3,.2}
+  elseif state=="due" then
+   if not nextSeen and not FieldKitReborn.IsEndless() then status="Next";nextSeen=true;fraction=charge or 0;tint={.65,.35,.85}
+   else status="Upcoming" end
+  end
+  local value=FieldKit_L(status)
+  if status=="Next" and charge~=nil then value=value..string.format(" · %.0f%%",math.floor(charge*100)) end
+  table.insert(out,{label=tostring(item.order)..". "..N.Text(FieldKitReborn.DisplayName(b.name)),value=value,fraction=fraction,tint=tint,
+   icon=FieldKitReborn.EnemyIcon(b.name),state=state,index=item.order})
+ end
+ return out,defeated,table.getn(out)>0
+end
+function T.BossList()
+ local frame=T.frames[4];if not frame then return end
+ if FieldKit.rebornLegacyFixture or not FieldKitRebornDB.bossListCard or (not N.Active() and N.Read("AZS_GetPhase")~="ready" and not FieldKit.layoutEditing) then frame:Hide();return end
+ if frame.bossListSerial~=N.serial then frame.bossListSerial=N.serial;frame.bossListOffset=0 end
+ local all,dead,known=T.BossListRows();local total=table.getn(all)
+ local offset=math.max(0,math.min(frame.bossListOffset or 0,math.max(0,total-table.getn(frame.rows))));frame.bossListOffset=offset;frame.bossListCount=total
+ local rows={};for i=offset+1,math.min(total,offset+table.getn(frame.rows)) do table.insert(rows,all[i]) end
+ if total==0 then rows={{label=FieldKit_L("Boss list not provided"),value=""}} end
+ local note=FieldKitReborn.IsEndless() and FieldKit_L("Endless: the game does not provide the upcoming boss sequence.") or ""
+ frame.fieldkitFooterHeight=note~="" and 36 or 0
+ T.ShowRows(frame,rows,known and (tostring(dead).." / "..total) or "")
+ for i,row in ipairs(frame.rows) do
+  row.bossListEntry=rows[i]
+  local e=rows[i]
+  if e then
+   local vw=e.value~="" and math.min(120,math.max(60,row.value:GetStringWidth()+10)) or 0
+   row.value:SetWidth(vw);row.label:SetWidth(math.max(40,frame:GetWidth()-vw-40))
+   if FieldKitReferenceHUD and FieldKitReferenceHUD.Fit then FieldKitReferenceHUD.Fit(row.label,12,10);FieldKitReferenceHUD.Fit(row.value,12,10) end
+   if e.tint then row:SetStatusBarColor(e.tint[1],e.tint[2],e.tint[3],.35) end
+  end
+ end
+ frame.note:SetWidth(frame:GetWidth()-24);frame.note:SetText(note)
+ if note~="" and not frame.mashCollapsed then frame.note:Show() else frame.note:Hide() end
+ FieldKitTheme.Update(frame)
 end
 -- Active player buffs from the client: icon, name (hidden tooltip), stacks and time left when exposed.
 function T.Buffs(rows)
@@ -294,8 +370,9 @@ function T.Update()
  if not T.frames[1] then return end
  N.Watch();T.Subscription()
  if T.serial~=N.serial then T.serial=N.serial;T.warnings={};T.recent={};T.lastBoss={};T.bossKeys={};T.endless=nil;T.endlessCycle=0 end
+ T.BossList()
  if not N.Active() and not FieldKit.layoutEditing then
-  for _,frame in ipairs(T.frames) do frame:Hide() end
+  for i,frame in ipairs(T.frames) do if i~=4 then frame:Hide() end end
   T.frames[1].lastRows={}
   T.warnings={};T.warningFrame:Hide();return
  end

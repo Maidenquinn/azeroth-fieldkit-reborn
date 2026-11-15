@@ -68,6 +68,8 @@ function FieldKit.BuildJourneySections(sections,actions)
   {kind="check",label="Gold and chest price",tip="Show the full counter strip: gold, chest price and, with a theme, kills and event currency. Off hides its artwork, icons and values together. With a theme, no empty native counters are substituted.",
    get=function() return FieldKitRebornDB.moneyFrame end,set=function(v) FieldKitRebornDB.moneyFrame=v;actions.SyncHudTally();actions.UpdateMoneyFrame() end},
   options.replaceTally,options.takenFrame,options.gearFrame,
+  {kind="check",label="Campaign bosses",tip="Show the campaign boss list in native order: defeated, fighting, next and upcoming. Available with or without a HUD theme; endless never invents a future sequence.",
+   get=function() return FieldKitRebornDB.bossListCard end,set=function(v) FieldKitRebornDB.bossListCard=v;FieldKitNativeTools.Update() end},
   {kind="check",label="Effects tracker",tip="Contextual totems, summons and native talent timers. Hidden without relevant data; filters are in Health & buffs.",
    get=function() return FieldKitRebornDB.effectsFrame end,set=function(v) FieldKitRebornDB.effectsFrame=v;FieldKitNativeTools.Update() end},
   {kind="check",label="Next boss reminder",tip="Next native boss and its progression. Hidden when no upcoming boss is provided.",

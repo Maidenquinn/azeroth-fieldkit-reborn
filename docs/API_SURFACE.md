@@ -392,3 +392,11 @@ Subscription failure preserves native announcements. Both displays are explicit
 profile preferences; baseline ownership is excluded from profile copies.
 Endless charge still comes solely from AZS_RUN.rift, and name from nbn. Missing
 charge is visible as unavailable; schedule/time do not supply a substitute.
+
+Campaign roster (.28): read AZS_SCHEDULE entries { index, name, state } in native
+index order; AZS_RUN.rift supplies only the first due campaign encounter's
+charge. AZSBOSSES / AZS_SCHEDULE_UPDATED participate in the existing native
+freshness barrier. No at/left timer or run kill total predicts an encounter.
+The roster is capped at 64 received entries / eight reusable visual rows.
+Endless retains the supplied campaign roster; unavailable future sequence is
+labelled explicitly. No new private API or native-table mutation is introduced.

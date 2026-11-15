@@ -22,3 +22,15 @@ assert(count>=241 and items>=66)
 assert(FieldKitReborn.DisplayName("Rapid Fire")=="Tir rapide")
 assert(FieldKitReborn.DisplayName("Surge of Strength")=="Afflux de force")
 print("PASS installed native French catalog: "..count.." class spells, "..items.." jewelry names; 5 French spell names legitimately identical to English")
+
+local maps=0
+for _,zone in ipairs(AZS_GEN.zones) do
+ AZS_ZONE={zone=zone.key};AZS_RUN={ph="playing",t=100,rift=25};AZS_SCHEDULE={}
+ for i,b in ipairs(zone.bosses) do AZS_SCHEDULE[i]={index=i,name=b.name,state=i==1 and "dead" or "due"} end
+ FieldKitNative.Watch();FieldKitNative.Packet("AZSBOSSES")
+ local rows,dead,known=FieldKitNativeTools.BossListRows()
+ assert(known and #rows==#zone.bosses and dead==1)
+ for i,b in ipairs(zone.bosses) do assert(rows[i].label==i..". "..FieldKitReborn.DisplayName(b.name)) end
+ maps=maps+1
+end
+print("PASS campaign boss roster against all "..maps.." installed native map catalogs")

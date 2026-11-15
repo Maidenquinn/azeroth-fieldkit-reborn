@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.27",
+  "version": "0.1.0-reborn.28",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "No new live client visual pass. Offline French checks cover 479 literal UI labels/help texts, option descriptors and dropdown choices, 241 installed class spells and 66 jewelry names, both theme families off/minimal/complete/alternative, fresh and persisted French settings, damage/healing/boss/recent/fallback/detached/modal/tooltips, player-name and raw-key preservation, effects/procs, DBC/server aliases and late name updates, floating grouped hits/misses, ranks and language refresh. Full runtime/settings and installed public API checks are run. Additional offline coverage: automatic native combat-damage takeover and restoration, explicit both-displays toggle, banner subscription/filters/native takeover/both/restore/failure, and endless nonzero/zero/missing charge across theme variants. Client observed at hero menu only; no live endless payload captured."
+  "inGameTestScope": "Offline campaign boss-card checks: native order/states/next charge, all 48 installed map catalogs, French/English, both theme families off/minimal/complete/alternative, dimensions, drag/save/profile, collapse, bounded scrolling/frame reuse, ready/choosing/paused/dead phases, empty/stale schedule and endless completed roster. Reuses the shared card materials and native layout/collision/scale/profile system. Full runtime/settings and installed public API checks. No new live client visual test is claimed; screenshots supplied by the maintainer show the native campaign roster and lack of future endless sequence."
 }
