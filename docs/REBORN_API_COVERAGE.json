@@ -3,7 +3,7 @@
   "liveGameValidation": false,
   "runtimeModules": 57,
   "runtimeSHA256": {
-    "Runtime.lua": "0a9ae03a03e3a8d34239411f6a01fd6c1b335ecb0c1bfe267228eb9b0f5e8be1",
+    "Runtime.lua": "f3dfbc40f56cc439e4b59e4a93ce4485829a776202f2eee9dd0fe0aee3befcf2",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -38,7 +38,7 @@
     "PartySync.lua": "43bb26e94146c793f9cd2a878756ddf96b1411891c6297520aafa650a24687cb",
     "PartyDetails.lua": "a4f8d24cca2cf2e5a6b8e06b74ba0401bacbfdc40cb5fcd9b3cf0354c3bfdb01",
     "ScreenLayers.lua": "406c14b9c9c4ec97dcc5655c7569d85a490c3292b49604684df5832d748dc7af",
-    "NativeTools.lua": "5c946d4176de2849b875af4f676fc575d6b57f15eb71ab28c6ade1f77c67ae65",
+    "NativeTools.lua": "8721304d17931eea665a0c486afe486607cb96f44ea28cc4316fcca0aea57dd5",
     "SpellAssets.lua": "5c443e759c4ff663fd0070f06566ac0de5e8c984c963341f50be72c8c4545681",
     "Loadout.lua": "41fa9c1cbd4a388e34da5c27f1c64be6bc0c07352e7e21ffdafde6cb40f08da9",
     "TakenDetails.lua": "9373f1cfad63e95f4fad5d316bae02573f27f94b9b900d536b59ba6449479822",
@@ -58,7 +58,7 @@
     "ThemeHUD.lua": "6a3f7f3d8b027f049709bcc5f4dd3b5baf5f324783c7024b334a7a9a0efd3da5",
     "ThemeTarget.lua": "46a244137cbfc17c39f0a9f108c8b17873c32dfa49f8cc0e086b4ce0304a7b4b",
     "ReferenceArt.lua": "b042e0777110f3a4519ccfadbf57bb4dcbb2e68ca9896f58f066775074605edf",
-    "ReferenceHUD.lua": "73dd0d5267c149277cc06f1faa76b618ddeb04038c31bfe2da1b78734d5a213d",
+    "ReferenceHUD.lua": "8fcdc425572bea7dc2a73a97118c77a46183d8e7437c77f478655d60d14e56e5",
     "ZoneThemes.lua": "1c749527ab665904c1e5578b159b8877157b7629db1db85f0c6b01ca258f18bc"
   },
   "nativeLuaSHA256": {
@@ -1431,7 +1431,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 1814
+          "line": 1884
         }
       ],
       "directCallSites": [
@@ -1736,15 +1736,15 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 262
+          "line": 264
         },
         {
           "file": "NativeTools.lua",
-          "line": 285
+          "line": 287
         },
         {
           "file": "NativeTools.lua",
-          "line": 385
+          "line": 387
         },
         {
           "file": "Loadout.lua",
@@ -2017,11 +2017,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 215
+          "line": 217
         },
         {
           "file": "NativeTools.lua",
-          "line": 387
+          "line": 389
         }
       ],
       "directCallSites": [],
@@ -2116,11 +2116,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 280
+          "line": 282
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 606
+          "line": 676
         },
         {
           "file": "ZoneThemes.lua",
@@ -2159,11 +2159,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 179
+          "line": 181
         },
         {
           "file": "NativeTools.lua",
-          "line": 386
+          "line": 388
         }
       ],
       "directCallSites": [],
@@ -2198,11 +2198,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 179
+          "line": 181
         },
         {
           "file": "NativeTools.lua",
-          "line": 387
+          "line": 389
         }
       ],
       "directCallSites": [],
@@ -2237,11 +2237,11 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 179
+          "line": 181
         },
         {
           "file": "NativeTools.lua",
-          "line": 386
+          "line": 388
         }
       ],
       "directCallSites": [],
@@ -2275,7 +2275,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 246
+          "line": 248
         },
         {
           "file": "ThemeHUD.lua",
@@ -2283,7 +2283,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 543
+          "line": 613
         }
       ],
       "directCallSites": [],
@@ -2462,15 +2462,15 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 332
+          "line": 334
         },
         {
           "file": "NativeTools.lua",
-          "line": 333
+          "line": 335
         },
         {
           "file": "NativeTools.lua",
-          "line": 337
+          "line": 339
         },
         {
           "file": "ZoneThemes.lua",
@@ -2785,7 +2785,7 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 607
+          "line": 677
         },
         {
           "file": "ZoneThemes.lua",
@@ -3125,19 +3125,19 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 231
+          "line": 233
         },
         {
           "file": "NativeTools.lua",
-          "line": 257
-        },
-        {
-          "file": "NativeTools.lua",
-          "line": 258
+          "line": 259
         },
         {
           "file": "NativeTools.lua",
           "line": 260
+        },
+        {
+          "file": "NativeTools.lua",
+          "line": 262
         },
         {
           "file": "FieldKit.lua",
@@ -3237,11 +3237,11 @@
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 557
+          "line": 627
         },
         {
           "file": "ReferenceHUD.lua",
-          "line": 599
+          "line": 669
         }
       ],
       "directCallSites": [],
@@ -3262,7 +3262,7 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 261
+          "line": 263
         }
       ],
       "directCallSites": [],
@@ -3293,11 +3293,11 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 324
+          "line": 326
         },
         {
           "file": "NativeTools.lua",
-          "line": 326
+          "line": 328
         }
       ],
       "directCallSites": [],
@@ -3409,7 +3409,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 239
+          "line": 241
         }
       ],
       "directCallSites": [],
@@ -4333,11 +4333,11 @@
       "references": [
         {
           "file": "NativeTools.lua",
-          "line": 327
+          "line": 329
         },
         {
           "file": "NativeTools.lua",
-          "line": 328
+          "line": 330
         }
       ],
       "directCallSites": [],
@@ -4558,7 +4558,7 @@
         },
         {
           "file": "NativeTools.lua",
-          "line": 384
+          "line": 386
         },
         {
           "file": "FieldKit.lua",

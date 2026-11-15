@@ -217,6 +217,76 @@ function R.ApplyOpacity()
  end
  return n
 end
+-- The campaign roster shares the reference cards' opaque edge artwork, clean body and viewport scale.
+-- Slice only the outer rim: row sockets and category/footer decorations never leak into the roster.
+function R.BossListCard(f,rows,total,note)
+ local themed=R.active and FieldKitZoneThemes.active and R.canvas and R.canvas:IsShown()
+ if not themed then
+  if f.bossReference then
+   f.bossReference=false;f.fieldkitArtOnly=nil;f:SetScale(FieldKit.Number(FieldKitRebornDB.nativeCardScale,100,50,130)/100)
+   for _,t in ipairs(f.bossRim or {}) do t:Hide() end
+   if f.cleanBody then f.cleanBody:Hide() end
+   R.opacityFrames[f]=nil;T.State(f,false)
+   f.title:ClearAllPoints();f.title:SetPoint("TOPLEFT",f,"TOPLEFT",12,-12);f.title:SetWidth(190);f.title:SetHeight(18);T.Font(f.title,12,T.gold)
+   f.total:ClearAllPoints();f.total:SetPoint("TOPRIGHT",f,"TOPRIGHT",-42,-12);f.total:SetHeight(18);T.Font(f.total,12,T.text)
+   for _,row in ipairs(f.rows) do row.icon:ClearAllPoints();row.icon:SetPoint("LEFT",row,"LEFT",0,0);row.icon:SetWidth(14);row.icon:SetHeight(14) end
+  end
+  return false
+ end
+ if not f.bossReference then f.bossPreviousScale=f:GetScale();f.bossReference=true end
+ Blank(f);f:SetAlpha(1)
+ local zone=T.zone=="naxx" and "naxx" or "elwynn"
+ local sw,sh,th=400,259,512;if zone=="naxx" then sw=326;sh=335 end
+ local header=zone=="naxx" and 51 or 46
+ local size=FieldKitRebornDB.cardSizes[f:GetName()]
+ local w=math.max(320,size and size.width or 400)
+ local count=math.min(table.getn(rows),table.getn(f.rows))
+ local footer=note~="" and 44 or 0
+ local h=math.max(header+20+count*28+footer,size and size.height or 0)
+ f.fieldkitExpandedHeight=h;f.fieldkitNaturalHeight=header+20+count*28+footer
+ if not f.azsMoving then
+  f:SetScale(R.canvas:GetScale()*FieldKitZoneThemes.ElementScale(f:GetName()))
+  f:SetWidth(w);f:SetHeight(f.mashCollapsed and header or h)
+ end
+ w=f:GetWidth();h=f:GetHeight()
+ f.bossRim=f.bossRim or {}
+ local slices={{0,0,64,header,0,0,64,header},{64,0,sw-88,header,64,0,w-88,header},{sw-24,0,24,header,w-24,0,24,header},
+  {0,header,20,sh-header-16,0,header,20,math.max(1,h-header-16)},
+  {sw-20,header,20,sh-header-16,w-20,header,20,math.max(1,h-header-16)},
+  {0,sh-16,24,16,0,h-16,24,16},{24,sh-16,sw-48,16,24,h-16,w-48,16},{sw-24,sh-16,24,16,w-24,h-16,24,16}}
+ for i,a in ipairs(slices) do
+  local t=f.bossRim[i];if not t then t=f:CreateTexture(nil,"BORDER");f.bossRim[i]=t end
+  t:SetTexture(T.media.."ReferenceHUD\\"..zone.."_complete_Damage_1_frame.tga")
+  t:SetTexCoord(a[1]/512,(a[1]+a[3])/512,a[2]/th,(a[2]+a[4])/th)
+  t:ClearAllPoints();t:SetPoint("TOPLEFT",f,"TOPLEFT",a[5],-a[6]);t:SetWidth(a[7]);t:SetHeight(a[8]);t:SetAlpha(1)
+  if f.mashCollapsed and (i==4 or i==5) then t:Hide() else t:Show() end
+ end
+ if not f.cleanBody then f.cleanBody=f:CreateTexture(nil,"BACKGROUND") end
+ local t=f.cleanBody;t:SetTexture(T.media.."ReferenceHUD\\"..zone.."_card_body_v9.tga");t:SetTexCoord(0,1,0,.75)
+ t:ClearAllPoints();t:SetPoint("TOPLEFT",f,"TOPLEFT",17,-12);t:SetWidth(w-34);t:SetHeight(math.max(1,h-26));t:SetAlpha(R.Opacity());t:Show();R.opacityFrames[f]=true
+ f.title:ClearAllPoints();f.title:SetPoint("TOPLEFT",f,"TOPLEFT",65,-11);f.title:SetWidth(w-180);f.title:SetHeight(26)
+ f.title:SetText(FieldKit_L("Campaign bosses"));T.Font(f.title,20,T.gold);R.Fit(f.title,20,14)
+ f.total:ClearAllPoints();f.total:SetPoint("TOPRIGHT",f,"TOPRIGHT",-43,-13);f.total:SetWidth(65);f.total:SetHeight(22);f.total:SetText(total);T.Font(f.total,14,R.body)
+ local collapse=getglobal(f:GetName().."Collapse")
+ if collapse then collapse:ClearAllPoints();collapse:SetPoint("TOPRIGHT",f,"TOPRIGHT",-8,-8);collapse:SetWidth(24);collapse:SetHeight(24);collapse:SetFrameLevel(f:GetFrameLevel()+25) end
+ f.lastRows=rows
+ local step=count>0 and math.max(28,(h-header-20-footer)/count) or 28
+ for i,row in ipairs(f.rows) do
+  local e=rows[i];row.bossListEntry=e
+  if e and not f.mashCollapsed then
+   row:ClearAllPoints();row:SetPoint("TOPLEFT",f,"TOPLEFT",26,-header-8-(i-1)*step);row:SetWidth(w-52);row:SetHeight(24);row:SetValue(0)
+   row.icon:ClearAllPoints();row.icon:SetPoint("LEFT",row,"LEFT",0,0);row.icon:SetWidth(20);row.icon:SetHeight(20)
+   if e.icon then row.icon:SetTexture(e.icon);row.icon:SetAlpha(1);row.icon:Show() else row.icon:Hide() end
+   local vw=e.value~="" and math.min(112,(w-80)*.4) or 0
+   row.label:ClearAllPoints();row.label:SetPoint("LEFT",row,"LEFT",e.icon and 28 or 0,0);row.label:SetWidth(w-88-vw);row.label:SetHeight(24);row.label:SetText(e.label);T.Font(row.label,16,R.body);R.Fit(row.label,16,12)
+   row.value:ClearAllPoints();row.value:SetPoint("RIGHT",row,"RIGHT",0,0);row.value:SetWidth(vw);row.value:SetHeight(24);row.value:SetText(e.value);T.Font(row.value,15,e.tint or R.body);R.Fit(row.value,15,12)
+   row:Show()
+  else row:Hide() end
+ end
+ f.note:ClearAllPoints();f.note:SetPoint("BOTTOMLEFT",f,"BOTTOMLEFT",26,16);f.note:SetWidth(w-52);f.note:SetHeight(32);f.note:SetText(note);T.Font(f.note,12,T.muted)
+ if note~="" and not f.mashCollapsed then f.note:Show() else f.note:Hide() end
+ f:Show();return true
+end
 function R.ModeShown()
  return FieldKitRebornDB.runModeCard and (not FieldKitRebornDB.hideUnknownMode or FieldKit.GetHeroicLevel()~=nil)
 end

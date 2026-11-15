@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.28",
+  "version": "0.1.0-reborn.29",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,7 +18,7 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.28",
+    "version": "0.1.0-reborn.29",
     "maintainerAcceptedForPublication": false,
     "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Reborn registry review pending; original-game approval does not apply",
@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Offline campaign boss-card checks: native order/states/next charge, all 48 installed map catalogs, French/English, both theme families off/minimal/complete/alternative, dimensions, drag/save/profile, collapse, bounded scrolling/frame reuse, ready/choosing/paused/dead phases, empty/stale schedule and endless completed roster. Reuses the shared card materials and native layout/collision/scale/profile system. Full runtime/settings and installed public API checks. No new live client visual test is claimed; screenshots supplied by the maintainer show the native campaign roster and lack of future endless sequence."
+    "inGameTestScope": "Automated runtime checks for reference material, header/row bounds, opaque edges and icons at 0/37/100 percent body opacity, viewport scaling, collapse and native restoration, plus the existing campaign/state/locale/settings and installed public API suites. No new live-client visual validation is claimed."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "0a9ae03a03e3a8d34239411f6a01fd6c1b335ecb0c1bfe267228eb9b0f5e8be1"
+      "sha256": "f3dfbc40f56cc439e4b59e4a93ce4485829a776202f2eee9dd0fe0aee3befcf2"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -210,7 +210,7 @@
     "NativeTools.lua": {
       "maxUpvalues": 3,
       "functions": 28,
-      "sha256": "5c946d4176de2849b875af4f676fc575d6b57f15eb71ab28c6ade1f77c67ae65"
+      "sha256": "8721304d17931eea665a0c486afe486607cb96f44ea28cc4316fcca0aea57dd5"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -309,8 +309,8 @@
     },
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
-      "functions": 193,
-      "sha256": "73dd0d5267c149277cc06f1faa76b618ddeb04038c31bfe2da1b78734d5a213d"
+      "functions": 194,
+      "sha256": "8fcdc425572bea7dc2a73a97118c77a46183d8e7437c77f478655d60d14e56e5"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

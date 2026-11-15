@@ -123,6 +123,8 @@ function T.BossList()
  if total==0 then rows={{label=FieldKit_L("Boss list not provided"),value=""}} end
  local note=FieldKitReborn.IsEndless() and FieldKit_L("Endless: the game does not provide the upcoming boss sequence.") or ""
  frame.fieldkitFooterHeight=note~="" and 36 or 0
+ local summary=known and (tostring(dead).." / "..total) or ""
+ if FieldKitReferenceHUD and FieldKitReferenceHUD.BossListCard(frame,rows,summary,note) then return end
  T.ShowRows(frame,rows,known and (tostring(dead).." / "..total) or "")
  for i,row in ipairs(frame.rows) do
   row.bossListEntry=rows[i]

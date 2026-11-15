@@ -59,3 +59,30 @@ AZS_RUN.ph="choosing";FieldKitScreenLayers.ApplyChoice();assert(f:IsShown() and 
 AZS_RUN.ph="paused";FieldKitScreenLayers.ClearChoice();T.Update()
 AZS_RUN.ph="dead";T.Update();assert(not f:IsShown())
 print("PASS campaign boss card: native index/state/charge and no schedule mutation; FR/EN x two theme families/off/variants; opt-out, frame reuse, endless completed roster, missing/stale data, pagination, ready/choice/end phases")
+
+-- Reference material and measured content bounds, including opacity and theme release.
+AZS_RUN.ph="playing";d.bossListCard=true;d.cardSizes.FieldKitBossListFrame=nil
+AZS_SCHEDULE={{index=1,name="Hogger",state="due"},{index=2,name="Mother Fang",state="up"}}
+N.Watch();N.Packet("AZSBOSSES")
+for _,zone in ipairs({"elwynn","naxx"}) do
+ d.zoneThemeMode=zone;d.zoneThemeVariant="complete";C.Set("zoneThemes",true);T.Update()
+ local f=FieldKitBossListFrame;local r=FieldKitReferenceHUD
+ assert(f.bossReference and f.fieldkitArtOnly and #f.bossRim==8)
+ assert(f:GetWidth()==400 and f:GetScale()==r.canvas:GetScale()*C.ElementScale(f:GetName()))
+ local _,_,_,tx,ty=f.title:GetPoint();local _,_,_,rx,ry=f.rows[1]:GetPoint()
+ assert(tx==65 and -ry>=-ty+f.title:GetHeight()+8,"Roster header overlaps the first row")
+ assert(rx>=20 and rx+f.rows[1]:GetWidth()<=f:GetWidth()-20)
+ assert(f.rows[1].icon:GetWidth()==20 and f.rows[1].label:GetHeight()==24)
+ for _,opacity in ipairs({0,37,100}) do
+  d.cardOpacity=opacity;r.ApplyOpacity();assert(f.cleanBody:GetAlpha()==opacity/100)
+  for _,edge in ipairs(f.bossRim) do assert(edge:GetAlpha()==1) end
+  assert(f.rows[1].icon:GetAlpha()==1 and f:GetAlpha()==1)
+ end
+ click(FieldKitBossListFrameCollapse);assert(f:GetHeight()>=46 and not f.rows[1]:IsShown())
+ click(FieldKitBossListFrameCollapse);assert(f.rows[1]:IsShown())
+ C.Set("zoneThemes",false);T.Update()
+ assert(not f.bossReference and not f.fieldkitArtOnly and not f.cleanBody:IsShown())
+ for _,edge in ipairs(f.bossRim) do assert(not edge:IsShown()) end
+ assert(f.rows[1].icon:GetWidth()==14)
+end
+print("PASS campaign roster reference rim/body/opacity/viewport scale, padded header/rows, collapse and native material restoration")

@@ -1,3 +1,5 @@
+Version reborn.29 changes only campaign-card presentation; no native API additions or data inference.
+
 # Native effects and data boundary
 
 ## Reborn reborn.4 native icon and layout integration

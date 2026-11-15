@@ -1,3 +1,10 @@
+# 0.1.0-reborn.29 — Campaign card reference styling
+
+- Replace the generic themed campaign frame with the reference artwork, clean body, opaque rim and matching viewport scale.
+- Separate the title, completion count and collapse control. Pad the boss rows and icons; reserve footer space for the endless notice.
+- Restore native material and icon dimensions when themes are disabled. Retain movement, dimensions, profiles, collapse and bounded scrolling.
+- Add automated geometry/material/opacity/scale regressions for both theme families. No new live-client visual acceptance claimed.
+
 # 0.1.0-reborn.28 — Campaign boss roster card
 
 - Add a default-on Campaign bosses card for theme off/on using the shared card material and layout system. Retain completed bosses and distinguish active, next and upcoming encounters in native index order. Show only native next-boss charge, never an inferred timer.
