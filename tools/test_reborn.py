@@ -19,6 +19,8 @@ def runtime(prelude=None, factory=False):
     return l
 def native_locale(addons):
     l=runtime()
+    # Native stock menu translations use a separate registrar since 0.6.7.
+    l.execute('AZS_StockStrings=function() end')
     l.execute('AZS_L={};function AZS_LocaleStrings(lang,t) if lang=="frFR" then for k,v in pairs(t) do AZS_L[k]=v end end end')
     core=addons/'AzerothSurvivors'
     for path in [core/'Generated/Content_frFR.lua',*sorted(core.glob('Locale_frFR*.lua'))]:

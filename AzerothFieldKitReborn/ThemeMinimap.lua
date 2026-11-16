@@ -4,6 +4,21 @@ FieldKitThemeMinimap={active=false,hidden={}}
 -- interception (ON by default since the mouse stacking fix: gear and other ring buttons ride the gold border), rim/proxies/follower = FieldKit parts.
 FieldKitThemeMinimap.probe={ring=true,rim=true,proxies=true,follower=true}
 local M=FieldKitThemeMinimap
+-- The native renderer caches a screen rectangle. Size, inherited scale and
+-- viewport changes need the same invalidation as a drag, including ultrawide.
+function M.RefreshViewport(owner)
+ if not Minimap or not owner then return end
+ local w,h=UIParent:GetWidth(),UIParent:GetHeight()
+ local sw=type(GetScreenWidth)=="function" and GetScreenWidth() or w
+ local sh=type(GetScreenHeight)=="function" and GetScreenHeight() or h
+ local stamp=table.concat({tostring(owner:GetLeft()),tostring(owner:GetTop()),owner:GetEffectiveScale(),
+  Minimap:GetWidth(),Minimap:GetHeight(),Minimap:GetEffectiveScale(),w,h,sw,sh},":")
+ if M.screenStamp==stamp then return false end
+ M.screenStamp=stamp
+ -- Never turn a hidden native map on merely to invalidate its cache.
+ if Minimap:IsShown() then Minimap:Hide();Minimap:Show() end
+ return true
+end
 local borderNames={"MinimapBorder","MinimapBorderTop","MinimapZoneTextButton","MinimapToggleButton","MinimapBackdrop"}
 function M.Rotate(x,y)
  if FieldKit.GetCVar("rotateMinimap")~="1" then return x,y end
@@ -264,14 +279,14 @@ function M.Restore()
  if Minimap and Minimap:GetParent()==M.root then
   local shown=Minimap:IsShown();Minimap:SetParent(old.parent);Minimap:ClearAllPoints()
   for i=1,table.getn(old.points) do local a=old.points[i];Minimap:SetPoint(a[1],a[2],a[3],a[4],a[5]) end
-  Minimap:SetWidth(old.width);Minimap:SetHeight(old.height)
+  Minimap:SetWidth(old.width);Minimap:SetHeight(old.height);Minimap:SetScale(old.scale or 1)
   if Minimap.SetMaskTexture then pcall(Minimap.SetMaskTexture,Minimap,old.mask) end
   if shown then Minimap:Hide();Minimap:Show() end
  end
  for f,alpha in pairs(M.hidden) do if f:GetAlpha()==0 then f:SetAlpha(alpha) end end
  for _,name in ipairs({"GameTimeFrame","MinimapZoomIn","MinimapZoomOut"}) do local f=getglobal(name);if f then FieldKitThemeHUD.RestoreOne(f) end end
  if old.level and Minimap.SetFrameLevel then Minimap:SetFrameLevel(old.level) end
- M.layerKey=nil;M.maskShape=nil
+ M.layerKey=nil;M.maskShape=nil;M.screenStamp=nil
  if M.roundRing then M.roundRing:Hide() end
  M.hidden={};M.active=false;M.before=nil
  if M.dragHandle then M.dragHandle:Hide() end
@@ -334,7 +349,7 @@ function M.Apply(variant)
   local mask="Textures\\MinimapMask"
   if Minimap.GetMaskTexture then local ok,path=pcall(Minimap.GetMaskTexture,Minimap);if ok and type(path)=="string" then mask=path end end
   local points=FieldKitThemeHUD.Points(Minimap)
-  M.before={parent=parent,points=points,width=Minimap:GetWidth(),height=Minimap:GetHeight(),mask=mask,level=Minimap.GetFrameLevel and Minimap:GetFrameLevel(),scripts={},mouse=Minimap.IsMouseEnabled and Minimap:IsMouseEnabled(),movable=Minimap.IsMovable and Minimap:IsMovable()}
+  M.before={parent=parent,points=points,width=Minimap:GetWidth(),height=Minimap:GetHeight(),scale=Minimap:GetScale(),mask=mask,level=Minimap.GetFrameLevel and Minimap:GetFrameLevel(),scripts={},mouse=Minimap.IsMouseEnabled and Minimap:IsMouseEnabled(),movable=Minimap.IsMovable and Minimap:IsMovable()}
   for _,event in ipairs({"OnDragStart","OnDragStop","OnMouseDown","OnMouseUp"}) do M.before.scripts[event]=Minimap:GetScript(event) end
   -- FieldKit installs NO script on the native Minimap any more: the map is never moved on its own. The group is moved
   -- from the identity card / art frame, or from the dedicated handle (see FieldKitReferenceHUD.Map).
@@ -367,7 +382,7 @@ function M.Apply(variant)
   if not M.SetMask(shape) then M.reason="Square mask rejected";M.before=nil;return false end
   M.active=true;M.reason=nil
   for _,name in ipairs({"MinimapZoomIn","MinimapZoomOut"}) do local f=getglobal(name);if f then FieldKitThemeHUD.Save(f);f:SetParent(FieldKitThemeHUD.Hidden()) end end
-  Minimap:SetParent(M.root)
+  Minimap:SetParent(M.root);Minimap:SetScale(1)
   for i=1,table.getn(borderNames) do local f=getglobal(borderNames[i]);if f and f.SetAlpha then M.hidden[f]=f:GetAlpha();f:SetAlpha(0) end end
  end
  if not M.SetMask(shape) then M.Restore();M.reason="Square mask rejected";return false end

@@ -91,6 +91,7 @@ local function FinishMove()
  local f=NativeChat()
  if f then
   f:StopMovingOrSizing()
+  FieldKitAlignment.Snap(f)
   SaveAnchor(f)
  end
  if FieldKit.ApplyChatStyle then FieldKit.ApplyChatStyle() end

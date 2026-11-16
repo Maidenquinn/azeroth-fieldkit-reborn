@@ -183,10 +183,18 @@ function P.Init()
    -- Discard invalid indices only. Preserve damaged valid slots for
    -- manual recovery instead of destroying the player's saved data.
    store[key]=nil
-  elseif Valid(value) and
-   (value.schema~=2 or type(value.nilValues)~="table") then
-   if not baseline then baseline=Capture() end
-   if baseline then Upgrade(value,baseline) end
+  elseif Valid(value) then
+   -- A schema-2 slot can predate newly declared display preferences.
+   -- Hydrate those too, before ApplySnapshot's complete-copy validation.
+   local needs=value.schema~=2 or type(value.nilValues)~="table"
+   for _,name in ipairs(PreferenceKeys()) do
+    if value.values[name]==nil and not (type(value.nilValues)=="table" and value.nilValues[name]) then needs=true end
+   end
+   for _,name in ipairs(tableKeys) do if type(value.tables[name])~="table" then needs=true end end
+   if needs then
+    if not baseline then baseline=Capture() end
+    if baseline then Upgrade(value,baseline) end
+   end
   end
  end
 end
@@ -343,6 +351,7 @@ function P.Save(number)
  return true
 end
 function P.Load(number)
+ if FieldKitAlignment then FieldKitAlignment.Stop() end
  if P.preview then return false end
  local slot=Slot(number)
  if not slot or not FieldKitRebornDB then return false end

@@ -188,6 +188,11 @@ again.execute('local p,r,rp,x,y=FieldKitStatsFrame:GetPoint();assert(p=="TOPRIGH
 again.execute('assert(FieldKitRebornDB.cardStyle==2 and FieldKitRebornDB.cardOpacity==37 and FieldKitRebornDB.meterValues==2)')
 again.execute('assert(FieldKitRebornDB.language=="fr");assert(FieldKitRebornDB.guardianPins==false);assert(FieldKitRebornDB.targetHealthMode==2);assert(FieldKitRebornDB.combatTextX==-123);assert(FieldKitRebornDB.combatEvents.crit.size=="31");assert(FieldKitRebornDB.chatCopy==false)')
 zone_themes=runtime();zone_themes.execute((base/"tests/zone_themes.lua").read_text(encoding="utf8"))
+alignment=runtime();alignment.execute((base/"tests/alignment.lua").read_text(encoding="utf8"))
+alignment_themes=runtime();alignment_themes.execute((base/"tests/alignment_themes.lua").read_text(encoding="utf8"))
+alignment.execute((base/"tests/snapshot.lua").read_text(encoding="utf8"))
+alignment_reload=runtime(alignment.eval('SNAPSHOT(FieldKitRebornDB)'))
+alignment_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitRebornDB.alignmentStep==48 and FieldKitRebornDB.alignmentSnap and FieldKitRebornDB.alignmentGrid);assert(not FieldKitAlignment.active and not FieldKitAlignment.overlay)')
 # Walk every compiled nested function, even callbacks the mock did not reach.
 # Generated card and round-map textures: their alpha layers are checked, not trusted (alpha.45 shipped a matte that still carried the baked
 # interior of the cards, and a ring whose path never resolved).

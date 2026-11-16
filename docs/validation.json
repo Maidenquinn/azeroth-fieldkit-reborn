@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.35",
+  "version": "0.1.0-reborn.36-dev",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -16,26 +16,26 @@
   "inGameTest": false,
   "partySyncTwoClientsSimulated": true,
   "partySyncLiveTransportConfirmed": false,
-  "approval": "maintainer accepted for publication; not independently certified",
+  "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.35",
-    "maintainerAcceptedForPublication": true,
-    "maintainerAcceptanceDate": "2026-11-15",
+    "version": "0.1.0-reborn.36-dev",
+    "maintainerAcceptedForPublication": false,
+    "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": false,
-    "githubPrerelease": false,
+    "inGameTestByAgent": true,
+    "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
-    "maintainerInGameTestingReported": true,
-    "inGameTestScope": "Full runtime/settings/locale/API tests; installed native anchor catalogue and projection; guardian enumeration, creature height/metric projection, unchanged chest clearance, finite setting bounds and independent profile restoration. The maintainer confirmed final live gameplay acceptance and authorized stable release. The agent's visual check was interrupted by the physical Escape key; it is not recorded as completed agent visual validation. Co-op and other resolutions are not independently certified."
+    "maintainerInGameTestingReported": false,
+    "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. No publication acceptance."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "2ac78f02c2ba897d110371187a6c5d0d69a7a1588b15a5f8a2fe35b9058aaab0"
+      "sha256": "faac2156d594f7cff8dd007f9d9f36a41d96253fee2c42c8838ee6596d5aa609"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -60,7 +60,7 @@
     "NativeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 45,
-      "sha256": "c60df3dbc81ebda8481de0cadc88e938e9596a6afa4afc527461a7086ed629a0"
+      "sha256": "2fe0797d4233f2f8ab657de3ce8c4293c820acb0982eccbffaf3945ed23135f9"
     },
     "NativeLayout.lua": {
       "maxUpvalues": 7,
@@ -77,15 +77,20 @@
       "functions": 4,
       "sha256": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81"
     },
+    "Alignment.lua": {
+      "maxUpvalues": 3,
+      "functions": 23,
+      "sha256": "dba5ff8f69b64d07cac759294a6f97d52c8e84e5bcfb26d6f0ae2d231f7b6376"
+    },
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "fa79c46bdd1ac993a459d219d5082510453ba5e886e8a142f0f22c258f7bdfdc"
+      "sha256": "8cab48c5b6283e84f800da5fd6e39ba1652514d280a1c0c6310b47e16600abbc"
     },
     "Profiles.lua": {
       "maxUpvalues": 6,
       "functions": 33,
-      "sha256": "74dc00eef90047efa38b257a26541ef1ddb5b0fd66fdc84abc14600b9d30dcce"
+      "sha256": "6499c08ac34cf7277ef021b50a843592cafbbb58709e15881477f3f44f75dbc3"
     },
     "FactoryPresets.lua": {
       "maxUpvalues": 0,
@@ -100,7 +105,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "e72cadd74562bd3dae3799f0482b0310a0f5b4f801ccdbb2ea23f57f775fc74e"
+      "sha256": "49df223b5ff66c6a73c7e8ef168742964b686e29ed6c64a913581576b4389211"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
@@ -180,7 +185,7 @@
     "HudStack.lua": {
       "maxUpvalues": 7,
       "functions": 13,
-      "sha256": "3b03b97ab491f6802c2847b5d44b8608dd90d1ae17f2f0f7aa0d66491fcceff8"
+      "sha256": "d2c44af7c87923fbc298521544130644e36ce155033786fcd1e382f1fec1fec5"
     },
     "CardLayout.lua": {
       "maxUpvalues": 2,
@@ -254,13 +259,13 @@
     },
     "Interface.lua": {
       "maxUpvalues": 28,
-      "functions": 235,
-      "sha256": "7cc27bece2809583830a382a7b70992c36eb665e937219ee3e07182a2966b9ad"
+      "functions": 236,
+      "sha256": "520195c3f962add5a8d6f5f21f2668fa7c3fa6d055df523293b33f875f504a65"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 192,
-      "sha256": "f8869c235216249529568a47afcd1f1875ca82db57cbd37c133b853256cae973"
+      "sha256": "f3fc910abab3a50d13e6b082112aa44d5d4b3b0b7c267fab7c296fa7d34dc6b2"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
@@ -290,12 +295,12 @@
     "CopyLog.lua": {
       "maxUpvalues": 20,
       "functions": 47,
-      "sha256": "ced8dba7c9b6182eb6e81c2fa94a52ff79e1b8fdcf9dc769ece3357dea3eb625"
+      "sha256": "fdca16054928f6794923cc3f0bfbab538c2b0038a6a2a6b9ee2e565d920cc3b1"
     },
     "ThemeMinimap.lua": {
       "maxUpvalues": 5,
-      "functions": 28,
-      "sha256": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2"
+      "functions": 29,
+      "sha256": "8320246fd8133ea9feb2944c44e072a9b7e031e2ff57f18f3395c92bc591bc66"
     },
     "ThemeHUD.lua": {
       "maxUpvalues": 5,
@@ -314,13 +319,13 @@
     },
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
-      "functions": 196,
-      "sha256": "f7bd656edf4a7b16da49db05335cce17f9ca47827930d53c77a8b6c83d1b41f6"
+      "functions": 197,
+      "sha256": "7c267b85c2d5cc4a34304d33588223ea3940d6b05b75f34f0f64e4859f591d2c"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "6824d1b8716067d209dc6856e17fdd0071ac8cf50bd57ba7aafc619bfb847534"
+      "sha256": "3bbdf4e28d10aa9ca6254dc67d170a2e6d88cf9315a81f3fd8e11529b2a62501"
     }
   }
 }

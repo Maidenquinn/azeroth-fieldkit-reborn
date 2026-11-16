@@ -289,7 +289,7 @@ local function RestorePoints(f,points)
 end
 local function StopNative(s)
  if not s or not s.dragging then return end
- s.dragging=nil;s.frame:StopMovingOrSizing();FieldKitPositions.Save(s.frame)
+ s.dragging=nil;s.frame:StopMovingOrSizing();FieldKitAlignment.Snap(s.frame);FieldKitPositions.Save(s.frame)
 end
 local function ForwardNative(hit,root,script)
  local source=hit;local fn=source:GetScript(script)

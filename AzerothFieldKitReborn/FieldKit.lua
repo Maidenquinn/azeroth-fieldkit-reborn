@@ -169,6 +169,7 @@ local function FinishMoving(frame)
 	frame.azsMoving = nil
  if FieldKitNativeLayout then FieldKitNativeLayout.lastMoved=frame end
 	frame:StopMovingOrSizing()
+ FieldKitAlignment.Snap(frame)
  if FieldKitZoneThemes and FieldKitZoneThemes.Remember(frame) then return end
 	if FieldKitPositions.Save(frame,frame.fieldkitTopLeftAnchor) then FieldKitPositions.Restore(frame) end
 end
@@ -3227,6 +3228,7 @@ SlashCmdList["FieldKit"] = function(msg)
  if msg=="diag" then FieldKitDiagnostics.Command("");return end
  if string.sub(msg,1,5)=="diag " then FieldKitDiagnostics.Command(string.sub(msg,6));return end
  if msg=="native" then FieldKitNativeTools.Diagnostic();return end
+ if msg=="align" then FieldKitAlignment.Start();return end
  if msg=="lock" or msg=="unlock" then FieldKit.SetWindowsLocked(msg=="lock");return end
 	if msg == "money" then
 		AttachMoneyToBar(true)

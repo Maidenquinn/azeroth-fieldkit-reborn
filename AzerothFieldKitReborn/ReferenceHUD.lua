@@ -817,7 +817,7 @@ function R.Map()
  local hole=R.layout.mapHole or {a[1],a[2],a[3],a[3]};local side=math.max(hole[3],hole[4])
  local round=M.shape=="round";if round then side=R.RoundGeometry(R.layout,hole) end
  local hx,hy=hole[1]+hole[3]/2-side/2,hole[2]+hole[4]/2-side/2
- Minimap:ClearAllPoints();Minimap:SetPoint("TOPLEFT",M.root,"TOPLEFT",hx-p[1],p[2]-hy);Minimap:SetWidth(side);Minimap:SetHeight(side);R.MapRim(M,hole);R.MapRound(M,hole,side);local owner=R.layout.rects.mapArt and M.root or H.identity;local stamp=tostring(owner:GetLeft())..":"..tostring(owner:GetTop())..":"..tostring(owner:GetEffectiveScale());if M.screenStamp~=stamp then Minimap:Hide();Minimap:Show();M.screenStamp=stamp end
+ Minimap:SetScale(1);Minimap:ClearAllPoints();Minimap:SetPoint("TOPLEFT",M.root,"TOPLEFT",hx-p[1],p[2]-hy);Minimap:SetWidth(side);Minimap:SetHeight(side);R.MapRim(M,hole);R.MapRound(M,hole,side);local owner=R.layout.rects.mapArt and M.root or H.identity;M.RefreshViewport(owner)
  local queue=getglobal("MiniMapBattlefieldFrame");if queue and R.queueClick then FieldKitZoneThemes.Mask(queue,true) end
  local world=getglobal("MiniMapWorldMapButton");if world and R.worldClick then FieldKitZoneThemes.Mask(world,true) end
  local clock=getglobal("GameTimeFrame");if clock then FieldKitZoneThemes.Mask(clock,true) end
@@ -830,8 +830,7 @@ function R.Map()
    local owner=(M.root and M.root.azsMoving and M.root) or (H.identity and H.identity.azsMoving and H.identity) or (M.dragOwner and M.dragOwner.azsMoving and M.dragOwner)
    if not owner or M.probe.follower==false then M.followStamp=nil;return end
    follower.t=follower.t+(arg1 or 0);if follower.t<.03 then return end;follower.t=0
-   local stamp=tostring(owner:GetLeft())..":"..tostring(owner:GetTop())
-   if stamp~=M.followStamp then M.followStamp=stamp;Minimap:Hide();Minimap:Show() end
+   M.RefreshViewport(owner)
   end)
  end
  -- No FieldKit frame covers the map any more: the old drag handle sat over the native map and the map's own buttons, and
@@ -1139,6 +1138,11 @@ function R.TakenPass(d)
  end
 end
 local function Inset(name) if name=="Taken" then return {0,0,0,0} end;if name=="BossList" then return {6,2,6,4} end;local t=OPAQUE[R.key];return (t and t[name]) or {6,6,6,6} end
+-- Expose the same visible frame bounds to the alignment editor as collision placement.
+function R.AlignmentInsets(frame)
+ for kind,f in pairs(R.frames or {}) do if f==frame then return Inset(kind) end end
+ return {0,0,0,0}
+end
 function R.CardVisible(kind,d)
  if kind=="BossList" then local f=R.frames.BossList;return f and f.bossReference and FieldKitRebornDB.bossListCard and not f.mashCollapsed and f.bossListActive end
  if kind=="Taken" then return R.frames.Taken and R.frames.Taken:IsShown() and FieldKitRebornDB.takenFrame and not (FieldKitRebornDB.collapsedWindows and FieldKitRebornDB.collapsedWindows.FieldKitTakenFrame) end

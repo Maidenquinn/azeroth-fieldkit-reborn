@@ -121,7 +121,7 @@ function C.Remember(frame)
 end
 function C.Finish(frame)
  if not frame.azsMoving then return end
- frame.azsMoving=nil;frame:StopMovingOrSizing();C.Remember(frame)
+ frame.azsMoving=nil;frame:StopMovingOrSizing();FieldKitAlignment.Snap(frame);C.Remember(frame)
 end
 function C.Bind(frame)
  if frame.fieldkitZoneDrag then return end

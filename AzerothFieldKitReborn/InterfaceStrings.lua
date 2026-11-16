@@ -564,3 +564,12 @@ table.sort(reverseKeys)
 for _,key in ipairs(reverseKeys) do
  if not FieldKitLocale.en[fr[key]] then FieldKitLocale.en[fr[key]]=key end
 end
+
+fr["Align HUD"]="Aligner le HUD"
+fr["Alignment grid"]="Grille d’alignement"
+fr["Snap to guides"]="Aimantation"
+fr["Drag the visible HUD. Edges and centres snap on release; overlap rules still apply."]="Glissez le HUD visible. Les bords et centres s’alignent au relâchement ; les règles de chevauchement restent actives."
+fr["Open the alignment grid without hiding the active theme. Drag your HUD, adjust spacing and toggle snapping."]="Ouvrez la grille d’alignement en gardant le thème actif. Déplacez le HUD, réglez l’espacement et activez ou non l’aimantation."
+
+fr["On"]="Activé"
+fr["Off"]="Désactivé"

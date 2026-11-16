@@ -133,6 +133,7 @@ function FieldKit.BuildJourneySections(sections,actions)
    set=function(v) if FieldKitMeterSuite then FieldKitMeterSuite.SetDetached("kills",v) else FieldKitRebornDB.meterDetach_kills=v and true or nil;actions.UpdateMeterFrames(true) end end},
  }
  local layout={
+  {kind="action",label="Align HUD",tip="Open the alignment grid without hiding the active theme. Drag your HUD, adjust spacing and toggle snapping.",action=function() FieldKitAlignment.Start() end},
   {kind="slider",label="Card size without theme",min=75,max=110,step=5,
    get=function() return FieldKitRebornDB.nativeCardScale end,
    set=function(v) FieldKitRebornDB.nativeCardScale=v;FieldKitNativeHUD.Update() end},
@@ -822,7 +823,7 @@ function U.BuildPage(section,index)
   elseif item.kind=="action" then
    local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(66)
    local button=T.Button(row,nil,item.label,0,0,240,32,item.action)
-   button:SetScript("OnEnter",function() FieldKitReborn065.DeathTip(this) end)
+   button:SetScript("OnEnter",function() if item.label=="Native death log" then FieldKitReborn065.DeathTip(this) else U.Tip(this,item.label,item.tip) end end)
    button:SetScript("OnLeave",function() GameTooltip:Hide() end)
    local label=T.Label(row,item.tip,0,38,500,22,12,T.muted)
    row.Reflow=function(w) row:SetWidth(w);label:SetWidth(w) end
@@ -1101,6 +1102,7 @@ end
 
 -- Hide settings during arrangement so the large panel cannot cover movable frames.
 function U.SetLayoutEditing(enabled,returnToSettings)
+ if enabled then FieldKitAlignment.Stop() end
  if enabled and FieldKitZoneThemes then FieldKitZoneThemes.Suspend() end
  FieldKit.layoutEditing=enabled and true or false
  if enabled then

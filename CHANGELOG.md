@@ -1,3 +1,11 @@
+# 0.1.0-reborn.36-dev — HUD alignment editor (candidate)
+
+- Add Interface > Layout & arrange > Align HUD and `/fieldkit align`: edit the visible HUD while retaining its active theme.
+- Show a centre-based grid, adjustable 8–64 spacing, optional snapping to grid lines, screen edges/centre and other visible HUD edges/centres. Existing overlap rules retain precedence.
+- Reuse overlay textures across viewport changes, preserve profile settings and restore the previous lock on exit. No positions change merely by enabling the grid.
+- Normalize the native minimap local scale within its themed owner, restore it when leaving the theme, and invalidate the native viewport cache when position, dimensions, inherited scale or screen dimensions change.
+- Synthetic coverage: four viewports, six theme layouts, independent effective scales, native scale restoration, FR/EN controls, bounded allocation, profile persistence and viewport cache invalidation. Native ultrawide visual acceptance remains pending; this is not a public release.
+
 # 0.1.0-reborn.35 — Stable world markers and height controls
 
 - Connect world markers to Reborn's public anchor contract and recover normal-rank guardians without marking ordinary mobs.
