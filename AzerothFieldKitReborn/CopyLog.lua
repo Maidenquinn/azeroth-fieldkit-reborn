@@ -11,6 +11,7 @@ local copyFrame,copyEdit
 local active=false
 local button, chatFrame, styleBefore, chatBackdrop, moveHandle
 local moving=false;local themedMove=nil
+local moveWasMovable=nil
 -- true while the theme owns the chat geometry (defined first: the move handle needs it)
 local function Themed() return FieldKitReferenceHUD and FieldKitReferenceHUD.active and FieldKitReferenceHUD.chat and true or false end
 local copiedNative=false
@@ -40,6 +41,13 @@ local fontFiles={
 }
 
 -- Native chat only. These controls never replace chat tabs or channel logic.
+local function EditingChat()
+ return (FieldKitAlignment and FieldKitAlignment.active) or FieldKit.layoutEditing
+end
+local function CanMoveChat()
+ local d=FieldKitRebornDB
+ return d and (EditingChat() or (d.chatStyle and d.chatMove))
+end
 local function NativeChat()
  return getglobal("ChatFrame1") or DEFAULT_CHAT_FRAME
 end
@@ -47,6 +55,23 @@ local function Clamp(v,default,minimum,maximum)
  v=tonumber(v)
  if not v or v~=v then v=default end
  return math.floor(math.max(minimum,math.min(maximum,v))+.5)
+end
+-- Remember the native anchor while an independent editor position is owned.
+-- Releasing that ownership (another profile/reset) must not leak its placement.
+local freeBefore=nil
+local function RememberFree(f)
+ if freeBefore and freeBefore.frame==f then return end
+ local p={f:GetPoint()}
+ if type(p[1])=="string" and type(p[3])=="string" then freeBefore={frame=f,point=p} end
+end
+local function RestoreFree(f)
+ local old=freeBefore;freeBefore=nil
+ if old and old.frame==f then
+  local p=old.point;local relative=p[2]
+  if type(relative)=="string" then relative=getglobal(relative) end
+  f:ClearAllPoints();f:SetPoint(p[1],relative or UIParent,p[3],p[4] or 0,p[5] or 0)
+  lastPositionStamp=nil
+ end
 end
 local function ApplyAnchor(f)
  local anchor=FieldKitRebornDB and FieldKitRebornDB.chatAnchor
@@ -90,9 +115,11 @@ local function FinishMove()
  end
  local f=NativeChat()
  if f then
-  f:StopMovingOrSizing()
+  f:StopMovingOrSizing();f.azsMoving=nil
   FieldKitAlignment.Snap(f)
   SaveAnchor(f)
+  if moveWasMovable~=nil then f:SetMovable(moveWasMovable) end;moveWasMovable=nil
+  if EditingChat() then FieldKitRebornDB.chatPositioned=true end
  end
  if FieldKit.ApplyChatStyle then FieldKit.ApplyChatStyle() end
 end
@@ -114,15 +141,17 @@ local function MoveControl()
   title:SetPoint("CENTER",moveHandle,"CENTER",0,0)
   FieldKit_Text(title,"Move chat")
   moveHandle:SetScript("OnDragStart",function()
-   if not FieldKitRebornDB or not FieldKitRebornDB.chatStyle or not FieldKitRebornDB.chatMove then return end
+   if not CanMoveChat() then return end
    local frame=NativeChat();if not frame then return end
    if Themed() then
     local card=FieldKitReferenceHUD.chat;if not card then return end
     themedMove=true;moving=true;card.azsMoving=true;card:StartMoving();return
    end
+   if EditingChat() and not FieldKitRebornDB.chatStyle then RememberFree(frame) end
+   moveWasMovable=frame.IsMovable and frame:IsMovable()
    frame:SetMovable(true)
    if frame.SetClampedToScreen then frame:SetClampedToScreen(true) end
-   moving=true
+   moving=true;frame.azsMoving=true
    frame:StartMoving()
   end)
   moveHandle:SetScript("OnDragStop",FinishMove)
@@ -135,9 +164,13 @@ local function MoveControl()
   moveHandle:SetPoint("BOTTOMLEFT",anchorFrame,"TOPLEFT",56,2)
   moveHandle.fieldkitAnchor=anchorFrame
  end
- if FieldKitRebornDB and FieldKitRebornDB.chatStyle and FieldKitRebornDB.chatMove then moveHandle:Show()
+ if CanMoveChat() then moveHandle:Show()
  else moveHandle:Hide() end
 end
+-- Temporary editing access, independent of styling/copy preferences. Finishing
+-- first preserves a drag that is still held when Done/profile switch is used.
+function FieldKit.RefreshChatMover() MoveControl() end
+function FieldKit.FinishChatMove() FinishMove() end
 -- Reset only chat geometry/anchor, keeping the current profile palette,
 -- font and existing messages. Prefer the native dimensions measured before
 -- FieldKit styling; fall back to the validated default dimensions.
@@ -154,7 +187,7 @@ end
 
 function FieldKit.ResetChatPosition()
  FinishMove()
- if FieldKitRebornDB then FieldKitRebornDB.chatAnchor=nil end
+ if FieldKitRebornDB then FieldKitRebornDB.chatAnchor=nil;FieldKitRebornDB.chatPositioned=false end
  lastPositionStamp=nil
  local f=NativeChat()
  if not f then return end
@@ -293,9 +326,9 @@ function FieldKit.ApplyChatStyle()
  end
  themedChatKnown=false -- the next themed pass synchronises once
  if not FieldKitRebornDB.chatStyle then
-  if moving then FinishMove() end
+  if moving and not EditingChat() then FinishMove() end
   if chatBackdrop then chatBackdrop:Hide();if chatBackdrop.fieldkitBorder then chatBackdrop.fieldkitBorder:Hide() end end
-  if moveHandle then moveHandle:Hide() end
+  if moveHandle and not CanMoveChat() then moveHandle:Hide() end
   if styleBefore and chatFrame==f then
    local snap=styleBefore
    local count=f.GetNumMessages and f:GetNumMessages() or nil
@@ -319,8 +352,16 @@ function FieldKit.ApplyChatStyle()
   end
   styleBefore=nil;chatFrame=nil;lastPositionStamp=nil
   geometryStamp=nil;fontStamp=nil
+  -- A position explicitly chosen in the editor also survives with native
+  -- styling. Existing style-only anchors retain their old restoration rules.
+  if not moving then
+   if FieldKitRebornDB.chatPositioned then RememberFree(f);ApplyAnchor(f)
+   else RestoreFree(f) end
+  end
+  MoveControl()
   return
  end
+ RestoreFree(f)
  if not styleBefore or chatFrame~=f then
   local point,relative,relativePoint,x,y=f:GetPoint()
   if type(point)=="string" and point~="" then
@@ -669,7 +710,7 @@ local elapsed=0
 watcher:SetScript("OnUpdate",function()
  elapsed=elapsed+(arg1 or 0);if elapsed<.2 then return end
  elapsed=0;FieldKit.SyncChat()
- if FieldKitRebornDB and FieldKitRebornDB.chatStyle then FieldKit.ApplyChatStyle() end
+ if FieldKitRebornDB and (FieldKitRebornDB.chatStyle or FieldKitRebornDB.chatPositioned or EditingChat()) then FieldKit.ApplyChatStyle() end
 end)
 SLASH_FieldKitLOG1="/fieldkitlog"
 SlashCmdList.FieldKitLOG=function(message)

@@ -519,8 +519,8 @@
       "literalEvents": []
     },
     "Alignment.lua": {
-      "bytes": 9186,
-      "sha256": "fd86e0295a99ba4f62437efd81e8e4c76efd771d8156ba526126285480a166b3",
+      "bytes": 9408,
+      "sha256": "d26f20726c96310702f5bb46788a31bc612c0d4e51091100c76247981fe4a60b",
       "namedFunctions": [
         {
           "name": "Scale",
@@ -588,14 +588,14 @@
         },
         {
           "name": "G.Start",
-          "line": 138
+          "line": 140
         }
       ],
       "literalEvents": []
     },
     "Config.lua": {
-      "bytes": 12187,
-      "sha256": "8cab48c5b6283e84f800da5fd6e39ba1652514d280a1c0c6310b47e16600abbc",
+      "bytes": 12208,
+      "sha256": "f6a465985eb7113162af54ad8238183c4ae9d05c9dab83c58360d4c404769190",
       "namedFunctions": [
         {
           "name": "FieldKit.InitializeSettings",
@@ -2416,8 +2416,8 @@
       "literalEvents": []
     },
     "Interface.lua": {
-      "bytes": 87158,
-      "sha256": "520195c3f962add5a8d6f5f21f2668fa7c3fa6d055df523293b33f875f504a65",
+      "bytes": 87349,
+      "sha256": "7ed164d8656bc6f154d6d3d87cac93b7f1105e128b79c9a3d00fd8fbbcf9de53",
       "namedFunctions": [
         {
           "name": "HealthChoice",
@@ -2529,39 +2529,39 @@
         },
         {
           "name": "U.StartLayout",
-          "line": 1119
+          "line": 1122
         },
         {
           "name": "U.ResetPositions",
-          "line": 1124
+          "line": 1127
         },
         {
           "name": "U.UndoPositions",
-          "line": 1134
+          "line": 1137
         },
         {
           "name": "U.Build",
-          "line": 1148
+          "line": 1151
         },
         {
           "name": "U.LayoutNavigation",
-          "line": 1217
+          "line": 1220
         },
         {
           "name": "U.EnsureProfilePreviewBar",
-          "line": 1296
+          "line": 1299
         },
         {
           "name": "U.UpdateProfilePreviewBar",
-          "line": 1322
+          "line": 1325
         },
         {
           "name": "U.PreviewDefaults",
-          "line": 1328
+          "line": 1331
         },
         {
           "name": "U.Toggle",
-          "line": 1347
+          "line": 1350
         }
       ],
       "literalEvents": []
@@ -3565,148 +3565,172 @@
       "literalEvents": []
     },
     "CopyLog.lua": {
-      "bytes": 34203,
-      "sha256": "fdca16054928f6794923cc3f0bfbab538c2b0038a6a2a6b9ee2e565d920cc3b1",
+      "bytes": 36072,
+      "sha256": "176ec6c43823346ce1bc214598a97b66454a4a3706e56e42e003afa2a23d69df",
       "namedFunctions": [
         {
           "name": "Themed",
-          "line": 15
+          "line": 16
+        },
+        {
+          "name": "EditingChat",
+          "line": 44
+        },
+        {
+          "name": "CanMoveChat",
+          "line": 47
         },
         {
           "name": "NativeChat",
-          "line": 43
-        },
-        {
-          "name": "Clamp",
-          "line": 46
-        },
-        {
-          "name": "ApplyAnchor",
           "line": 51
         },
         {
+          "name": "Clamp",
+          "line": 54
+        },
+        {
+          "name": "RememberFree",
+          "line": 62
+        },
+        {
+          "name": "RestoreFree",
+          "line": 67
+        },
+        {
+          "name": "ApplyAnchor",
+          "line": 76
+        },
+        {
           "name": "SaveAnchor",
-          "line": 65
+          "line": 90
         },
         {
           "name": "FinishMove",
-          "line": 83
+          "line": 108
         },
         {
           "name": "MoveControl",
-          "line": 99
+          "line": 126
+        },
+        {
+          "name": "FieldKit.RefreshChatMover",
+          "line": 172
+        },
+        {
+          "name": "FieldKit.FinishChatMove",
+          "line": 173
         },
         {
           "name": "FieldKit.ResetChatLayout",
-          "line": 144
+          "line": 177
         },
         {
           "name": "FieldKit.ResetChatPosition",
-          "line": 155
+          "line": 188
         },
         {
           "name": "FieldKit.ChatBackground",
-          "line": 182
+          "line": 215
         },
         {
           "name": "FieldKit.ChatFontWanted",
-          "line": 184
+          "line": 217
         },
         {
           "name": "Frac",
-          "line": 191
+          "line": 224
         },
         {
           "name": "FieldKit.ChatRect",
-          "line": 197
-        },
-        {
-          "name": "FieldKit.ChatVisible",
-          "line": 206
-        },
-        {
-          "name": "FieldKit.ChatNativeCapture",
-          "line": 214
-        },
-        {
-          "name": "FieldKit.ChatRestoreNative",
-          "line": 228
-        },
-        {
-          "name": "Try",
           "line": 230
         },
         {
+          "name": "FieldKit.ChatVisible",
+          "line": 239
+        },
+        {
+          "name": "FieldKit.ChatNativeCapture",
+          "line": 247
+        },
+        {
+          "name": "FieldKit.ChatRestoreNative",
+          "line": 261
+        },
+        {
+          "name": "Try",
+          "line": 263
+        },
+        {
           "name": "FieldKit.ChatGuard",
-          "line": 251
-        },
-        {
-          "name": "ThemedChatChanged",
-          "line": 275
-        },
-        {
-          "name": "FieldKit.ApplyChatStyle",
           "line": 284
         },
         {
+          "name": "ThemedChatChanged",
+          "line": 308
+        },
+        {
+          "name": "FieldKit.ApplyChatStyle",
+          "line": 317
+        },
+        {
           "name": "CopyButton",
-          "line": 400
+          "line": 441
         },
         {
           "name": "Clean",
-          "line": 437
+          "line": 478
         },
         {
           "name": "Capture",
-          "line": 446
+          "line": 487
         },
         {
           "name": "ImportVisible",
-          "line": 453
+          "line": 494
         },
         {
           "name": "FieldKit.ClearChat",
-          "line": 467
+          "line": 508
         },
         {
           "name": "ChatForwardResult",
-          "line": 476
+          "line": 517
         },
         {
           "name": "Hook",
-          "line": 489
+          "line": 530
         },
         {
           "name": "FieldKit.ClearChatRenderHistory",
-          "line": 515
+          "line": 556
         },
         {
           "name": "FieldKit.ResizeChatPreservingHistory",
-          "line": 521
+          "line": 562
         },
         {
           "name": "FieldKit.RestoreDisplayedChat",
-          "line": 546
+          "line": 587
         },
         {
           "name": "FieldKit.RecolorDisplayedChat",
-          "line": 564
+          "line": 605
         },
         {
           "name": "FieldKit.SyncChat",
-          "line": 600
+          "line": 641
         },
         {
           "name": "OpenCopy",
-          "line": 624
+          "line": 665
         },
         {
           "name": "FieldKit.OpenChatCopy",
-          "line": 662
+          "line": 703
         },
         {
           "name": "FieldKit.ThemeChatFont",
-          "line": 685
+          "line": 726
         }
       ],
       "literalEvents": []

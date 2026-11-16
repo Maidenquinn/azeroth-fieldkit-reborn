@@ -80,12 +80,12 @@
     "Alignment.lua": {
       "maxUpvalues": 3,
       "functions": 24,
-      "sha256": "fd86e0295a99ba4f62437efd81e8e4c76efd771d8156ba526126285480a166b3"
+      "sha256": "d26f20726c96310702f5bb46788a31bc612c0d4e51091100c76247981fe4a60b"
     },
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "8cab48c5b6283e84f800da5fd6e39ba1652514d280a1c0c6310b47e16600abbc"
+      "sha256": "f6a465985eb7113162af54ad8238183c4ae9d05c9dab83c58360d4c404769190"
     },
     "Profiles.lua": {
       "maxUpvalues": 6,
@@ -260,7 +260,7 @@
     "Interface.lua": {
       "maxUpvalues": 28,
       "functions": 236,
-      "sha256": "520195c3f962add5a8d6f5f21f2668fa7c3fa6d055df523293b33f875f504a65"
+      "sha256": "7ed164d8656bc6f154d6d3d87cac93b7f1105e128b79c9a3d00fd8fbbcf9de53"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
@@ -293,9 +293,9 @@
       "sha256": "0a1c450585b3bed496b07fe8e635d0860ffed94c15f98cb225d365d16f6150d5"
     },
     "CopyLog.lua": {
-      "maxUpvalues": 20,
-      "functions": 47,
-      "sha256": "fdca16054928f6794923cc3f0bfbab538c2b0038a6a2a6b9ee2e565d920cc3b1"
+      "maxUpvalues": 24,
+      "functions": 53,
+      "sha256": "176ec6c43823346ce1bc214598a97b66454a4a3706e56e42e003afa2a23d69df"
     },
     "ThemeMinimap.lua": {
       "maxUpvalues": 5,

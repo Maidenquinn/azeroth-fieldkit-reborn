@@ -2,6 +2,7 @@
 
 - Add Interface > Layout & arrange > Align HUD and `/fieldkit align`: edit the visible HUD while retaining its active theme.
 - Show a centre-based grid, adjustable 8–64 spacing and optional snapping. With the grid visible, guides snap only to its lines; with it hidden, they align to screen and peer edges/centres. Drawing and snapping share the same bounded spacing. Existing overlap rules retain precedence.
+- Temporarily unlock chat in both editors, independent of styling or copy opt-in; retain its position and restore the normal lock on exit.
 - Reuse overlay textures across viewport changes, preserve profile settings and restore the previous lock on exit. No positions change merely by enabling the grid.
 - Normalize the native minimap local scale within its themed owner, restore it when leaving the theme, and invalidate the native viewport cache when position, dimensions, inherited scale or screen dimensions change.
 - Synthetic coverage: four viewports, six theme layouts, independent effective scales, native scale restoration, FR/EN controls, bounded allocation, profile persistence and viewport cache invalidation. Native ultrawide visual acceptance remains pending; this is not a public release.

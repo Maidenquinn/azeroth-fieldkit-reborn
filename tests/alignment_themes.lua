@@ -14,7 +14,13 @@ for _,zone in ipairs({"elwynn","naxx"}) do for _,variant in ipairs({"minimal","c
  assert(Minimap:GetScale()==1,'Native local scale must not multiply the art owner scale')
  local parent=Minimap:GetParent();local key=C.currentLayout
  G.Start();assert(C.active and C.currentLayout==key and Minimap:GetParent()==parent,'Editor suspended or detached the themed HUD')
- G.Refresh();G.Stop();assert(C.active and Minimap:GetParent()==parent)
+ G.Refresh()
+ local chat=FieldKitReferenceHUD.chat;local nativeAnchor=FieldKitRebornDB.chatAnchor
+ assert(FieldKitChatMoveHandle:IsShown(),'Theme editor must expose the chat mover')
+ local old=this;this=FieldKitChatMoveHandle;FieldKitChatMoveHandle:GetScript("OnDragStart")();this=old
+ assert(chat.azsMoving,'The themed owner, not the native inner chat, must move')
+ G.Stop();assert(not chat.azsMoving and FieldKitRebornDB.chatAnchor==nativeAnchor)
+ assert(not FieldKitChatMoveHandle:IsShown() and C.active and Minimap:GetParent()==parent)
  C.Set("zoneThemes",false);assert(not M.active and Minimap:GetScale()==.75,'Original native map scale not restored')
 end end
 print('PASS live alignment on six theme layouts and exact native minimap scale restoration')

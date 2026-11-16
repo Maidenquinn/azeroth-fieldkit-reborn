@@ -1102,6 +1102,8 @@ end
 
 -- Hide settings during arrangement so the large panel cannot cover movable frames.
 function U.SetLayoutEditing(enabled,returnToSettings)
+ if enabled then FieldKitProfiles.Init() end
+ if not enabled and FieldKit.FinishChatMove then FieldKit.FinishChatMove() end
  if enabled then FieldKitAlignment.Stop() end
  if enabled and FieldKitZoneThemes then FieldKitZoneThemes.Suspend() end
  FieldKit.layoutEditing=enabled and true or false
@@ -1113,6 +1115,7 @@ function U.SetLayoutEditing(enabled,returnToSettings)
   FieldKitPreview.Stop();U.dock:Hide();U.context.unlock(false);FieldKitCombat.HideAnchors();U.context.bosses()
   if returnToSettings then U.Reflow();U.frame:Show();U.Refresh() end
  end
+ if FieldKit.RefreshChatMover then FieldKit.RefreshChatMover() end
  FieldKitCoop.Update()
 end
 

@@ -193,6 +193,8 @@ alignment_themes=runtime();alignment_themes.execute((base/"tests/alignment_theme
 alignment.execute((base/"tests/snapshot.lua").read_text(encoding="utf8"))
 alignment_reload=runtime(alignment.eval('SNAPSHOT(FieldKitRebornDB)'))
 alignment_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitRebornDB.alignmentStep==48 and FieldKitRebornDB.alignmentSnap and FieldKitRebornDB.alignmentGrid);assert(not FieldKitAlignment.active and not FieldKitAlignment.overlay)')
+alignment_chat=runtime();alignment_chat.execute((base/"tests/alignment_chat.lua").read_text(encoding="utf8"))
+alignment_chat_reload=runtime();alignment_chat_reload.execute((base/"tests/alignment_chat_reload.lua").read_text(encoding="utf8"))
 # Walk every compiled nested function, even callbacks the mock did not reach.
 # Generated card and round-map textures: their alpha layers are checked, not trusted (alpha.45 shipped a matte that still carried the baked
 # interior of the cards, and a ring whose path never resolved).

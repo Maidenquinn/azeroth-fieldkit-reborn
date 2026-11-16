@@ -130,17 +130,21 @@ function G.Refresh()
 end
 function G.Stop()
  if not G.active then return end
+ if FieldKit.FinishChatMove then FieldKit.FinishChatMove() end
  G.active=false
  G.overlay:Hide();G.toolbar:Hide()
+ if FieldKit.RefreshChatMover then FieldKit.RefreshChatMover() end
  local lock=G.wasLocked;G.wasLocked=nil
  FieldKit.SetWindowsLocked(lock)
 end
 function G.Start()
  if G.active or not FieldKitRebornDB then return end
+ FieldKitProfiles.Init()
  if FieldKit.layoutEditing then FieldKitUI.SetLayoutEditing(false,false) end
  G.wasLocked=FieldKitRebornDB.windowsLocked
  if FieldKitUI.frame then FieldKitUI.frame:Hide() end
  FieldKit.SetWindowsLocked(false);G.active=true
+ if FieldKit.RefreshChatMover then FieldKit.RefreshChatMover() end
  if not G.overlay then
   local T=FieldKitTheme
   local o=CreateFrame("Frame","FieldKitAlignmentGrid",UIParent);G.overlay=o;o:SetAllPoints(UIParent);o:SetFrameStrata("HIGH");o:EnableMouse(false)

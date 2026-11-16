@@ -9,7 +9,7 @@ local defaults={alignmentGrid=true,alignmentSnap=true,alignmentStep=32,nativeMin
 
  takenFrame=true,replaceTally=false,playerShield=true,chestPins=false,guardianPins=false,
  lairFrame=true,compactBar=false,lowHealth=true,lowHealthSound=false,
- lowHealthPct=30,targetHealthMode=1,playerHealthMode=1,bossHealthMode=1,chatCopy=false,chatStyle=false,chatFading=false,chatWidth=440,chatHeight=180,chatFontSize=12,chatHistoryLines=200,chatBackgroundOpacity=0,chatShowCopyButton=true,chatFontFace=1,chatBackgroundColor=1,chatTextColor=1,chatOverrideText=false,chatMove=false}
+ lowHealthPct=30,targetHealthMode=1,playerHealthMode=1,bossHealthMode=1,chatCopy=false,chatStyle=false,chatFading=false,chatWidth=440,chatHeight=180,chatFontSize=12,chatHistoryLines=200,chatBackgroundOpacity=0,chatShowCopyButton=true,chatFontFace=1,chatBackgroundColor=1,chatTextColor=1,chatOverrideText=false,chatMove=false,chatPositioned=false}
 
 -- Single audited source of defaults for profile-scoped preferences.
 -- State such as run counters, cached monster classifications, UI navigation

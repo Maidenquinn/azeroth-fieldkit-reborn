@@ -8,6 +8,7 @@ This editor keeps the actual active theme. The older Previews flow continues to 
 - Existing overlap rules can displace a card when an otherwise aligned position would collide. The grid never rewrites anchors merely by opening it.
 - Existing grouped cards keep their group movement. Native bars/minimap use their existing direct-drag controls. The editor temporarily unlocks and restores the previous lock when closed.
 - Preferences belong to each HUD profile. Existing schema-2 slots are hydrated with newly declared preferences before validation, without replacing their saved layouts.
+- Chat automatically exposes its Move chat handle while either editor is open, regardless of chatStyle/chatMove. These preferences and chat-copy opt-in are never changed. Closing the editor finishes any held drag and restores the normal mover state. Editor-chosen native positions persist even with styling disabled, without changing font, size, colours or message capture. The themed chat moves its whole card.
 - The overlay reuses texture regions and does not take mouse input.
 
 The minimap candidate normalizes its local scale inside a themed owner and restores the native scale on exit. Position, size, effective scale and viewport changes invalidate the native renderer cache. No replacement map texture or native data edits are involved.
