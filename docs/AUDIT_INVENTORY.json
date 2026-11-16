@@ -519,8 +519,8 @@
       "literalEvents": []
     },
     "Alignment.lua": {
-      "bytes": 8616,
-      "sha256": "dba5ff8f69b64d07cac759294a6f97d52c8e84e5bcfb26d6f0ae2d231f7b6376",
+      "bytes": 9186,
+      "sha256": "fd86e0295a99ba4f62437efd81e8e4c76efd771d8156ba526126285480a166b3",
       "namedFunctions": [
         {
           "name": "Scale",
@@ -551,40 +551,44 @@
           "line": 39
         },
         {
+          "name": "G.Step",
+          "line": 66
+        },
+        {
           "name": "G.Delta",
-          "line": 59
+          "line": 69
         },
         {
           "name": "Related",
-          "line": 62
+          "line": 72
         },
         {
           "name": "G.Snap",
-          "line": 71
+          "line": 82
         },
         {
           "name": "Line",
-          "line": 78
+          "line": 89
         },
         {
           "name": "G.Draw",
-          "line": 83
+          "line": 94
         },
         {
           "name": "Put",
-          "line": 91
+          "line": 102
         },
         {
           "name": "G.Refresh",
-          "line": 105
+          "line": 115
         },
         {
           "name": "G.Stop",
-          "line": 121
+          "line": 131
         },
         {
           "name": "G.Start",
-          "line": 128
+          "line": 138
         }
       ],
       "literalEvents": []
@@ -757,8 +761,8 @@
       "literalEvents": []
     },
     "InterfaceStrings.lua": {
-      "bytes": 51685,
-      "sha256": "49df223b5ff66c6a73c7e8ef168742964b686e29ed6c64a913581576b4389211",
+      "bytes": 51907,
+      "sha256": "9c0eacd7884bfa666348a0545cc70231cb0f54f9f7b0d3178c2b1ef390572c95",
       "namedFunctions": [],
       "literalEvents": []
     },

@@ -4,7 +4,7 @@ Open **Interface > Layout & arrange > Align HUD**, or `/fieldkit align`.
 This editor keeps the actual active theme. The older Previews flow continues to arrange sample cards without a theme.
 
 - Centre-based grid, spacing 8–64 UI pixels, independent grid and snap toggles.
-- Snap on release within eight UI pixels to screen/peer edges and centres; the grid uses its top-left anchor. Visible themed card bounds use the collision engine's insets.
+- Snap on release within eight UI pixels: with the grid visible, only its lines are targets for the visible top-left anchor. With the grid hidden, screen/peer edges and centres are targets. Guides and drawing share the same bounded spacing, including extreme viewports. Visible themed card bounds use the collision engine's insets.
 - Existing overlap rules can displace a card when an otherwise aligned position would collide. The grid never rewrites anchors merely by opening it.
 - Existing grouped cards keep their group movement. Native bars/minimap use their existing direct-drag controls. The editor temporarily unlocks and restores the previous lock when closed.
 - Preferences belong to each HUD profile. Existing schema-2 slots are hydrated with newly declared preferences before validation, without replacing their saved layouts.

@@ -16,6 +16,26 @@ for _,size in ipairs({{1920,1080},{2560,1080},{3440,1440},{1280,720}}) do
  dx,dy=G.Resolve({x=47,y=147,w=30,h=30},{},w,h,32,0,false)
  near(dx,0);near(dy,0)
 end
+-- A closer off-grid peer must not steal the snap from the visible lattice.
+for _,size in ipairs({{1920,1080},{2560,1080},{3440,1440},{1280,720},{20000,12000}}) do
+ for _,scale in ipairs({.65,1,1.5}) do for _,spacing in ipairs({8,32,64}) do
+  local w,h=size[1],size[2];local step=G.Step(w,h,scale,spacing)
+  local r={x=w/2+3/scale,y=h/2+3/scale,w=100,h=60}
+  local peers={{x=r.x+1/scale,y=r.y+1/scale,w=100,h=60}}
+  local dx,dy,gx,gy=G.Resolve(r,peers,w,h,step,8/scale,true)
+  -- Both guide coordinates are the same coordinates drawn by G.Draw.
+  near((gx-w/2)/step,math.floor((gx-w/2)/step+.5))
+  near((gy-h/2)/step,math.floor((gy-h/2)/step+.5))
+  near(r.x+dx,gx);near(r.y+dy,gy)
+  dx,dy,gx,gy=G.Resolve(r,peers,w,h,step,8/scale,false)
+  near(dx,1/scale);near(dy,1/scale)
+ end end
+end
+-- A non-grid screen edge must not advertise a grid snap after clamping.
+do
+ local dx,dy,gx,gy=G.Resolve({x=3,y=597,w=100,h=60},{},1001,601,32,20,true)
+ near(dx,-3);assert(gx==nil,'Clamped target must not leave a false guide')
+end
 -- Actual point conversion preserves rendered location under independent scales.
 local f=CreateFrame("Frame","FieldKitAlignmentTest",UIParent)
 f:SetWidth(100);f:SetHeight(60)

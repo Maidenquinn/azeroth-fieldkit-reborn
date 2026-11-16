@@ -41,20 +41,30 @@ function G.Resolve(r,peers,w,h,step,tolerance,grid)
   if math.abs(d)<=tolerance and (not dy or math.abs(d)<math.abs(dy)) then dy=d;by=target end
  end
  local xs={r.x,r.x+r.w/2,r.x+r.w};local ys={r.y,r.y-r.h/2,r.y-r.h}
- for _,v in ipairs(xs) do for _,t in ipairs({0,w/2,w}) do X(t,v) end end
- for _,v in ipairs(ys) do for _,t in ipairs({0,h/2,h}) do Y(t,v) end end
- for _,p in ipairs(peers) do
-  for _,v in ipairs(xs) do for _,t in ipairs({p.x,p.x+p.w/2,p.x+p.w}) do X(t,v) end end
-  for _,v in ipairs(ys) do for _,t in ipairs({p.y,p.y-p.h/2,p.y-p.h}) do Y(t,v) end end
- end
  if grid and step>0 then
-  -- The screen centre is the grid origin even on ultrawide displays.
+  -- The visible lattice is authoritative: a closer peer edge/centre must
+  -- never pull a guide between its lines. Snap the card's visible top-left.
   X(w/2+math.floor((r.x-w/2)/step+.5)*step,r.x)
   Y(h/2+math.floor((r.y-h/2)/step+.5)*step,r.y)
+ else
+  for _,v in ipairs(xs) do for _,t in ipairs({0,w/2,w}) do X(t,v) end end
+  for _,v in ipairs(ys) do for _,t in ipairs({0,h/2,h}) do Y(t,v) end end
+  for _,p in ipairs(peers) do
+   for _,v in ipairs(xs) do for _,t in ipairs({p.x,p.x+p.w/2,p.x+p.w}) do X(t,v) end end
+   for _,v in ipairs(ys) do for _,t in ipairs({p.y,p.y-p.h/2,p.y-p.h}) do Y(t,v) end end
+  end
  end
  local x=math.max(0,math.min(math.max(0,w-r.w),r.x+(dx or 0)))
  local y=math.max(math.min(h,r.h),math.min(h,r.y+(dy or 0)))
+ -- Screen clamping can defeat an otherwise valid target. Do not draw a
+ -- guide claiming the card can land there when the clamp prevents it.
+ if dx and math.abs(x-r.x-dx)>.000001 then bx=nil end
+ if dy and math.abs(y-r.y-dy)>.000001 then by=nil end
  return x-r.x,y-r.y,bx,by
+end
+-- Drawing and snapping must use exactly the same bounded lattice spacing.
+function G.Step(w,h,scale,spacing)
+ return math.max(spacing/scale,math.max(w,h)/300)
 end
 function G.Delta(f)
  local r=G.Rect(f);if not r then return end
@@ -66,7 +76,8 @@ function G.Delta(f)
  end
  for _,p in ipairs(G.Frames()) do if not Related(p) then local q=G.Rect(p);if q then table.insert(peers,q) end end end
  local d=FieldKitRebornDB;local us=Scale(UIParent)
- return G.Resolve(r,peers,UIParent:GetWidth(),UIParent:GetHeight(),d.alignmentStep/us,8/us,d.alignmentGrid)
+ local w,h=UIParent:GetWidth(),UIParent:GetHeight()
+ return G.Resolve(r,peers,w,h,G.Step(w,h,us,d.alignmentStep),8/us,d.alignmentGrid)
 end
 function G.Snap(f)
  if not G.active or not FieldKitRebornDB.alignmentSnap then return false end
@@ -94,10 +105,9 @@ function G.Draw()
   t:ClearAllPoints();t:SetPoint("BOTTOMLEFT",G.overlay,"BOTTOMLEFT",x,y);t:SetWidth(lx);t:SetHeight(ly)
   t:SetVertexColor(centre and 1 or .55,centre and .75 or .7,centre and .25 or .8,centre and .55 or .18);t:Show()
  end
- local pixel=1/us;local step=d.alignmentStep/us
+ local pixel=1/us;local step=G.Step(w,h,us,d.alignmentStep)
  if d.alignmentGrid then
   -- Bounded on extreme resolutions as well as hostile SavedVariables.
-  step=math.max(step,math.max(w,h)/300)
   for i=-math.floor(w/2/step),math.floor(w/2/step) do Put(w/2+i*step,0,pixel,h,i==0) end
   for i=-math.floor(h/2/step),math.floor(h/2/step) do Put(0,h/2+i*step,w,pixel,i==0) end
  else Put(w/2,0,pixel,h,true);Put(0,h/2,w,pixel,true) end
@@ -113,8 +123,8 @@ function G.Refresh()
  if not d.alignmentSnap then return end
  for _,f in ipairs(G.Frames()) do if f.azsMoving or f.fieldkitHudDragging then
   local _,_,x,y=G.Delta(f);local w,h=UIParent:GetWidth(),UIParent:GetHeight()
-  if x then local t=G.guides[1];t:ClearAllPoints();t:SetPoint("BOTTOMLEFT",G.overlay,"BOTTOMLEFT",x,0);t:SetHeight(h);t:Show() end
-  if y then local t=G.guides[2];t:ClearAllPoints();t:SetPoint("BOTTOMLEFT",G.overlay,"BOTTOMLEFT",0,y);t:SetWidth(w);t:Show() end
+  if x then local t=G.guides[1];t:ClearAllPoints();t:SetPoint("BOTTOMLEFT",G.overlay,"BOTTOMLEFT",x,0);t:SetWidth(1/Scale(UIParent));t:SetHeight(h);t:Show() end
+  if y then local t=G.guides[2];t:ClearAllPoints();t:SetPoint("BOTTOMLEFT",G.overlay,"BOTTOMLEFT",0,y);t:SetHeight(1/Scale(UIParent));t:SetWidth(w);t:Show() end
   break
  end end
 end
@@ -138,7 +148,7 @@ function G.Start()
   local b=CreateFrame("Frame","FieldKitAlignmentToolbar",UIParent);G.toolbar=b
   b:SetWidth(740);b:SetHeight(112);b:SetPoint("TOP",UIParent,"TOP",0,-20);b:SetFrameStrata("DIALOG");T.Surface(b,"window")
   local title=T.Label(b,"Align HUD",16,10,600,24,18,T.gold,true);FieldKit_Text(title,"Align HUD")
-  local hint=T.Label(b,"Drag the visible HUD. Edges and centres snap on release; overlap rules still apply.",16,36,710,28,12,T.muted);FieldKit_Text(hint,"Drag the visible HUD. Edges and centres snap on release; overlap rules still apply.")
+  local hint=T.Label(b,"Grid on: snap to grid. Grid off: align edges and centres. Overlap rules still apply.",16,36,710,28,12,T.muted);FieldKit_Text(hint,"Grid on: snap to grid. Grid off: align edges and centres. Overlap rules still apply.")
   G.grid=T.Button(b,nil,"",16,72,190,26,function() FieldKitRebornDB.alignmentGrid=not FieldKitRebornDB.alignmentGrid;G.Refresh() end)
   G.snap=T.Button(b,nil,"",214,72,190,26,function() FieldKitRebornDB.alignmentSnap=not FieldKitRebornDB.alignmentSnap;G.Refresh() end)
   T.Button(b,nil,"-",412,72,30,26,function() FieldKitRebornDB.alignmentStep=math.max(8,FieldKitRebornDB.alignmentStep-8);G.Refresh() end)

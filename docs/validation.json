@@ -79,8 +79,8 @@
     },
     "Alignment.lua": {
       "maxUpvalues": 3,
-      "functions": 23,
-      "sha256": "dba5ff8f69b64d07cac759294a6f97d52c8e84e5bcfb26d6f0ae2d231f7b6376"
+      "functions": 24,
+      "sha256": "fd86e0295a99ba4f62437efd81e8e4c76efd771d8156ba526126285480a166b3"
     },
     "Config.lua": {
       "maxUpvalues": 1,
@@ -105,7 +105,7 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "49df223b5ff66c6a73c7e8ef168742964b686e29ed6c64a913581576b4389211"
+      "sha256": "9c0eacd7884bfa666348a0545cc70231cb0f54f9f7b0d3178c2b1ef390572c95"
     },
     "Theme.lua": {
       "maxUpvalues": 1,

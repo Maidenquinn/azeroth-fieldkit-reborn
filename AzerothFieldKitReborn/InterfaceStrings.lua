@@ -573,3 +573,5 @@ fr["Open the alignment grid without hiding the active theme. Drag your HUD, adju
 
 fr["On"]="Activé"
 fr["Off"]="Désactivé"
+
+fr["Grid on: snap to grid. Grid off: align edges and centres. Overlap rules still apply."]="Grille affichée : aimantation sur la grille. Grille masquée : bords et centres. Les règles de chevauchement restent actives."
