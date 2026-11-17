@@ -11,11 +11,17 @@ local positions=FieldKitRebornDB.zoneThemePositions
 local styled=FieldKitRebornDB.chatStyle
 local names={pl="Obrażenia",cs="Poškození",de="Schaden",pt="Dano",es="Daño",fr="Dégâts",
  ro="Daune",tr="Hasar",ru="Урон",uk="Шкода",zh="伤害",ja="ダメージ",ko="피해",en="Damage"}
+-- Native QA caught literal anatomical translations of treasure chests. Check
+-- the compiled runtime too: glossary merging must not restore those old values.
+local chestPrices={pl="Cena skrzyni",cs="Cena truhly",de="Truhenpreis",pt="Preço do baú",
+ es="Precio del cofre",ro="Prețul cufărului",tr="Sandık fiyatı",ru="Цена сундука",
+ uk="Ціна скрині",zh="宝箱价格",ja="宝箱の価格",ko="상자 가격"}
 for index,row in ipairs(L.languages) do
  local code=row[1]
  if code~="auto" then
   assert(FieldKit_SetLanguage(code) and FieldKit_Language()==code)
   assert(FieldKit_L("Damage")==names[code],code..": primary label")
+  if chestPrices[code] then assert(FieldKit_L("Chest price")==chestPrices[code],code..": treasure chest label") end
   assert(FieldKit_L("A player called Aimed Shot")=="A player called Aimed Shot")
   assert(U.languageRow.choice.choiceButtons[index].fieldkitSelected)
   assert(U.languageRow.choice.fieldkitLabel:GetText()==row[2])

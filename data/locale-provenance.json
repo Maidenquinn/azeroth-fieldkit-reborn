@@ -28,7 +28,7 @@
     "modelDistributed": false,
     "playerNetworkAccess": false
   },
-  "reviewedTerms": 138,
+  "reviewedTerms": 146,
   "catalogCompiler": "tools/build_locales.py",
   "manualAcceptance": "pending",
   "canonicalStringCount": 1076

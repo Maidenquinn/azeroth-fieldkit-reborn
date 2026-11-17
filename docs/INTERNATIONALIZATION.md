@@ -59,6 +59,16 @@ Revised font resource names avoid reusing the earlier client font atlas after
 installing the corrected candidate. The player's French preference, profile 1,
 Elwynn Complete and paused game were restored after this inspection.
 
+After reloading the corrected candidate, the Chinese panel help, compact action
+bar label and guardian countdowns rendered without unknown tokens; all three
+revised CJK font resources rendered in the themed HUD. Chinese was also checked
+without a theme. Further context review found literal body-part translations of
+"chest" in the new catalogs. The treasure-chest labels were reviewed across all
+twelve additional languages, and 52 Chinese boss, party, counter and theme texts
+were corrected. This is targeted wording review, not certification of every
+sentence in every language. French/profile 1/Elwynn Complete were restored and
+the game remained paused at 0:01 throughout the inspection.
+
 In-game acceptance still checks layout, clipping and readability at the player's
 resolution, with themes off and Elwynn/Naxx on. A font diagnostic rendered by
 Pillow and synthetic geometry checks do not replace that client recipe.

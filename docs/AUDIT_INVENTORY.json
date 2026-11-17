@@ -759,74 +759,74 @@
       "literalEvents": []
     },
     "Locale_pl.lua": {
-      "bytes": 82891,
-      "sha256": "d714bf1114fc6dac68045933205cbbf865e65d8f0ba306bacea2ddae58c3cd40",
+      "bytes": 82886,
+      "sha256": "a6f1c61d42cc00d0f69ecdff3125dcb5c2ce004728fba659948c9fdd831b8322",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_cs.lua": {
-      "bytes": 82878,
-      "sha256": "7b8a8c7db33d8e669d8c27a01a5abdeb4560ea5cae67f9003742d4c72a0577ca",
+      "bytes": 82874,
+      "sha256": "6acbcf2c53ff75670e55516521a579996813f936e584a51ea1f2e06d18c681ab",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_de.lua": {
-      "bytes": 84614,
-      "sha256": "11d8678ff1c5e3ae9a083ca60b37c773341ffe2feb6695dfdc0197fab316f0a4",
+      "bytes": 84625,
+      "sha256": "8138904ea591ac9d7a4dd437d831236097647a70df0e6c194bb0d607a7e465c5",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_pt.lua": {
-      "bytes": 83707,
-      "sha256": "0c4d7c2034d6003557b625c9e58a85b3d3d0a83e5b3f93197ec51fe585c8331e",
+      "bytes": 83699,
+      "sha256": "3050b97f787f2c11945fe3fd879c5530b8b26bdde8ae506034c8346b062f3deb",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_es.lua": {
-      "bytes": 85920,
-      "sha256": "66be8a4de86efe9db8c45eae22a4b841f71892775664b354a5aa1d518d9b07bf",
+      "bytes": 85894,
+      "sha256": "ab52bcb18c14f87977f21dd1afcba7b415677d939dcfece9652b8a6df09974d4",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ro.lua": {
-      "bytes": 84699,
-      "sha256": "731b4cade16c5703f7970fe115eff250406d156bac11c07f9f570a2c607843fb",
+      "bytes": 84706,
+      "sha256": "15859cfa1e5e0a5d22a9f088149c0b84970713dd7b4ed9cda3071496bc4c1906",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_tr.lua": {
-      "bytes": 83322,
-      "sha256": "330de5b213ee25a531ad38fd3bfadc4c09ec4810ebb68eeb3907107ec7edeabb",
+      "bytes": 83363,
+      "sha256": "8a8df8dbdc569100090c0a93af314e36a09bb0225c5286fd5adff0752dfb7db8",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ru.lua": {
-      "bytes": 114264,
-      "sha256": "0000fb9536fa64d8ce6ac465dcdfb48e8796a899941708e6d48fc2f8ae7b5099",
+      "bytes": 114283,
+      "sha256": "f831a6957a7a67d624aad7231dbd283b54a1e36c07fb7bcdd71e94cd71b72946",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_uk.lua": {
-      "bytes": 112614,
-      "sha256": "8151b67cadf7801c9e89ebd24ec1de88cc89bb0c2f823211135fe96fcee78e09",
+      "bytes": 112604,
+      "sha256": "94f7018b434537270b3b8da61d33d9602f04d6007f1515c3deddc7f910368f01",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_zh.lua": {
-      "bytes": 73942,
-      "sha256": "78b7a014651b98e6df620c52b475c675fd6b24acc5a5f26aa706bc35c76f9d29",
+      "bytes": 74562,
+      "sha256": "0127ed2d055645e71b96e509a37b2f5bf0716169b008e48edc8c23997aca7385",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ja.lua": {
-      "bytes": 90474,
-      "sha256": "0ead9e3407787fe92282a61e7933a5d43cf51286407e9946d080d437972ab20d",
+      "bytes": 90503,
+      "sha256": "6c18ac1571bcff2945fe98e392331c549e01898ddb8a4f0a079a311f26bbf730",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ko.lua": {
-      "bytes": 87149,
-      "sha256": "83c7cd7ab426db6dfb53613e4410b0c3bc005b908f344803373bbef223966036",
+      "bytes": 87165,
+      "sha256": "6e2af9ce9c04f3b9734057a18da88c5ebc4b06397c947eff2088de4df9959187",
       "namedFunctions": [],
       "literalEvents": []
     },
@@ -7031,7 +7031,7 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. No publication acceptance. Internationalization: offline catalog, font, switching and native-data fixtures only; live client layout and native-speaker wording acceptance remain pending."
+    "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. No publication acceptance. Internationalization: client 0.6.8 at 1920x1080, live German/Russian/Chinese/Japanese/Korean with Elwynn Complete; Korean without theme and in FieldKit-owned native tooltip. Script glyphs render. Corrected unknown tokens and r2 CJK fonts rechecked after reload in ZH/JA/KO with Elwynn; ZH also without theme. Further treasure-chest/context wording corrected in source. Full layout acceptance and native-speaker wording review remain pending. French, profile 1, Elwynn Complete and paused state restored."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,
