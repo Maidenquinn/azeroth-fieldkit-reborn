@@ -65,7 +65,7 @@ function FieldKit.InitializeSettings(defaultStats)
  else d.zoneThemeNativeBefore=nil end
  if d.zoneThemeMode~="auto" and d.zoneThemeMode~="elwynn" and d.zoneThemeMode~="naxx" then d.zoneThemeMode="auto" end
  if d.zoneThemeVariant~="minimal" and d.zoneThemeVariant~="complete" and d.zoneThemeVariant~="alternative" then d.zoneThemeVariant="complete" end
-d.language=d.language=="fr" and "fr" or "en"
+ d.language=FieldKitLocale.Valid(d.language) and d.language or "auto"
  d.cardStyle=math.floor(FieldKit.Number(d.cardStyle,1,1,2))
  d.cardOpacity=math.floor(FieldKit.Number(d.cardOpacity,100,0,100))
  -- The settings shell belongs to the application, not a HUD profile.

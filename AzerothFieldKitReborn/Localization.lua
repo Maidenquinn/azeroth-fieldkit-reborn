@@ -525,7 +525,6 @@ T.fr["Offsets are measured from the screen center. Drag handles also save these 
 T.fr["Native text is independent of FieldKit scrolling text. Disable duplicate displays here."]="Le texte natif est indépendant de celui de FieldKit. Désactive ici les affichages en double."
 T.fr["Hidden abilities: one game-provided name per line. Example: Backstab. Maximum 32 names."]="Compétences masquées : un nom du jeu par ligne. Exemple : Backstab. Maximum 32 noms."
 T.fr["Matches the name received from the game, without the healing prefix. Small hits are filtered before merging. Partially blocked hits remain one damage message."]="Correspond au nom reçu du jeu, sans le préfixe de soin. Les petits coups sont filtrés avant regroupement. Les coups partiellement bloqués restent un seul message."
-T.fr["Les esquives et parades n’apparaissent que si le client envoie l’événement. < = reçu ; > = votre action."]="Avoidance events appear only when the client sends the corresponding message. < = incoming; > = your action."
 T.fr["This disables native damage text. World anchoring requires AS 0.138+."]="Ce bouton désactive le texte de dégâts natif. L'ancrage au monde nécessite AS 0.138+."
 -- V2-C8.4: additional dynamic UI strings from the Lua module audit.
 T.fr["Arrives at"]="Arrive à"
@@ -677,50 +676,38 @@ T.fr["Reset HUD positions"]="Réinitialiser les positions HUD"
 T.fr["Undo"]="Annuler"
 T.fr["Previews"]="Aperçus"
 T.en={};for en,fr in pairs(T.fr) do if not T.en[fr] then T.en[fr]=en end end
--- Read the saved UI language; game-provided names remain unchanged.
+-- An explicit selection wins; Automatic follows the native game locale.
 function FieldKit_Language()
- return FieldKitRebornDB and FieldKitRebornDB.language=="fr" and "fr" or "en"
+ local code=T.Selected and T.Selected() or (FieldKitRebornDB and FieldKitRebornDB.language or "en")
+ if code=="auto" then return T.GameLanguage and T.GameLanguage() or "en" end
+ return code
 end
 -- Translate a known addon label; unknown/native strings are passed through.
 function FieldKit_L(text)
  if type(text)~="string" then return text end
  local en=T.fr[text] and text or (T.en[text] or text)
- if FieldKit_Language()=="fr" then return T.fr[en] or text end
- return en
+ local language=FieldKit_Language()
+ if language=="en" then return en end
+ local catalog=T[language]
+ return type(catalog)=="table" and catalog[en] or en
 end
 -- Bind an addon label to a weakly tracked widget for later live language changes.
 function FieldKit_Text(object,text)
  if type(text)=="string" then T.bindings[object]=text else T.bindings[object]=nil end
  object:SetText(FieldKit_L(text));if object.fieldkitLabel then object.fieldkitLabel:SetText(FieldKit_L(text)) end
+ if T.ApplyFont then T.ApplyFont(object,object.fieldkitLanguageFont);if object.fieldkitLabel then T.ApplyFont(object.fieldkitLabel,object.fieldkitLanguageFont) end end
 end
 -- Register one refresh callback for dynamic UI labels.
 function FieldKit_RefreshLanguage(callback) table.insert(T.callbacks,callback) end
--- Persist EN/FR and refresh bound widgets without rebuilding the UI.
+-- Persist a supported locale and refresh owned labels/fonts without UI reload.
 function FieldKit_SetLanguage(language)
- if type(FieldKitRebornDB)~="table" or (language~="en" and language~="fr") then return end
+ if type(FieldKitRebornDB)~="table" or not T.Valid(language) then return false end
  FieldKitRebornDB.language=language
+ if T.RefreshFonts then T.RefreshFonts() end
  for object,text in pairs(T.bindings) do object:SetText(FieldKit_L(text));if object.fieldkitLabel then object.fieldkitLabel:SetText(FieldKit_L(text)) end end
  for i=1,table.getn(T.callbacks) do T.callbacks[i]() end
+ return true
 end
--- Build two explicit language buttons; capture a distinct language in each callback.
-function FieldKit_CreateLanguageOption(page,y)
- local label=page:CreateFontString(nil,"OVERLAY","GameFontNormal")
- label:SetPoint("TOPLEFT",page,"TOPLEFT",0,y);FieldKit_Text(label,"Language")
- for i=1,2 do
-  local language=i==1 and "en" or "fr"
-  local button=CreateFrame("Button",nil,page,"UIPanelButtonTemplate")
-  button:SetWidth(150);button:SetHeight(25);button:SetPoint("TOPLEFT",page,"TOPLEFT",(i-1)*160,y-24)
-  button:SetText(i==1 and "English" or "Français")
-  local function Refresh() button:SetText((FieldKit_Language()==language and "|cffffd100> " or "")..(language=="en" and "English" or "Français").."|r") end
-  button:SetScript("OnClick",function() FieldKit_SetLanguage(language) end)
-  FieldKit_RefreshLanguage(Refresh);Refresh()
- end
- local help=page:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall")
- help:SetPoint("TOPLEFT",page,"TOPLEFT",0,y-62);help:SetWidth(page:GetWidth()-12);help:SetJustifyH("LEFT")
- FieldKit_Text(help,"Choose the language used by FieldKit. Applies immediately; game-provided names keep the game's language.")
- return y-115
-end
-
 FieldKitLocale.fr["One theme for HUD, windows and tooltips."]="Un même thème pour le HUD, les fenêtres et les infobulles."
 FieldKitLocale.fr["Essentials within reach."]="L’essentiel à portée de main."
 FieldKitLocale.fr["Detailed tracking and quick access."]="Suivi détaillé et accès rapides."

@@ -1,5 +1,5 @@
 -- Exercise live language changes through the real Interface buttons.
-assert(FieldKitRebornDB.language=="en")
+assert(FieldKitRebornDB.language=="auto" and FieldKit_Language()=="en")
 assert(table.getn(FieldKitPanel.tabs)>=14)
 assert(FieldKitPanel.tabs[2].fieldkitLabel.text=="Combat text")
 assert(FieldKitPanel.tabs[4].fieldkitLabel.text=="Bosses")
@@ -10,12 +10,8 @@ for i=1,table.getn(FieldKitPanel.tabs) do
  if FieldKitPanel.tabs[i].section.id=="interface" then interface=FieldKitPanel.tabs[i].page end
 end
 assert(interface)
-local en,fr=FieldKitUI.languageRow.en,FieldKitUI.languageRow.fr
-for i=1,table.getn(interface.children) do
- local b=interface.children[i]
- if b.kind=="Button" and string.find(b.text or "","English",1,true) then en=b end
- if b.kind=="Button" and string.find(b.text or "","Français",1,true) then fr=b end
-end
+local en=FieldKitUI.languageRow.choice.choiceButtons[2]
+local fr=FieldKitUI.languageRow.choice.choiceButtons[8]
 assert(en and fr)
 local editor=FieldKitPanel.tabs[2].page.combatEditor
 local x,y=FieldKitRebornDB.combatTextX,FieldKitRebornDB.combatTextIncomingX

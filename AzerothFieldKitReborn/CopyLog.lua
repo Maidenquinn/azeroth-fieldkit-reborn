@@ -458,10 +458,10 @@ local function CopyButton()
    if GameTooltip then
     GameTooltip:SetOwner(this,"ANCHOR_TOP")
     GameTooltip:SetText(FieldKit_L("Open chat copy"))
-    GameTooltip:Show()
+    FieldKitLocale.ShowTooltip()
    end
   end)
-  button:SetScript("OnLeave",function() if GameTooltip then GameTooltip:Hide() end end)
+  button:SetScript("OnLeave",function() if GameTooltip then FieldKitLocale.HideTooltip() end end)
  end
  if button.fieldkitChatAnchor~=f then
   button:ClearAllPoints()
@@ -682,7 +682,7 @@ local function OpenCopy()
   scroll:SetPoint("TOPLEFT",f,"TOPLEFT",16,-50);scroll:SetPoint("BOTTOMRIGHT",f,"BOTTOMRIGHT",-36,45)
   scroll:SetWidth(618);scroll:SetHeight(340)
   local e=CreateFrame("EditBox","FieldKitCopyLogEdit",scroll)
-  e:SetWidth(605);e:SetHeight(320);e:SetMultiLine(true);e:SetAutoFocus(false);e:SetMaxLetters(52000);e:SetFontObject("ChatFontNormal")
+  e:SetWidth(605);e:SetHeight(320);e:SetMultiLine(true);e:SetAutoFocus(false);e:SetMaxLetters(52000);e:SetFontObject("ChatFontNormal");FieldKitLocale.ApplyFont(e)
   e:SetScript("OnEscapePressed",function() this:ClearFocus();copyFrame:Hide() end);scroll:SetScrollChild(e)
   local hint=f:CreateFontString(nil,"OVERLAY","GameFontNormalSmall");hint:SetPoint("BOTTOMLEFT",f,"BOTTOMLEFT",16,14)
   FieldKit_Text(hint,"Ctrl+A puis Ctrl+C - texte sans codes de couleur")

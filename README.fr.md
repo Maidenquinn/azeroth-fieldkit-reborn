@@ -1,5 +1,7 @@
 # Azeroth FieldKit Reborn
 
+**Candidate .36-dev :** Préférences propose quatorze langues et le choix Automatique, qui suit le jeu. Les changements sont immédiats, avec ou sans thème. Les choix de langue et profils existants sont conservés ; les noms fournis par le jeu gardent sa langue. Les traductions supplémentaires sont une première passe avec un vocabulaire revu ; les retours de formulation sont bienvenus.
+
 Premier lancement : le profil Elwynn validé est actif ; le profil 2 propose la disposition native validée. **Interface → Profils → Simuler un premier lancement** permet de comparer avec/sans thème et de rétablir tes préférences. Les réglages existants sont conservés.
 
 Adaptation 0.6.5 : catalogue de 240 boss, descriptions complètes des effets de bijoux au survol, barre d'incantation native conservée et accès au journal de mort via `/fieldkit death`. Les états de contrôle utilisent uniquement les informations réellement fournies ; les API manquantes font l'objet d'une demande préparée pour le développeur.

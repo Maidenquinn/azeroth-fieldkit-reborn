@@ -646,7 +646,7 @@ function L.ShowTip(row)
  local icon=(line and line.icon) or IconOf(name)
  local spellId=line and line.spellId
  L.AppendStats(name,spellId,icon,dmg,line and line.windowSeconds and line.windowSeconds>0)
- GameTooltip:Show()
+ FieldKitLocale.ShowTooltip()
  return true
 end
 
@@ -668,7 +668,7 @@ local function HookTooltipMethod(method)
   if method=="SetAction" and type(GetActionTexture)=="function" and a2 then
    local ok,tex=pcall(GetActionTexture,a2);if ok then icon=tex end
   end
-  if L.AppendStats(TipName(),spellId,icon,nil) then GameTooltip:Show() end
+  if L.AppendStats(TipName(),spellId,icon,nil) then FieldKitLocale.ShowTooltip() end
  end
 end
 

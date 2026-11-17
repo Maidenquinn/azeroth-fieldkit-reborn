@@ -162,7 +162,11 @@ function R.DisplayName(value,spellId)
  end
  local text=R.Localize(value)
  if text==value and type(value)=="string" then text=R.SpellAlias(value) or text end
- if FieldKit_Language()=="fr" then text=FieldKitLocale.fr[text] or text end
+ local language=FieldKit_Language()
+ -- Known addon fallbacks cover procs absent from the native name API. Keep
+ -- supplied game names in their language; preserve the historical FR fallback.
+ local catalog=(language=="fr" or (language~="en" and language==FieldKitLocale.GameLanguage())) and FieldKitLocale[language]
+ if type(catalog)=="table" then text=catalog[text] or text end
  -- Summon ledgers keep "owner: ability" as their raw identity. Translate only
  -- its display parts, without changing attribution or a player's custom name.
  if text==value and type(value)=="string" then
@@ -171,7 +175,7 @@ function R.DisplayName(value,spellId)
    local raw=string.sub(value,at+2)
    local suffix=R.Localize(raw)
    if suffix==raw then suffix=R.SpellAlias(raw) or suffix end
-   if FieldKit_Language()=="fr" then suffix=FieldKitLocale.fr[suffix] or suffix end
+   if type(catalog)=="table" then suffix=catalog[suffix] or suffix end
    text=string.sub(value,1,at+1)..suffix
   end
  end

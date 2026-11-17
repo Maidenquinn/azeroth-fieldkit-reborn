@@ -447,7 +447,7 @@ function L.Tip(owner,entry)
   else GameTooltip:AddLine(FieldKit_L("Bonus details not provided"),.65,.7,.7,true) end
  end
  if entry.spellId and FieldKitMeterLedger then FieldKitMeterLedger.AppendStats(entry.name,entry.spellId,entry.icon) end
- GameTooltip:Show()
+ FieldKitLocale.ShowTooltip()
 end
 function L.Attach(frame,readSlot,refresh)
  L.frame=frame;L.readSlot=readSlot;L.refresh=refresh;frame.spellRows={};frame.fieldkitHeaderHeight=12
@@ -465,7 +465,7 @@ function L.Attach(frame,readSlot,refresh)
   row.bonus:SetJustifyH("LEFT");row.bonus:SetJustifyV("TOP")
   if row.bonus.SetNonSpaceWrap then row.bonus:SetNonSpaceWrap(true) end
   row:RegisterForDrag("LeftButton");row:SetScript("OnDragStart",function() frame:GetScript("OnDragStart")() end);row:SetScript("OnDragStop",function() frame:GetScript("OnDragStop")() end)
-  row:SetScript("OnEnter",function() L.Tip(this,this.entry) end);row:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  row:SetScript("OnEnter",function() L.Tip(this,this.entry) end);row:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  end
 end
 function L.Render(frame)

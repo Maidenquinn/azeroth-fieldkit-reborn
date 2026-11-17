@@ -98,7 +98,7 @@ function Q.DeathTip(owner)
   GameTooltip:AddLine(FieldKit_L("Damage")..": "..tostring(h.total),1,1,1)
   if h.overkill then GameTooltip:AddLine(FieldKit_L("Overkill")..": "..tostring(h.overkill),1,.4,.3) end
  else GameTooltip:AddLine(FieldKit_L("Open the game's last blows and killing-blow card."),.8,.8,.8,true) end
- GameTooltip:Show()
+ FieldKitLocale.ShowTooltip()
 end
 
 -- Preserve complete native proc descriptions for jewelry tooltips. Compact

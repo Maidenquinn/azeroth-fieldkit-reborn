@@ -26,9 +26,9 @@ function C.Create()
   if callback then local previous=this;this=source;pcall(callback,source,arg1 or "LeftButton");this=previous end
  end)
  f:SetScript("OnEnter",function()
-  if GameTooltip and type(GameTooltip.SetUnit)=="function" then GameTooltip:SetOwner(this,"ANCHOR_BOTTOMRIGHT");GameTooltip:SetUnit("target");GameTooltip:Show() end
+  if GameTooltip and type(GameTooltip.SetUnit)=="function" then GameTooltip:SetOwner(this,"ANCHOR_BOTTOMRIGHT");GameTooltip:SetUnit("target");FieldKitLocale.ShowTooltip() end
  end)
- f:SetScript("OnLeave",function() if GameTooltip then GameTooltip:Hide() end end)
+ f:SetScript("OnLeave",function() if GameTooltip then FieldKitLocale.HideTooltip() end end)
  FieldKitZoneThemes.Bind(f)
 end
 local AURA_SIZE,AURA_STEP,AURA_COLUMNS,AURA_MAX=22,24,12,16
@@ -41,9 +41,9 @@ local function AuraButton(parent,kind,index)
  b.count=b:CreateFontString(nil,"OVERLAY","GameFontNormal");b.count:SetPoint("BOTTOMRIGHT",b,"BOTTOMRIGHT",0,1);T.Font(b.count,10,T.text)
  b:SetScript("OnEnter",function()
   local method=this.kind=="debuff" and "SetUnitDebuff" or "SetUnitBuff"
-  if GameTooltip and type(GameTooltip[method])=="function" then GameTooltip:SetOwner(this,"ANCHOR_BOTTOMRIGHT");GameTooltip[method](GameTooltip,"target",this.index);GameTooltip:Show() end
+  if GameTooltip and type(GameTooltip[method])=="function" then GameTooltip:SetOwner(this,"ANCHOR_BOTTOMRIGHT");GameTooltip[method](GameTooltip,"target",this.index);FieldKitLocale.ShowTooltip() end
  end)
- b:SetScript("OnLeave",function() if GameTooltip then GameTooltip:Hide() end end)
+ b:SetScript("OnLeave",function() if GameTooltip then FieldKitLocale.HideTooltip() end end)
  return b
 end
 -- Real native auras: debuffs first row, buffs second. Returns rows used (0-2).

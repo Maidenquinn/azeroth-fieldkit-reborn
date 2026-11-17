@@ -21,8 +21,8 @@ function FieldKit_CreateCombatOptions(parent)
  end
  -- Attach localized tooltip callbacks to an addon-owned control.
  local function Tip(button,text)
-  button:SetScript("OnEnter",function() GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(FieldKit_L(text),1,1,1);GameTooltip:Show() end)
-  button:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  button:SetScript("OnEnter",function() GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(FieldKit_L(text),1,1,1);FieldKitLocale.ShowTooltip() end)
+  button:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  end
  -- Create a localized explicit-action editor button.
  local function Button(p,label,x,y,w,callback)
@@ -234,7 +234,7 @@ function FieldKit_CreateCombatOptions(parent)
     local size=tonumber(event and event.size) or C.Number(crit and "combatTextCritSize" or "combatTextFontSize",crit and 20 or 16,10,40)
     size=math.min(40,math.max(10,size))
     local font=crit and critical>0 and critical or normal
-    local ok,result=pcall(fs.SetFont,fs,C.fonts[font][2],size,outline)
+    local ok,result=pcall(fs.SetFont,fs,FieldKitLocale.FontPath(C.fonts[font][2]),size,outline)
     if not ok or result==false then fs:SetFont(C.fonts[1][2],size,"OUTLINE") end
     local r,g,b=C.Color(v.kind);fs:SetTextColor(r,g,b)
     local age=now-v.time;local fade=math.min(1,math.max(0,(duration-age)/(duration/3)))
@@ -325,13 +325,13 @@ function FieldKit_CreateCombatOptions(parent)
  local function StyleFontChoice(choice,offset)
   for i=1,table.getn(choice.choiceButtons) do
    local item=choice.choiceButtons[i];local fontIndex=i-offset
-   if fontIndex>=1 and fontIndex<=table.getn(C.fonts) then item.fieldkitLabel:SetFont(C.fonts[fontIndex][2],14,"OUTLINE") end
+   if fontIndex>=1 and fontIndex<=table.getn(C.fonts) then item.fieldkitLabel.fieldkitFontPreview=C.fonts[fontIndex][2];T.Font(item.fieldkitLabel,14,T.gold) end
   end
   local old=choice.Refresh
   choice.Refresh=function()
    old();local selected=choice.get()-offset
-   if selected>=1 and selected<=table.getn(C.fonts) then choice.fieldkitLabel:SetFont(C.fonts[selected][2],14,"OUTLINE")
-   else choice.fieldkitLabel:SetFont(C.fonts[1][2],13,"OUTLINE") end
+   choice.fieldkitLabel.fieldkitFontPreview=C.fonts[(selected>=1 and selected<=table.getn(C.fonts)) and selected or 1][2]
+   T.Font(choice.fieldkitLabel,selected>=1 and 14 or 13,T.gold)
   end
   choice.Refresh()
  end
@@ -351,7 +351,7 @@ function FieldKit_CreateCombatOptions(parent)
  Number(p,"Soin minimum (par mise à jour)",-155,"combatTextHealMin",0,500)
  Text(p,"Hidden abilities: one game-provided name per line. Example: Backstab. Maximum 32 names.",0,-213)
  local edit=CreateFrame("EditBox",Name(),p);edit:SetWidth(width-10);edit:SetHeight(90);edit:SetPoint("TOPLEFT",p,"TOPLEFT",5,-253)
- Track(edit,5,width-10);edit:SetMultiLine(true);edit:SetAutoFocus(false);edit:SetFontObject("ChatFontNormal")
+ Track(edit,5,width-10);edit:SetMultiLine(true);edit:SetAutoFocus(false);edit:SetFontObject("ChatFontNormal");FieldKitLocale.ApplyFont(edit)
  edit:SetBackdrop({bgFile="Interface\\Tooltips\\UI-Tooltip-Background",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=16,edgeSize=8})
  if edit.SetMaxLetters then edit:SetMaxLetters(2000) end
  edit:SetScript("OnEscapePressed",function() this:ClearFocus() end)

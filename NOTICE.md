@@ -98,6 +98,12 @@ interpretations of Warcraft characters and materials, not official extracted
 Blizzard models or UI assets. Runtime text, action icons, maps and gauges use
 independent live components. Preview thumbnails alone contain example values.
 
-NotoSerif-Regular.ttf is an unmodified Noto Serif font under SIL OFL 1.1, covered
-by the included OFL-NotoSans.txt (same upstream license text). Its source and
-SHA-256 are recorded in data/theme-assets.json. Prior credits remain applicable.
+NotoSerif-Regular.ttf retains its original Noto Serif data under OFL 1.1.
+FieldKitLatin.ttf and FieldKitSerif.ttf are OFL Noto derivatives, with missing
+UI symbols added from Noto CJK in the multilingual candidate. The regional
+FieldKitSans-zh/ja/ko.ttf derivatives combine the bundled Latin face and pinned
+Noto CJK outlines converted to TrueType quadratics. Original copyright notices
+remain embedded; derivative families are renamed. Included OFL-NotoSans.txt and
+OFL-NotoCJK.txt apply. Source URLs, hashes and the reproducible developer build
+are recorded in data/locale-fonts.json and tools/check_locale_fonts.py. No font
+download or conversion runs inside the game. Prior credits remain applicable.

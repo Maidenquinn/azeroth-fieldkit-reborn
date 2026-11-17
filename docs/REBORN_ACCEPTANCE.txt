@@ -1,3 +1,23 @@
+FieldKit Reborn 0.1.0-reborn.36-dev — Candidate: HUD editor and languages
+
+No public release or new maintainer acceptance is implied. The previous native
+editor inspection does not certify this internationalization change.
+
+Manual recipe:
+1. Preferences: select Automatic, EN/FR, a Latin language, a Cyrillic language
+   and each CJK language. The list scrolls; autonyms must remain readable.
+2. Confirm live settings/HUD labels, tooltip wrapping and floating generated
+   combat labels with themes off, Elwynn and Naxx. Check your resolution/scale.
+3. Native spell/effect/equipment/creature names keep the game language; unknown
+   labels stay unchanged. No player identity or raw meter attribution is renamed.
+4. Leave an addon hover and open a native tooltip: its original font must return.
+5. Switch HUD profiles and /reload: explicit language or Automatic persists;
+   layout, chat opt-ins and native game language remain unchanged.
+6. Recheck the grid/editor, temporary chat handle and minimap on ultrawide.
+
+Additional translations are a machine-assisted first pass with reviewed terms.
+Native-speaker wording review and this client visual recipe remain open.
+
 FieldKit Reborn 0.1.0-reborn.35 — World markers and adjustable height
 
 Stable world-marker update, accepted by the maintainer after the final in-game recipe on 2026-11-15. Includes the Reborn API connection and normal-rank guardian discovery introduced in .32/.33, with the final approved placement controls.

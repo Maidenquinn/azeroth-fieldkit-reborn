@@ -144,9 +144,9 @@ function P.Create(createWindow,fitRows,makeMovable)
  meter:SetScript("OnEnter",function()
   GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(FieldKit_L("Group damage"),1,.85,.55)
   GameTooltip:AddLine(FieldKit_L("The header counts received players versus the current roster. Missing players or DPS stay unknown. Peer spell breakdowns are not provided by this API."),.8,.8,.8,true)
-  GameTooltip:Show()
+  FieldKitLocale.ShowTooltip()
  end)
- meter:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ meter:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  for i=1,4 do P.CreateMember(i,createWindow,makeMovable) end
  P.CreateMember(0,createWindow,makeMovable) -- the player's own card: same component
  P.TrackRun()
@@ -160,9 +160,9 @@ function P.CreateMember(index,createWindow,makeMovable)
   GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(FieldKit_L(index==0 and "My card" or "Teammate"),1,.85,.55)
   GameTooltip:AddLine(FieldKit_L("Native party-unit health and resources. Damage and DPS require a fresh group-meter sample. Drag cards directly. Native teammate frames remain interactive unless explicitly hidden."),.8,.8,.8,true)
   if FieldKitGroupHistory then local who=type(UnitName)=="function" and UnitName(this.unit);if who then FieldKitGroupHistory.DetailTooltip(GameTooltip,this.unit,who) end end
-  GameTooltip:Show()
+  FieldKitLocale.ShowTooltip()
  end)
- frame:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ frame:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  frame:Hide()
 end
 

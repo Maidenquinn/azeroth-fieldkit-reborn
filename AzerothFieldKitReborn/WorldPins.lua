@@ -39,9 +39,9 @@ local function NewPin(list,i,kind)
   if this.detail then GameTooltip:AddLine(this.detail,1,1,1,1) end
   if this.dist then GameTooltip:AddLine(math.floor(this.dist+.5)..FieldKit_L(" yd"),1,1,1) end
   if this.edge then GameTooltip:AddLine(FieldKit_L("Direction only: beyond minimap range"),1,.8,.3) end
-  GameTooltip:Show()
+  FieldKitLocale.ShowTooltip()
  end)
- p:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ p:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  p:Hide();list[i]=p;return p
 end
 -- Hide the pool first so missing native entries cannot leave stale markers.

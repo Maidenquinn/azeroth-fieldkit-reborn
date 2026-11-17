@@ -83,7 +83,7 @@ function D.Show(row)
  if table.getn(list)>12 then GameTooltip:AddLine(string.format(FieldKit_L("%d more sources"),table.getn(list)-12),.65,.7,.7) end
  if total< (row.takenDamage or 0) then GameTooltip:AddLine(FieldKit_L("Not identified")..": "..string.format("%.0f",row.takenDamage-total),.65,.7,.7)
  elseif total>(row.takenDamage or 0) then GameTooltip:AddLine(FieldKit_L("Combat log and native totals are not synchronized."),.8,.7,.4,true) end
- GameTooltip:Show()
+ FieldKitLocale.ShowTooltip()
 end
 local frame=CreateFrame("Frame","FieldKitTakenObserver",UIParent)
 frame:RegisterEvent("CHAT_MSG_COMBAT_CREATURE_VS_SELF_HITS")

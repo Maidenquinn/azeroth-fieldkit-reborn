@@ -181,6 +181,9 @@ local function StyleSlot(s,v,size,now,lifetime)
  local font=C.Number("combatTextFont",1,1,4)
  if critical and C.Number("combatTextCritFont",0,0,4)>0 then font=C.Number("combatTextCritFont",0,0,4) end
  local path=C.fonts[math.floor(font)][2];local outlines={"","OUTLINE","THICKOUTLINE"};local outline=outlines[math.floor(C.Number("combatTextOutline",2,1,3))]
+ -- Native ability names keep the game's script even under an English addon UI.
+ path=FieldKitLocale.FontPath(path,FieldKitLocale.GameLanguage())
+ path=FieldKitLocale.FontPath(path)
  local style=path..size..outline
  if s.style~=style then
   local ok,result=pcall(s.fs.SetFont,s.fs,path,size,outline)

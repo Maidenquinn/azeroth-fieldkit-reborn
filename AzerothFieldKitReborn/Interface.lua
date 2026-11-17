@@ -261,13 +261,13 @@ end
 
 -- One owned tooltip; no chat/network output for normal configuration changes.
 function U.HideTip()
- GameTooltip:Hide();if FieldKitThemeHUD then FieldKitThemeHUD.HideTip() end
+ FieldKitLocale.HideTooltip();if FieldKitThemeHUD then FieldKitThemeHUD.HideTip() end
 end
 function U.Tip(owner,label,detail)
  if FieldKitZoneThemes and FieldKitZoneThemes.active then FieldKitThemeHUD.Tip(owner,FieldKit_L(label),{FieldKit_L(detail or "")});return end
  GameTooltip:SetOwner(owner,"ANCHOR_RIGHT");GameTooltip:SetText(FieldKit_L(label),1,.85,.55)
  if detail then GameTooltip:AddLine(FieldKit_L(detail),.8,.83,.8,true) end
- GameTooltip:Show()
+ FieldKitLocale.ShowTooltip()
 end
 
 -- Bound dropdown height, with native scrolling rather than a screen-sized list.
@@ -573,6 +573,7 @@ local function BuildProfileManager(page,y)
   edit:SetPoint("TOPLEFT",editor,"TOPLEFT",10,-4)
   edit:SetWidth(285);edit:SetHeight(22)
   edit:SetFont("Fonts\\FRIZQT__.TTF",14,"")
+  FieldKitLocale.ApplyFont(edit)
   edit:SetTextColor(T.text[1],T.text[2],T.text[3])
   edit:SetAutoFocus(false);edit:SetMaxLetters(40)
   editor:Hide()
@@ -824,7 +825,7 @@ function U.BuildPage(section,index)
    local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(66)
    local button=T.Button(row,nil,item.label,0,0,240,32,item.action)
    button:SetScript("OnEnter",function() if item.label=="Native death log" then FieldKitReborn065.DeathTip(this) else U.Tip(this,item.label,item.tip) end end)
-   button:SetScript("OnLeave",function() GameTooltip:Hide() end)
+   button:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
    local label=T.Label(row,item.tip,0,38,500,22,12,T.muted)
    row.Reflow=function(w) row:SetWidth(w);label:SetWidth(w) end
    table.insert(page.flow,{frame=row,y=y});y=y+76
@@ -848,12 +849,36 @@ function U.BuildPage(section,index)
    row.Reflow=function(w) row:SetWidth(w);row.label:SetWidth(w);choice.Reflow(w) end
    table.insert(U.controls,choice);table.insert(page.flow,{frame=row,y=y});y=y+72
   elseif item.kind=="language" then
-   local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(68)
+   local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(118)
    row.label=T.Label(row,"Language",0,0,300,22,14)
-   row.en=T.Button(row,nil,"English",0,29,150,30,function() FieldKit_SetLanguage("en") end)
-   row.fr=T.Button(row,nil,"Français",160,29,150,30,function() FieldKit_SetLanguage("fr") end)
-   row.Reflow=function(w) row:SetWidth(w) end
-   U.languageRow=row;table.insert(page.flow,{frame=row,y=y});y=y+84
+   row.help=T.Label(row,"Choose the language used by FieldKit. Automatic follows the game language. Game-provided names keep the game language.",0,66,620,44,12,T.muted)
+   local names={};for _,language in ipairs(FieldKitLocale.languages) do table.insert(names,language[2]) end
+   local function Current()
+    for index,language in ipairs(FieldKitLocale.languages) do if language[1]==FieldKitLocale.Selected() then return index end end
+    return 1
+   end
+   row.choice=U.Choice(row,"FieldKitLanguageChoice","Language",0,29,420,names,Current,
+    function(index) FieldKit_SetLanguage(FieldKitLocale.languages[index][1]) end)
+   -- Autonyms use their own script, regardless of the current UI language.
+   local function Autonym(button,code,name)
+    FieldKitLocale.bindings[button]=nil
+    button.fieldkitLanguageFont=code=="auto" and FieldKit_Language() or code
+    button.fieldkitLabel.fieldkitLanguageFont=button.fieldkitLanguageFont
+    local label=code=="auto" and FieldKit_L("Automatic") or name
+    button:SetText(label);button.fieldkitLabel:SetText(label)
+    T.Font(button.fieldkitLabel,13,T.gold)
+   end
+   row.choice.Refresh=function()
+    local language=FieldKitLocale.languages[Current()];Autonym(row.choice,language[1],language[2])
+    for index,language in ipairs(FieldKitLocale.languages) do
+     local button=row.choice.choiceButtons[index]
+     Autonym(button,language[1],language[2]);button.fieldkitChoice=true
+     button.fieldkitSelected=index==Current();T.State(button,button.fieldkitSelected)
+    end
+   end
+   row.choice.Refresh()
+   row.Reflow=function(w) row:SetWidth(w);row.choice.Reflow(math.min(w,620));row.help:SetWidth(w) end
+   U.languageRow=row;table.insert(page.flow,{frame=row,y=y});y=y+130
   elseif item.kind=="camera" then
    y=Slider(page,{label="Max camera distance",get=function() return FieldKitRebornDB.cameraMax or 15 end,
     set=function(v) U.context.camera(v) end},y,true)
@@ -928,17 +953,7 @@ function U.Refresh()
   if U.quickProfileActiveBorder then U.quickProfileActiveBorder(name~=nil) end
  end
  if U.languageRow then
-  local en=FieldKit_Language()=="en"
-  local fr=FieldKit_Language()=="fr"
-  -- Unlike a momentary hover, selected buttons must stay selected after
-  -- OnLeave and show an unambiguous visible check mark.
-  U.languageRow.en.fieldkitChoice=true;U.languageRow.fr.fieldkitChoice=true
-  U.languageRow.en.fieldkitSelected=en
-  U.languageRow.fr.fieldkitSelected=fr
-  T.State(U.languageRow.en,en)
-  T.State(U.languageRow.fr,fr)
-  FieldKit_Text(U.languageRow.en,en and "✓ English" or "English")
-  FieldKit_Text(U.languageRow.fr,fr and "✓ Français" or "Français")
+  U.languageRow.choice.Refresh()
  end
  local reload=(FieldKitRebornDB.compactBar==true)~=(FieldKit.appliedCompactBar==true)
  U.reloadNeeded=reload

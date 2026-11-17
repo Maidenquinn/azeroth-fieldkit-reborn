@@ -1,5 +1,7 @@
 # Azeroth FieldKit Reborn
 
+**Development candidate .36-dev:** Preferences offers fourteen languages and Automatic (follow the game). Changes apply live with or without a theme. Existing language choices and HUD profiles are retained. Native game names keep their game language. The additional translations are a first pass with reviewed terminology; wording feedback is welcome.
+
 First launch: the approved Elwynn profile is active; profile 2 offers the approved native-style layout. Compare a fresh installation through **Interface → Profiles → Preview first launch**; Restore previous returns your settings. Existing preferences are retained.
 
 0.6.5 adaptation: 240-boss catalog, complete jewelry proc tooltips, native target castbar forwarding, and `/fieldkit death` for the native death log. Control states use supplied data only; missing API contracts are documented in a prepared developer request.
@@ -17,7 +19,7 @@ New installations start with the maintainer-approved Elwynn profile in slot 1; s
 [Downloads](https://github.com/Maidenquinn/azeroth-fieldkit-reborn/releases)
 
 Combat HUD, meters, learned spells, run jewelry, boss progression, minimap/world
-markers, configurable themes and English/French settings. Reborn's native data
+markers, configurable themes and localized settings. Reborn's native data
 supplies its maps and class spells, including expansion content. Dedicated
 illustrated themes reuse the existing Elwynn skin on other maps in Auto mode,
 with native zone names and data. Client 0.6.5 supplies recent damage/healing windows and native reset checkpoints. Received-healing counters and unidentified appearances stay unavailable.

@@ -126,9 +126,9 @@ local function MakeMark(parent)
   GameTooltip:SetText(this.bossName,1,.85,.55)
   if this.bossAt then GameTooltip:AddLine(FieldKit_L("Arrives at").." "..Clock(this.bossAt),.8,.8,.8) end
   if this.bossLeft and this.bossLeft>=0 then GameTooltip:AddLine(FieldKit_L("In").." "..Clock(this.bossLeft),.7,.85,1) end
-  GameTooltip:Show()
+  FieldKitLocale.ShowTooltip()
  end)
- m:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ m:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  m:Hide()
  return m
 end

@@ -189,23 +189,22 @@ assert(FieldKit_L("Empty slot — save your current HUD to start.")~=
 assert(FieldKit_L("Saved · %d positions · opacity %d%%")~=
  "Saved · %d positions · opacity %d%%")
 FieldKit_SetLanguage("en")
--- Language state must survive hover release and expose a visible selection.
+-- The complete picker retains its selection after hover release.
 U.Select("interface")
 U.Refresh()
-assert(U.languageRow.en.fieldkitSelected==true and
- U.languageRow.fr.fieldkitSelected==false)
-assert(string.find(U.languageRow.en.fieldkitLabel.text,"✓",1,true),
- "English selection must be explicit")
-this=U.languageRow.en
-local leave=U.languageRow.en:GetScript("OnLeave")
+local en=U.languageRow.choice.choiceButtons[2]
+local fr=U.languageRow.choice.choiceButtons[8]
+assert(en.fieldkitSelected==true and fr.fieldkitSelected==false)
+assert(U.languageRow.choice.fieldkitLabel.text=="English")
+this=en
+local leave=en:GetScript("OnLeave")
 leave()
-assert(U.languageRow.en.fieldkitActive==true,
+assert(en.fieldkitActive==true,
  "language button must remain highlighted after OnLeave")
-click(U.languageRow.fr)
-assert(U.languageRow.fr.fieldkitSelected==true and
- U.languageRow.en.fieldkitSelected==false)
-assert(string.find(U.languageRow.fr.fieldkitLabel.text,"✓",1,true))
-click(U.languageRow.en)
+click(fr)
+assert(fr.fieldkitSelected==true and en.fieldkitSelected==false)
+assert(U.languageRow.choice.fieldkitLabel.text=="Français")
+click(en)
 -- Reset HUD positions now resets chat placement and dimensions too, with Undo.
 U.Select("interface")
 FieldKitRebornDB.chatWidth=650;FieldKitRebornDB.chatHeight=260
