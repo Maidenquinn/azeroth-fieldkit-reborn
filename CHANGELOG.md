@@ -1,3 +1,18 @@
+# 0.1.0-reborn.36 — HUD editor and internationalization
+
+- Offer Automatic plus English, Polish, Czech, German, Brazilian Portuguese, Spanish, French, Romanian, Turkish, Russian, Ukrainian, Simplified Chinese, Japanese and Korean in Preferences. Keep existing manual EN/FR choices; new installations follow the game.
+- Refresh labels and script fonts live, with or without a theme, without changing the game's language or player identities. Keep native spell/effect names and use known localized fallbacks when native data is incomplete.
+- Bundle OFL fonts for CJK/Latin/Cyrillic mixed text and preserve arrows/checkmarks. Add complete-catalog, format-token, font-glyph, live-switch and reload regression gates. Additional locales are a machine-assisted first pass with reviewed terminology; native-speaker wording review remains open.
+- Correct malformed translation tokens found during native QA and refine panel opacity, guardian countdown, compact action bar and healing-on-kill terminology. Reject unknown tokens at build time and rebuild CJK glyph coverage.
+- Correct treasure-chest terminology across the new catalogs and refine Chinese boss, party, counter and theme descriptions after native inspection.
+
+- Add Interface > Layout & arrange > Align HUD and `/fieldkit align`: edit the visible HUD while retaining its active theme.
+- Show a centre-based grid, adjustable 8–64 spacing and optional snapping. With the grid visible, guides snap only to its lines; with it hidden, they align to screen and peer edges/centres. Drawing and snapping share the same bounded spacing. Existing overlap rules retain precedence.
+- Temporarily unlock chat in both editors, independent of styling or copy opt-in; retain its position and restore the normal lock on exit.
+- Reuse overlay textures across viewport changes, preserve profile settings and restore the previous lock on exit. No positions change merely by enabling the grid.
+- Normalize the native minimap local scale within its themed owner, restore it when leaving the theme, and invalidate the native viewport cache when position, dimensions, inherited scale or screen dimensions change.
+- Synthetic coverage: four viewports, six theme layouts, independent effective scales, native scale restoration, FR/EN controls, bounded allocation, profile persistence and viewport cache invalidation. Maintainer accepted .36 for stable release on 2026-11-17; agent ultrawide visual validation is not claimed.
+
 # 0.1.0-reborn.35 — Stable world markers and height controls
 
 - Connect world markers to Reborn's public anchor contract and recover normal-rank guardians without marking ordinary mobs.

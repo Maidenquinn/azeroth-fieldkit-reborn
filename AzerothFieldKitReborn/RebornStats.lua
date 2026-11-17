@@ -46,5 +46,5 @@ function S.Tip(owner,key)
  for _,line in ipairs(lines) do GameTooltip:AddLine(line,.85,.9,.8,true) end
  GameTooltip:AddLine(FieldKit_L("Native jewelry additions; already included in character totals."),.7,.7,.7,true)
  if not key or key=="dots" then GameTooltip:AddLine(FieldKit_L("DoT stacking is a character stat, not the current stacks on a target."),.7,.7,.7,true) end
- GameTooltip:Show();return true
+ FieldKitLocale.ShowTooltip();return true
 end

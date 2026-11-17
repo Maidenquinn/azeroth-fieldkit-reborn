@@ -133,10 +133,10 @@ local function newIcon()
    GameTooltip:SetOwner(this,"ANCHOR_RIGHT")
    GameTooltip:SetText(FieldKit_L and FieldKit_L("Spawn point") or "Spawn point",1,.8,.3)
    GameTooltip:AddLine(FieldKit_L and FieldKit_L("Guardian lair location; appearance does not guarantee a spawn is imminent.") or "Guardian lair location; appearance does not guarantee a spawn is imminent.",.9,.9,.9,1)
-   GameTooltip:Show()
+   FieldKitLocale.ShowTooltip()
   end
  end)
- f:SetScript("OnLeave",function() if GameTooltip and GameTooltip:IsOwned(this) then GameTooltip:Hide() end end)
+ f:SetScript("OnLeave",function() if GameTooltip and GameTooltip:IsOwned(this) then FieldKitLocale.HideTooltip() end end)
  return f
 end
 local function acquireGroundRing()

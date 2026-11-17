@@ -1,6 +1,6 @@
 -- All persisted data belongs to FieldKitRebornDB only. No automatic MASHDB import:
 -- old settings and game saves must not be overwritten by a renamed review build.
-local defaults={nativeMinimapScale=100,nativePlayerScale=100,nativeActionScale=100,nativeTargetScale=100,nativeCardScale=100,zoneThemes=false,zoneThemeMode="auto",zoneThemeVariant="complete",zoneThemeMinimap=true,zoneThemeMapShape="square",zoneThemeArt=true,zoneThemeOverlap=false,zoneThemeScale=100,lairNextBoss=true,windowsLocked=false,effectsFrame=false,effectTotems=true,effectSummons=true,effectTimers=true,effectBuffs=true,reviveFrame=false,
+local defaults={alignmentGrid=true,alignmentSnap=true,alignmentStep=32,nativeMinimapScale=100,nativePlayerScale=100,nativeActionScale=100,nativeTargetScale=100,nativeCardScale=100,zoneThemes=false,zoneThemeMode="auto",zoneThemeVariant="complete",zoneThemeMinimap=true,zoneThemeMapShape="square",zoneThemeArt=true,zoneThemeOverlap=false,zoneThemeScale=100,lairNextBoss=true,windowsLocked=false,effectsFrame=false,effectTotems=true,effectSummons=true,effectTimers=true,effectBuffs=true,reviveFrame=false,
  bossListCard=true,nextBossCard=false,nextBossAlert=false,bossTimeline=false,bossTimelineWidth=560,storedLevelsBadge=false,nativeWarnings=false,keepNativeBanners=false,otherBannerWarnings=true,bossBannerWarnings=true,mechanicWarnings=true,partyBannerWarnings=true,
  highlightFlaggedLair=false,showNativeAffixes=true,hideUnknownMode=true,replacePartyFrames=false,partyDetailSync=false,partyCards=false,partyMeter=true,partyHealthMode=3,partyShow=true,partyPlayerCard=false,partyDetail=2,partyCardScale=100,partyHistory=false,partyHistoryCount=5,partyHistoryBuffs=true,partyHistoryCombat=true,partyHistoryIcons=true,linkRightCards=false,linkLeftCards=false,runModeCard=true,moneyFrame=true,hidePlates=false,hideUnknown=false,targetHealth=true,playerBar=true,
  bossFrame=false,bossStyle="classic",statsFrame=true,playerBuffs=true,gearFrame=true,meterFrame=true,
@@ -9,7 +9,7 @@ local defaults={nativeMinimapScale=100,nativePlayerScale=100,nativeActionScale=1
 
  takenFrame=true,replaceTally=false,playerShield=true,chestPins=false,guardianPins=false,
  lairFrame=true,compactBar=false,lowHealth=true,lowHealthSound=false,
- lowHealthPct=30,targetHealthMode=1,playerHealthMode=1,bossHealthMode=1,chatCopy=false,chatStyle=false,chatFading=false,chatWidth=440,chatHeight=180,chatFontSize=12,chatHistoryLines=200,chatBackgroundOpacity=0,chatShowCopyButton=true,chatFontFace=1,chatBackgroundColor=1,chatTextColor=1,chatOverrideText=false,chatMove=false}
+ lowHealthPct=30,targetHealthMode=1,playerHealthMode=1,bossHealthMode=1,chatCopy=false,chatStyle=false,chatFading=false,chatWidth=440,chatHeight=180,chatFontSize=12,chatHistoryLines=200,chatBackgroundOpacity=0,chatShowCopyButton=true,chatFontFace=1,chatBackgroundColor=1,chatTextColor=1,chatOverrideText=false,chatMove=false,chatPositioned=false}
 
 -- Single audited source of defaults for profile-scoped preferences.
 -- State such as run counters, cached monster classifications, UI navigation
@@ -41,6 +41,7 @@ function FieldKit.InitializeSettings(defaultStats)
   d.shownStats={dmg=true,haste=true,crit=true,lch=true}
  end
  for _,key in ipairs({"nativeMinimapScale","nativePlayerScale","nativeActionScale"}) do d[key]=math.floor(FieldKit.Number(d[key],100,50,150)) end
+ d.alignmentStep=math.floor(FieldKit.Number(d.alignmentStep,32,8,64)/8+.5)*8
  d.nativeTargetScale=math.floor(FieldKit.Number(d.nativeTargetScale,100,50,150))
  d.nativeCardScale=math.floor(FieldKit.Number(d.nativeCardScale,100,75,110))
  d.spellsFrame=nil -- retired separate spell window; the existing card now has tabs
@@ -64,7 +65,7 @@ function FieldKit.InitializeSettings(defaultStats)
  else d.zoneThemeNativeBefore=nil end
  if d.zoneThemeMode~="auto" and d.zoneThemeMode~="elwynn" and d.zoneThemeMode~="naxx" then d.zoneThemeMode="auto" end
  if d.zoneThemeVariant~="minimal" and d.zoneThemeVariant~="complete" and d.zoneThemeVariant~="alternative" then d.zoneThemeVariant="complete" end
-d.language=d.language=="fr" and "fr" or "en"
+ d.language=FieldKitLocale.Valid(d.language) and d.language or "auto"
  d.cardStyle=math.floor(FieldKit.Number(d.cardStyle,1,1,2))
  d.cardOpacity=math.floor(FieldKit.Number(d.cardOpacity,100,0,100))
  -- The settings shell belongs to the application, not a HUD profile.

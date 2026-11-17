@@ -32,9 +32,9 @@ function T.Create(create,fit,move)
    local e=this.bossListEntry
    GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(e.label,1,.85,.55);GameTooltip:AddLine(e.value,1,1,1,true)
    if FieldKitReborn.IsEndless() then GameTooltip:AddLine(FieldKit_L("Endless: the game does not provide the upcoming boss sequence."),.7,.7,.7,true) end
-   GameTooltip:Show()
+   FieldKitLocale.ShowTooltip()
   end)
-  row:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  row:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  end
  for _,row in ipairs(T.frames[1].rows) do
   row.icon=row:CreateTexture(nil,"ARTWORK");row.icon:SetWidth(14);row.icon:SetHeight(14)
@@ -42,9 +42,9 @@ function T.Create(create,fit,move)
   row:SetScript("OnEnter",function()
    if not this.nativeDetail or (T.frames[1] and T.frames[1].azsMoving) then return end
    GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(this.nativeDetail,1,.85,.55)
-   GameTooltip:AddLine(FieldKit_L("Native remaining time; grouped durations show the soonest expiration."),.8,.8,.8,true);GameTooltip:Show()
+   GameTooltip:AddLine(FieldKit_L("Native remaining time; grouped durations show the soonest expiration."),.8,.8,.8,true);FieldKitLocale.ShowTooltip()
   end)
-  row:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  row:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  end
  local warnings=CreateFrame("Frame","FieldKitNativeWarnings",UIParent);T.warningFrame=warnings
  warnings:SetWidth(440);warnings:SetHeight(108);move(warnings,0,240,true)
@@ -56,9 +56,9 @@ function T.Create(create,fit,move)
  warnings:SetScript("OnEnter",function()
   GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(FieldKit_L("Native warnings"),1,.85,.55)
   for _,data in ipairs(T.warnings) do GameTooltip:AddLine(data.text,.9,.9,.85,true) end
-  GameTooltip:Show()
+  FieldKitLocale.ShowTooltip()
  end)
- warnings:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ warnings:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  warnings:Hide();N.Watch()
 end
 function T.ShowRows(frame,rows,total)

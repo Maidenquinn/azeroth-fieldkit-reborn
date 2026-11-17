@@ -870,6 +870,36 @@
       "sha256": "0608977aa53b1b0ac6b671f5650f2c42192a5187b42dfb6d2053a7cbe635c1f5",
       "bytes": 32812,
       "source": "Pixels of the approved elwynn_complete_Effects_1 card frame (four corners and a plain stretch of the top and bottom edges), packed without resampling by tools/build_native_banner.py."
+    },
+    "media/OFL-NotoCJK.txt": {
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+      "bytes": 4301,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitLatin.ttf": {
+      "sha256": "fb7dc00430a275d2a3c54d7bc6365188576043842b164b66669c8478e71bd960",
+      "bytes": 564976,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSerif.ttf": {
+      "sha256": "ec1a526935d52e8a58db4bc74beeb73462c8cdecf3d5018885cffde1f38a6b9a",
+      "bytes": 611472,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-zh-r2.ttf": {
+      "sha256": "10eede28f6ce5ac1e01551606068cf69c987b228cc894c73a32e6b1d58a6dc8a",
+      "bytes": 1396148,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-ja-r2.ttf": {
+      "sha256": "e1250d748435507056c4aba2f90632a8b1c01041a74a1e2661aefbb871e7f16f",
+      "bytes": 1388400,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-ko-r2.ttf": {
+      "sha256": "417a7ca0e3a989d9b2d277c5393982a6bd69420acbc4d6842fb8847064195c79",
+      "bytes": 1392104,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
     }
   }
 }

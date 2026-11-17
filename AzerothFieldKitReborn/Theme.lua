@@ -65,6 +65,8 @@ function T.Font(label,size,color,heading,face)
  local baseSize=size
  local flags=""
  if T.zone=="classic" and not FieldKit.rebornLegacyFixture and not face then path="Fonts\\FRIZQT__.TTF";flags="OUTLINE" end
+ if label.fieldkitFontPreview then path=label.fieldkitFontPreview;flags="OUTLINE" end
+ if FieldKitLocale and FieldKitLocale.FontPath then path=FieldKitLocale.FontPath(path,label.fieldkitLanguageFont) end
  local fit=label.fieldkitFit
  if fit and fit.path==path and fit.baseSize==size and fit.width==label:GetWidth() and fit.height==label:GetHeight() and (label:GetText()==fit.full or label:GetText()==fit.display) then size=fit.renderSize end
  local oldPath,oldSize,oldFlags;if label.GetFont then oldPath,oldSize,oldFlags=label:GetFont() end
@@ -309,7 +311,7 @@ function T.Glyph(parent,index,x,y,size)
  return t
 end
 
--- Bound only addon chrome. Game-provided names keep their existing native fonts.
+-- Fonts belong to addon-owned widgets; names still come from native game data.
 function T.Label(parent,key,x,y,w,h,size,color,heading)
  local t=parent:CreateFontString(nil,"OVERLAY","GameFontNormal")
  t:SetPoint("TOPLEFT",parent,"TOPLEFT",x,-y);t:SetWidth(w);t:SetHeight(h or 22)

@@ -10,8 +10,10 @@ local function Short(n) if not n then return "?" end;if math.abs(n)>=1000000 the
 -- separators follow the language. nil in, "?" out: a missing value is never turned into a number.
 function R.Amount(n)
  if type(n)~="number" then return "?" end
- local fr=FieldKitRebornDB and FieldKitRebornDB.language=="fr"
- local dec=fr and "," or ".";local group=fr and " " or ","
+ local language=FieldKit_Language()
+ local spaced=language=="fr" or language=="pl" or language=="cs" or language=="ru" or language=="uk"
+ local comma=spaced or language=="de" or language=="es" or language=="pt" or language=="ro" or language=="tr"
+ local dec=comma and "," or ".";local group=spaced and " " or (comma and "." or ",")
  local a=math.abs(n);local sign=n<0 and "-" or ""
  if a>=1000000 then return sign..string.gsub(string.format("%.1f",a/1000000),"%.",dec).." M" end
  if a>=10000 then return sign..string.gsub(string.format("%.1f",a/1000),"%.",dec).." k" end
@@ -105,13 +107,13 @@ function R.Create()
   f.rows={}
   for i=1,(kind=="Stats" and 30 or ((kind=="Accessories" or kind=="Damage") and 24 or 6)) do
    local row=CreateFrame("Button",nil,f);f.rows[i]=row;row:SetWidth(300);row:SetHeight(34)
-   row.label=T.Label(row,nil,0,0,210,28,17,R.body);pcall(row.label.SetFont,row.label,T.media.."NotoSerif-Regular.ttf",17,"")
+   row.label=T.Label(row,nil,0,0,210,28,17,R.body);T.Font(row.label,17,R.body,true)
    row.value=T.Label(row,nil,212,0,78,28,17,R.body);row.value:SetJustifyH("RIGHT")
    row.icon=row:CreateTexture(nil,"ARTWORK");row.icon:SetWidth(26);row.icon:SetHeight(26)
    row.bar=CreateFrame("StatusBar",nil,row);row.bar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar");row.bar:SetMinMaxValues(0,1);row.bar:SetHeight(8)
    row.bar:SetFrameLevel(row:GetFrameLevel()+1)
    row:SetScript("OnEnter",function() if this.entry and FieldKitLoadout then FieldKitLoadout.Tip(this,this.entry) end end)
-   row:SetScript("OnLeave",function() GameTooltip:Hide() end)
+   row:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
    local route=kind;row:RegisterForClicks("LeftButtonUp","RightButtonUp");row:SetScript("OnClick",function() if this.buffIndex and arg1=="RightButton" and type(CancelPlayerBuff)=="function" then CancelPlayerBuff(this.buffIndex) elseif route=="Stats" then R.ToggleStats() elseif route~="Damage" then FieldKitZoneThemes.Open(route) end end)
   end
   local route=kind
@@ -128,7 +130,7 @@ function R.Create()
   f.referenceKind=kind;f:EnableMouseWheel(true)
   if kind=="Stats" then
    f:SetScript("OnEnter",function() FieldKitRebornStats.Tip(this) end)
-   f:SetScript("OnLeave",function() GameTooltip:Hide() end)
+   f:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
   end
   local function Wheel() local p=this.referenceKind and this or this:GetParent();R.scroll=R.scroll or {};R.scroll[p.referenceKind]=(R.scroll[p.referenceKind] or 0)-(arg1 or 0);FieldKitZoneThemes.Refresh(true) end
   f:SetScript("OnMouseWheel",Wheel);for _,row in ipairs(f.rows) do row:EnableMouseWheel(true);row:SetScript("OnMouseWheel",Wheel) end
@@ -708,8 +710,8 @@ function R.Update(variant,zone)
    local tool=def
    local b=T.Button(R.chat,nil,def.label,0,0,22,19,function() R.ChatTool(tool.key) end);b.fieldkitChatTool=def.key;R.chatTools[i]=b
    b.fieldkitLabel:ClearAllPoints();b.fieldkitLabel:SetPoint("CENTER",b,"CENTER",0,0);b.fieldkitLabel:SetWidth(22);b.fieldkitLabel:SetJustifyH("CENTER");T.Font(b.fieldkitLabel,12,T.gold,true)
-   b:SetScript("OnEnter",function() T.State(this,true);GameTooltip:SetOwner(this,"ANCHOR_LEFT");GameTooltip:SetText(FieldKit_L(tool.tip));GameTooltip:Show() end)
-   b:SetScript("OnLeave",function() T.State(this,this.fieldkitSelected);GameTooltip:Hide() end)
+   b:SetScript("OnEnter",function() T.State(this,true);GameTooltip:SetOwner(this,"ANCHOR_LEFT");GameTooltip:SetText(FieldKit_L(tool.tip));FieldKitLocale.ShowTooltip() end)
+   b:SetScript("OnLeave",function() T.State(this,this.fieldkitSelected);FieldKitLocale.HideTooltip() end)
   end
  end
  local plan=R.ChatPlan(d,zone);R.chatPlan=plan;R.Geometry(R.chat,plan.rect);R.Art(R.chat,"none");R.chat.fieldkitArtOnly=nil;R.chat.fieldkitFill=plan.fill;T.Surface(R.chat,"card",true);T.State(R.chat,false);R.chat:Show()
@@ -817,7 +819,7 @@ function R.Map()
  local hole=R.layout.mapHole or {a[1],a[2],a[3],a[3]};local side=math.max(hole[3],hole[4])
  local round=M.shape=="round";if round then side=R.RoundGeometry(R.layout,hole) end
  local hx,hy=hole[1]+hole[3]/2-side/2,hole[2]+hole[4]/2-side/2
- Minimap:ClearAllPoints();Minimap:SetPoint("TOPLEFT",M.root,"TOPLEFT",hx-p[1],p[2]-hy);Minimap:SetWidth(side);Minimap:SetHeight(side);R.MapRim(M,hole);R.MapRound(M,hole,side);local owner=R.layout.rects.mapArt and M.root or H.identity;local stamp=tostring(owner:GetLeft())..":"..tostring(owner:GetTop())..":"..tostring(owner:GetEffectiveScale());if M.screenStamp~=stamp then Minimap:Hide();Minimap:Show();M.screenStamp=stamp end
+ Minimap:SetScale(1);Minimap:ClearAllPoints();Minimap:SetPoint("TOPLEFT",M.root,"TOPLEFT",hx-p[1],p[2]-hy);Minimap:SetWidth(side);Minimap:SetHeight(side);R.MapRim(M,hole);R.MapRound(M,hole,side);local owner=R.layout.rects.mapArt and M.root or H.identity;M.RefreshViewport(owner)
  local queue=getglobal("MiniMapBattlefieldFrame");if queue and R.queueClick then FieldKitZoneThemes.Mask(queue,true) end
  local world=getglobal("MiniMapWorldMapButton");if world and R.worldClick then FieldKitZoneThemes.Mask(world,true) end
  local clock=getglobal("GameTimeFrame");if clock then FieldKitZoneThemes.Mask(clock,true) end
@@ -830,8 +832,7 @@ function R.Map()
    local owner=(M.root and M.root.azsMoving and M.root) or (H.identity and H.identity.azsMoving and H.identity) or (M.dragOwner and M.dragOwner.azsMoving and M.dragOwner)
    if not owner or M.probe.follower==false then M.followStamp=nil;return end
    follower.t=follower.t+(arg1 or 0);if follower.t<.03 then return end;follower.t=0
-   local stamp=tostring(owner:GetLeft())..":"..tostring(owner:GetTop())
-   if stamp~=M.followStamp then M.followStamp=stamp;Minimap:Hide();Minimap:Show() end
+   M.RefreshViewport(owner)
   end)
  end
  -- No FieldKit frame covers the map any more: the old drag handle sat over the native map and the map's own buttons, and
@@ -850,7 +851,7 @@ function R.Map()
     proxy=CreateFrame("Button",nil,M.root);proxy:SetWidth(30);proxy:SetHeight(30);proxy.icon=proxy:CreateTexture(nil,"ARTWORK");proxy.icon:SetAllPoints(proxy);proxy:RegisterForClicks("LeftButtonUp","RightButtonUp")
     local launcherName=name -- Lua 5.0: a generic-for variable captured by a closure is nil once the loop ends
     proxy:SetScript("OnClick",function() local target=getglobal(launcherName);local handler=target and target.GetScript and target:GetScript("OnClick");if handler then local old=this;this=target;handler();this=old end end) -- the owner's CURRENT frame, looked up at click time
-    proxy:SetScript("OnEnter",function() GameTooltip:SetOwner(this,"ANCHOR_LEFT");GameTooltip:AddLine(R.LauncherLabel(launcherName),1,.85,.55);GameTooltip:AddLine(FieldKit_L("Click to open"),.8,.8,.8);GameTooltip:Show() end);proxy:SetScript("OnLeave",function() GameTooltip:Hide() end)
+    proxy:SetScript("OnEnter",function() GameTooltip:SetOwner(this,"ANCHOR_LEFT");GameTooltip:AddLine(R.LauncherLabel(launcherName),1,.85,.55);GameTooltip:AddLine(FieldKit_L("Click to open"),.8,.8,.8);FieldKitLocale.ShowTooltip() end);proxy:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
     M.launcherProxies[i]=proxy
    end
    local texture=original.icon or original.texture;local path=texture and texture.GetTexture and texture:GetTexture();if not path and original.GetNormalTexture then local n=original:GetNormalTexture();path=type(n)=="string" and n or (n and n.GetTexture and n:GetTexture()) end
@@ -946,8 +947,8 @@ function R.DamageTabs(f,a,zone,index)
    T.Solid(b.activeTile,{1,.82,.12},.14);b.activeTile:ClearAllPoints();b.activeTile:SetPoint("TOPLEFT",b,"TOPLEFT",2,-1);b.activeTile:SetPoint("BOTTOMRIGHT",b,"BOTTOMRIGHT",-2,2);if index==i then b.activeTile:Show() else b.activeTile:Hide() end
    -- full category name in the tooltip (the sixth label is an abbreviation in the narrow cell)
    local tip=R.tabTips[i];local base=b:GetScript("OnEnter")
-   b:SetScript("OnEnter",function() T.State(this,true);if GameTooltip then GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(FieldKit_L(tip));GameTooltip:Show() end end)
-   b:SetScript("OnLeave",function() T.State(this,this.fieldkitSelected);if GameTooltip then GameTooltip:Hide() end end)
+   b:SetScript("OnEnter",function() T.State(this,true);if GameTooltip then GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(FieldKit_L(tip));FieldKitLocale.ShowTooltip() end end)
+   b:SetScript("OnLeave",function() T.State(this,this.fieldkitSelected);if GameTooltip then FieldKitLocale.HideTooltip() end end)
   end
   b:Show()
  end
@@ -1139,6 +1140,11 @@ function R.TakenPass(d)
  end
 end
 local function Inset(name) if name=="Taken" then return {0,0,0,0} end;if name=="BossList" then return {6,2,6,4} end;local t=OPAQUE[R.key];return (t and t[name]) or {6,6,6,6} end
+-- Expose the same visible frame bounds to the alignment editor as collision placement.
+function R.AlignmentInsets(frame)
+ for kind,f in pairs(R.frames or {}) do if f==frame then return Inset(kind) end end
+ return {0,0,0,0}
+end
 function R.CardVisible(kind,d)
  if kind=="BossList" then local f=R.frames.BossList;return f and f.bossReference and FieldKitRebornDB.bossListCard and not f.mashCollapsed and f.bossListActive end
  if kind=="Taken" then return R.frames.Taken and R.frames.Taken:IsShown() and FieldKitRebornDB.takenFrame and not (FieldKitRebornDB.collapsedWindows and FieldKitRebornDB.collapsedWindows.FieldKitTakenFrame) end
@@ -2025,7 +2031,7 @@ function R.Panels(variant,zone)
     if kind=="Lairs" and r.amount and r.amount:GetText()~="" then T.Font(r.amount,size,r.valueTint or R.body,false);R.Fit(r.amount,size,least);table.insert(r.fullLines,r.amount.referenceFullText or "") end
     r:SetScript("OnEnter",function() if this.entry and FieldKitLoadout then FieldKitLoadout.Tip(this,this.entry) elseif this.statKey and FieldKitRebornStats.Tip(this,this.statKey) then
   elseif this.fieldkitLine and R.DamageTip(this) then -- complete tooltip, nothing to click
-  elseif this.buffIndex and GameTooltip.SetPlayerBuff then GameTooltip:SetOwner(this,"ANCHOR_LEFT");GameTooltip:SetPlayerBuff(this.buffIndex);GameTooltip:Show() else H.Tip(this,f.title:GetText(),this.fullLines) end end);r:SetScript("OnLeave",function() GameTooltip:Hide();H.HideTip() end)
+  elseif this.buffIndex and GameTooltip.SetPlayerBuff then GameTooltip:SetOwner(this,"ANCHOR_LEFT");GameTooltip:SetPlayerBuff(this.buffIndex);FieldKitLocale.ShowTooltip() else H.Tip(this,f.title:GetText(),this.fullLines) end end);r:SetScript("OnLeave",function() FieldKitLocale.HideTooltip();H.HideTip() end)
    end end
   end
  end

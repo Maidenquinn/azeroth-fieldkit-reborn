@@ -41,6 +41,7 @@ function S.Initialize(frames,makeMovable,placeMovable)
     dragging=false
     f.fieldkitHudDragging=nil
     root.azsMoving=nil
+    FieldKitAlignment.Snap(root)
     if FieldKitPositions.Save(root,true) then FieldKitPositions.Restore(root) end
     rootPoint=nil
     S.Apply()

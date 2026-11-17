@@ -1,4 +1,5 @@
 fire(FieldKitFrame,"VARIABLES_LOADED")
+assert(FieldKitRebornDB.language=="auto","Fresh factory presets must follow the game language")
 local P=FieldKitProfiles
 -- Synthetic preferences exercise the first-install transaction independently of the shipped artwork/coordinates.
 local previous=P.factoryPresets

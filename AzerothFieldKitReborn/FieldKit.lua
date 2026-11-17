@@ -169,6 +169,7 @@ local function FinishMoving(frame)
 	frame.azsMoving = nil
  if FieldKitNativeLayout then FieldKitNativeLayout.lastMoved=frame end
 	frame:StopMovingOrSizing()
+ FieldKitAlignment.Snap(frame)
  if FieldKitZoneThemes and FieldKitZoneThemes.Remember(frame) then return end
 	if FieldKitPositions.Save(frame,frame.fieldkitTopLeftAnchor) then FieldKitPositions.Restore(frame) end
 end
@@ -1423,7 +1424,7 @@ local function CreateStatsFrame()
 	AddCompactButton(statsFrame, "statsCollapsed", UpdateStatsFrame)
 	MakeMovable(statsFrame, UIParent:GetWidth() / 2 - 100, 0, true)
  statsFrame:SetScript("OnEnter",function() FieldKitRebornStats.Tip(this) end)
- statsFrame:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ statsFrame:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
 
 
 	if ( type(AZS_STATS) == "table" ) then
@@ -1438,6 +1439,7 @@ end
 -- Apply a readable settings font and color, retaining the template font as fallback.
 local function MenuFont(fs, size, r, g, b)
 	fs:SetFont(MENU_FONT, size)
+ if FieldKitLocale and FieldKitLocale.ApplyFont then FieldKitLocale.ApplyFont(fs) end
 	if ( r ) then
 		fs:SetTextColor(r, g, b)
 	end
@@ -1783,10 +1785,10 @@ local function CreateGearFrame()
 			if ( GetInventoryItemLink and GetInventoryItemLink("player", slotId) ) then
 				GameTooltip:SetOwner(this, "ANCHOR_LEFT")
 				GameTooltip:SetInventoryItem("player", slotId)
-				GameTooltip:Show()
+				FieldKitLocale.ShowTooltip()
 			end
 		end)
-		row:SetScript("OnLeave", function() GameTooltip:Hide() end)
+		row:SetScript("OnLeave", function() FieldKitLocale.HideTooltip() end)
 
 		row:RegisterForDrag("LeftButton")
 		row:SetScript("OnDragStart", function() gearFrame:GetScript("OnDragStart")() end)
@@ -2053,7 +2055,7 @@ local function CreateMeterFrames()
 	takenFrame = CreateBarWindow("FieldKitTakenFrame", "Damage taken", TAKEN_ROWS)
  for _,row in ipairs(takenFrame.rows) do
   row:SetScript("OnEnter",function() FieldKitTakenDetails.Show(this) end)
-  row:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  row:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  end
 
 	takenFrame:SetPoint("TOPLEFT", meterFrame, "BOTTOMLEFT", 0, -2)
@@ -2814,7 +2816,7 @@ function FieldKit.ApplyHUDProfileLive()
  FieldKitCoop.Update()
  FieldKitHudStack.Apply()
  FieldKitCardLayout.ApplyRight()
- FieldKitTheme.Refresh()
+ FieldKitLocale.RefreshFonts()
  PlaceCollapseDock()
  RefreshCollapseDock()
  -- A profile is now a full preference context, not merely a HUD layout.
@@ -2931,7 +2933,7 @@ local function CreateMinimapButton()
 	b:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
  b:RegisterForClicks("LeftButtonUp","RightButtonUp")
  b:SetScript("OnClick",function()
-  GameTooltip:Hide()
+  FieldKitLocale.HideTooltip()
   if arg1=="RightButton" then FieldKit.SetWindowsLocked(not DB.windowsLocked)
   else TogglePanel() end
  end)
@@ -2940,9 +2942,9 @@ local function CreateMinimapButton()
 		GameTooltip:SetText("Azeroth FieldKit", 1.0, 1.0, 1.0)
   GameTooltip:AddLine(FieldKit_L("Left-click: settings. Right-click: lock/unlock windows. Drag: move this shortcut."),NORMAL_FONT_COLOR.r,NORMAL_FONT_COLOR.g,NORMAL_FONT_COLOR.b)
   GameTooltip:AddLine(FieldKit_L((FieldKit.layoutEditing or not DB.windowsLocked) and "Windows unlocked" or "Windows locked"),1,.85,.55)
-		GameTooltip:Show()
+		FieldKitLocale.ShowTooltip()
 	end)
-	b:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	b:SetScript("OnLeave", function() FieldKitLocale.HideTooltip() end)
 end
 
 
@@ -3014,6 +3016,7 @@ local function FieldKitEventLifecycle()
   -- Options/profile refreshes during construction must not snapshot half-built UI.
   FieldKit.zoneThemeReady=true
   FieldKitNativeHUD.SeparateDefaults()
+  FieldKitLocale.RefreshFonts()
 		return
 	end
 	if ( not DB ) then
@@ -3227,6 +3230,7 @@ SlashCmdList["FieldKit"] = function(msg)
  if msg=="diag" then FieldKitDiagnostics.Command("");return end
  if string.sub(msg,1,5)=="diag " then FieldKitDiagnostics.Command(string.sub(msg,6));return end
  if msg=="native" then FieldKitNativeTools.Diagnostic();return end
+ if msg=="align" then FieldKitAlignment.Start();return end
  if msg=="lock" or msg=="unlock" then FieldKit.SetWindowsLocked(msg=="lock");return end
 	if msg == "money" then
 		AttachMoneyToBar(true)

@@ -228,10 +228,10 @@ function S.BindSpellTip(row)
    end
    GameTooltip:AddLine(FieldKit_L("Right-click: hide row (total unchanged)."),.55,.5,.42,true)
   end
-  GameTooltip:Show()
+  FieldKitLocale.ShowTooltip()
  end)
  row:SetScript("OnLeave",function()
-  GameTooltip:Hide()
+  FieldKitLocale.HideTooltip()
   if prevLeave then prevLeave() end
  end)
  row:SetScript("OnMouseUp",function()
@@ -261,9 +261,9 @@ local function MakeSortHeader(parent,key,justify)
  b:SetScript("OnEnter",function()
   GameTooltip:SetOwner(this,"ANCHOR_TOP")
   GameTooltip:SetText(FieldKit_L("Click to sort by this column."),1,1,1)
-  GameTooltip:Show()
+  FieldKitLocale.ShowTooltip()
  end)
- b:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ b:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  return b
 end
 
@@ -323,9 +323,9 @@ local function EnsureChrome(frame)
    GameTooltip:SetOwner(this,"ANCHOR_TOP")
    GameTooltip:SetText(FieldKit_L(this.fieldkitFullLabel),1,.85,.55)
    GameTooltip:AddLine(FieldKit_L("Left-click: switch tab. Right-click: detach / reattach window."),.8,.8,.8,true)
-   GameTooltip:Show()
+   FieldKitLocale.ShowTooltip()
   end)
-  b:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  b:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
   tabs.buttons[i]=b
  end
  local reset=CreateFrame("Button",frame:GetName().."Reset",frame)

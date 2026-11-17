@@ -188,6 +188,22 @@ again.execute('local p,r,rp,x,y=FieldKitStatsFrame:GetPoint();assert(p=="TOPRIGH
 again.execute('assert(FieldKitRebornDB.cardStyle==2 and FieldKitRebornDB.cardOpacity==37 and FieldKitRebornDB.meterValues==2)')
 again.execute('assert(FieldKitRebornDB.language=="fr");assert(FieldKitRebornDB.guardianPins==false);assert(FieldKitRebornDB.targetHealthMode==2);assert(FieldKitRebornDB.combatTextX==-123);assert(FieldKitRebornDB.combatEvents.crit.size=="31");assert(FieldKitRebornDB.chatCopy==false)')
 zone_themes=runtime();zone_themes.execute((base/"tests/zone_themes.lua").read_text(encoding="utf8"))
+alignment=runtime();alignment.execute((base/"tests/alignment.lua").read_text(encoding="utf8"))
+alignment_themes=runtime();alignment_themes.execute((base/"tests/alignment_themes.lua").read_text(encoding="utf8"))
+alignment.execute((base/"tests/snapshot.lua").read_text(encoding="utf8"))
+alignment_reload=runtime(alignment.eval('SNAPSHOT(FieldKitRebornDB)'))
+alignment_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitRebornDB.alignmentStep==48 and FieldKitRebornDB.alignmentSnap and FieldKitRebornDB.alignmentGrid);assert(not FieldKitAlignment.active and not FieldKitAlignment.overlay)')
+alignment_chat=runtime();alignment_chat.execute((base/"tests/alignment_chat.lua").read_text(encoding="utf8"))
+alignment_chat_reload=runtime();alignment_chat_reload.execute((base/"tests/alignment_chat_reload.lua").read_text(encoding="utf8"))
+international=runtime();international.execute((base/'tests/international.lua').read_text(encoding='utf8'))
+international.execute((base/'tests/snapshot.lua').read_text(encoding='utf8'))
+international_reload=runtime(international.eval('SNAPSHOT(FieldKitRebornDB)'))
+international_reload.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitRebornDB.language=="auto");AZS_LOCALE="ukUA";assert(FieldKit_Language()=="uk")')
+for code in ('pt','ru','uk','zh','ja','ko'):
+ international.execute('FieldKit_SetLanguage("'+code+'");assert(FieldKitProfiles.Save(1))')
+ saved=runtime(international.eval('SNAPSHOT(FieldKitRebornDB)'))
+ saved.execute('fire(FieldKitFrame,"VARIABLES_LOADED");assert(FieldKitRebornDB.language=="'+code+'" and FieldKit_Language()=="'+code+'")')
+print('PASS new locale preferences survive six SavedVariables/profile reloads')
 # Walk every compiled nested function, even callbacks the mock did not reach.
 # Generated card and round-map textures: their alpha layers are checked, not trusted (alpha.45 shipped a matte that still carried the baked
 # interior of the cards, and a ring whose path never resolved).

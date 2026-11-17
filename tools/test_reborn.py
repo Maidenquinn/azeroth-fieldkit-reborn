@@ -19,6 +19,8 @@ def runtime(prelude=None, factory=False):
     return l
 def native_locale(addons):
     l=runtime()
+    # Native stock menu translations use a separate registrar since 0.6.7.
+    l.execute('AZS_StockStrings=function() end')
     l.execute('AZS_L={};function AZS_LocaleStrings(lang,t) if lang=="frFR" then for k,v in pairs(t) do AZS_L[k]=v end end end')
     core=addons/'AzerothSurvivors'
     for path in [core/'Generated/Content_frFR.lua',*sorted(core.glob('Locale_frFR*.lua'))]:
@@ -26,12 +28,35 @@ def native_locale(addons):
     l.execute((core/'Generated/Content.lua').read_text(encoding='utf8'))
     l.execute((base/'tests/reborn_locale_native.lua').read_text(encoding='utf8'))
 
+def native_international(addons):
+    """Execute public translation registrars in isolated Lua states, never a live client."""
+    core=addons/'AzerothSurvivors'
+    locales={'deDE':'de','esES':'es','frFR':'fr','ptBR':'pt','plPL':'pl','trTR':'tr',
+             'ruRU':'ru','zhCN':'zh','jaJP':'ja','koKR':'ko'}
+    for native,code in locales.items():
+        l=runtime()
+        l.globals().AZS_LOCALE=native
+        l.execute('AZS_L={};function AZS_LocaleStrings(lang,t) if lang==AZS_LOCALE then for k,v in pairs(t) do AZS_L[k]=v end end end;AZS_StockStrings=AZS_LocaleStrings')
+        for path in [core/f'Generated/Content_{native}.lua',*sorted(core.glob(f'Locale_{native}*.lua'))]:
+            l.execute(path.read_text(encoding='utf-8-sig'),name=path.name)
+        l.execute('fire(FieldKitFrame,"VARIABLES_LOADED");FieldKit_SetLanguage("auto")')
+        assert l.eval('FieldKit_Language()')==code,(native,'automatic locale')
+        for key in ('Aimed Shot','Rapid Fire'):
+            expected=l.globals().AZS_L[key]
+            assert expected and expected!=key,(native,'missing native fixture',key)
+            assert l.globals().FieldKitReborn.DisplayName(key)==expected,(native,key)
+            l.globals().FieldKit_SetLanguage('en')
+            assert l.globals().FieldKitReborn.DisplayName(key)==expected,(native,'native label ownership')
+            l.globals().FieldKit_SetLanguage('auto')
+    print('PASS installed native language catalogs: 10 game locales, auto selection and spell/effect display ownership')
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--game',type=Path);a=p.parse_args()
     l=runtime(factory=True);l.execute((base/"tests/reborn_factory_presets.lua").read_text(encoding="utf8"))
     l=runtime(factory=True);l.execute((base/"tests/reborn_factory_install.lua").read_text(encoding="utf8"))
     from audit_locale import check
     check(base,runtime())
+    l=runtime();l.execute((base/'tests/international.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_party.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_buffs.lua').read_text(encoding='utf8'))
@@ -164,6 +189,8 @@ def main():
             l.execute(path.read_text(encoding='utf8'),name=name)
         l.execute((base/'tests/reborn_065_native.lua').read_text(encoding='utf8'))
         l.execute((base/'tests/reborn_world_markers_native.lua').read_text(encoding='utf8'))
-    if a.game: native_locale(a.game/'Interface/AddOns')
+    if a.game:
+        native_locale(a.game/'Interface/AddOns')
+        native_international(a.game/'Interface/AddOns')
     print(json.dumps({'rebornFixtures':True,'installedApiExecuted':bool(a.game),'liveGameTest':False}))
 if __name__=='__main__':main()

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.35",
+  "version": "0.1.0-reborn.36",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -18,24 +18,24 @@
   "partySyncLiveTransportConfirmed": false,
   "approval": "maintainer accepted for publication; not independently certified",
   "publication": {
-    "version": "0.1.0-reborn.35",
+    "version": "0.1.0-reborn.36",
     "maintainerAcceptedForPublication": true,
-    "maintainerAcceptanceDate": "2026-11-15",
+    "maintainerAcceptanceDate": "2026-11-17",
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
-    "inGameTestByAgent": false,
+    "inGameTestByAgent": true,
     "githubPrerelease": false,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": true,
-    "inGameTestScope": "Full runtime/settings/locale/API tests; installed native anchor catalogue and projection; guardian enumeration, creature height/metric projection, unchanged chest clearance, finite setting bounds and independent profile restoration. The maintainer confirmed final live gameplay acceptance and authorized stable release. The agent's visual check was interrupted by the physical Escape key; it is not recorded as completed agent visual validation. Co-op and other resolutions are not independently certified."
+    "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. Maintainer accepted .36 and authorized stable publication on 2026-11-17. Internationalization: client 0.6.8 at 1920x1080, live German/Russian/Chinese/Japanese/Korean with Elwynn Complete; Korean without theme and in FieldKit-owned native tooltip. Script glyphs render. Corrected unknown tokens and r2 CJK fonts rechecked after reload in ZH/JA/KO with Elwynn; ZH also without theme. Further treasure-chest/context wording corrected in source. Maintainer supplied publication acceptance; exhaustive native-speaker wording review remains open. Agent visual coverage is limited to the cases described here. French, profile 1, Elwynn Complete and paused state restored."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "2ac78f02c2ba897d110371187a6c5d0d69a7a1588b15a5f8a2fe35b9058aaab0"
+      "sha256": "f2e49ddceabc177a7d43750678a6ab9c432631c747ae6e868fa0fbd2feb4446a"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -45,7 +45,7 @@
     "Reborn.lua": {
       "maxUpvalues": 3,
       "functions": 24,
-      "sha256": "8b38cc566950566649cd6f11bda08b93aedd2e3670ae8b4fa9c3e2c96a3a639c"
+      "sha256": "ba85b45dcf702303f35ff99d0275ed1fbda4ec3981433e4313ac2d05dc5218d8"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -55,12 +55,12 @@
     "RebornHUD.lua": {
       "maxUpvalues": 1,
       "functions": 12,
-      "sha256": "2cf597b35ef36ec73e8b8a33cd2baea8c4be42343f5d19d942788866c647cd51"
+      "sha256": "87f575c508b91acbee74a90eefe78c8c7e340555d9eb6657a61fc8805aca4792"
     },
     "NativeHUD.lua": {
       "maxUpvalues": 5,
       "functions": 45,
-      "sha256": "c60df3dbc81ebda8481de0cadc88e938e9596a6afa4afc527461a7086ed629a0"
+      "sha256": "87970b6627152a2dae7749e91b6f436cb2c3cf2abd1d0ea5f8f2a3464b590c0f"
     },
     "NativeLayout.lua": {
       "maxUpvalues": 7,
@@ -77,15 +77,20 @@
       "functions": 4,
       "sha256": "27277fc9c00183ab28fd0a7a2841d8a2d873e2488bb1631e26e15213eb36ad81"
     },
+    "Alignment.lua": {
+      "maxUpvalues": 3,
+      "functions": 24,
+      "sha256": "d26f20726c96310702f5bb46788a31bc612c0d4e51091100c76247981fe4a60b"
+    },
     "Config.lua": {
       "maxUpvalues": 1,
       "functions": 2,
-      "sha256": "fa79c46bdd1ac993a459d219d5082510453ba5e886e8a142f0f22c258f7bdfdc"
+      "sha256": "fd3a09a9e23bfc0aab59a6cd6db77a7f4d0f1ba33cdfea142beb692c3366d37c"
     },
     "Profiles.lua": {
       "maxUpvalues": 6,
       "functions": 33,
-      "sha256": "74dc00eef90047efa38b257a26541ef1ddb5b0fd66fdc84abc14600b9d30dcce"
+      "sha256": "6499c08ac34cf7277ef021b50a843592cafbbb58709e15881477f3f44f75dbc3"
     },
     "FactoryPresets.lua": {
       "maxUpvalues": 0,
@@ -93,19 +98,84 @@
       "sha256": "86daa0ceb57dcf9fca1f7e3d2ede467e78cf1f13a89e368b19f1857d836da66a"
     },
     "Localization.lua": {
-      "maxUpvalues": 2,
-      "functions": 9,
-      "sha256": "52b438733774cee70dbde43c0c57b7e2503087aff219d9095ef4ac9b66043001"
+      "maxUpvalues": 1,
+      "functions": 6,
+      "sha256": "6beeeb3dfcdc777d47ceb94eecba78127fe43eab423e12a5f63e9767144f2128"
     },
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "e72cadd74562bd3dae3799f0482b0310a0f5b4f801ccdbb2ea23f57f775fc74e"
+      "sha256": "9c0eacd7884bfa666348a0545cc70231cb0f54f9f7b0d3178c2b1ef390572c95"
+    },
+    "Locale_pl.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "a6f1c61d42cc00d0f69ecdff3125dcb5c2ce004728fba659948c9fdd831b8322"
+    },
+    "Locale_cs.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "6acbcf2c53ff75670e55516521a579996813f936e584a51ea1f2e06d18c681ab"
+    },
+    "Locale_de.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "8138904ea591ac9d7a4dd437d831236097647a70df0e6c194bb0d607a7e465c5"
+    },
+    "Locale_pt.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "3050b97f787f2c11945fe3fd879c5530b8b26bdde8ae506034c8346b062f3deb"
+    },
+    "Locale_es.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "ab52bcb18c14f87977f21dd1afcba7b415677d939dcfece9652b8a6df09974d4"
+    },
+    "Locale_ro.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "15859cfa1e5e0a5d22a9f088149c0b84970713dd7b4ed9cda3071496bc4c1906"
+    },
+    "Locale_tr.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "8a8df8dbdc569100090c0a93af314e36a09bb0225c5286fd5adff0752dfb7db8"
+    },
+    "Locale_ru.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "f831a6957a7a67d624aad7231dbd283b54a1e36c07fb7bcdd71e94cd71b72946"
+    },
+    "Locale_uk.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "94f7018b434537270b3b8da61d33d9602f04d6007f1515c3deddc7f910368f01"
+    },
+    "Locale_zh.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "0127ed2d055645e71b96e509a37b2f5bf0716169b008e48edc8c23997aca7385"
+    },
+    "Locale_ja.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "6c18ac1571bcff2945fe98e392331c549e01898ddb8a4f0a079a311f26bbf730"
+    },
+    "Locale_ko.lua": {
+      "maxUpvalues": 0,
+      "functions": 1,
+      "sha256": "6e2af9ce9c04f3b9734057a18da88c5ebc4b06397c947eff2088de4df9959187"
+    },
+    "International.lua": {
+      "maxUpvalues": 4,
+      "functions": 14,
+      "sha256": "a4632c766e5d68b84b208101e551e983dcba6be6d37204a438878da5ad9496b9"
     },
     "Theme.lua": {
       "maxUpvalues": 1,
       "functions": 21,
-      "sha256": "0246f0ff84187b05d8dca179be50d24dbf51614932f37c914478dbcb4d609813"
+      "sha256": "e3cdc47d3bd4a0068211ffd2c47fa235f24acbbeb270d601ba7a3541e1fe98b7"
     },
     "ZoneThemeRegistry.lua": {
       "maxUpvalues": 0,
@@ -140,17 +210,17 @@
     "RebornStats.lua": {
       "maxUpvalues": 2,
       "functions": 4,
-      "sha256": "92e6ffc7fbe155415ac7dd5a7736b432cb4ec19408938d3e777f130b92f4b433"
+      "sha256": "5af6abfb8559334ad7619670efd563f339a02a6a47ea9f69530d2349d94b2091"
     },
     "Reborn065.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "0aae3cf8ce7038673ddfffceafc64411aefca50e0df5cd03f5754837d1d2988a"
+      "sha256": "46770798adf315670d38920bc7d0dde121aab0088da3046f54e997806e5d7249"
     },
     "RunMode.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "efceae75720932ce171fd798b9c7c40ae45625d0f5d7ef1d1ae5e8ff66c2f48a"
+      "sha256": "74eacdddca682ae2eb998d19de62fbce41ffd29355a8c88af391c8bf47824ec1"
     },
     "NativeData.lua": {
       "maxUpvalues": 2,
@@ -165,22 +235,22 @@
     "MeterLedger.lua": {
       "maxUpvalues": 11,
       "functions": 50,
-      "sha256": "273b745ca73aa75a430f46d7b3812599271fd17072eff2afd15d757172ca4fb7"
+      "sha256": "deb734cb5d169d7d7c9918aced8fdb941d6a976091d4f54de69d349751cc91ad"
     },
     "MeterSuite.lua": {
       "maxUpvalues": 6,
       "functions": 39,
-      "sha256": "bf544841bb353fe97f01e8d2f41eabf255c6a0612d877c3f2ca26a6e75aaa164"
+      "sha256": "b07cd2670d493005e3d927fb94d1245bb49eec4474d2e2b7f256a3825ed8887d"
     },
     "BossTimeline.lua": {
       "maxUpvalues": 26,
       "functions": 19,
-      "sha256": "e82893e528559c72063b57f7b4090332008d7687a2893462aec63f0a3668f754"
+      "sha256": "3ed960bd3dcbec86886cdfc4dbabcb9101d6deccd6f53dde537deceab958fe30"
     },
     "HudStack.lua": {
       "maxUpvalues": 7,
       "functions": 13,
-      "sha256": "3b03b97ab491f6802c2847b5d44b8608dd90d1ae17f2f0f7aa0d66491fcceff8"
+      "sha256": "d2c44af7c87923fbc298521544130644e36ce155033786fcd1e382f1fec1fec5"
     },
     "CardLayout.lua": {
       "maxUpvalues": 2,
@@ -190,7 +260,7 @@
     "Coop.lua": {
       "maxUpvalues": 6,
       "functions": 44,
-      "sha256": "29519fababc4d61c852dd8a102433e1a994d5ebffa36c2250f0ac7611bac51d1"
+      "sha256": "e015c7b17c186293a35e49fe935630ea0ba123c07c8ad7c8b286cdf1dde5d6bc"
     },
     "GroupHistory.lua": {
       "maxUpvalues": 3,
@@ -205,7 +275,7 @@
     "PartyDetails.lua": {
       "maxUpvalues": 11,
       "functions": 41,
-      "sha256": "a4f8d24cca2cf2e5a6b8e06b74ba0401bacbfdc40cb5fcd9b3cf0354c3bfdb01"
+      "sha256": "d43cf8f352c0e2794072774df300d186a024dc1e7b3eb23a200fb758a670a775"
     },
     "ScreenLayers.lua": {
       "maxUpvalues": 4,
@@ -215,7 +285,7 @@
     "NativeTools.lua": {
       "maxUpvalues": 3,
       "functions": 28,
-      "sha256": "d53cb4e232854b4be2caedba044cd25bf18c7e109f69be00cb331905d38bebf1"
+      "sha256": "325f52f59962456f966d365dc460c618f9873a12286b13dcd698e156d1d428d5"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -225,12 +295,12 @@
     "Loadout.lua": {
       "maxUpvalues": 2,
       "functions": 34,
-      "sha256": "41fa9c1cbd4a388e34da5c27f1c64be6bc0c07352e7e21ffdafde6cb40f08da9"
+      "sha256": "4db622fc546565077b9fc1fbd0c7b2f46981ab364ad1c9f55b749c1ce720ccd6"
     },
     "TakenDetails.lua": {
       "maxUpvalues": 4,
       "functions": 9,
-      "sha256": "9373f1cfad63e95f4fad5d316bae02573f27f94b9b900d536b59ba6449479822"
+      "sha256": "ff2c3fada5043c6feedb891c680b62c42afdb5e216ddc8c95edacffb5585edd6"
     },
     "Preview.lua": {
       "maxUpvalues": 3,
@@ -254,18 +324,18 @@
     },
     "Interface.lua": {
       "maxUpvalues": 28,
-      "functions": 235,
-      "sha256": "7cc27bece2809583830a382a7b70992c36eb665e937219ee3e07182a2966b9ad"
+      "functions": 238,
+      "sha256": "4d075faa49abc14ccdfa5f34fed925c942d12701141c053d3520282186af98c0"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 192,
-      "sha256": "f8869c235216249529568a47afcd1f1875ca82db57cbd37c133b853256cae973"
+      "sha256": "99d191c4050fe03857976f0b2bb03cbaede08dfe33a5b61551087a037eab8ef1"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,
       "functions": 12,
-      "sha256": "957fe45eca7972c8a362702d55c3c668b8a17ac4dab24d640cd2dff414e7ae9f"
+      "sha256": "7e32860e1e09b454607aae8c0108b858242c6dbc58f8f518ebaf7136acd3a542"
     },
     "WorldAnchors.lua": {
       "maxUpvalues": 14,
@@ -275,27 +345,27 @@
     "WorldMarkers.lua": {
       "maxUpvalues": 21,
       "functions": 49,
-      "sha256": "055e04dfca362144c477546beba9809eda7357cef7671f0ee509c8356246c4db"
+      "sha256": "4a223cb880ef965db0abbf2999e98a08c68dc9f2894746dc33960924b2d2b7fa"
     },
     "CombatText.lua": {
       "maxUpvalues": 12,
       "functions": 49,
-      "sha256": "6b0234bb4adc24fa588e4faa4cf72f117bc96a060853cde49bb834f0605fbd64"
+      "sha256": "a3e5265269b792b6f95baf7699e912b9b82183390b35d15021d7444f03a3284d"
     },
     "CombatOptions.lua": {
       "maxUpvalues": 11,
       "functions": 90,
-      "sha256": "0a1c450585b3bed496b07fe8e635d0860ffed94c15f98cb225d365d16f6150d5"
+      "sha256": "019f9bccbaecc7dbdbc5d8ec9755a648acee49b6ba00ab6a34cbd5c9731eb2db"
     },
     "CopyLog.lua": {
-      "maxUpvalues": 20,
-      "functions": 47,
-      "sha256": "ced8dba7c9b6182eb6e81c2fa94a52ff79e1b8fdcf9dc769ece3357dea3eb625"
+      "maxUpvalues": 24,
+      "functions": 53,
+      "sha256": "b96673d86517b1b0d733519a14499cab1a7bf07e75c8b565d5f331c9479546d7"
     },
     "ThemeMinimap.lua": {
       "maxUpvalues": 5,
-      "functions": 28,
-      "sha256": "92813e59e88345bb166194bf21cdc7633123d3ca5f31b88449df709d9b5afde2"
+      "functions": 29,
+      "sha256": "8320246fd8133ea9feb2944c44e072a9b7e031e2ff57f18f3395c92bc591bc66"
     },
     "ThemeHUD.lua": {
       "maxUpvalues": 5,
@@ -305,7 +375,7 @@
     "ThemeTarget.lua": {
       "maxUpvalues": 6,
       "functions": 12,
-      "sha256": "46a244137cbfc17c39f0a9f108c8b17873c32dfa49f8cc0e086b4ce0304a7b4b"
+      "sha256": "3f136c2e04935a189a2b14922a88d62924ca205a2db341a82946b580e2a281ca"
     },
     "ReferenceArt.lua": {
       "maxUpvalues": 0,
@@ -314,13 +384,13 @@
     },
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
-      "functions": 196,
-      "sha256": "f7bd656edf4a7b16da49db05335cce17f9ca47827930d53c77a8b6c83d1b41f6"
+      "functions": 197,
+      "sha256": "9a59e2d08071bce084dd45fcc5e21765aad378eb57e05ee5abc45aa756af072c"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,
       "functions": 66,
-      "sha256": "6824d1b8716067d209dc6856e17fdd0071ac8cf50bd57ba7aafc619bfb847534"
+      "sha256": "3bbdf4e28d10aa9ca6254dc67d170a2e6d88cf9315a81f3fd8e11529b2a62501"
     }
   }
 }

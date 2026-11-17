@@ -73,7 +73,7 @@ function R.Tooltip(owner)
  if not FieldKit.rebornLegacyFixture then
   GameTooltip:AddLine(FieldKit_L("Reborn difficulty: native rank only; multipliers unavailable."),.9,.9,.85,true)
   local affixes=R.Affixes();if affixes then GameTooltip:AddLine(affixes,.9,.85,.5,true) end
-  GameTooltip:Show();return
+  FieldKitLocale.ShowTooltip();return
  end
  local level=FieldKit.GetHeroicLevel()
  if level==nil then
@@ -100,19 +100,19 @@ function R.Tooltip(owner)
  local affixes=R.Affixes()
  if affixes then GameTooltip:AddLine(affixes,.9,.85,.5,true) end
  GameTooltip:AddLine(FieldKit_L("Same multipliers as the Difficulty UI. Not live combat meters."),.8,.7,.45,true)
- GameTooltip:Show()
+ FieldKitLocale.ShowTooltip()
 end
 
 function R.Create(createWindow,fitRows)
  R.frame=createWindow("FieldKitModeFrame","Run mode",8);R.fitRows=fitRows
  local f=R.frame
  f:SetScript("OnEnter",function() R.Tooltip(this) end)
- f:SetScript("OnLeave",function() GameTooltip:Hide() end)
+ f:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  for i=1,table.getn(f.rows) do
   local row=f.rows[i];row.value:Hide();row.label:ClearAllPoints()
   row.label:SetPoint("LEFT",row,"LEFT",3,0);row.label:SetHeight(14)
   row:SetScript("OnEnter",function() R.Tooltip(this) end)
-  row:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  row:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  end
  f:Hide();return f
 end

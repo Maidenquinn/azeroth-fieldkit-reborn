@@ -1,0 +1,35 @@
+{
+  "status": "machine-assisted first pass with reviewed terminology; native-speaker wording review pending",
+  "canonicalLanguage": "en",
+  "maintainedLanguage": "fr",
+  "additionalLanguages": [
+    "pl",
+    "cs",
+    "de",
+    "pt",
+    "es",
+    "ro",
+    "tr",
+    "ru",
+    "uk",
+    "zh",
+    "ja",
+    "ko"
+  ],
+  "seedSources": {
+    "statsRepository": "https://github.com/Maidenquinn/azeroth-stats-reborn",
+    "statsSourceCommit": "37bf14d0c754178e89922f4f490a4246720c1ac8",
+    "nativeClient": "0.6.8",
+    "nativeCatalogSHA256": "92e8871d0b05d7d596a790cfd355f104ecb28e4a4999a154532121d4270b71b4"
+  },
+  "offlineTranslation": {
+    "model": "mydubber-org/nllb-200-distilled-600M-ct2-int8",
+    "revision": "9e63a771e9ec358ef812d2ea149d97e16d5f8cee",
+    "modelDistributed": false,
+    "playerNetworkAccess": false
+  },
+  "reviewedTerms": 146,
+  "catalogCompiler": "tools/build_locales.py",
+  "manualAcceptance": "pending",
+  "canonicalStringCount": 1076
+}

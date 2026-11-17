@@ -52,9 +52,9 @@ function R.CounterBand()
   f.label=FieldKitTheme.Label(f,nil,0,0,90,26,18,FieldKitTheme.text,false,"AzerothSans.ttf")
   f.label:ClearAllPoints();f.label:SetPoint("LEFT",f.icon,"RIGHT",8,0);f.label:SetJustifyV("MIDDLE")
   f:SetScript("OnEnter",function()
-   GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(this.counterTitle or "?");GameTooltip:AddLine(this.counterValue or "?",1,.82,0);GameTooltip:Show()
+   GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(this.counterTitle or "?");GameTooltip:AddLine(this.counterValue or "?",1,.82,0);FieldKitLocale.ShowTooltip()
   end)
-  f:SetScript("OnLeave",function() GameTooltip:Hide() end)
+  f:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
  end end
  R.eventFrame=R.counterCells[4]
  if not R.counterCover then R.counterCover=H.counterRoot:CreateTexture(nil,"ARTWORK") end
@@ -116,9 +116,9 @@ function R.PlaceSteed()
    f.icon=f:CreateTexture(nil,"ARTWORK");f.icon:SetAllPoints(f);f.icon:SetVertexColor(.45,.45,.45)
    f.label=FieldKitTheme.Label(f,nil,0,0,46,20,16,FieldKitTheme.gold,false);f.label:ClearAllPoints();f.label:SetPoint("BOTTOM",f,"BOTTOM",0,0);f.label:SetText("?")
    f:SetScript("OnEnter",function()
-    GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(FieldKit_L("Mount state unavailable"));GameTooltip:AddLine(FieldKit_L("Waiting for the game's charge update."),.8,.8,.8,true);GameTooltip:Show()
+    GameTooltip:SetOwner(this,"ANCHOR_TOP");GameTooltip:SetText(FieldKit_L("Mount state unavailable"));GameTooltip:AddLine(FieldKit_L("Waiting for the game's charge update."),.8,.8,.8,true);FieldKitLocale.ShowTooltip()
    end)
-   f:SetScript("OnLeave",function() GameTooltip:Hide() end)
+   f:SetScript("OnLeave",function() FieldKitLocale.HideTooltip() end)
   end
   local f=R.steedPending;f:ClearAllPoints();f:SetPoint("BOTTOMLEFT",H.dock,"BOTTOMRIGHT",8,24);f:SetFrameLevel(H.dock:GetFrameLevel()+12)
   local icon=b.icon and b.icon:GetTexture()

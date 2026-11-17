@@ -1,7 +1,7 @@
 ## Interface: 11200
 ## Title: |cffd9b56bAzeroth FieldKit|r Reborn
 ## IconTexture: Interface\AddOns\AzerothFieldKitReborn\media\ChronicleSeal.tga
-## Version: 0.1.0-reborn.35
+## Version: 0.1.0-reborn.36
 ## Author: Kevin Radlowski (Maidenhead); derived from MASH by Malk
 ## Notes: Azeroth Survivors helper (/fieldkit): elite-only nameplates, chronicle boss bars + schedule timeline, health bar with shield, buffs and low health warning, crits, stats, gold and chest price, accessories, tabbed meter with sort/hide/heal done-recv/party drill/pet DoT tips, chests on the minimap, lairs, camera.
 ## SavedVariables: FieldKitRebornDB
@@ -15,11 +15,25 @@ NativeHUD.lua
 NativeLayout.lua
 Diagnostics.lua
 Positions.lua
+Alignment.lua
 Config.lua
 Profiles.lua
 FactoryPresets.lua
 Localization.lua
 InterfaceStrings.lua
+Locale_pl.lua
+Locale_cs.lua
+Locale_de.lua
+Locale_pt.lua
+Locale_es.lua
+Locale_ro.lua
+Locale_tr.lua
+Locale_ru.lua
+Locale_uk.lua
+Locale_zh.lua
+Locale_ja.lua
+Locale_ko.lua
+International.lua
 Theme.lua
 ZoneThemeRegistry.lua
 Seed.lua
