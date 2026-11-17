@@ -19,7 +19,7 @@ local function Text(s,limit)
 end
 
 local function Num(v,lo,hi)
- local n=FieldKit.Number(v,nil,lo,hi);return n
+ local n=FieldKit.MeterNumber(v,nil,lo,hi);return n
 end
 
 local function Strip(msg)

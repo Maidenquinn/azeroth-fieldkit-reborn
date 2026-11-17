@@ -22,7 +22,7 @@ D.Mark("undefined");assert(D.counts.undefined==nil,"diagnostics may record only 
 D.Tick(-1);D.Tick(0/0);D.Tick(9999)
 assert(D.frames==12,"invalid frame delta was recorded")
 local a,b,missing=D.Capabilities()
-assert(type(a)=="number" and b==12 and type(missing)=="table")
+assert(type(a)=="number" and b==13 and type(missing)=="table")
 assert(a+b-a==b)
 assert(FieldKitRebornDB.diagnostics==nil)
 local oldPhase=AZS_GetPhase

@@ -1,5 +1,14 @@
 FieldKit Reborn 0.1.0-reborn.37-dev — Preview rendering candidate
 
+Reborn 0.6.9 API additions: check the shared Statistics tooltip for native caps.
+During Endless, next-boss countdown/number must agree across the header, boss
+list, Lairs and reminder card, with and without a theme. Unknown identity stays
+anonymous until spawn; an active boss shows its native name/In combat. Pause
+must freeze the timer. A timer must never produce a percentage. After reload,
+the next synced packet must retain the same native encounter number. Missing caps
+and unavailable meter capabilities must remain absent rather than invented.
+The new API cases pass isolated/native-source fixtures; live inspection pending.
+
 Check Previews and individual Test display with/without Elwynn, in English/French
 and a CJK language. Each sample row must appear once, boss labels must not overlap
 the health bar/debuffs, and every included example must avoid the toolbar.

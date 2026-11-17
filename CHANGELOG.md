@@ -1,4 +1,10 @@
-# 0.1.0-reborn.37-dev — Preview rendering correction (candidate)
+# 0.1.0-reborn.37-dev — Preview correction and Reborn 0.6.9 API support (candidate)
+
+- Read the current next-encounter contract: known/unknown/active/none, native time or rift mechanism and stable encounter ordinal. Show the real endless countdown without inventing a boss name, sequence or charge percentage; preserve paused countdowns and reload identities.
+- Share this state across the boss list, reminders, Lairs, themed headers and unthemed progression card. Timed arrival warnings use native seconds; rift warnings retain the native percentage threshold.
+- Show live native stat caps in the shared statistics tooltip, distinguishing cooldown reduction from haste-buff caps and reading whole-percent units correctly. Missing caps stay absent; no hardcoded limits.
+- Accept native 128-bit-sized meter totals as Lua doubles with a separate numeric boundary; preserve snapshot/checkpoint rates and use compact scientific notation for very large amounts. Settings/geometry validation stays bounded as before.
+- Verify the installed 0.6.9 executable and public game/API files against the official distribution manifest. Rift-crystal positions, structured upgrade bonuses, extended encounter states, received/encounter healing, proc attribution, ground-warning geometry and a public death-summary getter remain unavailable in this distribution; existing supported presentations remain intact.
 
 - Paint each sample row once; hide legacy row widgets and duplicate boss labels.
 - Keep preview text on the selected script-safe fonts and contain boss health text above the debuff strip.

@@ -39,6 +39,15 @@ function FieldKit.Number(value, fallback, minimum, maximum)
  if maximum then n=math.min(maximum,n) end
  return n
 end
+-- Native meters count in unsigned 128 bits. Keep them as finite Lua doubles;
+-- do not widen the normal settings/geometry validator or convert to integers.
+function FieldKit.MeterNumber(value,fallback,minimum,maximum)
+ local n=tonumber(value)
+ if not n or n~=n or math.abs(n)>3.5e38 then return fallback end
+ if minimum then n=math.max(minimum,n) end
+ if maximum then n=math.min(maximum,n) end
+ return n
+end
 
 -- Catch missing CVars in custom clients. Reading an unknown CVar may throw.
 function FieldKit.GetCVar(key)

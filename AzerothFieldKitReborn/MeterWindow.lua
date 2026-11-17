@@ -24,12 +24,12 @@ function W.Accept(view,snapshot,err)
   state.status=rate.status;state.reason=rate.reason;state.approximate=rate.approximate
  end
  W.states[view]=state
- local valid=type(rate)=="table" and rate.status=="ready" and FieldKit.Number(rate.value)~=nil
-  and FieldKit.Number(totals.windowAmount)~=nil and type(snapshot.rows)=="table"
+ local valid=type(rate)=="table" and rate.status=="ready" and FieldKit.MeterNumber(rate.value)~=nil
+  and FieldKit.MeterNumber(totals.windowAmount)~=nil and type(snapshot.rows)=="table"
  if valid then
   for i=1,math.min(512,table.getn(snapshot.rows)) do
    local row=snapshot.rows[i]
-   if type(row)~="table" or FieldKit.Number(row.windowAmount)==nil then valid=false;break end
+   if type(row)~="table" or FieldKit.MeterNumber(row.windowAmount)==nil then valid=false;break end
   end
  end
  if not valid and state.status=="ready" then state.status="unavailable" end

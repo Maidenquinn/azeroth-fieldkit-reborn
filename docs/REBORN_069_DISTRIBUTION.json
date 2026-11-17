@@ -1,0 +1,85 @@
+{
+  "checkedOn": "2026-11-17",
+  "manifestURL": "https://dl.azreborn.com/update/manifest.json",
+  "version": "0.6.9",
+  "serial": 1794874731,
+  "manifestSHA256": "6cdc5758c7c89fbb704e16822ab8a2382aad714b5091cb58743cdbcfd53c4d85",
+  "hashAlgorithm": "BLAKE3",
+  "matchedExecutableAndPublicGameFiles": 268,
+  "mismatches": [],
+  "independentSignatureVerification": false,
+  "savedVariablesReadOrWritten": false,
+  "apiFiles": [
+    {
+      "path": "Interface/AddOns/AzerothSurvivorsAPI/Anchors.lua",
+      "size": 21640,
+      "hash": "3ac6c3559f41c9265c9d0301f4b65eff7bed187d74153a53bcf2494b896060f2",
+      "deltas": [
+        {
+          "from": "c52abd7454f0af9c9644605d8dbcbb98428e4f4dc00bce579011e3b366f75fe8",
+          "size": 224
+        }
+      ]
+    },
+    {
+      "path": "Interface/AddOns/AzerothSurvivorsAPI/Api.lua",
+      "size": 26483,
+      "hash": "7afcf83c7a6e4670e8964c3a6e4f5d4110d6c12e51283b0b54d118e6f5127ae8",
+      "deltas": [
+        {
+          "from": "a13e71ee8be7984ef1b8842ab697e549e2d14d6641e7a9bad607f2d28f446142",
+          "size": 330
+        }
+      ]
+    },
+    {
+      "path": "Interface/AddOns/AzerothSurvivorsAPI/AzerothSurvivorsAPI.toc",
+      "size": 465,
+      "hash": "f0eefb190f25b3553f147ce534fc5e403980a42386a51847fd2b9b90a80a42eb"
+    },
+    {
+      "path": "Interface/AddOns/AzerothSurvivorsAPI/CombatText.lua",
+      "size": 9666,
+      "hash": "f17e7be7cc859485c2f3a03c89ecb23fbe54c4376408acedaabc50ba7c408cbf",
+      "deltas": [
+        {
+          "from": "bb11685b9a800234d67bc403e80a2cb6f1a404cc819f39bc7e8079fe8a4e24f7",
+          "size": 216
+        }
+      ]
+    },
+    {
+      "path": "Interface/AddOns/AzerothSurvivorsAPI/Hud.lua",
+      "size": 11555,
+      "hash": "481419fc19e3ea6fdb235b178afc34efada7c009e8b34e9de3df7b940cc0f1d6",
+      "deltas": [
+        {
+          "from": "14788af8cac7cfefaeeb49168551749b77890c0cc7afdca87a551af9628ca1fe",
+          "size": 55
+        }
+      ]
+    },
+    {
+      "path": "Interface/AddOns/AzerothSurvivorsAPI/Meter.lua",
+      "size": 48024,
+      "hash": "0d195a7b8da0e615b00d7172dc98b15f22334414c34609c801b57f412bf65c9f",
+      "deltas": [
+        {
+          "from": "87d6dfb8a1f4b1ed2c3b37f5fafa8cd053dca640c48f2b007ad9eac959e793aa",
+          "size": 3947
+        }
+      ]
+    },
+    {
+      "path": "Interface/AddOns/AzerothSurvivorsAPI/Shims.lua",
+      "size": 22087,
+      "hash": "234cc119d3bd98bb78e4fb51d5f11760d93baf81ecc8f13e751f6a61fecb7ec6",
+      "deltas": [
+        {
+          "from": "827af5950ca437724759c5fe1d3512b7f1a412974ed6e37e3f59b64270165353",
+          "size": 267
+        }
+      ]
+    }
+  ]
+}

@@ -29,13 +29,13 @@
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Previous .36 native inspection and maintainer acceptance remain historical. The .37-dev preview-rendering correction has focused synthetic coverage; new live-client acceptance is pending. No stable .37 release is authorized."
+    "inGameTestScope": "Agent inspected the earlier .37-dev preview revision in French with Profile 1 / Elwynn Complete at 1920x1080: single sample text, separated cards/toolbar/combat handles, Done, themed HUD restoration and individual boss/health routing passed; game remained paused at 0:16. The subsequent 0.6.9 encounter/cap/large-meter integration and hiding inapplicable health actions have offline coverage; native reload inspection is pending. Other native theme/language/drag/Endless cases are not claimed. Maintainer authorized .37 publication conditional on validation on 2026-11-17; publication remains pending."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
-      "functions": 11,
-      "sha256": "f41b9b997a1dcff773463afff1b877e7ade4277767c098b542e90d169b98279b"
+      "functions": 12,
+      "sha256": "5448ea4984fea596207929f0d40a2a78501c7441b934b785159fb25dd959c9be"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -44,8 +44,8 @@
     },
     "Reborn.lua": {
       "maxUpvalues": 3,
-      "functions": 24,
-      "sha256": "ba85b45dcf702303f35ff99d0275ed1fbda4ec3981433e4313ac2d05dc5218d8"
+      "functions": 25,
+      "sha256": "19ba39d0f08a869040e1889c0fdf68a6bff77873afeb8faaac4e9553966ffba4"
     },
     "RebornPresentation.lua": {
       "maxUpvalues": 1,
@@ -55,7 +55,7 @@
     "RebornHUD.lua": {
       "maxUpvalues": 1,
       "functions": 12,
-      "sha256": "87f575c508b91acbee74a90eefe78c8c7e340555d9eb6657a61fc8805aca4792"
+      "sha256": "9562d950f1bac7c577a0dd7b83433ec2f938cc7152f2637cf5cea0efbbfb618c"
     },
     "NativeHUD.lua": {
       "maxUpvalues": 5,
@@ -70,7 +70,7 @@
     "Diagnostics.lua": {
       "maxUpvalues": 5,
       "functions": 33,
-      "sha256": "e955b83a534963118d4a2d5320ae37b4dc57006e04b1fe649b51a891675b3b54"
+      "sha256": "8bd96e37631ef9e53187f6c741039b16c718e94497ba48d7436c564ac2450a23"
     },
     "Positions.lua": {
       "maxUpvalues": 2,
@@ -105,67 +105,67 @@
     "InterfaceStrings.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "9c0eacd7884bfa666348a0545cc70231cb0f54f9f7b0d3178c2b1ef390572c95"
+      "sha256": "fa4fc8450124b3e4c31ad97ca9d2d67835db1aa061c3b32de618fc4b7574f54d"
     },
     "Locale_pl.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "a6f1c61d42cc00d0f69ecdff3125dcb5c2ce004728fba659948c9fdd831b8322"
+      "sha256": "6cc6d5aad61e56cd0c31d2d89f3f5f7e1e59e3a9d2ea6f37e0adc70cddb22f95"
     },
     "Locale_cs.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "6acbcf2c53ff75670e55516521a579996813f936e584a51ea1f2e06d18c681ab"
+      "sha256": "78fda54af0b013480e43132fcfb2145b15223307dd7f26d4eb84bb04e184831d"
     },
     "Locale_de.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "8138904ea591ac9d7a4dd437d831236097647a70df0e6c194bb0d607a7e465c5"
+      "sha256": "c50d6786ab89bef9eabca65692da9d65d780f7d3220c78507d9608d89aa46cc3"
     },
     "Locale_pt.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "3050b97f787f2c11945fe3fd879c5530b8b26bdde8ae506034c8346b062f3deb"
+      "sha256": "cef821cdc0706a542f23c685228f2c43315e5c225bdfb6f7c1fbfedcd6c4c6f0"
     },
     "Locale_es.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "ab52bcb18c14f87977f21dd1afcba7b415677d939dcfece9652b8a6df09974d4"
+      "sha256": "2dc86904ea2b617f5360694827b7c6bcb7fc33bf763a9664fcad9e3b6c346f80"
     },
     "Locale_ro.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "15859cfa1e5e0a5d22a9f088149c0b84970713dd7b4ed9cda3071496bc4c1906"
+      "sha256": "7785cd3f1a402457e97ceb2d74b4a05515adc95aa162234f471c21de0c8376c3"
     },
     "Locale_tr.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "8a8df8dbdc569100090c0a93af314e36a09bb0225c5286fd5adff0752dfb7db8"
+      "sha256": "00f6a38e799eae89be792642e40597520716ac20a0b0e58c467a06d97b7dce61"
     },
     "Locale_ru.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "f831a6957a7a67d624aad7231dbd283b54a1e36c07fb7bcdd71e94cd71b72946"
+      "sha256": "cdb2de2707c6d7350e3bef1374c2b1c4ddf9b61f3234ffd40414b7d81aa1df59"
     },
     "Locale_uk.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "94f7018b434537270b3b8da61d33d9602f04d6007f1515c3deddc7f910368f01"
+      "sha256": "69dda9fbb1c8e2f7fcfb13105e27926846b50a4412ede169b618ea44eb4b5ebb"
     },
     "Locale_zh.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "0127ed2d055645e71b96e509a37b2f5bf0716169b008e48edc8c23997aca7385"
+      "sha256": "6765a857e29d78fdb533d759c811b334d42f19e5ccbafbe34d8c14d3c48e0672"
     },
     "Locale_ja.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "6c18ac1571bcff2945fe98e392331c549e01898ddb8a4f0a079a311f26bbf730"
+      "sha256": "471d8d4120394c1448070d7aeb7b45c7baf45b586dfccb5fbb4c402283281cf4"
     },
     "Locale_ko.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "6e2af9ce9c04f3b9734057a18da88c5ebc4b06397c947eff2088de4df9959187"
+      "sha256": "3f7e2c3788a6b25453748c87d637ae7680c1a305f79f6de67ea31260850ddb42"
     },
     "International.lua": {
       "maxUpvalues": 4,
@@ -209,8 +209,8 @@
     },
     "RebornStats.lua": {
       "maxUpvalues": 2,
-      "functions": 4,
-      "sha256": "5af6abfb8559334ad7619670efd563f339a02a6a47ea9f69530d2349d94b2091"
+      "functions": 5,
+      "sha256": "7d78cd6588ec7451afdc050e827bf1b9f8825aeb9886eb030fbc326add215b9b"
     },
     "Reborn065.lua": {
       "maxUpvalues": 1,
@@ -225,22 +225,22 @@
     "NativeData.lua": {
       "maxUpvalues": 2,
       "functions": 13,
-      "sha256": "5160e020d8ba09b830ea6a115d65987d042bb800bcfc754b86d47e84c7f0b7df"
+      "sha256": "4ffb6b8b3c3ff0366a27ac007ad0d897828018808699f015f3bed386d2fd8dee"
     },
     "MeterWindow.lua": {
       "maxUpvalues": 1,
       "functions": 8,
-      "sha256": "bf12422a318c81fe7bfd7457e67adf65262fe8834e2b67663a6b27742d6f1a45"
+      "sha256": "4a883655d394db6a7d76dbf66f77d5d57dcceee39fc3e931c57ea5bf5867f8c3"
     },
     "MeterLedger.lua": {
       "maxUpvalues": 11,
       "functions": 50,
-      "sha256": "deb734cb5d169d7d7c9918aced8fdb941d6a976091d4f54de69d349751cc91ad"
+      "sha256": "2a766a8f931fe32aacd61f2681ce7fc14a623afd96d95b1e8dce4b94eacafdfd"
     },
     "MeterSuite.lua": {
       "maxUpvalues": 6,
       "functions": 39,
-      "sha256": "b07cd2670d493005e3d927fb94d1245bb49eec4474d2e2b7f256a3825ed8887d"
+      "sha256": "ba4e04ab76cd2d27d24147813700c03d2e0d45446b5bb6ff9c87ac7f5df30a9b"
     },
     "BossTimeline.lua": {
       "maxUpvalues": 26,
@@ -285,7 +285,7 @@
     "NativeTools.lua": {
       "maxUpvalues": 3,
       "functions": 28,
-      "sha256": "325f52f59962456f966d365dc460c618f9873a12286b13dcd698e156d1d428d5"
+      "sha256": "0be351cd310156e9d62a351badb6adfabd148bfd6f69edf60d3638fc107125b5"
     },
     "SpellAssets.lua": {
       "maxUpvalues": 0,
@@ -325,7 +325,7 @@
     "Interface.lua": {
       "maxUpvalues": 28,
       "functions": 238,
-      "sha256": "3399fad63e67d1d62c6976f18b739de9cea14499e8326cd1c14209a55a68f5a4"
+      "sha256": "104f9a618dfe53997da1c20d4db0093e941a3465a33301d522c6a4b4066c21a5"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
@@ -385,7 +385,7 @@
     "ReferenceHUD.lua": {
       "maxUpvalues": 9,
       "functions": 197,
-      "sha256": "9a59e2d08071bce084dd45fcc5e21765aad378eb57e05ee5abc45aa756af072c"
+      "sha256": "3122fcee515ce7ac9ed53e12b6d66ec9f0cf50622c849aae316c0e2d40c95d78"
     },
     "ZoneThemes.lua": {
       "maxUpvalues": 18,

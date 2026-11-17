@@ -1,3 +1,57 @@
+# Intégration Reborn 0.6.9 — candidat reborn.37, 17 novembre 2026
+
+Vérification de la dernière distribution : le manifeste HTTPS
+`https://dl.azreborn.com/update/manifest.json` annonce **0.6.9**, série
+`1794874731`. L’exécutable installé et les 267 fichiers publics des addons
+AzerothSurvivors/AzerothSurvivorsAPI correspondent à ses empreintes BLAKE3.
+Le contrôle porte sur les fichiers publics distribués, sans modification du jeu,
+sans lecture des sauvegardes et sans ouvrir les conteneurs chiffrés. Il ne constitue
+pas une vérification indépendante de signature. Preuve : REBORN_069_DISTRIBUTION.json.
+
+La référence officielle actuelle, son export Markdown et les sources distribuées
+ont été relus. Le retour du développeur est traité comme un signal à vérifier.
+
+- **Intégré : progression des rencontres.** `nbs`, `nbm`, `nbc`, `nb` alimentent
+  la liste des boss, les rappels, les antres, les thèmes et la carte sans thème.
+  L’état `unknown` ignore les anciens noms et conserve le numéro natif ; `up`
+  prend le nom des unités vivantes ; `none` retire le prochain boss. Un délai est
+  affiché comme une durée, jamais comme un pourcentage. La pause gèle sa durée ;
+  le numéro stable évite une numérotation locale inventée après reload.
+- **Intégré : plafonds natifs.** `AZS_GetStatCaps` ajoute les plafonds disponibles
+  à l’infobulle partagée des statistiques. `cdr` et `haste` restent distincts,
+  les unités entières sont converties une seule fois, aucune valeur absente
+  n’est remplacée par un plafond supposé.
+- **Corrigé : très grands compteurs.** Les montants natifs peuvent dépasser
+  2^64 ; un validateur réservé aux compteurs conserve leurs doubles jusqu’aux
+  valeurs 128 bits. Les règles numériques des positions et réglages ne changent
+  pas. Les durées, taux, fenêtres et différences de checkpoints restent natifs.
+- **Déjà exploité et revérifié :** fenêtres de 5 à 120 secondes et checkpoints,
+  soins effectués, détails de sources/icônes, debuffs de contrôle disponibles,
+  castbar native, notifications reçues et accès au journal de mort natif.
+- **Toujours indisponible :** catégorie/positions de cristaux dans les ancres.
+  `Rift.lua` précise que les cristaux doivent être trouvés et que le serveur
+  n’envoie pas leurs marques ; les portails et les comptes de cristaux ne
+  fournissent pas les positions des objets au sol.
+- **Toujours indisponible :** ventilation structurée des améliorations de sorts,
+  getter étendu de phases/casts/contrôles par rencontre, soins reçus/soins de
+  rencontre et attribution des procs, géométrie des alertes au sol, nouveau
+  getter public du résumé de mort. Les capacités actuelles sont respectées ;
+  aucune de ces données n’est reconstruite à partir d’un effet visuel ou d’une
+  description de base. L’ancien accès borné au journal de mort reste un adaptateur
+  de compatibilité, pas une nouvelle API publique.
+
+Tests : états/identités/pauses/durées/sentinelles, seuils d’alerte, remplacement
+des tables synchronisées, absence et changement de plafonds, thèmes Elwynn/Naxx
+dans leurs trois variantes et sans thème, EN/FR/chinois ; exécution de l’API
+publique installée pour les plafonds, normalisation du décompte, grands totaux,
+différences de checkpoints et capacités. Ces fixtures isolées ne constituent
+pas une partie Endless réelle ni un test de transport coopératif.
+
+Les sections datées ci-dessous sont historiques ; leurs limites antérieures ne
+remplacent pas ce contrôle de la 0.6.9.
+
+---
+
 # Adaptation Reborn 0.6.4 — reborn.11, 14 novembre 2026
 
 Le correctif de replay après reload est annoncé dans 0.6.4 et confirmé par le mainteneur.
