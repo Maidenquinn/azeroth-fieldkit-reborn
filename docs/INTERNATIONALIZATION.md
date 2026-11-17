@@ -1,9 +1,8 @@
 # FieldKit language support
 
-The .36-dev candidate offers Automatic and fourteen languages: English, Polish,
+The .36 release offers Automatic and fourteen languages: English, Polish,
 Czech, German, Brazilian Portuguese, Spanish, French, Romanian, Turkish,
-Russian, Ukrainian, Simplified Chinese, Japanese and Korean. This candidate is
-not a public stable release.
+Russian, Ukrainian, Simplified Chinese, Japanese and Korean. The maintainer accepted this stable release on 2026-11-17.
 
 Choose a language under Preferences. Automatic reads the game's locale; an
 unsupported game locale falls back to English. Existing explicit English/French

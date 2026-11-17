@@ -1,7 +1,8 @@
-FieldKit Reborn 0.1.0-reborn.36-dev — Candidate: HUD editor and languages
+FieldKit Reborn 0.1.0-reborn.36 — Stable: HUD editor and languages
 
-No public release or new maintainer acceptance is implied. The previous native
-editor inspection does not certify this internationalization change.
+Maintainer accepted the candidate after testing and authorized stable release on
+2026-11-17. See RELEASE_REBORN_36.md for features and the scoped test evidence.
+The following checklist remains useful for future resolutions and wording feedback.
 
 Manual recipe:
 1. Preferences: select Automatic, EN/FR, a Latin language, a Cyrillic language
@@ -16,7 +17,7 @@ Manual recipe:
 6. Recheck the grid/editor, temporary chat handle and minimap on ultrawide.
 
 Additional translations are a machine-assisted first pass with reviewed terms.
-Native-speaker wording review and this client visual recipe remain open.
+Exhaustive native-speaker wording review remains open. Agent visual inspection is scoped in INTERNATIONALIZATION.md; maintainer acceptance is supplied separately.
 
 FieldKit Reborn 0.1.0-reborn.35 — World markers and adjustable height
 

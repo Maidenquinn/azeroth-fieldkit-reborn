@@ -1,4 +1,4 @@
-# 0.1.0-reborn.36-dev — HUD editor and internationalization (candidate)
+# 0.1.0-reborn.36 — HUD editor and internationalization
 
 - Offer Automatic plus English, Polish, Czech, German, Brazilian Portuguese, Spanish, French, Romanian, Turkish, Russian, Ukrainian, Simplified Chinese, Japanese and Korean in Preferences. Keep existing manual EN/FR choices; new installations follow the game.
 - Refresh labels and script fonts live, with or without a theme, without changing the game's language or player identities. Keep native spell/effect names and use known localized fallbacks when native data is incomplete.
@@ -11,7 +11,7 @@
 - Temporarily unlock chat in both editors, independent of styling or copy opt-in; retain its position and restore the normal lock on exit.
 - Reuse overlay textures across viewport changes, preserve profile settings and restore the previous lock on exit. No positions change merely by enabling the grid.
 - Normalize the native minimap local scale within its themed owner, restore it when leaving the theme, and invalidate the native viewport cache when position, dimensions, inherited scale or screen dimensions change.
-- Synthetic coverage: four viewports, six theme layouts, independent effective scales, native scale restoration, FR/EN controls, bounded allocation, profile persistence and viewport cache invalidation. Native ultrawide visual acceptance remains pending; this is not a public release.
+- Synthetic coverage: four viewports, six theme layouts, independent effective scales, native scale restoration, FR/EN controls, bounded allocation, profile persistence and viewport cache invalidation. Maintainer accepted .36 for stable release on 2026-11-17; agent ultrawide visual validation is not claimed.
 
 # 0.1.0-reborn.35 — Stable world markers and height controls
 

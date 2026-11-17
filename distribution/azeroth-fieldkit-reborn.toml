@@ -14,5 +14,5 @@ asset = "AzerothFieldKitReborn-*.zip"
 
 [reborn]
 status = "works"
-tested = "0.6.5 / 0.1.0-reborn.35"
-notes = "Maintainer accepted the 0.1.0-reborn.35 gameplay recipe on client 0.6.5 (2026-11-15), including world-marker placement and height controls with native/illustrated layouts. Automated API, settings and profile tests pass. Requires the game's bundled AzerothSurvivorsAPI. Co-op and other resolutions are not independently certified. See repository notices for inherited rights."
+tested = "0.6.8 / 0.1.0-reborn.36"
+notes = "Maintainer accepted .36 on client 0.6.8 (2026-11-17): live HUD alignment grid, temporary chat mover, minimap scale correction and fourteen UI languages with automatic language selection. Existing settings/profiles retained. Requires bundled AzerothSurvivorsAPI. Automated API, locale, font, settings and profile tests pass; native-speaker wording feedback welcome. See repository notices for rights."

@@ -1,4 +1,4 @@
-# HUD alignment editor — .36-dev
+# HUD alignment editor — .36
 
 Open **Interface > Layout & arrange > Align HUD**, or `/fieldkit align`.
 This editor keeps the actual active theme. The older Previews flow continues to arrange sample cards without a theme.
@@ -11,7 +11,7 @@ This editor keeps the actual active theme. The older Previews flow continues to 
 - Chat automatically exposes its Move chat handle while either editor is open, regardless of chatStyle/chatMove. These preferences and chat-copy opt-in are never changed. Closing the editor finishes any held drag and restores the normal mover state. Editor-chosen native positions persist even with styling disabled, without changing font, size, colours or message capture. The themed chat moves its whole card.
 - The overlay reuses texture regions and does not take mouse input.
 
-The minimap candidate normalizes its local scale inside a themed owner and restores the native scale on exit. Position, size, effective scale and viewport changes invalidate the native renderer cache. No replacement map texture or native data edits are involved.
+The minimap normalizes its local scale inside a themed owner and restores the native scale on exit. Position, size, effective scale and viewport changes invalidate the native renderer cache. No replacement map texture or native data edits are involved.
 
 ## Validation
 
@@ -26,4 +26,4 @@ Native client 0.6.8 at 1920x1080: the grid and toolbar displayed with the curren
 3. Adjust spacing, toggle grid, exit, switch profiles and reload. Check saved positions, spacing and lock restoration.
 4. At 2560x1080 verify minimap containment after resize, drag, profile switch and reload. Repeat after changing window dimensions if available.
 
-The native QA used external verified profile copies. FieldKit and Stats .lua/.bak files are restored byte-for-byte after the test; private evidence and account data are never committed. This candidate is not published.
+That earlier native editor QA used external verified profile copies and restored FieldKit and Stats saves afterwards. Private evidence and account data are never committed. The maintainer accepted .36 for stable publication on 2026-11-17; the narrower scope of the agent's own visual inspection above is unchanged.
