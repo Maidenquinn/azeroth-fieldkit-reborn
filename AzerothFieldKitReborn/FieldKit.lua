@@ -722,6 +722,15 @@ end
 
 -- Select live final/boss/awake-guardian entries and update the bounded frame pool.
 local function UpdateBossFrame()
+ -- Preview samples own this screen. The normal renderer otherwise restores
+ -- alpha/compact variants between the preview mask's ticks, exposing a ghost
+ -- boss behind the toolbar. Rebuild the live pool normally on editor exit.
+ if FieldKitPreview and FieldKitPreview.mode=="place" then
+  for _,frame in ipairs(bossFrames) do
+   frame:Hide();if frame.compact then frame.compact:Hide() end
+  end
+  return
+ end
  for bi=2,table.getn(bossFrames) do
   local bf=bossFrames[bi]
   bf:ClearAllPoints()

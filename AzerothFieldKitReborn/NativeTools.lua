@@ -31,6 +31,7 @@ function T.Create(create,fit,move)
    if list.azsMoving or not this.bossListEntry then return end
    local e=this.bossListEntry
    GameTooltip:SetOwner(this,"ANCHOR_RIGHT");GameTooltip:SetText(e.label,1,.85,.55);GameTooltip:AddLine(e.value,1,1,1,true)
+   if e.unknown then GameTooltip:AddLine(FieldKit_L("Unknown"),.8,.8,.8,true) end
    if FieldKitReborn.IsEndless() then GameTooltip:AddLine(FieldKit_L("Endless: the game does not provide the upcoming boss sequence."),.7,.7,.7,true) end
    FieldKitLocale.ShowTooltip()
   end)
@@ -99,19 +100,25 @@ function T.BossListRows()
  end
  table.sort(ordered,function(a,b) if a.order==b.order then return a.original<b.original end;return a.order<b.order end)
  local charge=not FieldKitReborn.IsEndless() and FieldKitReborn.BossProgress() or nil
+ local encounter,supported=FieldKitReborn.NextEncounter()
+ if supported and encounter and encounter.endless then
+  table.insert(out,{label=encounter.name,value=T.BossValue(encounter),fraction=encounter.progress or 0,
+   state=encounter.state,index=encounter.ordinal,unknown=encounter.unknown,tint={.65,.35,.85}})
+ end
  for _,item in ipairs(ordered) do local b=item.boss;local state=b.state;local status="Status not provided";local fraction=0;local tint={.65,.68,.7}
   if state=="dead" or state=="slain" then status="Defeated";defeated=defeated+1;fraction=1;tint={.3,.7,.3}
   elseif state=="up" then status="In combat";tint={.85,.3,.2}
   elseif state=="due" then
-   if not nextSeen and not FieldKitReborn.IsEndless() then status="Next";nextSeen=true;fraction=charge or 0;tint={.65,.35,.85}
+   if not nextSeen and not FieldKitReborn.IsEndless() and (not supported or (encounter and not encounter.active and (not encounter.ordinal or encounter.ordinal==item.order))) then status="Next";nextSeen=true;fraction=charge or 0;tint={.65,.35,.85}
    else status="Upcoming" end
   end
   local value=FieldKit_L(status)
-  if status=="Next" and charge~=nil then value=value..string.format(" · %.0f%%",math.floor(charge*100)) end
+  if status=="Next" and supported and encounter then value=value.." · "..T.BossValue(encounter)
+  elseif status=="Next" and charge~=nil then value=value..string.format(" · %.0f%%",math.floor(charge*100)) end
   table.insert(out,{label=tostring(item.order)..". "..N.Text(FieldKitReborn.DisplayName(b.name)),value=value,fraction=fraction,tint=tint,
    icon=FieldKitReborn.EnemyIcon(b.name),state=state,index=item.order})
  end
- return out,defeated,table.getn(out)>0
+ return out,defeated,table.getn(out)>0,table.getn(ordered)
 end
 function T.BossList()
  local frame=T.frames[4];if not frame then return end
@@ -119,15 +126,15 @@ function T.BossList()
  if frame.mashCollapsed and frame.fieldkitDockHidden then frame.note:Hide();frame:Hide();return end
  if FieldKit.rebornLegacyFixture or not FieldKitRebornDB.bossListCard or (not N.Active() and N.Read("AZS_GetPhase")~="ready" and not FieldKit.layoutEditing) then frame:Hide();return end
  if frame.bossListSerial~=N.serial then frame.bossListSerial=N.serial;frame.bossListOffset=0 end
- local all,dead,known=T.BossListRows();local total=table.getn(all)
+ local all,dead,known,campaignCount=T.BossListRows();local total=table.getn(all)
  local offset=math.max(0,math.min(frame.bossListOffset or 0,math.max(0,total-table.getn(frame.rows))));frame.bossListOffset=offset;frame.bossListCount=total
  local rows={};for i=offset+1,math.min(total,offset+table.getn(frame.rows)) do table.insert(rows,all[i]) end
  if total==0 then rows={{label=FieldKit_L("Boss list not provided"),value=""}} end
  local note=FieldKitReborn.IsEndless() and FieldKit_L("Endless: the game does not provide the upcoming boss sequence.") or ""
  frame.fieldkitFooterHeight=note~="" and 36 or 0
- local summary=known and (tostring(dead).." / "..total) or ""
+ local summary=known and (tostring(dead).." / "..tostring(campaignCount or total)) or ""
  if FieldKitReferenceHUD and FieldKitReferenceHUD.BossListCard(frame,rows,summary,note) then return end
- T.ShowRows(frame,rows,known and (tostring(dead).." / "..total) or "")
+ T.ShowRows(frame,rows,summary)
  for i,row in ipairs(frame.rows) do
   row.bossListEntry=rows[i]
   local e=rows[i]
@@ -232,6 +239,8 @@ function T.Revive()
 end
 function T.NextBoss()
  if not FieldKit.rebornLegacyFixture then
+  local encounter,supported=FieldKitReborn.NextEncounter()
+  if supported then return encounter end
   local run=type(AZS_RUN)=="table" and AZS_RUN or {}
   if FieldKitReborn.IsEndless() then
    local progress=FieldKitReborn.BossProgress()
@@ -274,6 +283,8 @@ end
 function T.BossValue(boss)
  if not boss then return "" end
  if FieldKit.rebornLegacyFixture then return N.Clock(boss.left) end
+ if boss.active then return FieldKit_L("In combat") end
+ if boss.left~=nil then return N.Clock(boss.left) end
  return boss.progress and string.format("%.0f%%",math.floor(boss.progress*100)) or FieldKit_L("Progress not provided")
 end
 function T.Reminders()
@@ -284,7 +295,7 @@ function T.Reminders()
   local count=Count(N.Read("AZS_GetStoredLevels"))
   if count and count>0 then table.insert(rows,{label=FieldKit_L("Stored level-ups"),value=tostring(count)}) end
  end
- local approaching=boss and (FieldKit.rebornLegacyFixture and boss.left and boss.left>0 and boss.left<=FieldKitRebornDB.bossWarningLead
+ local approaching=boss and not boss.active and (boss.left and boss.left>0 and boss.left<=FieldKitRebornDB.bossWarningLead
   or not FieldKit.rebornLegacyFixture and boss.progress and boss.progress>=(100-FieldKitRebornDB.bossWarningLead)/100)
  if approaching and FieldKitRebornDB.nextBossAlert and N.Read("AZS_GetPhase")=="playing" then
   local key=tostring(N.serial)..":"..boss.key

@@ -72,9 +72,9 @@ function FieldKit.BuildJourneySections(sections,actions)
    get=function() return FieldKitRebornDB.bossListCard end,set=function(v) FieldKitRebornDB.bossListCard=v;FieldKitNativeTools.Update() end},
   {kind="check",label="Effects tracker",tip="Contextual totems, summons and native talent timers. Hidden without relevant data; filters are in Health & buffs.",
    get=function() return FieldKitRebornDB.effectsFrame end,set=function(v) FieldKitRebornDB.effectsFrame=v;FieldKitNativeTools.Update() end},
-  {kind="check",label="Next boss reminder",tip="Next native boss and its progression. Hidden when no upcoming boss is provided.",
+  {kind="check",label="Next boss reminder",tip="Native boss progress or countdown; unknown names stay unknown.",
    get=function() return FieldKitRebornDB.nextBossCard end,set=function(v) FieldKitRebornDB.nextBossCard=v;FieldKitNativeTools.Update() end},
-  {kind="check",label="Next boss in Lairs",tip="Next native boss and its progression. Hidden when no upcoming boss is provided.",
+  {kind="check",label="Next boss in Lairs",tip="Native boss progress or countdown; unknown names stay unknown.",
    get=function() return FieldKitRebornDB.lairNextBoss end,set=function(v) FieldKitRebornDB.lairNextBoss=v;actions.UpdateLairFrame() end},
   {kind="check",label="Stored level-up reminder",tip="Show a count only while native stored level-ups are waiting. Does not open, spend or choose them.",
    get=function() return FieldKitRebornDB.storedLevelsBadge end,set=function(v) FieldKitRebornDB.storedLevelsBadge=v;FieldKitNativeTools.Update() end},
@@ -166,32 +166,32 @@ function FieldKit.BuildJourneySections(sections,actions)
    get=function() return FieldKitRebornDB.onTopWindows.FieldKitPartyDetailsFrame end,
    set=function(v) FieldKitRebornDB.onTopWindows.FieldKitPartyDetailsFrame=v and true or nil;FieldKitScreenLayers.Update() end},
  }
- local health={{kind="preview",preview=18},options.playerBar,HealthChoice("playerHealthMode","Player health format",actions.UpdatePlayerBar),options.playerBuffs,options.playerShield,options.targetHealth,HealthChoice("targetHealthMode","Target health format",actions.UpdateTargetHealth)}
+ local health={{kind="preview",preview="FieldKitPlayerBar"},options.playerBar,HealthChoice("playerHealthMode","Player health format",actions.UpdatePlayerBar),options.playerBuffs,options.playerShield,options.targetHealth,HealthChoice("targetHealthMode","Target health format",actions.UpdateTargetHealth)}
  for _,def in ipairs({{"effectTotems","Track totems"},{"effectSummons","Track summons"},{"effectTimers","Track native effect timers"},{"effectBuffs","Track active buffs"}}) do
   local key,label=def[1],def[2]
   table.insert(health,{kind="check",label=label,tip="Filters the Effects tracker. Counts and remaining times come from the native API; unavailable data is never invented.",
    get=function() return FieldKitRebornDB[key] end,set=function(v) FieldKitRebornDB[key]=v;FieldKitNativeTools.Update() end})
  end
  local alerts=old.Warnings.items
- table.insert(alerts,1,{kind="preview",preview=16})
+ table.insert(alerts,1,{kind="preview",preview="FieldKitNativeWarnings"})
  for _,def in ipairs({{"nativeWarnings","FieldKit notifications","Show received announcements in a movable FieldKit panel. Native banners are replaced while this is enabled; filters apply below."},
   {"keepNativeBanners","Also show native notifications","Display native banners alongside FieldKit notifications. Off keeps only the movable FieldKit panel."},
   {"otherBannerWarnings","Other game announcements","Include other received game announcements, such as waves and guardian arrivals."},
   {"bossBannerWarnings","Boss banner messages","Include received banners explicitly flagged as boss messages."},
   {"mechanicWarnings","Mechanic banner messages","Include received banners whose kind is mechanic."},
   {"partyBannerWarnings","Party revive banners","Include co-op downed / friend-down / revived banners."},
-  {"nextBossAlert","Warn before the next boss","Warn once when native boss progression reaches the selected threshold. No spawn timer or attack prediction."}}) do
+  {"nextBossAlert","Warn before the next boss","Warn at the native progress threshold, or seconds before a timed boss."}}) do
   local key,label,tip=def[1],def[2],def[3]
   table.insert(alerts,{kind="check",label=label,tip=tip,get=function() return FieldKitRebornDB[key] end,
    set=function(v) FieldKitRebornDB[key]=v;FieldKitNativeTools.Update() end})
  end
  table.insert(alerts,{kind="slider",label="Boss arrival warning",min=3,max=30,step=1,
-  get=function() return FieldKitRebornDB.bossWarningLead end,format=function(v) return string.format(FieldKit_L("Warn at %d%% boss progression"),100-v) end,
+  get=function() return FieldKitRebornDB.bossWarningLead end,format=function(v) return string.format(FieldKit_L("Warn at %d%% boss progression"),100-v).." / "..string.format(FieldKit_L("%s arrives in %ds"),FieldKit_L("Boss"),v) end,
   set=function(v) FieldKitRebornDB.bossWarningLead=v end})
  table.insert(old.Map.items,{kind="check",label="Highlight the flagged lair",tip="Mark the lair selected by the game's flag in the existing lair list. Does not track a moving guardian.",
   get=function() return FieldKitRebornDB.highlightFlaggedLair end,set=function(v) FieldKitRebornDB.highlightFlaggedLair=v;actions.UpdateLairFrame() end})
  local coop={
-  {kind="preview",preview=8},
+  {kind="preview",preview="FieldKitPartyMeterFrame"},
   {kind="note",label="Experimental co-op",tip="Full allied spell sharing depends on a client transport that has not been confirmed in live co-op. Native group totals remain available without sharing."},
   {kind="check",label="Co-op teammate cards",tip="Optional passive cards. Native teammate frames remain available for targeting and their usual interactions.",
    get=function() return FieldKitRebornDB.partyCards end,set=function(v) FieldKitRebornDB.partyCards=v;FieldKitCoop.Update() end},
@@ -226,8 +226,8 @@ function FieldKit.BuildJourneySections(sections,actions)
   {id="home",title="Overview",glyph=13,group="01  HOME",items={{kind="home"}}},
   {id="combat",title="Combat text",glyph=2,group="02  COMBAT",items={{kind="combat"}}},
   {id="health",title="Health & buffs",glyph=16,group="02  COMBAT",items=health},
-  {id="bosses",title="Bosses",glyph=5,group="02  COMBAT",items={{kind="preview",preview=17},options.bossFrame,
-   {kind="check",label="Boss progression",tip="Shows the native boss progression gauge without a spawn countdown. With a theme, the gauge is already integrated below the run clock.",
+  {id="bosses",title="Bosses",glyph=5,group="02  COMBAT",items={{kind="preview",preview="FieldKitBossFrame1"},options.bossFrame,
+   {kind="check",label="Boss progression",tip="Native boss progress or countdown; unknown names stay unknown.",
     get=function() return FieldKitRebornDB.bossTimeline==true end,
     set=function(v) FieldKitRebornDB.bossTimeline=v and true or false;if FieldKitBossTimeline then FieldKitBossTimeline.Update() end;if not v and FieldKitBossTimeline then FieldKitBossTimeline.RestoreHud() end end},
    {kind="choice",label="Boss frame appearance",values={"Chronicle classic","Compact","Chronicle Premium"},
@@ -817,7 +817,8 @@ function U.BuildPage(section,index)
   elseif item.kind=="preview" then
    local row=CreateFrame("Frame",nil,page);row:SetPoint("TOPLEFT",page,"TOPLEFT",0,-y);row:SetHeight(76)
    local hint=T.Label(row,"Test without a party, boss or active module.",0,0,500,26,12,T.muted)
-   local example=T.Button(row,nil,"Test display",0,32,190,28,function() FieldKitPreview.Open(item.preview>0 and item.preview or FieldKitCardLayout.selected) end)
+   local example=T.Button(row,nil,"Test display",0,32,190,28,function() FieldKitPreview.Open(item.preview~=0 and item.preview or FieldKitCardLayout.selected) end)
+   row.previewButton=example
    local compose=T.Button(row,nil,"Compose interface",202,32,190,28,function() U.SetLayoutEditing(true,false) end)
    row.Reflow=function(w) row:SetWidth(w);hint:SetWidth(w) end
    table.insert(page.flow,{frame=row,y=y});y=y+84
@@ -1124,8 +1125,9 @@ function U.SetLayoutEditing(enabled,returnToSettings)
  FieldKit.layoutEditing=enabled and true or false
  if enabled then
   U.routingLayout=true;U.frame:Hide();U.routingLayout=nil
-  U.context.unlock(true);U.context.bosses();FieldKitCardLayout.UpdateDock();U.dock:Show();FieldKitPreview.Start(true)
+  U.context.unlock(true);U.context.bosses();FieldKitCardLayout.UpdateDock();U.dock:Show()
   if FieldKitRebornDB.combatText then FieldKitCombat.ShowAnchors() end
+  FieldKitPreview.Start(true)
  else
   FieldKitPreview.Stop();U.dock:Hide();U.context.unlock(false);FieldKitCombat.HideAnchors();U.context.bosses()
   if returnToSettings then U.Reflow();U.frame:Show();U.Refresh() end

@@ -84,6 +84,7 @@ end
 local function Short(n)
  if not n then return "?" end
  n=math.floor(n+.5)
+ if n>=1e12 then return string.format("%.2e",n) end
  if n>=1000000 then return string.format("%.1fM",n/1000000) end
  if n>=1000 then return string.format("%.1fk",n/1000) end
  return tostring(n)

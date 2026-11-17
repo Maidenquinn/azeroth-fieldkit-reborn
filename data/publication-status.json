@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.36",
+  "version": "0.1.0-reborn.37",
   "maintainerAcceptedForPublication": true,
   "maintainerAcceptanceDate": "2026-11-17",
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
@@ -9,6 +9,6 @@
   "githubPrerelease": false,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
-  "maintainerInGameTestingReported": true,
-  "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. Maintainer accepted .36 and authorized stable publication on 2026-11-17. Internationalization: client 0.6.8 at 1920x1080, live German/Russian/Chinese/Japanese/Korean with Elwynn Complete; Korean without theme and in FieldKit-owned native tooltip. Script glyphs render. Corrected unknown tokens and r2 CJK fonts rechecked after reload in ZH/JA/KO with Elwynn; ZH also without theme. Further treasure-chest/context wording corrected in source. Maintainer supplied publication acceptance; exhaustive native-speaker wording review remains open. Agent visual coverage is limited to the cases described here. French, profile 1, Elwynn Complete and paused state restored."
+  "maintainerInGameTestingReported": false,
+  "inGameTestScope": "Maintainer authorized publication after validation on 2026-11-17. Agent inspected .37-dev on verified client 0.6.9 in French, Profile 1 / Elwynn Complete at 1920x1080: single preview text, separate cards/toolbar/combat handles, Done, themed HUD restoration, correct boss/health inspectors, hidden inapplicable health actions, native campaign 0% and critical-cap 100% tooltip. Game stayed paused at 0:02. Native inspection found the haste tooltip alias defect; its one-line fix passes the full-reader regression but has no subsequent live observation. Encounter/clock/cap/large-meter and recent/checkpoint cases execute installed public API sources in isolated fixtures; live Endless, co-op transport and exhaustive native themes/languages are not claimed."
 }

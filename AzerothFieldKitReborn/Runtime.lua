@@ -1,7 +1,7 @@
 -- Runtime boundary: validate data and centralize the few native setting writes.
 -- This module runs first. It performs no I/O, networking or native writes at load.
 -- FieldKit is an addon-owned namespace; AZS_* tables remain owned by the client.
-FieldKit = { version = "0.1.0-reborn.36", folder = "AzerothFieldKitReborn" }
+FieldKit = { version = "0.1.0-reborn.37", folder = "AzerothFieldKitReborn" }
 
 -- Native level-up/chest choices own the action controls during this phase.
 -- Read the official phase; do not inspect or modify native screen frames.
@@ -35,6 +35,15 @@ end
 function FieldKit.Number(value, fallback, minimum, maximum)
  local n=tonumber(value)
  if not n or n~=n or n>1e18 or n< -1e18 then return fallback end
+ if minimum then n=math.max(minimum,n) end
+ if maximum then n=math.min(maximum,n) end
+ return n
+end
+-- Native meters count in unsigned 128 bits. Keep them as finite Lua doubles;
+-- do not widen the normal settings/geometry validator or convert to integers.
+function FieldKit.MeterNumber(value,fallback,minimum,maximum)
+ local n=tonumber(value)
+ if not n or n~=n or math.abs(n)>3.5e38 then return fallback end
  if minimum then n=math.max(minimum,n) end
  if maximum then n=math.min(maximum,n) end
  return n

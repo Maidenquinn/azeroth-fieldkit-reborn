@@ -23,7 +23,7 @@ function R.ProgressBar()
  local width=math.min(420,H.header:GetWidth()-28);R.SizeMeter(R.progressFrame,width);R.SizeMeter(R.hordeFrame,width)
  local share=R.BossProgress();local f=R.progressFrame;local boss=FieldKitNativeTools.NextBoss()
  f:ClearAllPoints();f:SetPoint("TOP",H.header,"BOTTOM",0,-6)
- if share~=nil or (boss and boss.endless) then
+ if share~=nil or boss then
   local name=boss and boss.name or FieldKit_L("Next boss")
   f.fill:SetStatusBarColor(.45,.32,.12,.95);f.fill:SetValue(0);f.fill:SetValue((share or 0)*100);f.label:SetText((boss and boss.endless and (FieldKit_L("Endless").." · ") or "")..name.." · "..FieldKitNativeTools.BossValue(boss));f:Show();H.next:SetText(name)
  else f:Hide();H.next:SetText(FieldKit_L("No upcoming boss")) end

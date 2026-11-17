@@ -15,6 +15,7 @@ function R.Amount(n)
  local comma=spaced or language=="de" or language=="es" or language=="pt" or language=="ro" or language=="tr"
  local dec=comma and "," or ".";local group=spaced and " " or (comma and "." or ",")
  local a=math.abs(n);local sign=n<0 and "-" or ""
+ if a>=1e12 then return sign..string.gsub(string.format("%.2e",a),"%.",dec) end
  if a>=1000000 then return sign..string.gsub(string.format("%.1f",a/1000000),"%.",dec).." M" end
  if a>=10000 then return sign..string.gsub(string.format("%.1f",a/1000),"%.",dec).." k" end
  local text=string.format("%.0f",math.floor(a+.5))
@@ -613,7 +614,7 @@ function R.Update(variant,zone)
  Button(H.timeline,H.header,clockRect);Label(H.clock,H.timeline,clockRect,25,true)
  Button(H.reminders,H.header,nextRect);Label(H.next,H.reminders,nextRect,zone=="elwynn" and 18 or (d.nextSize or 23),true)
  if zone=="naxx" and variant=="minimal" then
-  local b=FieldKitNativeTools.NextBoss();H.clock:SetText(FieldKit_L("Elapsed time").." : "..FieldKitNative.Clock(FieldKitNative.Time()));H.next:SetText(b and FieldKit_L("Next").." : "..b.name.." · "..FieldKitNative.Clock(b.left) or FieldKit_L("No upcoming boss"))
+  local b=FieldKitNativeTools.NextBoss();H.clock:SetText(FieldKit_L("Elapsed time").." : "..FieldKitNative.Clock(FieldKitNative.Time()));H.next:SetText(b and b.name.." · "..FieldKitNativeTools.BossValue(b) or FieldKit_L("No upcoming boss"))
  end
  if d.steps then
   local upcoming=FieldKitNative.Read("AZS_GetUpcomingBosses") or {}
@@ -622,7 +623,7 @@ function R.Update(variant,zone)
    Button(b,H.schedule,a);Label(b.fieldkitLabel,b,a,19,true,"CENTER");b.fieldkitLabel:SetText(upcoming[i] and tostring(upcoming[i].index or i) or "")
   else b:Hide() end end
  end
- if zone=="naxx" and variant=="alternative" then local b=FieldKitNativeTools.NextBoss();H.next:SetText(b and FieldKit_L("Next").."\n"..b.name.."\n"..FieldKitNative.Clock(b.left) or FieldKit_L("No upcoming boss"));H.next:SetJustifyH("CENTER") end
+ if zone=="naxx" and variant=="alternative" then local b=FieldKitNativeTools.NextBoss();H.next:SetText(b and b.name.."\n"..FieldKitNativeTools.BossValue(b) or FieldKit_L("No upcoming boss"));H.next:SetJustifyH("CENTER") end
  Label(H.name,H.healthRoot,d.name,23,true)
  if d.level then Label(R.level,H.healthRoot,d.level,30,true,"CENTER");R.level:SetText(tostring(UnitLevel("player") or "?"));H.name:SetText(UnitName("player") or "?") else R.level:Hide() end
  local barRect=R.PlayerBarRect(d);Button(H.player,H.healthRoot,barRect);R.BarOverlay();H.health:ClearAllPoints();H.health:SetAllPoints(H.player);H.health:SetFrameLevel(H.player:GetFrameLevel()+1)
@@ -699,7 +700,7 @@ function R.Update(variant,zone)
  else H.micro:SetPoint("TOPLEFT",H.mode,"BOTTOMLEFT",0,-8) end
  -- Settings remain available in the same one-click menu as native micro buttons.
 
- if d.rate then local _,_,rate=FieldKitMeterLedger.Read("damage");Label(R.rate,R.canvas,d.rate,21,true);R.rate:SetText("DPS "..(rate and string.format("%.0f",rate) or "?")) else R.rate:Hide() end
+ if d.rate then local _,_,rate=FieldKitMeterLedger.Read("damage");Label(R.rate,R.canvas,d.rate,21,true);R.rate:SetText("DPS "..R.Amount(rate)) else R.rate:Hide() end
  if not R.chat then
   R.chat=Frame("FieldKitReferenceChat");R.chatActions={}
   local callbacks={function() if type(ChatFrame_OpenChat)=="function" then ChatFrame_OpenChat("") end end,function() FieldKit.OpenChatCopy() end,function() SlashCmdList.FieldKit("");if FieldKitUI then FieldKitUI.Select("chat") end end}

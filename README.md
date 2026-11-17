@@ -1,6 +1,8 @@
 # Azeroth FieldKit Reborn
 
-**New in .36:** Preferences offers fourteen languages and Automatic (follow the game). Changes apply live with or without a theme. Existing language choices and HUD profiles are retained. Native game names keep their game language. The additional translations are a first pass with reviewed terminology; wording feedback is welcome.
+**New in .37:** repaired preview composition, native next-encounter states and Endless countdown, live stat caps in tooltips and support for very large native meter totals. Works with or without a HUD theme. Unknown boss identities stay unknown until the game reveals them; unavailable APIs are not fabricated.
+
+**Fourteen languages:** Preferences offers fourteen languages and Automatic (follow the game). Changes apply live with or without a theme. Existing language choices and HUD profiles are retained. Native game names keep their game language. The additional translations are a first pass with reviewed terminology; wording feedback is welcome.
 
 First launch: the approved Elwynn profile is active; profile 2 offers the approved native-style layout. Compare a fresh installation through **Interface → Profiles → Preview first launch**; Restore previous returns your settings. Existing preferences are retained.
 
@@ -10,7 +12,7 @@ Without an illustrated theme, cards use the native dark presentation. Resource c
 
 For 0.6.5: **/fieldkit → Interface → Combat meter → Recent damage and healing**, then choose **5–120 seconds**. Recent mode is off by default and saved per HUD profile. Hover Statistics for native jewelry/DoT contributions; select DoT values in the Statistics picker.
 
-Independent FieldKit adaptation for **Azeroth Survivors Reborn**, tested with client **0.6.8**. Version **0.1.0-reborn.36** is a stable release, accepted by the maintainer on 2026-11-17.
+Independent FieldKit adaptation for **Azeroth Survivors Reborn**, tested against verified client **0.6.9**. Version **0.1.0-reborn.37** is prepared for stable publication under the maintainer's authorization on 2026-11-17; test scope is recorded in the release notes and acceptance document.
 
 New installations start with the maintainer-approved Elwynn profile in slot 1; slot 2 contains the matching native-style layout. Both presets include the approved 70% opacity, sizes, scales and positions. Existing saved settings are preserved.
 

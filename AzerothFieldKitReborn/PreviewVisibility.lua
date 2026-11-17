@@ -8,10 +8,18 @@ local V=FieldKitPreviewVisibility
 -- Other FieldKit frames are live displays and are always masked in placement.
 function V.Keep(frame)
  local P=FieldKitPreview
- if FieldKitUI and frame==FieldKitUI.dock then return true end
- for _,f in pairs(P.frames) do if frame==f then return true end end
- for _,f in pairs(P.roots) do if frame==f then return true end end
- return frame==getglobal("FieldKitCombatAnchor1") or frame==getglobal("FieldKitCombatAnchor2")
+ -- Some client enumerators expose descendants as well as roots. Protect the
+ -- whole sample/editor subtree, including buttons and their material frames.
+ local current=frame
+ for depth=1,32 do
+  if not current or current==UIParent then break end
+  if FieldKitUI and current==FieldKitUI.dock then return true end
+  for _,f in pairs(P.frames) do if current==f then return true end end
+  for _,f in pairs(P.roots) do if current==f then return true end end
+  if current==getglobal("FieldKitCombatAnchor1") or current==getglobal("FieldKitCombatAnchor2") then return true end
+  current=current.GetParent and current:GetParent()
+ end
+ return false
 end
 
 function V.Restore(frame)

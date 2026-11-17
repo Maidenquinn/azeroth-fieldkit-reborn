@@ -13,7 +13,7 @@ local apis={
  "AZS_GetBossMeter","AZS_GetUpcomingBosses","AZS_GetCombatTextEvents",
  "AZS_GetWorldAnchorCapabilities","AZS_GetWorldAnchors",
  "AZS_ProjectWorldAnchors","AZS_GetPartyMeter",
- "AZS_SetOnTopOfScreens"
+ "AZS_SetOnTopOfScreens","AZS_GetStatCaps"
 }
 local function Say(message)
  if DEFAULT_CHAT_FRAME and DEFAULT_CHAT_FRAME.AddMessage then

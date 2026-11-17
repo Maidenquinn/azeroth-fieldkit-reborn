@@ -1,5 +1,7 @@
 -- Presentation-only UI additions. Native names use the separate Reborn display adapter.
 local fr=FieldKitLocale.fr
+fr["Native boss progress or countdown; unknown names stay unknown."]="Progression ou décompte natif du boss ; les noms inconnus restent inconnus."
+fr["Warn at the native progress threshold, or seconds before a timed boss."]="Avertit au seuil de progression natif, ou quelques secondes avant un boss temporisé."
 fr["Adds a separate kills line below the gold without a theme. With a theme, kills already belong to the main counter strip controlled by Gold and chest price."]="Ajoute une ligne de victimes sous l’or sans thème. Avec un thème, les victimes font déjà partie du bandeau principal commandé par Or et prix du coffre."
 fr["Your character bonuses: damage, haste, critical chance, lifesteal and other selected statistics. Currency counters are configured separately."]="Les bonus de votre personnage : dégâts, hâte, chances de critique, vol de vie et autres statistiques sélectionnées. Les compteurs de monnaies se règlent séparément."
 fr["Show the difficulty block and its information button. With a theme, hides the entire mode strip; the map and zone name stay visible. Reborn provides the native difficulty rank, not the old game's multipliers."]="Affiche le bloc de difficulté et son bouton d’information. Avec un thème, masque tout le bandeau du mode ; la carte et le nom de zone restent visibles. Reborn fournit le rang de difficulté, pas les multiplicateurs de l’ancien jeu."

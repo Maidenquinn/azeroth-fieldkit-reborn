@@ -80,6 +80,7 @@ function R.IsEndless()
 end
 function R.BossProgress()
  local run=type(AZS_RUN)=="table" and AZS_RUN or {}
+ if run.nbs~=nil and (run.nbm~="rift" or run.nbs=="up" or run.nbs=="none") then return nil end
  local rift=FieldKit.Number(run.rift)
  if rift and rift<0 then rift=nil end
  if rift then rift=math.min(100,rift)/100 end
@@ -91,6 +92,51 @@ function R.BossProgress()
    return rift
   end
  end
+end
+-- The server owns encounter identity and mechanism. A countdown is never a
+-- progress percentage; unknown names stay unknown, even with stale schedule data.
+function R.NextEncounter()
+ local run=type(AZS_RUN)=="table" and AZS_RUN or {}
+ local state=run.nbs
+ if state~="known" and state~="unknown" and state~="up" and state~="none" then return nil,false end
+ if state=="none" then return nil,true end
+ local ordinal=FieldKit.Number(run.nbc)
+ if ordinal and (ordinal<1 or ordinal~=math.floor(ordinal)) then ordinal=nil end
+ local name
+ if state=="known" then
+  for _,b in ipairs(type(AZS_SCHEDULE)=="table" and AZS_SCHEDULE or {}) do
+   if type(b)=="table" and b.state=="due" and (not ordinal or tonumber(b.index)==ordinal) then name=b.name;break end
+  end
+  if not name then name=run.nbn end
+ elseif state=="up" then
+  for _,b in ipairs(type(AZS_UNITS)=="table" and AZS_UNITS or {}) do
+   if type(b)=="table" and (b.kind=="boss" or b.kind=="final" or b.kind=="rift") and R.LiveBoss(b) then name=b.name;break end
+  end
+ end
+ local named=type(name)=="string" and string.find(name,"%S")
+ name=named and FieldKitNative.Text(R.DisplayName(name)) or FieldKit_L(state=="up" and "Boss" or "Next boss")
+ if not named and ordinal then name=name.." #"..tostring(ordinal) end
+ local boss={name=name,key="encounter:"..tostring(ordinal or state),ordinal=ordinal,state=state,
+  mechanism=run.nbm,endless=R.IsEndless(),unknown=not named,active=state=="up"}
+ if state~="up" then
+  if run.nbm=="rift" then boss.progress=R.BossProgress()
+  elseif run.nbm=="time" then
+   local left=FieldKit.Number(run.nb)
+   if left and left>=0 then
+    local elapsed=0
+    if run.ph=="playing" then
+     local ok,now=false,nil
+     if type(AZS_GetRunTime)=="function" then ok,now=pcall(AZS_GetRunTime) end
+     local base=FieldKit.Number(run.t);now=ok and FieldKit.Number(now) or nil
+     if base and now then elapsed=math.max(0,now-base)
+     else local stamp=FieldKit.Number(AZS_RUN_UPDATED);if stamp then elapsed=math.max(0,GetTime()-stamp) end end
+    end
+    boss.left=math.max(0,left-elapsed)
+   end
+  end
+ end
+ boss.unavailable=not boss.active and boss.left==nil and boss.progress==nil
+ return boss,true
 end
 function R.EventCurrency()
  local event=AZS_EVENT

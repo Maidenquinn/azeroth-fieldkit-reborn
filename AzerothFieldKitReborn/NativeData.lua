@@ -96,10 +96,10 @@ function M.Read(mode)
  for i=1,math.min(512,table.getn(lines)) do
   local row=lines[i]
   if type(row)=="table" and type(row.name)=="string" then
-   table.insert(out,{name=N.Text(row.name),displayName=N.Text(FieldKitReborn.DisplayName(row.name)),dmg=FieldKit.Number(row.dmg,nil,0),dps=FieldKit.Number(row.dps,nil,0),
+   table.insert(out,{name=N.Text(row.name),displayName=N.Text(FieldKitReborn.DisplayName(row.name)),dmg=FieldKit.MeterNumber(row.dmg,nil,0),dps=FieldKit.MeterNumber(row.dps,nil,0),
     share=FieldKit.Number(row.share,nil,0,1),proc=row.proc==1 and 1 or 0})
   end
  end
  table.sort(out,function(a,b) return (a.dmg or 0)>(b.dmg or 0) end)
- return out,FieldKit.Number(total,nil,0),FieldKit.Number(rate,nil,0),true,table.getn(lines)>512
+ return out,FieldKit.MeterNumber(total,nil,0),FieldKit.MeterNumber(rate,nil,0),true,table.getn(lines)>512
 end

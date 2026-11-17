@@ -1,3 +1,19 @@
+# 0.1.0-reborn.37 — Preview correction and Reborn 0.6.9 API support
+
+- Read the current next-encounter contract: known/unknown/active/none, native time or rift mechanism and stable encounter ordinal. Show the real endless countdown without inventing a boss name, sequence or charge percentage; preserve paused countdowns and reload identities.
+- Share this state across the boss list, reminders, Lairs, themed headers and unthemed progression card. Timed arrival warnings use native seconds; rift warnings retain the native percentage threshold.
+- Show live native stat caps in the shared statistics tooltip, distinguishing cooldown reduction from haste-buff caps and reading whole-percent units correctly. Missing caps stay absent; no hardcoded limits.
+- Accept native 128-bit-sized meter totals as Lua doubles with a separate numeric boundary; preserve snapshot/checkpoint rates and use compact scientific notation for very large amounts. Settings/geometry validation stays bounded as before.
+- Verify the installed 0.6.9 executable and public game/API files against the official distribution manifest. Rift-crystal positions, structured upgrade bonuses, extended encounter states, received/encounter healing, proc attribution, ground-warning geometry and a public death-summary getter remain unavailable in this distribution; existing supported presentations remain intact.
+
+- Paint each sample row once; hide legacy row widgets and duplicate boss labels.
+- Keep preview text on the selected script-safe fonts and contain boss health text above the debuff strip.
+- Resolve collisions between included preview blocks and reserve the editor toolbar area. Scale sample proxies when needed without changing saved HUD sizes or anchors.
+- Preserve toolbar controls and sample descendants during interface masking. Keep the composition stable during dragging and convert scaled drag offsets before saving a deliberate move.
+- Suppress the real boss renderer while arranging samples, reserve combat-text drag areas, and route individual tests by stable frame names rather than outdated card indexes. Localize the sample spell, guardian-state and health/rate captions.
+- Hide inapplicable proxy placement/reset actions in the player-health inspector; its translated help explains moving the active bar.
+- Focused coverage: all sample types, boss text ownership, masking descendants, five viewport sizes, grouped samples, drag persistence and cancellation. Native French/Elwynn inspection confirmed single text, separated examples/drag handles, visible Done, HUD restoration and correct individual boss/health routing. Other theme/language/drag recipe cases and maintainer acceptance remain pending. Stable .36 remains published.
+
 # 0.1.0-reborn.36 — HUD editor and internationalization
 
 - Offer Automatic plus English, Polish, Czech, German, Brazilian Portuguese, Spanish, French, Romanian, Turkish, Russian, Ukrainian, Simplified Chinese, Japanese and Korean in Preferences. Keep existing manual EN/FR choices; new installations follow the game.
