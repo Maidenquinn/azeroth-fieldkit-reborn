@@ -304,8 +304,8 @@
     },
     "Preview.lua": {
       "maxUpvalues": 4,
-      "functions": 30,
-      "sha256": "f9739f922c80ee1b61654426d275eeaf0419375abc959c8c842814143cdfd2d0"
+      "functions": 31,
+      "sha256": "8eaac78ad7e1a7adcb7a5e8aa1baed00cc0d44ca91f3a1c7c643bf89aae9b6dc"
     },
     "PreviewVisibility.lua": {
       "maxUpvalues": 1,
@@ -325,12 +325,12 @@
     "Interface.lua": {
       "maxUpvalues": 28,
       "functions": 238,
-      "sha256": "4d075faa49abc14ccdfa5f34fed925c942d12701141c053d3520282186af98c0"
+      "sha256": "3399fad63e67d1d62c6976f18b739de9cea14499e8326cd1c14209a55a68f5a4"
     },
     "FieldKit.lua": {
       "maxUpvalues": 21,
       "functions": 192,
-      "sha256": "99d191c4050fe03857976f0b2bb03cbaede08dfe33a5b61551087a037eab8ef1"
+      "sha256": "666ff535c93ebfe085d9114ca88534d30aa8eb276a4600ba6c046911bbf1a86d"
     },
     "WorldPins.lua": {
       "maxUpvalues": 11,

@@ -131,6 +131,7 @@ end
 for _,viewport in ipairs({{800,600},{1280,720},{1365,768},{1920,1080},{2560,1080}}) do
  local w,h=viewport[1],viewport[2]
  local reserved={x=(w-560)/2,y=12,w=560,h=172}
+ reserved.extras={{x=w/2-280,y=h*.58,w=280,h=32},{x=w/2,y=h*.58,w=280,h=32}}
  local items={}
  for i=1,15 do table.insert(items,{x=w/2-180,y=h/2-50,w=i==1 and 420 or 360,h=i==2 and 190 or 100}) end
  local packed,scale
@@ -139,6 +140,7 @@ for _,viewport in ipairs({{800,600},{1280,720},{1365,768},{1920,1080},{2560,1080
  for i,r in ipairs(packed) do
   assert(r.x>=0 and r.y>=0 and r.x+r.w<=w and r.y+r.h<=h)
   assert(separated(r,reserved),"Preview overlaps toolbar")
+  for _,area in ipairs(reserved.extras) do assert(separated(r,area),"Preview overlaps combat drag area") end
   for j=1,i-1 do assert(separated(r,packed[j]),"Preview samples overlap") end
  end
 end
@@ -153,4 +155,23 @@ preview.moving=nil
 P.Commit(preview,FieldKitMeterFrame)
 assert(FieldKitRebornDB.frameAnchors.FieldKitMeterFrame[3]==100 and FieldKitRebornDB.frameAnchors.FieldKitMeterFrame[4]==-80)
 P.Stop()
+local bossEnabled=FieldKitRebornDB.bossFrame
+FieldKitRebornDB.bossFrame=true;U.SetLayoutEditing(true,false);U.context.bosses()
+for i=1,4 do local boss=getglobal("FieldKitBossFrame"..i);assert(not boss:IsShown());assert(not boss.compact:IsShown()) end
+FieldKitRebornDB.bossFrame=bossEnabled;U.SetLayoutEditing(false,true)
+local oldLocale,legacy=AZS_L,FieldKit.rebornLegacyFixture;AZS_L={Fireball="Boule de feu"};FieldKit.rebornLegacyFixture=false
+FieldKit_SetLanguage("fr");assert(P.Text("Fireball")=="Boule de feu")
+assert(P.Rows(4)[1][2]=="awake" and P.Text("awake")==FieldKit_L("awake"))
+AZS_L=oldLocale;FieldKit.rebornLegacyFixture=legacy
+-- Exercise the actual page buttons: numeric indexes silently drifted when the
+-- campaign-boss and player cards were added to the catalog.
+for pageId,expected in pairs({bosses=P.bossIndex,health=P.playerIndex}) do
+ U.Select(pageId)
+ local button
+ for _,page in ipairs(U.pages) do if page.section.id==pageId then
+  for _,entry in ipairs(page.flow) do if entry.frame.previewButton then button=entry.frame.previewButton;break end end
+ end end
+ assert(button,"Missing preview action for "..pageId);click(button)
+ assert(P.selected==expected,"Wrong preview from "..pageId);P.Stop()
+end
 print("Preview rendering: single text owner, boss overlay isolation, toolbar descendants and five-viewport collision packing passed")

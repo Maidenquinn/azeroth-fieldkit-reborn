@@ -4,6 +4,11 @@
 FieldKitPreview={frames={},roots={},included={},selected=2}
 local P=FieldKitPreview
 local T=FieldKitTheme
+function P.Text(text)
+ local value=FieldKit_L(text)
+ if value==text and FieldKitReborn and FieldKitReborn.DisplayName then value=FieldKitReborn.DisplayName(text) end
+ return value
+end
 
 function P.Initialize(createBar,createBoss,place)
  P.createBar=createBar;P.createBoss=createBoss;P.place=place
@@ -136,18 +141,18 @@ function P.Rows(index)
  local hp=FieldKit_FormatHealth(6705,12200,FieldKitRebornDB.partyHealthMode)
  if P.names[index]=="FieldKitPlayerCard" then return {{"Player","Example"},{"Health",hp,.55},{"Mana","65 / 100",.65}} end
  if P.names[index]=="FieldKitBossListFrame" then return {{"Boss 1","Defeated"},{"Boss 2","Next"},{"Boss 3","Upcoming"}} end
- if index==1 then return {{"Heroic II","Example"},{"Bolstering","Example"},{"Next boss","1:24"}} end
+ if index==1 then return {{FieldKit_L("Heroic").." II","Example"},{"Bolstering","Example"},{"Next boss","1:24"}} end
  if index==2 then
   local mode=FieldKitMeters.Mode()
   if mode==2 then return {{"Healing",42000,1400,.7},{"Regeneration",18000,600,.3}} end
   return {{"Fireball",42000,1400,.7},{"Melee",12000,400,.2},{"Periodic damage",6000,200,.1}}
  end
  if index==3 then return {{"Monster melee",720,24,.6},{"Boss spells",360,12,.3},{"Elites",120,4,.1}} end
- if index==4 then return {{"Guardian","Awake"},{"Guardian","2:14"},{"Guardian","Asleep"},{"Guardian","0:32"}} end
+ if index==4 then return {{"Guardian","awake"},{"Guardian","2:14"},{"Guardian","asleep"},{"Guardian","0:32"}} end
  if index==5 and FieldKitRebornDB.loadoutTab==2 then return {{"Fireball","Rank 3","+8% / -16%"},{"Melee","Rank 3","+4%"}} end
  if index==5 then return {{"Amulet","Example"},{"Trinket 1","Example"},{"Trinket 2","Example"},{"Ring 1","Example"},{"Ring 2","Example"}} end
  if index==6 then return {{"Damage","+120%"},{"Haste","+30%"},{"Crit Chance","25%"},{"Lifesteal","3%"}} end
- if index==7 then return {{"Gold","640"},{"Chest price","86"},{"Next chest","720"}} end
+ if index==7 then return {{"Gold","640"},{"Chest price","86"},{FieldKit_L("Next").." · "..FieldKit_L("Chest price"),"720"}} end
  if index==8 then return {{"Player A",42000,1400,.4},{"Player B",31500,1050,.3},{"Player C",21000,700,.2},{"Player D",10500,350,.1}} end
  if index>=9 and index<=12 then return {{"Health",hp,.55},{"Mana","65 / 100",.65},{"Damage / DPS","42000 / 1400"}} end
  if index==13 then
@@ -184,7 +189,7 @@ function P.Render(index)
   f.name:SetText(FieldKit_L("Boss").." · "..FieldKit_L("Preview"))
   f.hp:SetText(FieldKit_FormatHealth(6705,12200,FieldKitRebornDB.bossHealthMode))
   f.bar:SetMinMaxValues(0,12200);f.bar:SetValue(6705);f.level:SetText("7")
-  f.previewName:SetText(FieldKit_L("Boss").." · "..FieldKit_L("Preview").."  Lv. 7")
+  f.previewName:SetText(FieldKit_L("Boss").." · "..FieldKit_L("Preview").."  "..FieldKit_L("Level").." 7")
   f.previewHealth:SetText(FieldKit_FormatHealth(6705,12200,FieldKitRebornDB.bossHealthMode).."  (55%)")
   f.previewDetail:SetText(FieldKit_L("Shield").."  1,250  ·  3 debuffs")
   FieldKit_Text(f.tag,"Preview — sample data")
@@ -216,12 +221,12 @@ function P.Render(index)
    local d=useSamples and rows[n] or nil
    if d then
     line:SetWidth(width-20)
-    local detail=FieldKit_L(tostring(d[2]))
+    local detail=P.Text(tostring(d[2]))
     if type(d[2])=="number" then
      detail=tostring(d[2])
-     if type(d[3])=="number" then detail=detail.."  /  "..tostring(d[3]).." DPS" end
+     if type(d[3])=="number" then detail=detail.."  /  "..tostring(d[3]).." "..FieldKit_L(index==2 and FieldKitMeters.Mode()==2 and "hps" or "dps") end
     end
-    line:SetText(FieldKit_L(d[1]).."    "..detail)
+    line:SetText(P.Text(d[1]).."    "..detail)
     line:Show()
    else line:Hide() end
   end
@@ -282,6 +287,7 @@ end
 -- as preferences; resolving collisions must never save a new gameplay layout.
 function P.Pack(items,width,height,reserved,scale)
  local gap=12;local placed={reserved};local result={}
+ for _,r in ipairs(reserved.extras or {}) do table.insert(placed,r) end
  local function free(x,y,w,h)
   if x<gap or y<gap or x+w>width-gap or y+h>height-gap then return false end
   for _,r in ipairs(placed) do
@@ -321,6 +327,19 @@ function P.Compose()
   button:SetFrameStrata("TOOLTIP");button:SetFrameLevel(210);T.Update(button)
  end
  local reserved={x=(width-560*ds)/2,y=12,w=560*ds,h=172*ds}
+ reserved.extras={}
+ local parentScale=UIParent.GetEffectiveScale and UIParent:GetEffectiveScale() or 1
+ for i=1,2 do
+  local a=getglobal("FieldKitCombatAnchor"..i)
+  if a and a:IsShown() then
+   if a.fieldkitMoving then return end
+   local x,top=a:GetLeft(),a:GetTop()
+   if x and top then
+    local s=a:GetEffectiveScale()/parentScale
+    table.insert(reserved.extras,{x=x*s,y=height-top*s,w=a:GetWidth()*s,h=a:GetHeight()*s})
+   end
+  end
+ end
  local items,seen={},{}
  for i=1,table.getn(P.names) do
   local f=P.frames[i]
@@ -341,6 +360,7 @@ function P.Compose()
  -- Keep preferred positions when possible. Only the presentation shrinks when
  -- all included examples cannot fit at full size on the current viewport.
  local key=width..":"..height..":"..ds
+ for _,r in ipairs(reserved.extras) do key=key..":"..r.x..":"..r.y..":"..r.w..":"..r.h end
  for _,item in ipairs(items) do
   key=key..":"..tostring(item.frame)..":"..math.floor(item.x*100)..":"..math.floor(item.y*100)..":"..item.w..":"..item.h
  end
@@ -440,6 +460,12 @@ end
 -- One reusable inspector, intentionally independent of module enable flags.
 -- Closing it never changes a preference or closes the normal settings panel.
 function P.Open(index)
+ if type(index)=="string" then
+  local found
+  for i,name in ipairs(P.names) do if name==index then found=i;break end end
+  if not found then return false end
+  index=found
+ end
  if FieldKit.layoutEditing then FieldKitUI.SetLayoutEditing(false,true) end
  P.Stop();if FieldKitZoneThemes then FieldKitZoneThemes.Suspend() end;P.selected=index or P.selected
  if not P.inspector then

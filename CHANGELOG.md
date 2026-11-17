@@ -4,6 +4,7 @@
 - Keep preview text on the selected script-safe fonts and contain boss health text above the debuff strip.
 - Resolve collisions between included preview blocks and reserve the editor toolbar area. Scale sample proxies when needed without changing saved HUD sizes or anchors.
 - Preserve toolbar controls and sample descendants during interface masking. Keep the composition stable during dragging and convert scaled drag offsets before saving a deliberate move.
+- Suppress the real boss renderer while arranging samples, reserve combat-text drag areas, and route individual tests by stable frame names rather than outdated card indexes. Localize the sample spell, guardian-state and health/rate captions.
 - Focused coverage: all sample types, boss text ownership, masking descendants, five viewport sizes, grouped samples, drag persistence and cancellation. Native client recipe pending. Stable .36 remains published.
 
 # 0.1.0-reborn.36 — HUD editor and internationalization
