@@ -6,6 +6,7 @@ local S=FieldKitRebornStats
 -- through the public getter; missing values are not zero or fixed game limits.
 function S.CapLines(key)
  local out={}
+ if key=="cd" then key="haste" end
  if FieldKit.rebornLegacyFixture or type(AZS_GetStatCaps)~="function" then return out end
  local ok,caps=pcall(AZS_GetStatCaps)
  if not ok or type(caps)~="table" then return out end

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.37-dev",
+  "version": "0.1.0-reborn.37",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -16,26 +16,26 @@
   "inGameTest": false,
   "partySyncTwoClientsSimulated": true,
   "partySyncLiveTransportConfirmed": false,
-  "approval": "development candidate; not accepted for publication",
+  "approval": "maintainer accepted for publication; not independently certified",
   "publication": {
-    "version": "0.1.0-reborn.37-dev",
-    "maintainerAcceptedForPublication": false,
-    "maintainerAcceptanceDate": null,
+    "version": "0.1.0-reborn.37",
+    "maintainerAcceptedForPublication": true,
+    "maintainerAcceptanceDate": "2026-11-17",
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
     "inGameTestByAgent": true,
-    "githubPrerelease": true,
+    "githubPrerelease": false,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
     "maintainerInGameTestingReported": false,
-    "inGameTestScope": "Agent inspected the earlier .37-dev preview revision in French with Profile 1 / Elwynn Complete at 1920x1080: single sample text, separated cards/toolbar/combat handles, Done, themed HUD restoration and individual boss/health routing passed; game remained paused at 0:16. The subsequent 0.6.9 encounter/cap/large-meter integration and hiding inapplicable health actions have offline coverage; native reload inspection is pending. Other native theme/language/drag/Endless cases are not claimed. Maintainer authorized .37 publication conditional on validation on 2026-11-17; publication remains pending."
+    "inGameTestScope": "Maintainer authorized publication after validation on 2026-11-17. Agent inspected .37-dev on verified client 0.6.9 in French, Profile 1 / Elwynn Complete at 1920x1080: single preview text, separate cards/toolbar/combat handles, Done, themed HUD restoration, correct boss/health inspectors, hidden inapplicable health actions, native campaign 0% and critical-cap 100% tooltip. Game stayed paused at 0:02. Native inspection found the haste tooltip alias defect; its one-line fix passes the full-reader regression but has no subsequent live observation. Encounter/clock/cap/large-meter and recent/checkpoint cases execute installed public API sources in isolated fixtures; live Endless, co-op transport and exhaustive native themes/languages are not claimed."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 12,
-      "sha256": "5448ea4984fea596207929f0d40a2a78501c7441b934b785159fb25dd959c9be"
+      "sha256": "8a4812237c22690002d85ee717541f8028be773a3617cda8af67c56684bcb437"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -210,7 +210,7 @@
     "RebornStats.lua": {
       "maxUpvalues": 2,
       "functions": 5,
-      "sha256": "7d78cd6588ec7451afdc050e827bf1b9f8825aeb9886eb030fbc326add215b9b"
+      "sha256": "f69733d3c2ee640154cad3dd158ec42fbd9482f3f0e6e65f9f12cdbaeeea98a4"
     },
     "Reborn065.lua": {
       "maxUpvalues": 1,

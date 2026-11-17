@@ -3,7 +3,7 @@
   "liveGameValidation": false,
   "runtimeModules": 72,
   "runtimeSHA256": {
-    "Runtime.lua": "5448ea4984fea596207929f0d40a2a78501c7441b934b785159fb25dd959c9be",
+    "Runtime.lua": "8a4812237c22690002d85ee717541f8028be773a3617cda8af67c56684bcb437",
     "RebornCreatures.lua": "2d324f0f716fa7cf85ef1ee7edcf29cd1a3e46a7c88145ac09105e4672ada2d3",
     "Reborn.lua": "19ba39d0f08a869040e1889c0fdf68a6bff77873afeb8faaac4e9553966ffba4",
     "RebornPresentation.lua": "400ac053908c69766c70be49bb6274e8075027d3f1828f699d999a116cf2fa66",
@@ -38,7 +38,7 @@
     "Portraits.lua": "c1451d1b391c9ac1051cde264f17e970fa2dd0261e6c9884e09e959bdf39f220",
     "Settings.lua": "23e840592514422ac9ba8a29fd88bcf93ffa6f6e9a43624bbcf6a76fdfd34951",
     "GameCompatibility.lua": "5c9e4fb8e2bbabfad6e9c0fc805bfb521f1271390f3f15fb6b34bf4833df499c",
-    "RebornStats.lua": "7d78cd6588ec7451afdc050e827bf1b9f8825aeb9886eb030fbc326add215b9b",
+    "RebornStats.lua": "f69733d3c2ee640154cad3dd158ec42fbd9482f3f0e6e65f9f12cdbaeeea98a4",
     "Reborn065.lua": "46770798adf315670d38920bc7d0dde121aab0088da3046f54e997806e5d7249",
     "RunMode.lua": "74eacdddca682ae2eb998d19de62fbce41ffd29355a8c88af391c8bf47824ec1",
     "NativeData.lua": "4ffb6b8b3c3ff0366a27ac007ad0d897828018808699f015f3bed386d2fd8dee",
@@ -1770,7 +1770,7 @@
         },
         {
           "file": "RebornStats.lua",
-          "line": 38
+          "line": 39
         },
         {
           "file": "Reborn065.lua",
@@ -1944,7 +1944,7 @@
         },
         {
           "file": "RebornStats.lua",
-          "line": 38
+          "line": 39
         },
         {
           "file": "RunMode.lua",
@@ -2214,11 +2214,11 @@
         },
         {
           "file": "RebornStats.lua",
-          "line": 9
+          "line": 10
         },
         {
           "file": "RebornStats.lua",
-          "line": 10
+          "line": 11
         }
       ],
       "directCallSites": [],
@@ -3679,7 +3679,7 @@
         },
         {
           "file": "RebornStats.lua",
-          "line": 37
+          "line": 38
         },
         {
           "file": "FieldKit.lua",

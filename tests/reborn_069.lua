@@ -58,6 +58,7 @@ AZS_STATS={};local caps={cdr=75,haste=80,crit=100,red=90,echo=0}
 AZS_GetStatCaps=function() return caps end
 local lines=S.CapLines();assert(#lines==5 and lines[1]=="Maximum · Cooldown: 75%" and lines[5]=="Maximum · Echo: 0%")
 assert(#S.CapLines("haste")==2 and #S.CapLines("crit")==1 and #S.CapLines("hp")==0)
+assert(#S.Lines("haste")==2 and S.Lines("haste")[2]=="Maximum · Haste: 80%","Tooltip key normalization lost caps")
 caps={cdr=67.5};assert(S.CapLines("haste")[1]=="Maximum · Cooldown: 67.5%","Cap reference cached or units incorrect")
 caps={crit=0/0,red=-1};assert(#S.CapLines()==0)
 AZS_GetStatCaps=function() error("not ready") end;assert(#S.CapLines()==0)

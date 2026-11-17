@@ -1,4 +1,4 @@
-# 0.1.0-reborn.37-dev — Preview correction and Reborn 0.6.9 API support (candidate)
+# 0.1.0-reborn.37 — Preview correction and Reborn 0.6.9 API support
 
 - Read the current next-encounter contract: known/unknown/active/none, native time or rift mechanism and stable encounter ordinal. Show the real endless countdown without inventing a boss name, sequence or charge percentage; preserve paused countdowns and reload identities.
 - Share this state across the boss list, reminders, Lairs, themed headers and unthemed progression card. Timed arrival warnings use native seconds; rift warnings retain the native percentage threshold.

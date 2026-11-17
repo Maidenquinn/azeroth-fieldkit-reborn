@@ -1,4 +1,13 @@
-FieldKit Reborn 0.1.0-reborn.37-dev — Preview rendering candidate
+FieldKit Reborn 0.1.0-reborn.37 — Stable package, 17 November 2026
+
+Maintainer authorized publication after validation. Final native inspection on
+verified client 0.6.9: French, Profile 1 / Elwynn Complete, 1920x1080, paused 0:02.
+Clean general previews, Done/HUD restoration, correct individual inspectors,
+hidden inapplicable health actions, native campaign 0% and critical-cap 100%
+tooltip were observed. A haste-tooltip key alias defect was found and fixed;
+the actual tooltip reader regression passes, without an additional live reload.
+No native Endless/co-op/drag certification is claimed. The cases below remain
+useful player checks; they do not imply a new approval requirement.
 
 Reborn 0.6.9 API additions: check the shared Statistics tooltip for native caps.
 During Endless, next-boss countdown/number must agree across the header, boss
@@ -7,14 +16,14 @@ anonymous until spawn; an active boss shows its native name/In combat. Pause
 must freeze the timer. A timer must never produce a percentage. After reload,
 the next synced packet must retain the same native encounter number. Missing caps
 and unavailable meter capabilities must remain absent rather than invented.
-The new API cases pass isolated/native-source fixtures; live inspection pending.
+The new API cases pass isolated/native-source fixtures; native scope is above.
 
 Check Previews and individual Test display with/without Elwynn, in English/French
 and a CJK language. Each sample row must appear once, boss labels must not overlap
 the health bar/debuffs, and every included example must avoid the toolbar.
 Check Done and Escape restore the live HUD and input. Opening previews alone must
 not change saved positions. Drag a scaled sample and confirm the intended position
-persists; grouped examples must stay together. Maintainer acceptance pending.
+persists; grouped examples must stay together. Untested cases are not claimed.
 
 Agent inspection on 2026-11-17, second .37-dev revision: French, Profile 1,
 Elwynn Complete, 1920x1080. General samples have single text and avoid the toolbar
@@ -23,7 +32,7 @@ individual inspectors restore the themed HUD. Boss and health Test display open
 their matching inspectors. Game clock remained paused at 0:16; no settings or
 saved positions were deliberately changed. Escape/drag/theme-off/CJK were not
 exercised in this native pass. A final follow-up hides the two inapplicable health
-proxy actions, covered offline; reload observation of that small change is pending.
+proxy actions; their absence was confirmed in the final native inspection above.
 
 FieldKit Reborn 0.1.0-reborn.36 — Stable: HUD editor and languages
 
