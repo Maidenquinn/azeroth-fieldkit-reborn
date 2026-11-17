@@ -1,3 +1,12 @@
+FieldKit Reborn 0.1.0-reborn.37-dev — Preview rendering candidate
+
+Check Previews and individual Test display with/without Elwynn, in English/French
+and a CJK language. Each sample row must appear once, boss labels must not overlap
+the health bar/debuffs, and every included example must avoid the toolbar.
+Check Done and Escape restore the live HUD and input. Opening previews alone must
+not change saved positions. Drag a scaled sample and confirm the intended position
+persists; grouped examples must stay together. Native acceptance pending.
+
 FieldKit Reborn 0.1.0-reborn.36 — Stable: HUD editor and languages
 
 Maintainer accepted the candidate after testing and authorized stable release on

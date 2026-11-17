@@ -1,14 +1,14 @@
 {
   "kind": "maintainer static inventory; not certification",
-  "candidate": "0.1.0-reborn.36",
+  "candidate": "0.1.0-reborn.37-dev",
   "runtimeModules": 72,
   "textureCount": 267,
   "forbiddenTokenGatePassed": true,
   "dynamicCombatEventNames": "See CombatText.lua events list; not all registrations are string literals.",
   "files": {
     "Runtime.lua": {
-      "bytes": 5207,
-      "sha256": "f2e49ddceabc177a7d43750678a6ab9c432631c747ae6e868fa0fbd2feb4446a",
+      "bytes": 5211,
+      "sha256": "f41b9b997a1dcff773463afff1b877e7ade4277767c098b542e90d169b98279b",
       "namedFunctions": [
         {
           "name": "FieldKit.IsChoiceScreen",
@@ -2391,8 +2391,8 @@
       ]
     },
     "Preview.lua": {
-      "bytes": 19861,
-      "sha256": "f52b65da2f320704df421c41c4d653e9e7548b00c0bf4cf42a4cbcad88cf49fe",
+      "bytes": 25120,
+      "sha256": "f9739f922c80ee1b61654426d275eeaf0419375abc959c8c842814143cdfd2d0",
       "namedFunctions": [
         {
           "name": "P.Initialize",
@@ -2408,58 +2408,70 @@
         },
         {
           "name": "P.Commit",
-          "line": 44
+          "line": 45
         },
         {
           "name": "P.Drag",
-          "line": 55
+          "line": 57
         },
         {
           "name": "P.HealthFrame",
-          "line": 68
+          "line": 70
         },
         {
           "name": "P.Frame",
-          "line": 87
+          "line": 89
         },
         {
           "name": "P.Rows",
-          "line": 126
+          "line": 135
         },
         {
           "name": "P.Render",
-          "line": 160
+          "line": 170
+        },
+        {
+          "name": "P.Pack",
+          "line": 283
+        },
+        {
+          "name": "free",
+          "line": 285
+        },
+        {
+          "name": "P.Compose",
+          "line": 313
         },
         {
           "name": "P.Stack",
-          "line": 265
+          "line": 367
         },
         {
           "name": "P.Refresh",
-          "line": 279
+          "line": 381
         },
         {
           "name": "P.Stop",
-          "line": 303
+          "line": 412
         },
         {
           "name": "P.Start",
-          "line": 317
+          "line": 426
         },
         {
           "name": "P.Reset",
-          "line": 321
+          "line": 430
         },
         {
           "name": "P.Open",
-          "line": 333
+          "line": 442
         }
       ],
       "literalEvents": []
     },
     "PreviewVisibility.lua": {
-      "bytes": 4238,
-      "sha256": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336",
+      "bytes": 4588,
+      "sha256": "5cb11712178bf776cd1eb0ab7497195bc3f0712d7febb14bcfc508b312797e95",
       "namedFunctions": [
         {
           "name": "V.Keep",
@@ -2467,23 +2479,23 @@
         },
         {
           "name": "V.Restore",
-          "line": 17
+          "line": 25
         },
         {
           "name": "V.Clear",
-          "line": 24
+          "line": 32
         },
         {
           "name": "V.Mask",
-          "line": 34
+          "line": 42
         },
         {
           "name": "V.Update",
-          "line": 66
+          "line": 74
         },
         {
           "name": "V.Toggle",
-          "line": 94
+          "line": 102
         }
       ],
       "literalEvents": []
@@ -7018,20 +7030,20 @@
     }
   },
   "inGameTest": false,
-  "approval": "maintainer accepted for publication; not independently certified",
+  "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.36",
-    "maintainerAcceptedForPublication": true,
-    "maintainerAcceptanceDate": "2026-11-17",
+    "version": "0.1.0-reborn.37-dev",
+    "maintainerAcceptedForPublication": false,
+    "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
     "inGameTestByAgent": true,
-    "githubPrerelease": false,
+    "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
-    "maintainerInGameTestingReported": true,
-    "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. Maintainer accepted .36 and authorized stable publication on 2026-11-17. Internationalization: client 0.6.8 at 1920x1080, live German/Russian/Chinese/Japanese/Korean with Elwynn Complete; Korean without theme and in FieldKit-owned native tooltip. Script glyphs render. Corrected unknown tokens and r2 CJK fonts rechecked after reload in ZH/JA/KO with Elwynn; ZH also without theme. Further treasure-chest/context wording corrected in source. Maintainer supplied publication acceptance; exhaustive native-speaker wording review remains open. Agent visual coverage is limited to the cases described here. French, profile 1, Elwynn Complete and paused state restored."
+    "maintainerInGameTestingReported": false,
+    "inGameTestScope": "Previous .36 native inspection and maintainer acceptance remain historical. The .37-dev preview-rendering correction has focused synthetic coverage; new live-client acceptance is pending. No stable .37 release is authorized."
   },
   "optionalPartyDetailTransport": {
     "defaultEnabled": false,

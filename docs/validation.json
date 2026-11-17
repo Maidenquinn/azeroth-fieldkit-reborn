@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.36",
+  "version": "0.1.0-reborn.37-dev",
   "lua51": true,
   "nativeLua50": null,
   "persistence": true,
@@ -16,26 +16,26 @@
   "inGameTest": false,
   "partySyncTwoClientsSimulated": true,
   "partySyncLiveTransportConfirmed": false,
-  "approval": "maintainer accepted for publication; not independently certified",
+  "approval": "development candidate; not accepted for publication",
   "publication": {
-    "version": "0.1.0-reborn.36",
-    "maintainerAcceptedForPublication": true,
-    "maintainerAcceptanceDate": "2026-11-17",
+    "version": "0.1.0-reborn.37-dev",
+    "maintainerAcceptedForPublication": false,
+    "maintainerAcceptanceDate": null,
     "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
     "packageSpecificGameApprovalConfirmed": false,
     "independentSecurityCertification": false,
     "inGameTestByAgent": true,
-    "githubPrerelease": false,
+    "githubPrerelease": true,
     "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
     "developmentAuthorizedDate": "2026-10-31",
-    "maintainerInGameTestingReported": true,
-    "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. Maintainer accepted .36 and authorized stable publication on 2026-11-17. Internationalization: client 0.6.8 at 1920x1080, live German/Russian/Chinese/Japanese/Korean with Elwynn Complete; Korean without theme and in FieldKit-owned native tooltip. Script glyphs render. Corrected unknown tokens and r2 CJK fonts rechecked after reload in ZH/JA/KO with Elwynn; ZH also without theme. Further treasure-chest/context wording corrected in source. Maintainer supplied publication acceptance; exhaustive native-speaker wording review remains open. Agent visual coverage is limited to the cases described here. French, profile 1, Elwynn Complete and paused state restored."
+    "maintainerInGameTestingReported": false,
+    "inGameTestScope": "Previous .36 native inspection and maintainer acceptance remain historical. The .37-dev preview-rendering correction has focused synthetic coverage; new live-client acceptance is pending. No stable .37 release is authorized."
   },
   "files": {
     "Runtime.lua": {
       "maxUpvalues": 1,
       "functions": 11,
-      "sha256": "f2e49ddceabc177a7d43750678a6ab9c432631c747ae6e868fa0fbd2feb4446a"
+      "sha256": "f41b9b997a1dcff773463afff1b877e7ade4277767c098b542e90d169b98279b"
     },
     "RebornCreatures.lua": {
       "maxUpvalues": 0,
@@ -303,14 +303,14 @@
       "sha256": "ff2c3fada5043c6feedb891c680b62c42afdb5e216ddc8c95edacffb5585edd6"
     },
     "Preview.lua": {
-      "maxUpvalues": 3,
-      "functions": 27,
-      "sha256": "f52b65da2f320704df421c41c4d653e9e7548b00c0bf4cf42a4cbcad88cf49fe"
+      "maxUpvalues": 4,
+      "functions": 30,
+      "sha256": "f9739f922c80ee1b61654426d275eeaf0419375abc959c8c842814143cdfd2d0"
     },
     "PreviewVisibility.lua": {
       "maxUpvalues": 1,
       "functions": 7,
-      "sha256": "50db73fd7b5f7064279e44be04fa3a1ba91d1566a952d8c6ab129258c72f8336"
+      "sha256": "5cb11712178bf776cd1eb0ab7497195bc3f0712d7febb14bcfc508b312797e95"
     },
     "OptionsSchema.lua": {
       "maxUpvalues": 1,

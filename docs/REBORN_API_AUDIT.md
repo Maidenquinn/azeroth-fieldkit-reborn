@@ -98,6 +98,48 @@ conservent la portée de validation propre à chaque version.
 
 ## Sources contrôlées
 
+### Mise à jour du 17 novembre 2026 : retour du développeur et contrats publiés
+
+Le message « this should be implemented now » a été comparé aux changelogs
+0.6.6–0.6.9 fournis par le mainteneur, aux fichiers Lua publics du client
+installé et à la [référence officielle actuelle](https://azreborn.com/guides/addon-api),
+y compris sa version Markdown consultée le 17 novembre. Ce message ne suffit
+pas à attester que les huit demandes sont toutes exposées.
+
+- **Endless : contrat confirmé.** `AZS_RUN.nbs` distingue `known`, `unknown`,
+  `up`, `none`; `nbm` distingue `time` et `rift`; `nbc` conserve le numéro de
+  rencontre après rechargement et changement d’hôte. En endless, le prochain
+  boss reste anonyme avant son apparition et `nb` fournit les secondes restantes
+  à partir de `AZS_RUN_UPDATED`. Aucun pourcentage ne doit être dérivé de cette
+  durée. Le nom et les PV du boss présent viennent d’`AZS_UNITS`. FieldKit .36
+  ne consomme pas encore ce nouveau triplet : c’est une adaptation à réaliser,
+  en conservant un repli sur les anciens clients et les états indisponibles.
+- **Plafonds de statistiques : getter confirmé.** `AZS_GetStatCaps()` fournit
+  `cdr`, `crit`, `red`, `echo`, `haste`, en pourcentage entier. La table est
+  initialement vide et dépend du personnage. FieldKit .36 ne l’utilise pas encore.
+- **Cristaux au sol : non confirmé.** La liste publiée et le code installé
+  d’`AZS_GetWorldAnchors` ne contiennent pas de catégorie de cristal de faille.
+  La correction d’emplacement des cristaux annoncée dans le changelog ne prouve
+  pas leur exposition aux addons. Aucun marqueur ne doit être simulé à partir
+  du texte d’une notification.
+- **Améliorations structurées, contrôles et télégraphes : non confirmés.** Les
+  descriptions de sorts, debuffs et notifications existants ne constituent pas
+  les getters structurés demandés. La documentation interdit de révéler à
+  l’avance les capacités et phases d’un boss qui ne sont pas montrées au joueur.
+- **Compteurs : limites toujours présentes dans le client installé.** Les soins
+  sont effectués, pas reçus ; les soins de rencontre ne sont pas retenus ; les
+  lignes sont encore classées `non_proc`. Le changelog sur les très grands
+  totaux concerne leur capacité numérique, pas ces fonctionnalités.
+- **Mort : getter public supplémentaire non confirmé.** La documentation
+  mentionne la synchronisation de la ligne `AZSDEATH`; cela ne constitue pas un
+  nouveau contrat de résumé détaillé indépendant des tables internes.
+
+Ces constats décrivent les contrats trouvés, pas l’absence définitive d’une
+implémentation dans une autre version du jeu. Les nouvelles fonctionnalités
+doivent être activées à partir de champs/capacités réellement présents, avec
+tests de rechargement et de données manquantes. Aucun fichier du client n’a été
+modifié pour ce relevé.
+
 Client installé **0.6.3**, 52 modules FieldKit et 407 fichiers Lua publics du
 client. Les huit guides officiels ont été relus, dont
 [l’API](https://azreborn.com/guides/addon-api) et

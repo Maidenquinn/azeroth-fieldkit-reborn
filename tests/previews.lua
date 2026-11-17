@@ -11,16 +11,25 @@ SendAddonMessage=function() writes=writes+1 end
 AZS_SetOnTopOfScreens=function() writes=writes+1 end
 for i=1,table.getn(P.names) do
  P.Open(i);assert(P.mode=="inspect" and P.frames[i]:IsShown())
+ if P.frames[i].sampleLines then
+  for _,row in ipairs(P.frames[i].rows) do assert(not row:IsShown(),"Preview rendered native rows over sample text") end
+  assert(P.frames[i].sampleLines[1]:IsShown())
+ end
  assert(P.frames[i]~=getglobal(P.names[i]),"Preview reused a live frame")
  assert(not FieldKitRebornDB.meterFrame and not FieldKitRebornDB.partyCards and not FieldKitRebornDB.bossFrame)
 end
 assert(AZS_METER==meter and AZS_TAKEN==taken and FieldKitCoop.party==party and writes==0)
+assert(P.Rows(17)[1][1]=="Player" and P.Rows(17)[2][1]=="Health","My card reused the warning samples")
 P.Open(9);FieldKitRebornDB.partyHealthMode=2;P.Refresh()
 assert(P.frames[9].rows[1].value:GetText()=="55%")
 FieldKitRebornDB.partyHealthMode=3;P.Refresh();assert(P.frames[9].rows[1].value:GetText()=="6705 / 12200 (55%)")
 P.Open(P.playerIndex);FieldKitRebornDB.playerHealthMode=2;P.Refresh();assert(P.frames[P.playerIndex].hp:GetText()=="55%")
 P.Open(P.targetIndex);FieldKitRebornDB.targetHealthMode=3;P.Refresh();assert(P.frames[P.targetIndex].hp:GetText()=="6705 / 12200 (55%)")
 P.Open(P.bossIndex);FieldKitRebornDB.bossHealthMode=2;P.Refresh();assert(P.frames[P.bossIndex].hp:GetText()=="55%")
+assert(not P.frames[P.bossIndex].hp:IsShown() and not P.frames[P.bossIndex].name:IsShown())
+assert(not P.frames[P.bossIndex].previewDetail:IsShown() and P.frames[P.bossIndex].previewHealth:IsShown())
+assert(P.frames[P.bossIndex].previewOverlay:GetFrameLevel()>P.frames[P.bossIndex]:GetFrameLevel())
+assert(P.inspector.place:GetFrameLevel()>P.inspector:GetFrameLevel())
 P.Open(2);FieldKitRebornDB.meterValues=3;P.Refresh()
 assert(P.frames[2].rows[1].meterColumns[1]:GetText()=="42000")
 FieldKitRebornDB.cardStyle=2;FieldKitRebornDB.cardOpacity=18;FieldKitTheme.Refresh()
@@ -96,6 +105,7 @@ U.SetLayoutEditing(true,false)
 assert(FieldKitMeterFrame:GetAlpha()==0 and foreign:GetAlpha()==0)
 assert(not foreign.mouse and not child.mouse)
 assert(P.frames[2]:GetAlpha()==1 and FieldKitUI.dock:GetAlpha()==1)
+assert(V.Keep(U.done) and V.Keep(P.frames[2].rows[1]),"Editor descendants must remain visible and interactive")
 assert(foreign:IsShown() and events==0,"Isolation invoked foreign Hide callbacks")
 click(U.otherUI)
 assert(not V.hideOthers and foreign:GetAlpha()==.37 and foreign.mouse and child.mouse)
@@ -113,3 +123,34 @@ U.dock:Hide();U.dock:GetScript("OnHide")()
 assert(foreign:GetAlpha()==0 and next(V.masked)==nil)
 UIParent.GetChildren=children
 print("Preview isolation: live HUD masking, other-UI toggle, input and exact restoration passed")
+
+-- Reproduce the screenshot's unpositioned centre cards at several screen sizes.
+local function separated(a,b)
+ return a.x+a.w<=b.x or b.x+b.w<=a.x or a.y+a.h<=b.y or b.y+b.h<=a.y
+end
+for _,viewport in ipairs({{800,600},{1280,720},{1365,768},{1920,1080},{2560,1080}}) do
+ local w,h=viewport[1],viewport[2]
+ local reserved={x=(w-560)/2,y=12,w=560,h=172}
+ local items={}
+ for i=1,15 do table.insert(items,{x=w/2-180,y=h/2-50,w=i==1 and 420 or 360,h=i==2 and 190 or 100}) end
+ local packed,scale
+ for step=0,15 do scale=1-step*.05;packed=P.Pack(items,w,h,reserved,scale);if packed then break end end
+ assert(packed and table.getn(packed)==15,"All samples must fit "..w.."x"..h)
+ for i,r in ipairs(packed) do
+  assert(r.x>=0 and r.y>=0 and r.x+r.w<=w and r.y+r.h<=h)
+  assert(separated(r,reserved),"Preview overlaps toolbar")
+  for j=1,i-1 do assert(separated(r,packed[j]),"Preview samples overlap") end
+ end
+end
+-- Merely arranging examples must not rewrite saved anchors; a deliberate drag
+-- from a scaled example commits screen-equivalent coordinates once.
+P.Open(2);FieldKitRebornDB.linkLeftCards=false
+local preview=P.frames[2];P.mode="place";preview.fieldkitCompositionScale=.5
+preview:SetPoint("TOPLEFT",UIParent,"TOPLEFT",200,-160)
+preview.moving=true;P.Refresh()
+assert(preview.fieldkitCompositionScale==.5,"Refreshing during a drag reset preview scale")
+preview.moving=nil
+P.Commit(preview,FieldKitMeterFrame)
+assert(FieldKitRebornDB.frameAnchors.FieldKitMeterFrame[3]==100 and FieldKitRebornDB.frameAnchors.FieldKitMeterFrame[4]==-80)
+P.Stop()
+print("Preview rendering: single text owner, boss overlay isolation, toolbar descendants and five-viewport collision packing passed")

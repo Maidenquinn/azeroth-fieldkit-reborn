@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.36",
-  "maintainerAcceptedForPublication": true,
-  "maintainerAcceptanceDate": "2026-11-17",
+  "version": "0.1.0-reborn.37-dev",
+  "maintainerAcceptedForPublication": false,
+  "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
   "inGameTestByAgent": true,
-  "githubPrerelease": false,
+  "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
-  "maintainerInGameTestingReported": true,
-  "inGameTestScope": "Agent native inspection on client 0.6.8 at 1920x1080: grid and toolbar visible in French without theme and English with Elwynn; spacing control and Done work; existing .35 profile switching repaired and confirmed. Synthetic four-viewport/six-layout snap, persistence and cache checks pass. Actual mouse drag snapping and ultrawide minimap visual acceptance remain pending. Maintainer accepted .36 and authorized stable publication on 2026-11-17. Internationalization: client 0.6.8 at 1920x1080, live German/Russian/Chinese/Japanese/Korean with Elwynn Complete; Korean without theme and in FieldKit-owned native tooltip. Script glyphs render. Corrected unknown tokens and r2 CJK fonts rechecked after reload in ZH/JA/KO with Elwynn; ZH also without theme. Further treasure-chest/context wording corrected in source. Maintainer supplied publication acceptance; exhaustive native-speaker wording review remains open. Agent visual coverage is limited to the cases described here. French, profile 1, Elwynn Complete and paused state restored."
+  "maintainerInGameTestingReported": false,
+  "inGameTestScope": "Previous .36 native inspection and maintainer acceptance remain historical. The .37-dev preview-rendering correction has focused synthetic coverage; new live-client acceptance is pending. No stable .37 release is authorized."
 }

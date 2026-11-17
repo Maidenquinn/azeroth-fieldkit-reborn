@@ -1,3 +1,11 @@
+# 0.1.0-reborn.37-dev — Preview rendering correction (candidate)
+
+- Paint each sample row once; hide legacy row widgets and duplicate boss labels.
+- Keep preview text on the selected script-safe fonts and contain boss health text above the debuff strip.
+- Resolve collisions between included preview blocks and reserve the editor toolbar area. Scale sample proxies when needed without changing saved HUD sizes or anchors.
+- Preserve toolbar controls and sample descendants during interface masking. Keep the composition stable during dragging and convert scaled drag offsets before saving a deliberate move.
+- Focused coverage: all sample types, boss text ownership, masking descendants, five viewport sizes, grouped samples, drag persistence and cancellation. Native client recipe pending. Stable .36 remains published.
+
 # 0.1.0-reborn.36 — HUD editor and internationalization
 
 - Offer Automatic plus English, Polish, Czech, German, Brazilian Portuguese, Spanish, French, Romanian, Turkish, Russian, Ukrainian, Simplified Chinese, Japanese and Korean in Preferences. Keep existing manual EN/FR choices; new installations follow the game.
