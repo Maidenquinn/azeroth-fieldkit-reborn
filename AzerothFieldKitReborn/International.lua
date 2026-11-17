@@ -35,9 +35,11 @@ function T.Selected()
 end
 -- Bundled OFL faces cover CJK plus Latin/Cyrillic in mixed addon/game text.
 -- Menus use each language's own face even before it has been selected.
-T.scriptFonts={zh="Interface\\AddOns\\AzerothFieldKitReborn\\media\\FieldKitSans-zh.ttf",
- ja="Interface\\AddOns\\AzerothFieldKitReborn\\media\\FieldKitSans-ja.ttf",
- ko="Interface\\AddOns\\AzerothFieldKitReborn\\media\\FieldKitSans-ko.ttf"}
+-- Revised glyph resources use a new path so an already-open client cannot reuse
+-- a cached font atlas that predates the corrected translations after /reload.
+T.scriptFonts={zh="Interface\\AddOns\\AzerothFieldKitReborn\\media\\FieldKitSans-zh-r2.ttf",
+ ja="Interface\\AddOns\\AzerothFieldKitReborn\\media\\FieldKitSans-ja-r2.ttf",
+ ko="Interface\\AddOns\\AzerothFieldKitReborn\\media\\FieldKitSans-ko-r2.ttf"}
 function T.FontPath(path,code)
  if not code then
   code=FieldKit_Language()

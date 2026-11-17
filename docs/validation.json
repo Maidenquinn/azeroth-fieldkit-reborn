@@ -110,67 +110,67 @@
     "Locale_pl.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "ac3744dec2a1523d1a1b08147270b54ce69c42678fc6ba66ff3079cb73a078da"
+      "sha256": "d714bf1114fc6dac68045933205cbbf865e65d8f0ba306bacea2ddae58c3cd40"
     },
     "Locale_cs.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "e0043ca00582877ef20140ba5be85685d8fe3057f9c69ef48b4eb8eb3a3d8f42"
+      "sha256": "7b8a8c7db33d8e669d8c27a01a5abdeb4560ea5cae67f9003742d4c72a0577ca"
     },
     "Locale_de.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "fc453523edcc7a4dfdc8ec34a378f1057e8437bb3e6ad6c4e20467c98bceca74"
+      "sha256": "11d8678ff1c5e3ae9a083ca60b37c773341ffe2feb6695dfdc0197fab316f0a4"
     },
     "Locale_pt.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "9c568e02103203d04e4ebda67ee918f56ece1221d463898aa9e6d4eed51198e8"
+      "sha256": "0c4d7c2034d6003557b625c9e58a85b3d3d0a83e5b3f93197ec51fe585c8331e"
     },
     "Locale_es.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "6cc381eeafdcced72fae490b918d347d4ec76c1910e6ffa9f3c32cef269fda11"
+      "sha256": "66be8a4de86efe9db8c45eae22a4b841f71892775664b354a5aa1d518d9b07bf"
     },
     "Locale_ro.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "a0070d575ac0f2c611628dd6e5078ef53b89d7d006cd88cd3ed2ebd37e60b2c4"
+      "sha256": "731b4cade16c5703f7970fe115eff250406d156bac11c07f9f570a2c607843fb"
     },
     "Locale_tr.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "47b8a3557c9d8003d3559d2451ab4e00023aa7117e1e11963fc727cf7f551d9b"
+      "sha256": "330de5b213ee25a531ad38fd3bfadc4c09ec4810ebb68eeb3907107ec7edeabb"
     },
     "Locale_ru.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "052afbbe0893b31f8c64c9ea9d1fa1fef0d1d8cf3ca2d3961f054e8002c8fcba"
+      "sha256": "0000fb9536fa64d8ce6ac465dcdfb48e8796a899941708e6d48fc2f8ae7b5099"
     },
     "Locale_uk.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "8f28566243c34bd8aedb4967eab44fc063054ffb78302c874690ae6148e96e4c"
+      "sha256": "8151b67cadf7801c9e89ebd24ec1de88cc89bb0c2f823211135fe96fcee78e09"
     },
     "Locale_zh.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "ee73a978b369f333b5a529ae69dc9be1eae271943a7a55ce00df8dd4568e5dc1"
+      "sha256": "78b7a014651b98e6df620c52b475c675fd6b24acc5a5f26aa706bc35c76f9d29"
     },
     "Locale_ja.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "edc0a1731aa8913522335b29618d434b7d2dc5b6ce95a826dce96d6b2ff0f822"
+      "sha256": "0ead9e3407787fe92282a61e7933a5d43cf51286407e9946d080d437972ab20d"
     },
     "Locale_ko.lua": {
       "maxUpvalues": 0,
       "functions": 1,
-      "sha256": "ecf0be336ca445d6b9c40b540084521176a06f5156e7e83ea99d1ffc2109cd3b"
+      "sha256": "83c7cd7ab426db6dfb53613e4410b0c3bc005b908f344803373bbef223966036"
     },
     "International.lua": {
       "maxUpvalues": 4,
       "functions": 14,
-      "sha256": "05d4b290040044975e2156c3aedeaada66dba0ed36f74c655ae7ed4aa893bbb5"
+      "sha256": "a4632c766e5d68b84b208101e551e983dcba6be6d37204a438878da5ad9496b9"
     },
     "Theme.lua": {
       "maxUpvalues": 1,

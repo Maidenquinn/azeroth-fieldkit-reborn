@@ -759,80 +759,80 @@
       "literalEvents": []
     },
     "Locale_pl.lua": {
-      "bytes": 82884,
-      "sha256": "ac3744dec2a1523d1a1b08147270b54ce69c42678fc6ba66ff3079cb73a078da",
+      "bytes": 82891,
+      "sha256": "d714bf1114fc6dac68045933205cbbf865e65d8f0ba306bacea2ddae58c3cd40",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_cs.lua": {
-      "bytes": 82876,
-      "sha256": "e0043ca00582877ef20140ba5be85685d8fe3057f9c69ef48b4eb8eb3a3d8f42",
+      "bytes": 82878,
+      "sha256": "7b8a8c7db33d8e669d8c27a01a5abdeb4560ea5cae67f9003742d4c72a0577ca",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_de.lua": {
-      "bytes": 84592,
-      "sha256": "fc453523edcc7a4dfdc8ec34a378f1057e8437bb3e6ad6c4e20467c98bceca74",
+      "bytes": 84614,
+      "sha256": "11d8678ff1c5e3ae9a083ca60b37c773341ffe2feb6695dfdc0197fab316f0a4",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_pt.lua": {
-      "bytes": 83679,
-      "sha256": "9c568e02103203d04e4ebda67ee918f56ece1221d463898aa9e6d4eed51198e8",
+      "bytes": 83707,
+      "sha256": "0c4d7c2034d6003557b625c9e58a85b3d3d0a83e5b3f93197ec51fe585c8331e",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_es.lua": {
-      "bytes": 85930,
-      "sha256": "6cc381eeafdcced72fae490b918d347d4ec76c1910e6ffa9f3c32cef269fda11",
+      "bytes": 85920,
+      "sha256": "66be8a4de86efe9db8c45eae22a4b841f71892775664b354a5aa1d518d9b07bf",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ro.lua": {
-      "bytes": 84672,
-      "sha256": "a0070d575ac0f2c611628dd6e5078ef53b89d7d006cd88cd3ed2ebd37e60b2c4",
+      "bytes": 84699,
+      "sha256": "731b4cade16c5703f7970fe115eff250406d156bac11c07f9f570a2c607843fb",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_tr.lua": {
-      "bytes": 83316,
-      "sha256": "47b8a3557c9d8003d3559d2451ab4e00023aa7117e1e11963fc727cf7f551d9b",
+      "bytes": 83322,
+      "sha256": "330de5b213ee25a531ad38fd3bfadc4c09ec4810ebb68eeb3907107ec7edeabb",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ru.lua": {
-      "bytes": 114190,
-      "sha256": "052afbbe0893b31f8c64c9ea9d1fa1fef0d1d8cf3ca2d3961f054e8002c8fcba",
+      "bytes": 114264,
+      "sha256": "0000fb9536fa64d8ce6ac465dcdfb48e8796a899941708e6d48fc2f8ae7b5099",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_uk.lua": {
-      "bytes": 112502,
-      "sha256": "8f28566243c34bd8aedb4967eab44fc063054ffb78302c874690ae6148e96e4c",
+      "bytes": 112614,
+      "sha256": "8151b67cadf7801c9e89ebd24ec1de88cc89bb0c2f823211135fe96fcee78e09",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_zh.lua": {
-      "bytes": 73436,
-      "sha256": "ee73a978b369f333b5a529ae69dc9be1eae271943a7a55ce00df8dd4568e5dc1",
+      "bytes": 73942,
+      "sha256": "78b7a014651b98e6df620c52b475c675fd6b24acc5a5f26aa706bc35c76f9d29",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ja.lua": {
-      "bytes": 90398,
-      "sha256": "edc0a1731aa8913522335b29618d434b7d2dc5b6ce95a826dce96d6b2ff0f822",
+      "bytes": 90474,
+      "sha256": "0ead9e3407787fe92282a61e7933a5d43cf51286407e9946d080d437972ab20d",
       "namedFunctions": [],
       "literalEvents": []
     },
     "Locale_ko.lua": {
-      "bytes": 87068,
-      "sha256": "ecf0be336ca445d6b9c40b540084521176a06f5156e7e83ea99d1ffc2109cd3b",
+      "bytes": 87149,
+      "sha256": "83c7cd7ab426db6dfb53613e4410b0c3bc005b908f344803373bbef223966036",
       "namedFunctions": [],
       "literalEvents": []
     },
     "International.lua": {
-      "bytes": 6877,
-      "sha256": "05d4b290040044975e2156c3aedeaada66dba0ed36f74c655ae7ed4aa893bbb5",
+      "bytes": 7046,
+      "sha256": "a4632c766e5d68b84b208101e551e983dcba6be6d37204a438878da5ad9496b9",
       "namedFunctions": [
         {
           "name": "T.Valid",
@@ -848,35 +848,35 @@
         },
         {
           "name": "T.FontPath",
-          "line": 41
+          "line": 43
         },
         {
           "name": "T.ApplyFont",
-          "line": 58
+          "line": 60
         },
         {
           "name": "T.RefreshFonts",
-          "line": 73
+          "line": 75
         },
         {
           "name": "T.RestoreTooltipFonts",
-          "line": 79
+          "line": 81
         },
         {
           "name": "T.ShowTooltip",
-          "line": 87
+          "line": 89
         },
         {
           "name": "T.HideTooltip",
-          "line": 117
+          "line": 119
         },
         {
           "name": "FieldKit_CreateLanguageOption",
-          "line": 122
+          "line": 124
         },
         {
           "name": "Refresh",
-          "line": 130
+          "line": 132
         }
       ],
       "literalEvents": []
@@ -6991,21 +6991,6 @@
       "bytes": 4301,
       "source": "data/locale-fonts.json; OFL Noto derivatives"
     },
-    "media/FieldKitSans-zh.ttf": {
-      "sha256": "92774eb218eddb2c18d6f377bc469d9bbf3617a70eeb55c962271de651d6b517",
-      "bytes": 1395672,
-      "source": "data/locale-fonts.json; OFL Noto derivatives"
-    },
-    "media/FieldKitSans-ja.ttf": {
-      "sha256": "e26365f52fbe40577ddd879b05dd24d50db09d44841c8b325abf317d9a710dd5",
-      "bytes": 1387884,
-      "source": "data/locale-fonts.json; OFL Noto derivatives"
-    },
-    "media/FieldKitSans-ko.ttf": {
-      "sha256": "b460d166e29da75f59132c06147a1f4eda37e8e4863f97834adde14774e72ca9",
-      "bytes": 1391588,
-      "source": "data/locale-fonts.json; OFL Noto derivatives"
-    },
     "media/FieldKitLatin.ttf": {
       "sha256": "fb7dc00430a275d2a3c54d7bc6365188576043842b164b66669c8478e71bd960",
       "bytes": 564976,
@@ -7014,6 +6999,21 @@
     "media/FieldKitSerif.ttf": {
       "sha256": "ec1a526935d52e8a58db4bc74beeb73462c8cdecf3d5018885cffde1f38a6b9a",
       "bytes": 611472,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-zh-r2.ttf": {
+      "sha256": "10eede28f6ce5ac1e01551606068cf69c987b228cc894c73a32e6b1d58a6dc8a",
+      "bytes": 1396148,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-ja-r2.ttf": {
+      "sha256": "e1250d748435507056c4aba2f90632a8b1c01041a74a1e2661aefbb871e7f16f",
+      "bytes": 1388400,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-ko-r2.ttf": {
+      "sha256": "417a7ca0e3a989d9b2d277c5393982a6bd69420acbc4d6842fb8847064195c79",
+      "bytes": 1392104,
       "source": "data/locale-fonts.json; OFL Noto derivatives"
     }
   },

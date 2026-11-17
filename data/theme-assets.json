@@ -876,21 +876,6 @@
       "bytes": 4301,
       "source": "data/locale-fonts.json; OFL Noto derivatives"
     },
-    "media/FieldKitSans-zh.ttf": {
-      "sha256": "92774eb218eddb2c18d6f377bc469d9bbf3617a70eeb55c962271de651d6b517",
-      "bytes": 1395672,
-      "source": "data/locale-fonts.json; OFL Noto derivatives"
-    },
-    "media/FieldKitSans-ja.ttf": {
-      "sha256": "e26365f52fbe40577ddd879b05dd24d50db09d44841c8b325abf317d9a710dd5",
-      "bytes": 1387884,
-      "source": "data/locale-fonts.json; OFL Noto derivatives"
-    },
-    "media/FieldKitSans-ko.ttf": {
-      "sha256": "b460d166e29da75f59132c06147a1f4eda37e8e4863f97834adde14774e72ca9",
-      "bytes": 1391588,
-      "source": "data/locale-fonts.json; OFL Noto derivatives"
-    },
     "media/FieldKitLatin.ttf": {
       "sha256": "fb7dc00430a275d2a3c54d7bc6365188576043842b164b66669c8478e71bd960",
       "bytes": 564976,
@@ -899,6 +884,21 @@
     "media/FieldKitSerif.ttf": {
       "sha256": "ec1a526935d52e8a58db4bc74beeb73462c8cdecf3d5018885cffde1f38a6b9a",
       "bytes": 611472,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-zh-r2.ttf": {
+      "sha256": "10eede28f6ce5ac1e01551606068cf69c987b228cc894c73a32e6b1d58a6dc8a",
+      "bytes": 1396148,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-ja-r2.ttf": {
+      "sha256": "e1250d748435507056c4aba2f90632a8b1c01041a74a1e2661aefbb871e7f16f",
+      "bytes": 1388400,
+      "source": "data/locale-fonts.json; OFL Noto derivatives"
+    },
+    "media/FieldKitSans-ko-r2.ttf": {
+      "sha256": "417a7ca0e3a989d9b2d277c5393982a6bd69420acbc4d6842fb8847064195c79",
+      "bytes": 1392104,
       "source": "data/locale-fonts.json; OFL Noto derivatives"
     }
   }

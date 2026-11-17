@@ -49,6 +49,16 @@ profile/reload persistence and native label ownership. The optional --game
 test_reborn.py check executes the installed public translation catalogs in
 isolated Lua states and does not modify the client.
 
+The compiler and runtime catalog audit also reject translation-model unknown
+tokens (U+2047, U+FFFD and `<unk>`). Native inspection on client 0.6.8 at
+1920x1080 exercised German, Russian and all three CJK alphabets with Elwynn
+Complete, plus Korean without a theme and in a FieldKit-owned native tooltip.
+The inspection found malformed Chinese text and several terminology errors;
+these were corrected in the source catalogs and the CJK glyph subsets rebuilt.
+Revised font resource names avoid reusing the earlier client font atlas after
+installing the corrected candidate. The player's French preference, profile 1,
+Elwynn Complete and paused game were restored after this inspection.
+
 In-game acceptance still checks layout, clipping and readability at the player's
 resolution, with themes off and Elwynn/Naxx on. A font diagnostic rendered by
 Pillow and synthetic geometry checks do not replace that client recipe.

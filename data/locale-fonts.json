@@ -25,21 +25,22 @@
     "AzerothSans.ttf": "eabcbfd9d8f91780eabcf59f4628d00cf629dcfb3f20c7fd4c94f163fbcd0fe0",
     "NotoSerif-Regular.ttf": "c8f669ceb2c9c60ccf55198b305e08a997ffca79a38cc7eeb551e643cbe66505"
   },
+  "fontToolsVersion": "4.68.0",
   "derivatives": {
     "zh": {
-      "file": "FieldKitSans-zh.ttf",
-      "sha256": "92774eb218eddb2c18d6f377bc469d9bbf3617a70eeb55c962271de651d6b517",
-      "glyphs": 6198
+      "file": "FieldKitSans-zh-r2.ttf",
+      "sha256": "10eede28f6ce5ac1e01551606068cf69c987b228cc894c73a32e6b1d58a6dc8a",
+      "glyphs": 6197
     },
     "ja": {
-      "file": "FieldKitSans-ja.ttf",
-      "sha256": "e26365f52fbe40577ddd879b05dd24d50db09d44841c8b325abf317d9a710dd5",
-      "glyphs": 6198
+      "file": "FieldKitSans-ja-r2.ttf",
+      "sha256": "e1250d748435507056c4aba2f90632a8b1c01041a74a1e2661aefbb871e7f16f",
+      "glyphs": 6197
     },
     "ko": {
-      "file": "FieldKitSans-ko.ttf",
-      "sha256": "b460d166e29da75f59132c06147a1f4eda37e8e4863f97834adde14774e72ca9",
-      "glyphs": 6198
+      "file": "FieldKitSans-ko-r2.ttf",
+      "sha256": "417a7ca0e3a989d9b2d277c5393982a6bd69420acbc4d6842fb8847064195c79",
+      "glyphs": 6197
     },
     "AzerothSans.ttf": {
       "file": "FieldKitLatin.ttf",
@@ -53,6 +54,5 @@
     }
   },
   "nativeCatalogSHA256": "92e8871d0b05d7d596a790cfd355f104ecb28e4a4999a154532121d4270b71b4",
-  "method": "Pinned OFL Noto CJK outlines converted to quadratics and added to the bundled Latin face; Latin shaping tables retained. Regional outlines selected per language.",
-  "fontToolsVersion": "4.68.0"
+  "method": "Pinned OFL Noto CJK outlines converted to quadratics and added to the bundled Latin face; Latin shaping tables retained. Regional outlines selected per language."
 }

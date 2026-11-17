@@ -46,6 +46,7 @@ def check(base, lua):
         for key in catalog.fr.keys():
             value=target[key] if target else None
             if not isinstance(value,str) or not value.strip(): issues.append(f'{code}: missing {key}')
+            elif any(marker in value for marker in ('\u2047','\ufffd','<unk>')): issues.append(f'{code}: unknown translation token {key}')
             elif tokens.findall(key)!=tokens.findall(value): issues.append(f'{code}: formats {key}: {value}')
             elif key.count('\n')!=value.count('\n'): issues.append(f'{code}: newlines {key}')
     assert not issues,'Locale completeness/format errors:\n'+'\n'.join(issues)

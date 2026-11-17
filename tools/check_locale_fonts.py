@@ -90,8 +90,8 @@ def main():
             font=TTFont(inputs/'AzerothSans.ttf',recalcTimestamp=False)
             missing=union-set(font.getBestCmap())-set(cjk[code].getBestCmap())
             assert not missing, f'Uncovered glyphs: {sorted(missing)}'
-            add_glyphs(font,cjk[code],union);rename(font,'FieldKit Sans '+code,cjk[code])
-            target=ROOT/f'media/FieldKitSans-{code}.ttf';font.save(target)
+            add_glyphs(font,cjk[code],union);rename(font,'FieldKit Sans '+code+' R2',cjk[code])
+            target=ROOT/f'media/FieldKitSans-{code}-r2.ttf';font.save(target)
             fonts[code]={'file':target.name,'sha256':digest(target),'glyphs':len(font.getBestCmap())}
         # Historical UI arrows/checkmarks also need glyphs in the Latin body/headings.
         for filename in ('AzerothSans.ttf','NotoSerif-Regular.ttf'):
@@ -106,6 +106,8 @@ def main():
                 'method':'Pinned OFL Noto CJK outlines converted to quadratics and added to the bundled Latin face; Latin shaping tables retained. Regional outlines selected per language.'}
         recipe_path.write_text(json.dumps(recipe,indent=2)+'\n',encoding='utf8',newline='\n')
         assets_path=BASE/'data/theme-assets.json';assets=json.loads(assets_path.read_text(encoding='utf8'))
+        for code in ('zh','ja','ko'):
+            assets['files'].pop(f'media/FieldKitSans-{code}.ttf',None)
         for path in [license_path,*[ROOT/'media'/v['file'] for v in fonts.values()]]:
             assets['files'][path.relative_to(ROOT).as_posix()]={'sha256':digest(path),'bytes':path.stat().st_size,
                 'source':'data/locale-fonts.json; OFL Noto derivatives'}
@@ -116,7 +118,7 @@ def main():
     # All CJK faces must cover mixed addon/game scripts and every selectable autonym.
     mixed=set().union(*needed.values())
     for code in needed:
-        names=(f'FieldKitSans-{code}.ttf',) if code in ('zh','ja','ko') else ('FieldKitLatin.ttf','FieldKitSerif.ttf')
+        names=(f'FieldKitSans-{code}-r2.ttf',) if code in ('zh','ja','ko') else ('FieldKitLatin.ttf','FieldKitSerif.ttf')
         for filename in names:
             points=mixed if code in ('zh','ja','ko') else needed[code]
             font=TTFont(ROOT/'media'/filename)
