@@ -5,7 +5,16 @@ and a CJK language. Each sample row must appear once, boss labels must not overl
 the health bar/debuffs, and every included example must avoid the toolbar.
 Check Done and Escape restore the live HUD and input. Opening previews alone must
 not change saved positions. Drag a scaled sample and confirm the intended position
-persists; grouped examples must stay together. Native acceptance pending.
+persists; grouped examples must stay together. Maintainer acceptance pending.
+
+Agent inspection on 2026-11-17, second .37-dev revision: French, Profile 1,
+Elwynn Complete, 1920x1080. General samples have single text and avoid the toolbar
+and combat-text handles; no live boss leaks behind the toolbar. Done and closing
+individual inspectors restore the themed HUD. Boss and health Test display open
+their matching inspectors. Game clock remained paused at 0:16; no settings or
+saved positions were deliberately changed. Escape/drag/theme-off/CJK were not
+exercised in this native pass. A final follow-up hides the two inapplicable health
+proxy actions, covered offline; reload observation of that small change is pending.
 
 FieldKit Reborn 0.1.0-reborn.36 — Stable: HUD editor and languages
 

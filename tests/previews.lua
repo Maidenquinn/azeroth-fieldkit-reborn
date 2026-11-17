@@ -172,6 +172,8 @@ for pageId,expected in pairs({bosses=P.bossIndex,health=P.playerIndex}) do
   for _,entry in ipairs(page.flow) do if entry.frame.previewButton then button=entry.frame.previewButton;break end end
  end end
  assert(button,"Missing preview action for "..pageId);click(button)
- assert(P.selected==expected,"Wrong preview from "..pageId);P.Stop()
+ assert(P.selected==expected,"Wrong preview from "..pageId)
+ assert(P.inspector.place:IsShown()==(pageId~="health"))
+ assert(P.inspector.reset:IsShown()==(pageId~="health"));P.Stop()
 end
 print("Preview rendering: single text owner, boss overlay isolation, toolbar descendants and five-viewport collision packing passed")

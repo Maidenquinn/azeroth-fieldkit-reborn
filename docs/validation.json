@@ -305,7 +305,7 @@
     "Preview.lua": {
       "maxUpvalues": 4,
       "functions": 31,
-      "sha256": "8eaac78ad7e1a7adcb7a5e8aa1baed00cc0d44ca91f3a1c7c643bf89aae9b6dc"
+      "sha256": "b60d6a7a9de976f8647726481f3bdce730cacefb52fc58349a6011ec9ee63442"
     },
     "PreviewVisibility.lua": {
       "maxUpvalues": 1,

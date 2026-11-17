@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Previous .36 native inspection and maintainer acceptance remain historical. The .37-dev preview-rendering correction has focused synthetic coverage; new live-client acceptance is pending. No stable .37 release is authorized."
+  "inGameTestScope": "Agent inspected the second .37-dev revision in French with Profile 1 / Elwynn Complete at 1920x1080: single sample text, separated cards/toolbar/combat handles, Done, themed HUD restoration and individual boss/health routing passed. Game remained paused at 0:16. Follow-up hiding inapplicable health proxy actions is tested offline; native reload observation pending. Other theme/language/drag cases and maintainer acceptance remain pending. No stable .37 release is authorized."
 }

@@ -418,8 +418,11 @@ function P.Refresh()
  FieldKitPreviewVisibility.Update()
  if P.inspector then
   local health=P.selected>=P.playerIndex
-  FieldKit_Text(P.inspector.place,health and "Preview only" or "Place this window")
-  FieldKit_Text(P.inspector.reset,health and "No position to reset" or P.Group(P.selected) and "Ungroup to reset" or "Reset this window position")
+  FieldKit_Text(P.inspector.place,"Place this window")
+  FieldKit_Text(P.inspector.reset,P.Group(P.selected) and "Ungroup to reset" or "Reset this window position")
+  -- Health uses the active player bar; these proxy-only actions do not apply.
+  if health then P.inspector.place:Hide();P.inspector.reset:Hide()
+  else P.inspector.place:Show();P.inspector.reset:Show() end
   if health then P.inspector.place:Disable() else P.inspector.place:Enable() end
   if health or P.Group(P.selected) then P.inspector.reset:Disable() else P.inspector.reset:Enable() end
   if P.inspector.help then
