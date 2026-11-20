@@ -4,6 +4,7 @@ FieldKitMeterLedger={}
 local L=FieldKitMeterLedger
 local BURST=1
 local books,kills,burstWin,byId,byIcon={},{},{},{},{}
+-- Ambiguous aliases are marked false instead of silently taking the last spell.
 local lastBlow={}
 local checkpoint,runKey,cursor,subscribed
 local TAKEN_NAMES={
@@ -61,9 +62,14 @@ end
 
 local function IndexSpell(key,spellId,icon)
  if not key then return end
- if spellId~=nil then byId[tostring(spellId)]=key end
+ if spellId~=nil then
+  local id=tostring(spellId)
+  if byId[id]==nil then byId[id]=key elseif byId[id]~=key then byId[id]=false end
+ end
  if type(icon)~="string" or icon=="" then icon=IconOf(key) end
- if type(icon)=="string" and icon~="" then byIcon[icon]=key end
+ if type(icon)=="string" and icon~="" then
+  if byIcon[icon]==nil then byIcon[icon]=key elseif byIcon[icon]~=key then byIcon[icon]=false end
+ end
 end
 
 local function RememberBlow(victim,spell,spellId,icon)
@@ -155,14 +161,21 @@ function L.KillsFor(name,spellId,icon)
 end
 
 local function ResolveBook(name,spellId,icon)
+ -- Prefer the actual combat-log spell name. Artwork is not a unique identifier:
+ -- Pyroclasm and Pyrotechnic Explosion (and many ranks) can share textures.
+ name=SpellBase(name)
+ if name and books[name] then return books[name],name end
+ -- Never substitute an unrelated spell just because its icon happens to match.
+ -- Alias fallback is allowed only when no explicit spell name was provided,
+ -- or when the caller uses a localized name unavailable in combat logs.
  if spellId~=nil then
-  local key=byId[tostring(spellId)];if key and books[key] then return books[key],key end
+  local key=byId[tostring(spellId)]
+  if key and books[key] then return books[key],key end
  end
  if type(icon)=="string" and icon~="" then
-  local key=byIcon[icon];if key and books[key] then return books[key],key end
+  local key=byIcon[icon]
+  if key and books[key] then return books[key],key end
  end
- name=SpellBase(name);if not name then return nil end
- if books[name] then return books[name],name end
  return nil
 end
 
@@ -468,6 +481,7 @@ local function RowsFromSnap(snap,seconds)
    if amount>=(line._top or 0) then
     line._top=amount;line.name=name;line.sourceKey=row.sourceKey;line.ownerId=row.ownerId
     line.displaySpellId=type(src)=="table" and type(src.spellIds)=="table" and src.spellIds[1] or nil
+     line.spellId=line.displaySpellId
     local ic=SourceIcon(src);if ic then line.icon=ic end
    end
    if proc==1 then line.proc=1 end
@@ -624,7 +638,7 @@ function L.AppendStats(name,spellId,icon,dmg,recent)
  if dmg then GameTooltip:AddLine(FieldKit_L("Total")..": "..string.format("%.0f",math.floor(dmg+.5)),1,1,1) end
  if st then
   GameTooltip:AddLine(string.format(FieldKit_L("Hits: %d   Crits: %d (%.0f%%)"),st.hits,st.crits,st.critPct),.9,.9,.9)
-  if st.maxHit>0 then GameTooltip:AddLine(FieldKit_L("Max hit")..": "..string.format("%.0f",st.maxHit),.85,.85,.85) end
+  if st.maxHit>0 then GameTooltip:AddLine(FieldKit_L("Max hit").." (non-crit): "..string.format("%.0f",st.maxHit),.85,.85,.85) end
   if st.maxCrit>0 then GameTooltip:AddLine(FieldKit_L("Max crit")..": "..string.format("%.0f",st.maxCrit),1,.55,.2) end
   if st.avg>0 then GameTooltip:AddLine(FieldKit_L("Average")..": "..string.format("%.0f",st.avg),.85,.85,.85) end
   if st.burst>0 then GameTooltip:AddLine(FieldKit_L("Burst (1s)")..": "..string.format("%.0f",st.burst),.7,.85,1) end
