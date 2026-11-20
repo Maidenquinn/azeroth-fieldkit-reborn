@@ -110,12 +110,16 @@ local function SyncSubChrome(frame,view)
  return 16
 end
 
--- Meter readability is independent from the generic transparent HUD preference.
+-- A dedicated low-level contrast plate leaves the theme's opacity controls and
+-- skin alphas untouched. Allocate once; no frames/textures per meter refresh.
 local function EnsureMeterContrast(frame)
  if not frame or frame.fieldkitMeterContrast then return end
- frame.fieldkitMeterContrast=true
- frame.fieldkitFill={color={.035,.048,.064},alpha=.96}
- if FieldKitTheme and FieldKitTheme.Update then FieldKitTheme.Update(frame) end
+ local plate=frame:CreateTexture(nil,"BACKGROUND")
+ plate:SetAllPoints(frame)
+ plate:SetTexture("Interface\\Buttons\\WHITE8X8")
+ plate:SetVertexColor(.025,.035,.05)
+ plate:SetAlpha(.94)
+ frame.fieldkitMeterContrast=plate
 end
 
 local function Paint(frame,view,force)
