@@ -110,8 +110,21 @@ local function SyncSubChrome(frame,view)
  return 16
 end
 
+-- A dedicated low-level contrast plate leaves the theme's opacity controls and
+-- skin alphas untouched. Allocate once; no frames/textures per meter refresh.
+local function EnsureMeterContrast(frame)
+ if not frame or frame.fieldkitMeterContrast then return end
+ local plate=frame:CreateTexture(nil,"BACKGROUND")
+ plate:SetAllPoints(frame)
+ plate:SetTexture("Interface\\Buttons\\WHITE8X8")
+ plate:SetVertexColor(.025,.035,.05)
+ plate:SetAlpha(.94)
+ frame.fieldkitMeterContrast=plate
+end
+
 local function Paint(frame,view,force)
  if not frame then return end
+ EnsureMeterContrast(frame)
  local lines,total,rate,known=L.Read(view)
  FieldKit_Text(frame.title,FieldKit_L(L.labels[1]))
  for i=1,table.getn(views) do if views[i]==view then FieldKit_Text(frame.title,FieldKit_L(L.labels[i]));break end end
@@ -165,15 +178,24 @@ local function Paint(frame,view,force)
   if view=="taken" then row:SetStatusBarColor(.75,.1,.1,.55)
   elseif view=="healing" then row:SetStatusBarColor(.2,.7,.2,.55)
   elseif view=="party" then row:SetStatusBarColor(.25,.45,.9,.55)
-  elseif line.proc==1 then row:SetStatusBarColor(.25,.45,.9,.55)
-  else row:SetStatusBarColor(.8,.55,.2,.55) end
+  elseif line.proc==1 then row:SetStatusBarColor(.24,.43,.7,.45)
+  else row:SetStatusBarColor(.56,.39,.16,.45) end
   row.label:SetText(line.displayName or line.name)
+  row.label:SetTextColor(.97,.97,1)
+  row.value:SetTextColor(.97,.97,1)
   if view=="kills" then
    row.value:Show();row.value:SetText(tostring(line.dmg or 0))
    if row.meterColumns then for j=1,3 do row.meterColumns[j]:Hide() end end
    if row.killColumn then row.killColumn:Hide() end
   else
    FieldKit.UpdateMeterColumns(row,line,mode,width,rateLabel~="" and rateLabel or nil)
+   if row.meterColumns then
+    for j=1,table.getn(row.meterColumns) do
+     local col=row.meterColumns[j]
+     if col and col.SetTextColor then col:SetTextColor(.97,.97,1) end
+    end
+   end
+   if row.killColumn and row.killColumn.SetTextColor then row.killColumn:SetTextColor(.97,.97,1) end
   end
   row:Show()
  end

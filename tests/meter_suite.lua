@@ -95,6 +95,22 @@ FieldKitMeterLedger.NoteHit("Consécration (Rang 39)",100,false,3901)
 FieldKitMeterLedger.NoteHit("Consécration (Rang 40)",200,true,4001)
 assert(FieldKitMeterLedger.Stats("Consécration").hits==2 and FieldKitMeterLedger.Stats("Consécration").crits==1,"rank book merge")
 assert(FieldKitMeterLedger.Stats("Consécration (Rank 40)").amount==300,"rank suffix resolve")
+-- Regression: two distinct abilities can share the same icon.
+-- A localized row name may use its stable spellId when the combat-log name differs.
+FieldKitMeterLedger.ClearHits()
+local sharedIcon="Interface\\\\Icons\\\\Spell_Fire_FlameBolt"
+FieldKitMeterLedger.NoteHit("Pyroclasm",1000,false,301,sharedIcon)
+FieldKitMeterLedger.NoteHit("Pyrotechnic Explosion",3500000000,true,302,sharedIcon)
+local pyro=FieldKitMeterLedger.Stats("Pyroclasm",301,sharedIcon)
+local explosion=FieldKitMeterLedger.Stats("Pyrotechnic Explosion",302,sharedIcon)
+assert(pyro and pyro.hits==1 and pyro.maxHit==1000 and pyro.maxCrit==0,"shared icon corrupted Pyroclasm")
+assert(explosion and explosion.hits==1 and explosion.maxCrit==3500000000,"large critical or shared icon corrupted Explosion")
+assert(FieldKitMeterLedger.Stats(nil,nil,sharedIcon)==nil,"ambiguous icon must not resolve")
+assert(FieldKitMeterLedger.Stats("Localized Explosion",302,sharedIcon).maxCrit==3500000000,"localized row joins by spellId")
+-- A noncrit record must stay distinct from a crit record.
+FieldKitMeterLedger.NoteHit("Pyrotechnic Explosion",4200000000,false,302,sharedIcon)
+explosion=FieldKitMeterLedger.Stats("Pyrotechnic Explosion")
+assert(explosion.maxHit==4200000000 and explosion.maxCrit==3500000000,"noncritical and critical maxima kept separately")
 -- Snapshot source rows merge by abilityKey across ranks
 AZS_GetMeterContext=function() return {runId="r1"} end
 AZS_GetMeterSnapshot=function()
