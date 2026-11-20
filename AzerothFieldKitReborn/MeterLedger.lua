@@ -172,7 +172,9 @@ local function ResolveBook(name,spellId,icon)
   local key=byId[tostring(spellId)]
   if key and books[key] then return books[key],key end
  end
- if type(icon)=="string" and icon~="" then
+ -- Icon-only lookups are for tooltips with no textual spell identity.
+ -- A named but unmatched source must not inherit another spell's record.
+ if not name and type(icon)=="string" and icon~="" then
   local key=byIcon[icon]
   if key and books[key] then return books[key],key end
  end
