@@ -7,6 +7,14 @@ local books,kills,burstWin,byId,byIcon={},{},{},{},{}
 -- Ambiguous aliases are marked false instead of silently taking the last spell.
 local lastBlow={}
 local checkpoint,runKey,cursor,subscribed
+-- Hit/crit source of truth (.39): the native combat-text feed (AZS_GetCombatTextEvents)
+-- carries the combat log's `critical` flag for direct AND periodic hits. The 1.12 chat
+-- shim writes periodic lines as "X suffers N ... from your Spell." with no crit form,
+-- so a chat-only ledger can never see a periodic crit (Consecration ticks).
+-- When the feed exists, it alone counts hits; chat lines are a fallback, never both.
+local FEED_PAGES=8
+local feedSeq
+L.feed={batches=0,gaps=0,missed=0,events=0}
 local TAKEN_NAMES={
  ["boss melee"]="Boss melee",["boss spell"]="Boss spells",["elite"]="Elites",
  ["mob melee"]="Monster melee",["mob spell"]="Monster spells",["area"]="Ground effects"}
@@ -49,7 +57,7 @@ end
 local function Book(name)
  name=SpellBase(name);if not name then return nil end
  local b=books[name]
- if not b then b={hits=0,crits=0,amount=0,maxHit=0,maxCrit=0,burst=0};books[name]=b end
+ if not b then b={hits=0,crits=0,amount=0,maxHit=0,maxCrit=0,burst=0,blind=0,maxBlind=0};books[name]=b end
  return b,name
 end
 
@@ -79,8 +87,11 @@ local function RememberBlow(victim,spell,spellId,icon)
  lastBlow[victim]={name=spell,spellId=spellId,icon=icon}
 end
 
+-- The feed cursor survives a book reset: rewinding it to nil would re-read the
+-- last second of already counted hits into the fresh books.
 function L.ClearHits()
- books={};kills={};burstWin={};byId={};byIcon={};lastBlow={};cursor=nil
+ books={};kills={};burstWin={};byId={};byIcon={};lastBlow={}
+ L.feed={batches=0,gaps=0,missed=0,events=0}
 end
 
 function L.Reset()
@@ -126,11 +137,16 @@ function L.Boundary()
  end
 end
 
+-- crit: true / false as reported; nil = the source cannot tell (a chat periodic line).
+-- Unclassified hits are counted but never enter the crit rate or the non-crit record.
 function L.NoteHit(name,amount,crit,spellId,icon)
  amount=Num(amount,0);if not amount or amount<=0 then return end
  local b,key=Book(name);if not b then return end
  b.hits=b.hits+1;b.amount=b.amount+amount
- if crit then
+ if crit==nil then
+  b.blind=(b.blind or 0)+1
+  if amount>(b.maxBlind or 0) then b.maxBlind=amount end
+ elseif crit then
   b.crits=b.crits+1
   if amount>b.maxCrit then b.maxCrit=amount end
  else
@@ -186,10 +202,14 @@ function L.Stats(name,spellId,icon)
  if not b then return nil end
  local hits=b.hits or 0
  local crits=b.crits or 0
+ local blind=b.blind or 0
+ local seen=hits-blind
  return {
   hits=hits,crits=crits,
-  critPct=hits>0 and (100*crits/hits) or 0,
-  maxHit=b.maxHit or 0,maxCrit=b.maxCrit or 0,
+  -- critKnown=false: hits exist but none says whether it crit (not "0% crit").
+  critKnown=seen>0,critObserved=seen,critUnknown=blind,
+  critPct=seen>0 and (100*crits/seen) or 0,
+  maxHit=b.maxHit or 0,maxCrit=b.maxCrit or 0,maxUnclassified=b.maxBlind or 0,
   avg=hits>0 and (b.amount/hits) or 0,
   burst=b.burst or 0,
   amount=b.amount or 0,
@@ -197,29 +217,71 @@ function L.Stats(name,spellId,icon)
  }
 end
 
--- Chat combat-log is the reliable hit/crit source (same as MaxHit / SpellMeter).
--- Combat-text has no kill kind; use it only for last-blow + icons when present.
+function L.FeedAvailable()
+ return type(AZS_GetCombatTextEvents)=="function"
+end
+
+-- Feed hits are already the hero's own (combat log "mine" affiliation). A pet or
+-- summon keeps the chat-era "Owner: Spell" book so its record never merges into
+-- the hero's spell of the same name.
+local function FeedName(e)
+ local name=type(e.abilityName)=="string" and e.abilityName~="" and e.abilityName or "Melee"
+ if name=="Attack" then name="Melee" end
+ local me=type(UnitGUID)=="function" and UnitGUID("player") or nil
+ if me and e.sourceGuid~=nil and e.sourceGuid~=me and type(e.sourceName)=="string" and e.sourceName~="" then
+  name=e.sourceName..": "..name
+ end
+ return name
+end
+
 local function IngestCombatEvent(e,countHits)
  if type(e)~="table" then return end
  if e.kind=="damage" then
-  local name=type(e.abilityName)=="string" and e.abilityName~="" and e.abilityName or "Melee"
-  if countHits then L.NoteHit(name,e.amount,e.critical and true or false,e.spellId,e.icon) end
+  local name=FeedName(e)
+  if countHits then
+   local crit=nil
+   if e.critical==true then crit=true elseif e.critical==false then crit=false end
+   L.NoteHit(name,e.amount,crit,e.spellId,e.icon)
+  end
   if type(e.targetName)=="string" then RememberBlow(e.targetName,name,e.spellId,e.icon) end
  end
 end
 
+-- Reads every page the feed holds (bounded), so a dense AoE second is not cut
+-- at 256 events. Lost events are counted, never estimated or invented.
 function L.PollCombatText(countHits)
- if type(AZS_GetCombatTextEvents)~="function" then return end
- local ok,batch,err=pcall(AZS_GetCombatTextEvents,cursor)
- if not ok then return end
- if not batch and type(err)=="table" and err.code=="STREAM_CHANGED" then
-  cursor=nil;ok,batch=pcall(AZS_GetCombatTextEvents,nil);if not ok or not batch then return end
- end
- if type(batch)~="table" then return end
- cursor=batch.cursor
- local events=batch.events
- if type(events)=="table" then
-  for i=1,math.min(256,table.getn(events)) do IngestCombatEvent(events[i],countHits) end
+ if not L.FeedAvailable() then return end
+ local pages=0
+ while pages<FEED_PAGES do
+  pages=pages+1
+  local ok,batch,err=pcall(AZS_GetCombatTextEvents,cursor)
+  if not ok then return end
+  if not batch and type(err)=="table" and err.code=="STREAM_CHANGED" then
+   cursor=nil;feedSeq=nil
+   ok,batch=pcall(AZS_GetCombatTextEvents,nil);if not ok or not batch then return end
+  end
+  if type(batch)~="table" then return end
+  if countHits then
+   L.feed.batches=L.feed.batches+1
+   if batch.gap then L.feed.gaps=L.feed.gaps+1 end
+   local dropped=tonumber(batch.droppedCount)
+   if dropped and dropped>0 then L.feed.missed=L.feed.missed+dropped end
+  end
+  if batch.cursor~=nil then cursor=batch.cursor end
+  local events=batch.events
+  local n=type(events)=="table" and math.min(256,table.getn(events)) or 0
+  for i=1,n do
+   local e=events[i]
+   local s=type(e)=="table" and tonumber(e.seq) or nil
+   if s then
+    -- A reload/new stream restarts numbering: only a forward jump is a loss.
+    if countHits and feedSeq and s>feedSeq+1 and not batch.droppedCount then L.feed.missed=L.feed.missed+(s-feedSeq-1) end
+    feedSeq=s
+   end
+   if countHits then L.feed.events=L.feed.events+1 end
+   IngestCombatEvent(e,countHits)
+  end
+  if not batch.hasMore or n==0 then return end
  end
 end
 
@@ -280,12 +342,15 @@ function L.ParseChat(msg)
   return
  end
  -- DoT / periodic: "X suffers N ... damage from your Spell" (+ optional Critical).
+ -- Without "(Critical)" the line does not say the tick was NOT a crit: the Reborn
+ -- shim has no periodic crit wording at all, so it is recorded as unclassified.
+ local periState=nil;if periCrit then periState=true end
  _,_,victim,amount,spell=string.find(msg,"^(.+) suffers ([%d,]+) .-damage from your (.+)$")
  if amount and spell then
   amount=string.gsub(amount,",","")
   spell=string.gsub(spell," %(Critical%)$","")
   spell=string.gsub(spell,"%.$","")
-  L.NoteHit(spell,amount,periCrit,nil,IconOf(spell))
+  L.NoteHit(spell,amount,periState,nil,IconOf(spell))
   RememberBlow(victim,spell,nil,IconOf(spell))
   return
  end
@@ -297,7 +362,7 @@ function L.ParseChat(msg)
   local labeled=Attribute(owner,spell)
   if labeled then
    amount=string.gsub(amount,",","")
-   L.NoteHit(labeled,amount,periCrit,nil,IconOf(spell) or IconOf(labeled))
+   L.NoteHit(labeled,amount,periState,nil,IconOf(spell) or IconOf(labeled))
    RememberBlow(victim,labeled,nil,IconOf(spell) or IconOf(labeled))
   end
   return
@@ -514,7 +579,7 @@ local function AttachKillStats(lines)
    local st=not (line.windowSeconds and line.windowSeconds>0) and L.Stats(line.name,line.spellId,icon) or nil
    if st then
     line.kills=st.kills or 0
-    line.hits=st.hits;line.crits=st.crits;line.critPct=st.critPct
+    line.hits=st.hits;line.crits=st.crits;line.critPct=st.critPct;line.critKnown=st.critKnown
     line.maxHit=st.maxHit;line.maxCrit=st.maxCrit;line.avg=st.avg;line.burst=st.burst
    else
     line.kills=line.kills or 0
@@ -639,7 +704,13 @@ function L.AppendStats(name,spellId,icon,dmg,recent)
  GameTooltip:AddLine(" ")
  if dmg then GameTooltip:AddLine(FieldKit_L("Total")..": "..string.format("%.0f",math.floor(dmg+.5)),1,1,1) end
  if st then
-  GameTooltip:AddLine(string.format(FieldKit_L("Hits: %d   Crits: %d (%.0f%%)"),st.hits,st.crits,st.critPct),.9,.9,.9)
+  if st.critKnown==false then
+   -- Hits seen, crit flag never reported: unknown, not 0%.
+   GameTooltip:AddLine(FieldKit_L("Hits")..": "..tostring(st.hits).."   "..FieldKit_L("Crit rate")..": -",.9,.9,.9)
+   if st.maxUnclassified>0 then GameTooltip:AddLine(FieldKit_L("Max hit")..": "..string.format("%.0f",st.maxUnclassified),.85,.85,.85) end
+  else
+   GameTooltip:AddLine(string.format(FieldKit_L("Hits: %d   Crits: %d (%.0f%%)"),st.hits,st.crits,st.critPct),.9,.9,.9)
+  end
   if st.maxHit>0 then GameTooltip:AddLine(FieldKit_L("Max hit").." (non-crit): "..string.format("%.0f",st.maxHit),.85,.85,.85) end
   if st.maxCrit>0 then GameTooltip:AddLine(FieldKit_L("Max crit")..": "..string.format("%.0f",st.maxCrit),1,.55,.2) end
   if st.avg>0 then GameTooltip:AddLine(FieldKit_L("Average")..": "..string.format("%.0f",st.avg),.85,.85,.85) end
@@ -696,8 +767,12 @@ tipHooks:SetScript("OnEvent",function()
  HookTooltipMethod("SetAction");HookTooltipMethod("SetSpell");HookTooltipMethod("SetTalent")
 end)
 
--- Chat combat log always feeds hits/crits/last-blow (MaxHit / SpellMeter path).
--- Hostile death credits the last blow. CT only refreshes last-blow icons (no double hits).
+-- One hit source at a time (no merge, no double count):
+--  * AZS_GetCombatTextEvents present: it counts hits/crits and last blows; chat
+--    damage lines are ignored. A death line first drains the feed (CombatText.lua
+--    sees each hit before Shims.lua writes its chat line), so the kill goes to the
+--    blow that actually landed last.
+--  * Feed absent (legacy clients): the chat lines count, as before.
 local driver=CreateFrame("Frame","FieldKitMeterLedgerDriver")
 local elapsed=0
 driver:RegisterEvent("CHAT_MSG_SPELL_SELF_DAMAGE")
@@ -710,16 +785,17 @@ driver:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH")
 driver:RegisterEvent("CHAT_MSG_COMBAT_HOSTILEPLAYER_DEATH")
 driver:SetScript("OnEvent",function()
  if not FieldKitRebornDB or not FieldKitRebornDB.meterFrame then return end
+ local feed=L.FeedAvailable()
  if event=="CHAT_MSG_COMBAT_HOSTILE_DEATH" or event=="CHAT_MSG_COMBAT_HOSTILEPLAYER_DEATH" then
+  if feed then L.PollCombatText(true) end
   L.ParseDeath(arg1);return
  end
- L.ParseChat(arg1)
+ if not feed then L.ParseChat(arg1) end
 end)
 driver:SetScript("OnUpdate",function()
  if not FieldKitRebornDB or not FieldKitRebornDB.meterFrame then return end
  elapsed=elapsed+(arg1 or 0)
  if elapsed<.1 then return end;elapsed=0
  L.Boundary()
- -- false = do not NoteHit from CT (chat already counted); still updates lastBlow/icons.
- if type(AZS_GetCombatTextEvents)=="function" then L.PollCombatText(false) end
+ if L.FeedAvailable() then L.PollCombatText(true) end
 end)

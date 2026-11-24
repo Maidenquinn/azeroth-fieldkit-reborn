@@ -997,10 +997,10 @@ function R.DamageTip(row)
  end
  if st then
   if st.avg>0 then Add(damage,"Average",string.format("%.0f",st.avg)) end
-  if st.maxHit>0 then Add(damage,"Maximum",string.format("%.0f",st.maxHit)) end
+  if st.maxHit>0 then Add(damage,"Maximum",string.format("%.0f",st.maxHit)) elseif (st.maxUnclassified or 0)>0 then Add(damage,"Maximum",string.format("%.0f",st.maxUnclassified)) end
   if st.burst>0 then Add(damage,"Burst (1s)",string.format("%.0f",st.burst),{.7,.85,1}) end
   if st.crits>0 then Add(crits,"Critical hits",tostring(st.crits),{1,.65,.3}) end
-  if st.hits>0 then Add(crits,"Crit rate",string.format("%.0f%%",st.critPct),{1,.65,.3}) end
+  if st.hits>0 then Add(crits,"Crit rate",st.critKnown==false and "-" or string.format("%.0f%%",st.critPct),{1,.65,.3}) end
   if st.maxCrit>0 then Add(crits,"Max crit",string.format("%.0f",st.maxCrit),{1,.55,.2}) end
   if st.hits>0 then Add(other,"Hits",tostring(st.hits)) end
   if st.kills>0 then Add(other,"Kills",tostring(st.kills),{.9,.75,.4}) end

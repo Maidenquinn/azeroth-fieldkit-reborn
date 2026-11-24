@@ -38,7 +38,7 @@ local function HitCells(line)
   Short(line.burst),
   line.avg and line.avg>0 and string.format("%.0f",line.avg) or "-",
   hits>0 and tostring(hits) or "-",
-  hits>0 and critPct>0 and string.format("%.0f%%",critPct) or (hits>0 and "0%" or "-"),
+  (hits>0 and line.critKnown~=false) and string.format("%.0f%%",critPct) or "-",
  }
 end
 
