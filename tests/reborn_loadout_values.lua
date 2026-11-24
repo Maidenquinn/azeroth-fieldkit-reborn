@@ -48,7 +48,7 @@ assert(string.find(consecrationText,"508825",1,true),"Consecration periodic holy
 assert(string.find(consecrationText,"270 m",1,true) and string.find(consecrationText,"585,8",1,true) and string.find(consecrationText,"1 s",1,true),"Consecration other details lost")
 local prevGear=AZS_GEAR
 AZS_GEAR={{slot="amulet",name="Amulette de l'Inferno : Consécration",icon="INV_Misc_Gem_Ruby_02"}}
-assert(L.Icon("Amulette de l'Inferno")=="Interface\\\\Icons\\\\INV_Misc_Gem_Ruby_02","Equipped legendary amulet meter source lost native icon")
+assert(L.Icon("Amulette de l'Inferno")=="Interface\\Icons\\INV_Misc_Gem_Ruby_02","Equipped legendary amulet meter source lost native icon")
 AZS_GEAR={{slot="amulet",name="Another Amulet",icon="OtherIcon"}}
 assert(L.Icon("Amulette de l'Inferno")==nil,"Missing amulet must not inherit an unrelated icon")
 AZS_GEAR=prevGear
