@@ -141,7 +141,13 @@ function L.SpellEffects(raw,interval)
  local function capture(patterns)
   for _,pattern in ipairs(patterns) do local _,_,v=string.find(text,pattern);if v then return v end end
  end
- local damage=capture({"pour "..number.." dégâts","inflige "..number.." dégâts",number.." damage"})
+ local damagePatterns={"pour "..number.." dégâts","inflige "..number.." dégâts","subit "..number.." dégâts","subissent "..number.." dégâts","subit "..number.." points de dégâts","subissent "..number.." points de dégâts",number.." damage"}
+ -- Native English tips name the school: "takes 508825 Holy damage every 1 sec".
+ -- An explicit school list keeps "30% more damage" debuffs out.
+ for _,school in ipairs({"holy","fire","frost","shadow","nature","arcane","physical","chaos","shadowflame"}) do
+  table.insert(damagePatterns,number.." "..school.." damage")
+ end
+ local damage=capture(damagePatterns)
  local targets=capture({"jusqu'à "..number.." ennemis","up to "..number.." enem", "hits "..number.." enem"})
  local range=capture({"moins de "..number.." m"});local rangeUnit="m"
  if not range then range=capture({"within "..number.." yards","within "..number.." yd"});rangeUnit="yd" end
@@ -245,12 +251,38 @@ function L.EnsureAssetIcons()
  }
  for key,icon in pairs(alias) do L.assetIcons[L.Key(key)]=icon end
 end
+-- Native meter source icons may be unavailable even while the equipped jewelry
+-- packet is fresh. Match the *actual equipped item's* name; do not guess an
+-- amulet icon from the associated spell (legendary heads can be shared).
+function L.EquippedSourceIcon(name)
+ if type(name)~="string" or name=="" or type(AZS_GEAR)~="table" then return nil end
+ local target=L.Key(name)
+ local matched=nil
+ for i=1,math.min(table.getn(AZS_GEAR),32) do
+  local gear=AZS_GEAR[i]
+  if type(gear)=="table" and type(gear.name)=="string" then
+   local candidate=FieldKitReborn.DisplayName(gear.name)
+   local full=L.Key(candidate)
+   -- Source name can omit the ': ability' suffix of a legendary item.
+   local _,_,head=string.find(candidate or "","^(.-):%s+")
+   local equal=target==full or (head and target==L.Key(head))
+   if equal then
+    local icon=FieldKitReborn.Icon(gear.icon)
+    if icon then
+     if matched and matched~=icon then return nil end
+     matched=icon
+    end
+   end
+  end
+ end
+ return matched
+end
 function L.Icon(name)
  if name=="Melee" or name=="Mêlée" then return "Interface\\Icons\\INV_Sword_04" end
  if name=="Lifesteal" or name=="Vol de vie" then return "Interface\\Icons\\Spell_Shadow_LifeDrain02" end
  L.EnsureAssetIcons()
  local key=L.Key(name)
- return L.icons[key] or L.assetIcons[key]
+ return L.icons[key] or L.assetIcons[key] or L.EquippedSourceIcon(name)
 end
 function L.ClearIcon(row)
  if row.fieldkitSpellIcon then row.fieldkitSpellIcon:Hide() end

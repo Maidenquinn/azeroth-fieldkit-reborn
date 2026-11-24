@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.38",
-  "maintainerAcceptedForPublication": true,
+  "version": "0.1.0-reborn.39",
+  "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": "2026-11-20",
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
   "inGameTestByAgent": false,
-  "githubPrerelease": false,
+  "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
-  "maintainerInGameTestingReported": true,
-  "inGameTestScope": "The maintainer personally validated the .38 candidate in-game on 2026-11-20, including per-spell record attribution and contrast/readability of the combat meter. Automated Lua regression, locale, API, audit and packaging checks are required for release. This does not imply agent-run game inspection or game-team certification."
+  "maintainerInGameTestingReported": false,
+  "inGameTestScope": "Paladin meter .39 development candidate: hit/crit books now read the native combat-text feed (periodic crits visible), chat fallback marks unknown crits, FR/EN periodic tooltip values, equipped amulet icons; automated fixtures only. Engine crit rule inferred from observed feed data (docs/PALADIN_CONSECRATION_SOURCE_AUDIT.md), not from engine source. Awaiting maintainer in-game recipe."
 }

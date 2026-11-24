@@ -1,3 +1,12 @@
+# 0.1.0-reborn.39 — Paladin meter recipe candidate (not yet approved)
+
+- Count hits and critical hits from the native combat-text feed (`AZS_GetCombatTextEvents`), which carries the critical flag for periodic damage too. The 1.12 chat lines it replaces have no periodic critical form, so Consecration and other ticking effects always showed 0 crits. Chat lines remain a fallback only when the feed is absent; the two sources are never merged.
+- Read every feed page per update, keep the feed position across meter resets and report lost events instead of estimating them. Kills are credited after draining the feed so the real last blow gets them.
+- Show an unknown crit rate as "-" rather than 0% when the available source cannot say whether hits crit.
+- Spell cards show periodic damage from French "subit / subissent" and English school-named texts ("takes 508825 Holy damage every 1 sec"), using the native number verbatim.
+- Equipped legendary items such as Amulette de l'Inferno take their meter icon from the item actually worn; ambiguous or missing icons stay unknown.
+- Native meter totals are unchanged and remain the only totals. Automated fixtures only; maintainer in-game recipe pending.
+
 # 0.1.0-reborn.37 — Preview correction and Reborn 0.6.9 API support
 
 - Read the current next-encounter contract: known/unknown/active/none, native time or rift mechanism and stable encounter ordinal. Show the real endless countdown without inventing a boss name, sequence or charge percentage; preserve paused countdowns and reload identities.
