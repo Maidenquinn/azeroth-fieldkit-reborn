@@ -41,6 +41,17 @@ assert(string.find(tip,FieldKit_L("Max crit"),1,true),"Native-bar combat statist
 GameTooltip.AddLine=add
 local english=table.concat(L.SpellEffects("Hits up to 9 enemies within 35 yards for 5364 damage each. Every 0.9 sec.",.9)," ")
 assert(string.find(english,"35 yd",1,true) and not string.find(english,"35 m",1,true),"Native range units silently converted")
+-- Consecration's localized periodic damage is "subit" rather than "inflige".
+local consecration=L.SpellEffects("Se centre sur toi : chaque ennemi à moins de 270 m de toi subit 508825 dégâts du Sacré toutes les 1 s pendant 585,8 s.",1)
+local consecrationText=table.concat(consecration," ")
+assert(string.find(consecrationText,"508825",1,true),"Consecration periodic holy damage omitted")
+assert(string.find(consecrationText,"270 m",1,true) and string.find(consecrationText,"585,8",1,true) and string.find(consecrationText,"1 s",1,true),"Consecration other details lost")
+local prevGear=AZS_GEAR
+AZS_GEAR={{slot="amulet",name="Amulette de l'Inferno : Consécration",icon="INV_Misc_Gem_Ruby_02"}}
+assert(L.Icon("Amulette de l'Inferno")=="Interface\\\\Icons\\\\INV_Misc_Gem_Ruby_02","Equipped legendary amulet meter source lost native icon")
+AZS_GEAR={{slot="amulet",name="Another Amulet",icon="OtherIcon"}}
+assert(L.Icon("Amulette de l'Inferno")==nil,"Missing amulet must not inherit an unrelated icon")
+AZS_GEAR=prevGear
 local unknown=L.SpellEffects("Unrecognised translated effect.",.125)
 assert(table.getn(unknown)==1 and string.find(unknown[1],"0.125",1,true),"Public cooldown precision lost")
 C.allowUnfinishedThemes=true
