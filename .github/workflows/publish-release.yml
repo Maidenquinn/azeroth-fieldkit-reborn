@@ -1,0 +1,115 @@
+name: Publish approved FieldKit release
+# Generic replacement of the .38-only workflow. The version comes from
+# data/publication-status.json (tools/release_guard.py); nothing is published
+# unless the maintainer marked that exact version accepted. A version that is
+# not accepted ends this workflow successfully with nothing published.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/publication-status.json'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish, e.g. 0.1.0-reborn.39 (must match publication-status.json)'
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'Maidenquinn/azeroth-fieldkit-reborn'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Confirm one consistent, approved version
+        id: guard
+        env:
+          REQUESTED: ${{ inputs.version }}
+        run: |
+          set +e
+          python tools/release_guard.py --expect "$REQUESTED" > guard.txt
+          code=$?
+          set -e
+          cat guard.txt
+          cat guard.txt >> "$GITHUB_OUTPUT"
+          if [ "$code" -eq 3 ]; then echo "publish=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ "$code" -ne 0 ]; then exit "$code"; fi
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+      - name: Refuse an existing tag or release (immutable assets)
+        if: steps.guard.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.guard.outputs.tag }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; refusing to overwrite immutable assets." >&2; exit 1
+          fi
+          if git ls-remote --exit-code --tags "https://github.com/${GITHUB_REPOSITORY}.git" "refs/tags/$TAG" >/dev/null; then
+            echo "Tag $TAG already exists; refusing to move it." >&2; exit 1
+          fi
+      - if: steps.guard.outputs.publish == 'true'
+        run: python -m pip install -r requirements-dev.txt
+      - name: Full validation
+        if: steps.guard.outputs.publish == 'true'
+        run: |
+          python tools/build_locales.py --check
+          python tests/test_locale_tokens.py
+          python tools/check_locale_fonts.py
+          python tools/audit.py
+          python tools/verify.py
+          python tools/test_reborn.py
+      - name: Build twice and require an identical install package
+        if: steps.guard.outputs.publish == 'true'
+        env:
+          VERSION: ${{ steps.guard.outputs.version }}
+        run: |
+          cp build/validation.json docs/validation.json
+          python tools/package.py
+          (cd dist && sha256sum -c SHA256SUMS.txt)
+          first=$(sha256sum "dist/AzerothFieldKitReborn-$VERSION.zip" | cut -d' ' -f1)
+          mv dist "$RUNNER_TEMP/dist-first"
+          python tools/package.py
+          second=$(sha256sum "dist/AzerothFieldKitReborn-$VERSION.zip" | cut -d' ' -f1)
+          test "$first" = "$second" || { echo "Non-reproducible package: $first != $second" >&2; exit 1; }
+          cmp "$RUNNER_TEMP/dist-first/MANIFEST.json" dist/MANIFEST.json
+          echo "Reproducible package SHA-256 $second"
+      - name: Publish new release (never overwrite assets)
+        if: steps.guard.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.guard.outputs.tag }}
+          VERSION: ${{ steps.guard.outputs.version }}
+          TITLE: ${{ steps.guard.outputs.title }}
+          NOTES: ${{ steps.guard.outputs.notes }}
+          PRERELEASE: ${{ steps.guard.outputs.prerelease }}
+        run: |
+          if [ "$PRERELEASE" = "true" ]; then channel=--prerelease; else channel=--latest; fi
+          gh release create "$TAG" \
+            "dist/AzerothFieldKitReborn-$VERSION.zip" \
+            dist/MANIFEST.json \
+            dist/SHA256SUMS.txt \
+            build/validation.json \
+            --target "$GITHUB_SHA" \
+            --title "$TITLE" \
+            --notes-file "$NOTES" \
+            "$channel"
+      - name: Verify published assets byte for byte
+        if: steps.guard.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.guard.outputs.tag }}
+          VERSION: ${{ steps.guard.outputs.version }}
+        run: |
+          gh release view "$TAG" --json tagName,isPrerelease,assets \
+            --jq '{tag: .tagName, prerelease: .isPrerelease, files: [.assets[].name]}'
+          gh release download "$TAG" --pattern "AzerothFieldKitReborn-$VERSION.zip" --pattern SHA256SUMS.txt --dir /tmp/fieldkit-release-check
+          cmp "dist/AzerothFieldKitReborn-$VERSION.zip" "/tmp/fieldkit-release-check/AzerothFieldKitReborn-$VERSION.zip"
+          cmp dist/SHA256SUMS.txt /tmp/fieldkit-release-check/SHA256SUMS.txt
