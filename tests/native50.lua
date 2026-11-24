@@ -95,6 +95,7 @@ Legacy();Run("zone_themes.lua")
 -- Reborn-mode meter: .39 periodic crits from the native combat feed, chat fallback,
 -- unknown-vs-zero, paging, gaps; and the native tooltip value extraction.
 Reborn();Run("reborn_meter_feed.lua")
+Reborn();Run("reborn_kill_attribution.lua")
 Reborn();Run("reborn_loadout_values.lua")
 
 print("Native Lua 5.0 fixtures passed: "..table.getn(files).." TOC modules")

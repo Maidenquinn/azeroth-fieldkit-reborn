@@ -14,7 +14,18 @@ local checkpoint,runKey,cursor,subscribed
 -- When the feed exists, it alone counts hits; chat lines are a fallback, never both.
 local FEED_PAGES=8
 local feedSeq
-L.feed={batches=0,gaps=0,missed=0,events=0}
+L.feed={batches=0,gaps=0,missed=0,events=0,kills=0}
+-- Kill attribution (Lot 0). With the feed, a kill is credited only on a feed hit
+-- whose target is identified (anchorId = the target's guid) and whose overkill is
+-- strictly positive: the feed holds only the hero's own hits (CombatText.lua's
+-- "mine" affiliation: hero, pets, summons), so killer and victim are both known.
+-- Observed on 0.7.4: non-lethal hits carry overkill 0 (never -1), lethal ones > 0.
+-- overkill 0 cannot tell "not lethal" from "exactly lethal": no kill is invented.
+-- Chat death lines ("X dies.", "You have slain X!") name victims only and are
+-- ignored while the feed exists. killedGuid de-duplicates a second lethal hit on
+-- the same corpse; entries expire after KILL_KEEP seconds (bounded memory).
+local KILL_KEEP=10
+local killedGuid,killSweepAt={},0
 local TAKEN_NAMES={
  ["boss melee"]="Boss melee",["boss spell"]="Boss spells",["elite"]="Elites",
  ["mob melee"]="Monster melee",["mob spell"]="Monster spells",["area"]="Ground effects"}
@@ -91,7 +102,8 @@ end
 -- last second of already counted hits into the fresh books.
 function L.ClearHits()
  books={};kills={};burstWin={};byId={};byIcon={};lastBlow={}
- L.feed={batches=0,gaps=0,missed=0,events=0}
+ killedGuid={};killSweepAt=0
+ L.feed={batches=0,gaps=0,missed=0,events=0,kills=0}
 end
 
 function L.Reset()
@@ -234,16 +246,27 @@ local function FeedName(e)
  return name
 end
 
+local function SweepKilled(now)
+ killSweepAt=now
+ for guid,at in pairs(killedGuid) do
+  if now-at>KILL_KEEP then killedGuid[guid]=nil end
+ end
+end
+
 local function IngestCombatEvent(e,countHits)
- if type(e)~="table" then return end
- if e.kind=="damage" then
-  local name=FeedName(e)
-  if countHits then
-   local crit=nil
-   if e.critical==true then crit=true elseif e.critical==false then crit=false end
-   L.NoteHit(name,e.amount,crit,e.spellId,e.icon)
-  end
-  if type(e.targetName)=="string" then RememberBlow(e.targetName,name,e.spellId,e.icon) end
+ if type(e)~="table" or e.kind~="damage" or not countHits then return end
+ local name=FeedName(e)
+ local crit=nil
+ if e.critical==true then crit=true elseif e.critical==false then crit=false end
+ L.NoteHit(name,e.amount,crit,e.spellId,e.icon)
+ local over=tonumber(e.overkill)
+ local guid=e.anchorId
+ if over and over>0 and type(guid)=="string" and guid~="" and not killedGuid[guid] then
+  local now=tonumber(e.at) or GetTime()
+  killedGuid[guid]=now
+  L.NoteKill(name,e.spellId,e.icon)
+  L.feed.kills=L.feed.kills+1
+  if now-killSweepAt>=1 then SweepKilled(now) end
  end
 end
 
@@ -769,10 +792,12 @@ end)
 
 -- One hit source at a time (no merge, no double count):
 --  * AZS_GetCombatTextEvents present: it counts hits/crits and last blows; chat
---    damage lines are ignored. A death line first drains the feed (CombatText.lua
---    sees each hit before Shims.lua writes its chat line), so the kill goes to the
---    blow that actually landed last.
---  * Feed absent (legacy clients): the chat lines count, as before.
+--    damage and death lines are ignored. Kills come from lethal feed hits (see the
+--    kill attribution note at the top). A death line only drains the feed early
+--    (CombatText.lua sees each hit before Shims.lua writes its chat line) so the
+--    kill shows without waiting for the next poll; it never credits by name.
+--  * Feed absent (legacy clients): the chat lines count, as before, including the
+--    name-based last-blow credit (documented limit: same-name enemies, co-op).
 local driver=CreateFrame("Frame","FieldKitMeterLedgerDriver")
 local elapsed=0
 driver:RegisterEvent("CHAT_MSG_SPELL_SELF_DAMAGE")
@@ -787,8 +812,8 @@ driver:SetScript("OnEvent",function()
  if not FieldKitRebornDB or not FieldKitRebornDB.meterFrame then return end
  local feed=L.FeedAvailable()
  if event=="CHAT_MSG_COMBAT_HOSTILE_DEATH" or event=="CHAT_MSG_COMBAT_HOSTILEPLAYER_DEATH" then
-  if feed then L.PollCombatText(true) end
-  L.ParseDeath(arg1);return
+  if feed then L.PollCombatText(true) else L.ParseDeath(arg1) end
+  return
  end
  if not feed then L.ParseChat(arg1) end
 end)

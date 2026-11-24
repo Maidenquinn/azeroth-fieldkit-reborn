@@ -92,13 +92,15 @@ assert(L.Stats("Localized Consecration",27173).hits==2,"spellId join")
 assert(L.Stats("Unknown Spell")==nil and L.Stats("Unknown Spell",999999)==nil,"unknown source must stay unknown")
 assert(L.Stats("Bouclier du vengeur").hits==1,"distinct spell collision")
 
--- 9. Death credit: the death line drains the feed first, then credits the true last blow.
+-- 9. Kills (Lot 0): only a lethal feed hit (overkill > 0 on an identified target) credits;
+-- a chat death line never credits by name while the feed exists, but drains it early.
 Hit("Consécration",700,false,true,26573,nil,nil,"Wolf")
 Hit("Bouclier du vengeur",900,true,false,31935,nil,nil,"Wolf")
+ring[table.getn(ring)].overkill=150;ring[table.getn(ring)].anchorId="Creature-Wolf-1"
 event="CHAT_MSG_COMBAT_HOSTILE_DEATH";arg1="Wolf dies."
 driver.scripts.OnEvent()
 event,arg1=pe,pa
-assert(L.KillsFor("Bouclier du vengeur")==1 and L.KillsFor("Consécration")==0,"kill credited to a stale blow")
+assert(L.KillsFor("Bouclier du vengeur")==1 and L.KillsFor("Consécration")==0,"lethal feed hit not credited")
 
 -- 10. Lost events are counted (forward seq jump), never invented as hits.
 local before=L.Stats("Consécration").hits
