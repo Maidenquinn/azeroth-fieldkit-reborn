@@ -141,7 +141,13 @@ function L.SpellEffects(raw,interval)
  local function capture(patterns)
   for _,pattern in ipairs(patterns) do local _,_,v=string.find(text,pattern);if v then return v end end
  end
- local damage=capture({"pour "..number.." dégâts","inflige "..number.." dégâts","subit "..number.." dégâts","subissent "..number.." dégâts","subit "..number.." points de dégâts","subissent "..number.." points de dégâts",number.." damage"})
+ local damagePatterns={"pour "..number.." dégâts","inflige "..number.." dégâts","subit "..number.." dégâts","subissent "..number.." dégâts","subit "..number.." points de dégâts","subissent "..number.." points de dégâts",number.." damage"}
+ -- Native English tips name the school: "takes 508825 Holy damage every 1 sec".
+ -- An explicit school list keeps "30% more damage" debuffs out.
+ for _,school in ipairs({"holy","fire","frost","shadow","nature","arcane","physical","chaos","shadowflame"}) do
+  table.insert(damagePatterns,number.." "..school.." damage")
+ end
+ local damage=capture(damagePatterns)
  local targets=capture({"jusqu'à "..number.." ennemis","up to "..number.." enem", "hits "..number.." enem"})
  local range=capture({"moins de "..number.." m"});local rangeUnit="m"
  if not range then range=capture({"within "..number.." yards","within "..number.." yd"});rangeUnit="yd" end
