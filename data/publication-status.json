@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Paladin meter .39 development candidate: source diagnostics and fixed FR tooltip / equipped amulet icon logic; automated fixtures only. Awaiting maintainer in-game recette. Exact game critical strike rule not yet source-confirmed."
+  "inGameTestScope": "Paladin meter .39 development candidate: hit/crit books now read the native combat-text feed (periodic crits visible), chat fallback marks unknown crits, FR/EN periodic tooltip values, equipped amulet icons; automated fixtures only. Engine crit rule inferred from observed feed data (docs/PALADIN_CONSECRATION_SOURCE_AUDIT.md), not from engine source. Awaiting maintainer in-game recipe."
 }

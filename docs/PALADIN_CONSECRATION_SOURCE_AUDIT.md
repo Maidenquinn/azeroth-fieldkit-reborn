@@ -1,31 +1,72 @@
-# Paladin Consecration — engine-source audit request (.39)
+# Paladin Consecration: critical-hit audit (.39)
 
-## What is confirmed from FieldKit source
-- `Loadout.SpellEffects` previously missed French `subit N dégâts` periodic descriptions, while extracting range, duration and cadence.
-- `MeterLedger.NoteHit` does **not** fabricate critical hits. It records the combat-log / combat-text `critical` flag as supplied; `maxCrit` is only populated for observed critical events.
-- `MeterLedger.RowsFromSnap` obtains total damage from the native game snapshot and can receive an absent/unready `source.icon`. `Loadout.Icon` previously only indexed learned spells, not actual equipped jewelry.
-- Screenshots of Consecration at rank 40 show 69,330 hits with 0 crits, despite a character stat of 100% crit. This does not prove a gameplay bug.
+Audit date: 2026-11-24. Installed game: Azeroth Survivors: Reborn **0.7.4** (`.azs/installed.json`, serial 1795141447).
+Only the installed client was available: its public Lua API, its generated content tables, and the
+SavedVariables that addons on the same account wrote. The Rust engine sources (`engine/benilla/crates/survivors-content`,
+`survivors-sim`) are **not** on this machine. Nothing in the game was modified.
 
-## Official public documentation consulted
-- https://azreborn.com/guides/addon-api — describes `AZS_GetCombatTextEvents(cursor, limit)` and its `critical`, `periodic`, `spellId`, `abilityName`, `meterSource` fields.
-- https://azreborn.com/guides/content-reference — documents `no_crit = true` for spells and the periodic damage code paths; its documented use does **not** establish that Consecration uses the flag.
-- https://azreborn.com/guides/data-api — publishes spell and legendary *icons*, but omits full spell descriptions and `no_crit`.
+## Conclusion
 
-## Source audit for a developer or local Claude/Codex agent with a lawful checkout
-Use the *exact installed game revision/profile* (not generic WoW or a different Azeroth Survivors fork). Do not change game sources. Read only.
+**H4 confirmed (FieldKit + chat shim).** FieldKit counted every hit from the 1.12 chat lines. The game's chat shim
+writes periodic damage with no critical form at all. FieldKit could therefore never see a critical Consecration tick,
+whatever the engine did. The engine does crit Consecration, and the native combat-text feed delivers the flag.
 
-1. Find Consecration's spell key and 3.3.5a spell ID in `crates/survivors-content/packs/**` or equivalent profile overlays. Record source file, line, pack version, shape (`ground` / `totem` / DoT), and the exact `no_crit` value or absence. Follow overrides/mods to the effective final spell definition.
-2. Trace damage production through `survivors-sim` ground-field/totem/DoT tick and crit logic (including `Run::tick_dots`, field ticks, damage modifiers). Determine *whether* Consecration's hits roll critical damage, and under what conditions. Quote minimal line references, do not assume all periodic damage crits.
-3. Trace server combat-log forwarding and client adapter at `ui/AddOns/AzerothSurvivorsAPI/CombatText.lua` and `Shims.lua`. Check that `critical` is true exactly when the damage event crits, and that `CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE` encodes periodic criticals in text the ledger recognizes.
-4. Inspect `AZS_GetMeterSnapshot` source descriptors for `ability:consecration` and amulet `jewel:amulet`: verify `source.icon.status`, `source.icon.path`, `spellIds` and whether missing icons are designed as unavailable. Compare the equipped `AZSGEAR` icon.
-5. If a bug is suspected in *game* rather than addon, reproduce in the game's test environment with a fixed RNG seed; verify crit chance and critical flag; create a minimal developer issue rather than altering player stats in an addon.
+| Hypothesis | Verdict | Evidence |
+|---|---|---|
+| H1 Consecration is `no_crit` | **Refuted by observation** | ≥ 48,549 Consecration ticks arrived with `critical == true` (below). The content reference documents `no_crit` only as a spell flag. It does not list Consecration. |
+| H2 engine never rolls periodic crits | **Refuted** | Same observation. |
+| H3 crit flag lost before addons | **Partly true, chat channel only** | `Shims.lua` drops the flag for periodic chat lines. `AZS_GetCombatTextEvents` keeps it. |
+| H4 FieldKit parser | **Confirmed** | `MeterLedger` counted chat lines only and ignored feed hits (`PollCombatText(false)`). |
+| H5 source collision | Not observed | Feed hits carry `spellId`. Rank merges and collision guards are covered by tests. |
 
-## Read-only live observation requested (not automatically collected)
-In a short solo run, record: player crit chance and cap, Consecration rank/tooltip, 100 consecutive *raw combat events* with `abilityName` / `spellId` / `periodic` / `critical`, and matching native meter totals. Do not log character names, other players or account identifiers; do not upload full chat logs. A `critical=false` event is an observed event, not proof of the source rule.
+## Evidence: installed API (read-only)
 
-## Acceptance criteria
-- Correct and non-duplicated per-hit record attribution.
-- Display the authoritative critical count (including zero); never force crits from the character stat.
-- Periodic tooltip shows the original number verbatim, with unchanged range and cadence.
-- Equipped amulet meter icon derived from the *actual native equipment record*; unknown/unrelated sources stay unknown, never assigned a guessed icon.
-- Lua 5.1 fixtures and CI pass; manual client recipe remains required.
+`Interface/AddOns/AzerothSurvivorsAPI/AzerothSurvivorsAPI.toc` loads `CombatText.lua` before `Shims.lua`.
+
+- `CombatText.lua` lines 49–51 put `SPELL_PERIODIC_DAMAGE` in the damage set with `periodic = true`.
+  Lines 130–132 read `critical` at the 3.3.5a position (`select(9, ...)`, then the 10th value) for both
+  `SPELL_DAMAGE` and `SPELL_PERIODIC_DAMAGE`, and store `ev.critical = critical and true or false`.
+- `Shims.lua` lines 398–408 (`SPELL_DAMAGE`) write `"crits"` when critical. Lines 409–419 (`SPELL_PERIODIC_DAMAGE`)
+  read only `spellName, amount, school` and always write
+  `"%s suffers %s %s damage from your %s."`. That line has **no critical variant**.
+- `Meter.lua` (`AZS_GetMeterSnapshot`) carries totals per source. It has no hit or crit counts.
+
+## Evidence: observed feed data (read-only)
+
+`WTF/Account/<account>/SavedVariables/AzerothStatsReborn.lua`, around line 8277. That addon counts
+`AZS_GetCombatTextEvents` events (`V2CombatObserve.lua` lines 170–182: `e.critical == true`, `e.periodic == true`).
+One French Paladin run recorded:
+
+- hits 111,562; periodic 79,694; **critical 80,417**; gaps 0; dropped 0
+- sources: Consécration 79,694 hits; Flamestrike 30,266; Bouclier du vengeur 1,484; Marteau du vertueux 57; Marteau de la justice 61
+
+Periodic hits equal Consecration hits, so every periodic event was Consecration. The non-Consecration hits total 31,868.
+Even if every one of them crit, at least **80,417 − 31,868 = 48,549** Consecration ticks were reported critical.
+Limits: the run's exact game build is not stored next to the summary. The proof rests on one aggregate. A direct
+event capture during recipe testing (protocol below) closes it.
+
+## Fix (FieldKit only)
+
+- `MeterLedger.lua`: when `AZS_GetCombatTextEvents` exists, the feed is the **only** hit/crit source and chat damage
+  lines are ignored (no merge, so nothing is counted twice). The chat parser is now only a fallback for clients without
+  the feed. Death lines drain the feed first, so a kill goes to the blow that actually landed last.
+- Every feed page is read (≤ 8 × 256 per poll). The cursor survives a book reset. Forward `seq` jumps or a
+  `droppedCount` add to `FieldKitMeterLedger.feed.missed`. Lost events are counted and never invented.
+- A chat periodic line without `(Critical)` is now **unclassified**, not a non-crit. `Stats().critKnown == false`
+  shows the crit rate as `-` instead of `0%` (tooltip, reference HUD, party details).
+- Native totals still come only from `AZS_GetMeterSnapshot`. Combat text never replaces them.
+
+## Other .39 findings
+
+- `Loadout.SpellEffects`: French `subit` / `subissent` (from the first .39 commit). Native English tips name the school
+  (`takes 198 Frost damage every 1 sec` was observed in installed data), which `N damage` missed. Patterns now cover an
+  explicit school list, so "50 % de dégâts en plus" debuffs stay excluded. The tooltip's own number is shown verbatim,
+  and no rank multiplier is computed.
+- `Loadout.EquippedSourceIcon`: worn items only (`AZS_GEAR`), exact name or legendary head before `:`. Ambiguous
+  duplicates and items without an icon stay unknown. It is evaluated live, so a mid-run swap does not leave a stale icon.
+
+## Report for SNX (optional, not a game bug)
+
+The 1.12 chat shim (`Shims.lua` 409–419) cannot express a periodic critical. If 1.12-era addons should see periodic
+crits, a `"(Critical)"` suffix or equivalent would be needed. This is a fidelity choice, not a defect. Current addons
+should read `AZS_GetCombatTextEvents`.
