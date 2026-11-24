@@ -16,9 +16,21 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - run: python tools/build_locales.py --check
       - run: python tests/test_locale_tokens.py
+      - run: python tests/test_runner_coverage.py
       - run: python tools/check_locale_fonts.py
       - run: python tools/audit.py
-      - run: python tools/verify.py
+      # Native Lua 5.0.3 (the 1.12 client's language level), built from the official
+      # source with its published SHA-256 (lua.org/ftp). Mandatory: verify.py --lua50
+      # runs tests/native50.lua, the Lua 5.0 port of every legacy and meter fixture.
+      - name: Build official Lua 5.0.3
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -fsSLo lua-5.0.3.tar.gz https://www.lua.org/ftp/lua-5.0.3.tar.gz
+          echo "1193a61b0e08acaa6eee0eecf29709179ee49c71baebc59b682a25c3b5a45671  lua-5.0.3.tar.gz" | sha256sum -c -
+          tar xzf lua-5.0.3.tar.gz
+          make -C lua-5.0.3 >/dev/null
+          echo 'print(_VERSION)' | lua-5.0.3/bin/lua -
+      - run: python tools/verify.py --lua50 "$RUNNER_TEMP/lua-5.0.3/bin/lua"
       - run: python tools/test_reborn.py
       # The chat isolation candidate changes a runtime module. Generate matching
       # review evidence in the CI checkout before packaging; no repository push.

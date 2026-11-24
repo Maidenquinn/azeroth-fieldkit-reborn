@@ -177,7 +177,8 @@ restored.execute('assert(not FieldKitRebornDB.linkLeftCards and not FieldKitRebo
 l=runtime('{compactBar=true,bossFrame=true,hidePlates=true,replaceTally=true,chestPins=true,guardianPins=true,moneyDetached=true,pos={FieldKitMoneyFrame={-2.5374755859375,-348.0493927001953}}}')
 assert l.globals().FieldKit.version==version,'TOC/runtime version mismatch'
 l.execute('fire(FieldKitFrame,"VARIABLES_LOADED");SlashCmdList.FieldKit("")')
-for name in ('test_money.lua','tests.lua','test_worldpins.lua','test_combat_editor.lua','test_localization.lua','interface_journey.lua','card_preferences.lua'):
+# combat_world, meter_suite and boss_timeline previously ran only under --lua50 (QA-01).
+for name in ('test_money.lua','tests.lua','test_worldpins.lua','test_combat_editor.lua','combat_world.lua','meter_suite.lua','boss_timeline.lua','test_localization.lua','interface_journey.lua','card_preferences.lua'):
  l.execute((base/'tests'/name).read_text(encoding='utf8'),name=name)
  print('PASS',name)
 l.execute('FieldKitRebornDB.linkRightCards=false;FieldKitRebornDB.frameAnchors.FieldKitStatsFrame={"TOPRIGHT","TOPRIGHT",0,-30}')
@@ -236,7 +237,7 @@ for name in files:
  prototypes[name]={'maxUpvalues':c.maximum,'functions':c.count,'sha256':hashlib.sha256(data).hexdigest()}
 native=None
 if args.lua50:
- run=subprocess.run([str(args.lua50.resolve()),'tests/native50.lua'],cwd=base,capture_output=True,text=True,encoding='utf8',timeout=240)
+ run=subprocess.run([str(args.lua50.resolve()),'tests/native50.lua'],cwd=base,capture_output=True,text=True,encoding='utf8',timeout=900)  # zone_themes alone takes ~4 min under Lua 5.0
  assert run.returncode==0,run.stdout+run.stderr
  native=run.stdout.strip()
 result={'version':version,'lua51':True,'nativeLua50':native,'persistence':True,'securityFixtures':True,
