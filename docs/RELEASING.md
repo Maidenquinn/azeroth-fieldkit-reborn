@@ -1,5 +1,26 @@
 # Release procedure
 
+## Generic publication workflow (2026-11-24, replaces publish-fieldkit-38.yml)
+
+`.github/workflows/publish-release.yml` publishes whichever version
+`data/publication-status.json` names, through `tools/release_guard.py`:
+
+- the TOC `## Version:`, `Runtime.lua` and `publication-status.json` must agree;
+  a manually requested version (workflow_dispatch input) must match too;
+- nothing is published unless `maintainerAcceptedForPublication` is `true`; an
+  unapproved version ends the run successfully with nothing published, so merging
+  a candidate no longer turns `main` red;
+- `docs/RELEASE_REBORN_<n>.md` must exist and start with `# Title` (release title);
+- an existing release **or tag** is never overwritten or moved;
+- the full validation suite runs, the package is built twice and both ZIPs must be
+  byte-identical; checksums are verified;
+- `githubPrerelease` selects `--prerelease` or `--latest`;
+- uploaded ZIP and SHA256SUMS are downloaded again and compared byte for byte.
+
+Dry run locally: `python tools/release_guard.py --expect 0.1.0-reborn.N`
+(exit 0 = would publish, 3 = not approved, other = inconsistent). Gate fixtures:
+`python tests/test_release_guard.py` (also in verify.yml).
+
 ## Install ZIP boundary (packaging correction, 2026-10-31)
 
 The addon ZIP contains only the TOC, its Lua modules, audited bundled textures/
