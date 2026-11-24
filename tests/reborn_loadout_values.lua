@@ -51,6 +51,31 @@ AZS_GEAR={{slot="amulet",name="Amulette de l'Inferno : Consécration",icon="INV_
 assert(L.Icon("Amulette de l'Inferno")=="Interface\\Icons\\INV_Misc_Gem_Ruby_02","Equipped legendary amulet meter source lost native icon")
 AZS_GEAR={{slot="amulet",name="Another Amulet",icon="OtherIcon"}}
 assert(L.Icon("Amulette de l'Inferno")==nil,"Missing amulet must not inherit an unrelated icon")
+-- .39 audit: plural form, rank change and English text keep the native number verbatim.
+local plural=table.concat(L.SpellEffects("Les ennemis à moins de 30 m subissent 1234 dégâts du Sacré toutes les 1 s.",1)," ")
+assert(string.find(plural,"1234",1,true),"subissent periodic damage omitted")
+local rank41=table.concat(L.SpellEffects("Se centre sur toi : chaque ennemi à moins de 270 m de toi subit 611002 dégâts du Sacré toutes les 1 s pendant 590,2 s.",1)," ")
+assert(string.find(rank41,"611002",1,true) and not string.find(rank41,"508825",1,true),"rank change must show the new native value, no reconstructed multiplier")
+local english=table.concat(L.SpellEffects("Centered on you: each enemy within 270 yards of you takes 508825 Holy damage every 1 sec for 585.8 sec.",1)," ")
+assert(string.find(english,"508825",1,true),"English periodic damage omitted")
+-- "subissent 50 % de dégâts en plus" is a debuff, not a damage amount.
+local debuff=table.concat(L.SpellEffects("Les ennemis touchés subissent 50 % de dégâts en plus pendant 3 s.",1)," ")
+assert(not string.find(debuff,"50 ",1,true) or string.find(debuff,"50 %",1,true),"a damage-taken debuff must not become a damage value")
+-- Equipped-source icons: English name, mid-run swap, duplicates, nothing worn.
+AZS_GEAR={{slot="amulet",name="Inferno Amulet: Consecration",icon="INV_Jewelry_Necklace_07"}}
+assert(L.Icon("Inferno Amulet")=="Interface\\Icons\\INV_Jewelry_Necklace_07","English legendary amulet icon")
+AZS_GEAR={{slot="amulet",name="Amulette de l'Inferno : Consécration",icon="INV_Misc_Gem_Ruby_02"}}
+assert(L.Icon("Amulette de l'Inferno")=="Interface\\Icons\\INV_Misc_Gem_Ruby_02","icon after swap back")
+AZS_GEAR={{slot="amulet",name="Amulette de givre : Nova",icon="INV_Jewelry_Amulet_04"}}
+assert(L.Icon("Amulette de l'Inferno")==nil,"unequipped amulet kept a stale icon after a mid-run swap")
+AZS_GEAR={{slot="ring",name="Anneau jumeau",icon="IconA"},{slot="ring",name="Anneau jumeau",icon="IconB"}}
+assert(L.Icon("Anneau jumeau")==nil,"two worn items with one name and different icons are ambiguous")
+AZS_GEAR={{slot="ring",name="Anneau jumeau",icon="IconA"},{slot="ring",name="Anneau jumeau",icon="IconA"}}
+assert(L.Icon("Anneau jumeau")=="Interface\\Icons\\IconA","identical duplicates agree")
+AZS_GEAR={{slot="amulet",name="Amulette de l'Inferno : Consécration"}}
+assert(L.Icon("Amulette de l'Inferno")==nil,"no native icon: stay unknown")
+AZS_GEAR={}
+assert(L.Icon("Amulette de l'Inferno")==nil,"nothing worn")
 AZS_GEAR=prevGear
 local unknown=L.SpellEffects("Unrecognised translated effect.",.125)
 assert(table.getn(unknown)==1 and string.find(unknown[1],"0.125",1,true),"Public cooldown precision lost")
