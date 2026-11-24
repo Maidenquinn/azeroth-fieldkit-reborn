@@ -1,3 +1,10 @@
+# 0.1.0-reborn.40 — Exact kill attribution (candidate, not yet approved)
+
+- Kills per spell are credited only from the game's native combat feed: a hit that actually killed (overkill above zero) a specific enemy, identified by its unique id. Enemies sharing a name no longer steal each other's kills, and in co-op a teammate's kills are no longer credited to you after you touched the same enemy.
+- Pets and summons keep their own kill entries ("Imp: Firebolt"); a second lethal hit on the same corpse is not counted twice.
+- When the game cannot tell whether a hit was lethal, no kill is invented. Chat death lines no longer credit kills by name while the native feed exists (legacy clients keep the previous behaviour).
+- Test chain: native Lua 5.0.3 fixtures repaired and mandatory in CI; three meter/timeline suites that no runner executed are back.
+
 # 0.1.0-reborn.39 — Paladin meter recipe candidate (not yet approved)
 
 - Count hits and critical hits from the native combat-text feed (`AZS_GetCombatTextEvents`), which carries the critical flag for periodic damage too. The 1.12 chat lines it replaces have no periodic critical form, so Consecration and other ticking effects always showed 0 crits. Chat lines remain a fallback only when the feed is absent; the two sources are never merged.

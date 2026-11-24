@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.39",
+  "version": "0.1.0-reborn.40",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": "2026-11-20",
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Paladin meter .39 development candidate: hit/crit books now read the native combat-text feed (periodic crits visible), chat fallback marks unknown crits, FR/EN periodic tooltip values, equipped amulet icons; automated fixtures only. Engine crit rule inferred from observed feed data (docs/PALADIN_CONSECRATION_SOURCE_AUDIT.md), not from engine source. Awaiting maintainer in-game recipe."
+  "inGameTestScope": "Lot 0 development candidate on top of .39: kills credited only from lethal native combat-feed hits (overkill > 0) on an identified target guid; chat death lines no longer credit by name while the feed exists. Automated Lua 5.1 and 5.0 fixtures only; awaiting maintainer in-game recipe (solo vs AZS_RUN.kills, co-op, pets)."
 }
