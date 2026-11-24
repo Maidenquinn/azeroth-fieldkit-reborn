@@ -258,7 +258,7 @@ function L.EquippedSourceIcon(name)
    local candidate=FieldKitReborn.DisplayName(gear.name)
    local full=L.Key(candidate)
    -- Source name can omit the ': ability' suffix of a legendary item.
-   local head=string.match(candidate or "","^(.-):%s+")
+   local _,_,head=string.find(candidate or "","^(.-):%s+")
    local equal=target==full or (head and target==L.Key(head))
    if equal then
     local icon=FieldKitReborn.Icon(gear.icon)
