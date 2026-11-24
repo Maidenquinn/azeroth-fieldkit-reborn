@@ -1,5 +1,22 @@
 # Verification and in-game acceptance
 
+## Test harness after QA-01 (2026-11-24)
+
+- `tests/native50.lua` is the native **Lua 5.0.3** port of the `verify.py` legacy
+  fixtures and of the Reborn meter fixtures. It reads the module list from the TOC
+  (never a copy) and resets the global table between fixtures, matching the fresh
+  `LuaRuntime` that `verify.py` gives each fixture. Before QA-01 it used a stale
+  hard-coded list and shared state across fixtures, and failed.
+- `combat_world.lua`, `meter_suite.lua` and `boss_timeline.lua` now run in both
+  `verify.py` (Lua 5.1) and `native50.lua` (Lua 5.0). Previously no runner executed them.
+- `.39` periodic crits (`reborn_meter_feed.lua`) and native tooltip values
+  (`reborn_loadout_values.lua`) run under Lua 5.1 (`test_reborn.py`) **and** 5.0.
+- CI (`verify.yml`) builds official Lua 5.0.3 (SHA-256 pinned) and runs
+  `verify.py --lua50`; `tests/test_runner_coverage.py` fails if a fixture is
+  executed by no runner, if CI stops running Lua 5.0, or if the module list is
+  hard-coded again.
+- Local: `python tools/verify.py --lua50 <path to lua 5.0.3 binary>`.
+
 ## Repeatable offline checks
 
 Use Python 3.12+ and `pip install -r requirements-dev.txt`, then:
