@@ -1,0 +1,3618 @@
+{
+ "scope": "TOC runtime modules vs installed game Lua (AzerothSurvivorsAPI, AzerothSurvivors, AzerothSurvivorsUI, !AzerothSurvivorsCompat). Static only.",
+ "installedLuaFiles": 477,
+ "fieldkitModules": 72,
+ "symbols": [
+  {
+   "name": "AZS_API_RunId",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:65"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "MeterLedger.lua",
+    "RebornPresentation.lua"
+   ],
+   "referenceCount": 6
+  },
+  {
+   "name": "AZS_BUFFS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:18",
+    "AzerothSurvivors/Units.lua:64"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua",
+    "Reborn.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_BUFFS_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:175 (by name)",
+    "AzerothSurvivors/Units.lua:65"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_BuildBossChargeBar",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsUI/Components/Misc/SurvivorsBossBar.lua:272"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "BossTimeline.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_CHESTS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Chests.lua:6",
+    "AzerothSurvivors/Units.lua:90"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "WorldPins.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_CreateMeterCheckpoint",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Meter.lua:1324"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "MeterLedger.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_DASH",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Dash.lua:104",
+    "AzerothSurvivors/Dash.lua:262 (by name)"
+   ],
+   "fields": [
+    "at",
+    "seen"
+   ],
+   "fieldkitModules": [
+    "RebornHUD.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_DEATH",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/DeathLog.lua:13",
+    "AzerothSurvivors/DeathLog.lua:508",
+    "AzerothSurvivors/DeathLog.lua:536"
+   ],
+   "fields": [
+    "sources"
+   ],
+   "fieldkitModules": [
+    "Reborn065.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_EVENT",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Events.lua:24",
+    "AzerothSurvivors/Events.lua:85",
+    "AzerothSurvivors/Events.lua:90"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_EventCurrency",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivors/Events.lua:28"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GEAR",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Units.lua:73"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Loadout.lua",
+    "NativeData.lua",
+    "Reborn.lua"
+   ],
+   "referenceCount": 6
+  },
+  {
+   "name": "AZS_GEN",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Generated/Content.lua:6"
+   ],
+   "fields": [
+    "accountRowPoints",
+    "accountTree",
+    "achievementGroups",
+    "achievements",
+    "amulets",
+    "cardLines",
+    "challenges",
+    "classColors",
+    "classes",
+    "creatureIcons",
+    "dyePacks",
+    "dyeStyles",
+    "dyes",
+    "emotes",
+    "enchants",
+    "formSkins",
+    "frames",
+    "gearTiers",
+    "glowPacks",
+    "holidays",
+    "horns",
+    "itemNames",
+    "jewels",
+    "killFx",
+    "lookPacks",
+    "mounts",
+    "nameStyles",
+    "palette",
+    "pets",
+    "pieces",
+    "raceByToken",
+    "races",
+    "rarities",
+    "referrals",
+    "seasons",
+    "setBonuses",
+    "setLooks",
+    "setRules",
+    "spellColors",
+    "spellSkins"
+   ],
+   "fieldkitModules": [
+    "Loadout.lua",
+    "Reborn.lua",
+    "RebornPresentation.lua",
+    "Seed.lua"
+   ],
+   "referenceCount": 12
+  },
+  {
+   "name": "AZS_GetBossMeter",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:488"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "MeterLedger.lua",
+    "NativeData.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_GetBosses",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:301"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetCombatTextCapabilities",
+   "installed": "not-defined-in-installed-lua",
+   "definedAt": [],
+   "fields": [],
+   "fieldkitModules": [
+    "CombatText.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetCombatTextEvents",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/CombatText.lua:258"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "CombatOptions.lua",
+    "CombatText.lua",
+    "Diagnostics.lua",
+    "MeterLedger.lua",
+    "NativeData.lua"
+   ],
+   "referenceCount": 10
+  },
+  {
+   "name": "AZS_GetDebuffs",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:262"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "Reborn065.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_GetDownedPartyMembers",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Anchors.lua:611"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "WorldMarkers.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetFlaggedLair",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:526"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "NativeData.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetGuardians",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:330"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetHealing",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:484"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "MeterLedger.lua",
+    "NativeData.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_GetLairs",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:500"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "NativeData.lua",
+    "ReferenceHUD.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_GetLocalTime",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:596"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_GetMeter",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:462"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "MeterLedger.lua",
+    "NativeData.lua",
+    "PartySync.lua"
+   ],
+   "referenceCount": 7
+  },
+  {
+   "name": "AZS_GetMeterCapabilities",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Meter.lua:1230"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetMeterContext",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Meter.lua:1245"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Loadout.lua",
+    "MeterLedger.lua"
+   ],
+   "referenceCount": 6
+  },
+  {
+   "name": "AZS_GetMeterLoadout",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Meter.lua:1262"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Loadout.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetMeterSnapshot",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Meter.lua:1258"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "MeterLedger.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_GetPartyMeter",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:493"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Coop.lua",
+    "Diagnostics.lua",
+    "MeterLedger.lua"
+   ],
+   "referenceCount": 5
+  },
+  {
+   "name": "AZS_GetPhase",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:233"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "BossTimeline.lua",
+    "CombatText.lua",
+    "Coop.lua",
+    "Diagnostics.lua",
+    "FieldKit.lua",
+    "GameCompatibility.lua",
+    "Loadout.lua",
+    "MeterLedger.lua",
+    "MeterSuite.lua",
+    "NativeData.lua",
+    "NativeHUD.lua",
+    "NativeTools.lua",
+    "PartySync.lua",
+    "Reborn.lua",
+    "Reborn065.lua",
+    "RebornStats.lua",
+    "RunMode.lua",
+    "Runtime.lua",
+    "WorldAnchors.lua",
+    "WorldPins.lua",
+    "ZoneThemes.lua"
+   ],
+   "referenceCount": 62
+  },
+  {
+   "name": "AZS_GetPlayerPosition",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:565"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "ThemeMinimap.lua",
+    "WorldMarkers.lua",
+    "WorldPins.lua"
+   ],
+   "referenceCount": 8
+  },
+  {
+   "name": "AZS_GetRevive",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:254"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua",
+    "NativeTools.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_GetRunTime",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:51"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "BossTimeline.lua",
+    "Diagnostics.lua",
+    "MeterLedger.lua",
+    "NativeData.lua",
+    "NativeHUD.lua",
+    "Reborn.lua"
+   ],
+   "referenceCount": 10
+  },
+  {
+   "name": "AZS_GetStatCaps",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:136"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "RebornStats.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_GetStoredLevels",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:610"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua",
+    "NativeTools.lua",
+    "ReferenceHUD.lua",
+    "ZoneThemes.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_GetSummonGroups",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:390"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua",
+    "NativeTools.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_GetTimers",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:444"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua",
+    "NativeTools.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_GetTotems",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:420"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua",
+    "NativeTools.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_GetUpcomingBosses",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:342"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "BossTimeline.lua",
+    "Diagnostics.lua",
+    "NativeData.lua",
+    "NativeTools.lua",
+    "ReferenceHUD.lua",
+    "ThemeHUD.lua"
+   ],
+   "referenceCount": 7
+  },
+  {
+   "name": "AZS_GetWorldAnchorCapabilities",
+   "installed": "not-defined-in-installed-lua",
+   "definedAt": [],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "WorldAnchors.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_GetWorldAnchors",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Anchors.lua:595"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "WorldAnchors.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_HEALING",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:29",
+    "AzerothSurvivorsAPI/Api.lua:204 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "CombatText.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_HEALING_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:204 (dynamic stamp)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "CombatText.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_IsHudShown",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Hud.lua:102"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeHUD.lua",
+    "NativeTools.lua",
+    "ZoneThemes.lua"
+   ],
+   "referenceCount": 10
+  },
+  {
+   "name": "AZS_IsOnTopOfScreens",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Hud.lua:329"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Runtime.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_L",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Locale.lua:37"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_LAIRS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Lairs.lua:7",
+    "AzerothSurvivors/Lairs.lua:104"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "WorldPins.lua"
+   ],
+   "referenceCount": 7
+  },
+  {
+   "name": "AZS_LOCALE",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Locale.lua:31",
+    "AzerothSurvivors/Locale.lua:33"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "International.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_OpenStoredLevels",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:614"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "ReferenceHUD.lua",
+    "ZoneThemes.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_PARTY",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:31",
+    "AzerothSurvivorsAPI/Api.lua:206 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Coop.lua"
+   ],
+   "referenceCount": 6
+  },
+  {
+   "name": "AZS_PARTY_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:206 (dynamic stamp)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Coop.lua"
+   ],
+   "referenceCount": 5
+  },
+  {
+   "name": "AZS_PETS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:26",
+    "AzerothSurvivorsAPI/Api.lua:201 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_ProjectCombatTextAnchors",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/CombatText.lua:262"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "CombatText.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_ProjectWorldAnchors",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Anchors.lua:599"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "WorldAnchors.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_ProjectWorldPoint",
+   "installed": "not-defined-in-installed-lua",
+   "definedAt": [],
+   "fields": [],
+   "fieldkitModules": [
+    "WorldAnchors.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_REVIVE",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Revive.lua:8",
+    "AzerothSurvivors/Revive.lua:150",
+    "AzerothSurvivors/Revive.lua:158"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_RUN",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:10",
+    "AzerothSurvivors/Run.lua:436"
+   ],
+   "fields": [
+    "el",
+    "nb",
+    "ph"
+   ],
+   "fieldkitModules": [
+    "BossTimeline.lua",
+    "CombatText.lua",
+    "Coop.lua",
+    "FieldKit.lua",
+    "GameCompatibility.lua",
+    "MeterLedger.lua",
+    "NativeData.lua",
+    "NativeHUD.lua",
+    "NativeTools.lua",
+    "PartySync.lua",
+    "Reborn.lua",
+    "RebornHUD.lua",
+    "ReferenceHUD.lua",
+    "ThemeHUD.lua",
+    "ThemeMinimap.lua",
+    "WorldPins.lua"
+   ],
+   "referenceCount": 92
+  },
+  {
+   "name": "AZS_RUN_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:437"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeTools.lua",
+    "Reborn.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_RegisterBannerHandler",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:638"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeTools.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_RegisterCombatTextFrameHandler",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/CombatText.lua:266"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "CombatText.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_RegisterWorldAnchorFrameHandler",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Anchors.lua:603"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "WorldAnchors.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_ReleaseMeterCheckpoint",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Meter.lua:1328"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "MeterLedger.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_SCHEDULE",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:12",
+    "AzerothSurvivors/Run.lua:449"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "BossTimeline.lua",
+    "NativeData.lua",
+    "NativeTools.lua",
+    "Reborn.lua"
+   ],
+   "referenceCount": 12
+  },
+  {
+   "name": "AZS_SPELLS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:14",
+    "AzerothSurvivors/Spells.lua:124"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Loadout.lua",
+    "NativeData.lua"
+   ],
+   "referenceCount": 5
+  },
+  {
+   "name": "AZS_SPELLTIPS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Spells.lua:9"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Loadout.lua",
+    "NativeData.lua"
+   ],
+   "referenceCount": 7
+  },
+  {
+   "name": "AZS_SPELL_NAMES",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Locale.lua:47"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_STATS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:122"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "RebornStats.lua"
+   ],
+   "referenceCount": 10
+  },
+  {
+   "name": "AZS_STATS_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:123 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_SetHudShown",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Hud.lua:89"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "Runtime.lua"
+   ],
+   "referenceCount": 5
+  },
+  {
+   "name": "AZS_SetOnTopOfScreens",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Hud.lua:310"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Diagnostics.lua",
+    "Runtime.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_SpellName",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivors/Locale.lua:56"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Reborn.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_TAKEN",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:32",
+    "AzerothSurvivorsAPI/Api.lua:207 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Coop.lua",
+    "MeterLedger.lua"
+   ],
+   "referenceCount": 10
+  },
+  {
+   "name": "AZS_TAKEN_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:207 (dynamic stamp)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "Coop.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_TARGET",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:24",
+    "AzerothSurvivorsAPI/Api.lua:221",
+    "AzerothSurvivorsAPI/Api.lua:756"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeHUD.lua",
+    "TakenDetails.lua",
+    "ThemeTarget.lua"
+   ],
+   "referenceCount": 11
+  },
+  {
+   "name": "AZS_TARGET_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:222 (by name)",
+    "AzerothSurvivorsAPI/Api.lua:757"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "TakenDetails.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_TIMERS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:25",
+    "AzerothSurvivorsAPI/Api.lua:200 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_TOTEMS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:27",
+    "AzerothSurvivorsAPI/Api.lua:202 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeData.lua"
+   ],
+   "referenceCount": 1
+  },
+  {
+   "name": "AZS_UNITS",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:13",
+    "AzerothSurvivors/Units.lua:30"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "NativeHUD.lua",
+    "Portraits.lua",
+    "Reborn.lua",
+    "TakenDetails.lua",
+    "ZoneThemes.lua"
+   ],
+   "referenceCount": 30
+  },
+  {
+   "name": "AZS_UNITS_UPDATED",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:145 (by name)"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua",
+    "Portraits.lua",
+    "TakenDetails.lua"
+   ],
+   "referenceCount": 7
+  },
+  {
+   "name": "AZS_UnitKind",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:687"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "FieldKit.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_UnitWorldPosition",
+   "installed": "documented-in-header",
+   "definedAt": [],
+   "fields": [],
+   "fieldkitModules": [
+    "RebornPresentation.lua",
+    "WorldAnchors.lua"
+   ],
+   "referenceCount": 4
+  },
+  {
+   "name": "AZS_UnregisterBannerHandler",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Api.lua:647"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "NativeTools.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_UnregisterWorldAnchorFrameHandler",
+   "installed": "function",
+   "definedAt": [
+    "AzerothSurvivorsAPI/Anchors.lua:607"
+   ],
+   "fields": [],
+   "fieldkitModules": [
+    "WorldAnchors.lua"
+   ],
+   "referenceCount": 3
+  },
+  {
+   "name": "AZS_WorldUnits",
+   "installed": "documented-in-header",
+   "definedAt": [],
+   "fields": [],
+   "fieldkitModules": [
+    "RebornPresentation.lua"
+   ],
+   "referenceCount": 2
+  },
+  {
+   "name": "AZS_ZONE",
+   "installed": "data",
+   "definedAt": [
+    "AzerothSurvivors/Run.lua:9",
+    "AzerothSurvivors/Run.lua:445"
+   ],
+   "fields": [
+    "run"
+   ],
+   "fieldkitModules": [
+    "BossTimeline.lua",
+    "CombatText.lua",
+    "FieldKit.lua",
+    "GameCompatibility.lua",
+    "MeterLedger.lua",
+    "NativeData.lua",
+    "NativeTools.lua",
+    "Portraits.lua",
+    "Reborn.lua",
+    "RebornPresentation.lua",
+    "RunMode.lua",
+    "ThemeHUD.lua",
+    "ZoneThemes.lua"
+   ],
+   "referenceCount": 60
+  }
+ ],
+ "installedFunctionsUnusedByFieldKit": [
+  "AZS_ApplyForcedCVars",
+  "AZS_ApplyLinkInfo",
+  "AZS_ApplyMeterSettings",
+  "AZS_ApplyPlace",
+  "AZS_ApplyPlaces",
+  "AZS_ApplyPlayerHealthColor",
+  "AZS_ApplyRunStatsSettings",
+  "AZS_ApplyStockText",
+  "AZS_ApplyStoreLevels",
+  "AZS_ApplyTrackerSettings",
+  "AZS_ApplyUpgradeSettings",
+  "AZS_ApplyVoiceAutoJoin",
+  "AZS_BossHorn",
+  "AZS_BuildBossStyleBar",
+  "AZS_CreateProvingBuild",
+  "AZS_Darkness",
+  "AZS_DarknessState",
+  "AZS_Dash",
+  "AZS_DashCard",
+  "AZS_FontName",
+  "AZS_FrameName",
+  "AZS_FriendsChanged",
+  "AZS_FriendsCommand",
+  "AZS_GetRunLength",
+  "AZS_GetRunSummary",
+  "AZS_GetSummonCount",
+  "AZS_GetSummons",
+  "AZS_GetTotemCount",
+  "AZS_GetVoiceVolume",
+  "AZS_GroupPanelLink",
+  "AZS_InspectUnit",
+  "AZS_InviteFriend",
+  "AZS_IsEditing",
+  "AZS_IsStoringLevels",
+  "AZS_LocaleStrings",
+  "AZS_LowerMeter",
+  "AZS_MeterTotals",
+  "AZS_MinimapOffset",
+  "AZS_MinimapView",
+  "AZS_Mount",
+  "AZS_NextBossProgress",
+  "AZS_OnBanner",
+  "AZS_OnWorldProjected",
+  "AZS_OpenHubLooks",
+  "AZS_OpenLevels",
+  "AZS_OpenRun",
+  "AZS_PadCardKeys",
+  "AZS_Parse",
+  "AZS_ParseBanner",
+  "AZS_PickCard",
+  "AZS_PingKey",
+  "AZS_PlayChestOpen",
+  "AZS_PushToTalk",
+  "AZS_ReadSpellNames",
+  "AZS_RequestAbilities",
+  "AZS_RunLobbyChanged",
+  "AZS_SendCrashReportsOption",
+  "AZS_SendLanguage",
+  "AZS_SetClassIcon",
+  "AZS_SetEditorActionBarsHidden",
+  "AZS_SetEditorHud",
+  "AZS_SetFont",
+  "AZS_SetLanguage",
+  "AZS_SetMeterPortrait",
+  "AZS_SetPeer",
+  "AZS_SetStoringLevels",
+  "AZS_SetVoiceVolume",
+  "AZS_ShiftName",
+  "AZS_ShowHubDps",
+  "AZS_SpaceOf",
+  "AZS_SpectateNext",
+  "AZS_SpectatePrev",
+  "AZS_SpectateSwitch",
+  "AZS_StockStrings",
+  "AZS_StockText",
+  "AZS_TagSpace",
+  "AZS_ToggleEditMode",
+  "AZS_ToggleEmoteWheel",
+  "AZS_ToggleFriends",
+  "AZS_ToggleInspect",
+  "AZS_ToggleProving",
+  "AZS_ToggleVoiceMute",
+  "AZS_TrackerShown",
+  "AZS_TurnArrow",
+  "AZS_UpdateChestPins",
+  "AZS_UpdateEnd",
+  "AZS_UpdateGearRow",
+  "AZS_UpdateLairMarks",
+  "AZS_UpdateRiftMarks",
+  "AZS_ZoneTitle"
+ ],
+ "installedDataUnusedByFieldKit": [
+  "AZS_ABILITIES",
+  "AZS_ABILITIES_UPDATED",
+  "AZS_API",
+  "AZS_API_HUD",
+  "AZS_ARMOR",
+  "AZS_ApiWorld",
+  "AZS_BANNER",
+  "AZS_BANNERS",
+  "AZS_BANNERS_KEPT",
+  "AZS_BANNER_HANDLERS",
+  "AZS_BANNER_UPDATED",
+  "AZS_BOSSMETER",
+  "AZS_BOSSMETER_UPDATED",
+  "AZS_CAPS",
+  "AZS_CAPS_UPDATED",
+  "AZS_CARDS",
+  "AZS_CHESTS_UPDATED",
+  "AZS_COOP_STATE",
+  "AZS_DARKNESS",
+  "AZS_DEBUFFS",
+  "AZS_DEBUFFS_AT",
+  "AZS_DEBUFFS_UPDATED",
+  "AZS_EMOTES",
+  "AZS_EMOTEWHEEL",
+  "AZS_END",
+  "AZS_END_HEROES",
+  "AZS_END_LOOT",
+  "AZS_END_OWN_RUN",
+  "AZS_END_RUN",
+  "AZS_END_RUN_ALL",
+  "AZS_END_UPDATED",
+  "AZS_FONT",
+  "AZS_FONTS",
+  "AZS_FRIENDS",
+  "AZS_Fields",
+  "AZS_GEAR_RARITY",
+  "AZS_GX_API",
+  "AZS_HEXES",
+  "AZS_HUB_ASK",
+  "AZS_HUD_CVARS",
+  "AZS_ICON_GROW",
+  "AZS_INSPECT",
+  "AZS_IconRim",
+  "AZS_JOIN_ASK",
+  "AZS_KEYS",
+  "AZS_KICK",
+  "AZS_LAIRS_UPDATED",
+  "AZS_LANGUAGES",
+  "AZS_List",
+  "AZS_METER",
+  "AZS_METER_UPDATED",
+  "AZS_MOUNT",
+  "AZS_ON_TOP",
+  "AZS_ON_TOP_FRAMES",
+  "AZS_OPENLEVELS",
+  "AZS_PASSAGE",
+  "AZS_PEERS",
+  "AZS_PETS_UPDATED",
+  "AZS_PG",
+  "AZS_PING",
+  "AZS_POWER",
+  "AZS_PUSHTOTALK",
+  "AZS_PlaceTracker",
+  "AZS_REMOVE_FRIEND",
+  "AZS_REVIVE_UPDATED",
+  "AZS_RIFT",
+  "AZS_RUNSTATS",
+  "AZS_SCHEDULE_UPDATED",
+  "AZS_SETTINGS",
+  "AZS_SPECTATE",
+  "AZS_SPECTATE_NEXT",
+  "AZS_SPECTATE_PREV",
+  "AZS_SPELLS_AT",
+  "AZS_SPELLS_UPDATED",
+  "AZS_SendCommand",
+  "AZS_Setting",
+  "AZS_SkinSlider",
+  "AZS_TALENT_BUILD",
+  "AZS_TALENT_TREES",
+  "AZS_TIMERS_UPDATED",
+  "AZS_TOMBS",
+  "AZS_TOTEMS_UPDATED",
+  "AZS_VAULT",
+  "AZS_VICTORY",
+  "AZS_WATCH",
+  "AZS_ZONE_UPDATED"
+ ],
+ "modules": {
+  "Runtime.lua": {
+   "lines": 113,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 1,
+   "azsPcalls": 4,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_IsOnTopOfScreens",
+    "AZS_SetHudShown",
+    "AZS_SetOnTopOfScreens"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKit"
+   ],
+   "tests": [
+    "action_effects.lua",
+    "alignment.lua",
+    "alignment_chat.lua",
+    "alignment_chat_reload.lua",
+    "alignment_themes.lua",
+    "card_preferences.lua",
+    "coop.lua",
+    "diagnostics.lua",
+    "edge_positions.lua",
+    "game_0121.lua",
+    "individual_layout.lua",
+    "interface_journey.lua",
+    "international.lua",
+    "loadout.lua",
+    "mode_stack.lua",
+    "native50.lua",
+    "native_tools.lua",
+    "party_details.lua",
+    "party_sync.lua",
+    "previews.lua",
+    "profile_chat.lua",
+    "profile_ui.lua",
+    "profiles.lua",
+    "reborn.lua",
+    "reborn_064.lua",
+    "reborn_065.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_buffs.lua",
+    "reborn_chat_controls.lua",
+    "reborn_difficulty_context.lua",
+    "reborn_display_ownership.lua",
+    "reborn_factory_install.lua",
+    "reborn_factory_presets.lua",
+    "reborn_first_launch.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_native_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "security.lua",
+    "test_money.lua",
+    "tests.lua",
+    "ux_simplification.lua",
+    "window_lock.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "action_effects.lua",
+    "alignment.lua",
+    "alignment_chat.lua",
+    "alignment_chat_reload.lua",
+    "alignment_themes.lua",
+    "card_preferences.lua",
+    "coop.lua",
+    "diagnostics.lua",
+    "edge_positions.lua",
+    "game_0121.lua",
+    "individual_layout.lua",
+    "interface_journey.lua",
+    "international.lua",
+    "loadout.lua",
+    "mode_stack.lua",
+    "native50.lua",
+    "native_tools.lua",
+    "party_details.lua",
+    "party_sync.lua",
+    "previews.lua",
+    "profile_chat.lua",
+    "profile_ui.lua",
+    "profiles.lua",
+    "reborn.lua",
+    "reborn_064.lua",
+    "reborn_065.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_buffs.lua",
+    "reborn_chat_controls.lua",
+    "reborn_difficulty_context.lua",
+    "reborn_display_ownership.lua",
+    "reborn_factory_install.lua",
+    "reborn_factory_presets.lua",
+    "reborn_first_launch.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_native_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "security.lua",
+    "test_money.lua",
+    "tests.lua",
+    "ux_simplification.lua",
+    "window_lock.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "RebornCreatures.lua": {
+   "lines": 920,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitRebornCreatures"
+   ],
+   "tests": [
+    "reborn_presentation_regressions.lua"
+   ],
+   "executedTests": [
+    "reborn_presentation_regressions.lua"
+   ]
+  },
+  "Reborn.lua": {
+   "lines": 354,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 1,
+   "azsPcalls": 6,
+   "azsSymbols": [
+    "AZS_BUFFS",
+    "AZS_BUFFS_UPDATED",
+    "AZS_EVENT",
+    "AZS_EventCurrency",
+    "AZS_GEAR",
+    "AZS_GEN",
+    "AZS_GetBosses",
+    "AZS_GetGuardians",
+    "AZS_GetMeterCapabilities",
+    "AZS_GetPhase",
+    "AZS_GetRunTime",
+    "AZS_L",
+    "AZS_RUN",
+    "AZS_RUN_UPDATED",
+    "AZS_SCHEDULE",
+    "AZS_SPELL_NAMES",
+    "AZS_SpellName",
+    "AZS_UNITS",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitReborn"
+   ],
+   "tests": [
+    "international.lua",
+    "reborn.lua",
+    "reborn_064.lua",
+    "reborn_065.lua",
+    "reborn_065_native.lua",
+    "reborn_069.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_progression.lua",
+    "reborn_buffs.lua",
+    "reborn_combat_locale.lua",
+    "reborn_display_ownership.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_hud_details.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_locale_native.lua",
+    "reborn_optional_art.lua",
+    "reborn_presentation_regressions.lua",
+    "reborn_ready_hud.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua"
+   ],
+   "executedTests": [
+    "international.lua",
+    "reborn.lua",
+    "reborn_064.lua",
+    "reborn_065.lua",
+    "reborn_065_native.lua",
+    "reborn_069.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_progression.lua",
+    "reborn_buffs.lua",
+    "reborn_combat_locale.lua",
+    "reborn_display_ownership.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_hud_details.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_locale_native.lua",
+    "reborn_optional_art.lua",
+    "reborn_presentation_regressions.lua",
+    "reborn_ready_hud.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua"
+   ]
+  },
+  "RebornPresentation.lua": {
+   "lines": 123,
+   "events": [
+    "COMBAT_LOG_EVENT_UNFILTERED"
+   ],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 2,
+   "createTextureOrFont": 1,
+   "azsCalls": 2,
+   "azsPcalls": 2,
+   "azsSymbols": [
+    "AZS_API_RunId",
+    "AZS_GEN",
+    "AZS_UnitWorldPosition",
+    "AZS_WorldUnits",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "RebornHUD.lua": {
+   "lines": 134,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 6,
+   "createTextureOrFont": 5,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_DASH",
+    "AZS_RUN"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "NativeHUD.lua": {
+   "lines": 388,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 8,
+   "createTextureOrFont": 6,
+   "azsCalls": 0,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_GetRunTime",
+    "AZS_IsHudShown",
+    "AZS_RUN",
+    "AZS_TARGET",
+    "AZS_UNITS"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitNativeHUD"
+   ],
+   "tests": [
+    "reborn_endless_choices.lua",
+    "reborn_native_controls.lua",
+    "reborn_native_hud.lua",
+    "reborn_optional_art.lua",
+    "reborn_themes.lua"
+   ],
+   "executedTests": [
+    "reborn_endless_choices.lua",
+    "reborn_native_controls.lua",
+    "reborn_native_hud.lua",
+    "reborn_optional_art.lua",
+    "reborn_themes.lua"
+   ]
+  },
+  "NativeLayout.lua": {
+   "lines": 77,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitNativeLayout"
+   ],
+   "tests": [
+    "reborn_boss_list_layout.lua",
+    "reborn_native_hud.lua"
+   ],
+   "executedTests": [
+    "reborn_boss_list_layout.lua",
+    "reborn_native_hud.lua"
+   ]
+  },
+  "Diagnostics.lua": {
+   "lines": 361,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_GetBossMeter",
+    "AZS_GetCombatTextEvents",
+    "AZS_GetHealing",
+    "AZS_GetMeter",
+    "AZS_GetPartyMeter",
+    "AZS_GetPhase",
+    "AZS_GetRunTime",
+    "AZS_GetStatCaps",
+    "AZS_GetUpcomingBosses",
+    "AZS_GetWorldAnchorCapabilities",
+    "AZS_GetWorldAnchors",
+    "AZS_ProjectWorldAnchors",
+    "AZS_SetOnTopOfScreens"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitDiagnostics"
+   ],
+   "tests": [
+    "diagnostics.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "diagnostics.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "Positions.lua": {
+   "lines": 37,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitPositions"
+   ],
+   "tests": [
+    "edge_positions.lua"
+   ],
+   "executedTests": [
+    "edge_positions.lua"
+   ]
+  },
+  "Alignment.lua": {
+   "lines": 166,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 2,
+   "createTextureOrFont": 1,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitAlignment"
+   ],
+   "tests": [
+    "alignment.lua",
+    "alignment_chat.lua",
+    "alignment_chat_reload.lua",
+    "alignment_themes.lua"
+   ],
+   "executedTests": [
+    "alignment.lua",
+    "alignment_chat.lua",
+    "alignment_chat_reload.lua",
+    "alignment_themes.lua"
+   ]
+  },
+  "Config.lua": {
+   "lines": 169,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Profiles.lua": {
+   "lines": 485,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitProfiles"
+   ],
+   "tests": [
+    "alignment.lua",
+    "alignment_chat.lua",
+    "alignment_chat_reload.lua",
+    "diagnostics.lua",
+    "international.lua",
+    "migration_042.lua",
+    "profile_chat.lua",
+    "profile_ui.lua",
+    "profiles.lua",
+    "reborn_064.lua",
+    "reborn_boss_list.lua",
+    "reborn_factory_install.lua",
+    "reborn_factory_presets.lua",
+    "reborn_first_launch.lua",
+    "reborn_settings_audit.lua",
+    "reborn_world_markers.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "alignment.lua",
+    "alignment_chat.lua",
+    "alignment_chat_reload.lua",
+    "diagnostics.lua",
+    "international.lua",
+    "migration_042.lua",
+    "profile_chat.lua",
+    "profile_ui.lua",
+    "profiles.lua",
+    "reborn_064.lua",
+    "reborn_boss_list.lua",
+    "reborn_factory_install.lua",
+    "reborn_factory_presets.lua",
+    "reborn_first_launch.lua",
+    "reborn_settings_audit.lua",
+    "reborn_world_markers.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "FactoryPresets.lua": {
+   "lines": 1580,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Localization.lua": {
+   "lines": 743,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitLocale"
+   ],
+   "tests": [
+    "international.lua",
+    "test_localization.lua",
+    "ux_simplification.lua"
+   ],
+   "executedTests": [
+    "international.lua",
+    "test_localization.lua",
+    "ux_simplification.lua"
+   ]
+  },
+  "InterfaceStrings.lua": {
+   "lines": 579,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_pl.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_cs.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_de.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_pt.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_es.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_ro.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_tr.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_ru.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_uk.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_zh.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_ja.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Locale_ko.lua": {
+   "lines": 1088,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "International.lua": {
+   "lines": 139,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 2,
+   "createTextureOrFont": 1,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_LOCALE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "Theme.lua": {
+   "lines": 321,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 2,
+   "createTextureOrFont": 9,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitTheme"
+   ],
+   "tests": [
+    "card_preferences.lua",
+    "diagnostics.lua",
+    "international.lua",
+    "party_details.lua",
+    "previews.lua",
+    "reborn_boss_list.lua",
+    "reborn_native_hud.lua",
+    "reborn_ready_hud.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "card_preferences.lua",
+    "diagnostics.lua",
+    "international.lua",
+    "party_details.lua",
+    "previews.lua",
+    "reborn_boss_list.lua",
+    "reborn_native_hud.lua",
+    "reborn_ready_hud.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "ZoneThemeRegistry.lua": {
+   "lines": 7,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitZoneRegistry",
+    "FieldKitZoneVariants"
+   ],
+   "tests": [],
+   "executedTests": []
+  },
+  "Seed.lua": {
+   "lines": 158,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_GEN"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKit_Seed"
+   ],
+   "tests": [],
+   "executedTests": []
+  },
+  "PortraitCatalog.lua": {
+   "lines": 1080,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKit_PortraitCatalog",
+    "FieldKit_PortraitCatalogInfo"
+   ],
+   "tests": [
+    "tests.lua"
+   ],
+   "executedTests": [
+    "tests.lua"
+   ]
+  },
+  "Portraits.lua": {
+   "lines": 70,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_UNITS",
+    "AZS_UNITS_UPDATED",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKit_Portraits",
+    "SLASH_FieldKitPORTRAIT1"
+   ],
+   "tests": [
+    "official_api.lua",
+    "portraits_native.lua",
+    "reborn.lua",
+    "tests.lua"
+   ],
+   "executedTests": [
+    "official_api.lua",
+    "portraits_native.lua",
+    "reborn.lua",
+    "tests.lua"
+   ]
+  },
+  "Settings.lua": {
+   "lines": 226,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 2,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "GameCompatibility.lua": {
+   "lines": 83,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 2,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_RUN",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "RebornStats.lua": {
+   "lines": 68,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 1,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_GetStatCaps",
+    "AZS_STATS"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitRebornStats"
+   ],
+   "tests": [
+    "reborn_064.lua",
+    "reborn_069.lua",
+    "reborn_069_native.lua"
+   ],
+   "executedTests": [
+    "reborn_064.lua",
+    "reborn_069.lua",
+    "reborn_069_native.lua"
+   ]
+  },
+  "Reborn065.lua": {
+   "lines": 116,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_DEATH",
+    "AZS_GetDebuffs",
+    "AZS_GetPhase"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitReborn065"
+   ],
+   "tests": [
+    "reborn_065.lua"
+   ],
+   "executedTests": [
+    "reborn_065.lua"
+   ]
+  },
+  "RunMode.lua": {
+   "lines": 148,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 1,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitRunMode"
+   ],
+   "tests": [
+    "mode_stack.lua",
+    "native_tools.lua",
+    "reborn.lua",
+    "ux_simplification.lua",
+    "window_lock.lua"
+   ],
+   "executedTests": [
+    "mode_stack.lua",
+    "native_tools.lua",
+    "reborn.lua",
+    "ux_simplification.lua",
+    "window_lock.lua"
+   ]
+  },
+  "NativeData.lua": {
+   "lines": 105,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_BUFFS",
+    "AZS_GEAR",
+    "AZS_GetBossMeter",
+    "AZS_GetCombatTextEvents",
+    "AZS_GetFlaggedLair",
+    "AZS_GetHealing",
+    "AZS_GetLairs",
+    "AZS_GetLocalTime",
+    "AZS_GetMeter",
+    "AZS_GetPhase",
+    "AZS_GetRevive",
+    "AZS_GetRunTime",
+    "AZS_GetStoredLevels",
+    "AZS_GetSummonGroups",
+    "AZS_GetTimers",
+    "AZS_GetTotems",
+    "AZS_GetUpcomingBosses",
+    "AZS_PETS",
+    "AZS_REVIVE",
+    "AZS_RUN",
+    "AZS_SCHEDULE",
+    "AZS_SPELLS",
+    "AZS_SPELLTIPS",
+    "AZS_TIMERS",
+    "AZS_TOTEMS",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitMeters",
+    "FieldKitNative"
+   ],
+   "tests": [
+    "loadout.lua",
+    "native_tools.lua",
+    "reborn_069.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_difficulty_context.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_factory_install.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_locale_native.lua",
+    "reborn_ready_hud.lua",
+    "reborn_world_markers_native.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "loadout.lua",
+    "native_tools.lua",
+    "reborn_069.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_difficulty_context.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_factory_install.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_locale_native.lua",
+    "reborn_ready_hud.lua",
+    "reborn_world_markers_native.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "MeterWindow.lua": {
+   "lines": 59,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitMeterWindow"
+   ],
+   "tests": [
+    "reborn_064.lua",
+    "reborn_064_native.lua"
+   ],
+   "executedTests": [
+    "reborn_064.lua",
+    "reborn_064_native.lua"
+   ]
+  },
+  "MeterLedger.lua": {
+   "lines": 801,
+   "events": [
+    "ADDON_LOADED",
+    "CHAT_MSG_COMBAT_HOSTILEPLAYER_DEATH",
+    "CHAT_MSG_COMBAT_HOSTILE_DEATH",
+    "CHAT_MSG_COMBAT_PET_HITS",
+    "CHAT_MSG_COMBAT_SELF_HITS",
+    "CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE",
+    "CHAT_MSG_SPELL_PERIODIC_HOSTILEPLAYER_DAMAGE",
+    "CHAT_MSG_SPELL_PET_DAMAGE",
+    "CHAT_MSG_SPELL_SELF_DAMAGE",
+    "PLAYER_LOGIN"
+   ],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 2,
+   "createTextureOrFont": 0,
+   "azsCalls": 3,
+   "azsPcalls": 8,
+   "azsSymbols": [
+    "AZS_API_RunId",
+    "AZS_CreateMeterCheckpoint",
+    "AZS_GetBossMeter",
+    "AZS_GetCombatTextEvents",
+    "AZS_GetHealing",
+    "AZS_GetMeter",
+    "AZS_GetMeterContext",
+    "AZS_GetMeterSnapshot",
+    "AZS_GetPartyMeter",
+    "AZS_GetPhase",
+    "AZS_GetRunTime",
+    "AZS_RUN",
+    "AZS_ReleaseMeterCheckpoint",
+    "AZS_TAKEN",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitMeterLedger"
+   ],
+   "tests": [
+    "meter_suite.lua",
+    "reborn.lua",
+    "reborn_064.lua",
+    "reborn_064_native.lua",
+    "reborn_069_native.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_meter_feed.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_party.lua",
+    "reborn_presentation_regressions.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "reborn.lua",
+    "reborn_064.lua",
+    "reborn_064_native.lua",
+    "reborn_069_native.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_meter_feed.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_party.lua",
+    "reborn_presentation_regressions.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "MeterSuite.lua": {
+   "lines": 490,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 11,
+   "createTextureOrFont": 10,
+   "azsCalls": 1,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_GetPhase"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitMeterSuite"
+   ],
+   "tests": [
+    "meter_suite.lua",
+    "reborn_064.lua",
+    "reborn_locale_matrix.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "reborn_064.lua",
+    "reborn_locale_matrix.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "BossTimeline.lua": {
+   "lines": 363,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 5,
+   "createTextureOrFont": 13,
+   "azsCalls": 1,
+   "azsPcalls": 3,
+   "azsSymbols": [
+    "AZS_BuildBossChargeBar",
+    "AZS_GetPhase",
+    "AZS_GetRunTime",
+    "AZS_GetUpcomingBosses",
+    "AZS_RUN",
+    "AZS_SCHEDULE",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitBossTimeline"
+   ],
+   "tests": [
+    "boss_timeline.lua",
+    "reborn_069.lua",
+    "reborn_boss_progression.lua",
+    "reborn_display_ownership.lua",
+    "reborn_native_hud.lua"
+   ],
+   "executedTests": [
+    "reborn_069.lua",
+    "reborn_boss_progression.lua",
+    "reborn_display_ownership.lua",
+    "reborn_native_hud.lua"
+   ]
+  },
+  "HudStack.lua": {
+   "lines": 174,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 2,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitHudStack"
+   ],
+   "tests": [
+    "diagnostics.lua",
+    "edge_positions.lua",
+    "mode_stack.lua",
+    "previews.lua",
+    "window_lock.lua"
+   ],
+   "executedTests": [
+    "diagnostics.lua",
+    "edge_positions.lua",
+    "mode_stack.lua",
+    "previews.lua",
+    "window_lock.lua"
+   ]
+  },
+  "CardLayout.lua": {
+   "lines": 205,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 1,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitCardLayout"
+   ],
+   "tests": [
+    "coop.lua",
+    "individual_layout.lua",
+    "native_tools.lua",
+    "previews.lua",
+    "reborn_boss_list.lua",
+    "reborn_native_hud.lua",
+    "window_lock.lua"
+   ],
+   "executedTests": [
+    "coop.lua",
+    "individual_layout.lua",
+    "native_tools.lua",
+    "previews.lua",
+    "reborn_boss_list.lua",
+    "reborn_native_hud.lua",
+    "window_lock.lua"
+   ]
+  },
+  "Coop.lua": {
+   "lines": 545,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 1,
+   "createTextureOrFont": 11,
+   "azsCalls": 1,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_GetPartyMeter",
+    "AZS_GetPhase",
+    "AZS_PARTY",
+    "AZS_PARTY_UPDATED",
+    "AZS_RUN",
+    "AZS_TAKEN",
+    "AZS_TAKEN_UPDATED"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitCoop"
+   ],
+   "tests": [
+    "coop.lua",
+    "group_history.lua",
+    "party_details.lua",
+    "previews.lua",
+    "ux_simplification.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "coop.lua",
+    "group_history.lua",
+    "party_details.lua",
+    "previews.lua",
+    "ux_simplification.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "GroupHistory.lua": {
+   "lines": 286,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 2,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitGroupHistory"
+   ],
+   "tests": [
+    "group_history.lua",
+    "reborn_locale_matrix.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "group_history.lua",
+    "reborn_locale_matrix.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "PartySync.lua": {
+   "lines": 204,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 1,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_GetMeter",
+    "AZS_GetPhase",
+    "AZS_RUN"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitPartySync"
+   ],
+   "tests": [
+    "party_details.lua",
+    "party_sync.lua",
+    "ux_simplification.lua"
+   ],
+   "executedTests": [
+    "party_details.lua",
+    "party_sync.lua",
+    "ux_simplification.lua"
+   ]
+  },
+  "PartyDetails.lua": {
+   "lines": 414,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 6,
+   "createTextureOrFont": 4,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitPartyDetails"
+   ],
+   "tests": [
+    "native_tools.lua",
+    "party_details.lua",
+    "reborn_064.lua",
+    "reborn_effects_headers.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_presentation_regressions.lua",
+    "ux_simplification.lua"
+   ],
+   "executedTests": [
+    "native_tools.lua",
+    "party_details.lua",
+    "reborn_064.lua",
+    "reborn_effects_headers.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_presentation_regressions.lua",
+    "ux_simplification.lua"
+   ]
+  },
+  "ScreenLayers.lua": {
+   "lines": 107,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitScreenLayers"
+   ],
+   "tests": [
+    "reborn_boss_list.lua",
+    "reborn_endless_choices.lua",
+    "reborn_first_launch.lua",
+    "reborn_native_hud.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "reborn_boss_list.lua",
+    "reborn_endless_choices.lua",
+    "reborn_first_launch.lua",
+    "reborn_native_hud.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "NativeTools.lua": {
+   "lines": 404,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 1,
+   "createTextureOrFont": 3,
+   "azsCalls": 0,
+   "azsPcalls": 4,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_GetRevive",
+    "AZS_GetStoredLevels",
+    "AZS_GetSummonGroups",
+    "AZS_GetTimers",
+    "AZS_GetTotems",
+    "AZS_GetUpcomingBosses",
+    "AZS_IsHudShown",
+    "AZS_RUN",
+    "AZS_RUN_UPDATED",
+    "AZS_RegisterBannerHandler",
+    "AZS_SCHEDULE",
+    "AZS_UnregisterBannerHandler",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitNativeTools"
+   ],
+   "tests": [
+    "international.lua",
+    "native_tools.lua",
+    "reborn_069.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_boss_progression.lua",
+    "reborn_buffs.lua",
+    "reborn_display_ownership.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_factory_install.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_locale_native.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "international.lua",
+    "native_tools.lua",
+    "reborn_069.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_boss_progression.lua",
+    "reborn_buffs.lua",
+    "reborn_display_ownership.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_factory_install.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_locale_native.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "SpellAssets.lua": {
+   "lines": 1751,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitSpellAssets"
+   ],
+   "tests": [],
+   "executedTests": []
+  },
+  "Loadout.lua": {
+   "lines": 584,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 3,
+   "createTextureOrFont": 4,
+   "azsCalls": 0,
+   "azsPcalls": 2,
+   "azsSymbols": [
+    "AZS_GEAR",
+    "AZS_GEN",
+    "AZS_GetMeterContext",
+    "AZS_GetMeterLoadout",
+    "AZS_GetPhase",
+    "AZS_SPELLS",
+    "AZS_SPELLTIPS"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitLoadout"
+   ],
+   "tests": [
+    "diagnostics.lua",
+    "group_history.lua",
+    "international.lua",
+    "loadout.lua",
+    "reborn_endless_choices.lua",
+    "reborn_hud_details.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_presentation_regressions.lua",
+    "reborn_ready_hud.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "diagnostics.lua",
+    "group_history.lua",
+    "international.lua",
+    "loadout.lua",
+    "reborn_endless_choices.lua",
+    "reborn_hud_details.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_presentation_regressions.lua",
+    "reborn_ready_hud.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "TakenDetails.lua": {
+   "lines": 92,
+   "events": [
+    "CHAT_MSG_COMBAT_CREATURE_VS_SELF_HITS",
+    "CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE",
+    "CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE"
+   ],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 1,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_TARGET",
+    "AZS_TARGET_UPDATED",
+    "AZS_UNITS",
+    "AZS_UNITS_UPDATED"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitTakenDetails"
+   ],
+   "tests": [
+    "loadout.lua"
+   ],
+   "executedTests": [
+    "loadout.lua"
+   ]
+  },
+  "Preview.lua": {
+   "lines": 501,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 7,
+   "createTextureOrFont": 5,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitPreview"
+   ],
+   "tests": [
+    "previews.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "previews.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "PreviewVisibility.lua": {
+   "lines": 106,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitPreviewVisibility"
+   ],
+   "tests": [
+    "previews.lua"
+   ],
+   "executedTests": [
+    "previews.lua"
+   ]
+  },
+  "OptionsSchema.lua": {
+   "lines": 233,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "LegacyCrits.lua": {
+   "lines": 125,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 1,
+   "createTextureOrFont": 2,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitCrits"
+   ],
+   "tests": [],
+   "executedTests": []
+  },
+  "Interface.lua": {
+   "lines": 1372,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 2,
+   "createFrame": 37,
+   "createTextureOrFont": 6,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitUI"
+   ],
+   "tests": [
+    "alignment.lua",
+    "alignment_chat.lua",
+    "card_preferences.lua",
+    "coop.lua",
+    "edge_positions.lua",
+    "game_0121.lua",
+    "individual_layout.lua",
+    "interface_journey.lua",
+    "international.lua",
+    "mode_stack.lua",
+    "native_tools.lua",
+    "party_details.lua",
+    "previews.lua",
+    "profile_ui.lua",
+    "reborn_064.lua",
+    "reborn_065.lua",
+    "reborn_buffs.lua",
+    "reborn_chat_controls.lua",
+    "reborn_display_ownership.lua",
+    "reborn_native_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "test_localization.lua",
+    "ux_simplification.lua",
+    "window_lock.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "alignment.lua",
+    "alignment_chat.lua",
+    "card_preferences.lua",
+    "coop.lua",
+    "edge_positions.lua",
+    "game_0121.lua",
+    "individual_layout.lua",
+    "interface_journey.lua",
+    "international.lua",
+    "mode_stack.lua",
+    "native_tools.lua",
+    "party_details.lua",
+    "previews.lua",
+    "profile_ui.lua",
+    "reborn_064.lua",
+    "reborn_065.lua",
+    "reborn_buffs.lua",
+    "reborn_chat_controls.lua",
+    "reborn_display_ownership.lua",
+    "reborn_native_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "test_localization.lua",
+    "ux_simplification.lua",
+    "window_lock.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "FieldKit.lua": {
+   "lines": 3283,
+   "events": [
+    "CHAT_MSG_ADDON",
+    "CHAT_MSG_COMBAT_SELF_HITS",
+    "CHAT_MSG_SPELL_SELF_DAMAGE",
+    "PLAYER_AURAS_CHANGED",
+    "PLAYER_ENTERING_WORLD",
+    "PLAYER_LEVEL_UP",
+    "PLAYER_LOGOUT",
+    "PLAYER_MONEY",
+    "PLAYER_TARGET_CHANGED",
+    "PLAYER_XP_UPDATE",
+    "UNIT_HEALTH",
+    "UNIT_INVENTORY_CHANGED",
+    "UNIT_MAXHEALTH",
+    "UPDATE_MOUSEOVER_UNIT",
+    "VARIABLES_LOADED"
+   ],
+   "unregistered": [],
+   "onUpdate": 3,
+   "createFrame": 30,
+   "createTextureOrFont": 68,
+   "azsCalls": 20,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_GetDebuffs",
+    "AZS_GetFlaggedLair",
+    "AZS_GetLairs",
+    "AZS_GetPhase",
+    "AZS_GetPlayerPosition",
+    "AZS_LAIRS",
+    "AZS_RUN",
+    "AZS_STATS",
+    "AZS_STATS_UPDATED",
+    "AZS_SetHudShown",
+    "AZS_UNITS",
+    "AZS_UNITS_UPDATED",
+    "AZS_UnitKind",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "HideNameplates",
+    "RefreshCollapseDock",
+    "SECTIONS",
+    "SLASH_FieldKit1"
+   ],
+   "tests": [
+    "mock.lua"
+   ],
+   "executedTests": [
+    "mock.lua"
+   ]
+  },
+  "WorldPins.lua": {
+   "lines": 136,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 1,
+   "createTextureOrFont": 2,
+   "azsCalls": 1,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_CHESTS",
+    "AZS_GetPhase",
+    "AZS_GetPlayerPosition",
+    "AZS_LAIRS",
+    "AZS_RUN"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "WorldAnchors.lua": {
+   "lines": 155,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 1,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 6,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_GetWorldAnchorCapabilities",
+    "AZS_GetWorldAnchors",
+    "AZS_ProjectWorldAnchors",
+    "AZS_ProjectWorldPoint",
+    "AZS_RegisterWorldAnchorFrameHandler",
+    "AZS_UnitWorldPosition",
+    "AZS_UnregisterWorldAnchorFrameHandler"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitWorldAnchors",
+    "SLASH_FIELDKITANCHORS1"
+   ],
+   "tests": [
+    "reborn_world_markers.lua",
+    "reborn_world_markers_native.lua"
+   ],
+   "executedTests": [
+    "reborn_world_markers.lua",
+    "reborn_world_markers_native.lua"
+   ]
+  },
+  "WorldMarkers.lua": {
+   "lines": 405,
+   "events": [
+    "PLAYER_ENTERING_WORLD"
+   ],
+   "unregistered": [],
+   "onUpdate": 3,
+   "createFrame": 5,
+   "createTextureOrFont": 4,
+   "azsCalls": 0,
+   "azsPcalls": 2,
+   "azsSymbols": [
+    "AZS_GetDownedPartyMembers",
+    "AZS_GetPlayerPosition"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitWorldMarkers",
+    "SLASH_FIELDKITMARKERS1"
+   ],
+   "tests": [
+    "reborn_world_markers.lua",
+    "reborn_world_markers_native.lua"
+   ],
+   "executedTests": [
+    "reborn_world_markers.lua",
+    "reborn_world_markers_native.lua"
+   ]
+  },
+  "CombatText.lua": {
+   "lines": 683,
+   "events": [
+    "PLAYER_LOGOUT"
+   ],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 3,
+   "createTextureOrFont": 3,
+   "azsCalls": 1,
+   "azsPcalls": 6,
+   "azsSymbols": [
+    "AZS_GetCombatTextCapabilities",
+    "AZS_GetCombatTextEvents",
+    "AZS_GetPhase",
+    "AZS_HEALING",
+    "AZS_HEALING_UPDATED",
+    "AZS_ProjectCombatTextAnchors",
+    "AZS_RUN",
+    "AZS_RegisterCombatTextFrameHandler",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitCombat",
+    "SLASH_FieldKitCOMBAT1"
+   ],
+   "tests": [
+    "combat_world.lua",
+    "international.lua",
+    "reborn_locale_native.lua",
+    "test_combat_editor.lua",
+    "test_localization.lua"
+   ],
+   "executedTests": [
+    "international.lua",
+    "reborn_locale_native.lua",
+    "test_combat_editor.lua",
+    "test_localization.lua"
+   ]
+  },
+  "CombatOptions.lua": {
+   "lines": 399,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 2,
+   "createFrame": 6,
+   "createTextureOrFont": 5,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_GetCombatTextEvents"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [],
+   "tests": [],
+   "executedTests": []
+  },
+  "CopyLog.lua": {
+   "lines": 740,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 8,
+   "createTextureOrFont": 5,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "SLASH_FieldKitLOG1"
+   ],
+   "tests": [],
+   "executedTests": []
+  },
+  "ThemeMinimap.lua": {
+   "lines": 403,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 1,
+   "createFrame": 1,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_GetPlayerPosition",
+    "AZS_RUN"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitThemeMinimap"
+   ],
+   "tests": [
+    "alignment.lua",
+    "alignment_themes.lua",
+    "diagnostics.lua",
+    "reborn_optional_art.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "alignment.lua",
+    "alignment_themes.lua",
+    "diagnostics.lua",
+    "reborn_optional_art.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "ThemeHUD.lua": {
+   "lines": 447,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 14,
+   "createTextureOrFont": 8,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_GetUpcomingBosses",
+    "AZS_RUN",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitThemeHUD"
+   ],
+   "tests": [
+    "diagnostics.lua",
+    "reborn_065.lua",
+    "reborn_endless_choices.lua",
+    "reborn_hud_details.lua",
+    "reborn_native_hud.lua",
+    "reborn_optional_art.lua",
+    "reborn_ready_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "diagnostics.lua",
+    "reborn_065.lua",
+    "reborn_endless_choices.lua",
+    "reborn_hud_details.lua",
+    "reborn_native_hud.lua",
+    "reborn_optional_art.lua",
+    "reborn_ready_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "ThemeTarget.lua": {
+   "lines": 142,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 3,
+   "createTextureOrFont": 4,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [
+    "AZS_TARGET"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitThemeTarget"
+   ],
+   "tests": [
+    "reborn_hud_details.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_settings_audit.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "reborn_hud_details.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_settings_audit.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "ReferenceArt.lua": {
+   "lines": 2,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 0,
+   "createTextureOrFont": 0,
+   "azsCalls": 0,
+   "azsPcalls": 0,
+   "azsSymbols": [],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitReferenceArt"
+   ],
+   "tests": [],
+   "executedTests": []
+  },
+  "ReferenceHUD.lua": {
+   "lines": 2076,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 2,
+   "createFrame": 15,
+   "createTextureOrFont": 25,
+   "azsCalls": 0,
+   "azsPcalls": 1,
+   "azsSymbols": [
+    "AZS_GetLairs",
+    "AZS_GetStoredLevels",
+    "AZS_GetUpcomingBosses",
+    "AZS_OpenStoredLevels",
+    "AZS_RUN"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitReferenceHUD"
+   ],
+   "tests": [
+    "alignment_themes.lua",
+    "diagnostics.lua",
+    "reborn_064.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_chat_controls.lua",
+    "reborn_factory_install.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_optional_art.lua",
+    "reborn_ready_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "alignment_themes.lua",
+    "diagnostics.lua",
+    "reborn_064.lua",
+    "reborn_069_native.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_chat_controls.lua",
+    "reborn_factory_install.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_optional_art.lua",
+    "reborn_ready_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua",
+    "zone_themes.lua"
+   ]
+  },
+  "ZoneThemes.lua": {
+   "lines": 615,
+   "events": [],
+   "unregistered": [],
+   "onUpdate": 0,
+   "createFrame": 4,
+   "createTextureOrFont": 1,
+   "azsCalls": 1,
+   "azsPcalls": 4,
+   "azsSymbols": [
+    "AZS_GetPhase",
+    "AZS_GetStoredLevels",
+    "AZS_IsHudShown",
+    "AZS_OpenStoredLevels",
+    "AZS_UNITS",
+    "AZS_ZONE"
+   ],
+   "luaHazards": [],
+   "globalsDefined": [
+    "FieldKitZoneThemes",
+    "SLASH_FKMAPSTATE1"
+   ],
+   "tests": [
+    "alignment.lua",
+    "alignment_themes.lua",
+    "diagnostics.lua",
+    "international.lua",
+    "reborn_064.lua",
+    "reborn_069.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_boss_progression.lua",
+    "reborn_chat_controls.lua",
+    "reborn_display_ownership.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_factory_install.lua",
+    "reborn_hud_details.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_native_hud.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_optional_art.lua",
+    "reborn_ready_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua",
+    "reborn_world_markers.lua",
+    "zone_themes.lua"
+   ],
+   "executedTests": [
+    "alignment.lua",
+    "alignment_themes.lua",
+    "diagnostics.lua",
+    "international.lua",
+    "reborn_064.lua",
+    "reborn_069.lua",
+    "reborn_boss_list.lua",
+    "reborn_boss_list_layout.lua",
+    "reborn_boss_progression.lua",
+    "reborn_chat_controls.lua",
+    "reborn_display_ownership.lua",
+    "reborn_effects_headers.lua",
+    "reborn_endless_choices.lua",
+    "reborn_factory_install.lua",
+    "reborn_hud_details.lua",
+    "reborn_loadout_locale.lua",
+    "reborn_loadout_values.lua",
+    "reborn_locale_matrix.lua",
+    "reborn_native_hud.lua",
+    "reborn_numeric_layout.lua",
+    "reborn_optional_art.lua",
+    "reborn_ready_hud.lua",
+    "reborn_settings_audit.lua",
+    "reborn_taken_layout.lua",
+    "reborn_themes.lua",
+    "reborn_visual_integration.lua",
+    "reborn_world_markers.lua",
+    "zone_themes.lua"
+   ]
+  }
+ },
+ "testFilesNotExecutedByRunners": [
+  "boss_timeline.lua",
+  "combat_world.lua",
+  "meter_suite.lua"
+ ]
+}

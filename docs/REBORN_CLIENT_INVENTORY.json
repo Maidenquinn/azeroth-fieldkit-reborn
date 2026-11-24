@@ -4,10 +4,10 @@
   "counts": {
     "classes": 12,
     "zones": 48,
-    "jewels": 38,
-    "amulets": 20,
+    "jewels": 44,
+    "amulets": 22,
     "gearTiers": 3,
-    "creatureIcons": 612,
+    "creatureIcons": 816,
     "pieces": 6,
     "achievements": 83,
     "spells": 241
@@ -233,84 +233,84 @@
       "key": "deepholm",
       "name": "Deepholm",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "gilneas",
       "name": "Gilneas",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "tol_barad",
       "name": "Tol Barad",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "uldum",
       "name": "Uldum",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "mount_hyjal",
       "name": "Mount Hyjal",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "vashjir",
       "name": "Vashj'ir",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "twilight_highlands",
       "name": "Twilight Highlands",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "lost_isles",
       "name": "The Lost Isles",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "firelands",
       "name": "Firelands",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "grim_batol",
       "name": "Grim Batol",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "blackwing_descent",
       "name": "Blackwing Descent",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     },
     {
       "key": "dragon_soul",
       "name": "Dragon Soul",
       "world": 4,
-      "scheduledBosses": 1
+      "scheduledBosses": 5
     }
   ],
   "clientEvidenceSHA256": {
-    "Anchors.lua": "2600dafc0c72a58bc761c6e8e6f4d9100a963bf10cd37cacdc70ed820038dd0f",
-    "Api.lua": "bad99b088322cd4947b8a74fc3b93f0e96816990d87b507bb35479bdb6d02210",
+    "Anchors.lua": "025d92433f111b48c1cdcbe627593c938773519eaee4d22c5c16625dab8c945d",
+    "Api.lua": "e4b39f3bac9ecb279dbbc2d1d666242d4ab9e1e5dff73d6431e47df2d12bdcd2",
     "AzerothSurvivorsAPI.toc": "1481390eb8ceb3dd517d725400e14624ae3a827f9ab6742110e02c4e03ff3af2",
-    "CombatText.lua": "5bb0fa1bcca406b113a2d22b90435588bbea9b78a14d380eb9303b1436705ad8",
+    "CombatText.lua": "0b29ec9ae8d44300b2eb95d6e69b05e9793160e87ffda53e6141cd0613203ec0",
     "Hud.lua": "dabd26b1f364d2fddc250e70c43640283d4c5632fb7e2ef71246581529ec93ac",
-    "Meter.lua": "6edb2f35034a6c82f29e9cdcc3b67c27de32cd8244c90a36f69d4bb37b6b624d",
+    "Meter.lua": "605564904bdb3cdb6cf2adfdcbd645878012ce7900db9722bdccc7f04906b38d",
     "Shims.lua": "4234db152513dceb9397c697c9007156718153c357443136dec021c07003988d",
-    "Generated/Content.lua": "ccf1cae0f435d5772d9aea1310d16f198c273e53a432ce479921f7d1509428e6"
+    "Generated/Content.lua": "235a6f510441c57b7f68846e49c6dfdc73b2800e03ea6025aad0cbe775adf3e4"
   },
   "directCalls": [
     "AZS_API_RunId",
