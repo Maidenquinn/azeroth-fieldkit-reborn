@@ -95,7 +95,7 @@ function N.Update()
  -- This native frame alternates live boss health and next-boss progression.
  local live,covered=false,true
  for _,u in ipairs(type(AZS_UNITS)=="table" and AZS_UNITS or {}) do
-  if FieldKit.Number(u.hp or u[4],0,0)>0 then
+  if FieldKit.MeterNumber(u.hp or u[4],0,0)>0 then
    live=true;if not represented[FieldKit.Number(u.id or u[2],0)] then covered=false end
   end
  end
@@ -117,11 +117,7 @@ function N.Update()
 end
 
 local function Short(value)
- local n=FieldKit.Number(value,nil,0)
- if not n then return "?" end
- if n<1000 then return tostring(math.floor(n)) end
- if n<1000000 then return string.format("%.1fk",n/1000) end
- return string.format("%.1fm",n/1000000)
+ return FieldKit.Compact(FieldKit.MeterNumber(value,nil,0))
 end
 -- The same evenly spaced cells include the event currency, including zero.
 function N.Money(frame,gold,chest)

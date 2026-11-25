@@ -43,7 +43,8 @@ for _,variant in ipairs({'minimal','complete','alternative'}) do
  update(FieldKitFrame,.3)
  assert(c:IsShown() and c.bar:IsShown() and c.bar:GetAlpha()==1)
  assert(c.bar:GetFrameStrata()==c:GetFrameStrata() and c.bar:GetFrameLevel()>c:GetFrameLevel(),'Boss HP behind themed material')
- assert(c.bar:GetValue()==700 and c.bar:GetHeight()>0 and c.hp:IsShown() and c.hp:GetHeight()>0 and c.hp:GetText()~='','Boss HP data/geometry missing')
+ -- .41: status bars draw a fraction (700/1000), never the unbounded native range.
+ assert(math.abs(c.bar:GetValue()-.7)<1e-12 and c.bar.fieldkitFraction==c.bar:GetValue() and c.bar:GetHeight()>0 and c.hp:IsShown() and c.hp:GetHeight()>0 and c.hp:GetText()~='','Boss HP data/geometry missing')
  FieldKitZoneThemes.Set('zoneThemes',false)
 end
 print('PASS live proc + retained spell buff merge, French native labels, deduplication, expiry/freshness, and explicit independent damage/healing header geometry, visibility and sorting')

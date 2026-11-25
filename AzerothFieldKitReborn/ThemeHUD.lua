@@ -279,13 +279,13 @@ end
 function H.ReferenceValues()
  local cur,max=FieldKit.Number(UnitHealth("player")),FieldKit.Number(UnitHealthMax("player"))
  H.name:SetText((UnitName("player") or "?").." · "..tostring(UnitLevel("player") or "?"))
- if cur and max and max>0 then H.health:SetMinMaxValues(0,max);H.health:SetValue(cur);H.hp:SetText(FieldKit_FormatHealth(cur,max,FieldKitRebornDB.playerHealthMode)) else H.hp:SetText("?") end
+ if cur and max and max>0 then FieldKit.SetBarFraction(H.health,cur,max);H.hp:SetText(FieldKit_FormatHealth(cur,max,FieldKitRebornDB.playerHealthMode)) else H.hp:SetText("?") end
  local run=type(AZS_RUN)=="table" and AZS_RUN or {};local names={bloodrage="Rage",seal_fate="Combo points",soul_fire="Soul shards",lightwell="Lightwell"}
  local power,pm=FieldKit.Number(run.pv),FieldKit.Number(run.pm)
  if not names[run.proc] or not pm or pm<=0 then power=type(UnitMana)=="function" and FieldKit.Number(UnitMana("player"));pm=type(UnitManaMax)=="function" and FieldKit.Number(UnitManaMax("player")) end
- if power and pm and pm>0 then H.resource:SetMinMaxValues(0,pm);H.resource:SetValue(power);H.resource:Show();H.resourceText:SetText(FieldKit_L(names[run.proc] or ({[0]="Mana",[1]="Rage",[2]="Focus",[3]="Energy"})[type(UnitPowerType)=="function" and UnitPowerType("player")] or "Resource").." "..power.." / "..pm) else H.resource:Hide();H.resourceText:SetText("") end
+ if power and pm and pm>0 then FieldKit.SetBarFraction(H.resource,power,pm);H.resource:Show();H.resourceText:SetText(FieldKit_L(names[run.proc] or ({[0]="Mana",[1]="Rage",[2]="Focus",[3]="Energy"})[type(UnitPowerType)=="function" and UnitPowerType("player")] or "Resource").." "..power.." / "..pm) else H.resource:Hide();H.resourceText:SetText("") end
  local xp,xpn=FieldKit.Number(UnitXP("player")),FieldKit.Number(UnitXPMax("player"))
- if xp and xpn and xpn>0 then H.xp:SetMinMaxValues(0,xpn);H.xp:SetValue(xp);H.xpText:SetText("XP · "..math.floor(xp/xpn*100).."%");H.xpDetail="XP "..xp.." / "..xpn.." · "..math.max(0,xpn-xp).." "..FieldKit_L("remaining") else H.xp:SetValue(0);H.xpText:SetText("XP · ?");H.xpDetail=FieldKit_L("Native data unavailable") end
+ if xp and xpn and xpn>0 then FieldKit.SetBarFraction(H.xp,xp,xpn);H.xpText:SetText("XP · "..math.floor(xp/xpn*100).."%");H.xpDetail="XP "..xp.." / "..xpn.." · "..math.max(0,xpn-xp).." "..FieldKit_L("remaining") else H.xp:SetValue(0);H.xpText:SetText("XP · ?");H.xpDetail=FieldKit_L("Native data unavailable") end
  local nativeZone=type(AZS_ZONE)=="table" and AZS_ZONE.zname;local key=type(AZS_ZONE)=="table" and AZS_ZONE.zone
  if not FieldKit.rebornLegacyFixture then nativeZone=FieldKitReborn.ZoneName() end
  if type(nativeZone)~="string" or nativeZone=="" then nativeZone=FieldKitZoneRegistry[key or ""] and FieldKit_L(FieldKitZoneRegistry[key].name) or FieldKit_L("Zone not provided") end
@@ -319,20 +319,20 @@ function H.Update(variant,zone)
  else Place(H.healthRoot,"BOTTOM",H.dock,"TOP",0,5) end
  local level=UnitLevel("player");H.name:SetText((UnitName("player") or "?").." · "..tostring(level or "?"))
  local cur,max=FieldKit.Number(UnitHealth("player")),FieldKit.Number(UnitHealthMax("player"))
- if cur and max and max>0 then H.health:SetMinMaxValues(0,max);H.health:SetValue(cur);H.hp:SetText(FieldKit_FormatHealth(cur,max,FieldKitRebornDB.playerHealthMode)) else H.hp:SetText("?") end
+ if cur and max and max>0 then FieldKit.SetBarFraction(H.health,cur,max);H.hp:SetText(FieldKit_FormatHealth(cur,max,FieldKitRebornDB.playerHealthMode)) else H.hp:SetText("?") end
  local shield=FieldKitRebornDB.playerShield and type(AZS_RUN)=="table" and FieldKit.Number(AZS_RUN.sh) or 0
  if shield and shield>0 and max and max>0 then H.shield:SetWidth(430*math.min(shield/max,1));H.shield:Show() else H.shield:Hide() end
  local run=type(AZS_RUN)=="table" and AZS_RUN or {};local proc=run.proc
  local names={bloodrage="Rage",seal_fate="Combo points",soul_fire="Soul shards",lightwell="Lightwell"}
  local power=FieldKit.Number(run.pv);local pm=FieldKit.Number(run.pm)
  if not names[proc] or not pm or pm<=0 then power=type(UnitMana)=="function" and FieldKit.Number(UnitMana("player"));pm=type(UnitManaMax)=="function" and FieldKit.Number(UnitManaMax("player")) end
- if power and pm and pm>0 then H.resource:SetMinMaxValues(0,pm);H.resource:SetValue(power);H.resource:Show();H.resourceText:SetText(FieldKit_L(names[proc] or ({[0]="Mana",[1]="Rage",[2]="Focus",[3]="Energy"})[type(UnitPowerType)=="function" and UnitPowerType("player")] or "Resource").." "..power.." / "..pm) else H.resource:Hide();H.resourceText:SetText("") end
+ if power and pm and pm>0 then FieldKit.SetBarFraction(H.resource,power,pm);H.resource:Show();H.resourceText:SetText(FieldKit_L(names[proc] or ({[0]="Mana",[1]="Rage",[2]="Focus",[3]="Energy"})[type(UnitPowerType)=="function" and UnitPowerType("player")] or "Resource").." "..power.." / "..pm) else H.resource:Hide();H.resourceText:SetText("") end
  H.xpRoot:SetScale(alternative and 1 or scale);H.xpRoot:SetWidth(alternative and sw-40 or 560)
  if alternative then Place(H.xpRoot,zone=="elwynn" and "TOP" or "BOTTOM",UIParent,zone=="elwynn" and "TOP" or "BOTTOM",0,zone=="elwynn" and -6 or 14)
  elseif complete and zone=="elwynn" then Place(H.xpRoot,"BOTTOM",H.dock,"TOP",0,8)
  else Place(H.xpRoot,"TOP",H.dock,"BOTTOM",0,-2) end
  local xp,xpn=FieldKit.Number(UnitXP("player")),FieldKit.Number(UnitXPMax("player"))
- if xp and xpn and xpn>0 then H.xp:SetMinMaxValues(0,xpn);H.xp:SetValue(xp);H.xpText:SetText("XP · "..math.floor(xp/xpn*100).."%");H.xpDetail="XP "..xp.." / "..xpn.." · "..math.max(0,xpn-xp).." "..FieldKit_L("remaining") else H.xp:SetValue(0);H.xpText:SetText("XP · ?");H.xpDetail=FieldKit_L("Native data unavailable") end
+ if xp and xpn and xpn>0 then FieldKit.SetBarFraction(H.xp,xp,xpn);H.xpText:SetText("XP · "..math.floor(xp/xpn*100).."%");H.xpDetail="XP "..xp.." / "..xpn.." · "..math.max(0,xpn-xp).." "..FieldKit_L("remaining") else H.xp:SetValue(0);H.xpText:SetText("XP · ?");H.xpDetail=FieldKit_L("Native data unavailable") end
  if alternative and zone=="naxx" then Place(H.counterRoot,"BOTTOM",H.dock,"TOP",0,5)
  elseif complete and zone=="naxx" then Place(H.counterRoot,"BOTTOM",H.healthRoot,"TOP",0,4)
  elseif complete then Place(H.counterRoot,"TOP",H.dock,"BOTTOM",0,-3)

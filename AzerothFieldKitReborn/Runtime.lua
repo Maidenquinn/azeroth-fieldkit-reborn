@@ -1,7 +1,7 @@
 -- Runtime boundary: validate data and centralize the few native setting writes.
 -- This module runs first. It performs no I/O, networking or native writes at load.
 -- FieldKit is an addon-owned namespace; AZS_* tables remain owned by the client.
-FieldKit = { version = "0.1.0-reborn.40", folder = "AzerothFieldKitReborn" }
+FieldKit = { version = "0.1.0-reborn.41", folder = "AzerothFieldKitReborn" }
 
 -- Native level-up/chest choices own the action controls during this phase.
 -- Read the official phase; do not inspect or modify native screen frames.
@@ -47,6 +47,71 @@ function FieldKit.MeterNumber(value,fallback,minimum,maximum)
  if minimum then n=math.max(minimum,n) end
  if maximum then n=math.min(maximum,n) end
  return n
+end
+
+-- Display-only number formats (.41). Values are never changed, only written.
+-- Tiers are the game's own (AzerothSurvivors/Core.lua AZS.Short: k..Dc, the same
+-- letters in every language; native meter rows are 128-bit and pass 2^64 in long
+-- endless runs). FieldKit keeps its approved style: exact and grouped below 10 000,
+-- then one decimal and a spaced unit, with the language's decimal separator.
+-- Ud (1e36) only keeps 2^128 (3.4e38) inside the column.
+local TIERS={{1e36,"Ud"},{1e33,"Dc"},{1e30,"No"},{1e27,"Oc"},{1e24,"Sp"},{1e21,"Sx"},
+ {1e18,"Qi"},{1e15,"Qa"},{1e12,"T"},{1e9,"B"},{1e6,"M"},{1e3,"k"}}
+local function Separators()
+ local language=type(FieldKit_Language)=="function" and FieldKit_Language() or "en"
+ local spaced=language=="fr" or language=="pl" or language=="cs" or language=="ru" or language=="uk"
+ local comma=spaced or language=="de" or language=="es" or language=="pt" or language=="ro" or language=="tr"
+ return comma and "," or ".",spaced and " " or (comma and "." or ",")
+end
+local function Group(digits,group)
+ local out=""
+ while string.len(digits)>3 do
+  out=group..string.sub(digits,-3)..out
+  digits=string.sub(digits,1,-4)
+ end
+ return digits..out
+end
+-- nil, text, NaN or infinity -> "?": a missing value is never turned into a number.
+function FieldKit.Compact(value)
+ local n=type(value)=="number" and value or nil
+ if not n or n-n~=0 then return "?" end -- NaN and both infinities (no math.huge in Lua 5.0)
+ local dec,group=Separators()
+ local a=math.abs(n);local sign=n<0 and "-" or ""
+ if a<9999.5 then return sign..Group(string.format("%.0f",a),group) end
+ for i=1,table.getn(TIERS) do
+  -- A hair under a tier reads as that tier: 999 960 is "1.0 M", never "1000.0 k".
+  if a>=TIERS[i][1]*0.99995 or i==table.getn(TIERS) then
+   local text=string.format("%.1f",a/TIERS[i][1])
+   return sign..string.gsub(text,"%.",dec).." "..TIERS[i][2]
+  end
+ end
+end
+-- The full value for tooltips: every digit, grouped. Above 2^53 a double no longer
+-- holds every unit, so the value is marked approximate rather than shown as exact.
+function FieldKit.Exact(value)
+ local n=type(value)=="number" and value or nil
+ if not n or n-n~=0 then return "?" end -- NaN and both infinities (no math.huge in Lua 5.0)
+ local _,group=Separators()
+ local a=math.abs(n);local text=Group(string.format("%.0f",a),group)
+ if a>9007199254740992 then text="~"..text end
+ return (n<0 and "-" or "")..text
+end
+-- Drop shadow for data text over coloured bars and spell effects (guarded: a custom
+-- client without the method keeps the plain text).
+function FieldKit.TextShadow(fs)
+ if fs and fs.SetShadowOffset then fs:SetShadowOffset(1,-1);if fs.SetShadowColor then fs:SetShadowColor(0,0,0,1) end end
+end
+-- Status bars take a fraction: the client rejects unbounded native ranges ("Min or
+-- Max out of range" on endless boss health, FieldKit.lua ShowBossFrame, 0.7.4), and
+-- that uncaught error stopped the whole HUD loop (lairs, meter, map). The native
+-- amounts stay untouched; bar.fieldkitFraction keeps the drawn fraction.
+function FieldKit.SetBarFraction(bar,value,maximum)
+ local v,m=tonumber(value),tonumber(maximum)
+ local f=0
+ if v and m and m>0 and v-v==0 and m-m==0 then f=v/m end
+ if f~=f or f<0 then f=0 elseif f>1 then f=1 end
+ bar:SetMinMaxValues(0,1);bar:SetValue(f);bar.fieldkitFraction=f
+ return f
 end
 
 -- Catch missing CVars in custom clients. Reading an unknown CVar may throw.

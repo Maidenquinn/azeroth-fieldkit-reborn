@@ -12,7 +12,7 @@ FieldKitRebornDB.zoneThemeMode='elwynn'
 for _,variant in ipairs({'minimal','complete','alternative'}) do
  FieldKitRebornDB.zoneThemeVariant=variant;C.Set('zoneThemes',true);T.Update(variant)
  T.bar:SetFrameStrata('LOW');T.bar:SetAlpha(0);T.bar:Hide();T.Update(variant)
- assert(T.frame:IsShown() and T.bar:IsShown() and T.bar:GetValue()==350 and T.bar:GetAlpha()==1)
+ assert(T.frame:IsShown() and T.bar:IsShown() and math.abs(T.bar:GetValue()-.35)<1e-12 and T.bar:GetAlpha()==1)
  assert(T.bar:GetFrameStrata()==T.frame:GetFrameStrata() and T.bar:GetFrameLevel()>T.frame:GetFrameLevel())
  assert(T.hp:GetHeight()==19 and T.hp:IsShown() and T.hp:GetText()~='')
  C.Set('zoneThemes',false)

@@ -30,9 +30,10 @@ AZS_UNITS[1].displayId=nil
 AZS_UNITS[2]=nil;AZS_ZONE.zone="anotherzone";FieldKit_Portraits.Apply(FieldKitBossFrame1,AZS_UNITS[1].name,"guardian",5001)
 assert(FieldKitBossFrame1.portrait.texture=="Interface\\Icons\\INV_Misc_QuestionMark")
 AZS_ZONE.zone="feralas";AZS_UNITS[1].name="Brute gordunni"
-assert(FieldKit_FormatHealth(6705,12200,1)=="6705 / 12200")
+-- .41 shared compact format (Runtime.lua FieldKit.Compact): grouped below 10 000, then k/M/B/T...
+assert(FieldKit_FormatHealth(6705,12200,1)==FieldKit.Compact(6705).." / "..FieldKit.Compact(12200))
 assert(FieldKit_FormatHealth(6705,12200,2)=="55%")
-assert(FieldKit_FormatHealth(6705,12200,3)=="6705 / 12200 (55%)")
+assert(FieldKit_FormatHealth(6705,12200,3)==FieldKit.Compact(6705).." / "..FieldKit.Compact(12200).." (55%)")
 assert(FieldKit_FormatHealth(nil,0,3)=="0 / 0 (0%)")
 -- Saved options must survive reopening and reinitialization.
 FieldKitRebornDB.playerHealthMode=3;FieldKitRebornDB.targetHealthMode=2;FieldKitRebornDB.combatTextX=-123
@@ -121,7 +122,8 @@ AZS_UNITS[2].state=1;AZS_UNITS[2].hp=9000
 fire(FieldKitFrame,"PLAYER_TARGET_CHANGED")
 assert(FieldKitBossFrame2.portrait.texture==FieldKitBossFrame1.portrait.texture)
 assert(FieldKitBossFrame1.mashPortraitIdentity~=FieldKitBossFrame2.mashPortraitIdentity)
-assert(FieldKitBossFrame1.bar.value==11501 and FieldKitBossFrame2.bar.value==9000)
+-- .41: bars draw the fraction of each unit's own maximum (unbounded native ranges are rejected by the client).
+assert(FieldKitBossFrame1.bar.value==11501/12305 and FieldKitBossFrame2.bar.value==9000/12305)
 -- Stale AZS_UNITS state=1 after despawn/new run: empty/returning lairs hide guardian frames.
 AZS_LAIRS={
  {name="Brute gordunni",id=687865983,state="empty",left=11},
@@ -137,7 +139,7 @@ AZS_LAIRS={
  {name="Brute gordunni",id=687865986,state="empty",left=25},
 }
 fire(FieldKitFrame,"PLAYER_TARGET_CHANGED")
-assert(FieldKitBossFrame1:IsShown() and FieldKitBossFrame1.bar.value==11501)
+assert(FieldKitBossFrame1:IsShown() and FieldKitBossFrame1.bar.value==11501/12305)
 assert(not FieldKitBossFrame2:IsShown())
 AZS_LAIRS={}
 -- Resolve every localized alias on every map, with duplicate instances and another target.

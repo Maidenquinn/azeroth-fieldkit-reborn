@@ -42,12 +42,7 @@ end
 
 -- Format a display-only number using compact k/m suffixes.
 local function ShortNumber(v)
-	if ( v >= 1000000 ) then
-		return string.format("%.1fm", v / 1000000)
-	elseif ( v >= 10000 ) then
-		return string.format("%.1fk", v / 1000)
-	end
-	return string.format("%.0f", v)
+	return FieldKit.Compact(v)
 end
 
 
@@ -241,6 +236,7 @@ local function CreateBossFrame(i,preview)
 	f:SetHeight(96)
 	f:SetFrameStrata("MEDIUM")
 	if FieldKitTheme and FieldKitTheme.Surface then FieldKitTheme.Surface(f,"window",true) end
+	if FieldKitTheme and FieldKitTheme.ReadableFloor then FieldKitTheme.ReadableFloor(f) end
 
 	local portBack=f:CreateTexture(nil,"BACKGROUND")
 	portBack:SetTexture(FieldKitTheme.bronze[1],FieldKitTheme.bronze[2],FieldKitTheme.bronze[3])
@@ -596,7 +592,7 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
    compact.name:SetText(premium and "" or (FieldKitReborn.DisplayName(name) or ""))
    local maxHP=math.max(tonumber(hpm) or 1,1)
    local currentHP=math.max(0,math.min(tonumber(hp) or 0,maxHP))
-   compact.bar:SetMinMaxValues(0,maxHP);compact.bar:SetValue(currentHP)
+   FieldKit.SetBarFraction(compact.bar,currentHP,maxHP)
    -- Reborn does not consistently inherit child strata. Keep the health
    -- surface above its themed card material, including after skin changes.
    compact.bar:SetFrameStrata(compact:GetFrameStrata())
@@ -611,8 +607,7 @@ local function ShowBossFrame(f, name, hp, hpm, kind, state, id)
   end
  end
 	f.name:SetText(FieldKitReborn.DisplayName(name))
-	f.bar:SetMinMaxValues(0, math.max(hpm or 1, 1))
-	f.bar:SetValue(hp or 0)
+	FieldKit.SetBarFraction(f.bar, hp, hpm)
 	FieldKit_Text(f.hp,FieldKit_FormatHealth(hp, hpm, DB.bossHealthMode))
 	if ( kind == "guardian" ) then
 		f.bar:SetStatusBarColor(.62,.08,.12)
@@ -1084,8 +1079,7 @@ local function UpdatePlayerBar()
 		max = 1
 	end
 	local cur = UnitHealth("player") or 0
-	playerBar:SetMinMaxValues(0, max)
-	playerBar:SetValue(cur)
+	FieldKit.SetBarFraction(playerBar, cur, max)
     if playerBar.healthText then
         FieldKit_Text(playerBar.healthText,FieldKit_FormatHealth(cur, max, DB.playerHealthMode))
     end
@@ -1426,7 +1420,7 @@ local function CreateStatsFrame()
 	})
 	statsFrame:SetBackdropColor(0, 0, 0, 0.6)
 	statsFrame:SetBackdropBorderColor(0.5, 0.5, 0.5, 0.8)
- FieldKitTheme.Surface(statsFrame,"card",true)
+ FieldKitTheme.Surface(statsFrame,"card",true);FieldKitTheme.ReadableFloor(statsFrame)
 	statsFrame:SetWidth(STACK_WIDTH)
 	statsFrame:SetHeight(20)
 	statsFrame.rows = {}
@@ -1678,7 +1672,7 @@ local function CreateMoneyFrame()
 	moneyFrame:SetBackdrop(statsFrame:GetBackdrop())
 	moneyFrame:SetBackdropColor(0, 0, 0, 0.6)
 	moneyFrame:SetBackdropBorderColor(0.5, 0.5, 0.5, 0.8)
- FieldKitTheme.Surface(moneyFrame,"card",true)
+ FieldKitTheme.Surface(moneyFrame,"card",true);FieldKitTheme.ReadableFloor(moneyFrame)
 
 	local coin = moneyFrame:CreateTexture("FieldKitMoneyFrameCoin", "ARTWORK")
 	coin:SetTexture("Interface\\MoneyFrame\\UI-MoneyIcons")
@@ -1766,7 +1760,7 @@ local function CreateGearFrame()
 	gearFrame:SetBackdrop(statsFrame:GetBackdrop())
 	gearFrame:SetBackdropColor(0, 0, 0, 0.6)
 	gearFrame:SetBackdropBorderColor(0.5, 0.5, 0.5, 0.8)
- FieldKitTheme.Surface(gearFrame,"card",true)
+ FieldKitTheme.Surface(gearFrame,"card",true);FieldKitTheme.ReadableFloor(gearFrame)
 	gearFrame.slots = {}
 	AddCompactButton(gearFrame, "gearCollapsed", UpdateGearFrame)
 	for i = 1, table.getn(GEAR_SLOTS) do
@@ -1867,7 +1861,7 @@ local function CreateBarWindow(name, title, rows)
 	})
 	f:SetBackdropColor(0, 0, 0, 0.6)
 	f:SetBackdropBorderColor(0.5, 0.5, 0.5, 0.8)
- FieldKitTheme.Surface(f,"card",true)
+ FieldKitTheme.Surface(f,"card",true);FieldKitTheme.ReadableFloor(f)
 	f.title = f:CreateFontString(name.."Title", "OVERLAY", "GameFontNormalSmall")
 	f.title:SetPoint("TOPLEFT", f, "TOPLEFT", 9, -7)
 	FieldKit_Text(f.title,title);FieldKitTheme.Font(f.title,12,FieldKitTheme.gold)
@@ -2213,7 +2207,7 @@ function UpdateLairFrame()
    local e=AZS_UNITS[i];local kind=Field(e,"kind",1)
    if kind=="final" or kind=="boss" then
     local hp,hpm=Field(e,"hp",4),Field(e,"hpm",5)
-    if FieldKit.Number(hpm) and hpm>0 then
+    if FieldKit.MeterNumber(hpm) and hpm>0 then
      live={name=Field(e,"name",3) or "?",hp=hp or 0,hpm=hpm,enraged=Field(e,"state",6)}
      break
     end
@@ -2238,7 +2232,7 @@ function UpdateLairFrame()
   lairFrame.bossPct:ClearAllPoints();lairFrame.bossPct:SetPoint("BOTTOMRIGHT",lairFrame,"BOTTOMRIGHT",-14,24)
   lairFrame.bossPct:SetWidth(68);lairFrame.bossPct:SetText(info);lairFrame.bossPct:Show()
   lairFrame.bossBar:ClearAllPoints();lairFrame.bossBar:SetPoint("BOTTOMLEFT",lairFrame,"BOTTOMLEFT",12,10)
-  lairFrame.bossBar:SetMinMaxValues(0,live.hpm);lairFrame.bossBar:SetValue(live.hp or 0)
+  FieldKit.SetBarFraction(lairFrame.bossBar,live.hp,live.hpm)
   lairFrame.bossBar:SetWidth(lairFrame:GetWidth()-24);lairFrame.bossBar:Show()
  else
   lairFrame.nextBoss:SetText(FieldKit_L("Next boss")..": "..nextBoss.name)
@@ -2451,8 +2445,7 @@ function UpdateCompactXP()
 		return
 	end
 	local cur, max = UnitXP("player") or 0, UnitXPMax("player") or 0
-	compactBar.xp:SetMinMaxValues(0, math.max(max, 1))
-	compactBar.xp:SetValue(cur)
+	FieldKit.SetBarFraction(compactBar.xp, cur, math.max(max, 1))
 	FieldKit_Text(compactBar.xpText,"XP "..cur.." / "..max)
 end
 
@@ -3135,6 +3128,24 @@ local function RefreshNativeData()
 end
 
 local plateElapsed, layoutElapsed = 0, 0
+-- .41: one failing HUD step must not freeze the others. In a 17 h endless run an
+-- uncaught "Min or Max out of range" in UpdateBossFrame (0.7.4 lua-errors.log) ended
+-- every tick before the native-data step, so the lair card, meter and map stopped
+-- refreshing and kept showing old states. Each step now runs protected; its first
+-- error per session still goes to the client's error handler (lua-errors.log) and
+-- is counted in FieldKit.stepErrors, the other steps keep running.
+FieldKit.stepErrors = {}
+local reportedStep = {}
+local function Step(name, fn)
+	local ok, err = pcall(fn)
+	if ok then return end
+	FieldKit.stepErrors[name] = (FieldKit.stepErrors[name] or 0) + 1
+	if not reportedStep[name] then
+		reportedStep[name] = true
+		local handler = type(geterrorhandler) == "function" and geterrorhandler()
+		if handler then pcall(handler, "FieldKit "..name..": "..tostring(err)) end
+	end
+end
 local platesFilterOn = false
 frame:SetScript("OnUpdate", function()
 	if ( not DB ) then
@@ -3192,22 +3203,23 @@ frame:SetScript("OnUpdate", function()
 	end
 	elapsed = 0
  FieldKitDiagnostics.Mark("scan")
-	KeepCompactBar()
+	Step("compactBar", KeepCompactBar)
 	if not choosing then
-		UpdateBossFrame()
-		UpdatePlayerBuffs()
-		UpdatePlayerBar()
+		Step("bossFrame", UpdateBossFrame)
+		Step("playerBuffs", UpdatePlayerBuffs)
+		Step("playerBar", UpdatePlayerBar)
 	end
 	if dataClock.elapsed>=DATA_INTERVAL then
 		dataClock.elapsed=0
   FieldKitDiagnostics.Mark("snapshot")
-		FieldKitNative.Watch();RefreshNativeData();FieldKitRunMode.Update();FieldKitCoop.Update()
-		FieldKitNativeTools.Update()
+		Step("nativeWatch", FieldKitNative.Watch);Step("nativeData", RefreshNativeData)
+		Step("runMode", FieldKitRunMode.Update);Step("coop", FieldKitCoop.Update)
+		Step("nativeTools", FieldKitNativeTools.Update)
 		-- Loadout tooltip scans hitch hard; keep them off the choosing overlay path.
-		if not choosing then FieldKitLoadout.Update() end
+		if not choosing then Step("loadout", FieldKitLoadout.Update) end
   -- Run the dock reconciliation last, including loadout and native tool renders.
-  if RefreshCollapseDock then RefreshCollapseDock() end
-		FieldKitScreenLayers.Update()
+  if RefreshCollapseDock then Step("dock", RefreshCollapseDock) end
+		Step("screenLayers", FieldKitScreenLayers.Update)
 		-- Cards may show/hide after native snapshots; restack once here, not every paint.
 		layoutElapsed = 0
 		if not choosing then FieldKitHudStack.Apply();FieldKitCardLayout.ApplyRight();FieldKitDiagnostics.Mark("layout") end
@@ -3216,10 +3228,53 @@ frame:SetScript("OnUpdate", function()
 		layoutElapsed = 0
 		if not choosing then FieldKitHudStack.Apply();FieldKitCardLayout.ApplyRight();FieldKitDiagnostics.Mark("layout") end
 	end
-	if not choosing then FieldKitPartySync.Tick() end
- if FieldKitZoneThemes then FieldKitZoneThemes.Tick() end
- FieldKitNativeHUD.Update()
+	if not choosing then Step("partySync", FieldKitPartySync.Tick) end
+ if FieldKitZoneThemes then Step("zoneThemes", FieldKitZoneThemes.Tick) end
+ Step("nativeHud", FieldKitNativeHUD.Update)
 end)
+
+-- /fieldkit lairs (.41): read-only dump of the native lair/guardian contract as this
+-- client received it (Lairs.lua AZS_LAIRS, Api.lua AZS_GetLairs/AZS_GetGuardians and
+-- the AZS_LAIRS_UPDATED stamp), plus FieldKit's own step errors. It tells "the game
+-- still reports awake" from "FieldKit stopped refreshing". Nothing is written.
+function FieldKit.LairDiagnostic()
+	local out = DEFAULT_CHAT_FRAME
+	if not out then return end
+	local function Say(t) out:AddMessage("|cff33ff99FieldKit lairs|r "..t) end
+	local now = GetTime()
+	local stamp = tonumber(AZS_LAIRS_UPDATED)
+	local phase = type(AZS_GetPhase) == "function" and AZS_GetPhase() or nil
+	local runT = type(AZS_GetRunTime) == "function" and tonumber(AZS_GetRunTime()) or nil
+	Say("phase="..tostring(phase).." run="..(runT and string.format("%.0fs", runT) or "?")..
+		" zone="..tostring(type(AZS_ZONE) == "table" and AZS_ZONE.zone)..
+		" lastLairLine="..(stamp and string.format("%.1fs ago", now - stamp) or "never"))
+	local lairs = type(AZS_LAIRS) == "table" and AZS_LAIRS or {}
+	local guardians = {}
+	if type(AZS_GetGuardians) == "function" then
+		local ok, list = pcall(AZS_GetGuardians)
+		if ok and type(list) == "table" then
+			for i = 1, math.min(64, table.getn(list)) do
+				local g = list[i]
+				if type(g) == "table" and g.id then guardians[tostring(g.id)] = g end
+			end
+		end
+	end
+	Say(table.getn(lairs).." lairs (native AZS_LAIRS)")
+	for i = 1, math.min(32, table.getn(lairs)) do
+		local l = lairs[i]
+		if type(l) == "table" then
+			local g = l.id and guardians[tostring(l.id)]
+			Say(string.format("#%s state=%s id=%s guardian=%s hp=%s/%s left=%s flag=%s name=%s",
+				tostring(l.index), tostring(l.state), tostring(l.id),
+				g and (g.awake and "listed-awake" or "listed-asleep") or "not-listed",
+				FieldKit.Exact(tonumber(l.hp)), FieldKit.Exact(tonumber(l.hpm)), tostring(l.left),
+				tostring(l.flag), tostring(l.name)))
+		end
+	end
+	local errors = ""
+	for name, count in pairs(FieldKit.stepErrors or {}) do errors = errors..name.."="..count.." " end
+	Say("FieldKit step errors: "..(errors ~= "" and errors or "none"))
+end
 
 SLASH_FieldKit1 = "/fieldkit"
 SlashCmdList["FieldKit"] = function(msg)
@@ -3239,6 +3294,7 @@ SlashCmdList["FieldKit"] = function(msg)
  if msg=="diag" then FieldKitDiagnostics.Command("");return end
  if string.sub(msg,1,5)=="diag " then FieldKitDiagnostics.Command(string.sub(msg,6));return end
  if msg=="native" then FieldKitNativeTools.Diagnostic();return end
+ if msg=="lairs" then FieldKit.LairDiagnostic();return end
  if msg=="align" then FieldKitAlignment.Start();return end
  if msg=="lock" or msg=="unlock" then FieldKit.SetWindowsLocked(msg=="lock");return end
 	if msg == "money" then

@@ -1,3 +1,12 @@
+# 0.1.0-reborn.41 — Long endless runs (candidate, not yet approved)
+
+- Large numbers stay readable: one compact format everywhere (meter, detail card, HUD, party, boss and health text) using the game's own units (k, M, B, T, Qa, Qi ... Dc), never raw scientific notation. Hover tooltips keep the exact value.
+- Fixed a boss health bar error in very long endless runs ("Min or Max out of range") that froze the rest of the HUD: lairs, meter and map stopped refreshing and kept showing old states. All health bars now draw a fraction, and one failing HUD part can no longer stop the others.
+- Bosses and guardians above 10^18 health no longer disappear from FieldKit's frames.
+- Data cards (stats, gear, damage taken, lairs, party details, warnings) keep at least 88 % background coverage; above that your card opacity setting is untouched. Meter text has a shadow.
+- Kill counts in the meter use the compact format and no longer reflow the row on every kill.
+- New `/fieldkit lairs`: shows exactly what the game reports for each lair and guardian, to tell a game-side state from a FieldKit display issue.
+
 # 0.1.0-reborn.40 — Exact kill attribution (candidate, not yet approved)
 
 - Kills per spell are credited only from the game's native combat feed: a hit that actually killed (overkill above zero) a specific enemy, identified by its unique id. Enemies sharing a name no longer steal each other's kills, and in co-op a teammate's kills are no longer credited to you after you touched the same enemy.

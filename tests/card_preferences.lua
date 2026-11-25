@@ -12,7 +12,8 @@ local display=control("Damage meter values")
 local function choose(c,index) click(c);click(c.choiceButtons[index]) end
 choose(display,3)
 local row=FieldKitMeterFrame.rows[1];local columns=row.meterColumns
-assert(columns[1]:GetText()=="1234567" and columns[2]:GetText()=="8656 dps" and columns[3]:GetText()=="39%")
+-- .41 shared compact format (Runtime.lua FieldKit.Compact): grouped below 10 000, then k/M/B/T...
+assert(columns[1]:GetText()==FieldKit.Compact(1234567) and columns[2]:GetText()==FieldKit.Compact(8656).." dps" and columns[3]:GetText()=="39%")
 assert(columns[1]:IsShown() and columns[2]:IsShown() and columns[3]:IsShown() and not row.value:IsShown())
 -- Orders of magnitude cannot move the columns: every row uses fixed right edges.
 local other=FieldKitMeterFrame.rows[2]

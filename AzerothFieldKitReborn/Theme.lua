@@ -186,6 +186,31 @@ function T.Surface(frame,kind,hud)
  T.State(frame,false);T.Update(frame)
 end
 
+-- Readability floor (.41) for cards that carry data text. The card opacity option
+-- keeps its full range for the material; when it is below `floor`, one dark plate
+-- (allocated once, BACKGROUND, under every label and bar) lifts the combined
+-- coverage to exactly `floor`: 1-(1-o)(1-p)=floor. At or above the floor the plate
+-- is invisible and the card looks exactly as before. Decorative and theme art
+-- surfaces are not called here, so their 0 % "really transparent" stays.
+function T.ReadableFloor(frame,floor)
+ if not frame then return end
+ frame.fieldkitFloorTarget=floor or frame.fieldkitFloorTarget or .88
+ if not frame.fieldkitFloor then
+  local plate=frame:CreateTexture(nil,"BACKGROUND")
+  plate:SetAllPoints(frame);plate:SetTexture("Interface\\Buttons\\WHITE8X8");plate:SetVertexColor(.025,.035,.05)
+  frame.fieldkitFloor=plate
+ end
+ local skin=frame.fieldkitSkin
+ local o=(skin and skin.kind~="button") and T.Opacity(frame) or 1
+ if frame.fieldkitFill and frame.fieldkitFill.alpha then o=frame.fieldkitFill.alpha end
+ local target=frame.fieldkitFloorTarget;local a=0
+ if frame.fieldkitArtOnly then a=0 elseif o<target then a=1-(1-target)/(1-o) end
+ if a<0 then a=0 elseif a>1 then a=1 end
+ frame.fieldkitFloor:SetAlpha(a)
+ if a>0 then frame.fieldkitFloor:Show() else frame.fieldkitFloor:Hide() end
+ return a
+end
+
 -- Selection/hover only changes the fixed material, never allocates another layer.
 -- T.State is a pure function of: the art-only flag, active, navigation flag, the opacity (or the card's own fill alpha), the fill
 -- colour, the style and the zone/colours generation (T.gen, bumped by T.SetZone / T.Refresh). Called ~1500 times per theme
@@ -211,6 +236,7 @@ function T.State(frame,active)
  -- frame.fieldkitFill = {color={r,g,b},alpha=a}: the card's own interior colour and opacity (the chat preferences), applied to the
  -- fill and to the centre slice only; the gold border slices keep their own opacity.
  local fill=frame.fieldkitFill
+ if frame.fieldkitFloor then T.ReadableFloor(frame) end
  if skin.nativeBackdrop then frame:SetBackdrop({});skin.nativeBackdrop=nil end
  if skin.nativeMaterial then skin.nativeMaterial:Hide() end
  for _,part in ipairs(skin.nativeButtons or {}) do part:Hide() end
