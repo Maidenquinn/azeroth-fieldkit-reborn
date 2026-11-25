@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.40",
+  "version": "0.1.0-reborn.41",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": "2026-11-20",
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-10-31",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Lot 0 development candidate on top of .39: kills credited only from lethal native combat-feed hits (overkill > 0) on an identified target guid; chat death lines no longer credit by name while the feed exists. Automated Lua 5.1 and 5.0 fixtures only; awaiting maintainer in-game recipe (solo vs AZS_RUN.kills, co-op, pets)."
+  "inGameTestScope": "Long endless candidate on top of .40 (kill attribution kept): compact large-number formats with exact tooltips, status bars as fractions, HUD loop isolated per step, boss/guardian health past 10^18 kept live, readability floor on data cards, /fieldkit lairs native diagnostic. Automated Lua 5.1 and 5.0 fixtures and a reproduction on .40; awaiting maintainer long endless recipe."
 }
