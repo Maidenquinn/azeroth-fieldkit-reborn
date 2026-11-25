@@ -37,14 +37,14 @@ Mise à jour sur la candidate .43. Le lot portails p/o/v est implémenté dans l
 ### Emplacements des cristaux · C · complexité moyenne si le contrat évolue
 
 - **Intérêt.** Retrouver les cristaux visibles et retirer l’indication après collecte.
-- **Données.** Le rendu de `c` existe côté client, aucun flux automatique exploitable vérifié. L’API d’ancres lit unités, caches, antres et pings sans fournisseur de pickups (`Rift.lua:1–20,68–128`, `Anchors.lua:246–347`). Le ping volontaire (`Ping.lua:81–109,549–580`) fournit au mieux un point ponctuel dont l’association au cristal reste à tester.
+- **Données.** Le rendu de `c` existe côté client, aucun flux automatique exploitable vérifié. L’API d’ancres lit unités, caches, antres et pings sans fournisseur de pickups (`Rift.lua:1–20,68–128`, `Anchors.lua:246–347`). Le ping volontaire (`Ping.lua:81–109,549–580`) a confirmé à Icecrown un point associé au GameObject 9040 « Cristal de faille ». La résolution indépendante par GUID et l’énumération restent à tester.
 - **Conception et coût.** Demander un snapshot officiel des cristaux visibles. Réutiliser les pools et filtres de FieldKit avec mise à jour par révision, sans doublon. Lot bloqué par le contrat.
 - **Risques et tests.** Valider entités multiples, ID, collecte, zone, arène, reload et changement d’hôte. Voir le [rapport et la proposition à SNX](RIFT_CRYSTALS_DEEP_INVESTIGATION.md#proposition-technique-à-snx).
 
 ### Bonus des runes · B pour attribution d’effet, C pour les positions · complexité moyenne
 
 - **Intérêt.** Identifier les effets réellement utiles du bonus temporaire.
-- **Données.** Speed, Berserker et Restoration Rune sont documentées. `AZS_BUFFS` donne le sort et le temps restant (`Units.lua:63–66`, `Api.lua:174–176`). Les IDs de sorts et les modalités exactes restent à corréler. Les pings `rune` n’identifient aucune variante.
+- **Données.** Speed, Berserker et Restoration Rune sont documentées. `AZS_BUFFS` donne le sort et le temps restant (`Units.lua:63–66`, `Api.lua:174–176`). Le cache local d’objets identifie les entrées 9006, 9007 et 9008. Les IDs de sorts et les modalités exactes restent à corréler. Les pings `rune` n’identifient aucune variante.
 - **Conception et coût.** Diagnostic manuel par snapshot et une collecte filmée de chaque variante. Ensuite, une lecture du stamp et de la liste de buffs suffit pour un éventuel affichage d’effet prouvé.
 - **Risques et tests.** Distinguer proc, soin direct, aura, rune de classe et objet ramassé. Vérifier la corrélation dans plusieurs sessions. [Guide des objets ramassables](https://azreborn.com/guides/runs-and-zones#pickups)
 
