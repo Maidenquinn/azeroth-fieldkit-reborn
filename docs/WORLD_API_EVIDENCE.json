@@ -1,0 +1,1566 @@
+{
+  "globalAssignments": {
+    "AZS_ABILITIES": [
+      "AzerothSurvivorsAPI/Api.lua:34",
+      "AzerothSurvivorsAPI/Api.lua:163",
+      "AzerothSurvivorsAPI/Api.lua:170"
+    ],
+    "AZS_ABILITIES_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:171"
+    ],
+    "AZS_API": [
+      "AzerothSurvivorsAPI/Api.lua:16",
+      "AzerothSurvivorsAPI/Hud.lua:24",
+      "AzerothSurvivorsAPI/Shims.lua:21"
+    ],
+    "AZS_API.LegacyCaller": [
+      "AzerothSurvivorsAPI/Shims.lua:98"
+    ],
+    "AZS_API_HUD": [
+      "AzerothSurvivorsAPI/Hud.lua:67",
+      "AzerothSurvivorsAPI/Hud.lua:207",
+      "AzerothSurvivorsAPI/Hud.lua:235"
+    ],
+    "AZS_ARMOR": [
+      "AzerothSurvivors/Units.lua:83"
+    ],
+    "AZS_BANNER": [
+      "AzerothSurvivorsAPI/Api.lua:669"
+    ],
+    "AZS_BANNERS": [
+      "AzerothSurvivorsAPI/Api.lua:35"
+    ],
+    "AZS_BANNERS_KEPT": [
+      "AzerothSurvivorsAPI/Api.lua:634"
+    ],
+    "AZS_BANNER_HANDLERS": [
+      "AzerothSurvivorsAPI/Api.lua:36"
+    ],
+    "AZS_BANNER_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:674"
+    ],
+    "AZS_BOSSMETER": [
+      "AzerothSurvivorsAPI/Api.lua:30"
+    ],
+    "AZS_BUFFS": [
+      "AzerothSurvivors/Run.lua:18",
+      "AzerothSurvivors/Units.lua:64"
+    ],
+    "AZS_BUFFS_UPDATED": [
+      "AzerothSurvivors/Units.lua:65"
+    ],
+    "AZS_CAPS": [
+      "AzerothSurvivorsAPI/Api.lua:33",
+      "AzerothSurvivorsAPI/Api.lua:132"
+    ],
+    "AZS_CARDS": [
+      "AzerothSurvivors/Cards.lua:1500",
+      "AzerothSurvivors/Run.lua:15"
+    ],
+    "AZS_CARDS.rerolled": [
+      "AzerothSurvivors/Cards.lua:1347"
+    ],
+    "AZS_CARDS.tips": [
+      "AzerothSurvivors/Cards.lua:1508"
+    ],
+    "AZS_CHESTS": [
+      "AzerothSurvivors/Chests.lua:6",
+      "AzerothSurvivors/Units.lua:90"
+    ],
+    "AZS_COOP_STATE": [
+      "AzerothSurvivors/Friends.lua:88",
+      "AzerothSurvivors/Friends.lua:93"
+    ],
+    "AZS_COOP_STATE.open": [
+      "AzerothSurvivors/Friends.lua:524"
+    ],
+    "AZS_DASH": [
+      "AzerothSurvivors/Dash.lua:104"
+    ],
+    "AZS_DASH.at": [
+      "AzerothSurvivors/Dash.lua:288"
+    ],
+    "AZS_DASH.seen": [
+      "AzerothSurvivors/Dash.lua:392"
+    ],
+    "AZS_DEATH": [
+      "AzerothSurvivors/DeathLog.lua:13",
+      "AzerothSurvivors/DeathLog.lua:508",
+      "AzerothSurvivors/DeathLog.lua:536"
+    ],
+    "AZS_DEATH.sources": [
+      "AzerothSurvivors/DeathLog.lua:521"
+    ],
+    "AZS_DEBUFFS": [
+      "AzerothSurvivors/Units.lua:5",
+      "AzerothSurvivors/Units.lua:36"
+    ],
+    "AZS_DEBUFFS_AT": [
+      "AzerothSurvivors/Units.lua:37"
+    ],
+    "AZS_DEBUFFS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:152"
+    ],
+    "AZS_EMOTES": [
+      "AzerothSurvivors/Emotes.lua:12"
+    ],
+    "AZS_EMOTES.last": [
+      "AzerothSurvivors/Emotes.lua:520"
+    ],
+    "AZS_EMOTES.owned": [
+      "AzerothSurvivors/Emotes.lua:505"
+    ],
+    "AZS_EMOTES.victory": [
+      "AzerothSurvivors/Emotes.lua:509"
+    ],
+    "AZS_END": [
+      "AzerothSurvivors/Run.lua:16",
+      "AzerothSurvivors/Spoils.lua:706",
+      "AzerothSurvivors/Spoils.lua:752"
+    ],
+    "AZS_END_HEROES": [
+      "AzerothSurvivors/Spoils.lua:714",
+      "AzerothSurvivors/Spoils.lua:741"
+    ],
+    "AZS_END_LOOT": [
+      "AzerothSurvivors/Spoils.lua:148",
+      "AzerothSurvivors/Spoils.lua:707",
+      "AzerothSurvivors/Spoils.lua:730"
+    ],
+    "AZS_EVENT": [
+      "AzerothSurvivors/Events.lua:24",
+      "AzerothSurvivors/Events.lua:85",
+      "AzerothSurvivors/Events.lua:90"
+    ],
+    "AZS_FONT": [
+      "AzerothSurvivors/Locale.lua:140",
+      "AzerothSurvivors/Locale.lua:142"
+    ],
+    "AZS_FONTS": [
+      "AzerothSurvivors/Locale.lua:123"
+    ],
+    "AZS_FRIENDS": [
+      "AzerothSurvivors/Friends.lua:135",
+      "AzerothSurvivors/Friends.lua:157"
+    ],
+    "AZS_GEAR": [
+      "AzerothSurvivors/Units.lua:73"
+    ],
+    "AZS_GEAR_RARITY": [
+      "AzerothSurvivors/Loot.lua:28"
+    ],
+    "AZS_GEN": [
+      "AzerothSurvivors/Generated/Content.lua:6"
+    ],
+    "AZS_GEN.accountRowPoints": [
+      "AzerothSurvivors/Generated/Content.lua:1251"
+    ],
+    "AZS_GEN.accountTree": [
+      "AzerothSurvivors/Generated/Content.lua:1254"
+    ],
+    "AZS_GEN.achievementGroups": [
+      "AzerothSurvivors/Generated/Content.lua:1448"
+    ],
+    "AZS_GEN.achievements": [
+      "AzerothSurvivors/Generated/Content.lua:1450"
+    ],
+    "AZS_GEN.amulets": [
+      "AzerothSurvivors/Generated/Content.lua:1352"
+    ],
+    "AZS_GEN.cardLines": [
+      "AzerothSurvivors/Generated/Content.lua:1297"
+    ],
+    "AZS_GEN.challenges": [
+      "AzerothSurvivors/Generated/Content.lua:1535"
+    ],
+    "AZS_GEN.classColors": [
+      "AzerothSurvivors/Generated/Content.lua:3083"
+    ],
+    "AZS_GEN.classes": [
+      "AzerothSurvivors/Generated/Content.lua:12"
+    ],
+    "AZS_GEN.creatureIcons": [
+      "AzerothSurvivors/Generated/Content.lua:431"
+    ],
+    "AZS_GEN.dyePacks": [
+      "AzerothSurvivors/Generated/Content.lua:2532"
+    ],
+    "AZS_GEN.dyeStyles": [
+      "AzerothSurvivors/Generated/Content.lua:2507"
+    ],
+    "AZS_GEN.dyes": [
+      "AzerothSurvivors/Generated/Content.lua:2461"
+    ],
+    "AZS_GEN.emotes": [
+      "AzerothSurvivors/Generated/Content.lua:2199"
+    ],
+    "AZS_GEN.enchants": [
+      "AzerothSurvivors/Generated/Content.lua:1876"
+    ],
+    "AZS_GEN.formSkins": [
+      "AzerothSurvivors/Generated/Content.lua:2449"
+    ],
+    "AZS_GEN.frames": [
+      "AzerothSurvivors/Generated/Content.lua:1992"
+    ],
+    "AZS_GEN.gearTiers": [
+      "AzerothSurvivors/Generated/Content.lua:1381"
+    ],
+    "AZS_GEN.glowPacks": [
+      "AzerothSurvivors/Generated/Content.lua:2543"
+    ],
+    "AZS_GEN.holidays": [
+      "AzerothSurvivors/Generated/Content.lua:1545"
+    ],
+    "AZS_GEN.horns": [
+      "AzerothSurvivors/Generated/Content.lua:1712"
+    ],
+    "AZS_GEN.itemNames": [
+      "AzerothSurvivors/Generated/Content.lua:2547"
+    ],
+    "AZS_GEN.jewels": [
+      "AzerothSurvivors/Generated/Content.lua:1306"
+    ],
+    "AZS_GEN.killFx": [
+      "AzerothSurvivors/Generated/Content.lua:1618"
+    ],
+    "AZS_GEN.lookPacks": [
+      "AzerothSurvivors/Generated/Content.lua:2147"
+    ],
+    "AZS_GEN.mounts": [
+      "AzerothSurvivors/Generated/Content.lua:1562"
+    ],
+    "AZS_GEN.nameStyles": [
+      "AzerothSurvivors/Generated/Content.lua:2222"
+    ],
+    "AZS_GEN.palette": [
+      "AzerothSurvivors/Generated/Content.lua:2278"
+    ],
+    "AZS_GEN.pets": [
+      "AzerothSurvivors/Generated/Content.lua:2169"
+    ],
+    "AZS_GEN.pieces": [
+      "AzerothSurvivors/Generated/Content.lua:3333"
+    ],
+    "AZS_GEN.raceByToken": [
+      "AzerothSurvivors/Generated/Content.lua:371"
+    ],
+    "AZS_GEN.races": [
+      "AzerothSurvivors/Generated/Content.lua:303"
+    ],
+    "AZS_GEN.rarities": [
+      "AzerothSurvivors/Generated/Content.lua:1282"
+    ],
+    "AZS_GEN.referrals": [
+      "AzerothSurvivors/Generated/Content.lua:1559"
+    ],
+    "AZS_GEN.seasons": [
+      "AzerothSurvivors/Generated/Content.lua:1555"
+    ],
+    "AZS_GEN.setBonuses": [
+      "AzerothSurvivors/Generated/Content.lua:3175"
+    ],
+    "AZS_GEN.setLooks": [
+      "AzerothSurvivors/Generated/Content.lua:1395"
+    ],
+    "AZS_GEN.setRules": [
+      "AzerothSurvivors/Generated/Content.lua:3171"
+    ],
+    "AZS_GEN.spellColors": [
+      "AzerothSurvivors/Generated/Content.lua:2295"
+    ],
+    "AZS_GEN.spellSkins": [
+      "AzerothSurvivors/Generated/Content.lua:2315"
+    ],
+    "AZS_GEN.spells": [
+      "AzerothSurvivors/Generated/Content.lua:33"
+    ],
+    "AZS_GEN.tabards": [
+      "AzerothSurvivors/Generated/Content.lua:1796"
+    ],
+    "AZS_GEN.titles": [
+      "AzerothSurvivors/Generated/Content.lua:1966"
+    ],
+    "AZS_GEN.trails": [
+      "AzerothSurvivors/Generated/Content.lua:1949"
+    ],
+    "AZS_GEN.wardrobeSets": [
+      "AzerothSurvivors/Generated/Content.lua:2001"
+    ],
+    "AZS_GEN.weaponLooks": [
+      "AzerothSurvivors/Generated/Content.lua:2080"
+    ],
+    "AZS_GEN.wings": [
+      "AzerothSurvivors/Generated/Content.lua:1634"
+    ],
+    "AZS_GEN.zones": [
+      "AzerothSurvivors/Generated/Content.lua:379"
+    ],
+    "AZS_HEALING": [
+      "AzerothSurvivorsAPI/Api.lua:29"
+    ],
+    "AZS_HEXES": [
+      "AzerothSurvivors/Run.lua:23",
+      "AzerothSurvivors/Units.lua:54"
+    ],
+    "AZS_HUD_CVARS": [
+      "AzerothSurvivorsAPI/Hud.lua:35"
+    ],
+    "AZS_ICON_GROW": [
+      "AzerothSurvivors/Cards.lua:88"
+    ],
+    "AZS_KEYS": [
+      "AzerothSurvivors/Units.lua:60"
+    ],
+    "AZS_L": [
+      "AzerothSurvivors/Locale.lua:37"
+    ],
+    "AZS_LAIRS": [
+      "AzerothSurvivors/Lairs.lua:7",
+      "AzerothSurvivors/Lairs.lua:104"
+    ],
+    "AZS_LANGUAGES": [
+      "AzerothSurvivors/Locale.lua:10"
+    ],
+    "AZS_LOCALE": [
+      "AzerothSurvivors/Locale.lua:31",
+      "AzerothSurvivors/Locale.lua:33"
+    ],
+    "AZS_METER": [
+      "AzerothSurvivorsAPI/Api.lua:28"
+    ],
+    "AZS_ON_TOP": [
+      "AzerothSurvivorsAPI/Hud.lua:254"
+    ],
+    "AZS_ON_TOP_FRAMES": [
+      "AzerothSurvivorsAPI/Hud.lua:255",
+      "AzerothSurvivorsAPI/Hud.lua:325"
+    ],
+    "AZS_PARTY": [
+      "AzerothSurvivorsAPI/Api.lua:31"
+    ],
+    "AZS_PASSAGE": [
+      "AzerothSurvivors/Passage.lua:6",
+      "AzerothSurvivors/Passage.lua:316",
+      "AzerothSurvivors/Passage.lua:321",
+      "AzerothSurvivors/Passage.lua:328"
+    ],
+    "AZS_PEERS": [
+      "AzerothSurvivors/Inspect.lua:199"
+    ],
+    "AZS_PETS": [
+      "AzerothSurvivorsAPI/Api.lua:26"
+    ],
+    "AZS_PG": [
+      "AzerothSurvivors/ProvingGround.lua:70"
+    ],
+    "AZS_PG.active": [
+      "AzerothSurvivors/ProvingGround.lua:1787"
+    ],
+    "AZS_PG.build": [
+      "AzerothSurvivors/ProvingGround.lua:72",
+      "AzerothSurvivors/ProvingGround.lua:1785"
+    ],
+    "AZS_PG.dps": [
+      "AzerothSurvivors/ProvingGround.lua:1746"
+    ],
+    "AZS_PG.sim": [
+      "AzerothSurvivors/ProvingGround.lua:1758"
+    ],
+    "AZS_POWER": [
+      "AzerothSurvivors/Run.lua:11",
+      "AzerothSurvivors/Units.lua:19"
+    ],
+    "AZS_REVIVE": [
+      "AzerothSurvivors/Revive.lua:8",
+      "AzerothSurvivors/Revive.lua:150",
+      "AzerothSurvivors/Revive.lua:158"
+    ],
+    "AZS_RIFT": [
+      "AzerothSurvivors/Rift.lua:7",
+      "AzerothSurvivors/Rift.lua:109"
+    ],
+    "AZS_RUN": [
+      "AzerothSurvivors/Run.lua:10",
+      "AzerothSurvivors/Run.lua:436"
+    ],
+    "AZS_RUN.el": [
+      "AzerothSurvivorsAPI/Api.lua:102"
+    ],
+    "AZS_RUN.nb": [
+      "AzerothSurvivorsAPI/Api.lua:105"
+    ],
+    "AZS_RUN.ph": [
+      "AzerothSurvivors/Spoils.lua:721"
+    ],
+    "AZS_RUNSTATS": [
+      "AzerothSurvivors/Run.lua:20",
+      "AzerothSurvivors/Units.lua:23"
+    ],
+    "AZS_RUN_UPDATED": [
+      "AzerothSurvivors/Run.lua:437"
+    ],
+    "AZS_SCHEDULE": [
+      "AzerothSurvivors/Run.lua:12",
+      "AzerothSurvivors/Run.lua:449"
+    ],
+    "AZS_SETTINGS": [
+      "AzerothSurvivors/Darkness.lua:53",
+      "AzerothSurvivors/Dash.lua:470",
+      "AzerothSurvivors/EditMode.lua:138",
+      "AzerothSurvivors/EditMode.lua:227",
+      "AzerothSurvivors/Editor/ModelLibrary.lua:39",
+      "AzerothSurvivors/Emotes.lua:73",
+      "AzerothSurvivors/Meter.lua:270",
+      "AzerothSurvivors/Meter.lua:329",
+      "AzerothSurvivors/Meter.lua:442",
+      "AzerothSurvivors/Settings.lua:328",
+      "AzerothSurvivors/Settings.lua:596",
+      "AzerothSurvivors/Settings.lua:709",
+      "AzerothSurvivorsAPI/Api.lua:625",
+      "AzerothSurvivorsAPI/Hud.lua:70",
+      "AzerothSurvivorsAPI/Hud.lua:214"
+    ],
+    "AZS_SETTINGS.darknessKeySet": [
+      "AzerothSurvivors/Darkness.lua:57"
+    ],
+    "AZS_SETTINGS.dashShift": [
+      "AzerothSurvivors/Dash.lua:472",
+      "AzerothSurvivors/Dash.lua:474"
+    ],
+    "AZS_SETTINGS.editorModelCatalogue": [
+      "AzerothSurvivors/Editor/ModelLibrary.lua:40"
+    ],
+    "AZS_SETTINGS.emoteSlots": [
+      "AzerothSurvivors/Emotes.lua:80"
+    ],
+    "AZS_SETTINGS.meterPoint": [
+      "AzerothSurvivors/EditMode.lua:228",
+      "AzerothSurvivors/EditMode.lua:247",
+      "AzerothSurvivors/Meter.lua:271"
+    ],
+    "AZS_SETTINGS.meterScope": [
+      "AzerothSurvivors/Meter.lua:330"
+    ],
+    "AZS_SETTINGS.meterTab": [
+      "AzerothSurvivors/Meter.lua:443"
+    ],
+    "AZS_SETTINGS.places": [
+      "AzerothSurvivors/EditMode.lua:139"
+    ],
+    "AZS_SETTINGS.storeLevels": [
+      "AzerothSurvivorsAPI/Api.lua:626"
+    ],
+    "AZS_SPECTATE": [
+      "AzerothSurvivors/Spectate.lua:16"
+    ],
+    "AZS_SPECTATE.active": [
+      "AzerothSurvivors/Spectate.lua:340",
+      "AzerothSurvivors/Spectate.lua:350"
+    ],
+    "AZS_SPECTATE.guid": [
+      "AzerothSurvivors/Spectate.lua:225"
+    ],
+    "AZS_SPELLS": [
+      "AzerothSurvivors/Run.lua:14",
+      "AzerothSurvivors/Spells.lua:124"
+    ],
+    "AZS_SPELLS_AT": [
+      "AzerothSurvivors/Spells.lua:126"
+    ],
+    "AZS_SPELLTIPS": [
+      "AzerothSurvivors/Spells.lua:9"
+    ],
+    "AZS_SPELL_NAMES": [
+      "AzerothSurvivors/Locale.lua:47"
+    ],
+    "AZS_STATS": [
+      "AzerothSurvivorsAPI/Api.lua:122"
+    ],
+    "AZS_TAKEN": [
+      "AzerothSurvivorsAPI/Api.lua:32"
+    ],
+    "AZS_TALENT_BUILD": [
+      "AzerothSurvivors/Talents/SurvivorsTalentBuild.lua:67"
+    ],
+    "AZS_TALENT_TREES": [
+      "AzerothSurvivors/Talents/SurvivorsTalents.lua:8"
+    ],
+    "AZS_TARGET": [
+      "AzerothSurvivorsAPI/Api.lua:24",
+      "AzerothSurvivorsAPI/Api.lua:221",
+      "AzerothSurvivorsAPI/Api.lua:756"
+    ],
+    "AZS_TARGET_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:757"
+    ],
+    "AZS_TIMERS": [
+      "AzerothSurvivorsAPI/Api.lua:25"
+    ],
+    "AZS_TOMBS": [
+      "AzerothSurvivors/Units.lua:50"
+    ],
+    "AZS_TOTEMS": [
+      "AzerothSurvivorsAPI/Api.lua:27"
+    ],
+    "AZS_UNITS": [
+      "AzerothSurvivors/Run.lua:13",
+      "AzerothSurvivors/Units.lua:30"
+    ],
+    "AZS_VAULT": [
+      "AzerothSurvivors/Vault.lua:7",
+      "AzerothSurvivors/Vault.lua:464",
+      "AzerothSurvivors/Vault.lua:471",
+      "AzerothSurvivors/Vault.lua:480"
+    ],
+    "AZS_VAULT.at": [
+      "AzerothSurvivors/Vault.lua:481"
+    ],
+    "AZS_VICTORY": [
+      "AzerothSurvivors/VictoryScene.lua:26"
+    ],
+    "AZS_WATCH": [
+      "AzerothSurvivors/Watch.lua:18"
+    ],
+    "AZS_WATCH.active": [
+      "AzerothSurvivors/Watch.lua:332",
+      "AzerothSurvivors/Watch.lua:405"
+    ],
+    "AZS_WATCH.guid": [
+      "AzerothSurvivors/Watch.lua:160"
+    ],
+    "AZS_ZONE": [
+      "AzerothSurvivors/Run.lua:9",
+      "AzerothSurvivors/Run.lua:445"
+    ],
+    "AZS_ZONE.run": [
+      "AzerothSurvivorsAPI/Api.lua:82",
+      "AzerothSurvivorsAPI/Api.lua:99"
+    ]
+  },
+  "literalRouterReceivers": {
+    "AZS": [
+      "AzerothSurvivorsAPI/Api.lua:121"
+    ],
+    "AZSABILITIES": [
+      "AzerothSurvivorsAPI/Api.lua:162"
+    ],
+    "AZSACCT": [
+      "AzerothSurvivors/Core.lua:74"
+    ],
+    "AZSACHV": [
+      "AzerothSurvivors/Loot.lua:235"
+    ],
+    "AZSADMINUI": [
+      "AzerothSurvivors/ServerUI.lua:23"
+    ],
+    "AZSARMOR": [
+      "AzerothSurvivors/Units.lua:82"
+    ],
+    "AZSBANNER": [
+      "AzerothSurvivors/Banner.lua:25",
+      "AzerothSurvivorsAPI/Api.lua:225"
+    ],
+    "AZSBOSSES": [
+      "AzerothSurvivors/Run.lua:448",
+      "AzerothSurvivorsAPI/Api.lua:140",
+      "AzerothSurvivorsAPI/Meter.lua:587"
+    ],
+    "AZSBUFFS": [
+      "AzerothSurvivors/Units.lua:63",
+      "AzerothSurvivorsAPI/Api.lua:174"
+    ],
+    "AZSCAPS": [
+      "AzerothSurvivorsAPI/Api.lua:131"
+    ],
+    "AZSCARDS": [
+      "AzerothSurvivors/Cards.lua:1468",
+      "AzerothSurvivors/Dash.lua:303"
+    ],
+    "AZSCARDTIP": [
+      "AzerothSurvivors/Cards.lua:1504"
+    ],
+    "AZSCHESTS": [
+      "AzerothSurvivors/Units.lua:89",
+      "AzerothSurvivorsAPI/Api.lua:187"
+    ],
+    "AZSCRITS": [
+      "AzerothSurvivors/RunStats.lua:283"
+    ],
+    "AZSDARK": [
+      "AzerothSurvivors/Darkness.lua:32"
+    ],
+    "AZSDASH": [
+      "AzerothSurvivors/Dash.lua:416"
+    ],
+    "AZSDEATH": [
+      "AzerothSurvivors/DeathLog.lua:534"
+    ],
+    "AZSDEBUFFS": [
+      "AzerothSurvivors/Units.lua:33",
+      "AzerothSurvivorsAPI/Api.lua:149"
+    ],
+    "AZSDODGE": [
+      "AzerothSurvivors/Dash.lua:410"
+    ],
+    "AZSEMOTE": [
+      "AzerothSurvivors/Emotes.lua:515"
+    ],
+    "AZSEMOTES": [
+      "AzerothSurvivors/Emotes.lua:499"
+    ],
+    "AZSEND": [
+      "AzerothSurvivors/Cards.lua:1518",
+      "AzerothSurvivors/Darkness.lua:44",
+      "AzerothSurvivors/Dash.lua:440",
+      "AzerothSurvivors/Passage.lua:320",
+      "AzerothSurvivors/Passage.lua:585",
+      "AzerothSurvivors/Spectate.lua:430",
+      "AzerothSurvivors/Spoils.lua:751",
+      "AzerothSurvivors/Vault.lua:470",
+      "AzerothSurvivorsAPI/Api.lua:182"
+    ],
+    "AZSENDHEROES": [
+      "AzerothSurvivors/Spoils.lua:739"
+    ],
+    "AZSENDLOOT": [
+      "AzerothSurvivors/Spoils.lua:728"
+    ],
+    "AZSEVENT": [
+      "AzerothSurvivors/Events.lua:88"
+    ],
+    "AZSGATE": [
+      "AzerothSurvivors/Passage.lua:574"
+    ],
+    "AZSGEAR": [
+      "AzerothSurvivors/Units.lua:72"
+    ],
+    "AZSHANDOVER": [
+      "AzerothSurvivors/Handover.lua:249"
+    ],
+    "AZSHELLO": [
+      "AzerothSurvivors/Core.lua:139"
+    ],
+    "AZSHEX": [
+      "AzerothSurvivors/Units.lua:53"
+    ],
+    "AZSHUBDPS": [
+      "AzerothSurvivors/Hub.lua:211"
+    ],
+    "AZSHUBUI": [
+      "AzerothSurvivors/Hub.lua:205"
+    ],
+    "AZSKEYS": [
+      "AzerothSurvivors/Units.lua:59"
+    ],
+    "AZSLAIRS": [
+      "AzerothSurvivors/Lairs.lua:102",
+      "AzerothSurvivorsAPI/Anchors.lua:183",
+      "AzerothSurvivorsAPI/Api.lua:192"
+    ],
+    "AZSLOOKS": [
+      "AzerothSurvivors/Hub.lua:215"
+    ],
+    "AZSLOOT": [
+      "AzerothSurvivors/Loot.lua:224"
+    ],
+    "AZSMAP": [
+      "AzerothSurvivors/Editor/CommunityMaps.lua:415",
+      "AzerothSurvivors/Editor/SurvivorsEditor.lua:2230",
+      "AzerothSurvivors/Editor/SurvivorsSharing.lua:144"
+    ],
+    "AZSNAMES": [
+      "AzerothSurvivors/Spells.lua:111"
+    ],
+    "AZSPASSAGE": [
+      "AzerothSurvivors/Passage.lua:325"
+    ],
+    "AZSPEER": [
+      "AzerothSurvivors/Units.lua:68"
+    ],
+    "AZSPG": [
+      "AzerothSurvivors/ProvingGround.lua:1774"
+    ],
+    "AZSPGDPS": [
+      "AzerothSurvivors/ProvingGround.lua:1745"
+    ],
+    "AZSPGSIM": [
+      "AzerothSurvivors/ProvingGround.lua:1752"
+    ],
+    "AZSPING": [
+      "AzerothSurvivors/Ping.lua:618",
+      "AzerothSurvivorsAPI/Anchors.lua:153"
+    ],
+    "AZSPOWER": [
+      "AzerothSurvivors/Units.lua:17"
+    ],
+    "AZSREVIVE": [
+      "AzerothSurvivors/Revive.lua:155",
+      "AzerothSurvivors/Spectate.lua:438",
+      "AzerothSurvivorsAPI/Api.lua:178"
+    ],
+    "AZSRIFT": [
+      "AzerothSurvivors/Rift.lua:108"
+    ],
+    "AZSRUN": [
+      "AzerothSurvivors/Cards.lua:1454",
+      "AzerothSurvivors/Dash.lua:299",
+      "AzerothSurvivors/Meter.lua:774",
+      "AzerothSurvivors/Run.lua:435",
+      "AzerothSurvivors/RunStats.lua:265",
+      "AzerothSurvivorsAPI/Api.lua:90",
+      "AzerothSurvivorsAPI/Meter.lua:540"
+    ],
+    "AZSSHARE": [
+      "AzerothSurvivors/Editor/SurvivorsSharing.lua:163"
+    ],
+    "AZSSPELLS": [
+      "AzerothSurvivors/Cards.lua:1461",
+      "AzerothSurvivors/Spells.lua:123",
+      "AzerothSurvivorsAPI/Api.lua:155"
+    ],
+    "AZSSPELLTIP": [
+      "AzerothSurvivors/Spells.lua:115"
+    ],
+    "AZSSTATS": [
+      "AzerothSurvivors/Units.lua:22"
+    ],
+    "AZSTGT": [
+      "AzerothSurvivorsAPI/Api.lua:219"
+    ],
+    "AZSTOMBS": [
+      "AzerothSurvivors/Units.lua:40"
+    ],
+    "AZSUNITS": [
+      "AzerothSurvivors/Units.lua:29",
+      "AzerothSurvivorsAPI/Api.lua:144"
+    ],
+    "AZSVAULT": [
+      "AzerothSurvivors/Vault.lua:477"
+    ],
+    "AZSVICTORY": [
+      "AzerothSurvivors/VictoryScene.lua:298"
+    ],
+    "AZSVOTE": [
+      "AzerothSurvivors/Handover.lua:216"
+    ],
+    "AZSWATCH": [
+      "AzerothSurvivors/Watch.lua:380"
+    ],
+    "AZSZONE": [
+      "AzerothSurvivors/Mount.lua:163",
+      "AzerothSurvivors/Run.lua:444",
+      "AzerothSurvivors/ServerUI.lua:19",
+      "AzerothSurvivorsAPI/Anchors.lua:186",
+      "AzerothSurvivorsAPI/Api.lua:77",
+      "AzerothSurvivorsAPI/Api.lua:169",
+      "AzerothSurvivorsAPI/Meter.lua:535"
+    ]
+  },
+  "literalStampCalls": {
+    "AZS_ABILITIES_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:167"
+    ],
+    "AZS_BUFFS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:175"
+    ],
+    "AZS_CAPS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:133"
+    ],
+    "AZS_CHESTS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:189"
+    ],
+    "AZS_END_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:183"
+    ],
+    "AZS_LAIRS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:194"
+    ],
+    "AZS_REVIVE_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:179"
+    ],
+    "AZS_SCHEDULE_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:141"
+    ],
+    "AZS_SPELLS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:156"
+    ],
+    "AZS_STATS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:123"
+    ],
+    "AZS_TARGET_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:222"
+    ],
+    "AZS_UNITS_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:145"
+    ],
+    "AZS_ZONE_UPDATED": [
+      "AzerothSurvivorsAPI/Api.lua:83"
+    ]
+  },
+  "luaFilesScanned": {
+    "!AzerothSurvivorsCompat": 1,
+    "AzerothSurvivors": 223,
+    "AzerothSurvivorsAPI": 6,
+    "AzerothSurvivorsUI": 247
+  },
+  "luaFunctionDeclarations": {
+    "AZS.Clamp": [
+      "AzerothSurvivors/Core.lua:179"
+    ],
+    "AZS.Clock": [
+      "AzerothSurvivors/Core.lua:173"
+    ],
+    "AZS.Fmt": [
+      "AzerothSurvivors/Core.lua:87"
+    ],
+    "AZS.GetLifestealHealing": [
+      "AzerothSurvivors/Meter.lua:85"
+    ],
+    "AZS.On": [
+      "AzerothSurvivors/Core.lua:45"
+    ],
+    "AZS.OnAcct": [
+      "AzerothSurvivors/Core.lua:65"
+    ],
+    "AZS.OutBack": [
+      "AzerothSurvivors/Core.lua:194"
+    ],
+    "AZS.OutCubic": [
+      "AzerothSurvivors/Core.lua:188"
+    ],
+    "AZS.ParseKV": [
+      "AzerothSurvivors/Core.lua:142"
+    ],
+    "AZS.ParseList": [
+      "AzerothSurvivors/Core.lua:151"
+    ],
+    "AZS.SendCommand": [
+      "AzerothSurvivors/Core.lua:168"
+    ],
+    "AZS.Short": [
+      "AzerothSurvivors/Core.lua:97"
+    ],
+    "AZS_API.DeriveTarget": [
+      "AzerothSurvivorsAPI/Api.lua:740"
+    ],
+    "AZS_API.GuardianUnits": [
+      "AzerothSurvivorsAPI/Api.lua:317"
+    ],
+    "AZS_API.IsLegacyAddOn": [
+      "AzerothSurvivorsAPI/Shims.lua:70"
+    ],
+    "AZS_API.RunUnit": [
+      "AzerothSurvivorsAPI/Api.lua:716"
+    ],
+    "AZS_API_RunId": [
+      "AzerothSurvivorsAPI/Api.lua:65"
+    ],
+    "AZS_ApplyForcedCVars": [
+      "AzerothSurvivors/Run.lua:290"
+    ],
+    "AZS_ApplyLinkInfo": [
+      "AzerothSurvivors/Net.lua:93"
+    ],
+    "AZS_ApplyMeterSettings": [
+      "AzerothSurvivors/Meter.lua:720"
+    ],
+    "AZS_ApplyPlace": [
+      "AzerothSurvivors/EditMode.lua:176"
+    ],
+    "AZS_ApplyPlaces": [
+      "AzerothSurvivors/EditMode.lua:163"
+    ],
+    "AZS_ApplyRunStatsSettings": [
+      "AzerothSurvivors/RunStats.lua:258"
+    ],
+    "AZS_ApplyStockText": [
+      "AzerothSurvivors/StockText.lua:187"
+    ],
+    "AZS_ApplyStoreLevels": [
+      "AzerothSurvivors/Settings.lua:76"
+    ],
+    "AZS_ApplyTrackerSettings": [
+      "AzerothSurvivors/Tracker.lua:557"
+    ],
+    "AZS_ApplyUpgradeSettings": [
+      "AzerothSurvivors/Settings.lua:81"
+    ],
+    "AZS_ApplyVoiceAutoJoin": [
+      "AzerothSurvivors/Voice.lua:203"
+    ],
+    "AZS_BossHorn": [
+      "AzerothSurvivors/Banner.lua:10"
+    ],
+    "AZS_CreateMeterCheckpoint": [
+      "AzerothSurvivorsAPI/Meter.lua:1324"
+    ],
+    "AZS_CreateProvingBuild": [
+      "AzerothSurvivors/ProvingBuild.lua:2"
+    ],
+    "AZS_Darkness": [
+      "AzerothSurvivors/Darkness.lua:20"
+    ],
+    "AZS_DarknessState": [
+      "AzerothSurvivors/Darkness.lua:13"
+    ],
+    "AZS_Dash": [
+      "AzerothSurvivors/Dash.lua:123"
+    ],
+    "AZS_DashCard": [
+      "AzerothSurvivors/Dash.lua:448"
+    ],
+    "AZS_EMOTES.Get": [
+      "AzerothSurvivors/Emotes.lua:47"
+    ],
+    "AZS_EMOTES.StopMusic": [
+      "AzerothSurvivors/Emotes.lua:477"
+    ],
+    "AZS_EventCurrency": [
+      "AzerothSurvivors/Events.lua:28"
+    ],
+    "AZS_FontName": [
+      "AzerothSurvivors/Locale.lua:146"
+    ],
+    "AZS_FrameName": [
+      "AzerothSurvivorsAPI/Hud.lua:301"
+    ],
+    "AZS_FriendsChanged": [
+      "AzerothSurvivors/FriendsWindow.lua:587"
+    ],
+    "AZS_FriendsCommand": [
+      "AzerothSurvivors/Friends.lua:198"
+    ],
+    "AZS_GetBossMeter": [
+      "AzerothSurvivorsAPI/Api.lua:488"
+    ],
+    "AZS_GetBosses": [
+      "AzerothSurvivorsAPI/Api.lua:301"
+    ],
+    "AZS_GetCombatTextEvents": [
+      "AzerothSurvivorsAPI/CombatText.lua:258"
+    ],
+    "AZS_GetDebuffs": [
+      "AzerothSurvivorsAPI/Api.lua:262"
+    ],
+    "AZS_GetDownedPartyMembers": [
+      "AzerothSurvivorsAPI/Anchors.lua:611"
+    ],
+    "AZS_GetFlaggedLair": [
+      "AzerothSurvivorsAPI/Api.lua:526"
+    ],
+    "AZS_GetGuardians": [
+      "AzerothSurvivorsAPI/Api.lua:330"
+    ],
+    "AZS_GetHealing": [
+      "AzerothSurvivorsAPI/Api.lua:484"
+    ],
+    "AZS_GetLairs": [
+      "AzerothSurvivorsAPI/Api.lua:500"
+    ],
+    "AZS_GetLocalTime": [
+      "AzerothSurvivorsAPI/Api.lua:596"
+    ],
+    "AZS_GetMeter": [
+      "AzerothSurvivorsAPI/Api.lua:462"
+    ],
+    "AZS_GetMeterCapabilities": [
+      "AzerothSurvivorsAPI/Meter.lua:1230"
+    ],
+    "AZS_GetMeterContext": [
+      "AzerothSurvivorsAPI/Meter.lua:1245"
+    ],
+    "AZS_GetMeterLoadout": [
+      "AzerothSurvivorsAPI/Meter.lua:1262"
+    ],
+    "AZS_GetMeterSnapshot": [
+      "AzerothSurvivorsAPI/Meter.lua:1258"
+    ],
+    "AZS_GetPartyMeter": [
+      "AzerothSurvivorsAPI/Api.lua:493"
+    ],
+    "AZS_GetPhase": [
+      "AzerothSurvivorsAPI/Api.lua:233"
+    ],
+    "AZS_GetPlayerPosition": [
+      "AzerothSurvivorsAPI/Api.lua:565"
+    ],
+    "AZS_GetRevive": [
+      "AzerothSurvivorsAPI/Api.lua:254"
+    ],
+    "AZS_GetRunLength": [
+      "AzerothSurvivorsAPI/Api.lua:241"
+    ],
+    "AZS_GetRunSummary": [
+      "AzerothSurvivorsAPI/Api.lua:246"
+    ],
+    "AZS_GetRunTime": [
+      "AzerothSurvivors/Run.lua:51"
+    ],
+    "AZS_GetStatCaps": [
+      "AzerothSurvivorsAPI/Api.lua:136"
+    ],
+    "AZS_GetStoredLevels": [
+      "AzerothSurvivorsAPI/Api.lua:610"
+    ],
+    "AZS_GetSummonCount": [
+      "AzerothSurvivorsAPI/Api.lua:384"
+    ],
+    "AZS_GetSummonGroups": [
+      "AzerothSurvivorsAPI/Api.lua:390"
+    ],
+    "AZS_GetSummons": [
+      "AzerothSurvivorsAPI/Api.lua:359"
+    ],
+    "AZS_GetTimers": [
+      "AzerothSurvivorsAPI/Api.lua:444"
+    ],
+    "AZS_GetTotemCount": [
+      "AzerothSurvivorsAPI/Api.lua:433"
+    ],
+    "AZS_GetTotems": [
+      "AzerothSurvivorsAPI/Api.lua:420"
+    ],
+    "AZS_GetUpcomingBosses": [
+      "AzerothSurvivorsAPI/Api.lua:342"
+    ],
+    "AZS_GetVoiceVolume": [
+      "AzerothSurvivors/Voice.lua:250"
+    ],
+    "AZS_GetWorldAnchors": [
+      "AzerothSurvivorsAPI/Anchors.lua:595"
+    ],
+    "AZS_GroupPanelLink": [
+      "AzerothSurvivors/Friends.lua:515"
+    ],
+    "AZS_InspectUnit": [
+      "AzerothSurvivors/Inspect.lua:1042"
+    ],
+    "AZS_InviteFriend": [
+      "AzerothSurvivors/Friends.lua:177"
+    ],
+    "AZS_IsEditing": [
+      "AzerothSurvivors/EditMode.lua:481"
+    ],
+    "AZS_IsHudShown": [
+      "AzerothSurvivorsAPI/Hud.lua:102"
+    ],
+    "AZS_IsOnTopOfScreens": [
+      "AzerothSurvivorsAPI/Hud.lua:329"
+    ],
+    "AZS_IsStoringLevels": [
+      "AzerothSurvivorsAPI/Api.lua:620"
+    ],
+    "AZS_LocaleStrings": [
+      "AzerothSurvivors/Locale.lua:65"
+    ],
+    "AZS_LowerMeter": [
+      "AzerothSurvivors/Meter.lua:712"
+    ],
+    "AZS_MeterTotals": [
+      "AzerothSurvivorsAPI/Api.lua:475"
+    ],
+    "AZS_MinimapOffset": [
+      "AzerothSurvivors/Chests.lua:125"
+    ],
+    "AZS_MinimapView": [
+      "AzerothSurvivors/Chests.lua:139"
+    ],
+    "AZS_Mount": [
+      "AzerothSurvivors/Mount.lua:16"
+    ],
+    "AZS_OnBanner": [
+      "AzerothSurvivorsAPI/Api.lua:664"
+    ],
+    "AZS_OnWorldProjected": [
+      "AzerothSurvivors/Chests.lua:272",
+      "AzerothSurvivors/Passage.lua:566",
+      "AzerothSurvivors/Ping.lua:488",
+      "AzerothSurvivorsAPI/Anchors.lua:568"
+    ],
+    "AZS_OpenHubLooks": [
+      "AzerothSurvivors/Hub.lua:200"
+    ],
+    "AZS_OpenLevels": [
+      "AzerothSurvivors/Run.lua:275"
+    ],
+    "AZS_OpenRun": [
+      "AzerothSurvivors/Friends.lua:186"
+    ],
+    "AZS_OpenStoredLevels": [
+      "AzerothSurvivorsAPI/Api.lua:614"
+    ],
+    "AZS_PadCardKeys": [
+      "AzerothSurvivors/Controller.lua:61"
+    ],
+    "AZS_Parse": [
+      "AzerothSurvivorsAPI/Api.lua:112"
+    ],
+    "AZS_ParseBanner": [
+      "AzerothSurvivorsAPI/Api.lua:656"
+    ],
+    "AZS_PickCard": [
+      "AzerothSurvivors/Cards.lua:925"
+    ],
+    "AZS_PingKey": [
+      "AzerothSurvivors/Ping.lua:276"
+    ],
+    "AZS_PlayChestOpen": [
+      "AzerothSurvivors/Chests.lua:400"
+    ],
+    "AZS_ProjectCombatTextAnchors": [
+      "AzerothSurvivorsAPI/CombatText.lua:262"
+    ],
+    "AZS_ProjectWorldAnchors": [
+      "AzerothSurvivorsAPI/Anchors.lua:599"
+    ],
+    "AZS_PushToTalk": [
+      "AzerothSurvivors/Voice.lua:473"
+    ],
+    "AZS_ReadSpellNames": [
+      "AzerothSurvivors/Locale.lua:49"
+    ],
+    "AZS_RegisterBannerHandler": [
+      "AzerothSurvivorsAPI/Api.lua:638"
+    ],
+    "AZS_RegisterCombatTextFrameHandler": [
+      "AzerothSurvivorsAPI/CombatText.lua:266"
+    ],
+    "AZS_RegisterWorldAnchorFrameHandler": [
+      "AzerothSurvivorsAPI/Anchors.lua:603"
+    ],
+    "AZS_ReleaseMeterCheckpoint": [
+      "AzerothSurvivorsAPI/Meter.lua:1328"
+    ],
+    "AZS_RequestAbilities": [
+      "AzerothSurvivorsAPI/Api.lua:159"
+    ],
+    "AZS_RunLobbyChanged": [
+      "AzerothSurvivors/FriendsWindow.lua:465"
+    ],
+    "AZS_SendCrashReportsOption": [
+      "AzerothSurvivors/Settings.lua:395"
+    ],
+    "AZS_SendLanguage": [
+      "AzerothSurvivors/Locale.lua:169"
+    ],
+    "AZS_SetClassIcon": [
+      "AzerothSurvivors/ClassSlots.lua:17"
+    ],
+    "AZS_SetEditorActionBarsHidden": [
+      "AzerothSurvivorsUI/Components/ActionBars/Elements/ActionBars.lua:723"
+    ],
+    "AZS_SetEditorHud": [
+      "AzerothSurvivorsAPI/Hud.lua:175"
+    ],
+    "AZS_SetFont": [
+      "AzerothSurvivors/Locale.lua:156"
+    ],
+    "AZS_SetHudShown": [
+      "AzerothSurvivorsAPI/Hud.lua:89"
+    ],
+    "AZS_SetLanguage": [
+      "AzerothSurvivors/Locale.lua:105"
+    ],
+    "AZS_SetMeterPortrait": [
+      "AzerothSurvivorsAPI/Meter.lua:1332"
+    ],
+    "AZS_SetOnTopOfScreens": [
+      "AzerothSurvivorsAPI/Hud.lua:310"
+    ],
+    "AZS_SetPeer": [
+      "AzerothSurvivors/Inspect.lua:201"
+    ],
+    "AZS_SetStoringLevels": [
+      "AzerothSurvivorsAPI/Api.lua:624"
+    ],
+    "AZS_SetVoiceVolume": [
+      "AzerothSurvivors/Voice.lua:254"
+    ],
+    "AZS_ShiftName": [
+      "AzerothSurvivors/Dash.lua:250"
+    ],
+    "AZS_ShowHubDps": [
+      "AzerothSurvivors/Hub.lua:257"
+    ],
+    "AZS_SpaceOf": [
+      "AzerothSurvivorsAPI/Api.lua:508"
+    ],
+    "AZS_SpectateNext": [
+      "AzerothSurvivors/Spectate.lua:403"
+    ],
+    "AZS_SpectatePrev": [
+      "AzerothSurvivors/Spectate.lua:407"
+    ],
+    "AZS_SpectateSwitch": [
+      "AzerothSurvivors/Spectate.lua:389"
+    ],
+    "AZS_SpellName": [
+      "AzerothSurvivors/Locale.lua:56"
+    ],
+    "AZS_StockStrings": [
+      "AzerothSurvivors/Locale.lua:80"
+    ],
+    "AZS_StockText": [
+      "AzerothSurvivors/Locale.lua:90"
+    ],
+    "AZS_TagSpace": [
+      "AzerothSurvivorsAPI/Api.lua:513"
+    ],
+    "AZS_ToggleEditMode": [
+      "AzerothSurvivors/EditMode.lua:485"
+    ],
+    "AZS_ToggleEmoteWheel": [
+      "AzerothSurvivors/Emotes.lua:463"
+    ],
+    "AZS_ToggleFriends": [
+      "AzerothSurvivors/FriendsWindow.lua:486"
+    ],
+    "AZS_ToggleInspect": [
+      "AzerothSurvivors/Inspect.lua:1056"
+    ],
+    "AZS_ToggleProving": [
+      "AzerothSurvivors/ProvingGround.lua:1716"
+    ],
+    "AZS_ToggleVoiceMute": [
+      "AzerothSurvivors/Voice.lua:477"
+    ],
+    "AZS_TrackerShown": [
+      "AzerothSurvivors/Tracker.lua:550"
+    ],
+    "AZS_TurnArrow": [
+      "AzerothSurvivors/Lairs.lua:38"
+    ],
+    "AZS_UnitKind": [
+      "AzerothSurvivorsAPI/Api.lua:687"
+    ],
+    "AZS_UnregisterBannerHandler": [
+      "AzerothSurvivorsAPI/Api.lua:647"
+    ],
+    "AZS_UnregisterWorldAnchorFrameHandler": [
+      "AzerothSurvivorsAPI/Anchors.lua:607"
+    ],
+    "AZS_UpdateChestPins": [
+      "AzerothSurvivors/Chests.lua:155"
+    ],
+    "AZS_UpdateEnd": [
+      "AzerothSurvivors/Spoils.lua:692"
+    ],
+    "AZS_UpdateGearRow": [
+      "AzerothSurvivors/Gear.lua:70"
+    ],
+    "AZS_UpdateLairMarks": [
+      "AzerothSurvivors/Lairs.lua:50"
+    ],
+    "AZS_UpdateRiftMarks": [
+      "AzerothSurvivors/Rift.lua:68"
+    ],
+    "AZS_ZoneTitle": [
+      "AzerothSurvivors/Run.lua:39"
+    ]
+  },
+  "manifestSerial": 1795141447,
+  "manifestSha256": "fd0ad0c6832f3def47f4c3f6f836864d579851c08224579474d8a32cbfc8bf4e",
+  "reviewedContracts": {
+    "AZSGATE": {
+      "evidence": [
+        "AzerothSurvivors/Passage.lua:389",
+        "AzerothSurvivors/Passage.lua:574"
+      ],
+      "fields": [
+        "id",
+        "x",
+        "y",
+        "z",
+        "wing",
+        "bosses"
+      ],
+      "lifecycle": "replacement snapshot stored locally by the stock UI; replay unverified",
+      "rowCoordinates": "world3D",
+      "stableInstanceId": "used within the received list; cross-reload scope unverified"
+    },
+    "AZS_CHESTS": {
+      "evidence": [
+        "AzerothSurvivors/Units.lua:89",
+        "AzerothSurvivorsAPI/Api.lua:187"
+      ],
+      "fields": [
+        "id",
+        "x",
+        "y",
+        "z",
+        "mx",
+        "my",
+        "boss",
+        "runId",
+        "mapId",
+        "spaceId"
+      ],
+      "lifecycle": "replacement snapshot and AZS_CHESTS_UPDATED",
+      "prefix": "AZSCHESTS",
+      "rowCoordinates": "world3D and map2D",
+      "stableInstanceId": "id within its current space"
+    },
+    "AZS_GetWorldAnchors": {
+      "evidence": [
+        "AzerothSurvivorsAPI/Anchors.lua:246",
+        "AzerothSurvivorsAPI/Anchors.lua:382",
+        "AzerothSurvivorsAPI/Anchors.lua:595"
+      ],
+      "fields": [
+        "entries",
+        "hasMore",
+        "nextCursor",
+        "snapshotId",
+        "total"
+      ],
+      "lifecycle": "paged catalog; category-specific state",
+      "parameters": [
+        "query?",
+        "cursor?",
+        "limit?"
+      ],
+      "rowCoordinates": "world3D",
+      "stableInstanceId": "anchorId, scoped by the consumer to the current context"
+    },
+    "AZS_LAIRS": {
+      "evidence": [
+        "AzerothSurvivors/Lairs.lua:102",
+        "AzerothSurvivorsAPI/Api.lua:192"
+      ],
+      "fields": [
+        "index",
+        "state",
+        "name",
+        "id",
+        "left",
+        "x",
+        "y",
+        "z",
+        "mx",
+        "my",
+        "flag",
+        "hp",
+        "hpm",
+        "runId",
+        "mapId",
+        "spaceId"
+      ],
+      "lifecycle": "replacement snapshot and AZS_LAIRS_UPDATED; empty lairs can remain in the list",
+      "prefix": "AZSLAIRS",
+      "rowCoordinates": "world3D and map2D",
+      "stableInstanceId": "lair index within its space; id refers to the occupant"
+    },
+    "AZS_RIFT": {
+      "evidence": [
+        "AzerothSurvivors/Rift.lua:1",
+        "AzerothSurvivors/Rift.lua:108"
+      ],
+      "fields": [
+        "st",
+        "got",
+        "need",
+        "m"
+      ],
+      "lifecycle": "replacement snapshot; availability and freshness must be established",
+      "prefix": "AZSRIFT",
+      "rowCoordinates": "map2D",
+      "rowEncoding": "kind:mx:my, separated by /",
+      "stableInstanceId": false
+    },
+    "AZS_VAULT": {
+      "atIsLocalReceptionTime": true,
+      "evidence": [
+        "AzerothSurvivors/Vault.lua:460",
+        "AzerothSurvivors/Vault.lua:477"
+      ],
+      "fields": [
+        "st",
+        "left",
+        "secs",
+        "got",
+        "of",
+        "at"
+      ],
+      "lifecycle": "enter/open; other states end the display; world-entry and run-end reset",
+      "prefix": "AZSVAULT",
+      "rowCoordinates": null,
+      "stableInstanceId": false
+    }
+  },
+  "schema": 1,
+  "scope": "Static Lua index. Matches can be internal, conditional, unused or comments (topics only). Native executable bindings and dynamic registrations require separate review.",
+  "sourceSha256": {
+    "AzerothSurvivors/AzerothSurvivors.toc": "f3f5b99556bfb6ac9447aa6a3e2694a9c08507995bb5333f9f131a59d97a15e2",
+    "AzerothSurvivors/Chests.lua": "8bf4a6330fcc678fa97f8a2ce8f0c3a003aab38745cc0095a3fb671cf5fb6720",
+    "AzerothSurvivors/Core.lua": "238e4cc8e1bdc614b1cc74caab5407449fca0ee7c6705614aa952b7e12f3c079",
+    "AzerothSurvivors/Generated/Content.lua": "235a6f510441c57b7f68846e49c6dfdc73b2800e03ea6025aad0cbe775adf3e4",
+    "AzerothSurvivors/Lairs.lua": "fc036e161979bacf74a82aa41b291c3e13afc6f6b67674ac6b230f32f83cd82b",
+    "AzerothSurvivors/Passage.lua": "3c96ba686290bf9b6ed09a2141b4e062db8a06310631e3a08eb1dffb9e23b9aa",
+    "AzerothSurvivors/Rift.lua": "da10ddf07d2a78bfd4b9995cca987c791330d764432fd2d66ad44c0755309c89",
+    "AzerothSurvivors/Run.lua": "733f0352fe0b2442e74d1e68bf4f254914a0ca0fa7aeb2d70998a717ec465edf",
+    "AzerothSurvivors/Units.lua": "6bce9469ceb39f2242421a3544cd3601e680f31f427f431144a98ee189681b0b",
+    "AzerothSurvivors/Vault.lua": "680c08e54dae3b935a3e3304ab62addd161e534d260490d868c2ecfa38383f44",
+    "AzerothSurvivorsAPI/Anchors.lua": "025d92433f111b48c1cdcbe627593c938773519eaee4d22c5c16625dab8c945d",
+    "AzerothSurvivorsAPI/Api.lua": "e4b39f3bac9ecb279dbbc2d1d666242d4ab9e1e5dff73d6431e47df2d12bdcd2",
+    "AzerothSurvivorsAPI/AzerothSurvivorsAPI.toc": "1481390eb8ceb3dd517d725400e14624ae3a827f9ab6742110e02c4e03ff3af2",
+    "AzerothSurvivorsAPI/CombatText.lua": "0b29ec9ae8d44300b2eb95d6e69b05e9793160e87ffda53e6141cd0613203ec0",
+    "AzerothSurvivorsAPI/Hud.lua": "dabd26b1f364d2fddc250e70c43640283d4c5632fb7e2ef71246581529ec93ac",
+    "AzerothSurvivorsAPI/Meter.lua": "605564904bdb3cdb6cf2adfdcbd645878012ce7900db9722bdccc7f04906b38d"
+  },
+  "topicExpressions": {
+    "arena_portals": "\\b(?:AZSGATE|AZSPASSAGE|AZS_PASSAGE|gate_line)\\b",
+    "object_catalogs": "\\b(?:AZS_(?:CHESTS|LAIRS)|AZSCHESTS|AZSLAIRS|AZSPING|AZS_GetWorldAnchors|AZS_WorldUnits)\\b",
+    "rift_crystals": "\\b(?:rift crystals?|cristaux? (?:de|de la) faille)\\b",
+    "rune_pickups": "\\b(?:speed rune|berserker rune|restoration rune|rune (?:jaune|de vitesse|de restauration|du berserker)|yellow rune|AZS_?RUNES?|AZS_?PICKUPS?)\\b",
+    "treasury": "\\b(?:AZSRIFT|AZSVAULT|AZS_RIFT|AZS_VAULT|goblin treasury|trésorerie gobeline|treasure goblin|gobelin au trésor)\\b"
+  },
+  "topicMatches": {
+    "arena_portals": [
+      "AzerothSurvivors/Passage.lua:1",
+      "AzerothSurvivors/Passage.lua:6",
+      "AzerothSurvivors/Passage.lua:54",
+      "AzerothSurvivors/Passage.lua:55",
+      "AzerothSurvivors/Passage.lua:278",
+      "AzerothSurvivors/Passage.lua:281",
+      "AzerothSurvivors/Passage.lua:316",
+      "AzerothSurvivors/Passage.lua:321",
+      "AzerothSurvivors/Passage.lua:325",
+      "AzerothSurvivors/Passage.lua:328",
+      "AzerothSurvivors/Passage.lua:337",
+      "AzerothSurvivors/Passage.lua:338",
+      "AzerothSurvivors/Passage.lua:377",
+      "AzerothSurvivors/Passage.lua:574"
+    ],
+    "object_catalogs": [
+      "AzerothSurvivors/Chests.lua:1",
+      "AzerothSurvivors/Chests.lua:6",
+      "AzerothSurvivors/Chests.lua:46",
+      "AzerothSurvivors/Chests.lua:157",
+      "AzerothSurvivors/Chests.lua:169",
+      "AzerothSurvivors/Chests.lua:279",
+      "AzerothSurvivors/Chests.lua:361",
+      "AzerothSurvivors/Lairs.lua:1",
+      "AzerothSurvivors/Lairs.lua:7",
+      "AzerothSurvivors/Lairs.lua:54",
+      "AzerothSurvivors/Lairs.lua:102",
+      "AzerothSurvivors/Lairs.lua:104",
+      "AzerothSurvivors/Ping.lua:8",
+      "AzerothSurvivors/Ping.lua:13",
+      "AzerothSurvivors/Ping.lua:14",
+      "AzerothSurvivors/Ping.lua:16",
+      "AzerothSurvivors/Ping.lua:303",
+      "AzerothSurvivors/Ping.lua:304",
+      "AzerothSurvivors/Ping.lua:618",
+      "AzerothSurvivors/Run.lua:2",
+      "AzerothSurvivors/Units.lua:89",
+      "AzerothSurvivors/Units.lua:90",
+      "AzerothSurvivorsAPI/Anchors.lua:1",
+      "AzerothSurvivorsAPI/Anchors.lua:4",
+      "AzerothSurvivorsAPI/Anchors.lua:5",
+      "AzerothSurvivorsAPI/Anchors.lua:7",
+      "AzerothSurvivorsAPI/Anchors.lua:9",
+      "AzerothSurvivorsAPI/Anchors.lua:12",
+      "AzerothSurvivorsAPI/Anchors.lua:16",
+      "AzerothSurvivorsAPI/Anchors.lua:153",
+      "AzerothSurvivorsAPI/Anchors.lua:171",
+      "AzerothSurvivorsAPI/Anchors.lua:183",
+      "AzerothSurvivorsAPI/Anchors.lua:200",
+      "AzerothSurvivorsAPI/Anchors.lua:261",
+      "AzerothSurvivorsAPI/Anchors.lua:266",
+      "AzerothSurvivorsAPI/Anchors.lua:310",
+      "AzerothSurvivorsAPI/Anchors.lua:320",
+      "AzerothSurvivorsAPI/Anchors.lua:595",
+      "AzerothSurvivorsAPI/Api.lua:6",
+      "AzerothSurvivorsAPI/Api.lua:187",
+      "AzerothSurvivorsAPI/Api.lua:188",
+      "AzerothSurvivorsAPI/Api.lua:192",
+      "AzerothSurvivorsAPI/Api.lua:193",
+      "AzerothSurvivorsAPI/Api.lua:314",
+      "AzerothSurvivorsAPI/Api.lua:319",
+      "AzerothSurvivorsAPI/Api.lua:320",
+      "AzerothSurvivorsAPI/Api.lua:501",
+      "AzerothSurvivorsAPI/Api.lua:502",
+      "AzerothSurvivorsAPI/Api.lua:504",
+      "AzerothSurvivorsAPI/Api.lua:544",
+      "AzerothSurvivorsAPI/Api.lua:715"
+    ],
+    "rift_crystals": [],
+    "rune_pickups": [],
+    "treasury": [
+      "AzerothSurvivors/Locale_deDE_Run.lua:296",
+      "AzerothSurvivors/Locale_deDE_Run.lua:302",
+      "AzerothSurvivors/Locale_deDE_Run.lua:303",
+      "AzerothSurvivors/Locale_deDE_Run.lua:307",
+      "AzerothSurvivors/Locale_esES_Run.lua:296",
+      "AzerothSurvivors/Locale_esES_Run.lua:302",
+      "AzerothSurvivors/Locale_esES_Run.lua:303",
+      "AzerothSurvivors/Locale_esES_Run.lua:307",
+      "AzerothSurvivors/Locale_frFR_Run.lua:296",
+      "AzerothSurvivors/Locale_frFR_Run.lua:302",
+      "AzerothSurvivors/Locale_frFR_Run.lua:303",
+      "AzerothSurvivors/Locale_frFR_Run.lua:307",
+      "AzerothSurvivors/Locale_itIT_Run.lua:295",
+      "AzerothSurvivors/Locale_itIT_Run.lua:301",
+      "AzerothSurvivors/Locale_itIT_Run.lua:302",
+      "AzerothSurvivors/Locale_itIT_Run.lua:306",
+      "AzerothSurvivors/Locale_jaJP_Run.lua:296",
+      "AzerothSurvivors/Locale_jaJP_Run.lua:302",
+      "AzerothSurvivors/Locale_jaJP_Run.lua:303",
+      "AzerothSurvivors/Locale_jaJP_Run.lua:307",
+      "AzerothSurvivors/Locale_koKR_Run.lua:296",
+      "AzerothSurvivors/Locale_koKR_Run.lua:302",
+      "AzerothSurvivors/Locale_koKR_Run.lua:303",
+      "AzerothSurvivors/Locale_koKR_Run.lua:307",
+      "AzerothSurvivors/Locale_plPL_Run.lua:296",
+      "AzerothSurvivors/Locale_plPL_Run.lua:302",
+      "AzerothSurvivors/Locale_plPL_Run.lua:303",
+      "AzerothSurvivors/Locale_plPL_Run.lua:307",
+      "AzerothSurvivors/Locale_ptBR_Run.lua:296",
+      "AzerothSurvivors/Locale_ptBR_Run.lua:302",
+      "AzerothSurvivors/Locale_ptBR_Run.lua:303",
+      "AzerothSurvivors/Locale_ptBR_Run.lua:307",
+      "AzerothSurvivors/Locale_ruRU_Run.lua:296",
+      "AzerothSurvivors/Locale_ruRU_Run.lua:302",
+      "AzerothSurvivors/Locale_ruRU_Run.lua:303",
+      "AzerothSurvivors/Locale_ruRU_Run.lua:307",
+      "AzerothSurvivors/Locale_trTR_Run.lua:296",
+      "AzerothSurvivors/Locale_trTR_Run.lua:302",
+      "AzerothSurvivors/Locale_trTR_Run.lua:303",
+      "AzerothSurvivors/Locale_trTR_Run.lua:307",
+      "AzerothSurvivors/Locale_zhCN_Run.lua:296",
+      "AzerothSurvivors/Locale_zhCN_Run.lua:302",
+      "AzerothSurvivors/Locale_zhCN_Run.lua:303",
+      "AzerothSurvivors/Locale_zhCN_Run.lua:307",
+      "AzerothSurvivors/Passage.lua:4",
+      "AzerothSurvivors/Rift.lua:1",
+      "AzerothSurvivors/Rift.lua:5",
+      "AzerothSurvivors/Rift.lua:7",
+      "AzerothSurvivors/Rift.lua:108",
+      "AzerothSurvivors/Rift.lua:109",
+      "AzerothSurvivors/Rift.lua:111",
+      "AzerothSurvivors/Run.lua:76",
+      "AzerothSurvivors/Vault.lua:1",
+      "AzerothSurvivors/Vault.lua:7",
+      "AzerothSurvivors/Vault.lua:68",
+      "AzerothSurvivors/Vault.lua:69",
+      "AzerothSurvivors/Vault.lua:161",
+      "AzerothSurvivors/Vault.lua:184",
+      "AzerothSurvivors/Vault.lua:319",
+      "AzerothSurvivors/Vault.lua:429",
+      "AzerothSurvivors/Vault.lua:435",
+      "AzerothSurvivors/Vault.lua:436",
+      "AzerothSurvivors/Vault.lua:464",
+      "AzerothSurvivors/Vault.lua:471",
+      "AzerothSurvivors/Vault.lua:477",
+      "AzerothSurvivors/Vault.lua:478",
+      "AzerothSurvivors/Vault.lua:479",
+      "AzerothSurvivors/Vault.lua:480",
+      "AzerothSurvivors/Vault.lua:481",
+      "AzerothSurvivors/Vault.lua:482",
+      "AzerothSurvivors/Vault.lua:497",
+      "AzerothSurvivorsUI/Components/Misc/SurvivorsBossBar.lua:71"
+    ]
+  },
+  "version": "0.7.4"
+}
