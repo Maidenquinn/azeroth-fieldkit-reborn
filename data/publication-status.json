@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-reborn.42",
+  "version": "0.1.0-reborn.43",
   "maintainerAcceptedForPublication": false,
   "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
@@ -10,5 +10,5 @@
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
   "developmentAuthorizedDate": "2026-11-25",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Goblin Treasury portal R1 candidate on top of .41. Lua fixtures cover synthetic native snapshot replacement, lifecycle, distance and independent settings. Maintainer in-game recipe pending."
+  "inGameTestScope": "Rift portal extension candidate. Tests use synthetic packets. The .43 live recipe, crystal identity and any c coordinates remain pending."
 }

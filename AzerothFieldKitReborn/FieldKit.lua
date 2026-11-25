@@ -3076,7 +3076,7 @@ local function FieldKitEventOther()
   -- rather than leaving an extra polling interval of compact HUD on choices.
   local prefix,message,channel,sender=arg1,arg2,arg3,arg4
   if prefix=="AZSRUN" then KeepCompactBar() end
-  local portalChanged,portalAppeared=FieldKitNative.Packet(prefix,message)
+  local portalChanged,portalAppeared,riftEvent=FieldKitNative.Packet(prefix,message)
   FieldKitPartySync.Receive(prefix,message,channel,sender)
   FieldKitCoop.Packet(prefix)
 		if ( prefix == "AZS" and message ) then
@@ -3085,7 +3085,7 @@ local function FieldKitEventOther()
 			DB.lastStats = stats
 			UpdateStatsFrame()
 		end
-  if portalChanged then FieldKitNativeTools.PortalChanged(portalAppeared) end
+  if portalChanged then FieldKitNativeTools.PortalChanged(portalAppeared,riftEvent) end
 	elseif ( arg1 == "target" ) then
 		UpdateTargetHealth()
 		UpdateBossFrame()
@@ -3297,7 +3297,7 @@ SlashCmdList["FieldKit"] = function(msg)
  if msg=="diag" then FieldKitDiagnostics.Command("");return end
  if string.sub(msg,1,5)=="diag " then FieldKitDiagnostics.Command(string.sub(msg,6));return end
  if msg=="native" then FieldKitNativeTools.Diagnostic();return end
- if msg=="portal" then FieldKitNativeTools.PortalDiagnostic();return end
+ if msg=="portal" or msg=="rift" then FieldKitNativeTools.PortalDiagnostic();return end
  if msg=="lairs" then FieldKit.LairDiagnostic();return end
  if msg=="align" then FieldKitAlignment.Start();return end
  if msg=="lock" or msg=="unlock" then FieldKit.SetWindowsLocked(msg=="lock");return end

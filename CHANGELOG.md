@@ -1,3 +1,9 @@
+# 0.1.0-reborn.43 — Sealed and open Rift Portals (review candidate)
+
+- Added independent Rift Portal HUD and alert settings alongside Goblin Treasury support.
+- Show crystal progress on the Rift Portal card when received. Crystal positions remain diagnostic only.
+- Expanded /fieldkit rift with packet age, types, coordinates and display reasons.
+
 # 0.1.0-reborn.42 — Goblin Treasury portal (review candidate)
 
 - Optional profile-scoped Goblin Treasury indicator and independent confirmed-opening alert.

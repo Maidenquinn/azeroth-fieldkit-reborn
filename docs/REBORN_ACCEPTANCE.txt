@@ -1,3 +1,11 @@
+FieldKit Reborn 0.1.0-reborn.43 — Rift Portals candidate
+
+Enable the Rift Portal indicator in World > Minimap and its independent alert
+in Combat > Alerts. Run /fieldkit rift before and after the portal appears,
+opens, or disappears. Try reload, arena transitions and coexistence with the
+Goblin Treasury portal. Compare snapshots before and after a crystal pickup.
+See docs/RIFT_PORTALS_043.md for the full recipe. Live acceptance is pending.
+
 FieldKit Reborn 0.1.0-reborn.42 — Goblin Treasury portal review candidate
 
 Maintainer in-game recipe pending. Enable the HUD indicator under World >

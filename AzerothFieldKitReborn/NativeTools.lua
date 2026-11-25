@@ -360,12 +360,14 @@ function T.Warnings()
  local d=FieldKitRebornDB
  local size=d.cardSizes.FieldKitNativeWarnings
  local now=GetTime()
- T.portalNotice=false
+ T.portalNotice,T.goblinNotice,T.riftNotice=false,false,false
  for i=table.getn(T.warnings),1,-1 do
   local item=T.warnings[i]
   if now-item.at>=4 or (item.kind=="native" and not d.nativeWarnings) or (item.kind=="next" and not d.nextBossAlert)
-    or (item.kind=="portal" and (not d.goblinPortalAlert or N.Portal.state~="present")) then table.remove(T.warnings,i)
-  elseif item.kind=="portal" then T.portalNotice=true end
+    or (item.kind=="portal" and (not d.goblinPortalAlert or N.Portal.state~="present"))
+    or (item.kind=="rift" and (not d.riftPortalAlert or N.Portal.rift.state~="present")) then table.remove(T.warnings,i)
+  elseif item.kind=="portal" then T.portalNotice,T.goblinNotice=true,true
+  elseif item.kind=="rift" then T.portalNotice,T.riftNotice=true,true end
  end
  local count=table.getn(T.warnings)
  local compact=count==1 and T.portalNotice and not FieldKit.layoutEditing
@@ -389,63 +391,133 @@ function T.Warnings()
  frame:Show()
 end
 
-local function CreatePortalCard()
- local f=CreateFrame("Frame","FieldKitGoblinPortal",UIParent)
+local function CreatePortalCard(rift)
+ local name=rift and "FieldKitRiftPortal" or "FieldKitGoblinPortal"
+ local f=CreateFrame("Frame",name,UIParent)
  f:SetFrameStrata("LOW")
  f:SetWidth(240);f:SetHeight(44)
  FieldKitTheme.Surface(f,"card",true);FieldKitTheme.ReadableFloor(f)
- local icon=f:CreateTexture(nil,"ARTWORK")
- icon:SetTexture("Interface\\Icons\\INV_Misc_Coin_02")
- icon:SetWidth(24);icon:SetHeight(24);icon:SetPoint("LEFT",f,"LEFT",10,0)
- FieldKitTheme.Label(f,"Goblin portal available",42,4,188,18,12,FieldKitTheme.gold)
+ f.icon=f:CreateTexture(nil,"ARTWORK")
+ f.icon:SetTexture(rift and "Interface\\Icons\\Spell_Arcane_PortalIronForge" or "Interface\\Icons\\INV_Misc_Coin_02")
+ f.icon:SetWidth(24);f.icon:SetHeight(24);f.icon:SetPoint("LEFT",f,"LEFT",10,0)
+ f.title=FieldKitTheme.Label(f,not rift and "Goblin portal available" or nil,42,4,188,18,12,FieldKitTheme.gold)
  f.detail=FieldKitTheme.Label(f,nil,42,23,188,16,11,FieldKitTheme.muted)
- T.move(f,UIParent:GetWidth()/2-142,UIParent:GetHeight()/2-239)
- T.portalFrame=f
+ if rift then f.progress=FieldKitTheme.Label(f,nil,42,23,188,16,11,FieldKitTheme.muted) end
+ T.move(f,UIParent:GetWidth()/2-142,UIParent:GetHeight()/2-(rift and 297 or 239))
+ if rift then T.riftFrame=f else T.portalFrame=f end
  return f
 end
 
-function T.PortalView()
- local d,p,f=FieldKitRebornDB,N.Portal,T.portalFrame
- local phase=p.state=="present" and N.Read("AZS_GetPhase")
- if not d.goblinPortalIndicator or (phase~="playing" and phase~="paused") then
-  if f and f:IsShown() then f:Hide() end
-  p.distanceReason=d.goblinPortalIndicator and "not_visible" or "indicator_off"
-  return
- end
- f=f or CreatePortalCard()
- local yards=p.Distance()
+local function RiftLabel(marks)
+ if table.getn(marks.o)==0 then return "Rift portal sealed" end
+ if table.getn(marks.p)==0 then return "Rift portal open" end
+ return "Open and sealed rifts"
+end
+
+local function RenderPortal(f,yards,title,progress)
  local detail=yards and string.format(FieldKit_L("Horizontal: %d yd"),math.floor(yards+0.5))
- if f.portalDetail~=detail or not f:IsShown() then
-  f.portalDetail=detail
+ if title and f.portalTitle~=title then
+  f.portalTitle=title
+  FieldKit_Text(f.title,title)
+  if title=="Rift portal sealed" then f.icon:SetVertexColor(.8,.65,1)
+  else f.icon:SetVertexColor(1,1,1) end
+ end
+ if f.portalDetail~=detail or f.portalProgress~=progress or not f:IsShown() then
+  f.portalDetail,f.portalProgress=detail,progress
   f.detail:SetText(detail or "")
   if detail then f.detail:Show() else f.detail:Hide() end
-  f:SetHeight(detail and 44 or 32)
+  if f.progress then
+   f.progress:SetText(progress or "")
+   f.progress:ClearAllPoints()
+   f.progress:SetPoint("TOPLEFT",f,"TOPLEFT",42,detail and -40 or -23)
+   if progress then f.progress:Show() else f.progress:Hide() end
+  end
+  f:SetHeight(detail and progress and 60 or ((detail or progress) and 44 or 32))
   FieldKitTheme.Update(f)
  end
  if not f:IsShown() then f:Show() end
 end
 
-function T.PortalChanged(appeared)
+local function Visibility(state,enabled,phase)
+ if not enabled then return "indicator_off" end
+ if state~="present" then return state end
+ if phase~="playing" and phase~="paused" then return "phase_hidden" end
+ return "ready"
+end
+
+local function HidePortal(f)
+ if f and f:IsShown() then f:Hide() end
+end
+
+function T.PortalView()
+ local d,p=FieldKitRebornDB,N.Portal
+ local phase=p.phase
+ local goblin=Visibility(p.state,d.goblinPortalIndicator,phase)
+ local rift=Visibility(p.rift.state,d.riftPortalIndicator,phase)
+ local showGoblin,showRift=goblin=="ready",rift=="ready"
+ local gYards,rYards
+ if showGoblin or showRift then gYards,rYards=p.Distances(showGoblin,showRift) end
+ if showGoblin then RenderPortal(T.portalFrame or CreatePortalCard(false),gYards)
+ else p.distanceReason=goblin;HidePortal(T.portalFrame) end
+ if showRift then
+  local progress
+  if p.got and p.need and p.need>0 and p.got<=p.need then
+   progress=string.format(FieldKit_L("Crystals: %d/%d"),p.got,p.need)
+  end
+  RenderPortal(T.riftFrame or CreatePortalCard(true),rYards,RiftLabel(p.marks),progress)
+ else p.rift.distanceReason=rift;HidePortal(T.riftFrame) end
+ T.portalEvaluatedAt=GetTime()
+ T.portalEvaluatedPacket=p.packets
+end
+
+function T.PortalChanged(appeared,riftEvent)
  local d,p=FieldKitRebornDB,N.Portal
  if not T.warningFrame then return end
- if p.state~="present" then
-  if T.portalFrame and T.portalFrame:IsShown() then T.portalFrame:Hide() end
-  if T.portalNotice then T.Warnings() end
- elseif appeared and d.goblinPortalAlert and not FieldKit.layoutEditing then
+ local refresh=(T.goblinNotice and p.state~="present") or (T.riftNotice and p.rift.state~="present")
+ if p.state~="present" then HidePortal(T.portalFrame) end
+ if p.rift.state~="present" then HidePortal(T.riftFrame) end
+ if appeared and d.goblinPortalAlert and not FieldKit.layoutEditing then
   T.Push(FieldKit_L("Goblin portal available"),"portal:goblin","portal")
-  T.Warnings()
+  refresh=true
  end
+ if riftEvent and d.riftPortalAlert and not FieldKit.layoutEditing then
+  local label=riftEvent=="open" and "Rift portal open" or "Rift portal sealed"
+  T.Push(FieldKit_L(label),"rift:"..riftEvent,"rift")
+  refresh=true
+ end
+ if refresh then T.Warnings() end
 end
 
 function T.PortalDiagnostic()
- local p=N.Portal
- DEFAULT_CHAT_FRAME:AddMessage(string.format(
-  "FieldKit portal: state=%s reason=%s phase=%s map=%s points=%d distance=%s packets=%d decodes=%d poseReads=%d",
-  p.state,p.reason,tostring(N.Read("AZS_GetPhase")),tostring(p.map),table.getn(p.points),
-  p.distanceReason or "not_read",p.packets,p.decodes,p.poseReads))
- for i=1,math.min(4,table.getn(p.points)) do
-  local point=p.points[i]
-  DEFAULT_CHAT_FRAME:AddMessage(string.format("  v[%d] mx=%.6f my=%.6f",i,point.x,point.y))
+ local p,d=N.Portal,FieldKitRebornDB
+ local chat=DEFAULT_CHAT_FRAME
+ local phase=N.Read("AZS_GetPhase")
+ local function Stamp(at)
+  return at and string.format("%.2f (%.2fs ago)",at,math.max(0,GetTime()-at)) or "none"
+ end
+ chat:AddMessage(string.format("FieldKit rift: run=%s zone=%s map=%s area=%s floor=%s phase=%s",
+  tostring(p.runId),N.Text(tostring(p.zone),40),tostring(p.map),tostring(p.area),tostring(p.floor),tostring(phase)))
+ chat:AddMessage(string.format("AZSRIFT: sync=%s st=%s got=%s need=%s latest=%s accepted=%s",
+  p.reason,tostring(p.nativeState),tostring(p.got),tostring(p.need),Stamp(p.lastPacket),Stamp(p.receivedAt)))
+ local refresh=T.portalEvaluatedAt and "evaluated" or "never_evaluated"
+ if T.portalEvaluatedPacket~=p.packets then refresh="pending_evaluation" end
+ if p.runId and AZS_RIFT~=p.source then refresh="native_table_not_observed" end
+ chat:AddMessage(string.format("Refresh: %s lastHUD=%s lastPacket=%s packets=%d decodes=%d poseReads=%d",
+  refresh,Stamp(T.portalEvaluatedAt),tostring(p.lastPacketReason),p.packets,p.decodes,p.poseReads))
+ chat:AddMessage(string.format("Goblin=%s display=%s distance=%s | Rift=%s display=%s distance=%s",
+  p.state,Visibility(p.state,d.goblinPortalIndicator,phase),tostring(p.distanceReason),
+  p.rift.state,Visibility(p.rift.state,d.riftPortalIndicator,phase),tostring(p.rift.distanceReason)))
+ if not p.marks then
+  chat:AddMessage("Points p/o/v/c: unavailable (no valid marks)")
+  return
+ end
+ chat:AddMessage(string.format("Points p=%d o=%d v=%d c=%d unknown=%d; c is diagnostic only",
+  table.getn(p.marks.p),table.getn(p.marks.o),table.getn(p.marks.v),table.getn(p.marks.c),p.marks.unknown))
+ for _,kind in ipairs({"p","o","v","c"}) do
+  for i,point in ipairs(p.marks[kind]) do
+   if i>4 then break end
+   chat:AddMessage(string.format("  %s[%d] mx=%.6f my=%.6f",kind,i,point.x,point.y))
+  end
  end
 end
 
