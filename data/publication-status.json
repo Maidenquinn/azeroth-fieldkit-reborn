@@ -1,14 +1,14 @@
 {
-  "version": "0.1.0-reborn.41",
+  "version": "0.1.0-reborn.43",
   "maintainerAcceptedForPublication": false,
-  "maintainerAcceptanceDate": "2026-11-20",
+  "maintainerAcceptanceDate": null,
   "gameTeamPublicationPermission": "Registry entry accepted in Syiana/azs-addons PR #3 on 2026-11-13; no separate game-team certification of this package claimed.",
   "packageSpecificGameApprovalConfirmed": false,
   "independentSecurityCertification": false,
   "inGameTestByAgent": false,
   "githubPrerelease": true,
   "rights": "Maintainer reports holding necessary distribution permissions on 2026-11-06; original attribution and license notices retained. Not independently verified.",
-  "developmentAuthorizedDate": "2026-10-31",
+  "developmentAuthorizedDate": "2026-11-25",
   "maintainerInGameTestingReported": false,
-  "inGameTestScope": "Long endless candidate on top of .40 (kill attribution kept): compact large-number formats with exact tooltips, status bars as fractions, HUD loop isolated per step, boss/guardian health past 10^18 kept live, readability floor on data cards, /fieldkit lairs native diagnostic. Automated Lua 5.1 and 5.0 fixtures and a reproduction on .40; awaiting maintainer long endless recipe."
+  "inGameTestScope": "Rift portal extension candidate. Tests use synthetic packets. The .43 live recipe, crystal identity and any c coordinates remain pending."
 }

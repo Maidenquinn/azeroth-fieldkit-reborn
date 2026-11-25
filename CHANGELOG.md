@@ -1,3 +1,15 @@
+# 0.1.0-reborn.43 — Sealed and open Rift Portals (review candidate)
+
+- Added independent Rift Portal HUD and alert settings alongside Goblin Treasury support.
+- Show crystal progress on the Rift Portal card when received. Crystal positions remain diagnostic only.
+- Expanded /fieldkit rift with packet age, types, coordinates and display reasons.
+
+# 0.1.0-reborn.42 — Goblin Treasury portal (review candidate)
+
+- Optional profile-scoped Goblin Treasury indicator and independent confirmed-opening alert.
+- Horizontal distance is conditional on a verified native map reference. The stock minimap marker and arrow stay visible.
+- See [the in-game recipe and API limits](docs/GOBLIN_PORTAL_R1.md).
+
 # 0.1.0-reborn.41 — Long endless runs (candidate, not yet approved)
 
 - Large numbers stay readable: one compact format everywhere (meter, detail card, HUD, party, boss and health text) using the game's own units (k, M, B, T, Qa, Qi ... Dc), never raw scientific notation. Hover tooltips keep the exact value.

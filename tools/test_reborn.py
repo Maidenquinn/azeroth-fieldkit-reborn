@@ -77,6 +77,7 @@ def main():
     l=runtime();l.execute((base/'tests/reborn_endless_choices.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_display_ownership.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_world_markers.lua').read_text(encoding='utf8'))
+    l=runtime();l.execute((base/'tests/reborn_goblin_portal.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_boss_list.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_boss_list_layout.lua').read_text(encoding='utf8'))
     l=runtime();l.execute((base/'tests/reborn_loadout_values.lua').read_text(encoding='utf8'))

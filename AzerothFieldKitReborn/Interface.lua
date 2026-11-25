@@ -180,6 +180,8 @@ function FieldKit.BuildJourneySections(sections,actions)
   {"bossBannerWarnings","Boss banner messages","Include received banners explicitly flagged as boss messages."},
   {"mechanicWarnings","Mechanic banner messages","Include received banners whose kind is mechanic."},
   {"partyBannerWarnings","Party revive banners","Include co-op downed / friend-down / revived banners."},
+  {"riftPortalAlert","Rift portal alerts","Notify when a rift portal appears or opens."},
+  {"goblinPortalAlert","Goblin portal alerts","Notify once when a goblin portal is observed opening."},
   {"nextBossAlert","Warn before the next boss","Warn at the native progress threshold, or seconds before a timed boss."}}) do
   local key,label,tip=def[1],def[2],def[3]
   table.insert(alerts,{kind="check",label=label,tip=tip,get=function() return FieldKitRebornDB[key] end,
@@ -190,6 +192,12 @@ function FieldKit.BuildJourneySections(sections,actions)
   set=function(v) FieldKitRebornDB.bossWarningLead=v end})
  table.insert(old.Map.items,{kind="check",label="Highlight the flagged lair",tip="Mark the lair selected by the game's flag in the existing lair list. Does not track a moving guardian.",
   get=function() return FieldKitRebornDB.highlightFlaggedLair end,set=function(v) FieldKitRebornDB.highlightFlaggedLair=v;actions.UpdateLairFrame() end})
+ table.insert(old.Map.items,{kind="check",label="Goblin portal indicator",tip="Show the goblin portal and its horizontal distance when available.",
+  get=function() return FieldKitRebornDB.goblinPortalIndicator end,
+  set=function(v) FieldKitRebornDB.goblinPortalIndicator=v;FieldKitNativeTools.Update() end})
+ table.insert(old.Map.items,{kind="check",label="Rift portal indicator",tip="Show sealed or open rifts, distance and crystal progress when available.",
+  get=function() return FieldKitRebornDB.riftPortalIndicator end,
+  set=function(v) FieldKitRebornDB.riftPortalIndicator=v;FieldKitNativeTools.Update() end})
  local coop={
   {kind="preview",preview="FieldKitPartyMeterFrame"},
   {kind="note",label="Experimental co-op",tip="Full allied spell sharing depends on a client transport that has not been confirmed in live co-op. Native group totals remain available without sharing."},

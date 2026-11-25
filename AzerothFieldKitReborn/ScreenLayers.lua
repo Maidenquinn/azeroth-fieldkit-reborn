@@ -6,7 +6,7 @@ local S=FieldKitScreenLayers
 
 local CHOICE_EXTRA={"FieldKitFirstLaunchBar","FieldKitProfilePreviewBar","FieldKitReferenceCanvas","FieldKitThemeBack","FieldKitThemeSummaryDamage","FieldKitThemeSummaryLairs","FieldKitThemeSummaryAccessories","FieldKitThemeSummaryStats","FieldKitThemeSummaryEffects","FieldKitThemeIdentity","FieldKitThemeVitality","FieldKitThemeExperience","FieldKitThemeCounters","FieldKitThemeSchedule","FieldKitThemeUtility","FieldKitThemeMicro","FieldKitThemeTargetFrame","FieldKitBossFrame1Compact","FieldKitBossFrame2Compact","FieldKitBossFrame3Compact","FieldKitBossFrame4Compact","FieldKitThemeDock","FieldKitThemeHeader","FieldKitThemeNavigation","FieldKitThemeTooltip","FieldKitThemeMap","FieldKitBossTimelineFrame","FieldKitLeftStack","FieldKitRightStack",
  "FieldKitBossFrame1","FieldKitBossFrame2","FieldKitBossFrame3","FieldKitBossFrame4",
- "FieldKitPlayerBar","FieldKitPlayerBuffs","FieldKitLegacyCritFrame","FieldKitCombatText",
+ "FieldKitGoblinPortal","FieldKitRiftPortal","FieldKitPlayerBar","FieldKitPlayerBuffs","FieldKitLegacyCritFrame","FieldKitCombatText",
  "FieldKitCompactBar","FieldKitRunClockFrame","FieldKitRebornBossProgress","FieldKitRebornHorde","FieldKitMinimapButton","FieldKitPartyDetailsFrame",
  "FieldKitMeterExtra_damage","FieldKitMeterExtra_healing","FieldKitMeterExtra_boss",
  "FieldKitMeterExtra_taken","FieldKitMeterExtra_party","FieldKitMeterExtra_kills"}
