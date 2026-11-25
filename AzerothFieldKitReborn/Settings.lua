@@ -1,22 +1,25 @@
 -- Lua 5.0: small callbacks only capture an option key and its default.
 -- Format finite observed HP in numbers/percent/both, safely handling missing or zero maxima.
 function FieldKit_FormatHealth(current,maximum,mode)
- local hp=FieldKit.Number(current,0,0)
- local max=FieldKit.Number(maximum,0,0)
+ -- Endless health passes 2^53: MeterNumber keeps it; Compact writes it (.41).
+ local hp=FieldKit.MeterNumber(current,0,0)
+ local max=FieldKit.MeterNumber(maximum,0,0)
  local percent=max>0 and math.floor(hp*100/max+0.5) or 0
- local numbers=string.format("%.0f / %.0f",hp,max)
+ local numbers=FieldKit.Compact(hp).." / "..FieldKit.Compact(max)
  if mode==2 then return percent.."%" end
  if mode==3 then return numbers.." ("..percent.."%)" end
  return numbers
 end
 -- These are observed native meter fields, not damage inferred from DPS/time.
--- Missing fields remain visibly unknown. Damage totals are displayed unabridged.
+-- Missing fields remain visibly unknown. .41: amounts are compact (FieldKit.Compact):
+-- unabridged digits overflowed the 92 px column past 10^9 in long endless runs and
+-- FieldKit.Number turned anything over 10^18 into "?". The exact value is in the tooltip.
 local function MeterParts(line,rateLabel)
- local damage=FieldKit.Number(line.dmg,nil,0)
- local rate=FieldKit.Number(line.dps,nil,0)
+ local damage=FieldKit.MeterNumber(line.dmg,nil,0)
+ local rate=FieldKit.MeterNumber(line.dps,nil,0)
  local share=FieldKit.Number(line.share,nil,0)
- local amount=damage and string.format("%.0f",damage) or "?"
- local dps=(rate and string.format("%.0f",rate) or "?").." "..FieldKit_L(rateLabel or "dps")
+ local amount=damage and FieldKit.Compact(damage) or "?"
+ local dps=(rate and FieldKit.Compact(rate) or "?").." "..FieldKit_L(rateLabel or "dps")
  local percent=share and string.format("%.0f%%",share*100) or "?"
  return amount,dps,percent
 end
@@ -41,7 +44,7 @@ function FieldKit.CreateMeterColumns(frame)
   local row=frame.rows[i];row.meterColumns={}
   for j=1,3 do
    local text=row:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall")
-   text:SetJustifyH("RIGHT");text:SetHeight(14);row.meterColumns[j]=text
+   text:SetJustifyH("RIGHT");text:SetHeight(14);FieldKit.TextShadow(text);row.meterColumns[j]=text
   end
   row.value:Hide()
  end
@@ -100,10 +103,10 @@ function FieldKit.UpdateMeterColumns(row,line,mode,width,rateLabel)
  local damage,rate,share=MeterParts(line,rateLabel)
  columns[1]:SetText(damage);columns[2]:SetText(rate);columns[3]:SetText(share)
  -- Kills sit in their own slot left of the value columns — never on top of damage.
- local kills=FieldKit.Number(line and line.kills,nil,0)
+ local kills=FieldKit.MeterNumber(line and line.kills,nil,0)
  local showKills=kills and kills>0 and mode~=2
  local offsets,sizes,killW,valueLeft,reserved=FieldKit.MeterColumnLayout(mode,showKills)
- local killKey=showKills and kills or 0
+ local killKey=showKills and 1 or 0
  if row.meterMode~=mode or row.meterWidth~=width or row.meterInset~=row.fieldkitIconInset or row.meterKills~=killKey then
   row.meterMode=mode;row.meterWidth=width;row.meterInset=row.fieldkitIconInset;row.meterKills=killKey
   for i=1,3 do
@@ -113,13 +116,13 @@ function FieldKit.UpdateMeterColumns(row,line,mode,width,rateLabel)
   end
   if not row.killColumn then
    row.killColumn=row:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall")
-   row.killColumn:SetJustifyH("RIGHT");row.killColumn:SetHeight(14)
+   row.killColumn:SetJustifyH("RIGHT");row.killColumn:SetHeight(14);FieldKit.TextShadow(row.killColumn)
   end
   if showKills then
    row.killColumn:ClearAllPoints()
    row.killColumn:SetPoint("RIGHT",row,"RIGHT",-(valueLeft+4),0)
    row.killColumn:SetWidth(36)
-   row.killColumn:SetText(tostring(kills))
+   row.killColumn:SetText(FieldKit.Compact(kills))
    row.killColumn:SetTextColor(1,.82,.45)
    row.killColumn:Show()
   else
@@ -129,7 +132,7 @@ function FieldKit.UpdateMeterColumns(row,line,mode,width,rateLabel)
   row.label:SetWidth(math.max(40,width-12-reserved-11-(row.fieldkitIconInset or 0)));row.label:SetHeight(14)
  end
  if showKills and row.killColumn then
-  row.killColumn:SetText(tostring(kills));row.killColumn:Show()
+  row.killColumn:SetText(FieldKit.Compact(kills));row.killColumn:Show()
  elseif row.killColumn then row.killColumn:Hide() end
  row.value:Hide();row.value:SetText("")
 end

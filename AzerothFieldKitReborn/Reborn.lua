@@ -37,7 +37,8 @@ function R.RestorePresentation()
  R.presentation={}
 end
 function R.HealthColor(current,maximum)
- current=FieldKit.Number(current,nil,0);maximum=FieldKit.Number(maximum,nil,0)
+ -- .41: health is a meter-sized number (endless passes 10^18, FieldKit.Number's cap).
+ current=FieldKit.MeterNumber(current,nil,0);maximum=FieldKit.MeterNumber(maximum,nil,0)
  if not current or not maximum or maximum<=0 then return nil end
  local share=current/maximum
  if share>=.75 then return .12,.76,.18 end
@@ -49,7 +50,9 @@ end
 -- public snapshots for the Chronicle pool, without modifying native globals.
 function R.LiveBoss(u)
  if type(u)~="table" then return false end
- local id,hp,hpm=FieldKit.Number(u.id),FieldKit.Number(u.hp),FieldKit.Number(u.hpm)
+ -- .41: a boss or guardian past 10^18 health was "not live" and its frame vanished
+ -- while its lair still read awake. Ids keep the strict validator; health does not.
+ local id,hp,hpm=FieldKit.Number(u.id),FieldKit.MeterNumber(u.hp),FieldKit.MeterNumber(u.hpm)
  return id and id>0 and hp and hp>0 and hpm and hpm>0 and type(u.name)=="string" and string.find(u.name,"%S")
 end
 function R.BossUnits()

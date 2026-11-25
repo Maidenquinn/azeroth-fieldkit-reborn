@@ -123,7 +123,7 @@ function C.Update(variant)
  if control then C.kind:SetText(control) end
  local friendly=(type(UnitIsUnit)=="function" and UnitIsUnit("player","target")) or (type(UnitIsFriend)=="function" and UnitIsFriend("player","target"))
  if friendly then C.bar:SetStatusBarColor(.12,.62,.30) else C.bar:SetStatusBarColor(.72,.17,.20) end
- C.bar:SetMinMaxValues(0,max);C.bar:SetValue(hp);C.hp:SetText(FieldKit_FormatHealth(hp,max,FieldKitRebornDB.targetHealthMode))
+ FieldKit.SetBarFraction(C.bar,hp,max);C.hp:SetText(FieldKit_FormatHealth(hp,max,FieldKitRebornDB.targetHealthMode))
  -- A native child StatusBar may keep MEDIUM while its card is HIGH.
  -- Explicit layering also repairs the gauge after a theme/choice transition.
  C.bar:SetFrameStrata(f:GetFrameStrata());C.bar:SetFrameLevel(f:GetFrameLevel()+3)

@@ -49,7 +49,7 @@ function T.Create(create,fit,move)
  end
  local warnings=CreateFrame("Frame","FieldKitNativeWarnings",UIParent);T.warningFrame=warnings
  warnings:SetWidth(440);warnings:SetHeight(108);move(warnings,0,240,true)
- FieldKitTheme.Surface(warnings,"card",true);warnings.rows={}
+ FieldKitTheme.Surface(warnings,"card",true);FieldKitTheme.ReadableFloor(warnings);warnings.rows={}
  for i=1,3 do
   local row=FieldKitTheme.Label(warnings,nil,12,8+(i-1)*32,416,30,14,FieldKitTheme.gold)
   table.insert(warnings.rows,row)

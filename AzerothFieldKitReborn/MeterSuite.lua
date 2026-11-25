@@ -81,14 +81,8 @@ function S.SetDetached(view,on)
  S.Update(true)
 end
 
-local function Short(n)
- if not n then return "?" end
- n=math.floor(n+.5)
- if n>=1e12 then return string.format("%.2e",n) end
- if n>=1000000 then return string.format("%.1fM",n/1000000) end
- if n>=1000 then return string.format("%.1fk",n/1000) end
- return tostring(n)
-end
+-- One compact format everywhere (Runtime.lua FieldKit.Compact): no raw "7.08e+13".
+local function Short(n) return FieldKit.Compact(n) end
 
 local function SyncSubChrome(frame,view)
  local sub=frame.fieldkitSubChrome
@@ -409,6 +403,7 @@ function S.EnsureDetach(view)
   row:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar");row:SetMinMaxValues(0,1)
   row.label=row:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall");row.label:SetPoint("LEFT",row,"LEFT",3,0);row.label:SetJustifyH("LEFT")
   row.value=row:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall");row.value:SetPoint("RIGHT",row,"RIGHT",-3,0)
+  FieldKit.TextShadow(row.label);FieldKit.TextShadow(row.value)
   row.label:SetPoint("RIGHT",row.value,"LEFT",-4,0)
   S.BindSpellTip(row);row:Hide();f.rows[i]=row
  end

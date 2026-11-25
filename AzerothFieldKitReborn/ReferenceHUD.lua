@@ -8,19 +8,10 @@ local slots={1,2,3,4,5,6,12}
 local function Short(n) if not n then return "?" end;if math.abs(n)>=1000000 then return string.format("%.1f m",n/1000000) elseif math.abs(n)>=1000 then return string.format("%.1f k",n/1000) else return string.format("%.0f",n) end end
 -- Compact amounts: exact below 10 000 (grouped), then one decimal in thousands (k) or millions (M); the decimal and group
 -- separators follow the language. nil in, "?" out: a missing value is never turned into a number.
+-- .41: the same rules now live in Runtime.lua (FieldKit.Compact) for every surface,
+-- extended past millions with the game's tiers (B, T, Qa ... Dc) instead of "%.2e".
 function R.Amount(n)
- if type(n)~="number" then return "?" end
- local language=FieldKit_Language()
- local spaced=language=="fr" or language=="pl" or language=="cs" or language=="ru" or language=="uk"
- local comma=spaced or language=="de" or language=="es" or language=="pt" or language=="ro" or language=="tr"
- local dec=comma and "," or ".";local group=spaced and " " or (comma and "." or ",")
- local a=math.abs(n);local sign=n<0 and "-" or ""
- if a>=1e12 then return sign..string.gsub(string.format("%.2e",a),"%.",dec) end
- if a>=1000000 then return sign..string.gsub(string.format("%.1f",a/1000000),"%.",dec).." M" end
- if a>=10000 then return sign..string.gsub(string.format("%.1f",a/1000),"%.",dec).." k" end
- local text=string.format("%.0f",math.floor(a+.5))
- if string.len(text)==4 then text=string.sub(text,1,1)..group..string.sub(text,2) end
- return sign..text
+ return FieldKit.Compact(n)
 end
 -- Chat tools of the themed chat card. Nothing is re-implemented: they call the native chat frame's own scroll methods (the
 -- native buttons are masked, so their own handlers, which act on their parent, cannot be used) and FieldKit's copy window.
@@ -700,7 +691,7 @@ function R.Update(variant,zone)
  else H.micro:SetPoint("TOPLEFT",H.mode,"BOTTOMLEFT",0,-8) end
  -- Settings remain available in the same one-click menu as native micro buttons.
 
- if d.rate then local _,_,rate=FieldKitMeterLedger.Read("damage");Label(R.rate,R.canvas,d.rate,21,true);R.rate:SetText("DPS "..R.Amount(rate)) else R.rate:Hide() end
+ if d.rate then local _,_,rate=FieldKitMeterLedger.Read("damage");Label(R.rate,R.canvas,d.rate,21,true);R.rate:SetText(FieldKit_L("dps").." "..R.Amount(rate)) else R.rate:Hide() end
  if not R.chat then
   R.chat=Frame("FieldKitReferenceChat");R.chatActions={}
   local callbacks={function() if type(ChatFrame_OpenChat)=="function" then ChatFrame_OpenChat("") end end,function() FieldKit.OpenChatCopy() end,function() SlashCmdList.FieldKit("");if FieldKitUI then FieldKitUI.Select("chat") end end}

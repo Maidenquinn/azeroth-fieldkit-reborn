@@ -13,14 +13,8 @@ local HIT_WIDTHS={72,58,58,52,44,48}
 local HIT_RIGHT={294,230,166,108,58,4}
 local CAP_KEYS={"dmg","dps","share"}
 
-local function Short(n)
- if not n or n<=0 then return "-" end
- n=math.floor(n+.5)
- if n>=1000000 then return string.format("%.1fM",n/1000000) end
- if n>=10000 then return string.format("%.1fk",n/1000) end
- if n>=1000 then return string.format("%.1fk",n/1000) end
- return tostring(n)
-end
+-- One compact format everywhere (Runtime.lua FieldKit.Compact); "-" stays "no data".
+local function Short(n) if type(n)~="number" or n<=0 then return "-" end;return FieldKit.Compact(math.floor(n+.5)) end
 
 local function CritPct(line)
  local hits=line.hits or 0
@@ -167,7 +161,7 @@ function D.Build()
  if D.frame then return end
  local frame=CreateFrame("Frame","FieldKitPartyDetailsFrame",UIParent);D.frame=frame
  frame:SetWidth(720);frame:SetHeight(400);frame:SetFrameStrata("TOOLTIP");frame:SetFrameLevel(220)
- frame:SetClampedToScreen(true);frame:EnableMouse(true);T.Surface(frame,"card",true)
+ frame:SetClampedToScreen(true);frame:EnableMouse(true);T.Surface(frame,"card",true);T.ReadableFloor(frame)
  D.title=T.Label(frame,nil,16,10,560,26,18,T.gold,true)
  D.summary=T.Label(frame,nil,16,40,680,22,12,T.text)
  D.hint=T.Label(frame,nil,16,64,680,36,11,T.muted)

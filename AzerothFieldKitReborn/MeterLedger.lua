@@ -725,20 +725,20 @@ function L.AppendStats(name,spellId,icon,dmg,recent)
  local st=not recent and L.Stats(name,spellId,icon) or nil
  if not st and not dmg then return false end
  GameTooltip:AddLine(" ")
- if dmg then GameTooltip:AddLine(FieldKit_L("Total")..": "..string.format("%.0f",math.floor(dmg+.5)),1,1,1) end
+ if dmg then GameTooltip:AddLine(FieldKit_L("Total")..": "..FieldKit.Exact(math.floor(dmg+.5)),1,1,1) end
  if st then
   if st.critKnown==false then
    -- Hits seen, crit flag never reported: unknown, not 0%.
    GameTooltip:AddLine(FieldKit_L("Hits")..": "..tostring(st.hits).."   "..FieldKit_L("Crit rate")..": -",.9,.9,.9)
-   if st.maxUnclassified>0 then GameTooltip:AddLine(FieldKit_L("Max hit")..": "..string.format("%.0f",st.maxUnclassified),.85,.85,.85) end
+   if st.maxUnclassified>0 then GameTooltip:AddLine(FieldKit_L("Max hit")..": "..FieldKit.Exact(st.maxUnclassified),.85,.85,.85) end
   else
    GameTooltip:AddLine(string.format(FieldKit_L("Hits: %d   Crits: %d (%.0f%%)"),st.hits,st.crits,st.critPct),.9,.9,.9)
   end
-  if st.maxHit>0 then GameTooltip:AddLine(FieldKit_L("Max hit").." (non-crit): "..string.format("%.0f",st.maxHit),.85,.85,.85) end
-  if st.maxCrit>0 then GameTooltip:AddLine(FieldKit_L("Max crit")..": "..string.format("%.0f",st.maxCrit),1,.55,.2) end
-  if st.avg>0 then GameTooltip:AddLine(FieldKit_L("Average")..": "..string.format("%.0f",st.avg),.85,.85,.85) end
-  if st.burst>0 then GameTooltip:AddLine(FieldKit_L("Burst (1s)")..": "..string.format("%.0f",st.burst),.7,.85,1) end
-  if st.kills>0 then GameTooltip:AddLine(FieldKit_L("Kills")..": "..tostring(st.kills),.9,.75,.4) end
+  if st.maxHit>0 then GameTooltip:AddLine(FieldKit_L("Max hit").." (non-crit): "..FieldKit.Exact(st.maxHit),.85,.85,.85) end
+  if st.maxCrit>0 then GameTooltip:AddLine(FieldKit_L("Max crit")..": "..FieldKit.Exact(st.maxCrit),1,.55,.2) end
+  if st.avg>0 then GameTooltip:AddLine(FieldKit_L("Average")..": "..FieldKit.Exact(math.floor(st.avg+.5)),.85,.85,.85) end
+  if st.burst>0 then GameTooltip:AddLine(FieldKit_L("Burst (1s)")..": "..FieldKit.Exact(st.burst),.7,.85,1) end
+  if st.kills>0 then GameTooltip:AddLine(FieldKit_L("Kills")..": "..FieldKit.Exact(st.kills),.9,.75,.4) end
  elseif not recent then
   GameTooltip:AddLine(FieldKit_L("No hit sample yet for this spell"),.6,.6,.6)
  end
