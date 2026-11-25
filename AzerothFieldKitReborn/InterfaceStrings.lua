@@ -577,3 +577,10 @@ fr["On"]="Activé"
 fr["Off"]="Désactivé"
 
 fr["Grid on: snap to grid. Grid off: align edges and centres. Overlap rules still apply."]="Grille affichée : aimantation sur la grille. Grille masquée : bords et centres. Les règles de chevauchement restent actives."
+
+fr["Goblin portal available"]="Portail gobelin disponible"
+fr["Horizontal: %d yd"]="À l’horizontale : %d yd"
+fr["Goblin portal indicator"]="Indicateur du portail gobelin"
+fr["Show the goblin portal and its horizontal distance when available."]="Affiche le portail gobelin et sa distance horizontale lorsqu’elle est disponible."
+fr["Goblin portal alerts"]="Alertes de portail gobelin"
+fr["Notify once when a goblin portal is observed opening."]="Avertit une fois à l’ouverture observée d’un portail gobelin."

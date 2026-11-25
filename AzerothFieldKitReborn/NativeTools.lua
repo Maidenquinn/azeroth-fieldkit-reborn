@@ -5,7 +5,7 @@ local T=FieldKitNativeTools
 local N=FieldKitNative
 local function Count(value) local n=FieldKit.Number(value,nil,0,10000);return n and math.floor(n) end
 function T.Create(create,fit,move)
- T.fit=fit
+ T.fit=fit;T.move=move
  local defs={{"FieldKitEffectsFrame","Effects",-430,-110},{"FieldKitReviveFrame","Revive",0,160},
   {"FieldKitEncounterFrame","Run reminders",430,-180},{"FieldKitBossListFrame","Campaign bosses",-UIParent:GetWidth()/2+480,UIParent:GetHeight()/2-120}}
  for i,def in ipairs(defs) do
@@ -311,11 +311,11 @@ function T.Reminders()
  if FieldKitRebornDB.nextBossCard or FieldKitRebornDB.storedLevelsBadge then T.ShowRows(frame,rows) else frame:Hide() end
 end
 -- At most three short warnings; native message ids/content are not executable.
-function T.Push(text,key)
+function T.Push(text,key,kind)
  local now=GetTime();text=N.Text(text,240)
  for _,seen in ipairs(T.recent) do if (seen.key==key or seen.text==text) and now-seen.at<5 then return end end
  table.insert(T.recent,{text=text,key=key,at=now});while table.getn(T.recent)>32 do table.remove(T.recent,1) end
- table.insert(T.warnings,{text=text,at=now,kind=string.find(key,"^next:") and "next" or "native"});while table.getn(T.warnings)>3 do table.remove(T.warnings,1) end
+ table.insert(T.warnings,{text=text,at=now,kind=kind or (string.find(key,"^next:") and "next" or "native")});while table.getn(T.warnings)>3 do table.remove(T.warnings,1) end
 end
 function T.Banner(banner)
  if not FieldKitRebornDB or not FieldKitRebornDB.nativeWarnings or not N.Active() or type(banner)~="table" or type(banner.text)~="string" then return end
@@ -357,18 +357,25 @@ end
 
 function T.Warnings()
  local frame=T.warningFrame
- local size=FieldKitRebornDB.cardSizes.FieldKitNativeWarnings
- frame.fieldkitMinimumHeight=108;frame.fieldkitExpandedHeight=math.max(108,size and size.height or 108)
- frame:SetWidth(FieldKitCardLayout.Width(frame,440));frame:SetHeight(frame.fieldkitExpandedHeight)
- for _,row in ipairs(frame.rows) do row:SetWidth(frame:GetWidth()-24) end
- FieldKitTheme.Update(frame)
- if not FieldKitRebornDB.nativeWarnings and not FieldKitRebornDB.nextBossAlert then T.warnings={} end
+ local d=FieldKitRebornDB
+ local size=d.cardSizes.FieldKitNativeWarnings
  local now=GetTime()
+ T.portalNotice=false
  for i=table.getn(T.warnings),1,-1 do
   local item=T.warnings[i]
-  if now-item.at>=4 or (item.kind=="native" and not FieldKitRebornDB.nativeWarnings) or (item.kind=="next" and not FieldKitRebornDB.nextBossAlert) then table.remove(T.warnings,i) end
+  if now-item.at>=4 or (item.kind=="native" and not d.nativeWarnings) or (item.kind=="next" and not d.nextBossAlert)
+    or (item.kind=="portal" and (not d.goblinPortalAlert or N.Portal.state~="present")) then table.remove(T.warnings,i)
+  elseif item.kind=="portal" then T.portalNotice=true end
  end
- if table.getn(T.warnings)==0 then
+ local count=table.getn(T.warnings)
+ local compact=count==1 and T.portalNotice and not FieldKit.layoutEditing
+ frame.fieldkitMinimumHeight=108;frame.fieldkitExpandedHeight=math.max(108,size and size.height or 108)
+ local width=FieldKitCardLayout.Width(frame,440)
+ frame:SetWidth(compact and math.min(width,300) or width)
+ frame:SetHeight(compact and 44 or frame.fieldkitExpandedHeight)
+ for _,row in ipairs(frame.rows) do row:SetWidth(frame:GetWidth()-24) end
+ FieldKitTheme.Update(frame)
+ if count==0 then
   if FieldKit.layoutEditing and (FieldKitRebornDB.nativeWarnings or FieldKitRebornDB.nextBossAlert) then
    FieldKit_Text(frame.rows[1],"Preview");frame.rows[1]:Show();frame.rows[1]:SetAlpha(1)
    frame.rows[2]:Hide();frame.rows[3]:Hide();frame:Show()
@@ -381,9 +388,70 @@ function T.Warnings()
  end
  frame:Show()
 end
+
+local function CreatePortalCard()
+ local f=CreateFrame("Frame","FieldKitGoblinPortal",UIParent)
+ f:SetFrameStrata("LOW")
+ f:SetWidth(240);f:SetHeight(44)
+ FieldKitTheme.Surface(f,"card",true);FieldKitTheme.ReadableFloor(f)
+ local icon=f:CreateTexture(nil,"ARTWORK")
+ icon:SetTexture("Interface\\Icons\\INV_Misc_Coin_02")
+ icon:SetWidth(24);icon:SetHeight(24);icon:SetPoint("LEFT",f,"LEFT",10,0)
+ FieldKitTheme.Label(f,"Goblin portal available",42,4,188,18,12,FieldKitTheme.gold)
+ f.detail=FieldKitTheme.Label(f,nil,42,23,188,16,11,FieldKitTheme.muted)
+ T.move(f,UIParent:GetWidth()/2-142,UIParent:GetHeight()/2-239)
+ T.portalFrame=f
+ return f
+end
+
+function T.PortalView()
+ local d,p,f=FieldKitRebornDB,N.Portal,T.portalFrame
+ local phase=p.state=="present" and N.Read("AZS_GetPhase")
+ if not d.goblinPortalIndicator or (phase~="playing" and phase~="paused") then
+  if f and f:IsShown() then f:Hide() end
+  p.distanceReason=d.goblinPortalIndicator and "not_visible" or "indicator_off"
+  return
+ end
+ f=f or CreatePortalCard()
+ local yards=p.Distance()
+ local detail=yards and string.format(FieldKit_L("Horizontal: %d yd"),math.floor(yards+0.5))
+ if f.portalDetail~=detail or not f:IsShown() then
+  f.portalDetail=detail
+  f.detail:SetText(detail or "")
+  if detail then f.detail:Show() else f.detail:Hide() end
+  f:SetHeight(detail and 44 or 32)
+  FieldKitTheme.Update(f)
+ end
+ if not f:IsShown() then f:Show() end
+end
+
+function T.PortalChanged(appeared)
+ local d,p=FieldKitRebornDB,N.Portal
+ if not T.warningFrame then return end
+ if p.state~="present" then
+  if T.portalFrame and T.portalFrame:IsShown() then T.portalFrame:Hide() end
+  if T.portalNotice then T.Warnings() end
+ elseif appeared and d.goblinPortalAlert and not FieldKit.layoutEditing then
+  T.Push(FieldKit_L("Goblin portal available"),"portal:goblin","portal")
+  T.Warnings()
+ end
+end
+
+function T.PortalDiagnostic()
+ local p=N.Portal
+ DEFAULT_CHAT_FRAME:AddMessage(string.format(
+  "FieldKit portal: state=%s reason=%s phase=%s map=%s points=%d distance=%s packets=%d decodes=%d poseReads=%d",
+  p.state,p.reason,tostring(N.Read("AZS_GetPhase")),tostring(p.map),table.getn(p.points),
+  p.distanceReason or "not_read",p.packets,p.decodes,p.poseReads))
+ for i=1,math.min(4,table.getn(p.points)) do
+  local point=p.points[i]
+  DEFAULT_CHAT_FRAME:AddMessage(string.format("  v[%d] mx=%.6f my=%.6f",i,point.x,point.y))
+ end
+end
+
 function T.Update()
  if not T.frames[1] then return end
- N.Watch();T.Subscription()
+ N.Watch();N.Portal.Check();T.PortalView();T.Subscription()
  if T.serial~=N.serial then T.serial=N.serial;T.warnings={};T.recent={};T.lastBoss={};T.bossKeys={};T.endless=nil;T.endlessCycle=0 end
  T.BossList()
  if not N.Active() and not FieldKit.layoutEditing then

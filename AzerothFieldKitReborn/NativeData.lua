@@ -53,13 +53,14 @@ function N.Watch()
  end
  N.initialized=true;N.phase=phase;N.time=time;N.zone=zone;N.wasActive=N.Active()
 end
-function N.Packet(prefix)
+function N.Packet(prefix,message)
  if prefix=="AZSZONE" then
   if FieldKitRebornDB then FieldKitRebornDB.runDifficultyContext=nil end
   FieldKit.observedDifficulty=nil
   if FieldKit.CaptureDifficulty then FieldKit.CaptureDifficulty() end
  end
  if sources[prefix] then N.generation[prefix]=(N.generation[prefix] or 0)+1 end
+ return N.Portal.Packet(prefix,message)
 end
 function N.Fresh(prefix)
  local barrier=N.barriers[prefix];if not barrier then return true end

@@ -97,6 +97,7 @@ Legacy();Run("zone_themes.lua")
 Reborn();Run("reborn_meter_feed.lua")
 Reborn();Run("reborn_kill_attribution.lua")
 Reborn();Run("reborn_endless_longrun.lua")
+Reborn();Run("reborn_goblin_portal.lua")
 Reborn();Run("reborn_loadout_values.lua")
 
 print("Native Lua 5.0 fixtures passed: "..table.getn(files).." TOC modules")

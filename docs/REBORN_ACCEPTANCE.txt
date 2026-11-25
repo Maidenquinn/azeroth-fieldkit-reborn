@@ -1,3 +1,18 @@
+FieldKit Reborn 0.1.0-reborn.42 — Goblin Treasury portal review candidate
+
+Maintainer in-game recipe pending. Enable the HUD indicator under World >
+Minimap and the Goblin portal alert under Warnings. The options are independent
+and default off. Try a campaign with and without a gold portal and run
+/fieldkit portal before, during and after. With a confirmed absent -> present
+transition expect one alert. After reload with a portal already present expect
+no repeated alert. Confirm the stock gold minimap pin and arrow continue to
+work. The card disappears when a valid snapshot removes the portal or the
+context changes. The horizontal distance is hidden if map position is uncertain.
+
+Check with two profiles, with and without a theme, and during a new run,
+arena transition or co-op host handover. See docs/GOBLIN_PORTAL_R1.md in the
+repository for the complete recipe.
+
 FieldKit Reborn 0.1.0-reborn.37 — Stable package, 17 November 2026
 
 Maintainer authorized publication after validation. Final native inspection on

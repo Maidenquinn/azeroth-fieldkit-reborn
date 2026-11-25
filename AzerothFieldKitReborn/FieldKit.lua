@@ -3028,6 +3028,7 @@ end
 
 -- Refresh visuals at world entry; native visual writes are routed through Runtime.lua.
 local function FieldKitEventWorld()
+ FieldKitNative.Portal.WorldEntry();FieldKitNativeTools.PortalChanged()
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 		SyncNativePlates()
 		UpdatePlayerBar()
@@ -3073,16 +3074,18 @@ local function FieldKitEventOther()
 	elseif ( event == "CHAT_MSG_ADDON" ) then
   -- The official AZSRUN parser runs before addon event handlers. React now,
   -- rather than leaving an extra polling interval of compact HUD on choices.
-  if arg1=="AZSRUN" then KeepCompactBar() end
-  FieldKitNative.Packet(arg1)
-  FieldKitPartySync.Receive(arg1,arg2,arg3,arg4)
-  FieldKitCoop.Packet(arg1)
-		if ( arg1 == "AZS" and arg2 ) then
+  local prefix,message,channel,sender=arg1,arg2,arg3,arg4
+  if prefix=="AZSRUN" then KeepCompactBar() end
+  local portalChanged,portalAppeared=FieldKitNative.Packet(prefix,message)
+  FieldKitPartySync.Receive(prefix,message,channel,sender)
+  FieldKitCoop.Packet(prefix)
+		if ( prefix == "AZS" and message ) then
 			-- The official parser runs before addons; avoid parsing its payload twice.
-			stats = type(AZS_STATS)=="table" and AZS_STATS or ParseStats(arg2)
+			stats = type(AZS_STATS)=="table" and AZS_STATS or ParseStats(message)
 			DB.lastStats = stats
 			UpdateStatsFrame()
 		end
+  if portalChanged then FieldKitNativeTools.PortalChanged(portalAppeared) end
 	elseif ( arg1 == "target" ) then
 		UpdateTargetHealth()
 		UpdateBossFrame()
@@ -3294,6 +3297,7 @@ SlashCmdList["FieldKit"] = function(msg)
  if msg=="diag" then FieldKitDiagnostics.Command("");return end
  if string.sub(msg,1,5)=="diag " then FieldKitDiagnostics.Command(string.sub(msg,6));return end
  if msg=="native" then FieldKitNativeTools.Diagnostic();return end
+ if msg=="portal" then FieldKitNativeTools.PortalDiagnostic();return end
  if msg=="lairs" then FieldKit.LairDiagnostic();return end
  if msg=="align" then FieldKitAlignment.Start();return end
  if msg=="lock" or msg=="unlock" then FieldKit.SetWindowsLocked(msg=="lock");return end
