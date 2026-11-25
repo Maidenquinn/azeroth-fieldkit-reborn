@@ -2,7 +2,8 @@
 assert(not FieldKit.rebornLegacyFixture)
 assert(FieldKit.folder=="AzerothFieldKitReborn")
 assert(FieldKit.Number(1e15)==1e15 and FieldKit.Number(1/0)==nil)
-assert(FieldKit_FormatHealth(1e15,1e15,1)=="1000000000000000 / 1000000000000000")
+-- .41: endless health is compact (unabridged digits overflowed the boss/target cards).
+assert(FieldKit_FormatHealth(1e15,1e15,1)=="1.0 Qa / 1.0 Qa")
 FieldKitDB={sentinel="original-game"}
 fire(FieldKitFrame,"VARIABLES_LOADED")
 assert(FieldKit.zoneThemeReady and FieldKitMeterFrame and FieldKitStatsFrame and FieldKitGearFrame,

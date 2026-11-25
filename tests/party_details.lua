@@ -20,7 +20,8 @@ assert(table.getn(D.data.rows)==23 and D.data.damage==123456 and D.data.dps==321
 assert(D.summary:GetText()=="Damage: 123456   DPS: 321")
 assert(D.frame.rows[1].label:GetText()=="Actual spell 1")
 -- Own breakdown uses Max Hit columns (Total / Crit / Burst / Avg / Hits / Crit%).
-assert(D.frame.rows[1].hitColumns[1]:GetText()=="2.4k")
+-- .41 shared compact format: the exact total 2 390, grouped, below 10 000 (was rounded to "2.4k").
+assert(D.frame.rows[1].hitColumns[1]:GetText()==FieldKit.Compact(2390) and not string.find(D.frame.rows[1].hitColumns[1]:GetText(),"k",1,true))
 assert(D.hitCaptions[1]:IsShown() and not D.captions[1]:IsShown())
 assert(D.frame:GetWidth()>=640,"Own Max Hit breakdown needs a wide card")
 assert(D.frame.fieldkitSkin.base:GetAlpha()==0,"Hover ignored the selected HUD background opacity")
@@ -67,7 +68,7 @@ FieldKitRebornDB.partyDetailSync=true;FieldKitPartySync.Watch()
 FieldKitPartySync.cache.Denza={rows={{name="His actual first spell",dmg=4321,dps=43.21,share=.75},{name="His other spell",dmg=1440,dps=14.4,share=.25}},damage=5761,dps=57.61,shared=true,received=GetTime()}
 D.Close();enter(peer)
 assert(D.data.shared and table.getn(D.data.rows)==2 and D.frame.rows[1].label:GetText()=="His actual first spell")
-assert(D.frame.rows[1].meterColumns[1]:GetText()=="4321" and D.frame.rows[1].meterColumns[2]:GetText()=="43 dps")
+assert(D.frame.rows[1].meterColumns[1]:GetText()==FieldKit.Compact(4321) and D.frame.rows[1].meterColumns[2]:GetText()=="43 dps")
 assert(D.captions[1]:IsShown() and D.captions[3]:IsShown())
 FieldKitRebornDB.partyDetailSync=false;FieldKitPartySync.Watch();D.Close();enter(peer)
 local created=table.getn(objects)
